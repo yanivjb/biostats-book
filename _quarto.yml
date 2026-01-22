@@ -1,0 +1,222 @@
+project:
+  type: book
+  output-dir: docs
+  preview:
+    browser: true
+
+# bootstraping  https://acclab.github.io/dabestr/articles/tutorial_basics.html
+# causal inference https://ngreifer.github.io/software/ causal
+# fix honest_plots chatbot
+# fix clear_plots chatbot
+
+book:
+  title: "Applied Biostatistics"
+  author: "Yaniv Brandvain"
+  date: today
+  sidebar:
+    search: true
+    background: '#3A5F0B' #"#9f86c0"
+    logo: "figs/fun_figs/stamp.png"
+    collapse-level: 1 # Add this line
+  chapters:
+    - index.qmd
+    - book_sections/clarkia_and_its_data/clarkia_and_its_data.qmd
+    - book_sections/example_mini/varType.qmd
+    - book_sections/filler.qmd
+    - book_sections/intro2r_index.qmd
+    - part: book_sections/getting_started.qmd
+      chapters: 
+        - book_sections/getting_started/functions_and_vectors.qmd
+        - book_sections/getting_started/loading_packages_and_data.qmd
+        - book_sections/getting_started/data_types.qmd
+        - book_sections/getting_started/rstudio_orientation.qmd
+        - book_sections/getting_started/getting_started_summary.qmd
+    - part: book_sections/data_in_R.qmd
+      chapters: 
+        - book_sections/data_in_R/add_vars.qmd
+        - book_sections/data_in_R/select_vars.qmd
+        - book_sections/data_in_R/summarize_vars.qmd
+        - book_sections/data_in_R/choose_rows.qmd
+        - book_sections/data_in_R/data_in_R_summary.qmd
+    - part: book_sections/intro_to_ggplot.qmd
+      chapters: 
+        - book_sections/intro_to_ggplot/one_continuous.qmd
+        - book_sections/intro_to_ggplot/saving_ggplots.qmd
+        - book_sections/intro_to_ggplot/cont_cat.qmd
+        - book_sections/intro_to_ggplot/two_categorical.qmd
+        - book_sections/intro_to_ggplot/two_continuous.qmd
+        - book_sections/intro_to_ggplot/many_explanatory.qmd
+        - book_sections/intro_to_ggplot/ggplot_summary.qmd
+    - part: book_sections/reproducible_science.qmd
+      chapters: 
+        - book_sections/reproducible_science/collecting_data.qmd
+        - book_sections/reproducible_science/reproducible_analyses.qmd
+        - book_sections/reproducible_science/reproducible_summary.qmd  
+    - book_sections/filler.qmd
+    - book_sections/summarizing_data_index.qmd
+    - part: book_sections/univariate_summaries.qmd
+      chapters: 
+        - book_sections/univariate_summaries/summarizing_shape.qmd
+        - book_sections/univariate_summaries/changing_shape.qmd
+        - book_sections/univariate_summaries/summarizing_center.qmd
+        - book_sections/univariate_summaries/summarizing_variability.qmd
+        - book_sections/univariate_summaries/summarizing_summaries.qmd
+    - part: book_sections/associations.qmd
+      chapters: 
+        - book_sections/associations/cat_cont.qmd
+        - book_sections/associations/two_categorical_vars.qmd
+        - book_sections/associations/cont_cont.qmd
+        - book_sections/associations/summarizing_associations.qmd
+    - part: book_sections/linear_models.qmd 
+      chapters: 
+        - book_sections/linear_models/mean.qmd 
+        - book_sections/linear_models/lm_cat_pred.qmd
+        - book_sections/linear_models/regression.qmd
+        - book_sections/linear_models/two_predictors.qmd
+        - book_sections/linear_models/lm_summary.qmd
+    - part: book_sections/ordination.qmd
+      chapters:         
+        - book_sections/ordination/pca.qmd
+        - book_sections/ordination/pcaII.qmd
+        - book_sections/ordination/pcaIII.qmd
+        - book_sections/ordination/pcalternatives.qmd
+        - book_sections/ordination/ordination_summary.qmd
+    - part: book_sections/data_viz.qmd
+      chapters:         
+        - book_sections/data_viz/audience&delivery.qmd
+        - book_sections/data_viz/honest_plots.qmd
+        - book_sections/data_viz/transparent_plots.qmd
+        - book_sections/data_viz/clear_plots.qmd
+        - book_sections/data_viz/avoid_distractions.qmd
+        - book_sections/data_viz/accessible_plots.qmd
+        - book_sections/data_viz/writing_about_figures.qmd
+        - book_sections/data_viz/dataviz_summary.qmd
+    - part: book_sections/betteR_plots.qmd
+      chapters:         
+        - book_sections/betteR_plots/plotting_tools.qmd
+        - book_sections/betteR_plots/cleaR_plots.qmd
+        - book_sections/betteR_plots/plots_foR_medium.qmd
+        - book_sections/betteR_plots/betteR_plots_summary.qmd    
+    - book_sections/filler.qmd
+    - book_sections/stats_foundation_index.qmd
+    - part: book_sections/sampling_intro.qmd
+      chapters:         
+        - book_sections/sampling/sampling.qmd
+        - book_sections/sampling/sampling_error.qmd
+        - book_sections/sampling/sampling_bias.qmd
+        - book_sections/sampling/nonindependence.qmd
+        - book_sections/sampling/better_sampling.qmd
+        - book_sections/sampling/sampling_summary.qmd
+    - part: book_sections/uncertainty.qmd
+      chapters:         
+        - book_sections/uncertainty/bootstrap.qmd
+        - book_sections/uncertainty/ci.qmd
+        - book_sections/uncertainty/boot_infer.qmd
+        - book_sections/uncertainty/boot_gotchas.qmd
+        - book_sections/uncertainty/uncertainty_summary.qmd
+    - part: book_sections/nhst.qmd
+      chapters:         
+        - book_sections/nhst/statistical_hypotheses.qmd
+        - book_sections/nhst/p_values.qmd
+        - book_sections/nhst/statistical_significance.qmd
+        - book_sections/nhst/nhst_gotchas.qmd
+        - book_sections/nhst/nhst_summary.qmd
+    - part: book_sections/shuffling.qmd
+      chapters:         
+        - book_sections/shuffling/the_frogs.qmd
+        - book_sections/shuffling/permute.qmd
+        - book_sections/shuffling/permute_nonindependent.qmd
+        - book_sections/shuffling/shuffling_summary.qmd
+    - part: book_sections/chi2.qmd
+      chapters:         
+        - book_sections/chi2/expectations_and_differences.qmd
+        - book_sections/chi2/associations_between_catvars.qmd
+        - book_sections/chi2/chi2_dist.qmd
+        - book_sections/chi2/chi2_summary.qmd
+    - book_sections/filler.qmd
+    - book_sections/stats_4_linear_models_index.qmd
+    - part: book_sections/normal.qmd
+      chapters:         
+        - book_sections/normal/normal_intro.qmd
+        - book_sections/normal/normal_properties.qmd
+        - book_sections/normal/noRmal.qmd
+        - book_sections/normal/p_norm.qmd
+        - book_sections/normal/is_it_normal.qmd
+        - book_sections/normal/clt.qmd
+        - book_sections/normal/transform.qmd
+        - book_sections/normal/normal_summary.qmd
+    - part: book_sections/t.qmd
+      chapters:         
+        - book_sections/t/t_example.qmd
+        - book_sections/t/summaries_4_t.qmd
+        - book_sections/t/t_assumptions.qmd
+        - book_sections/t/t_CI.qmd
+        - book_sections/t/one_sample_t_test.qmd
+        - book_sections/t/one_sample_t_test_in_R.qmd
+        - book_sections/t/paired_t_test.qmd
+        - book_sections/t/t_summary.qmd
+    - part: book_sections/two_ts.qmd
+      chapters:         
+        - book_sections/two_ts/2t_assumptions.qmd
+        - book_sections/two_ts/2t_calcs.qmd
+        - book_sections/two_ts/uncertain2t.qmd
+        - book_sections/two_ts/nhs2t.qmd
+        - book_sections/two_ts/2t_summary.qmd
+    - part: book_sections/f.qmd
+      chapters:         
+        - book_sections/f/from_sampling.qmd
+        - book_sections/f/f_calcs.qmd
+        - book_sections/f/FR.qmd
+        - book_sections/f/Finding_connections.qmd
+        - book_sections/f/f_summary.qmd
+    - part: book_sections/anova.qmd
+      chapters:         
+        - book_sections/anova/multiple_testing.qmd
+        - book_sections/anova/anova_lm.qmd     
+        - book_sections/anova/anova_assumptions.qmd
+        - book_sections/anova/anova_example.qmd
+        - book_sections/anova/post_hoc.qmd
+        - book_sections/anova/sig_groups.qmd
+        - book_sections/anova/Ranova_pipeline.qmd
+        - book_sections/anova/anova_summary.qmd
+    - book_sections/linear_regression.qmd
+    - book_sections/two_predictors.qmd
+    - book_sections/multiple_regression.qmd
+    - book_sections/interactions.qmd
+    - book_sections/model_evaluation.qmd
+    - book_sections/study_design.qmd
+    - book_sections/causal_inference.qmd
+    - book_sections/probability_and_likelihood.qmd
+    - references.qmd
+
+
+ 
+
+
+bibliography: ["assets/modeling.bib", "assets/packages.bib"]
+csl: 'assets/apa-single-spaced.csl'
+
+format:
+  html:
+    theme: 
+      - flatly
+      - "assets/theme_corrected.scss"
+    css: ["assets/sticky-notes.css", "assets/table-styles.css", "assets/webex.css"]
+    include-after-body: assets/webex.js
+    code-copy: true
+    highlight-style: zenburn
+    mainfont: 'Crimson Text'
+    fontsize: '14pt'
+    linestretch: '1.5em'
+    linkcolor: '#20a2a3' 
+    toc: false
+    link-external-newwindow: true
+editor: source
+filters:
+ - webr
+ - shinylive
+ 
+ 
+resources:
+  - widget.html
+  - widget-script.js 
