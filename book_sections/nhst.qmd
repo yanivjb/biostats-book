@@ -15,7 +15,6 @@ library(DT)
 library(webexercises)
 library(ggplot2)
 library(tidyr)
-library(tiktokrmd)
 ```
 
 
