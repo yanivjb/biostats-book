@@ -9,7 +9,6 @@
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

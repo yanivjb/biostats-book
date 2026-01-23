@@ -31,7 +31,6 @@ You've collected data and have a sample estimate, and avoided sampling bias, but
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

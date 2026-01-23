@@ -28,7 +28,6 @@ shinylive:
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)
@@ -38,7 +37,6 @@ library(webexercises)
 library(ggplot2)
 library(tidyr)
 library(cowplot)
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

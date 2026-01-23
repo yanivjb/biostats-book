@@ -32,7 +32,6 @@ shinylive:
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)
@@ -43,7 +42,6 @@ library(ggplot2)
 library(shinylive)
 library(tidyr)
 library(cowplot)
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

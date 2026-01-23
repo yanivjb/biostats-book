@@ -15,7 +15,6 @@ webr:
 ```{r setup, include=FALSE}
 library(dplyr)
 library(palmerpenguins)
-library(tweetrmd)
 library(knitr)
 library(tidyr)
 library(ggplot2)

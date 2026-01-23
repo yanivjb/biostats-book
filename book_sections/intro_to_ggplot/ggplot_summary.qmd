@@ -14,7 +14,6 @@ webr:
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)
@@ -290,7 +289,6 @@ Often data have strange outliers, or patterns you think you see but aren't sure 
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

@@ -31,7 +31,6 @@ You noticed that two variables (e.g. petal color and petal area) are associated 
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

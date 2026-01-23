@@ -7,7 +7,6 @@
 #| message: false
 #| warning: false
 # https://dpananos.github.io/posts/2024-06-23-confound/
-library(tweetrmd)
 library(ggforce)
 library(ggExtra)
 library(knitr)

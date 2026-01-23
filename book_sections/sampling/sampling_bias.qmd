@@ -23,7 +23,6 @@ You are designing your study or critically evaluating someone else's research. Y
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

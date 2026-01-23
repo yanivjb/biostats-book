@@ -6,7 +6,6 @@
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(ggforce)
 library(ggExtra)
 library(knitr)

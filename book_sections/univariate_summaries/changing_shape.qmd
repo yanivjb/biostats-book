@@ -6,7 +6,6 @@
 #| message: false
 #| warning: false
 #| code-summary: "Code for selecting data from a few columns from RILs planted at GC"
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

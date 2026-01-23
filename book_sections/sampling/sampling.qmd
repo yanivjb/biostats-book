@@ -23,7 +23,6 @@ We need to know about sampling to do statistics!
 #| echo: false
 #| message: false
 #| warning: false
-library(tweetrmd)
 library(knitr)
 library(dplyr)
 library(readr)

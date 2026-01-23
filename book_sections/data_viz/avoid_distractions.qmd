@@ -5,7 +5,6 @@
 ```{r setup, include=FALSE}
 library(dplyr)
 library(palmerpenguins)
-library(tweetrmd)
 library(knitr)
 library(tidyr)
 library(ggplot2)
@@ -138,9 +137,10 @@ A "glass slipper" (@fig-slipper) is when a visualization designed for one purpos
 ```{r}
 #| echo: false
 #| label: fig-slipper
-#| fig-cap: "A tweet from the *Calling Bullshit* highlights a 'glass slipper'. This  'Periodic Table of IT Ops Tools' mimics the structure of the chemical periodic table but does not reflect any real periodicity or organizational logic in the data it presents."
+#| fig-cap: "A [tweet from the *Calling Bullshit* highlights a 'glass slipper'](https://twitter.com/callin_bull/status/1106259105377705985). This  'Periodic Table of IT Ops Tools' mimics the structure of the chemical periodic table but does not reflect any real periodicity or organizational logic in the data it presents."
 #| fig-alt: "A visual titled 'Periodic Table of IT Ops Tools' that uses the familiar layout of the chemical periodic table to categorize dozens of IT tools. Each 'element' is color-coded by function, but the grid offers no meaningful spatial logic, illustrating a misleading reuse of visual form."
-include_tweet("https://twitter.com/callin_bull/status/1106259105377705985")
+#include_tweet("https://twitter.com/callin_bull/status/1106259105377705985")
+include_graphics("../../figs/summarizing_data/data_viz/periodic_table.png")
 ```
 
 

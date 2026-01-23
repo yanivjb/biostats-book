@@ -16,7 +16,6 @@ shinylive:
 library(dplyr)
 library(shinylive)
 library(palmerpenguins)
-library(tweetrmd)
 library(knitr)
 library(tidyr)
 library(ggplot2)

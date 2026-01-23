@@ -3,7 +3,6 @@
 ```{r setup, include=FALSE}
 library(dplyr)
 library(palmerpenguins)
-library(tweetrmd)
 library(knitr)
 library(tidyr)
 library(ggplot2)
@@ -224,7 +223,7 @@ Computational tools like `ggplot2` are great for making good plots, but remember
 ```{r}
 #| column: margin
 #| echo: false
-
+#| eval: false
 include_tweet("https://twitter.com/webbshasta/status/1263894431268106241")
 ```
 
