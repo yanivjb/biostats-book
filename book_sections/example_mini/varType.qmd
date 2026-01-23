@@ -36,7 +36,7 @@ library(webexercises)
 #| column: margin
 #| message: false
 #| echo: false
-include_graphics("../../figs/vartype/clarkias.png")
+include_graphics("../../figs/varType/clarkias.png")
 ```
 
 - *C. xantiana ssp. xantiana* (hereafter *xantiana*) is primarily outcrossing, with large, showy flowers that attract pollinators.  
