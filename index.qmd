@@ -16,7 +16,6 @@ webr:
 library(knitr)
 library(tidyverse)
 library(blogdown)
-library(tweetrmd)
 library(tufte)
 #https://springer.public.springernature.app/link/publish-a-book
 source("_common.R") 
