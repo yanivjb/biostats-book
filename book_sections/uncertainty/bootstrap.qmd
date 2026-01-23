@@ -107,15 +107,17 @@ ggplot(gc_rils, aes(x = prop_hybrid,fill = id))+
 
 ```{r}
 #| echo: false
-tweet_embed("https://twitter.com/rdhernand/status/1104361442625630212?s=20")
+#| eval: false
+#tweet_embed("https://twitter.com/rdhernand/status/1104361442625630212?s=20")
 ```
 
 ```{r}
 #| echo: false
-#| eval: false
->While statistics offers no magic pill for quantitative scientific investigations, the bootstrap is the best statistical pain reliever ever produced.
->
-> `r tufte::quote_footer('--- [Xiao-Li Meng](https://statistics.fas.harvard.edu/people/xiao-li-meng) as quoted in @cochran2019')` 
+#| label: fig-herntweet
+#| fig-alt: "A tweet from Ryan Hernandez. “If you don’t know anything about statistics, learn the bootstrap. Seriously, think of it as a statistical pain reliever!! My new favorite term for the approach that underlies almost everything I do...” Below this is an embedded quoted tweet. The quoted tweet is from Daniel E. Weeks, handle @StatGenDan, with a small profile photo to the left. The quoted text reads: “While statistics offers no magic pill for quantitative scientific investigations, the bootstrap is the best statistical pain reliever ever produced.” – Xiao-Li Meng as quoted in @cochran2019."
+#| fig-cap: "A [tweet](https://twitter.com/rdhernand/status/1104361442625630212?s=20) gushing about the beauty of bootstrapping."
+include_graphics("../../figs/stats_foundations/uncertainty/hernandez_tweet.png")
+
 ```
 
 When we take a statistical  sample from a population, we do so **without replacement.** That, is we do not select the same individual twice -- rather we sample n distinct individuals. This is how we get our sample.  Conceptually we build sampling distributions by repeating this amny times (but of course in the real world we usually only have one sample).
