@@ -149,7 +149,7 @@ We primarily want to know which (if any) phenotypes influence the amount of poll
 #| label: fig-sketch
 #| fig-cap: "[Tweet](https://x.com/webbshasta/status/1263894431268106241) from [Shasta E. Webb](https://www.shastawebb.com/) (\\@webbshasta) about how she makes a plot. \"My approach to figure-making in #ggplot ALWAYS begins with sketching out what I want the final product to look like. It feels a bit analog but helps me determine which #geom or #theme I need, what arrangement will look best, & what illustrations/images will spice it up. #rstats\""
 #| column: margin
-include_graphics("../figs/intro_to_R/intro_to_ggplot/webbshasta - 1263894431268106241.mp4")
+include_graphics("../figs/intro_to_r/intro_to_ggplot/webbshasta - 1263894431268106241.mp4")
 ```
 
 
@@ -176,7 +176,7 @@ See @fig-clarkia_sketch for examples of how these may look.
 #| label: fig-clarkia_sketch
 #| fig-cap: "Brainstorming potential figures."
 #| echo: false
-include_graphics("../figs/intro_to_R/intro_to_ggplot/clarkia_sketch.png")
+include_graphics("../figs/intro_to_r/intro_to_ggplot/clarkia_sketch.png")
 ```
 
 

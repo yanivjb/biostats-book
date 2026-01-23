@@ -55,7 +55,7 @@ We [previously used the mean function](#vectors) to find the mean of a vector. W
 #| column: margin
 #| fig-cap: "Computing summary statistics with  `summarize()`. The top table contains two columns: `prop_hyb` (proportion of hybrids) and `n_hyb` (the number of hybrids). The `summarize(mean_hyb = mean(n_hyb))` function is applied to calculate the mean of `n_hyb`, producing a single-row output where `mean_hyb` represents the average number of hybrids across the dataset. The final result, shown in the bottom table, contains a single value of 1."
 #| fig-alt: "A visual representation of summarizing data using `summarize()` in `dplyr`. The top table contains two columns: `prop_hyb` and `n_hyb`, displaying hybrid proportions and counts. Below, an R code snippet applies `summarize(mean_hyb = mean(n_hyb))`, computing the average value of `n_hyb`. The bottom table shows the resulting dataset, reduced to a single row with a new column `mean_hyb`, which holds the computed mean value of 1."  
-include_graphics("../../figs/intro_to_R/data_in_R/summarize.png")
+include_graphics("../../figs/intro_to_r/data_in_R/summarize.png")
 ```
 
 ```{r}

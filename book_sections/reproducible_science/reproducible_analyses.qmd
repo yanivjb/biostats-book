@@ -36,7 +36,7 @@ This humorous observation highlights a very real challenge. Research is complex 
 #| fig-cap: "A screenshot of the files pane of RStudio. This displayes the folder containing my RProject, my data, and data dictionary. If you do this, there is no need to use the `setwd()` function or to use a long, \"absolute path\" to the data."
 library(knitr)
 source("../../_common.R") 
-include_graphics("../../figs/intro_to_R/reproducible_science/file_tab_Rproject.png")
+include_graphics("../../figs/intro_to_r/reproducible_science/file_tab_Rproject.png")
 ```
 
 I have [previously  introduced an easy way to load data from the internet into R](https://ybrandvain.quarto.pub/applied-biostatistics/book_sections/intro_to_R/getting_started/loading_packages_and_data.html#reading-data-into-r), but often data is on our computer, not the internet. Loading data from your computer to R can be a difficult challenge, but if you follow the guide below you will see that it can be very easy. 

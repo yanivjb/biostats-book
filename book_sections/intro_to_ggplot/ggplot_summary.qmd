@@ -36,7 +36,7 @@ ril_data <- read_csv(ril_link, show_col_types = FALSE)|>
 ```{r}
 #| echo: false
 #| column: margin
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/ggplo2_logo.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/ggplo2_logo.png")
 ```
 
 ### Chapter Summary {#ggplot_summarySummary}

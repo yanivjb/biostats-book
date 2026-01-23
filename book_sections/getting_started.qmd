@@ -34,7 +34,7 @@ library(knitr)
 library(webexercises)
 library(DT)
 library(webexercises)
-include_graphics("../figs/intro_to_R/getting_started/pnas_clarkia.png")
+include_graphics("../figs/intro_to_r/getting_started/pnas_clarkia.png")
 ```
 
 

@@ -25,7 +25,7 @@ ril_data <- readr::read_csv(ril_link)|>
 
 ```{r}
 #| echo: false
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/clarkia_sketch_hist.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_hist.png")
 ```
 
 
@@ -60,7 +60,7 @@ As we will see throughout the term, understanding the shape of our data helps gu
 ```{r}
 #| echo: false
 #| column: margin
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/hist_sketch.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/hist_sketch.png")
 ```
 
 - **A histogram** bins the x-axis variable (in this case, visitation) into intervals and shows the number of observations in each bin on the y-axis. This allows us to see how frequently different levels of visitation occur.    

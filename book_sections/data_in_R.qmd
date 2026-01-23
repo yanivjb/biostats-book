@@ -28,7 +28,7 @@ library(tidyr)
 #| fig-alt: "A tweet from Schraiber, which reads: \" say this all the time but: learning dplyr + ggplot was one of the highest payoff things I've done in my career.\""
 #| column: margin
 #| echo: false
-include_graphics("../figs/intro_to_R/data_in_R/josh_tweet.png")
+include_graphics("../figs/intro_to_r/data_in_R/josh_tweet.png")
 ```
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
@@ -65,7 +65,7 @@ include_graphics("../figs/intro_to_R/data_in_R/josh_tweet.png")
 #| fig-alt: "Illustration of tidy data principles. The image features a quote from Hadley Wickham: 'Tidy data is a standard way of mapping the meaning of a dataset to its structure.' The text explains that in tidy data, each variable forms a column, each observation forms a row, and each cell is a single measurement. A small table is included as an example, where column headers ('site,' 'ril,' 'visits') represent variables, and each row represents an observation. Emphasized text and highlighting visually reinforce key concepts."
 #| column: margin
 #| echo: false
-include_graphics("../figs/intro_to_R/data_in_R/tidy.png")
+include_graphics("../figs/intro_to_r/data_in_R/tidy.png")
 ```
 
 
@@ -90,7 +90,7 @@ Because all untidy data are different, there is no way to uniformly tidy an unti
 #| fig-cap: "An example of tidy versus untidy data. **A)** A table where each row is an observation (a petal), and each column is a variable (e.g. pop, plant, image etc...). **B)** A nicely arranged (but not tidy) sheet of *Clarkia xantiana* petals - arranged by flower."
 #| fig-alt: "A. A table with images of Clarkia petals. Each row is a petal. Columns are: Spp; Pop; Plant; Flower; Petal; Image."
 #| echo: false
-include_graphics("../figs/intro_to_R/data_in_R/tidy_clarkia.png")
+include_graphics("../figs/intro_to_r/data_in_R/tidy_clarkia.png")
 ```
 
 ## Tibbles 

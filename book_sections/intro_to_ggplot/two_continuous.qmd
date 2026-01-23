@@ -23,7 +23,7 @@ ril_data <- readr::read_csv(ril_link)|>
 
 ```{r}
 #| echo: false
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/clarkia_sketch_twoconts.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_twoconts.png")
 ```
 
 
@@ -54,7 +54,7 @@ When Brooke watched pollinators visit *parviflora* recombinant inbred lines (RIL
 ```{r}
 #| echo: false
 #| column: margin
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/jitter_sketch.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/jitter_sketch.png")
 ```
 
 We use [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)  to make such a plot and add trends with [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html). There are numerous types of trendlines we could add with the `method` argument:     

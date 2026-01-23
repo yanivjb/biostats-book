@@ -41,7 +41,7 @@ axis(1, at = 1:10, labels = 1:10, cex.axis = 1.75)
 #| fig-alt: "A collection of hexagonal stickers representing popular packages in the Tidyverse, an ecosystem of R packages for data science. Each hex showcases a different package: dplyr (pliers illustration), tibble (stylized data table in a space theme), ggplot2 (scatterplot icon), readr (document and table icon), tidyr (highlighters zooming through space), stringr (violin), forcats (three black cats in a box), lubridate (calendar and clock), and purrr (a peacefully sleeping cat). The hexes are arranged in a honeycomb pattern."
 #| fig-cap: "A collection of Tidyverse hex stickers representing key R packages for data science, including dplyr, ggplot2, tidyr, readr, and more—each with a unique thematic design."  
 #| column: margin 
-include_graphics("../figs/intro_to_R/intro_to_R/hex.png")
+include_graphics("../figs/intro_to_r/intro_to_R/hex.png")
 ```
 
 As `R` has evolved over time and its capabilities can be extended with packages (we will discuss this soon), different "dialects" of `R` have emerged. While many of you have likely seen **Base `R`**  -- built on the standard `R` program you download, here we will use   **Tidyverse** -- a specific and highly standardized set of packages designed for data science workflows  (@fig-hex). As a broad overgeneralization, Base R allows for much more control of what you are doing but requires more programming skill, while tidyverse allows you to do a lot with less programming skill.
@@ -69,7 +69,7 @@ include_url("https://player.vimeo.com/video/745985537")
 #| fig-alt: "(1) Automatic thought: \"I must be a moron if I can't perform this simple maintenance task.\" Balanced alternative: \"This isn't something I do very often, so it's unreasonable to expect that I'd automatically be an expert at it.\" (2) \"The documentation is useless and doesn’t help me at all.\" Balanced alternative: \"It's not possible to document every possible situation; but I can still read the docs and learn something.\". (3) Automatic thought: \"This isn’t something I do very often, so it’s unreasonable to expect that I’d automatically be an expert at it.\" Balanced alternative: \"This was a total waste of time. I'll never get those 4 hours back again.	Maybe I didn’t succeed in my original goal, but I made some progress and gained valuable insights for the next time I try.\""
 #| label: fig-balanced
 #| column: margin 
-include_graphics("../figs/intro_to_R/intro_to_R/balanced.png")
+include_graphics("../figs/intro_to_r/intro_to_R/balanced.png")
 ```
 
 
@@ -93,7 +93,7 @@ include_graphics("../figs/intro_to_R/intro_to_R/balanced.png")
 #| label: "fig-wereoff"
 #| fig-alt: "A nice picture of Clarkia's home." 
 #| fig-cap: "A pretty scene of Clarkia's home showing the world we get to investigate as we get equipped with R."
-include_graphics("../figs/intro_to_R/intro_to_R/pretty_scene.png")
+include_graphics("../figs/intro_to_r/intro_to_R/pretty_scene.png")
 ```
 
 Now we begin our intro to R. While we will keep practicing what we have learned and learning new R stuff all term, the  next four chapters, listed below will get you started:

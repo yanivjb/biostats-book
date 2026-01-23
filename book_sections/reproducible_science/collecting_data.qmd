@@ -37,7 +37,7 @@ source("../../_common.R")
 #| label: fig-data_collection
 #| fig-cap: "Researchers collecting data on *Clarkia* pollinator visitation."
 #| fig-alt: "Researchers conducting fieldwork on a steep hillside covered in blooming *Clarkia xantiana* flowers. One researcher in the foreground, wearing a blue beanie and dark clothing, is seated among the flowers, writing on a clipboard. Another researcher in a red jacket is also recording data, while a third person in a hat is partially visible. The background features rolling, dry, shrub-covered hills under an overcast sky."
-include_graphics("../../figs/intro_to_R/reproducible_science/more_xan.png")
+include_graphics("../../figs/intro_to_r/reproducible_science/more_xan.png")
 ```
 
 --- 
@@ -89,7 +89,7 @@ It’s also smart to include metadata at the top—things like the date, locatio
 #| label: fig-datasheet
 #| out-width: "200%"
 #| echo: false
-include_graphics("../../figs/intro_to_R/reproducible_science/sample_datasheet.png")
+include_graphics("../../figs/intro_to_r/reproducible_science/sample_datasheet.png")
 ```
 
 
@@ -114,7 +114,7 @@ include_graphics("../../figs/intro_to_R/reproducible_science/sample_datasheet.pn
 #| label: fig-good_names
 #| fig-cap: "A comparison of bad and good variable naming conventions in a dataset. The top section (labeled \"Bad\" in red) displays poor naming choices, including spaces, special characters, unclear abbreviations, and inconsistent formatting. The bottom section (labeled \"Good\" in blue) demonstrates improved naming conventions with consistent formatting, clear descriptions, and no special characters."
 #| fig-alt: "A table comparing bad and good variable naming practices. The top section, labeled \"Bad\" in red, contains three tables with problematic variable names such as \"#Bugs,\" \"X1,\" and \"Num_bugs_5_to_2_pm.\" These names include special characters, unclear abbreviations, or excessive detail. The bottom section, labeled \"Good\" in blue, presents two tables with improved names like \"numBugs\" and \"n_Bugs,\" which follow consistent, clear, and readable naming conventions."
-knitr::include_graphics("../../figs/intro_to_R/reproducible_science/goodNames4Things.png")
+knitr::include_graphics("../../figs/intro_to_r/reproducible_science/goodNames4Things.png")
 
 ```
 

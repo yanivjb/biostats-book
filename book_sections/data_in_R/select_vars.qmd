@@ -41,7 +41,7 @@ ril_data <- readr::read_csv(ril_link) |>
 #| label: fig-select
 #| fig-cap: "Using the `select()` function to retain specific columns from a dataset. The top table contains three columns: `prop_hyb` (proportion of hybrids), `n_assayed` (number of individuals assayed), and `n_hyb` (the computed number of hybrids). The `select(prop_hyb, n_hyb)` function is applied, keeping only the `prop_hyb` and `n_hyb` columns. The bottom table displays the resulting dataset after column selection."
 #| fig-alt: "A visual representation of using `select()` in `dplyr`. The top table contains three columns: `prop_hyb`, `n_assayed`, and `n_hyb`, showing values of hybrid proportions, sample sizes, and computed hybrid counts. Below, an R code snippet applies `select(prop_hyb, n_hyb)`, removing `n_assayed` and keeping only the first and last columns. The resulting table, displayed at the bottom, reflects the updated dataset with only `prop_hyb` and `n_hyb` remaining, shown with consistent formatting."  
-include_graphics("../../figs/intro_to_R/data_in_R/select.png")
+include_graphics("../../figs/intro_to_r/data_in_R/select.png")
 ```
 
 --- 

@@ -41,7 +41,7 @@ ril_data <- readr::read_csv(ril_link)
 #| label: fig-mutate
 #| fig-cap: "An illustration of the `mutate()` function. The top table represents the original dataset, containing columns for the proportion of hybrids (`prop_hyb`) and the number of individuals assayed (`n_assayed`). The `mutate()` function is then applied to compute `n_hyb`, the total number of hybrid individuals, by multiplying `prop_hyb` by `n_assayed`. The resulting dataset, shown in the bottom table, includes this newly created `n_hyb` column."  
 #| fig-alt: "A visual representation of a data transformation using `mutate()` in `dplyr`. The top table contains two columns: `prop_hyb` (proportion of hybrids) and `n_assayed` (number of individuals assayed), with values showing different proportions and a constant sample size of 8. Below, an R code snippet applies `mutate(n_hyb = prop_hyb * n_assayed)`, generating a new column, `n_hyb`, which contains the computed number of hybrids (0, 1, and 2, respectively). The updated dataset is displayed in a bottom table with the new `n_hyb` column highlighted in a darker shade." 
-include_graphics("../../figs/intro_to_R/data_in_R/mutate.png")
+include_graphics("../../figs/intro_to_r/data_in_R/mutate.png")
 ```
 
 --- 

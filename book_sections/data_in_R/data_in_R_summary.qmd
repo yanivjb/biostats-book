@@ -38,7 +38,7 @@ ril_data <- read_csv(ril_link, show_col_types = FALSE)|>
 #| column: margin
 #| fig-alt: "A close-up photograph of a vibrant pink *Clarkia xantiana* flower with delicate, deeply lobed petals. The petals have a soft gradient, fading from a rich pink at the center to a lighter shade towards the edges. The reproductive structures—dark purple stamens with pollen-covered anthers and a protruding stigma—are prominently visible. The background is softly blurred, showing additional flowers and green stems in what appears to be a greenhouse or controlled growth environment."
 #| fig-cap: "A beautiful *Clarkia xantiana* flower."
-include_graphics("../../figs/intro_to_R/data_in_R/pretty_stressed_clarkia.png")
+include_graphics("../../figs/intro_to_r/data_in_R/pretty_stressed_clarkia.png")
 ```
 
 

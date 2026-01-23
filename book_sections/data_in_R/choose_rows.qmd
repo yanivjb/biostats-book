@@ -53,7 +53,7 @@ There are reasons to remove rows by their values. For example, we could remove p
 #| label: fig-filter
 #| fig-cap: "Using `filter()` to subset data based on a condition. The top table contains two columns: `prop_hyb` (proportion of hybrids) and `petal_color` (flower color), with values including both \"white\" and \"pink\" flowers. The function `filter(petal_color == \"pink\")` is applied to retain only rows where `petal_color` is \"pink.\" The resulting dataset, shown in the bottom table, excludes the \"white\" flower row and keeps only the observations where petal color is \"pink.\""
 #| fig-alt: "A visual representation of filtering data using `filter()` in `dplyr`. The top table contains two columns: `prop_hyb` and `petal_color`, listing hybrid proportions alongside flower color (\"white\" and \"pink\"). Below, an R code snippet applies `filter(petal_color == \"pink\")`, removing rows where `petal_color` is not \"pink.\" The bottom table displays the filtered dataset, which includes only rows with pink flowers, while the white flower row has been excluded."
-include_graphics("../../figs/intro_to_R/data_in_R/filter.png")
+include_graphics("../../figs/intro_to_r/data_in_R/filter.png")
 ```
 
 

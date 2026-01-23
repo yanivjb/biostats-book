@@ -24,7 +24,7 @@ library(webexercises)
 #| fig-cap: "Some pretty R from [Allison Horst](https://allisonhorst.com/r-slack-emoji)."
 #| fig-alt: "Animated gif of the R logo with magenta and red hearts moving upward in a loop to the left of the \"R.\""
 #| label: fig-Rheart
-include_graphics("../../figs/intro_to_R/getting_started/Rgif.gif")
+include_graphics("../../figs/intro_to_r/getting_started/Rgif.gif")
 ```
 
 Links to: [Summary](#getting_started_summarySummary). [Chatbot tutor](#getting_started_summaryChatbot). [Questions](#getting_started_summaryPractice_questions). [Glossary](#getting_started_summaryGlossary_of_terms). [R functions](#getting_started_summaryNew_r_functions). [R packages](#getting_started_summaryR_packages_introduced). [Additional resources](#getting_started_summaryAdditional_resources).
@@ -53,7 +53,7 @@ Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/
 #| fig-cap: "Some encouragement from [Allison Horst](https://allisonhorst.com/r-slack-emoji)."
 #| fig-alt: "Animated gif with pastel lines in the background. The words \"CODE HERO\" in bold black text scroll across repeatedly."
 #| label: fig-encouragement
-include_graphics("../../figs/intro_to_R/getting_started/code_hero.gif")
+include_graphics("../../figs/intro_to_r/getting_started/code_hero.gif")
 ```
 
 

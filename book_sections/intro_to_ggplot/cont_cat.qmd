@@ -27,7 +27,7 @@ ril_data <- readr::read_csv(ril_link)|>
 
 ```{r}
 #| echo: false
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/clarkia_sketch_catexplan.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_catexplan.png")
 ```
 
 
@@ -58,7 +58,7 @@ We often want to know more than just the distribution of variables, we want to k
 ```{r}
 #| echo: false
 #| column: margin
-include_graphics("../../figs/intro_to_R/intro_to_ggplot/jitter_sketch.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/jitter_sketch.png")
 ```
 
 
