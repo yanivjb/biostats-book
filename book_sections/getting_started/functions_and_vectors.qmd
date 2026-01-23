@@ -29,22 +29,41 @@ R comes with tons of built-in functions that do everything from basic math to ad
 
 
 
-
-**Functions take arguments**, which we put in parentheses. When  typing `sqrt(25)`, [`sqrt()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) is the function, `25` is the argument, and `5` is the output.  
-
-
 ```{r}
 #| column: margin
+#| eval: false
+#| echo: false
 # Natural log of 1000
 log(1000)             
 ```  
 
 
-**Functions can take multiple arguments:**  If you don’t specify them all, R will either tell you to provide them, or assumes default values. For example, the `log` function defaults to the natural log (base *e*), so  `log(1000)` returns `r log(1000) |> round(digits = 3)`. If you want the logarithm with base 10, you need to specify it explicitly as `log(1000, 10)`, which returns `r log(1000, 10)`. Note that argument order matters:—`log(10, 1000)` returns `r log(10, 1000)`, while `log(1000, 10)` returns `r log(1000, 10)`. 
+### Functions take arguments
+We put arguments in parentheses. For example, when  typing `sqrt(25)`, [`sqrt()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) is the function, `25` is the argument, and `5` is the output. @fig-args **A** shows the log function, taking the argument, 1000, and returning 6.9077.
+
+---
+
+```{r}
+#| echo: false
+#| column: page-right
+#| label: fig-args
+#| fig-cap: "A) A function taking one argument: log(1000) uses the default base (e), returning 6.9077. B) A function taking two arguments: log(1000, base = 10), explicitly supplies the base (10) as the second argument, returning 3."
+#| fig-alt: "Panel A is titled \"A function taking one argument.\" It shows the code log(1000) in a green box, with arrows labeling “function” pointing to log and “argument” pointing to 1000. Below, the output [1] 6.9077 is shown, with an arrow labeled \"output.\" Panel B is titled \"A function taking two arguments.\" It shows log(1000, base = 10) in a green box. Arrows label log as the function, 1000 as argument 1, and base = 10 as a named second argument. Below, the output [1] 3 is shown with an arrow labeled \"output.\""
+library(knitr)
+
+include_graphics("../../figs/intro_to_r/getting_started/functions_arguments.png")
+```
+
+---
+
+### Functions can take multiple arguments:  
+If you don’t specify them all, R will either tell you to provide them, or assumes default values. For example, the `log` function defaults to the natural log (base *e*), so  `log(1000)` returns `r log(1000) |> round(digits = 3)`. If you want the logarithm with base 10, you need to specify it explicitly as `log(1000, 10)`, which returns `r log(1000, 10)` (@fig-args **A**). Note that argument order matters:—`log(10, 1000)` returns `r log(10, 1000)`, while `log(1000, 10)` returns `r log(1000, 10)` (@fig-args **B**). 
 
 
 ```{r}
 #| column: margin
+#| eval: false
+#| echo: false
 # Log base 1000 of 10
 log(1000, base = 10)  
 ```  
