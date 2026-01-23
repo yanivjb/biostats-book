@@ -12,7 +12,6 @@ library(DT)
 library(cowplot)
 library(broom)
 library(patchwork)
-library(emo)
 library(webexercises)
 knitr::opts_chunk$set(echo = TRUE)
 ```
