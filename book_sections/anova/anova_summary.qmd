@@ -40,7 +40,7 @@ library(forcats)
 #| fig-cap: "Enjoy this \"insomnia meme\" about the ANOVA. From [this video](https://www.youtube.com/watch?v=9W4gOJZfKhA)"
 #| fig-alt:  "A four-panel comic shows a brain talking to a person in bed at night. In panel one, the brain asks, \"What is ANOVA?\" In panel two, the person replies, \"Analysis of Variance.\" In panel three, the brain nervously asks, \"Then why do we compare means?\" In panel four, the person lies awake in the dark, wide-eyed, clearly disturbed by the question. please"
 library(knitr)
-include_graphics("../../figs/linear_models/f/anova_joke.jpg")
+include_graphics("../../figs/linear_models/F/anova_joke.jpg")
 ```
  
 We previously introduced F and the ANOVA approach as an alternative to the two sample t-test. Here we show it's true utility - by testing the single null hypothesis that all sample come from the same statistical population, we avoid the "multiple testing problem." As such, compared to the naive testing of all pairwise differences, the ANOVA approach allows us to farily test for differences in means among numerous groups. If we reject the null that all groups are equal, we conduct a "post-hoc" test to see which groups differ.
