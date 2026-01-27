@@ -266,3 +266,15 @@ body .blockquote {
   font-size:  1.3em !important;
   font-family: 'Garamond', 'Georgia', serif !important;
 }
+
+/* Style inline code (but NOT fenced code blocks) */
+p code, li code, td code, th code, .callout code {
+  background-color: #f7f7f7;
+  padding: 0.12em 0.28em;
+  border-radius: 0.2rem;
+}
+
+/* If the highlighter wraps tokens in spans, kill their backgrounds */
+p code span, li code span, td code span, th code span, .callout code span {
+  background: transparent !important;
+}
