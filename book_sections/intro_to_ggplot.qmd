@@ -5,7 +5,7 @@ webr:
 ---
 
 
-# 3. Introduction to ggplot {#intro_to_ggplot}
+# 2. Introduction to ggplot {#intro_to_ggplot}
 
 
 ```{r}
@@ -115,7 +115,7 @@ Ultimately, after a combination of exploratory plots, summary statistics, and st
 
 :::protip
 
-**Detect data quality issues early**  It is common to split up data collect to a team and maybe someone enters data in centimeters, and someone else in inches (etc). Or maybe for a data point or two a decimal point was lost,  a value is way bigger than it should be. Everytime  you collect and enter data you should make some plots to help identify any such data issues.
+**Detect data quality issues early**  It is common to split up data collection to a team and maybe someone enters data in centimeters, and someone else in inches (etc). Or maybe for a data point or two a decimal point was lost,  a value is way bigger than it should be. Every time  you collect and enter data you should make some plots to help identify any such data issues.
 
 :::
 
@@ -124,16 +124,16 @@ Ultimately, after a combination of exploratory plots, summary statistics, and st
 
 ## Focus on biological questions.    
 
-Before starting your R coding, consider the plots you want to make and why. It is all too easy to get stuck in the  R vortex—making plots simply because they’re easy to create, visually appealing, fun, or challenging, and before you know it you've wasted an hour doing something that did not move your analysis or understanding forward. So before make a (set of) plot(s) always consider   
+Before starting your R coding, consider the plots you want to make and why. It is all too easy to get stuck in the  R vortex—making plots simply because they’re easy to create, visually appealing, fun, or challenging, and before you know it you've wasted an hour doing something that did not move your analysis or understanding forward. So before making a (set of) plot(s) always consider   
 
 - **The thing you want to know**, and how it relates to the motivating biology. This includes
    - Identifying explanatory and response variables, and 
-   - Distinguishing between key explanatory variables from covariates that you may not care about but need to include.   
-- **That the visualization of data reflects your  biological motivation**.This is particularly tricky for categorical variables which R loves to put in alphabetical order but  may likely have a reasonable order to highlight patterns or biology. 
+   - Distinguishing between key explanatory variables from covariates that you want to account for, but are not of primary interest.  
+- **That the visualization of data reflects your  biological motivation**. This is particularly tricky for categorical variables which R loves to put in alphabetical order but  may likely have a reasonable order to highlight patterns or biology. 
 
 --- 
 
-**For the** ***Clarkia*** **RIL datasets:**.      
+**For the** ***Clarkia*** **RIL datasets:**      
 
 We primarily want to know which (if any) phenotypes influence the amount of pollinator visitation and hybrid seed formation.       
 
@@ -194,7 +194,7 @@ include_url("https://www.youtube.com/embed/cqcQT44mJTM?end=64")
 ```
 
 
-As described in the [video above](https://www.youtube.com/watch?v=cqcQT44mJTM) `ggplot` is based on the grammar of graphics, a framework for constructing plots by mapping data to visual aesthetics.. A major idea here is that plots are made up of data that we map onto aesthetic attributes, and that we build up plots layer by layer.
+As described in the [video above](https://www.youtube.com/watch?v=cqcQT44mJTM) `ggplot` is based on the grammar of graphics, a framework for constructing plots by mapping data to visual aesthetics. A major idea here is that plots are made up of data that we map onto aesthetic attributes, and that we build up plots layer by layer.
 
 Let's unpack this sentence, because there's a lot there. Say we wanted to make a very simple plot e.g. observations for categorical data, or a simple histogram for a single continuous variable. Here we are mapping this variable onto a single aesthetic attribute – the x-axis.
 

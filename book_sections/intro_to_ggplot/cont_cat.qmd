@@ -64,15 +64,26 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/jitter_sketch.png")
 
 To compare visitation by site, we start with this setup:  
 
-- Filter our data for samples from \"GC\" and \"SR\" (because we did not conduct pollinator observations at the other sites).   
-- Pipe this directly into our `ggplot()` function.  
+- Filter our data for samples from \"GC\" and \"SR\" (because we did not conduct pollinator observations at the other sites).   We have not yet learned this so I make this reduced data set, called `gc_sr_rils` in the margin here. 
+- Use the new data, `gc_sr_rils` in our `ggplot()` function.  
+
+::: aside
+
+
+
+```{r}
+gc_sr_rils <- ril_data |> 
+  dplyr::filter(
+      location == "GC" | 
+      location == "SR")
+```
+:::
 
 **Note:** We do not need to specify the data argument when piping data. That is because ggplot inherits data from the pipe.
 
 ```{r}
 #| eval: false 
-ril_data |> 
-  filter(location == "GC" | location == "SR") |> # Pipe data into ggplot
+gc_sr_rils # Pipe data into ggplot
   ggplot(aes(x = location, y = mean_visits))
 ```
 
@@ -97,8 +108,7 @@ ril_data |>
 ```{r}
 #| message: false 
 #| warning: false 
-ril_data |> 
-  filter(location == "GC" | location == "SR") |>  # Pipe data into ggplot
+gc_sr_rils |>
   ggplot(aes(x = location, y = mean_visits)) +
   geom_point(size =2, alpha = 0.5) +
   stat_summary(size = 1.2, color = "red")
@@ -126,8 +136,7 @@ Jitter plots spread out data along the x-axis. This works well with categorical 
 ```{r}
 #| message: false 
 #| warning: false 
-ril_data |> 
-  filter(location == "GC" | location == "SR") |> # Pipe data into ggplot
+gc_sr_rils|>
   ggplot(aes(x = location, y = mean_visits))+
   geom_jitter(height = 0, width = .3, size = 3, alpha = .5)+
   stat_summary(size = 1.2,color = "red")
@@ -154,8 +163,7 @@ We can add multiple `geom` layers to a plot. For example, we can combine a boxpl
 ```{r}
 #| message: false 
 #| warning: false 
-ril_data |> 
-  filter(location == "GC" | location == "SR") |> # Pipe data into ggplot
+gc_sr_rils |>
   ggplot(aes(x = location, y = mean_visits))+
   geom_boxplot(outlier.shape = NA) + 
   geom_jitter(height = 0, width = .3, size = 3, alpha = .5)

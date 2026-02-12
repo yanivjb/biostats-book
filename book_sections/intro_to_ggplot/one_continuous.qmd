@@ -112,7 +112,7 @@ ggplot(ril_data,aes(x = mean_visits))+
 
 ::: {style="background-color: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-To take a bit more control of my histogram, I like to   
+To take a bit more control of my histogram, I like to:    
 
 - Specify the number or width of bins (with the `binwidth` and `bins` arguments, respectively).   
 - Add white lines between bins to make them easier to see (with `color = "white"`).  

@@ -171,7 +171,8 @@ ril_data |>
              color  = petal_color))+
   geom_point(size = 3, alpha = .4)+
   facet_wrap(~ location, nrow = 1, labeller = "label_both")+
-  geom_smooth(method = "lm", se = FALSE)
+  geom_smooth(method = "lm", se = FALSE)+
+  theme(legend.position = "bottom")
 ```
 
 :::  
