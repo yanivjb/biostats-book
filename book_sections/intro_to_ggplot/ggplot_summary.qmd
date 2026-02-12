@@ -1,4 +1,4 @@
-## • 3. ggplot summary {.unnumbered}
+## • 2. ggplot summary {.unnumbered}
 
 ---
 format: html
@@ -31,7 +31,17 @@ ril_data <- read_csv(ril_link, show_col_types = FALSE)|>
 
 
 
+```{webr-r}
+#| context: setup
+library(ggplot2)
+library(readr)
+library(dplyr)
 
+# load data
+link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- read_csv(link, show_col_types = FALSE)|>
+  filter(!is.na(petal_color), !is.na(petal_area_mm), !is.na(asd_mm))
+```
 
 ```{r}
 #| echo: false
@@ -57,21 +67,12 @@ Try the questions below. The R environment below will allow you to work without 
 
 
 ```{webr-r}
-# load libraries
-library(ggplot2)
-library(readr)
-library(dplyr)
-
-# load data
-link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
-ril_data <- read_csv(link, show_col_types = FALSE)|>
-  filter(!is.na(petal_color), !is.na(petal_area_mm), !is.na(asd_mm))
+# uncomment line below for column names & class
+# glimpse(ril_data)
 
 # start plot
 ggplot(ril_data, aes(x = petal_area_mm , 
                      y = asd_mm))
-
-# There will be a warning: "`curl` package not installed, falling back to using `url()`" IGNORE IT
 ```  
 
 

@@ -1,4 +1,4 @@
-### • 3. Saving a ggplot {.unnumbered #saving_ggplots}
+### • 2. Saving a ggplot {.unnumbered #saving_ggplots}
 
 
 

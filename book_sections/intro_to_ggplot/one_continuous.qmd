@@ -1,4 +1,4 @@
-### • 3. A continuous variable {.unnumbered #one_continuous}
+### • 2. A continuous variable {.unnumbered #one_continuous}
 
 
 

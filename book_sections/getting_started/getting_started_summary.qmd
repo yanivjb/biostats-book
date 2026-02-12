@@ -35,7 +35,7 @@ Links to: [Summary](#getting_started_summarySummary). [Chatbot tutor](#getting_s
 ### Chapter summary {#getting_started_summarySummary}
 
 
-More than a simple calculator, R can keep track of variables, and has functions to make plots, summarize data, and build statistical models. R also has many packages that can extend its capabilities. But getting started in R can be tricky. Developing good praxctices and a healthy outlook is more important to your success as a programmer than is raw intellegence and coding talent.  Now that we are familiar with R, RStudio, vectors, functions, data types and packages, we are ready to build our R skills even further to work with data!
+More than a simple calculator, R can keep track of variables, and has functions to make plots, summarize data, and build statistical models. R also has many packages that can extend its capabilities. But getting started in R can be tricky. Developing good practices and a healthy outlook is more important to your success as a programmer than is raw intelligence and coding talent.  Now that we are familiar with R, RStudio, vectors, functions, data types and packages, we are ready to build our R skills even further to work with data!
 
 ### Chatbot tutor {#getting_started_summaryChatbot}
  
