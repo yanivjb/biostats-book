@@ -1,0 +1,120 @@
+---
+webr:
+  packages: ['dplyr', 'readr']
+  autoload-packages: false
+---
+
+### • 1. Variable assignment  {.unnumbered #assignment}  
+
+
+```{r}
+#| echo: false
+library(knitr)
+library(webexercises)
+```
+
+
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating scenario:** You keep typing a bunch of numbers into R and you forget what they mean. You wish there was a better way.     
+
+**Learning goals: By the end of this sub-chapter you should be able to**  
+
+1. Explain what variable assignment is and why it makes code clearer and less error-prone.   
+2. Assign numeric values and vectors to variables using `<-`.   
+3. Use assigned variables in calculations, including combining multiple variables in expressions.   
+4. Diagnose simple errors caused by using variables before they are defined.  
+:::     
+
+---
+
+## Variable assignment 
+
+Up until now, we had to enter data into a vector every time we wanted to access it. But this is a pain, and generates many opportunities for errors. 
+
+
+**Storing values in variables** allows for efficient (and less error-prone) analyses, while paving the way to more complex calculations. In R, we assign values to variables using the assignment operator, `<-`.  For example, to store the value `1` in a variable named `x`, type `x <- 1`.   Now, `2 * x` will return `2`.  
+
+```{r}
+#| column: margin
+x <- 1 # Assign 1 to x
+2 *  x # Multiply x by 2
+```
+
+#### Challenges in variable assignment
+But `R` must have a value defined before it can use it. The code below aims to set `y` equal to five, and see what `y` plus one is (it should be six). However, it returns an error. Run the code to see the error message, then fix it!  
+
+
+
+::: {.panel-tabset group="language"}
+
+### Challenge  
+
+```{webr-r}
+# First, run this code and note the error.
+# Then, fix the code by assigning a value to y.
+y + 1  # y plus one
+y <- 5 # Set y equal to 5 
+```  
+
+`r hide("Hint")`
+R reads and executes each line of code sequentially, from top to bottom. Think about what `y + 1` means to R if it hasn’t seen a definition of `y` yet.
+`r unhide()`
+
+
+### Solution  
+
+```{webr-r}
+# Just switch the order!
+y <- 5  # Assign 5 to y
+y + 1   # y plus one
+```  
+
+`r hide("Hint")`
+In R, variables must be defined before they are used. When you try to use `y + 1` before assigning a value to `y`, R throws an error because it doesn’t know what `y` is yet. When we switch the order—assigning `y <- 5` before using `y + 1`—R understands the command and evaluates it properly.
+`r unhide()`
+
+:::  
+
+
+
+Now, try assigning different numbers to `x` and `y`, or even using them together in a calculation, such as `x + y`. Understanding this  concept of assigning values is critical to understanding how to use R.  
+
+
+### Storing vectors in variables
+
+Variable assignment gets even more useful when we're dealing with the real kind of data we store in vectors. Let's return to our four hypothetical Clarkia plants with  
+
+- Four  petals per flower. 
+-  One flower on plant one, two flowers on plant two, three flowers on plant three, and two flowers on plant four. 
+-  Three seeds per flower on plant one, half a seed per flower for plant two, one seed per flower for plants three and four.
+
+By  assigning these vectors to variables with reasonable names our code is so much clearer! 
+
+
+```{r}
+petals_per_flower <- 4 
+num_flowers       <- c(1,   2, 3, 2)
+seeds_per_flower  <- c(3, 0.5, 1, 1)
+
+petals_per_flower  * num_flowers               # total petals
+num_flowers        * seeds_per_flower          # total seeds (for each plant)
+sum(num_flowers    * seeds_per_flower)         # total seeds (overall)
+```
+
+
+---
+
+:::protip
+**Variable assignment can be optional:** In the code, I assigned observations to the vector, `num_flowers`, and then found the mean. But we could have skipped variable assignment `mean(c(1, 2, 3, 2))` also returns `2`.  
+
+
+There are two good reasons not to skip variable assignment:    
+
+- *Variable assignment makes code easier to understand*. If I revisited my code in weeks I would know what the mean of this vector meant.   
+
+- *Variable assignment allows us to easily reuse the information.* For example, below I can easily find the mean petal number.   
+:::

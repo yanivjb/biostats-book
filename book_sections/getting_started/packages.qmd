@@ -1,0 +1,95 @@
+### • 1. R Packages {.unnumbered #packages}  
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating scenario:** You have heard of or seen a cool way of doing things in R, but it requires functions that do not come with the standard "out of the box" R you have.     
+
+**Learning goals: By the end of this sub-chapter you should be able to**  
+
+1. **Know what an R package is** and why you may use one.  
+2. **Install an R package** with the [`install.packages()`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/install.packages.html) function.  
+   - And know to only install a package the first time you use it.     
+3. **Load an R package** with the [`library()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/library.html) function.   
+   - And know to load all packages you need every R session you need them.   
+4. **Use a function** from an R package.  
+    - And diagnose what went wrong if it did not work.  
+
+:::     
+
+
+
+```{r}
+#| message: false
+#| echo: false
+library(knitr)
+```
+
+---   
+
+## Packages
+
+```{r}
+#| echo: false
+#| column: margin
+#| fig-alt: "A decorative R gif for funsies."
+include_graphics("../../figs/intro_to_r/getting_started/Rgif.gif")
+```
+
+
+While `R` has many built-in functions, packages extend `R`'s capabilities by providing even more functions! Packages can offer better ways to do things in R, and can even enable you to do things  that are not included in base `R` at all. In fact, `R` packages are a major way that the latest statistical and computational methods in various fields are shared with users. 
+
+
+
+Throughout this course we will run into many remarkably useful packages, including [`ggplot2`](https://ggplot2.tidyverse.org/index.html) to make great plots, [`readr`](https://readr.tidyverse.org/index.html) to load data, and   [`dplyr`](https://dplyr.tidyverse.org/index.html) to handle data. 
+
+Today, we'll start with the two packages which I find better for a first lesson, [`praise`](https://github.com/rladies/praise) and [`conflicted`](https://conflicted.r-lib.org/).
+
+- [`praise`](https://github.com/rladies/praise) is a fun package. It is just here to provide us some encouragement. Its  main function, [`praise()`](https://cran.r-project.org/web/packages/praise/refman/praise.html#praise), provides words of support. This may seem silly, but learning R can be frustrating at first, and a little encouragement can help.  
+
+- [`conflicted`](https://conflicted.r-lib.org/) is one of my favorite packages. It addresses a problem that packages themselves create: different packages can contain functions with the same name. By default, R quietly chooses one of them, which can lead to confusing behavior. 
+
+    - When [`conflicted`](https://conflicted.r-lib.org/) is loaded, R will instead, stop and ask you to be explicit whenever there is a name conflict, reminding you how to specify which function you want using package::function().
+
+    - [`conflicted`](https://conflicted.r-lib.org/) also provides the  [`conflict_prefer()`](https://conflicted.r-lib.org/reference/conflict_prefer.html) function, which allows you to tell R which version of a function you prefer. We will return to this useful idea in a later chapter.
+
+Today we will install and load both packages, but only directly use  [`praise`](https://github.com/rladies/praise). We simply load [`conflicted`](https://conflicted.r-lib.org/) to get in the habit of using it every time we use R. 
+
+### Installing packages 
+
+To install a package type,   `install.packages("<NAME OF PACKAGE>")`. So to install these packages go to the console and  type:     
+
+`install.packages("conflicted")`    
+`install.packages("praise")`    
+
+**REMEMBER: You only need to install a package once!**  
+
+
+### Loading  packages 
+
+So you installed your package. You feel like a hero. Now you try to use a function from it, but get this weird error: 
+
+
+
+```{r}
+#| error: true
+praise()
+```
+
+--- 
+
+**What went wrong?**   
+
+Installing a package means that it is available for your computer, but to use a function in a package you need to tell R to make the package available. Use the  [`library()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/library.html) function to make the functions in the package available, (e.g. `library(conflicted)`  or  `library(praise)`). Now it will work!    
+
+```{r}
+library(praise)
+praise()
+
+```
+
+**REMEMBER: You must load a package each R session that you will use it.**  
+
+
+

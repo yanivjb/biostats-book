@@ -35,7 +35,7 @@ Links to: [Summary](#getting_started_summarySummary). [Chatbot tutor](#getting_s
 ### Chapter summary {#getting_started_summarySummary}
 
 
-R is (much more than just) a simple calculator -- it can keep track of variables, and has functions to make plots, summarize data, and build statistical models. R also has many packages that can extend its capabilities. Now that we are familiar with R, RStudio, vectors, functions, data types and packages, we are ready to build our R skills even further to work with data!
+More than a simple calculator, R can keep track of variables, and has functions to make plots, summarize data, and build statistical models. R also has many packages that can extend its capabilities. But getting started in R can be tricky. Developing good praxctices and a healthy outlook is more important to your success as a programmer than is raw intellegence and coding talent.  Now that we are familiar with R, RStudio, vectors, functions, data types and packages, we are ready to build our R skills even further to work with data!
 
 ### Chatbot tutor {#getting_started_summaryChatbot}
  
@@ -61,11 +61,7 @@ The interactive R environment below allows you to work without switching tabs.
 
 
 ```{webr-r}
-# Loading packages. Note: there will be some red R output when loading dplyr. Don't worry about it!
-# Click "run" again and it will disappear! 
-library(readr)
-library(dplyr)
-
+# work here 
 
 ```  
 
@@ -75,6 +71,7 @@ library(dplyr)
 **Q1)** Entering *\"p\"^2* into R produces which error? `r longmcq(c("What error? It works great?", "Error: object p not found", "Error: object of type closure is not subsettable",answer = "Error in \"p\"^2 : non-numeric argument to binary operator"))`   
 
 
+---
 
 **Q2)** Which logical question provides an unexpected answer? `r longmcq(c("(2.0 + 1.0) == 3.0", answer = "(0.2 + 0.1) == 0.3", "2^2 > 8", "(1/0) == (10 * 1/0)"))` 
 
@@ -90,29 +87,31 @@ If you are worried about floating point errors, use the  [*all.equal()*](https:/
 
 `r unhide()`
 
-**Q3)** R has a built-in dataset called *iris*. You can look at it or give it to functions by typing *iris*. Which variable type is the *Species* in the *iris* dataset? `r longmcq(c("numeric", "logical", "character", answer = "factor"))` 
+:::
 
-**For the following questions consider the** ***diabetes dataset*** **available at: https://rb.gy/fan785**
+---
 
-**Q4)** Which variable in the diabetes dataset is a character but should be a number?: `r longmcq(c(answer = "ratio", "location", "age",  "frame", "none"))`
-
-
-**Q5)** True OR False: The numeric variable, *bp.1d*, is a double, but could be changed to an integer without changing any of our analyses: `r torf(TRUE)`
-
-**Q6)** Which categorical variable in the dataset is ordinal? `r longmcq(c("id", "location", "gender", answer = "frame"))`
-
-**Q7)** You collected five leaves of the wild grape (*Vitis riparia*) and measured their length and width. You have a table of lengths and widths of each leaf and a formula for grape leaf area (below). 
-
-
-The area of a grape leaf is: 
-$$\text{leaf area } = 0.851 \times \text{ leaf length } \times \text{ leaf width}$$
-The data are here, each column is a leaf:
+Use the data in the table below for the next question (each column is a leaf). For your convinience I have included a web-r workspace: 
 
 ```{r}
 #| echo: false
 kable(data.frame(length = c(5, 6.1, 5.8, 4.9, 6),
                  width = c(3.2, 3, 4.1, 2.9, 4.5)) |>t())
 ```
+
+```{webr-r}
+          # Code here
+
+```
+
+:::exercises
+
+**Q3)** You collected five leaves of the wild grape (*Vitis riparia*) and measured their length and width. You have a table of lengths and widths of each leaf and a formula for grape leaf area (below). 
+
+
+The area of a grape leaf is: 
+$$\text{leaf area } = 0.851 \times \text{ leaf length } \times \text{ leaf width}$$
+
 
 
 
@@ -152,9 +151,109 @@ mean(leaf_areas)                     # find mean
 
 `r unhide()`
 
+:::
+
+---
+
+
+```{r}
+#| echo: false
+#| label: fig-praise
+#| fig-cap: "Refer to this for question 4"
+#| fig-alt: "Screenshot of an RStudio script pane titled. The code shows two lines: praise() on the first line and library(praise) on the second line."
+include_graphics("../../figs/intro_to_r/getting_started/wrongpraise.png")
+```
+
+:::exercises
+
+**Q4)** How will running the script in @fig-praise (above) make you feel?   `r mcq(c("Amazing, I love being praised", answer = "Not good it wont work :("))`
+
+:::
+
+
+
+
+---
+
+```{r}
+#| echo: false
+#| label: fig-a
+#| fig-cap: "Refer to this for questions 5 and 6."
+#| fig-alt: "RStudio screenshot showing x <- 3:5 and y <- 1 in a script. The Global Environment lists only x as an integer vector of length 3."
+include_graphics("../../figs/intro_to_r/getting_started/badscript.png")
+```
+
+:::exercises
+
+**Q5)** Consider the R environment in @fig-a. What will happen if you enter `x^2` in the console?    `r mcq(c("Error: object x not found", "1 4 9" , answer = "9 16 25"))`
+
+---
+
+
+**Q6)** Consider the R environment in @fig-a. What will happen if you enter `x* y` in the console?    `r mcq(c("Error: object x not found", answer = "Error: object y not found", "1 2 3" ,  "3 4 5"))`
+:::
+
+---
+
+:::exercises
+**Q7)** You spend 30 minutes debugging something, and at the end the mistake was so obvious. What is the most accurate interpretation? `r longmcq(c("You're bad at R",  "You wasted time", answer = "Good job! You learned something and solved a problem.", "R is stupid"))`
+::: 
+
+--- 
+
+::: columns
+::: column
+
+**Script A**
+```{r}
+a<-c(1,2,3)
+b<-a*2
+```
+
+:::
+
+::: column
+**Script B**
+```{r}
+leaf_length <- c(1,2,3)
+double_length <- leaf_length * 2
+```
+:::
+:::
+
+:::exercises
+**Q8)** While neither script above is perfect, which is better? `r longmcq(c("They both work - so they are equally good",  "It depends on who is reading it","Script A, it's shorter",answer =  "Script B, it's easier to understand"))`
+::: 
+
+---
+
+
+
+a) `x <- 4`    
+b) `class(x)`  
+c) `install.packages("ggplot2")` 
+d) `library(ggplot2)` 
+
+:::exercises
+**Q10)** Consider the lines of  code above, which two are best to include in your saved R script (assuming you are using functions from ggplot2)? `r longmcq(c("a & b",  "a & c", answer = "a & d", "b & c", "b & d", "c & d"))`
+
+
+`r hide("Explanation")`
+
+* **a** and **d** are required for your code to work, so they must be included.    
+* **b) `class(x)`** checks the type of an object.   This is useful while exploring or debugging, but it is not required to reproduce the analysis. Scripts should focus on the steps needed to recreate results.
+* **c) `install.package("ggplot2")`** installs a package.  Installing packages is a one-time setup step, not part of a reproducible workflow.
+`r unhide()`
 
 
 ::: 
+
+
+:::exercises
+**Q11)** Which of the following is the best long-term strategy for improving in R?
+
+`r longmcq(c("Memorize as many functions as possible", "Avoid errors", answer = "Write code regularly and reflect on mistakes", "Ask AI to solve all your R problems and copy and paste its answers"))`
+:::
 
 ----
 
@@ -204,16 +303,6 @@ mean(leaf_areas)                     # find mean
 - **[`log()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Log.html)**: Computes the logarithm of a number, with an optional base.
 
 - **[`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html)**: Calculates the average (mean) of a numeric vector.
-
-- **[`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)** *([readr](https://readr.tidyverse.org))*: Reads a CSV file into R as a data frame.
-
-
-- **[`round()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Round.html)**: Rounds a number to a specified number of decimal places.
-
-- **[`sqrt()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html)**: Finds the square root of a number.
-
-- **[`View()`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/View.html)**: Opens a data frame in a spreadsheet-style viewer.
-
 :::
 
 ---
@@ -227,11 +316,10 @@ mean(leaf_areas)                     # find mean
 
 - **[`base`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)**: The core R package that provides fundamental functions like `c()`, `log()`, `sqrt()`, and `round()`.
 
-- **[`readr`](https://readr.tidyverse.org/)**: A tidyverse package for reading rectangular data files (e.g., `read_csv()`).
-
-- **[`dplyr`](https://dplyr.tidyverse.org/)**: A tidyverse package for data manipulation, including `mutate()`, `glimpse()`, and `across()`.
-
 - **[`conflicted`](https://conflicted.r-lib.org/)**: Helps resolve function name conflicts when multiple packages have functions with the same name.
+
+
+- **[`praise`](https://github.com/rladies/praise)**: Provides ecouragement and kind words.
 
 :::
 
@@ -246,17 +334,16 @@ These optional resources reinforce or go beyond what we have learned.
 
 - [Doing math in R](https://posit.cloud/learn/recipes/basics/BasicB1).   
 - [Using R functions](https://posit.cloud/learn/recipes/basics/BasicB4).   
-- [Importing data from a .csv](https://posit.cloud/learn/recipes/basics/ImportA1).    
+
 
 **Videos:**   
 
-- [Coding your Data Analysis for Success](https://www.youtube.com/watch?v=91LmBj29-Sc) (From Stat454).   
+- [Coding your Data Analysis for Success](https://www.youtube.com/watch?v=91LmBj29-Sc) (From Stat454).
 - [Why use R?](https://vimeo.com/745909809) (Yaniv Talking).   
 - [Accessing R and RStudio](https://vimeo.com/746738789) (Yaniv Talking).   
 - [RStudio orientation](https://vimeo.com/746907243) (Yaniv Talking).   
 - [R functions](https://vimeo.com/999280671)  (Yaniv Talking).   
 - [R packages](https://vimeo.com/746968343) (Yaniv Talking).   
-- [Loading data into R](https://bookdown.org/ybrandvain/Applied_Biostats_2024/02-Rintro.html) (Yaniv Talking).    
 - [Data types](https://vimeo.com/747009618) (Yaniv Talking).  Uses [compression data](https://raw.githubusercontent.com/ybrandvain/datasets/master/compensation.csv) as an example.     
 
 ::: 

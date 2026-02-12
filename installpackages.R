@@ -45,7 +45,7 @@ install.packages("ggdag")
 install.packages("bslib")
 devtools::install_github("gadenbuie/tweetrmd")
 devtools::install_github("hadley/emo")
-remotes::install_github("gadenbuie/tiktokrmd")
+remotes::install_github("gadenbuie/`1tiktokrmd")
 add_to_bookdown(bookdown_dir = ".",
                 include_dir = "www",
                 script_dir = "scripts",

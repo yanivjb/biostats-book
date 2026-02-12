@@ -1,0 +1,126 @@
+### • 1. R tips {.unnumbered #Rtips}  
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating scenario:** Before we learn how to use R, it's important to learn how to learn R. That is the focus of this section.        
+
+**Learning goals: By the end of this sub-chapter you should be able to**  
+
+1. Approach R coding with a "growth mindset".  
+2. Recognize "automatic thoughts" and replace them with a "balanced alternative".  
+3. Know how to find focus when you're having trouble coding.  
+4. Know how to find coding help.  
+:::     
+
+
+
+```{r}
+#| message: false
+#| echo: false
+library(knitr)
+```
+
+--- 
+
+
+
+## A growth mindset  
+
+```{r}
+#| echo: false
+#| column: margin
+#| fig-cap: "R can be rough in the early days. (Image by [Allison Horst](https://allisonhorst.com/allison-horst))"
+#| fig-alt: "Cartoon illustration of the R logo and a small pink fuzzy character standing under a dark storm cloud with rain. Text reads \"at first I was like...\" Below, the scene changes to sunshine, flowers, and smiling characters with the text \"...but now its like,\" suggesting improvement over time."
+include_graphics("https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1920.png?h=2b72c110cfcf02f5cf1f74b558461c06")
+```
+
+Learning to code can be frustrating. You might feel like you  don't know what you're doing. Like you're dumb, or coding simply isn't for you. These feelings are common in early days, because 
+
+1. Coding requires learning a new way of thinking. 
+2. Coding requires learning a new language.  
+3. Coding provides real feedback and evaluation - it's hard to bullshit and clear to know when you're wrong. 
+
+The good news is that as we conquer these challenges they become valuable skills. The even better news is that with persistence all of you can conquer these skills. I've noticed that some people pick up coding faster and some pick up coding more slowly, but the key to success is not how quick you learn, but rather  your persistence through challenges and frustration. You all have the potential to be way better at programming than you need to be to do well in this course. 
+
+
+
+### Automatic vs Balanced thoughts  
+
+
+
+Coding provides clear and immediate feedback. You might know if you did well or poorly on a chem exam, or if your essay in philosophy class was brilliant or bullshit, but programming provides instant feedback -- the code worked or  had an error, the output makes sense or is clearly garbage etc etc. Our reactions to this instant feedback can be fast, and negative. 
+
+
+These reactions are called "automatic thoughts." They feel true in the moment, but we can replace them with more accurate and helpful interpretations:
+
+
+| Automatic thought                                | Balanced alternative                                     |
+| ------------------------------------------------ | -------------------------------------------------------- |
+| I’m stupid.                                      | I don’t have much experience with this yet.              |
+| I’m not an R person.                             | I am learning and growing.                               |
+| I can’t do this.                                 | I rarely do this — it’s normal that it feels hard.       |
+| This took too long and I accomplished so little. | I learned and reviewed a lot while working through this. |
+
+## How to succeed when you feel stuck 
+
+Above I tried to make it clear that persistence, frustration tolerance and mindset are the key. This is easy to say, and important to remember, but not always easy to do. Here are some strategies I've developed:
+
+```{r}
+#| echo: false
+#| column: margin
+#| fig-cap: "The same problem can feel impossible at 5:00 PM and obvious the next morning. (Image by [Allison Horst](https://allisonhorst.com/allison-horst))."
+#| fig-alt: "Two-panel cartoon. In the first panel labeled \"Friday 5:00 PM,\" a tired person sits at a computer under dark clouds while the screen shows an error message. In the second panel labeled \"Saturday 6:00 AM,\" the same person looks refreshed and cheerful, working successfully on the computer with bright light and colorful background, suggesting that rest improves problem-solving."
+include_graphics("https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/2231d847-adce-477c-bdcc-b05be343eb15_rw_1920.jpg?h=675b39d4a0768d3a05e8f3d90b65b85f")
+```
+
+
+- **Don’t despair. Keep trying.  Take breaks.** I don't know how to say this right but keep pushing forward when you need to, but know when you're simply banging your head into a wall. If you feel frustrated, or are not sure what to do, I suggest standing up and doing ten jumping jacks or a few push ups, or going on a walk.      
+
+- **Step away from the computer often.** The computer screen is hard on our brains and eyes. It helps me to close my computer and make a plan on paper with a pencil. I often do this while either talking to myself, a pet, a toy, or best another human.     
+
+
+- **Reflect on what worked/didn’t** When you figure something out or find an answer reflect on what went right or wrong. This is a learning opportunity. Simply moving on  will mean you did not learn anything. 
+
+- **Be patient & understanding.** With both yourself, and others. You are doing your best, and you are learning. This all takes time and does not happen by magic. 
+
+
+- **Don’t compare yourself to others** We're all different. No one's life has ever improved by thinking they are better or worse than someone else.   
+
+- **Ask for help** You have many resources. Use them (see below) 
+
+--- 
+
+:::warning
+**Knowing R and knowing statistics are two different things.** 
+
+This class is about statistics, not R. But R is the way we interact with statistics nowadays. So, it is fully possible to be good at R and bad at statistics, and fully possible to be good at stats and bad at R, my goal is to get you ok with R so that you can do better stats
+:::
+
+
+
+--- 
+
+### How to get R help 
+
+There are many ways to get help in coding. 
+
+- **In my view the best way to get help is to ask a friend / peer.** Unlike old professors, they learned this stuff more recently, and might better understand your challenges better than an out of touch old fogey. Plus, by helping you they are actually increasing their mastery so you're actually doing your friend a favor by asking for help. 
+
+- **When friends can't help, we can** Ask a professor or TA etc. They know what they are doing and can often help. 
+
+- **Use the internet and books etc** People (who know the answer) are not always around books and the internet are. I suggest finding resources that you get to know well. I love [R for data Science](https://r4ds.hadley.nz/), [Data visualization: A practical introduction](https://socviz.co/), [The R graphic cookbook](https://r-graphics.org/), and [Stat545](https://stat545.com/).  Getting to know R's help files, and how to work through the trenches of stack overflow is also worthwhile. 
+
+- **Reach out to a chatbot** Chatbots are good at coding. But they might do things in weird ways. They also can be too wordy, or solve problems without helping you understand (or you might just skip their long text). So, I suggest spending extra effort understanding how a chatbot's guidance did or did not work.  For your convenience, I have developed a [Gemini "Gem" R tutor](https://gemini.google.com/gem/1lAxXB79bKH6CPmMrGqqNUwxAjVmMvc-6?usp=sharing) which is meant to follow my pedagogical views and be consistent with the style and focus of this book. In my experience chatbots are most useful once I know stuff - so I recommend to do as much as you can without a bot as you are learning. 
+
+::: aside 
+If you are interested, here are [my instructions](https://docs.google.com/document/d/1-_P6F1iRZ548w9hSlJ9wApVTgGmcvqbKaav0fWcZtHQ/edit?usp=sharing). Feel free to change/use this as a starting place if you want to build your own helper.) 
+:::
+
+:::protip
+Chatbots are often right, but can be wrong. Usually if a chatbot is giving you the wrong answer it doesn't end up solving your problem with more prodding - it just gets worse. 
+:::
+
+---
+

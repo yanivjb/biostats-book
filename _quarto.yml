@@ -26,10 +26,12 @@ book:
     - book_sections/intro2r_index.qmd
     - part: book_sections/getting_started.qmd
       chapters: 
-        - book_sections/getting_started/functions_and_vectors.qmd
-        - book_sections/getting_started/loading_packages_and_data.qmd
-        - book_sections/getting_started/data_types.qmd
-        - book_sections/getting_started/rstudio_orientation.qmd
+        - book_sections/getting_started/Rtips.qmd
+        - book_sections/getting_started/functions.qmd
+        - book_sections/getting_started/robjects.qmd
+        - book_sections/getting_started/assignment.qmd
+        - book_sections/getting_started/packages.qmd
+        - book_sections/getting_started/Rscripts.qmd
         - book_sections/getting_started/getting_started_summary.qmd
     - part: book_sections/data_in_R.qmd
       chapters: 
@@ -204,7 +206,7 @@ format:
     css: ["assets/sticky-notes.css", "assets/table-styles.css", "assets/webex.css"]
     include-after-body: assets/webex.js
     code-copy: true
-    highlight-style: zenburn
+    highlight-style: default
     mainfont: 'Crimson Text'
     fontsize: '14pt'
     linestretch: '1.5em'
