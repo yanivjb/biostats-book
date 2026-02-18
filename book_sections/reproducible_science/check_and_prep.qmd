@@ -1,0 +1,216 @@
+## • 3. Check & prep data {.unnumbered #check_and_prep}  
+
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+
+**Motivating scenario:** You got your data into `R` and are preparing for data analysis. 
+
+**Learning goals: By the end of this chapter you should be able to**  
+
+- Describe why you should never edit your data sheet.  
+- Use [`dplyr`](https://dplyr.tidyverse.org/index.html)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function to get a sense of your data sheet.  
+- Have a look at your data in `R` with [`dplyr`](https://dplyr.tidyverse.org/index.html)'s [`View()`](https://tibble.tidyverse.org/reference/view.html) function.  
+- Clean all column names with [`janitor`](https://sfirke.github.io/janitor/index.html)'s [`clean_names()`](https://sfirke.github.io/janitor/articles/janitor.html) function.  
+- Explicitly rename specific columns with [`dplyr`](https://dplyr.tidyverse.org/index.html)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function.    
+  
+
+:::
+
+--- 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-alt: "A decorative figure"
+#| column: margin
+library(knitr)
+library(readr)
+library(dplyr)
+library(conflicted)
+library(readr)
+
+
+path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- read_csv(path)
+include_graphics("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2owOWJyYzhhM3Z0NGgxMWc5ZWdma3hpMzBjbHFxdHl2Zjl1dXI5NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GoZsvxdqzXFq0yn9ti/giphy.gif")
+
+```
+
+CONGRATS! you got your hard-fought data into `R`!!!!
+
+
+If you're lucky (or better said, if you and your collaborators carefully entered data and structured your data sheet in a way to make coding easy), you are ready to go! Unfortunately, it's more likely you might be disappointed to see that it's still a pain to work with these data. The remainder of this section and the next will help you get your data ready to analyze.
+
+Here we introduce our first steps to look into our data, and to lightly modify how R "sees" your spreadsheet to make your analyses easier. In this subsection, I introduce the key functions and packages I use to get to know and manage data sheets. The two key packages here are [`dplyr`](https://dplyr.tidyverse.org/index.html) and  [`janitor`](https://sfirke.github.io/janitor/index.html), so be sure to install them now!
+
+### Best practices for managing data in R 
+
+Raw data sheets are often imperfect. Names might be inconsistent or inconvenient. Data might be entered wrong etc etc etc. While this is true, you should never edit a data sheet, as that could remove the initial data and obscure what you did to it. Rather, you should manage data in a reproducible `R` script! 
+
+:::warning
+Never edit your raw data. 
+:::
+
+
+In this subsection I introduce key functions and packages. But because the whole point of this practice is to have a reliable record of what happened to the data, you should follow the [best practices of writing reproducible scripts](#Rscripts). Towards that end, the next subsection shows a suggested workflow and structured R script for managing data. 
+
+
+
+```{r}
+#| column: margin
+# loading packages
+library(dplyr)
+library(conflicted)
+library(praise)
+library(readr)
+
+# loading data
+path     <-  "../../data/clarkia_rils.csv"
+#path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- read_csv(path)
+```
+
+
+### Peeking at data in `R`
+
+
+After loading your data with [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html), `R` will provide some information about these data (see output on the right). Specifically it will list the different "classes" of data in the columns, and show the names of the first few columns in each class. This is a great start, but provides a limited view of your dataset. 
+
+**dplyr's [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function**  reveals the class of data in each column and the values for the first few individuals. I often use this function to better get to know my data. But this SHOULD NOT be a part of your saved script - it helps you but could annoy a reader. 
+
+
+
+::: {.callout-note collapse="true"}
+## Expand to see output of `glimpse(ril_data)`
+
+```{r}
+#| echo: false
+glimpse(ril_data)
+```
+:::
+
+
+**dplyr's [`View()`](https://tibble.tidyverse.org/reference/view.html) function** opens up a new window in `R` (as a tab in the pane with your script) showing the complete data sheet. Again, I use this regularly  but you should never include it in a saved R script. If someone wants to View the data they can - they don't need to know that you did.
+
+::: {.callout-note collapse="true"}
+## Expand to see output of `View(ril_data)`
+
+```{r}
+#| echo: false
+library(DT)
+datatable(ril_data)
+```
+:::
+
+
+
+### Cleaning column names {#cleaning-names} 
+
+R makes it very hard to work with column names that start with a number or include most punctuation (! @ # $ % ^ & * ( ) - + = { } [ ] | \ : ; " ' < > , ? / ~, or a space). It is also a waste of your mental faculties to remember if a column name included a capital or not, and/or if words in a column name are separated by a period or an underscore. The [`clean_names()`](https://sfirke.github.io/janitor/articles/janitor.html) function in the [`janitor`](https://sfirke.github.io/janitor/index.html) package makes column names standard (all lower case and separated by an underscore) and legally valid. Expand the box below for an example:  
+
+
+::: {.callout-note collapse="true"}
+## Expand to see how [`clean_names()`](https://sfirke.github.io/janitor/articles/janitor.html) changes column names
+
+We will try this out on the `iris` data set built into `R`. Note that I reassigned the output of `clean_names(iris)` to `iris` to make the new names stick. Remember that the [`janitor`](https://sfirke.github.io/janitor/index.html) package must be installed and loaded.
+
+```{r}
+#| echo: false
+library(janitor)
+library(dplyr)
+
+# initial names
+glimpse(iris)
+
+# clean names
+iris <- clean_names(iris)
+glimpse(iris)
+```
+:::
+
+As discussed earlier, it's best to have descriptive column names that are not too long. `clean_names()` cannot do this for us. But we can manually reassign names with [`dplyr`](https://dplyr.tidyverse.org)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function. The code below renames the `petal_area_mm` column in `ril_data` to `petal_area`.
+
+
+
+```{r}
+#| message: false
+#| warning: false
+library(dplyr)
+library(readr)
+
+# loading data
+path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- read_csv(path) |>        #pipe data
+  rename(petal_area = petal_area_mm) #rename(new_name = old_name)
+```
+
+### Optional extras
+
+
+#### **Tidying data**
+:::fyi
+
+
+We have previously seen that it's easiest to analyze tidy data, but not all data are tidy. While there are many ways for data to be untidy, one common untidy data format is the "wide format."  You can use the `pivot_longer()` function in the [`tidyr`](https://tidyr.tidyverse.org/) package, to tidy such data (@fig-pivot). 
+
+
+
+```{r}
+#| echo: false
+#| fig-cap: "A demonstration of converting from wide to long format with pivot_longer(). From the [Simon Schölzel's](https://simonschoelzel.rbind.io/) slide show [Machine learning in R: Introduction to the tidyverse](https://simonschoe.github.io/introduction-to-the-tidyverse/)."
+#| fig-alt: "pivot_longer can convert wide-formatted data to long format."
+#| label: fig-pivot
+
+include_graphics("https://raw.githubusercontent.com/apreshill/teachthat/master/pivot/pivot_longer_smaller.gif")
+```
+
+See [this webpage](https://dcl-wrangle.stanford.edu/pivot-basic.html) for more information. 
+:::
+
+
+#### **Selecting columns**
+
+
+
+
+:::fyi
+
+Sometimes we want to pare down a dataset with many columns to only look at a few columns of interest. Say we only wanted the `location` `prop_hybrid` `mean_visits` and `petal_color` columns from `ril_data`. We can accomplish this with  [`dplyr`](https://dplyr.tidyverse.org)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function (see @fig-select):   
+
+
+
+```{r}
+#| message: false
+#| warning: false
+library(dplyr)
+library(readr)
+
+# loading data
+path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- read_csv(path) |>        #pipe data
+ select(location, prop_hybrid, mean_visits, petal_color) 
+```
+
+`glimpse(ril_data)`
+
+```{r}
+#| echo: false
+glimpse(ril_data)
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| fig-cap: "The idea of selecting columns."
+#| fig-alt: "dplyr's select function allows you to choose the columns you want to deal with."
+#| label: fig-select
+include_graphics("https://learn.r-journalism.com/wrangling/dplyr/images/select.png?classes=shadow")
+```
+
+:::

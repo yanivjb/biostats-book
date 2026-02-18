@@ -1,18 +1,19 @@
-## • 4. Collecting data {.unnumbered #collecting_data}  
+## • 3. Collecting data {.unnumbered #collecting_data}  
 
-**This section includes background on:** [Making rules for data collection](#making-rules-for-data-collection), [Making a spreadsheet for data entry](#making-a-spreadsheet-for-data-entry), [Making data (field) sheets](#making-data-field-sheets),  [A checklist for data collection](#data-collection-and-data-entry-checklist), [Making a README and/or data dictionary](#making-a-readme-andor-data-dictionary), and [Long term public data storage](#long-term-public-data-storage).   
+**This section includes background on:** [Making rules for data collection](#making-rules-for-data-collection), [Making a spreadsheet for data entry](#making-a-spreadsheet-for-data-entry), [Making data (field) sheets](#making-data-field-sheets),  [A checklist for data collection](#data-collection-and-data-entry-checklist), and [Making a README and/or data dictionary](#making-a-readme-andor-data-dictionary)
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
 
-**Motivating scenario:** You are getting ready to collect, enter, and store data. 
+**Motivating scenario:** You are getting ready to collect, enter, store, and analyze data. 
 
-**Learning goals: By the end of this chapter you should be able to**  
+**Learning goals: By the end of this subsection you should be able to**  
 
-- Make a data sheet. 
-- Label samples.  
-- Describe best principles for collecting, storing, and maintaining data.   
+1. Make a data sheet. 
+2. Label samples.  
+3. Describe best practices for collecting and maintaining data.    
+4. Explain the tidy data format and differentiate between tidy and untidy data.     
 
 :::
 
@@ -42,7 +43,7 @@ include_graphics("../../figs/intro_to_r/reproducible_science/more_xan.png")
 
 --- 
 
-Sometimes, data come from running a sample through a machine, resulting in a computer readout of our data (e.g., genotypes, gene expression, mass spectrometer, spectrophotometer, etc.). Other times, we collect data through counting, observing, and similar methods, and we enter our data by hand. Either way, there is likely some key data or metadata for which we are responsible (e.g., information about our sample). Below,we focus on how we collect and store our data, assuming that our study and sampling scheme have already been designed. Issues in study design and sampling will be discussed in later chapters.
+Sometimes, data come from running a sample through a machine, resulting in a computer readout of our data (e.g., genotypes, gene expression, mass spectrometer, spectrophotometer, etc.). Other times, we collect data through counting, observing, and similar methods, and we enter our data by hand. Either way, there is likely some key data or metadata for which we are responsible (e.g., information about our sample). Below, we focus on how we collect and store our data, assuming that our study and sampling scheme have already been designed. Issues in study design and sampling will be discussed in later chapters.
 
 
 :::aside
@@ -104,7 +105,7 @@ include_graphics("../../figs/intro_to_r/reproducible_science/sample_datasheet.pn
 <span style="color: blue;">A just as good organization would be:</span> Male, Female, Male, Male, Non-binary, Female. 
 :::  
 
--  *Use good names for things:*  Names should be concise and descriptive. They need not tell the entire story. For example, units are better kept in a data dictionary (@fig-datadictionary) than column name.  This makes downstream analyses easier.  Avoiding spaces and special characters makes column names easier to work with in R.
+-  *Use good names for things:*  Names should be concise and descriptive. They need not tell the entire story. For example, units are better kept in a data dictionary (See the table below) than in a column name.  This makes downstream analyses easier.  Avoiding spaces and special characters makes column names easier to work with in R.
 
 
 
@@ -118,36 +119,78 @@ knitr::include_graphics("../../figs/intro_to_r/reproducible_science/goodNames4Th
 
 ```
 
-- *Save in a good place*. Make a folder for your project. Keep your data sheet (and data dictionary) there. Try to keep all that you need for the project in this folder, but try not to let it get too complex. Some people like to add more order with additional subfolders for larger projects.   <br>   <br>
+- **Save in a good place.** Make a folder for your project. Keep your data sheet (and data dictionary) there. Try to keep all that you need for the project in this folder, but try not to let it get too complex. Some people like to add more order with additional subfolders for larger projects.   </br></br>     
 
-- *Save early and often:* You are welcome.  <br>   <br>
+- **Save early and often.** You are welcome.    </br></br>     
 
-- *Backup your data, do not touch the original data file and do not perform calculations on it.* In addition to scans of your data (if collected on paper) also save your data on both your computer and a locked, un-editable location on the cloud (e.g. google docs, dropbox, etc.). When you want to do something to your data do it in R, and keep the code that did it. This will ensure that you know every step of data manipulation, QC etc.  <br>   <br> 
-- *Do Not Use Font Color or Highlighting as Data.* You may be tempted to encode information with bolded text, highlighting, or text color. Don’t do this! Be sure that all information is in a readable column. These extra markings will either be lost or add an extra degree of difficulty to your analysis. Reserve such markings for the presentation of data.<br>   <br>
+- **Backup your data, do not touch the original data file and do not perform calculations on it.** In addition to scans of your data (if collected on paper) also save your data on both your computer and a locked, un-editable location on the cloud (e.g. google docs, dropbox, etc.). When you want to do something to your data do it in R, and keep the code that did it. This will ensure that you know every step of data manipulation, QC etc.   </br></br>     
 
-- *No values should be implied* Never leave an entry blank as "shorthand for same as above". Similarly, never denote the first replicate (or treatment, or whatever) by its order in a spreadsheet, but rather make this explicit with a value in a column. Data order could get jumbled and besides it would take quite a bit of effort to go from implied order to a statistical analysis. It is ok to skip this while taking data in the field, but make sure no values are implied when entering data into a computer.<br>   <br>
+- **Do Not Use Font Color or Highlighting as Data.** You may be tempted to encode information with bolded text, highlighting, or text color. Don’t do this! Be sure that all information is in a readable column. These extra markings will either be lost or add an extra degree of difficulty to your analysis. Reserve such markings for the presentation of data.       </br></br>     
 
-- *Data should be tidy  (aka rectangular):* Ideally data should be entered as tidy (Each variable must have its own column. Each observation must have its own row.  Each value must have its own cell). However, you must balance two practice considerations -- "What is the best way to collect and enter data?" vs "What is the easiest way to analyze data?" So consider the future computational pain of tidying untidy data when ultimately deciding on the best way to format your spreadsheet (above).   <br>   <br>  
-
-
-- *Use data validation approaches:*  When making a spreadsheet, think about future-you (or your collaborator) who will analyze the data. Typos and inconsistencies in values (e.g., "Male," "male," and "M" for "male") create unnecessary headaches. Accidentally inputting the wrong measure (e.g., putting height where weight should be, or reporting values in kg rather than lb) sucks.      <br> Both Excel and Google Sheets (and likely most spreadsheet programs) have a simple solution: use the "Data validation" feature in the "Data" drop-down menu to limit the potential categorical values or set a range for continuous values that users can enter into your spreadsheet. This helps ensure the data are correct.     
+- **No values should be implied.** Never leave an entry blank as "shorthand for same as above". Similarly, never denote the first replicate (or treatment, or whatever) by its order in a spreadsheet, but rather make this explicit with a value in a column. Data order could get jumbled and besides it would take quite a bit of effort to go from implied order to a statistical analysis. It is ok to skip this while taking data in the field, but make sure no values are implied when entering data into a computer.       </br></br>     
 
 
+
+- **Use data validation approaches.**  When making a spreadsheet, think about future-you (or your collaborator) who will analyze the data. Typos and inconsistencies in values (e.g., "Male," "male," and "M" for "male") create unnecessary headaches. Accidentally inputting the wrong measure (e.g., putting height where weight should be, or reporting values in kg rather than lb) sucks.       
+    - Both Excel and Google Sheets (and likely most spreadsheet programs) have a simple solution: use the "Data validation" feature in the "Data" drop-down menu to limit the potential categorical values or set a range for continuous values that users can enter into your spreadsheet. This helps ensure the data are correct.        </br> 
+
+
+- **Data should be tidy  (aka rectangular).** Ideally data should be entered as tidy (Each variable must have its own column. Each observation must have its own row.  Each value must have its own cell). However, you must balance two practical considerations -- "*What is the best/easiest/fastest way to collect and enter data?*" vs "*What is the easiest way to analyze data?*"
+
+#### Tidy data {#tidy}
+
+
+```{r}
+#| label: fig-tidy
+#| fig-cap: "A visual explanation of tidy data. Modified from @wickham2014."
+#| fig-alt: "Illustration of tidy data principles. The image features a quote from Hadley Wickham: 'Tidy data is a standard way of mapping the meaning of a dataset to its structure.' The text explains that in tidy data, each variable forms a column, each observation forms a row, and each cell is a single measurement. A small table is included as an example, where column headers ('site,' 'ril,' 'visits') represent variables, and each row represents an observation. Emphasized text and highlighting visually reinforce key concepts."
+#| column: margin
+#| echo: false
+include_graphics("../../figs/intro_to_r/reproducible_science/tidy.png")
+```
+
+
+> Like families, tidy datasets are all alike but every messy dataset is messy in its own way. Tidy datasets provide a standardized way to link the structure of a dataset (its physical layout) with its semantics (its meaning).
+>
+> Hadley Wickham. *Tidy data*. @wickham2014.
+
+Data can be structured in different ways: in a tidy format, each variable has its own column, and each row represents an observation. In contrast, messy data might combine multiple variables into a single column or store observations in a less structured format.  @fig-tidy A  shows "long" data with one variable per column. @fig-tidy B contains boxes (rather than rows or columns) with petals from a given flower laid  out neatly, and information about the flower and plant written beneath it. Both formats have their costs and benefits:   
+
+- **@fig-tidy A is  "tidy":** Each row is an observation (a petal), and each column is a variable related to that observation. Because this style is so predictable, this format simplifies computational analyses.  
+- **@fig-tidy B is  not "tidy":** There are not simple rows and columns, and variables are combined in a long string. This format is useful in many ways: e.g., humans can easily identify patterns, and data can be stored compactly, but it is not tidy.   
+
+So tidy data is not necessarily "prettier" or easier to read, or an efficient use of computer memory -- in fact, in visual presentation of data for people, we often choose an untidy format. But when analyzing data on our computer, a tidy format simplifies our work. For this reason we will work with tidy data when possible in this book. 
+
+:::aside
+Because all untidy data are different, there is no way to uniformly tidy an untidy dataset. However, the [tidyr package](https://tidyr.tidyverse.org/)  has many useful functions. Specifically, the [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) function allows for converting data from wide format to long format.
+:::
+
+```{r}
+#| label: fig-tidy_clarkia
+#| out-width: "100%"
+#| fig-cap: "An example of tidy versus untidy data. **A)** A table where each row is an observation (a petal), and each column is a variable (e.g. pop, plant, image etc...). **B)** A nicely arranged (but not tidy) sheet of *Clarkia xantiana* petals - arranged by flower."
+#| fig-alt: "A. A table with images of Clarkia petals. Each row is a petal. Columns are: Spp; Pop; Plant; Flower; Petal; Image."
+#| echo: false
+include_graphics("../../figs/intro_to_r/reproducible_science/tidy_clarkia.png")
+```
 
 ### Making a README and/or "data dictionary" {#making-a-readme-andor-data-dictionary}
 
 A data dictionary is a separate file (or sheet within a file, if you prefer) that explains all the variables in your dataset. It should include the exact variable names from the data file, a version of the variable name that you might use in visualizations, and a longer explanation of what each variable means. Additionally, it is important to list the measurement units and the expected minimum and maximum values for each variable, so anyone using the data knows what to expect.
 
-Alongside your data dictionary, you should also create a README file that provides an overview of the project and dataset, explaining the purpose of the study and how the data were collected. The README should include a description of each row and column in the dataset. While there may be some overlap with the data dictionary, this is fine. The data dictionary can serve as a quick reference for plotting and performing quality control, whereas the README provides a higher-level summary, designed for those who may not have been directly involved in the project but are seriously interested in the data.
+Alongside your data dictionary, you should also create a README file that provides an overview of the project and dataset, explaining the purpose of the study and how the data were collected. The README should include a description of each row and column in the dataset. In some cases you may prefer to put the information in the data dictionary in the README - that is ok too. Just make sure this information is easy for a reader to spot. 
 
-```{r}
-#| echo: false
-#| label: fig-datadictionary
-#| fig-cap: "Example data dictionary from [@broman2018]. This table provides structured metadata for a dataset, including variable names, descriptions, and group classifications. It ensures clarity in data documentation by defining each column's purpose and expected values. See the [Clarkia RIL data dictionary here](https://ybrandvain.quarto.pub/applied-biostatistics/book_sections/clarkia_and_its_data/clarkia_and_its_data.html) for another example."
-#| fig-alt: "A screenshot of a data dictionary table with four columns labeled \"name,\" \"plot_name,\" \"group,\" and \"description.\" The table defines variables used in a dataset, such as \"mouse\" (animal identifier), \"sex\" (Male or Female), \"sac_date\" (date of sacrifice), and other clinical or demographic variables like coat color and days on diet. The descriptions provide explanations for each variable's meaning and classification."
-include_graphics("http://www.tandfonline.com/cms/asset/a0ee9bd4-ec62-4aa0-85cd-ef3514ba63bd/utas_a_1375989_f0009_b.jpg")
-```
+::: {.column-page-right}
 
-### Long-term public data storage {#long-term-public-data-storage}
+**Table 1.** An example Data Dictionary.   
 
-A key to the scientific method is reproducibility. This is why scientific papers have a methods section. Nowadays - the internet allows for even more detailed sharing of methods. Additionally it is the expectation in most fields that data is  made available after publication on repositories like [data DRYAD](https://datadryad.org/stash) or [DRUM](https://conservancy.umn.edu/collections/6c548d8b-0f3a-4f6b-b16e-4154c88136c0). 
+| name              | plot_name          | group        | description                                              |
+|-------------------|-------------------|-------------|----------------------------------------------------------|
+| mouse             | Mouse              | demographic  | Animal identifier                                        |
+| sex               | Sex                | demographic  | Male (M) or Female (F)                                   |
+| sac_date          | Date of sac        | demographic  | Date mouse was sacrificed                                |
+| partial_inflation | Partial inflation  | clinical     | Indicates if mouse showed partial pancreatic inflation   |
+| coat_color        | Coat color         | demographic  | Coat color, by visual inspection                         |
+| crumblers         | Crumblers          | clinical     | Indicates if mouse stored food in their bedding          |
+| diet_days         | Days on diet       | clinical     | Number of days on high–fat diet                          |
+:::

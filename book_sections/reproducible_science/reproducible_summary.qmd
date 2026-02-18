@@ -1,4 +1,4 @@
-## • 4. Reproducibility summary {.unnumbered}
+## • 3. Reproducibility summary {.unnumbered}
 
 **Links to:** [Summary](#reproducible_summarySummary),  [Chatbot Tutor](#reproducible_summaryChatbot), [Practice Questions](#reproducible_summaryPractice_questions),  [Glossary](#reproducible_summaryGlossary_of_terms), [R functions](#reproducible_summaryNew_r_functions) and [R packages](#reproducible_summaryR_packages_introduced), and [Additional resources](#reproducible_summaryAdditional_resources).    
 
@@ -20,19 +20,12 @@ library(dplyr)
 
 ## Chapter Summary  {#reproducible_summarySummary}  
 
-
-Reproducibility is a cornerstone of good science, ensuring that research is transparent, reliable, and easy to build upon. This chapter covered best practices for collecting, organizing, and analyzing data in a reproducible manner.  
-
-Before collecting data, establish clear rules for measurement, naming conventions, and data entry to maintain consistency. Field sheets should be well-structured, and tidy.  Additionally, creating a data dictionary and README document ensures that variables and project details are well-documented. Finally, storing data and scripts in public repositories supports transparency and open science. 
-
-In analysis, using an R Project helps keep files organized, and loading data with relative paths avoids location issues. Writing well-structured R scripts with clear comments makes workflows understandable and repeatable. By prioritizing reproducibility you not only strengthen the integrity of your work, but also make future analyses smoother for yourself and others.
-
-
+Doing science is hard work. It is therefore important to keep your hard-fought data in a stable form that is less likely to be corrupted, and to provide clean, reproducible code to analyze these data. By following the best practices in collecting, storing, documenting, and analyzing data laid out in this chapter, your work will be reproducible and trustworthy.
 
 ### Chatbot tutor  {#reproducible_summaryChatbot}
 
 :::tutor
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-681d8db6f8688191847ab02451805eeb-reproducible-science-tutor)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-699602e563d8819187e3ce112c2466b5-reproducible-research-2026), **[**Gemini link here**](https://gemini.google.com/gem/1bzp27nr6_xCgTN9cdjf4S1aBH1TLyhLm?usp=sharing)**) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 :::
 
 
@@ -81,6 +74,51 @@ While some of these (like the long name for date) are clearly shortcomings, spre
 
 **Q4)** What should you do to make code reproducible?  (pick the best answer) `r longmcq(c("Specify the working directory with setwd()","Show the packages installed with install.packages()", answer = "Restart R once your done, and rerun your script to see if it works"))`
 
+---
+
+
+**Q5)** As we saw in this chapter, R has a built-in dataset called *iris*. You can look at it or give it to functions by typing *iris*. Which variable type is the *Species* in the *iris* dataset? `r longmcq(c("numeric", "logical", "character", answer = "factor"))` 
+:::
+
+**For the following question consider the** ***diabetes dataset*** available at: https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/diabetes.csv 
+
+:::exercises
+
+**Q6)** What is the first column in the diabetes dataset that will change its name after going through the clean_names() function?: `r fitb(answer = "stab.glu")`
+
+
+:::
+
+---
+
+For the next questions, consider the R script below, which is (sadly) not far from bad code I often have to handle as a data editor.
+
+
+```{r}
+#| eval: false
+# My R script
+
+setwd("~/ybrandva/Desktop/silphium_project")
+
+#### load data 
+silphium_data <- read_csv("mydata.csv")
+View(silphium_data)
+
+
+ggplot(silphium_data, aes(x = location, y = yield))+
+  geom_point()
+```
+
+:::exercises
+**Q7)** The script above worked fine on my computer yesterday, but today I opened up a new R session on the very same computer and it failed. What went wrong? `r mcq(c("I set my working directory", "I used an absolute path, not a relative path",answer = "I did not load the libraries in my script", "I used the View function"))`
+
+---
+
+**Q8)** what about the script would make it work on my computer (once the thing above is fixed) but not on another computer? `r mcq(c(answer = "I set my working directory", "I used an absolute path, not a relative path", "I did not load the libraries in my script", "I used the View function"))`
+
+---
+
+**Q9)** What about the script is annoying for someone using this code (once it works) and should be removed, but doesnt stop our code from working? `r mcq(c( "I set my working directory", "I used an absolute path, not a relative path", "I did not load the libraries in my script",answer = "I used the View function"))`
 ::: 
 
 
@@ -127,25 +165,32 @@ While some of these (like the long name for date) are clearly shortcomings, spre
 :::functions
 
 
-- **[`clean_names(data)`](https://sfirke.github.io/janitor/reference/clean_names.html)** – Standardizes column names (from the [`janitor`](https://sfirke.github.io/janitor/index.html) package).  
 
+**📥 Data import**    
 
-- **[`drop_na(data)`](https://tidyr.tidyverse.org/reference/drop_na.html)** – Removes rows with missing values (from the [`tidyr`](https://tidyr.tidyverse.org/) package)).  
+* - **[`read_csv("file.csv")`](https://readr.tidyverse.org/reference/read_delim.html)** – Reads a CSV file into R as a tibble (from the [`readr`](https://readr.tidyverse.org/) package).    
+* **[`read_xlsx("file.xlsx", sheet = "sheetname")`](https://readxl.tidyverse.org/reference/read_excel.html)** – Reads an excel sheet into R as a tibble (from the [`readxl`](https://readxl.tidyverse.org/) package).   
 
+---
 
-- **[`read_csv("file.csv")`](https://readr.tidyverse.org/reference/read_delim.html)** – Reads a CSV file into R as a tibble (from the [`readr`](https://readr.tidyverse.org/) package).  
+**🔍 Inspecting data**   
 
-- **[`read_xlsx("file.xlsx", sheet = "sheetname")`](https://readxl.tidyverse.org/reference/read_excel.html)** – Reads an excel sheet into R as a tibble (from the [`readxl`](https://readxl.tidyverse.org/) package).  
+* **[`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html)** — shows the structure of your data from the [`dplyr`](https://dplyr.tidyverse.org) package. 
+* **[`View()`](https://tibble.tidyverse.org/reference/view.html)** — open data viewer.  
 
+---
 
-- **[`rename(data, new_name = old_name)`](https://dplyr.tidyverse.org/reference/rename.html)** – Renames columns in a dataset (from the [`dplyr`](https://dplyr.tidyverse.org/) package).  
+**🧹 Cleaning & renaming**  
 
-- **[`pivot_longer(data, cols, names_to, values_to)`](https://tidyr.tidyverse.org/reference/pivot_longer.html)** – Converts wide-format data to long format (from the [`tidyr`](https://tidyr.tidyverse.org/) package).  
+* **[`clean_names(data)`](https://sfirke.github.io/janitor/reference/clean_names.html)** – Standardizes column names (from the [`janitor`](https://sfirke.github.io/janitor/index.html) package). 
+* **[`rename(data, new_name = old_name)`](https://dplyr.tidyverse.org/reference/rename.html)** – Renames columns in a dataset (from the [`dplyr`](https://dplyr.tidyverse.org/) package).  
 
- 
+---
 
-- **[`sessionInfo()`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/sessionInfo.html)** – Displays session details, including loaded packages (useful for reproducibility).  
+**🔧 Data wrangling**    
 
+* **[`select()`](https://dplyr.tidyverse.org/reference/select.html)** — choose columns (from the [`dplyr`](https://dplyr.tidyverse.org/) package).   
+* **[`pivot_longer(data, cols, names_to, values_to)`](https://tidyr.tidyverse.org/reference/pivot_longer.html)** – Converts wide-format data to long format (from the [`tidyr`](https://tidyr.tidyverse.org/) package).   
 
 :::
 
@@ -164,7 +209,7 @@ While some of these (like the long name for date) are clearly shortcomings, spre
 
 - **[`tidyr`](https://tidyr.tidyverse.org/)** – Helps tidy messy data. Here we introduced [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) to make wide data long.    
 
-- **[`janitor`](https://sfirke.github.io/janitor/)** – Cleans and standardizes data, including `clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) for formatting column names.  
+- **[`janitor`](https://sfirke.github.io/janitor/)** – Cleans and standardizes data, including [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) for formatting column names.  
 
 
 :::

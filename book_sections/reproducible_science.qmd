@@ -1,4 +1,4 @@
-## 4. Reproducible Science {#reproducible_science}
+## 3. Reproducible Science {#reproducible_science}
 
 **This section includes background on:** 
 
@@ -13,7 +13,7 @@
 
 - Make a data sheet. 
 - Label samples.  
-- Describe best principles for collecting, storing, and maintaining data.    
+- Describe best practices for collecting, storing, and maintaining data.    
 - Organize data in folders. 
 - Load data into R using a project
 - Write code that allows for readers to  understand, replicate, and extend your work.
@@ -39,10 +39,8 @@ In my roles as a biostatistics professor and Data Editor at [The American Natura
 
 This chapter walks you through the key steps for making your science reproducible—from field notes to final scripts. You will learn how to:
 
-- [Appropriately collect and store data](#collecting_data), including [Making rules for data collection](#making-rules-for-data-collection), [Making a spreadsheet for data entry](#making-a-spreadsheet-for-data-entry), [Making data (field) sheets](#making-data-field-sheets),  [A checklist for data collection](#data-collection-and-data-entry-checklist), [Making a README and/or data dictionary](#making-a-readme-andor-data-dictionary), and [Long term public data storage](#long-term-public-data-storage).  
-- [Develop reproducible computational strategies](#reproducible_analyses), including: [Making an R project](#making-an-r-project), [Loading data into R](#loading-data), [Writing and saving R scripts (with comments)](#r-scripts-commenting-code-cleaning-tidying-data), [Cleaning](#cleaning-data) and [tidying](#tidying-data) data, and finally [a reproducible code checklist (modified from The American Naturalist)](#reproducible-code-american-naturalist-checklist).       
-
-
-
-Then we [summarize the chapter](#reproducible_summarySummary), present  a [chatbot tutor](#reproducible_summaryChatbot), [practice questions](#reproducible_summaryPractice_questions), a [glossary](#reproducible_summaryGlossary_of_terms),  a review of [R functions](#reproducible_summaryNew_r_functions) and [R packages](#reproducible_summaryR_packages_introduced) introduced, and [provide links to additional resources](#reproducible_summaryAdditional_resources).    
-
+- [Appropriately collect and store data](#collecting_data).    
+- [Safely store data](#storing_data).  
+- [Load data into R](#loading_data).    
+- [Peek at your data in R, and prepare it for analysis](#check_and_prep).   
+- [Make sure your code follows best practices in. reproducibility](#reproducible_analyses).    

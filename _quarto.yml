@@ -42,6 +42,14 @@ book:
         - book_sections/intro_to_ggplot/two_continuous.qmd
         - book_sections/intro_to_ggplot/many_explanatory.qmd
         - book_sections/intro_to_ggplot/ggplot_summary.qmd
+    - part: book_sections/reproducible_science.qmd
+      chapters: 
+        - book_sections/reproducible_science/collecting_data.qmd
+        - book_sections/reproducible_science/storing_data.qmd
+        - book_sections/reproducible_science/loading_data.qmd
+        - book_sections/reproducible_science/check_and_prep.qmd
+        - book_sections/reproducible_science/reproducible_analyses.qmd
+        - book_sections/reproducible_science/reproducible_summary.qmd  
     - part: book_sections/data_in_R.qmd
       chapters: 
         - book_sections/data_in_R/add_vars.qmd
@@ -49,11 +57,6 @@ book:
         - book_sections/data_in_R/summarize_vars.qmd
         - book_sections/data_in_R/choose_rows.qmd
         - book_sections/data_in_R/data_in_R_summary.qmd
-    - part: book_sections/reproducible_science.qmd
-      chapters: 
-        - book_sections/reproducible_science/collecting_data.qmd
-        - book_sections/reproducible_science/reproducible_analyses.qmd
-        - book_sections/reproducible_science/reproducible_summary.qmd  
     - book_sections/filler.qmd
     - book_sections/summarizing_data_index.qmd
     - part: book_sections/univariate_summaries.qmd

@@ -4,14 +4,14 @@
 
 By the end of this chapter, students should be able to:
 
-1. Describe principles for collecting, labeling, storing, and documenting data.
-2. Make tidy, consistent data sheets for field or lab collection.
+1. Describe best practices for collecting, labeling, storing, and documenting data.
+2. Design tidy, consistent data sheets for field or lab collection.
 3. Understand the role of a README and data dictionary.
-4. Create a folder structure and initiate an R Project for reproducible analysis.
+4. Create a logical folder structure and initiate an R Project for reproducible analysis.
 5. Load data into R using relative paths.
 6. Write reproducible R scripts with informative comments.
 7. Clean and tidy data in R.
-8. Apply best practices for writing and organizing code.
+8. Apply best practices for organizing and documenting analyses.
 
 ---
 
@@ -19,11 +19,11 @@ By the end of this chapter, students should be able to:
 
 This chapter follows:
 
-1. Types of Variables (students understand variable types)
-2. Data in R (students use `filter()`, `mutate()`, `group_by()`, `read_csv()`)
-3. Intro to ggplot (students have created simple plots)
+1. Types of Variables
+2. Data in R
+3. Intro to ggplot
 
-This chapter introduces higher-level practices for project setup, data entry standards, and coding workflow.
+This chapter introduces higher-level practices for project setup, data entry standards, and reproducible workflows.
 
 ---
 
@@ -35,6 +35,13 @@ This chapter introduces higher-level practices for project setup, data entry sta
 * They may not know how to structure folders or create projects.
 * They are encouraged to reflect on real-world scientific practices (lab notebooks, naming files, data storage).
 * They should begin thinking of themselves as future researchers.
+* They may believe “it ran once” means code works reproducibly.
+
+---
+
+## Core Definition to Reinforce
+
+**Reproducibility:** Someone else (or future you) can run your code on the same data and obtain the same results.
 
 ---
 
@@ -42,77 +49,112 @@ This chapter introduces higher-level practices for project setup, data entry sta
 
 * Start reproducibility at the beginning of a project.
 * Use consistent naming and data entry practices.
-* Always save raw data; never overwrite.
+* Always save raw data; never overwrite it.
 * Store data and scripts together in a logical structure.
-* R Projects help make paths reliable.
+* R Projects make relative paths reliable.
 * Every data transformation should happen in a script.
+* Scripts should run top-to-bottom in a fresh session.
 * Scripts should begin with author, date, and purpose.
-* Avoid using Excel formatting (e.g., bold/color) as data.
-* Code should work if rerun from scratch.
+* Avoid using formatting (bold, color) as data.
+* Reproducible code benefits both science and future you.
+
+---
+
+## AmNat Reproducibility Guidelines (Instructor Emphasis)
+
+The chapter draws on **The American Naturalist** reproducibility policy. Students should understand these principles:
+
+### REQUIRED
+
+* Scripts begin by loading packages and importing raw data.
+* Use relative paths (avoid `setwd()`).
+* Code must run in a fresh session.
+* Comment code to explain purpose (“why”).
+* Link code to figures/tables in the manuscript.
+* Cite packages and reused code.
+
+### RECOMMENDED
+
+* Test code on a clean machine or new session.
+* Use informative names for files and variables.
+* Perform all data manipulation in scripts.
+* Organize code into logical sections.
+* Label sections to match figures/tables.
+* Remove unused code or move to a coda.
+
+Students are **not expected to memorize** these but should recognize their purpose.
 
 ---
 
 ## Figures to Reference
 
-| Figure ID             | Topic             | Key Message                                                              |
-| --------------------- | ----------------- | ------------------------------------------------------------------------ |
-| `fig-data_collection` | Fieldwork image   | Visual context for data collection from real biology.                    |
-| `fig-datasheet`       | Field data sheet  | Highlights layout, metadata, and organization for real-world collection. |
-| `fig-good_names`      | Variable naming   | Illustrates good vs bad naming conventions.                              |
-| `fig-datadictionary`  | Data dictionary   | Shows metadata structure for variables.                                  |
-| `fig-Rproject`        | RStudio file pane | Reinforces folder structure and R Project file organization.             |
+| Figure ID             | Topic             | Key Message                               |
+| --------------------- | ----------------- | ----------------------------------------- |
+| `fig-data_collection` | Fieldwork image   | Data collection is a real, messy process. |
+| `fig-datasheet`       | Field data sheet  | Shows layout, metadata, and organization. |
+| `fig-good_names`      | Variable naming   | Good names reduce errors and confusion.   |
+| `fig-datadictionary`  | Data dictionary   | Metadata makes data usable by others.     |
+| `fig-Rproject`        | RStudio file pane | Projects enable reliable paths.           |
 
-> These figures are embedded in the textbook. The tutor should reference them conversationally to help students recall key lessons, not display or link directly.
+The tutor should reference these conversationally.
 
 ---
 
 ## R Functions Introduced
 
-* `read_csv()` — read a .csv file into R
-* `read_xlsx()` — read Excel file into R
+* `read_csv()` — load CSV files
+* `read_xlsx()` — load Excel files
 * `rename()` — rename variables
-* `pivot_longer()` — convert wide to long
-* `clean_names()` — clean variable names (janitor)
-* `sessionInfo()` — print R session info for reproducibility
+* `pivot_longer()` — tidy wide data
+* `clean_names()` — standardize column names
+* `sessionInfo()` — record software environment
+* `ggsave()` — save reproducible figures
 
 ---
 
 ## R Packages Introduced
 
-* `readr` — data import
-* `readxl` — Excel import
-* `dplyr` — renaming, filtering
-* `tidyr` — reshaping
-* `janitor` — cleaning names
+* `readr`
+* `readxl`
+* `dplyr`
+* `tidyr`
+* `janitor`
+* `ggplot2`
 
 ---
 
 ## Awareness of Embedded Quiz Items
 
-The tutor should not give direct answers, but can support student thinking through:
+Tutor should guide thinking without giving answers.
 
-* Prompting them to examine spreadsheet structures
-* Reminding them what a data dictionary includes
-* Recommending a reproducible R workflow
+Common quiz themes:
+
+* tidy vs untidy data
+* relative vs absolute paths
+* README vs data dictionary
+* reproducible scripts
+* raw data preservation
 
 ---
 
-## Quiz Topics Covered
+## Common Student Misconceptions
 
-* Tidy vs untidy data
-* Proper file naming and variable naming
-* What belongs in a README or data dictionary
-* Why to avoid `setwd()`
-* How to load data from a project folder
-* Writing and commenting a reproducible script
+Tutor should watch for:
+
+* “If it runs once, it works.”
+* Confusing spreadsheet formatting with data.
+* Believing raw data can be edited safely.
+* Thinking folder structure is optional.
+* Treating interactive console steps as reproducible.
 
 ---
 
 ## Tutoring Tone and Tactics
 
-* Emphasize real-world relevance ("future you will thank you")
-* Gently challenge assumptions about what counts as data
-* Ask students to describe their current organization habits
-* Encourage sketching folder structure or planning ahead
-* Keep code examples minimal unless asked to elaborate
-* Praise students for investing in reproducibility
+* Emphasize real-world relevance (“future you will thank you”).
+* Ask students to describe their current workflow.
+* Encourage planning before coding.
+* Keep code examples minimal unless requested.
+* Praise investment in organization and clarity.
+
+
