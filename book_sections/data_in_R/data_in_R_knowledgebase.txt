@@ -1,0 +1,157 @@
+## OVERALL CHAPTER: Data in R
+
+### Chapter-Wide Learning Goals
+
+By the end of this chapter, students should be able to:
+
+By the end of the chapter, students should be able to:
+
+1. Explain the tidy data format and differentiate between tidy and untidy data.    
+2. Use the [`select()`](https://dplyr.tidyverse.org/reference/select.html) function in `R` to choose columns to work with.   
+3. Use the [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) function in `R` to add or overwrite columns.     
+4. Use the [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) function to choose the rows you want to work with.  
+   - Recognize that two functions in different packages may share the same name (e.g., `filter()`), and know how to resolve these conflicts when errors occur.  
+
+5. Combine these operations with the pipe  [`|>`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/pipeOp.html) operator.  
+6. Generate a reproducible R script which documents your data wrangling efforts.
+---
+
+## Pedagogical Sequence
+
+This chapter follows:
+
+1. Intro to R (students have experience loading data and assigning variables)
+2. Understanding of basic variable types (categorical, numeric)
+
+This chapter introduces students to data wrangling using tidyverse verbs.
+
+---
+
+## Background Context for Students
+
+* Students know how to run code in RStudio, use `<-`, and execute functions.
+* They have seen the base R pipe `|>` and are encouraged to use it.
+* They have seen read_csv() from readr, clean_names() from janitor, and select() from dplyr. 
+* They understand types of variables: categorical (nominal, binary, ordinal) and numeric (discrete, continuous).
+
+---
+
+## Key Concepts to Reinforce
+
+* **Tidy data**: each row = observation, each column = variable.
+* **Tibbles**: rectangular data structure used in tidyverse (rows = obs, columns = variables).
+* **Data wrangling**: chaining functions together to transform and summarize data.
+
+---
+
+## Tidyverse Style and Conventions
+
+* Use `|>` to chain commands.
+* Use tidyverse functions like `select()`, `mutate()`, `summarize()`, and `filter()`.
+* Avoid `$`, bracket indexing, and `attach()` unless students ask.
+* Do not teach `data.frame`, `list`, or `matrix` unless asked. Prefer `tibble` terminology.
+
+---
+
+## Subchapter Summaries and Learning Goals
+
+### 1. Tidy Data
+
+* Define tidy vs. untidy formats.
+* Recognize tidy data layout.
+
+
+### 2. Checking stat review 
+* Use dplyr’s glimpse() to get a sense of our data.
+* Use dplyr’s select() function to limit our data to a few variables of interest.
+* Use dplyr’s rename()` function to change the names of specific columns.
+
+### 3. Adding Columns with `mutate()`
+
+* Create or overwrite variables.
+* Use `as.numeric()` to change types.
+* Use `case_when()` for conditional assignment.
+
+### 4. Choosing Rows with `filter()`
+
+* Use `filter()` to remove or retain specific observations.
+* Understand how row-level filtering can impact summary results.
+* Understand function the idea of conflict, and fix them with pacakge::function() notation or conflict_prefer(). 
+
+---
+
+## R Functions Introduced
+
+* `mutate()` [dplyr package]
+* `as.numeric()`
+* `select()` [dplyr package]
+* `filter()` [dplyr package]
+* `rename()` [dplyr package]
+* `ifelse()` [dplyr package]
+* `glimps()` [dplyr package]
+* clean_names() [janitor package]
+* Pipe operator `|>`
+
+---
+
+## R Packages Introduced
+
+* `dplyr`
+* `readr`
+
+These build on the previous chapter, which also used `conflicted` package to manage function name conflicts, and janitor's clean_names() function.. 
+
+---
+
+## Common Debugging Themes in This Chapter
+
+Students may encounter:
+- Errors due to missing `library()` calls
+- Function conflicts between packages
+- Changes not saved due to missing reassignment (`<-`)
+- Confusion between row filtering vs column selection
+
+The tutor should guide students to interpret error messages and test small code changes.
+
+---
+
+Awareness of Embedded Quiz Items
+
+This tutor should be aware of the embedded webr quiz questions in this chapter and avoid giving direct answers. Instead, guide students using hints, prompts, and clarification questions that encourage them to run code, interpret output, and reason through errors.
+
+Sample Quiz Topics
+
+1. Missing library errors — understanding why functions like filter() fail when dplyr is not loaded.  
+
+2. Function conflicts — recognizing that stats::filter() and dplyr::filter() share a name and knowing how to resolve the conflict using explicit namespaces or conflict_prefer().   
+
+3. Tidy vs. untidy data — identifying whether a dataset is tidy based on structure (e.g., transposed, combined variables, or wide formats).   
+
+4. When tidy data matters — recognizing that tidy format is essential for using tidyverse tools like dplyr.  
+
+5. Overwriting raw data — understanding the risks of overwriting built-in datasets (e.g., iris) and the importance of preserving original data.   
+
+6. Pipes and data flow — predicting how data move through chained operations using the pipe operator |>.   
+
+---
+
+## Awareness of Key Figures
+
+The tutor should recognize and be able to describe these figures to help students interpret them. If students refer to "the mutate figure" or "that tidy graphic," the tutor should help them recall the visual structure and key takeaway.
+
+
+| Section              | Figure | Topic                      | Key Message                                                                                             | Tutor Guidance                                                           |
+| -------------------- | ------ | -------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Data in R            | Fig 1  | Tidy data principles       | Variables = columns, observations = rows, cells = single values                                         | Connect structure to analysis; tidy data enables `dplyr` and `ggplot`.   |
+| Data in R            | Fig 2  | Tidy vs. untidy data       | Tidy tables are predictable for computation; untidy formats may be human-friendly but harder to analyze | Emphasize tidy ≠ prettier; tidy = analyzable.                            |
+| Checking Data Review | Fig 1  | `select()` retains columns | Selecting columns removes others from the dataset                                                       | Ask what information is lost and why selecting clarifies analysis.       |
+| Modifying Columns    | Fig 1  | Problematic scatterplot    | Character data treated as categorical → cluttered axis                                                  | Encourage using plots to detect data type issues.                        |
+| Modifying Columns    | Fig 2  | Corrected scatterplot      | Numeric data produce meaningful scales                                                                  | Prompt reflection on data types and interpretation.                      |
+| Modifying Columns    | Fig 3  | `mutate()` adds a column   | New variables can be computed from existing ones                                                        | Ask where new values come from and why derived variables help workflows. |
+| Choose Rows          | Fig 1  | Counts with missing data   | Missing values can obscure patterns                                                                     | Encourage thinking about when filtering missing data is appropriate.     |
+| Choose Rows          | Fig 2  | `filter()` subsets rows    | Rows not meeting the condition are removed                                                              | Ask what rule determines which rows remain.                              |
+| Choose Rows          | Fig 3  | Counts after filtering     | Filtering can clarify patterns but may affect interpretation                                            | Prompt reflection on clarity vs. bias.                                   |
+
+
+> The tutor should not show or link to images but can summarize what they showed and help students recall their meaning and relevance.
+

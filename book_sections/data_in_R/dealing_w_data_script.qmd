@@ -1,0 +1,82 @@
+### • 4. Code for Dealing w data {.unnumbered #dealing_w_data_script}
+
+### Overview
+
+**The past two chapters have introduced the basic function and workflow for preparing to analyze your data in R.** Below I provide an example script for this process. Remember that:
+
+- The contents of your script is not all the code that you wrote. Rather, your script is what is needed for someone else to generate your results and understand how you got there. For example, I used the `glimpse()` function to look into the data. I also had numerous versions of wrong code and false starts etc. While it is useful for you (as learners) to understand that such additional code and false starts are common, it is not needed to recreate my final product.  
+
+- Reproducibility requires a reliable file structure. I cheated by reading data from the web. If your data reside on your computer be sure to include a .zip file with the R script, the data and an R project that will work on a naive computer
+
+### Functions
+
+I used the following functions to handle the data (let's not focus on the ggplot functions) for now. 
+
+- [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html). In the [`readr`](https://readr.tidyverse.org/reference/read_delim.html) package. It loads the data into R.   
+- [`select()`]((https://dplyr.tidyverse.org/reference/select.html)). In the[ `dplyr`](https://dplyr.tidyverse.org/) package allows us to winnow down our dataset to the columns we care about. *NOTE:* You can choose either the columns you want with their  names, or the columns you don't want with their name after a negative sign, `-`.   
+- [`rename()`](https://dplyr.tidyverse.org/reference/rename.html). In the  [`dplyr`](https://dplyr.tidyverse.org/) package. It allows us to change the names of columns: `rename(NEW_NAME, OLD_NAME)`.    
+- [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html). In the [`dplyr`](https://dplyr.tidyverse.org/) package. Adds or modifies a column.      
+- [`ifelse()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ifelse.html). In base R. This is a bonus function that you don't NEED to know now, but it is helpful! It allows you to do different things based on the output of a logical question. In  this case, I used it to have the values of `visited` equal `visited` if there are nonzero pollinator visits, and `not visited` if there are zero visits.. This gives us better x-labels than `TRUE` / `FALSE`.    
+- [`filter()`](https://dplyr.tidyverse.org/reference/filter.html). In the [`dplyr`](https://dplyr.tidyverse.org/) package. Allows you to choose rows to retain based on their values in  a column. Because there is another `filter()`  function,  always specify that you want dplyr's filter. You can do this by:   
+   - Using the [`conflict_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) function in the [`conflicted`](https://conflicted.r-lib.org/) package: `conflict_prefer("filter", winner = "dplyr")`.  OR
+   - Using the package::function() convention: `dplyr::filter()`.  
+
+### Reproducible script   
+
+Now here it is!
+
+```{r}
+#| message: false
+#| warning: false
+#| column: screen-right
+#| fig-column: body
+# Yaniv Brandvain
+# Feb 21 2026
+# Goal to load, and clean Clarkia data for analysis
+
+###--------------------------
+### Load packages
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(conflicted)
+conflict_prefer("filter", winner = "dplyr") # Prefer dplyr's filter function.
+
+###--------------------------
+### Load data
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link)
+
+###--------------------------
+### Format data. Note the many line breaks make code easier to read, but don't change how it works
+ril_data <- ril_data |> 
+  select(location,                              # Focus on a few columns of interest
+         prop_hybrid,  
+         mean_visits, 
+         petal_color, 
+         petal_area_mm, 
+         asd_mm, 
+         growth_rate) |>
+  rename(petal_area  = petal_area_mm,           # Makes names better
+         asd         = asd_mm, 
+         visits      = mean_visits)|>
+  mutate(growth_rate = as.numeric(growth_rate), # Improve and add columns
+         visited = ifelse(visits       > 0, "visited", "not visited"),
+         has_hyb = ifelse(prop_hybrid > 0, "yes hybrid", "no hybrid"),
+         relative_asd = asd / petal_area) |>    
+  filter(!is.na(visited),                       # Remove NA data
+         !is.na(has_hyb))
+
+###--------------------------
+### Plot the association between receiving a visits and having a hybrid by location
+final_plot <- ggplot(ril_data, aes(x = has_hyb, fill = visited))+
+  geom_bar()+
+  facet_wrap(~location, labeller = "label_both")+
+  theme(legend.position = "bottom",                  # tricks to make better plots 
+        axis.title.y      = element_text(size = 18), # we didnt learn these tricks yet
+        axis.title.x      = element_blank(),         # we will learn this in chapter 8
+        axis.text         = element_text(size = 18),
+        legend.title      = element_blank(),
+        legend.text       = element_text(size = 18), 
+        strip.text        = element_text(size = 18))
+```

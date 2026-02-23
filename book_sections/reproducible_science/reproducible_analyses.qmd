@@ -22,6 +22,7 @@
 #| echo: false
 #| message: false
 #| warning: false
+#| column: margin
 #| fig-cap: "The logo for American Naturalist"
 #| fig-alt: "A decorative image."
 library(knitr)
@@ -143,9 +144,9 @@ ggsave("visits_by_petal_perimeter_and_color.png", visit_plots)
 For example, after entering `ril_data <- read_csv(path)`, I went into the console and entered `glimpse(ril_data)`. Similarly I made my plot a few lines at a time. First typing and entering 
 
 `ril_data |>`</br> 
-`  ggplot(aes(x = petal_perimeter,` 
-`             y = mean_visits,`
-`             color = petal_color ))+`</br>
+`  ggplot(aes(x=petal_perimeter,` 
+`             y=mean_visits,`
+`             color=petal_color))+`</br>
 `    geom_point()`</br>
 
 I then added
