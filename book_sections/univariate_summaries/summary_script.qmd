@@ -1,0 +1,172 @@
+### • 5. Summarizing Data: Code {.unnumbered #dealing_w_data_script}
+
+
+
+
+### Overview
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| column: margin
+#| fig-alt: "The R logo"
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(kableExtra)
+library(ggplot2)
+library(tidyr)
+source("../../_common.R") 
+include_graphics("https://www.r-project.org/Rlogo.png")
+```
+
+Here I provide simple R code to generate the most common univariate data summaries.  Note the steps:
+
+1. **Load packages.** See the [section loading data](#loading_data) from chapter three.  
+2. **Load data.**   See the [section on packages](#packages) from chapter one.  
+3. **Format data.** See the [chapter four](#data_in_R) for more info.    
+   - Here I removed all `NA` data before analyzing. If you do not remove NA data before summarizing, be sure to include `na.rm=TRUE`. e.g. `mean(x, na.rm = TRUE)`.  
+4. **Visualize data.** See the [section on visualizing a continuous variable](#one_continuous) from chapter two, and the sections on [summarizing shape](#summarizing_shape), and [summarizing variability](#summarizing_variability), from this chapter.  
+5. **Summarize data**
+   - Appropriate summaries depend on the [shape of the data](#summarizing_shape). Here I present all standard summaries of the ["average"](#summarizing_center) and the [variability](#summarizing_variability), but note that the left skew makes these somewhat difficult to interpret. 
+
+---
+
+```{r}
+#| eval: false
+###--------------------------
+### Load Packages
+library(dplyr)
+library(readr)
+library(ggplot2)
+
+
+###--------------------------
+### Load data
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link)
+
+###--------------------------
+### Format data
+gc_visits <- ril_data            |> 
+  select(location, mean_visits)  |>   # Focus on two columns of interest
+  rename(visits = mean_visits)   |>   # "mean visits" confuses me because it was mean per plant, so let's call it visits
+  filter(location == "GC",            # let's focus on plants at GC 
+         !is.na(visits))                  # with non-na-visits
+
+###--------------------------
+### Visualize before you summarize
+# Boxplot
+ggplot(gc_visits, aes(x = location, y = visits))+
+  geom_boxplot()
+
+# histogram
+ggplot(gc_visits, aes(x = visits))+
+  geom_histogram(binwidth = 0.15, color = "white")
+```
+
+```{r}
+#| echo: false
+#| column: margin
+#| fig-height: 8
+###--------------------------
+### Load Packages
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(patchwork)
+
+###--------------------------
+### Load data
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link)
+
+###--------------------------
+### Format data
+gc_visits <- ril_data            |> 
+  select(location, mean_visits)  |>   # Focus on two columns of interest
+  rename(visits = mean_visits)   |>   # "mean visits" confuses me because it was mean per plant, so let's call it visits
+  filter(location == "GC",            # let's focus on plants at GC 
+         !is.na(visits))                  # with non-na-visits
+
+###--------------------------
+### Visualize before you summarize
+# Boxplot
+a<-ggplot(gc_visits, aes(x = location, y = visits))+
+  geom_boxplot()+
+  theme(axis.title = element_text(size=30),
+        axis.text = element_text(size=25))
+
+# histogram
+b<-ggplot(gc_visits, aes(x = visits))+
+  geom_histogram(binwidth = 0.15, color = "white") +
+  theme(axis.title = element_text(size=30),
+        axis.text = element_text(size=25))
+
+a / b + plot_annotation(tag_levels = 'A')
+```
+
+```{r}
+#| eval: false
+#| fig-cap: "Two displays of the number of visitors per RIL platn at GC. (A) A boxplot  showing the number of visits recorded per observation at the GC site. Most observations are zero (that's why the box is so small), with a few higher values. (B) Histogram of visits at the GC site, illustrating a strongly right-skewed distribution with a large spike at zero and a long tail of rare higher counts."
+#| fig-alt: "Two-panel figure labeled A and B. Panel A shows a box plot of visits at the GC location, with most points at zero and a few scattered up to about two visits. Panel B shows a histogram of visits with a very tall bar at zero and progressively smaller bars toward higher visit values, indicating a highly right-skewed distribution."
+#| label: fig-pic
+# The plots show highly right skewed data - most plants 
+#   receive zero or few visits, some receive many
+# I will continue with the standard run of summaries, 
+#   but note, some are less appropriate for this shape
+
+###--------------------------
+### Data summaries
+
+## Summarizing center
+gc_visits |>
+  summarise(mean_visits   = mean(visits),                # Mean
+            median_visits = median(visits))              # Median
+
+## Summarizing variability
+gc_visits |>
+  summarise(iqr_visits    = IQR(visits),                 # Interquartile range
+            sd_visits     = sd(visits),                  # Standard deviation
+            var_visits    = var(visits),                 # Variance
+            coef_var_visits = sd(visits) / mean(visits)) # Coefficient of variation
+```
+
+
+```{r}
+#| echo: false
+# The plots show highly right skewed data - most plants 
+#   receive zero or few visits, some receive many
+# I will continue with the standard run of summaries, 
+#   but note, some are less appropriate for this shape
+
+###--------------------------
+### Data summaries
+
+## Summarizing center
+a <- gc_visits |>
+  summarise(mean_visits   = mean(visits),                # Center: Mean
+            mode_visits   = quantile(visits, prob = .5), # Center: Mode
+            median_visits = median(visits))              # Center: Median
+
+## Summarizing center
+b<- gc_visits |>
+  summarise(iqr_visits    = IQR(visits),
+            sd_visits     = sd(visits),
+            var_visits    = var(visits),
+            coef_var_visits = sd(visits) / mean(visits)) 
+
+a |>
+  mutate_all(round, digits = 4)|>
+  kbl(caption = "Summarizing the average pollinator visits at GC") |>
+  kable_classic(full_width = F, html_font = "Cambria")
+
+b |>
+  mutate_all(round, digits = 4)|>
+  kbl(caption = "Summarizing variability in pollinator visits at GC") |>
+  kable_classic(full_width = F, html_font = "Cambria")
+```

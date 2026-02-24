@@ -11,6 +11,7 @@ library(knitr)
 library(dplyr)
 library(readr)
 library(stringr)
+library(DT)
 library(webexercises)
 library(ggplot2)
 library(tidyr)
@@ -208,7 +209,7 @@ Here we want to add columns, not overwrite old ones. No worries, we can also add
 ril_data <- ril_data             |>
   mutate(visited      = visits > 0,
          has_hyb      = prop_hybrid > 0,
-         relative_asd = asd / petal_area)  
+         rel_asd      = asd / petal_area)  
 ```
 
 Below, I show this transformation after temporarily removing `location`  (for space, I do not save this change). Note a new [`dplyr::select()`](https://dplyr.tidyverse.org/reference/select.html) trick -- you can select all but specified columns with a minus sign. 
@@ -224,10 +225,15 @@ ril_data <- mutate(ril_data  , asd = round(asd, digits = 2))
 #| eval: false
 library(dplyr)
 ril_data |>
+  rename(prop_hyb = prop_hybrid)|>
   select(-location) # select everything but location
 ```
 
+
+
+
 ```{r}
 #| echo: false
-kable(ril_data |> select(-location))
+#| column: page-right 
+datatable(ril_data |> select(-location)|>rename(prop_hyb = prop_hybrid)|> mutate(rel_asd = round(rel_asd, digits = 4), petal_area = round(petal_area, digits = 4)))
 ```

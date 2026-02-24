@@ -57,6 +57,14 @@ book:
         - book_sections/data_in_R/choose_rows.qmd
         - book_sections/data_in_R/dealing_w_data_script.qmd
         - book_sections/data_in_R/data_in_R_summary.qmd
+    - part: book_sections/univariate_summaries.qmd
+      chapters: 
+        - book_sections/univariate_summaries/summarizing_shape.qmd
+        - book_sections/univariate_summaries/changing_shape.qmd
+        - book_sections/univariate_summaries/summarizing_center.qmd
+        - book_sections/univariate_summaries/summarizing_variability.qmd
+        - book_sections/univariate_summaries/summary_script.qmd
+        - book_sections/univariate_summaries/summarizing_summaries.qmd
     - references.qmd
 
 
