@@ -1,0 +1,449 @@
+## • 6. Two categorical vars {.unnumbered #two_categorical_vars}
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(kableExtra)
+library(ggplot2)
+library(tidyr)
+source("../../_common.R") 
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) |>
+  rename(visits = mean_visits)|>
+  dplyr::mutate(growth_rate = case_when(growth_rate =="1.8O" ~ "1.80",
+                                          .default = growth_rate),  
+                growth_rate = as.numeric(growth_rate),
+                visited = visits > 0)
+```
+
+
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating Scenario:**   
+You are continuing your exploration of a fresh new dataset. You have figured out the shape, made the transformations you thought appropriate, and now want to summarize associations between two categorical variables.
+
+**Learning Goals: By the end of this subchapter, you should be able to:**  
+
+
+
+1. **Calculate and explain conditional proportion:**   You should be able to do this with basic math and with R code. 
+
+2. **Visualize associations between two categorical variables.**   With pen and paper and R code. 
+
+
+
+
+
+```{r}
+#| echo: false
+#| eval: false
+2. **Explain the intuition of the multiplication rule for independent events**   
+
+3. **Calculate and explain the deviation from expectations under independence.** Again  you should be able to do this with basic math and with R code. 
+```
+
+:::     
+
+---
+
+
+```{r}
+#| message: false
+#| warning: false
+#| code-fold: true
+#| code-summary: "Loading and processing data."
+library(dplyr)
+library(readr)
+library(ggplot2)
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+gc_rils <- readr::read_csv(ril_link) |>
+    rename(visits = mean_visits)|>
+    mutate(visited = ifelse(visits > 0,"some_visits","no_visits")) |>
+    dplyr::filter(location == "GC", !is.na(prop_hybrid), ! is.na(visits),!is.na(petal_color))|>
+    select(petal_color, visits, visited, prop_hybrid)
+```
+
+---  
+
+
+## Unconditional proportions  
+
+
+
+Even the most complex analysis  should begin with clear summaries and visualizations on our data. So, before describing associations between categorical variables, let us revisit our univariate summaries and consider how to summarize categorical variables. 
+
+
+```{r}
+#| column: margin
+#| echo: false
+#| message: false
+#| label: fig-visit
+#| warning: false
+#| fig-cap: "The number of plants that did (light grey) or did not (black) receive a visit from a pollinator."
+#| fig-alt: "A stacked bar plot showing the number of plants that did (about one quarter) or did not (about three quarters) receive a visit from a pollinator."
+#| fig-height: 6
+
+ggplot(gc_rils,aes(x = 1, fill = visited))+
+  geom_bar(color = "white")+
+  scale_fill_manual(values = c("black","lightgrey") ) +
+  scale_y_continuous(expand = c(0,0)) + 
+  theme_light()+
+  labs( title = "Unconditional data")+
+  theme(axis.text.y = element_text(size= 28),
+        axis.text.x = element_blank(),
+        axis.title.y = element_text(size= 28),
+        axis.title.x = element_blank(),
+        legend.text = element_text(size= 28),
+        legend.title = element_text(size= 28),
+        plot.title = element_text(size=34),
+        legend.position ="none")+
+  annotate(x = c(1), y =c(50), geom = "text",
+           label= c("no visits") , 
+           size = 12, color ="white")+
+  annotate(x = 1, y =10, geom = "text",color = "black",
+           label= "some visits", size = 12)
+```
+
+
+- **First, we visualize!** @fig-visit shows that only a quarter of flowers were visited by a pollinator under our watch. We learn how to do this [below](#viz_two_categorical_vars).   But for now, consider the choices available to you. I report the data as counts, and as a "stacked" barplot. But these could be presented side-by-side and/or as proportions. I will pepper in some guiding data visualization  principles as we go, and dive deeper into data visualization later in the book. But for now, let these principles guide you: 
+   - Show all the data. 
+   - Show the data honestly.  
+   - Make patterns easy to see. </br></br>      
+
+- **Next, we summarize!** A proportion (e.g., the proportion of pink flowers) is a special kind  of mean where one outcome (e.g., pink flowers) is set to 1 and the other (e.g., white flowers) is set to 0. So we can calculate a proportion as the number of pink flowers divided by the total number of plants with known petal color.   
+    - **We summarize categorical variables in R** by taking advantage of the fact that R considers `TRUE` to equal one and `FALSE` to equal zero. Within dplyr's [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html), we find counts with [`sum()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/sum.html)  and proportions  with  [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html):
+
+```{r}
+#| eval: false
+gc_rils |>
+  summarise(n_pink       = sum(petal_color == "pink"),
+            n_visits     = sum(visited == "some_visits"),
+            n            = n(),
+            prop_pink    = mean(petal_color == "pink"),
+            prop_visited = mean(visited == "some_visits")) 
+```
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(n_pink       = sum(petal_color == "pink"),
+            n_visits     = sum(visited == "some_visits"),
+            n            = n(),
+            prop_pink    = mean(petal_color == "pink"),
+            prop_visited = mean(visited == "some_visits"))  |>
+  kable(digits = 3)
+```
+
+
+
+## Associations between categorical variables    
+
+There are many ways to quantify associations between two categorical variables. Rather than go through them all, I focus here on some key concepts. 
+
+### Conditional proportions 
+
+```{r}
+#| column: margin
+#| echo: false
+#| message: false
+#| label: fig-pinkvisit
+#| warning: false
+#| fig-cap: "**The association between petal color and pollinator visitation.** Petal color is on the x-axis and visit status is shown within bars. We see that pink-flowered plants are more likely to receive a visit from a pollinator."
+#| fig-alt: "A bar plot showing the relationship between petal color (pink or white) and pollinator visitation (visited or not visited). Petal color is on the x-axis and proportion of flowers that were visited or not on the y-axis. This plot shows that pink flowers are more likely to be visited."
+#| fig-height: 6
+library(patchwork)
+tmp <- gc_rils|> 
+  dplyr::filter(!is.na(petal_color))
+ggplot(tmp,aes(fill = visited, x = petal_color))+
+    geom_bar(position = "fill", 
+             color = c("pink","pink","white","white"), linewidth = 3)+
+  scale_fill_manual(values = c("black","grey") ) +
+  scale_y_continuous(expand = c(0,0), 
+                     limits =c(-.003,1.003),
+                     breaks = c(0,1/4,1/2,3/4,1),
+                     labels =c("0","1/4","1/2","3/4","1") ) + 
+  theme_light()+
+  labs(y = "Proportion", title = "Conditional proportions",x= "Petal color")+
+  theme(axis.text = element_text(size= 28), 
+        axis.title = element_text(size= 28),
+        legend.text = element_text(size= 28),
+        legend.title = element_text(size= 28),
+        legend.position = "none",
+        plot.title = element_text(size= 34))+
+  annotate(x = c(1,2), y =c(.8,.5), geom = "text",
+           label= "no visits" , color =  c("white"),
+           size = 12)+
+  annotate(x = 1, y =.29, geom = "text",
+           label= "visits", size = 12)
+
+```
+
+
+
+
+We found that about one quarter of the RILs planted at GC received no pollinator visits under our watch. But this overall average obscures the key fact -- that not all plants are the same. We may believe, and  @fig-pinkvisit   shows, that the proportion of plants receiving visits differs conditional on the petal color! While nearly half of pink-flowered plants received a visit from a  pollinator under our watch, only about five percent of white-flowered plants did.
+
+Using the notation of probability theory, $P_{A \mid B}$ or P(A|B), meaning the "probability of A conditional on B," or alternatively, "The probability of A given B"
+
+- P(Visit | Pink) $\approx$ 0.50.     
+- P(Visit | White) $\approx$ 0.05. 
+
+Below, I introduce [`janitor`](https://sfirke.github.io/janitor/index.html)'s [`tabyl()`](https://sfirke.github.io/janitor/reference/tabyl.html) function to aid in these calculations: 
+
+```{r}
+library(janitor)
+gc_rils |>
+  tabyl(petal_color, visited) 
+```
+
+Now that we have these counts, we can use [`dplyr`](https://dplyr.tidyverse.org/)'s [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) to find the exact proportions visually estimated from @fig-pinkvisit. 
+
+```{r}
+conditional_table <- gc_rils                                |>
+  tabyl(petal_color, visited)                               |> 
+  mutate(n_tot =  no_visits + some_visits)                  |>
+  mutate(prop_visited =  some_visits / n_tot)      
+```
+
+
+```{r}
+#| echo: false
+kable(conditional_table, digits = 3)
+```
+
+
+--- 
+
+If two categorical variables are independent, the conditional probabilities would be equal. It's clear that, in this case, the probability of us observing a pollinator visit differs conditional on petal color. Pink-flowered RILs had about 10× higher probability (or more technically "relative risk of $\approx$ 10") of  being visited by a pollinator than did white-flowered RILs. 
+
+
+ 
+:::learnmore 
+**Additional summaries of associations between categorical variables.** 
+
+At this point many textbooks would introduce two other standard summaries -- **[odds ratios](https://en.wikipedia.org/wiki/Odds_ratio)** and **[relative risk](https://en.wikipedia.org/wiki/Relative_risk)** (calculated above).  I am not spending much time on them here. That is not because they are not useful (they are) -- but because  
+
+- They can get complicated.   
+- They don't lead naturally to the next steps in our learning journey.  
+
+Feel free to read more about each on Wikipedia (links above) or in conversation with your favorite large language model.
+
+We will also introduce two additional summaries - covariance, and correlation in the next chapter on associations.   
+:::
+
+
+
+## Visualizing categorical variables {.unnumbered #viz_two_categorical_vars}
+
+We have [previously introduced making plots with ggplot2](#intro_to_ggplot). As a quick refresh, let's consider how to visualize categorical data. Note this section is about how to get a reasonable ggplot up and running - and we will only consider high-level decisions that make plots clear and easy to interpret. Later in the book we will consider how to make better plots.
+
+### One categorical variable 
+
+The code below shows three ways to visualize one categorical variable: counts, proportions, and side-by-side (aka grouped) comparisons. Each plot (shown in @fig-onecat) highlights a different aspect of the association. These options can help you choose the visualization that most honestly and clearly displays patterns in your data.  
+
+```{r}
+#| eval: false
+#| column: page-right
+#| fig-height: 3
+# I am adding this to each plot to clean up the x-axis labelling. Ignore if you like
+added_theme <- theme_light()+
+               theme(axis.text.x = element_blank(),  axis.title.x = element_blank(), 
+                     axis.ticks.x = element_blank(), legend.position = "bottom")
+# PLOT A 
+ggplot(gc_rils,aes(x = 1, fill = visited))+
+  geom_bar()+
+  added_theme 
+
+# PLOT B 
+ggplot(gc_rils,aes(x = 1, fill = visited))+
+  geom_bar(position = "fill")+
+  labs(y = "proportion")+
+  added_theme 
+
+# PLOT C 
+ggplot(gc_rils,aes(x = visited, fill = visited))+
+  geom_bar()
+```
+
+
+```{r}
+#| echo: false
+#| fig-height: 3
+#| column: page-right
+#| label: fig-onecat
+#| fig-cap: "Three ways to visualize visited status of plants."  
+#| fig-alt: "Three visualization of pollinator visitation. Black bars indicate plants with no pollinator visits; light gray bars indicate plants that received at least one visit. (A) Stacked bar chart showing most plants received no pollinator visits, while a smaller portion received at least one visit. (B) Proportion bar chart showing roughly three quarters of plants had no visits and one quarter had at least one visit. (C) Side-by-side bars comparing counts of plants with no visits versus some visits, showing many more plants without visits."
+library(patchwork)
+added_theme <- theme_light()+
+               theme(axis.text.x = element_blank(),  axis.title.x = element_blank(), 
+                     axis.ticks.x = element_blank(), legend.position = "bottom",title = element_text(size =6),
+                     axis.title = element_text(size =8), axis.text = element_text(size =10),
+                     legend.title = element_text(size =12), legend.text = element_text(size =10))
+# PLOT A 
+a <- ggplot(gc_rils,aes(x = 1, fill = visited))+
+  geom_bar()+
+  scale_fill_manual(values = c("black","grey"))+ 
+  labs(title =  "# Plot A) Stacked, count\n\naes(x=1, fill=visited) +\n geom_bar()")+
+  added_theme 
+
+# PLOT B 
+b <- ggplot(gc_rils,aes(x = 1, fill = visited))+
+  geom_bar(position = "fill")+
+  scale_fill_manual(values = c("black","grey"))+ 
+  labs(y = "proportion", title =  "# Plot B) Stacked, prop\n\naes(x=1, fill=visited) +\n geom_bar(position=\"fill\")")+
+  added_theme 
+
+# PLOT C 
+c <- ggplot(gc_rils,aes(x = visited, fill = visited))+
+  geom_bar()+
+  labs(title =  "# Plot C) Grouped\n\naes(x=visited, fill=visited) +\n geom_bar()")+
+  scale_fill_manual(values = c("black","grey"))+ 
+  theme_light()+
+  theme(title = element_text(size =8),axis.text = element_text(size =10), axis.text.x = element_text(size =6),
+        legend.title = element_text(size =12), axis.title.x = element_blank(),legend.text = element_text(size =10))
+
+a+b+c+  plot_layout(guides = 'collect')& theme(legend.position = "bottom")
+```
+---
+
+### Two categorical variables  
+
+As above, the code below produces three plots (@fig-twocats) to show the same data in different formats: counts, proportions, and side-by-side (aka grouped) comparisons. Each plot highlights a different aspect of the association.
+
+```{r}
+#| eval: false
+#| column: page-right
+#| fig-height: 3
+# I am adding this to each plot to clean up the x-axis labelling. Ignore if you like
+added_theme <- theme_light()+
+               theme(axis.text.x = element_blank(),  axis.title.x = element_blank(), 
+                     axis.ticks.x = element_blank(), legend.position = "bottom")
+# PLOT A 
+ggplot(gc_rils,aes(x = petal_color, fill = visited))+
+  geom_bar()
+
+# PLOT B 
+ggplot(gc_rils,aes(x = petal_color, fill = visited))+
+  geom_bar(position = "fill")+
+  labs(y = "proportion")
+
+# PLOT C 
+ggplot(gc_rils,aes(x = petal_color, fill = visited))+
+  geom_bar(position = "dodge")
+```
+
+
+```{r}
+#| echo: false
+#| fig-height: 3
+#| label: fig-twocats
+#| column: page-right
+#| fig-cap: "Three ways to visualize pollinator visits (yes/no) by petal color."
+#| fig-alt: "(A) Stacked bar chart of pink and white flowers showing more visits among pink flowers and very few visits among white flowers. (B) Proportion bar chart showing about half of pink flowers were visited, while only a small fraction of white flowers were visited. (C) Side-by-side bars comparing visit counts by petal color, showing pink flowers received many more visits than white flowers." 
+
+library(patchwork)
+added_theme <- theme_light()+
+               theme(legend.position = "bottom",title = element_text(size =6),
+                     axis.title = element_text(size =8), axis.text = element_text(size =10),
+                     legend.title = element_text(size =12), legend.text = element_text(size =10))
+# PLOT A 
+a <- ggplot(gc_rils,aes(x = petal_color, fill = visited))+
+  geom_bar()+
+  labs(title =  "# Plot A) Stacked, count\n\naes(x=petal_color, fill=visited) +\n geom_bar()")+
+  scale_fill_manual(values = c("black","grey"))+ 
+  added_theme 
+
+# PLOT B 
+b <-ggplot(gc_rils,aes(x = petal_color, fill = visited))+
+  geom_bar(position = "fill")+
+   scale_fill_manual(values = c("black","grey"))+  
+  labs(y = "proportion", title =  "# Plot B) Stacked, prop\n\naes(x=petal_color, fill=visited) +\n geom_bar(position=\"fill\")")+
+  added_theme 
+
+# PLOT C 
+c <- ggplot(gc_rils,aes(x = petal_color, fill = visited))+
+  geom_bar(position = "dodge")+
+  labs(title =  "# Plot C) Grouped\n\naes(x=petal_color, fill=visited) +\n geom_bar()")+
+  scale_fill_manual(values = c("black","grey"))+ 
+  added_theme
+
+a+b+c+  plot_layout(guides = 'collect')& theme(legend.position = "bottom")
+```
+
+
+---
+
+### Covariance
+
+A common quantification of the association between two binary variables is the covariance. This quantification follows some simple mathematical logic:  
+
+- If two categorical variables, A & B are independent, the probability of observing both A and B  (aka, $P_{AB}$) should equal the product of their unconditional probabilities:
+$$P_{AB \mid \text{independence}} = P_A \times P_B$$
+
+- The covariance is the deviation from this expectation: $$COV_{AB} = P_{AB} - P_A \times P_B$$
+
+So for the association between petal color and  being visited, the covariance is:
+
+$$COV_{\text{visited, pink}} =P_{\text{visited and pink}} - P_{\text{visited}}  \times P_{\text{pink}}$$
+
+
+
+
+We can find this in R:
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils |>
+  summarise(p_pink_and_visited   = mean(petal_color == "pink" & visited  == "some_visits"),
+            p_pink               = mean(petal_color == "pink"),
+            p_visited            = mean(visited  == "some_visits"),
+            cov_pink_and_visited = p_pink_and_visited - p_pink  * p_visited)
+```
+
+
+
+:::aside
+Our answer and formula are slightly off. We used a denominator of $n$, while the sample covariance has a denominator of $n-1$. To get the precise covariance -- as R calculates -- multiply this by $\frac{n}{n-1}$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). But when $n$ is big, this is close enough.
+:::
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(p_pink_and_visited   = mean(petal_color == "pink" & visited  == "some_visits"),
+            p_pink               = mean(petal_color == "pink"),
+            p_visited            = mean(visited  == "some_visits"),
+            cov_pink_and_visited = p_pink_and_visited - p_pink  * p_visited) |>
+  kable(digits = 4)
+```
+
+
+Alternatively, R can calculate the covariance with the [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function. This only works if the values are numbers or boolean (TRUE [1] / FALSE [0]). Note the slight mismatch between our calculation due to "Bessel's correction (see margin)
+
+
+```{r}
+#| column: page-right
+gc_rils |>
+  summarise(cov_pink_visited = cov(petal_color == "pink", visited  == "some_visits"))
+```
+
+
+--- 
+
+Covariance gives us a numerical measure of how far our data deviate from what we’d expect under independence. In this case, the value is 0.10 — but is that meaningful? We’ll build up more intuition for interpreting covariances as we shift to continuous variables in the next chapter.
+
+---
+

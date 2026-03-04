@@ -1,0 +1,248 @@
+## Section: Associations I Script Walkthrough
+
+---
+
+# Section Context
+
+This section walks students through an **R workflow for exploring associations between variables**.
+
+Students apply concepts from earlier sections using the **Clarkia RIL dataset**, practicing how to:
+
+* load and prepare data
+* compute conditional summaries
+* visualize associations
+* interpret statistical outputs
+
+The focus is on **practical data exploration**, not statistical inference.
+
+---
+
+# Learning Goals
+
+By the end of this section students should be able to:
+
+1. Load and prepare a dataset in R.
+2. Use `group_by()` and `summarize()` to compute **conditional summaries**.
+3. Calculate **conditional proportions** using logical expressions.
+4. Compute **conditional means** across groups.
+5. Use `ggplot2` to visualize associations.
+6. Interpret outputs in terms of biological questions.
+
+---
+
+# Dataset Used
+
+The examples use the **Clarkia RIL dataset**.
+
+Important variables include:
+
+**petal_color**
+
+* pink
+* white
+
+**visited**
+
+* TRUE/FALSE indicator of pollinator visitation
+
+**prop_hybrid**
+
+* proportion of seeds that are hybrids
+
+Students use these variables to explore associations between:
+
+* flower color and pollinator visitation
+* visitation and hybrid seed production
+
+---
+
+# Key Workflow Pattern
+
+Students repeatedly follow this pattern:
+
+```
+load data
+→ inspect variables
+→ group observations
+→ summarize values
+→ visualize results
+→ interpret patterns
+```
+
+This workflow reflects how exploratory data analysis is commonly performed in biology.
+
+---
+
+# Key Concept: Logical Values as Proportions
+
+In R, logical values can be treated numerically:
+
+```id="r1"
+TRUE  = 1
+FALSE = 0
+```
+
+Because of this, taking the **mean of a logical variable** calculates the **proportion of TRUE values**.
+
+Example:
+
+```id="r2"
+mean(visited)
+```
+
+This returns the **proportion of plants receiving pollinator visits**.
+
+Students frequently use this idea when calculating conditional proportions.
+
+---
+
+# Key Concept: Conditional Summaries with `group_by()`
+
+`group_by()` allows students to compute summaries **within categories**.
+
+Example structure:
+
+```id="r3"
+data |>
+group_by(petal_color) |>
+summarize(prop_visited = mean(visited))
+```
+
+This calculates the **proportion of visited plants within each petal color group**.
+
+Students should recognize this as a **conditional proportion**.
+
+---
+
+# Key Concept: Summarizing Numeric Outcomes
+
+For categorical–numeric relationships, students compute **conditional means**.
+
+Example structure:
+
+```id="r4"
+data |>
+group_by(visited) |>
+summarize(mean_hybrid = mean(prop_hybrid))
+```
+
+This compares the **average hybrid seed proportion for plants with and without pollinator visits**.
+
+---
+
+# Visualizing Associations
+
+Students use `ggplot2` to visualize patterns.
+
+Common examples include:
+
+**Bar plots**
+
+Used to visualize conditional proportions.
+
+**Histograms and density plots**
+
+Used to compare numeric distributions.
+
+**Jittered scatterplots**
+
+Used to visualize individual observations when points overlap.
+
+Visualization helps students interpret patterns before calculating statistics.
+
+---
+
+# Common Student Confusions
+
+### Forgetting `na.rm = TRUE`
+
+Missing values can cause summary functions to return `NA`.
+
+Students may need to include:
+
+```id="r5"
+mean(variable, na.rm = TRUE)
+```
+
+---
+
+### Confusing grouping behavior
+
+Students sometimes expect `summarize()` to return one value per row.
+
+Explain that:
+
+* `group_by()` splits the dataset into groups
+* `summarize()` produces **one row per group**
+
+---
+
+### Misinterpreting proportions
+
+Students may forget that:
+
+```id="r6"
+mean(variable == "value")
+```
+
+calculates the **proportion of rows matching that condition**.
+
+---
+
+# R Functions Used
+
+Students frequently use:
+
+```id="r7"
+read_csv()
+select()
+rename()
+group_by()
+summarize()
+mutate()
+mean()
+```
+
+For visualization:
+
+```id="r8"
+ggplot()
+geom_bar()
+geom_histogram()
+geom_density()
+geom_jitter()
+geom_point()
+```
+
+These functions support the full exploratory workflow.
+
+---
+
+# Tutor Guidance
+
+When helping students:
+
+1. Ask what **variables they are comparing**.
+2. Ask what type of summary they need:
+
+   * conditional proportion
+   * conditional mean
+3. Encourage students to **interpret plots before running summaries**.
+4. Keep explanations short and guide them toward understanding **what the code is doing conceptually**.
+
+Avoid writing long blocks of code unless the student asks.
+
+---
+
+# Typical Student Questions
+
+Students often ask:
+
+* “Why does `mean(TRUE/FALSE)` give a proportion?”
+* “What does `group_by()` actually do?”
+* “Why did we use `summarize()` here?”
+* “How do I compare groups in this dataset?”
+* “Why do we jitter points in the plot?”
+
+The tutor should respond with **short explanations and guiding questions**, not long lectures.
+

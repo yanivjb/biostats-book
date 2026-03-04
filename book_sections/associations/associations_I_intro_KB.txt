@@ -1,0 +1,191 @@
+## Chapter: Summarizing Associations I — Setup & Introduction
+
+### Chapter Context
+
+This chapter introduces how to **describe associations between variables**.
+An association occurs when the value of one variable tends to differ depending on the value of another variable.
+
+In biological research, associations appear when:
+
+* traits differ across species or treatments
+* probabilities differ across groups
+* values of one measurement tend to increase or decrease with another
+
+This chapter focuses on **describing associations**, not explaining their causes.
+
+Students should learn to:
+
+* recognize patterns between variables
+* summarize those patterns using simple statistics
+* visualize associations using plots
+* interpret results carefully without assuming causation
+
+The next chapter will extend these ideas to **associations between two numeric variables**, introducing covariance, correlation, and slope.
+
+---
+
+# Learning Goals
+
+After completing this chapter students should be able to:
+
+1. Recognize different types of relationships between variables.
+2. Describe associations between a categorical explanatory variable and another variable.
+3. Use conditional summaries (means or proportions) to describe group differences.
+4. Visualize associations using plots such as bar plots, boxplots, and scatterplots.
+5. Interpret associations cautiously and understand that **association does not imply causation**.
+6. Connect statistical summaries to real biological questions.
+
+---
+
+# Types of Associations Introduced
+
+This chapter focuses on two types of relationships.
+
+### 1. Categorical–Categorical
+
+Both variables represent categories.
+
+Example biological questions:
+
+* Are pink flowers more likely to receive pollinator visits?
+* Do survival rates differ across habitat types?
+
+Associations are described using:
+
+* **conditional proportions**
+* contingency tables
+* bar plots
+
+---
+
+### 2. Categorical–Numeric
+
+A categorical explanatory variable is used to compare a numeric outcome.
+
+Example biological questions:
+
+* Do plants receiving pollinator visits produce more seeds?
+* Does trait value differ between two species?
+
+Associations are described using:
+
+* **conditional means**
+* **difference in means**
+* **Cohen's D** (a standardized difference)
+
+---
+
+# Key Concept: Conditional Summaries
+
+Many association summaries in this chapter are **conditional summaries**.
+
+A conditional summary describes a variable **within a specific group**.
+
+Examples:
+
+* probability of survival **given** passenger class
+* average trait value **given** species
+* proportion visited **given** flower color
+
+Conditional summaries allow students to compare how outcomes differ across groups.
+
+---
+
+# Key Concept: Association vs Causation
+
+An association means two variables vary together.
+
+However:
+
+* associations do **not automatically imply causation**
+* patterns can arise from confounding variables
+* patterns observed in one dataset may not generalize
+
+Students should treat association summaries as **descriptions of patterns**, not proof of causal relationships.
+
+---
+
+# Common Student Confusions
+
+Students often confuse:
+
+**Raw counts vs proportions**
+
+Example:
+A bar plot with many observations may appear larger even if the **proportion** is the same.
+
+---
+
+**Overall mean vs conditional mean**
+
+Students may mistakenly interpret group differences without recognizing that the **overall mean can differ from group means**.
+
+---
+
+**Association vs prediction**
+
+A relationship observed in one dataset does not guarantee accurate prediction in another context.
+
+---
+
+# R Tools Used in This Chapter
+
+Students commonly use the following functions:
+
+```
+group_by()
+summarize()
+mean()
+ggplot()
+geom_bar()
+geom_boxplot()
+```
+
+These tools help students:
+
+* compute conditional summaries
+* visualize associations
+* explore biological datasets
+
+---
+
+# Tutor Guidance
+
+When helping students:
+
+* Encourage them to **describe patterns before computing statistics**
+* Ask students **what variables are explanatory vs response**
+* Prompt them to interpret **plots first**, then statistics
+* Keep explanations short and ask guiding questions
+
+The goal is to help students **recognize and describe associations**, not to perform formal statistical inference.
+
+---
+
+If you'd like, next we can also build the **two categorical variables knowledge base**, which will include:
+
+* conditional proportions
+* independence vs association
+* the multiplication rule
+* your Clarkia visitation example
+* figure references
+
+That KB will likely be the **most important one for the tutor**, because students tend to struggle there.
+
+
+
+
+
+# Figures — *Associations I* Chapter intro
+
+| Figure    | What the figure shows                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Concept it illustrates                                                                                                                                                            | Tutor guidance (how to use it with students)                                                                                                                                                                                                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fig 1** | A **GGally `ggpairs()` matrix** showing pairwise relationships among variables in the Clarkia RIL dataset. The matrix includes categorical variables (petal color, visited), numeric variables (prop_hybrid, log petal area, log anther–stigma distance), and a derived variable (visits if visited). Diagonal panels show distributions, upper panels show correlations between numeric variables, and lower panels show scatterplots or grouped distributions depending on variable type. | **Exploratory visualization of associations.** Demonstrates how relationships differ depending on variable types (categorical–categorical, categorical–numeric, numeric–numeric). | If students ask about this figure, guide them to notice **how different panels correspond to different types of associations**. Encourage them to identify: which variables are categorical vs numeric, where correlations appear, and how patterns change across plots. Emphasize this is **exploratory**, not causal.                |
+| **Fig 2** | A gif cartoon showing a man pretentding to start and stop a train by running and pushing it.                                                                                                                                                                                                                                                                                                                                                      | **Correlation vs causation.** Illustrates how people may mistakenly infer causation from coincidental patterns.                                                                   | Use this figure to remind students that **associations alone do not establish cause-and-effect relationships**. Ask students what alternative explanations might exist for observed patterns.                                                                                                                                          |
+| **Fig 3** | Three scatterplots from Clarkia RIL data showing relationships among: (A) proportion hybrid seed vs anther–stigma distance, (B) anther–stigma distance vs petal area, and (C) proportion hybrid seed vs petal area. Lines show fitted trends.                                                                                                                                                                                                                                               | **Confounding.** An apparent association between two variables may arise because both are related to a third variable.                                                            | If students mention Fig 3, guide them to identify the possible **confounder (petal area)** and explain how it could create a misleading relationship between hybrid proportion and anther–stigma distance. Encourage thinking about **alternative causal structures**.                                                                 |
+| **Fig 4** | Two stacked bar plots showing the relationship between **petal color (pink vs white)** and **pollinator visitation (visited vs not visited)**. The panels differ only in which variable appears on the x-axis and which variable is shown within bars.                                                                                                                                                                                                                                      | **Conditional proportions and visual framing.** The same association can be displayed in multiple ways depending on which variable is treated as explanatory.                     | Help students see that both panels show **the same association**, but the **framing changes interpretation**. Emphasize that placing a variable on the x-axis often implies a causal interpretation, even when the data cannot establish causality. Encourage students to interpret the **conditional proportions** shown in the bars. |
+
+---
+
+
+

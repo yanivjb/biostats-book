@@ -1,0 +1,295 @@
+
+# Section Context
+
+This section introduces how to describe associations between a **categorical variable** and a **numeric variable**.
+
+The central idea is that associations between these variable types can be summarized by **comparing conditional means** — the average value of the numeric variable within each category.
+
+Students learn to:
+
+1. examine the **distribution of a numeric variable**
+2. compare **conditional means across groups**
+3. visualize group differences using plots
+4. quantify differences using **difference in means** and **Cohen’s d**
+
+This section continues the broader theme that **associations describe patterns**, not causes.
+
+---
+
+# Learning Goals
+
+By the end of this section students should be able to:
+
+1. Recognize associations between a **categorical explanatory variable** and a **numeric response variable**.
+2. Interpret **conditional means** across groups.
+3. Calculate and interpret the **difference in means**.
+4. Understand the purpose of **Cohen’s d** as a standardized measure of group differences.
+5. Use visualizations to compare distributions across groups.
+6. Connect statistical summaries to biological questions.
+
+---
+
+# Variables Used in Examples
+
+The section continues using the **Clarkia RIL dataset**.
+
+Key variables include:
+
+**visited**
+
+* some_visits
+* no_visits
+
+**prop_hybrid**
+
+* proportion of seeds that are hybrids
+
+The biological question explored is:
+
+> Do plants receiving pollinator visits produce different proportions of hybrid seeds than plants receiving no visits?
+
+---
+
+# Key Concept: Grand Mean
+
+The **grand mean** is the overall average value of a numeric variable across all observations.
+
+Example:
+
+Average proportion of hybrid seeds across all plants.
+
+The grand mean represents the expected value for a **randomly chosen observation**.
+
+---
+
+# Key Concept: Conditional Means
+
+A **conditional mean** is the average value of a numeric variable **within a specific group**.
+
+Example:
+
+```id="c1"
+Mean(prop_hybrid | visited)
+Mean(prop_hybrid | no_visits)
+```
+
+These values allow students to compare the **average hybrid seed proportion for plants with and without pollinator visits**.
+
+Associations between categorical and numeric variables appear when **conditional means differ across groups**.
+
+---
+
+# Key Concept: Difference in Means
+
+One simple way to summarize an association is the **difference between group means**.
+
+Example structure:
+
+```id="c2"
+Difference in means =
+Mean(prop_hybrid | visited)
+-
+Mean(prop_hybrid | no_visits)
+```
+
+This value measures how much the outcome differs between groups.
+
+---
+
+# Key Concept: Cohen’s d
+
+**Cohen’s d** is a standardized measure of group differences.
+
+It expresses the difference in means relative to the **pooled standard deviation**.
+
+Conceptually:
+
+```id="c3"
+Cohen's d =
+difference in means
+/
+pooled standard deviation
+```
+
+This allows comparisons across datasets with different scales.
+
+Students should understand that Cohen’s d describes **effect size**, not statistical significance.
+
+---
+
+# Visualizing Categorical–Numeric Associations
+
+Several plots help students compare numeric values across groups.
+
+Common visualizations include:
+
+**Histograms**
+
+Show the distribution of numeric values.
+
+**Density plots**
+
+Show smoothed versions of distributions.
+
+**Jittered scatterplots**
+
+Reveal individual observations when points would otherwise overlap.
+
+**Means with connecting lines**
+
+Highlight differences between group averages.
+
+---
+
+# Figure References
+
+### Figure 1 — Biological Motivation
+
+A GIF showing pollinators visiting Clarkia flowers.
+
+Purpose:
+
+Provide biological context for the question of whether **pollinator visitation is associated with hybrid seed production**.
+
+Tutor note:
+If students reference this figure, focus discussion on **the biological question motivating the analysis**.
+
+---
+
+### Figure 2 — Grand Mean vs Conditional Means
+
+Panel A:
+
+Distribution of hybrid seed proportions across all plants, with a point marking the **grand mean**.
+
+Panel B:
+
+Hybrid seed proportions separated by **pollinator visitation status**, with points marking **conditional means**.
+
+Key concept:
+
+Associations between categorical and numeric variables are summarized by **differences in conditional means**.
+
+---
+
+### Figure 3 — Comparing Distributions
+
+Two visualizations compare hybrid seed proportions across groups:
+
+A: Two histograms
+B: Density plot
+
+Key concept:
+
+Examining **entire distributions** can reveal patterns beyond just the mean.
+
+Students should compare:
+
+* center
+* spread
+* distribution shape
+
+---
+
+### Figure 4 — Improving Visualization
+
+Three scatter-style visualizations:
+
+A: Raw points (overlapping observations obscure patterns)
+
+B: Jittered points reveal individual observations
+
+C: Jittered points with **group means and connecting line**
+
+Key concept:
+
+Visualization choices strongly affect how clearly patterns are seen.
+
+Jittering reveals observations, while mean markers highlight group differences.
+
+---
+
+# Common Student Confusions
+
+### Confusing overall mean with group means
+
+Students sometimes interpret the grand mean as representing each group.
+
+Encourage them to distinguish:
+
+* overall mean
+* conditional means
+
+---
+
+### Assuming differences imply causation
+
+Even if hybrid seed proportion differs across visitation groups, this does not prove that visitation causes the difference.
+
+Other variables could influence both.
+
+---
+
+### Ignoring distribution shape
+
+Students may focus only on means and overlook important differences in:
+
+* variability
+* skew
+* outliers
+
+Encourage students to examine full distributions.
+
+---
+
+# R Tools Used in This Section
+
+Students commonly use:
+
+```id="c4"
+group_by()
+summarize()
+mean()
+ggplot()
+geom_histogram()
+geom_density()
+geom_jitter()
+geom_point()
+```
+
+These functions allow students to:
+
+* compute conditional means
+* visualize distributions
+* explore relationships between variables.
+
+---
+
+# Tutor Guidance
+
+When helping students:
+
+1. Ask them to identify the **categorical variable** and the **numeric variable**.
+2. Encourage them to compute or interpret **conditional means**.
+3. Prompt them to describe **distribution differences**, not just means.
+4. Connect statistical summaries to the **biological question about pollinator visitation and hybridization**.
+
+Keep responses short and guide students toward interpreting patterns rather than simply calculating statistics.
+
+
+
+
+
+**Section 6: Categorical + Numeric** that matches the structure we used before and keeps the **figure numbers** .
+
+---
+
+# Figures — Section 6: Categorical + Numeric
+
+| Figure    | What the figure shows                                                                                                                                                                                                                                                                                                                       | Concept illustrated                                               | Key takeaway                                                                                                                          | Tutor guidance                                                                                                                                                                                                                   | Common student questions                                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Fig 1** | A GIF showing pollinators visiting Clarkia flowers in the field. The animation visually introduces the biological process behind pollinator visitation.                                                                                                                                                                                     | **Biological motivation for the analysis.**                       | Statistical summaries are motivated by **real biological processes**, such as pollinator behavior affecting reproduction.             | Use this figure to ground the discussion in biology. If students reference it, remind them that the statistical question is about whether **pollinator visitation is associated with differences in hybrid seed production.**    | “Why are we studying pollinator visits?” “What biological question is this section addressing?”                                      |
+| **Fig 2** | Two panels comparing hybrid seed proportions. (A) Shows the **distribution of hybrid seed proportions across all plants**, with a black point marking the **grand mean**. (B) Shows the same data separated by **pollinator visitation status**, with black points marking **group (conditional) means** and a dashed line connecting them. | **Grand mean vs conditional means.**                              | Associations between a categorical and numeric variable are summarized by **comparing conditional means** across groups.              | Guide students to notice the difference between the **overall average (grand mean)** and the **group averages** for visited vs non-visited plants. Encourage them to interpret the **difference between the conditional means.** | “What is the grand mean?” “What does conditional mean here?” “Why are the means different between groups?”                           |
+| **Fig 3** | Two ways to compare hybrid seed proportions by visitation status. (A) Histograms for plants with no visits vs some visits. (B) A density plot showing the distributions of hybrid seed proportions for each group.                                                                                                                          | **Comparing distributions across groups.**                        | When comparing a numeric variable across groups, visualizing the **entire distribution** can reveal differences beyond just the mean. | Encourage students to compare **shape, spread, and center** of the distributions for visited vs non-visited plants. Ask whether the distributions appear shifted or different between groups.                                    | “Why use histograms or density plots?” “What do these distributions tell us?” “Which group tends to have higher hybrid proportions?” |
+| **Fig 4** | Three scatter-style plots showing hybrid seed proportion vs visitation status. (A) Raw points without jitter show heavy overlap. (B) Jittered points reveal the distribution more clearly. (C) Jittered points with **group means (red)** and a dashed line connecting them emphasize the difference between conditional means.             | **Improving visualization of categorical–numeric relationships.** | Jittering helps reveal overlapping observations, and adding **group means** highlights the difference in conditional means.           | If students reference this figure, help them see how **visual choices affect interpretability**. Emphasize that jittering reveals individual data points and the mean markers summarize the group comparison.                    | “Why use jitter?” “What do the red points represent?” “Why connect the means with a dashed line?”                                    |
+

@@ -65,6 +65,12 @@ book:
         - book_sections/univariate_summaries/summarizing_variability.qmd
         - book_sections/univariate_summaries/summary_script.qmd
         - book_sections/univariate_summaries/summarizing_summaries.qmd
+    - part: book_sections/associations_I.qmd
+      chapters: 
+        - book_sections/associations/two_categorical_vars.qmd
+        - book_sections/associations/cat_cont.qmd
+        - book_sections/associations/associationsI_script.qmd
+        - book_sections/associations/summarizing_associations_I.qmd
     - references.qmd
 
 

@@ -1,0 +1,211 @@
+### • 6. Associations I: Script {.unnumbered #associationsI_script}
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+library(knitr)
+```
+
+---
+
+Here's a brief run down of the key functions and pipelines used in this chapter. 
+
+## Two categorical variables 
+
+Lets look at a new (classic) data set - the survival of adults sitting first class on the Titanic. The code below takes the data from old-R style into the tidyverse framework we're used to. The data now look like this:
+
+```{r}
+#| code-fold: true
+#| code-summary: "Formatting the Titanic data & then glimpsing"
+#| message: false
+#| warning: false
+library(tidyr) # for "uncount"
+library(dplyr)
+library(janitor)
+library(ggplot2)
+titanic_first_class_adults <- Titanic["1st",,,]  |>
+    data.frame()                                 |> 
+    filter(Age == "Adult")                       |> 
+    select(-Age)                                 |>
+    uncount(weights = Freq)                      |>
+  slice_sample(prop = 1)
+
+glimpse(titanic_first_class_adults)
+```
+
+```{r}
+#| echo: false
+#| column: margin
+#| fig-height: 6.5
+#| label: figo-ne
+#| fig-cap: "Survival counts for adult first-class passengers on the Titanic by sex. Stacked bars show the number of adult first-class passengers who did or did not survived, separated by sex."
+#| fig-alt: "Stacked bar chart showing counts of adult first-class Titanic passengers by sex and survival status. For males, the majority did not survive, with a smaller portion surviving. For females, most survived, with very few deaths. The y-axis shows counts, the x-axis shows sex, and colors distinguish survival status (teal = survived, coral = did not survive)."
+titanic_first_class_adults |>
+  ggplot(aes(x = Sex, fill = Survived))+
+  geom_bar()+
+  theme(axis.text = element_text(size = 30),
+        axis.title = element_text(size = 25),
+        legend.position = "bottom", 
+        legend.text  = element_text(size = 25), 
+        legend.title = element_text(size = 25))
+
+
+```
+
+
+```{r}
+#| echo: false
+#| column: margin
+titanic_first_class_adults                     |>
+  tabyl(Sex, Survived)                         |> 
+  mutate(n_tot =  No + Yes)                    |>
+  mutate(prop_survived =  Yes / n_tot)         |>
+  select(Sex, prop_survived)                   |>
+  kable(digits = 3)
+```
+
+```{r}
+#| eval: false
+library(dplyr)
+library(janitor)
+library(ggplot2)
+
+# making plot
+titanic_first_class_adults |>
+  ggplot(aes(x = Sex, fill = Survived))+
+  geom_bar()
+
+# finding conditional proportions
+titanic_first_class_adults                     |>
+  tabyl(Sex, Survived)                         |> 
+  mutate(n_tot =  No + Yes)                    |>
+  mutate(prop_survived =  Yes / n_tot)         |>
+  select(Sex, prop_survived)
+```
+
+::: {.callout-tip appearance="simple" collapse="true"}
+
+## Dealing with Count Data
+
+```{r}
+#| code-fold: true
+#| code-summary: "Formatting the Titanic data & then looking"
+#| message: false
+#| warning: false
+
+titanic_first_class_adults_counts  <- Titanic["1st",,,]  |>
+    data.frame()                                 |> 
+    filter(Age == "Adult")                       |> 
+    select(-Age)  
+
+titanic_first_class_adults_counts
+```
+
+Often categorical data comes summarized as counts, as above.  When this is the case we can still proceed without much delay. We just need a few different R tricks.   
+
+- For plotting, map the "count" column (in this case `Freq`) onto `y` in `aes` and use `geom_col()` instead of `geom_bar()`.   
+- For counting and summarizing we "munge" the data to make it easy to deal with. In this case, we first make the data wide with `tidyr`'s `pivot_wider()` function. 
+
+```{r}
+#| eval: false
+library(dplyr)
+library(janitor)
+library(ggplot2)
+library(tidyr)
+# making plot
+titanic_first_class_adults_counts |>
+  ggplot(aes(x = Sex, y = Freq, fill = Survived))+
+  geom_col()
+
+# finding conditional proportions
+titanic_first_class_adults_counts                        |>
+  pivot_wider(names_from = Survived, values_from = Freq) |> #make it wide
+  # now were back to the previous version after tabyl
+  mutate(n_tot =  No + Yes)                    |>
+  mutate(prop_survived =  Yes / n_tot)         |>
+  select(Sex, prop_survived)
+```
+
+:::
+
+## A binary and continuous variable
+
+Returning to Clarkia RIL's let's compare petal area of pink plants at GC that were and were not visited by pollinators.
+
+```{r}
+#| code-summary: "Formatting the GC data"
+#| code-fold: true
+#| message: false
+#| warning: false
+library(readr)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) 
+
+pink_gc_rils <- ril_data |>
+  dplyr::filter(location == "GC",  petal_color == "pink", !is.na(petal_area_mm), !is.na(mean_visits))|>
+  mutate(visited = ifelse(mean_visits > 0,"some_visits","no_visits")) |>
+  select( petal_area_mm,  visited)
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| column: margin
+#| fig-height: 6.5
+#| fig-cap: "Mean petal area differs slightly between visited and unvisited pink-flowered RILs at the GC site. Each point represents an individual pink-flowered recombinant inbred line (RIL). Black points show individual observations. Red points indicate group means for plants receiving no visits and those receiving at least one visit. The dashed line connects the group mean."
+#| fig-alt: "Scatter plot of petal area (mm²) by visitation category (no_visits vs. some_visits) for pink-flowered plants. Black dots show individual plant values. Red dots show group means. The mean petal area for plants receiving visits is slightly larger than for plants receiving no visits. A dashed line connects the two group means, highlighting the small difference."
+pink_gc_rils |>
+  ggplot(aes(x = visited, y = petal_area_mm))+
+  geom_jitter(width = 0.2, height = 0, size= 4)+
+  stat_summary(aes(group = 1), geom = "line", lty = 2,linewidth = 1)+
+  stat_summary(geom = "point", color = "red",size = 6)+
+  theme(axis.text = element_text(size = 30),
+        axis.title = element_text(size = 25))
+```
+
+```{r}
+#| echo: false
+#| column: margin
+pink_gc_rils |> 
+  group_by(visited) |>
+  summarise(mean_petal_area = mean(petal_area_mm)) |>
+  kable(digits = 1)
+```
+
+
+```{r}
+#| echo: false
+#| column: margin
+library(effectsize)
+cohens_d(petal_area_mm ~ visited, data = pink_gc_rils,reference = "no_visits" )|> kable(digits = 2)
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+
+library(effectsize)
+library(ggplot2)
+library(dplyr)
+
+# Make a plot
+pink_gc_rils |> 
+    ggplot(aes(x = visited, y = petal_area_mm))+ 
+    geom_jitter(width = .2)+
+    stat_summary(aes(group = 1), geom = "line", lty = 2)+
+    stat_summary(geom = "point", color = "red",size = 2)
+
+# Conditional means
+pink_gc_rils |> 
+    group_by(visited) |>
+    summarise(mean_petal_area = mean(petal_area_mm))
+
+# Cohen's D
+cohens_d(petal_area_mm ~ visited, data = pink_gc_rils,reference = "no_visits")
+```

@@ -1,4 +1,4 @@
-### • 4. Code for Dealing w data {.unnumbered #dealing_w_data_script}
+### • 4. Data in R: Code {.unnumbered #dealing_w_data_script}
 
 ### Overview
 

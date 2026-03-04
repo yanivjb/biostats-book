@@ -1,0 +1,235 @@
+## Section: Summarizing Associations I — Summary & Practice
+
+---
+
+# Section Context
+
+This section reviews the core ideas introduced in the **Summarizing Associations I** chapter and provides practice questions.
+
+Students should consolidate their understanding of how to describe relationships between variables using:
+
+* conditional proportions
+* conditional means
+* difference in means
+* Cohen’s d
+
+The emphasis remains on **describing patterns in data**, not testing hypotheses or establishing causation.
+
+---
+
+# Core Ideas from the Chapter
+
+### Associations describe patterns
+
+An **association** occurs when the value of one variable tends to differ depending on the value of another variable.
+
+Associations describe **patterns in observed data**, not causal relationships.
+
+---
+
+### Conditional summaries
+
+Many association summaries are **conditional summaries**.
+
+These describe a variable **within a group defined by another variable**.
+
+Examples:
+
+```id="s1"
+P(visit | pink)
+mean(prop_hybrid | visited)
+```
+
+Conditional summaries allow comparisons across groups.
+
+---
+
+### Associations between two categorical variables
+
+When both variables are categorical, associations are summarized using:
+
+**Conditional proportions**
+
+Example:
+
+* probability of visitation among pink flowers
+* probability of visitation among white flowers
+
+Visualization tools include:
+
+* stacked bar plots
+* proportional bar plots
+* grouped bar plots
+
+---
+
+### Associations between categorical and numeric variables
+
+When comparing a numeric variable across groups, associations are summarized using:
+
+**Conditional means**
+
+Example:
+
+* average hybrid seed proportion among plants receiving visits
+* average hybrid seed proportion among plants receiving no visits
+
+---
+
+### Difference in means
+
+A simple summary of group differences is the **difference between conditional means**.
+
+Conceptually:
+
+```id="s2"
+difference in means =
+mean(Y | group1)
+-
+mean(Y | group2)
+```
+
+---
+
+### Cohen’s d
+
+Cohen’s d standardizes the difference in means by the **pooled standard deviation**.
+
+It expresses group differences in units of **standard deviations**.
+
+Students should understand that Cohen’s d measures **effect size**, not statistical significance.
+
+---
+
+# Decision Guide for Students
+
+When analyzing a relationship between variables, students should first identify the **variable types**.
+
+### Step 1 — Identify variable types
+
+Ask:
+
+* Are both variables categorical?
+* Is one categorical and one numeric?
+
+---
+
+### Step 2 — Choose the appropriate summary
+
+```id="s3"
+categorical + categorical → conditional proportions
+categorical + numeric → conditional means
+```
+
+---
+
+### Step 3 — Visualize the relationship
+
+Common plots include:
+
+For categorical–categorical:
+
+* stacked bar plots
+* proportional bar plots
+
+For categorical–numeric:
+
+* boxplots
+* jittered scatterplots
+* histograms or density plots
+
+---
+
+### Step 4 — Interpret carefully
+
+Students should ask:
+
+* How large is the difference between groups?
+* Could other variables explain the pattern?
+* Does the data support causal conclusions?
+
+Associations alone **do not establish causation**.
+
+---
+
+# Common Student Difficulties
+
+### Confusing counts with proportions
+
+Students sometimes compare **bar heights representing counts** when the meaningful comparison is **proportions**.
+
+Encourage students to focus on **conditional probabilities**.
+
+---
+
+### Ignoring variability
+
+Students may focus only on mean differences and overlook:
+
+* spread
+* skew
+* overlapping distributions
+
+Visualization helps reveal these patterns.
+
+---
+
+### Misinterpreting conditional notation
+
+Students sometimes reverse conditional probabilities.
+
+Example:
+
+```id="s4"
+P(visit | pink)
+```
+
+means:
+
+> probability of visitation **given pink flowers**
+
+not the reverse.
+
+---
+
+# Tutor Guidance for Practice Questions
+
+When students ask about practice questions:
+
+1. Do **not give the final answer directly**.
+2. Ask guiding questions that help them reason through the problem.
+3. Encourage them to interpret **plots and summaries**.
+4. Suggest computing conditional summaries in R if helpful.
+
+Example tutor response style:
+
+> “What type of variables are you comparing here? Once you identify that, you can decide whether you should be looking at conditional proportions or conditional means.”
+
+---
+
+# Typical Student Questions
+
+Students commonly ask:
+
+* “Which summary statistic should I use here?”
+* “Is this comparing proportions or means?”
+* “What does Cohen’s d tell us?”
+* “How do I interpret this plot?”
+* “Does this pattern imply causation?”
+
+The tutor should guide students toward **interpreting patterns and choosing appropriate summaries**, rather than simply calculating answers.
+
+---
+
+# Chapter Connection
+
+This section prepares students for the next chapter, which will examine associations between **two numeric variables**.
+
+That chapter will introduce:
+
+* covariance
+* correlation
+* slope
+
+These concepts extend the idea of describing associations to situations where **both variables vary continuously**.
+

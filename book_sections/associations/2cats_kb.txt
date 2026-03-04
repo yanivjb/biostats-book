@@ -1,0 +1,242 @@
+## Section: Two Categorical Variables
+
+---
+
+# Section Context
+
+This section introduces how to **describe associations between two categorical variables**.
+
+Students begin by reviewing **unconditional proportions** and then learn how to compute **conditional proportions** to compare outcomes across groups.
+
+The key conceptual progression is:
+
+1. Start with **unconditional proportions**.
+2. Introduce **conditional proportions**.
+3. Compare conditional proportions across groups.
+4. Describe **deviations from independence** as evidence of association.
+
+This section focuses on **description and intuition**, not formal statistical testing.
+
+---
+
+# Learning Goals
+
+By the end of this section students should be able to:
+
+1. Calculate and interpret **conditional proportions**.
+2. Visualize associations between two categorical variables.
+3. Explain the **multiplication rule for independent events**.
+4. Recognize when data **deviate from independence**.
+5. Interpret contingency table summaries and bar plots.
+
+---
+
+# Variables Used in Examples
+
+The main example uses the **Clarkia RIL dataset**.
+
+Key variables include:
+
+**petal_color**
+
+* pink
+* white
+
+**visited**
+
+* some_visits
+* no_visits
+
+Students explore whether **pollinator visitation differs between pink and white flowers**.
+
+---
+
+# Key Concept: Unconditional Proportions
+
+An unconditional proportion describes the **overall frequency** of a category in the dataset.
+
+Example:
+
+Proportion of flowers that received a pollinator visit.
+
+This summary ignores any grouping variables.
+
+Students often visualize unconditional proportions using **a stacked bar plot**.
+
+---
+
+# Figure References
+
+### Figure 1 — Unconditional Data
+
+**Figure label:** `fig-visit`
+
+This figure shows a stacked bar plot summarizing:
+
+* number of plants receiving **no visits**
+* number of plants receiving **some visits**
+
+Key interpretation:
+
+Approximately **one quarter of plants received visits** while most received none.
+
+This figure illustrates an **overall (unconditional) proportion**.
+
+---
+
+# Key Concept: Conditional Proportions
+
+A conditional proportion describes the probability of an outcome **within a specific group**.
+
+Example:
+
+```
+P(Visit | Pink)
+P(Visit | White)
+```
+
+These represent:
+
+* probability of receiving a pollinator visit **given pink flowers**
+* probability of receiving a pollinator visit **given white flowers**
+
+Conditional proportions allow students to **compare groups**.
+
+---
+
+# Visualizing Conditional Proportions
+
+Associations between categorical variables are commonly visualized with **bar plots**.
+
+Useful display options include:
+
+**Stacked bar plots**
+
+Show counts within groups.
+
+**Fill bar plots**
+
+Show proportions within groups.
+
+Students should learn to interpret both.
+
+---
+
+# Key Concept: Independence
+
+Two categorical variables are **independent** if the probability of observing both events equals the product of their individual probabilities.
+
+Mathematically:
+
+```
+P(A and B) = P(A) × P(B)
+```
+
+Example:
+
+```
+P(visited AND pink)
+=
+P(visited) × P(pink)
+```
+
+If this equality holds, the variables are **independent**.
+
+---
+
+# Key Concept: Deviation from Independence
+
+If the observed joint probability differs from the expected value under independence, the variables show **association**.
+
+Example structure:
+
+```
+Observed:
+P(visited AND pink)
+
+Expected under independence:
+P(visited) × P(pink)
+```
+
+If these values differ, the data show **association between the variables**.
+
+This deviation provides the intuition that will later connect to **covariance**.
+
+---
+
+# Common Student Confusions
+
+### Confusing counts and proportions
+
+Students often compare bar heights representing **counts** when the meaningful comparison is **proportions**.
+
+Encourage students to ask:
+
+> “Am I comparing totals or probabilities?”
+
+---
+
+### Forgetting the conditioning
+
+Students may misinterpret
+
+```
+P(Visit | Pink)
+```
+
+as the probability of pink given visits.
+
+Reinforce the idea that **the condition appears after the vertical bar**.
+
+---
+
+### Assuming association implies causation
+
+Even if visitation differs between flower colors, this does **not prove that color causes visitation**.
+
+Other factors could influence the pattern.
+
+---
+
+# R Tools Used in This Section
+
+Students commonly use:
+
+```
+ggplot()
+geom_bar()
+group_by()
+summarize()
+```
+
+They may also work with contingency tables and tidy summaries.
+
+These tools allow students to:
+
+* compute conditional proportions
+* visualize associations
+* summarize categorical relationships
+
+---
+
+# Tutor Guidance
+
+When helping students:
+
+1. Ask them to identify the **two variables being compared**.
+2. Ask which variable is treated as the **conditioning variable**.
+3. Encourage students to interpret **plots before computing statistics**.
+4. Reinforce the difference between **counts and proportions**.
+
+Keep responses brief and guide students toward **interpreting the biological meaning of patterns**.
+
+
+# Figures — Section 6: Two Categorical Variables
+
+| Figure    | What the figure shows                                                                                                                                                                                                        | Concept illustrated                                             | Key takeaway                                                                                                                                              | Tutor guidance                                                                                                                                                                                | Common student questions                                                                                                   |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Fig 1** | A single stacked bar showing counts of plants that **received a pollinator visit (light gray)** or **did not receive a visit (black)**. The bar represents the unconditional distribution of visit status across all plants. | **Unconditional counts / marginal distribution.**               | Before comparing groups, we often start by understanding the **overall distribution of a variable**.                                                      | If students mention this figure, guide them to notice that this plot shows **overall counts**, not differences across groups. Emphasize that no explanatory variable has been introduced yet. | “Why is there only one bar?” “What does unconditional mean?” “What is this plot telling us?”                               |
+| **Fig 2** | A stacked bar plot showing **petal color on the x-axis** and **pollinator visit status within bars**. The bar heights represent conditional proportions of visited vs not visited within each petal color category.          | **Conditional proportions.**                                    | Associations between categorical variables are often summarized using **conditional proportions** (e.g., proportion visited among pink vs white flowers). | Encourage students to compare the **proportion of visits within each petal color**. Help them articulate the pattern: pink flowers are more likely to receive visits than white flowers.      | “What does conditional mean here?” “How do we interpret the bars?” “What proportion of pink flowers were visited?”         |
+| **Fig 3** | Three alternative bar plots showing the same data about **visit status**: (A) stacked counts, (B) stacked proportions, and (C) grouped bars. All visualize the distribution of visited vs not visited plants.                | **Multiple ways to visualize categorical data.**                | The **same data** can be visualized in several ways, each emphasizing different aspects (counts vs proportions vs comparisons).                           | Guide students to notice that these plots show **the same underlying data** but highlight different comparisons. Ask which plot makes proportions easiest to interpret.                       | “Which plot should I use?” “Why do these plots look different?” “What is the difference between count and proportion?”     |
+| **Fig 4** | Three bar plots showing **pollinator visitation by petal color**: (A) stacked counts, (B) stacked proportions, and (C) grouped bars. Each visualizes the relationship between the two categorical variables.                 | **Visualizing associations between two categorical variables.** | Associations between categorical variables are often easiest to interpret using **conditional proportions** (stacked proportion bars).                    | Encourage students to compare **proportions within each petal color** rather than raw counts. Ask them what pattern they see in visitation between pink and white flowers.                    | “Which variable is explanatory here?” “Why are the bars different heights?” “How do we compare visitation between colors?” |
+
