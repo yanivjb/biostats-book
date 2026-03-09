@@ -87,6 +87,14 @@ book:
         - book_sections/sampling/nonindependence.qmd
         - book_sections/sampling/better_sampling.qmd       
         - book_sections/sampling/sampling_summary.qmd
+    - part: book_sections/uncertainty.qmd
+      chapters: 
+        - book_sections/uncertainty/bootstrap.qmd
+        - book_sections/uncertainty/ci.qmd
+        - book_sections/uncertainty/boot_infer.qmd
+        - book_sections/uncertainty/boot_gotchas.qmd
+        - book_sections/uncertainty/boot_script.qmd
+        - book_sections/uncertainty/uncertainty_summary.qmd
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd

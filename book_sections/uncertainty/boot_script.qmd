@@ -1,0 +1,154 @@
+## • 9. Bootstrap script {.unnumbered #boot_script}
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+```
+
+## Overview
+
+Here I provide streamlined versions of R scripts to estimate uncertainty by a bootstrap.
+
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Code for selecting data from a few columns from RILs planted at GC"
+library(readr)
+library(dplyr)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) 
+
+gc_rils <- ril_data |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(mean_visits))|>
+  select(petal_color, petal_area_mm, num_hybrid, offspring_genotyped, prop_hybrid, mean_visits , asd_mm )|>
+  mutate(id = factor(1:n()))
+```
+
+### Functions
+
+The key "workhorse" functions I will use are: 
+
+- The [`specify()`](https://infer.tidymodels.org/reference/specify.html) to [`generate()`](https://infer.tidymodels.org/reference/generate.html) to [`calculate()`](https://infer.tidymodels.org/reference/calculate.html) pipeline from the [`infer`](https://infer.tidymodels.org/) package.  
+
+- [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) from [`dplyr`](https://dplyr.tidyverse.org/).    
+
+- [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) from base R. We'll use this to get the standard deviation of the bootstrap distribution - aka the "bootstrap standard error."    
+
+- [`quantile()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html) from base R. We'll use this to get the upper and lower tails of the bootstrap distirbution to find the  "bootstrap confidence interval." 
+
+### Reproducible script   
+
+Now here it is!
+
+
+#### Set up
+
+```{r}
+#| message: false
+#| warning: false
+library(dplyr)
+library(infer)
+alpha   <- .05
+n_boots <- 5000
+```
+
+--- 
+
+#### For mean prop_hybrid
+
+
+```{r}
+#| echo: false
+#| column: margin
+
+ tibble(se = 0.023, lower_ci = 0.107, upper_ci = 0.197)|>kable()
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+library(dplyr)
+library(infer)
+gc_rils %>%
+    specify(response = prop_hybrid)               |> 
+    generate(reps = n_boots, type = "bootstrap")  |> 
+    calculate(stat = "mean")|>
+    summarise(se = sd(stat),
+            lower_ci = quantile(stat, probs = alpha /2,),
+            upper_ci = quantile(stat, probs = 1 - alpha /2))
+```
+
+
+--- 
+
+#### For differences in mean prop_hybrid by petal color
+
+
+```{r}
+#| echo: false
+#| column: margin
+ tibble(se = 0.042, lower_ci = 0.149, upper_ci = 0.312)|>kable()
+```
+
+```{r}
+gc_rils                                                          |>
+  filter(!is.na(petal_color))                                    |>
+  specify(prop_hybrid ~ petal_color)                             |>                      
+  generate(reps = n_boots, type = "bootstrap")                   |>                   
+  calculate(stat = "diff in means", order = c("pink", "white"))  |>
+  summarise(se = sd(stat),
+            lower_ci = quantile(stat, probs = alpha /2,),
+            upper_ci = quantile(stat, probs = 1 - alpha /2))
+```
+
+---
+
+#### For differences in mean prop_hybrid by petal color
+
+
+```{r}
+#| echo: false
+#| column: margin
+ tibble(se = 0.042, lower_ci = 0.149, upper_ci = 0.312)|>kable()
+```
+
+```{r}
+gc_rils                                                          |>
+  filter(!is.na(petal_color))                                    |>
+  specify(prop_hybrid ~ petal_color)                             |>                      
+  generate(reps = n_boots, type = "bootstrap")                   |>                   
+  calculate(stat = "diff in means", order = c("pink", "white"))  |>
+  summarise(se = sd(stat),
+            lower_ci = quantile(stat, probs = alpha /2,),
+            upper_ci = quantile(stat, probs = 1 - alpha /2))
+```
+
+---
+
+
+
+#### For slopes
+
+
+```{r}
+#| echo: false
+#| column: margin
+ tibble(se = 0.00173, lower_ci = 0.00217, upper_ci = 0.00896)|>kable()
+```
+
+```{r}
+gc_rils                                           |>
+  filter(!is.na(petal_area_mm))                   |>
+  specify(prop_hybrid ~ petal_area_mm)            |>  # The linear model we're looking into
+  generate(reps = n_boots, type = "bootstrap")    |>  # Bootstrapping
+  calculate(stat = "slope")                       |>
+  summarise(se = sd(stat),
+            lower_ci = quantile(stat, probs = alpha /2,),
+            upper_ci = quantile(stat, probs = 1 - alpha /2))
+```
