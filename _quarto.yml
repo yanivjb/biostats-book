@@ -78,6 +78,16 @@ book:
         - book_sections/associations/associationsII_script.qmd
         - book_sections/associations/summarizing_associations_II.qmd
     - book_sections/filler.qmd
+    - book_sections/stats_foundation_index.qmd
+    - part: book_sections/sampling_intro.qmd
+      chapters: 
+        - book_sections/sampling/sampling.qmd
+        - book_sections/sampling/sampling_error.qmd
+        - book_sections/sampling/sampling_bias.qmd
+        - book_sections/sampling/nonindependence.qmd
+        - book_sections/sampling/better_sampling.qmd       
+        - book_sections/sampling/sampling_summary.qmd
+    - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
       chapters: 
