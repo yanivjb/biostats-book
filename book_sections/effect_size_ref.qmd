@@ -1,0 +1,77 @@
+### • Supplement: Effect Sizes {.unnumbered #effect_size_ref}
+
+
+
+
+---
+
+:::warning
+**EFFECT SIZE MEASUREES THE STRENGTH OF AN ASSOCIATION -- IT IS NOT CAUSAL**   
+
+"Effect size" is a poorly chosen name for the strength of an association. There are few different measures of the effect size, depedning on our models etc. But they generally describe estimates of parameters in linear models standardize by residual variability.  
+
+:::
+
+---
+
+## Cohen's D: Differences in group means    
+
+
+Cohen’s D standardizes the difference in means by the variability within groups (the pooled standard deviation), allowing for more intuitive comparisons across studies and systems.  
+
+$$\text{Cohen's D} = \frac{\text{Difference in means}}{\text{pooled sd}}$$
+
+
+::: aside 
+
+pooled sd $= \sqrt{\frac{s^2_1\times(n_1-1) + s^2_2\times(n_2-1)}{n-2}}$ Where:</br>* $s^2_i$ is the variance in the $i^{th}$ group. </br>* $n_i$ is the size of each group, and </br>*n is the total sample size, $n_1+n_2$.</br></br> 
+
+
+
+Finding Cohen's D with the [`effectsize`](http://easystats.github.io/effectsize/index.html) package: 
+
+
+```{r}
+#| eval: false
+library(effectsize)
+cohens_d(y ~ x, data = data)
+```
+
+
+:::
+
+**Interpreting Cohen's D:** There aren't hard and fast rules for interpreting Cohen's D — this varies by field —  but the rough guidelines are presented below.
+
+| Size              | Range of Cohen's D     |
+|------------------|------------------------|
+| Not worth reporting | < 0.01               |
+| Tiny              | 0.01 – 0.20           |
+| Small             | 0.20 – 0.50           |
+| Medium            | 0.50 – 0.80           |
+| Large             | 0.80 – 1.20           |
+| Very large        | 1.20 – 2.00          |
+| Huge              | > 2.00                |
+
+
+
+
+## The correlation   {#cont_cont_the-correlation}  
+
+The correlation coefficient,  *r* -- a summary of the strength and direction of a linear association between two variables. So it's absolute value, *|r|* mesuares the strength of an association.  Mathematically *r* is simply the covariance divided by the product of standard deviations ($s_X$ and $s_Y$), and we can find it in `R` with the  [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function: 
+
+$$r = \frac{\text{Covariance}_{X,Y}}{s_X \times s_Y}$$
+
+**Interpreting |r|:** As in Cohen's D, what is a "large" or "small" correlation coefficient depends on the study, the question and the  field of study, but there are rough guides 
+
+
+| Size              | Range of $|r|$    |
+|------------------|------------------------|
+| Not worth reporting | < 0.005               |
+| Tiny              | 0.005 – 0.10           |
+| Small             | 0.01 – 0.20         |
+| **Medium**            | **0.2 – 0.35**           |
+| Large             | 0.35 – 0.50           |
+| Very large        | 0.50 – 0.75          |
+| Huge              | $> 0.75$                |
+
+

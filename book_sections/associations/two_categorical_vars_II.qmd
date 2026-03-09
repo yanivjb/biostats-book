@@ -1,0 +1,285 @@
+## • 7. Revisiting two cats {.unnumbered #two_categorical_vars_II}
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(kableExtra)
+library(ggplot2)
+library(tidyr)
+source("../../_common.R") 
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) |>
+  rename(visits = mean_visits)|>
+  dplyr::mutate(growth_rate = case_when(growth_rate =="1.8O" ~ "1.80",
+                                          .default = growth_rate),  
+                growth_rate = as.numeric(growth_rate),
+                visited = visits > 0)
+```
+
+
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating Scenario:**   
+You are digging deeper into your summaries of associations between two categorical variables.
+
+**Learning Goals: By the end of this subchapter, you should be able to:**  
+
+
+1. **Explain the intuition of the multiplication rule for independent events**   
+
+2. **Calculate and explain the covariance** as a deviation from expectations under independence. Again  you should be able to do this with basic math and with R code. 
+
+
+:::     
+
+---
+
+
+```{r}
+#| message: false
+#| warning: false
+#| code-fold: true
+#| code-summary: "Loading and processing data."
+library(dplyr)
+library(readr)
+library(ggplot2)
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+gc_rils <- readr::read_csv(ril_link) |>
+    rename(visits = mean_visits)|>
+    mutate(visited = ifelse(visits > 0,"some_visits","no_visits")) |>
+    dplyr::filter(location == "GC", !is.na(prop_hybrid), ! is.na(visits),!is.na(petal_color))|>
+    select(petal_color, visits, visited, prop_hybrid)
+```
+
+---  
+
+
+## Unconditional & conditional proportions  
+
+In the previous section we calculated UNCONDITIONAL (also known as marginal) proportions (n_case / n_total) of two binary categorical variables. Let;s call these proportions: 
+
+- $P_\text{pink}= n_\text{pink} / n_\text{plants}$
+
+- $P_\text{some visits}= n_\text{some visits} / n_\text{plants}$
+
+
+
+
+
+
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils |>
+  summarise(prop_pink    = mean(petal_color == "pink"),
+            prop_visited = mean(visited == "some_visits")) 
+```
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(prop_pink    = mean(petal_color == "pink"),
+            prop_visited = mean(visited == "some_visits"))  |>
+  kable(digits = 3)
+```
+
+We also saw that proportions of one outcome can depend on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
+
+
+- $P_\text{some visits | pink}= n_\text{some visits  | pink} / n_\text{pink plants}$
+
+- $P_\text{some visits | white}= n_\text{some visits  | white} / n_\text{white plants}$
+
+These differed substantially. Pink plants were way more likely to be visited than white plants.
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils |>
+  summarise(n_pink        = sum(petal_color == "pink"),
+            n_white       = sum(petal_color == "white"),
+            p_visit_pink  = sum(petal_color == "pink"  & visited == "some_visits") / n_pink ,
+            p_visit_white = sum(petal_color == "white" & visited == "some_visits") / n_white) 
+```
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(n_pink   = sum(petal_color == "pink"),
+        n_white      = sum(petal_color == "white"),
+        p_visit_pink = sum(petal_color == "pink"  & visited == "some_visits") / n_pink ,
+        p_visit_white = sum(petal_color == "white" & visited == "some_visits") / n_white)  |>
+  kable(digits = 3)
+```
+
+---
+
+### Covariance
+
+A common quantification of the association between two binary variables is the covariance. This quantification follows some simple mathematical logic:  
+
+- If two categorical variables, A & B are independent, the probability of observing both A and B  (aka, $P_{AB}$) should equal the product of their unconditional probabilities:
+$$P_{AB \mid \text{independence}} = P_A \times P_B$$
+
+- The covariance is the deviation from this expectation: $$COV_{AB} = P_{AB} - P_A \times P_B$$
+
+So for the association between petal color and  being visited, the covariance is:
+
+$$COV_{\text{visited, pink}} =P_{\text{visited and pink}} - P_{\text{visited}}  \times P_{\text{pink}}$$
+
+
+
+
+We can find this in R:
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils |>
+  summarise(p_pink_and_visited   = mean(petal_color == "pink" & visited  == "some_visits"),
+            p_pink               = mean(petal_color == "pink"),
+            p_visited            = mean(visited  == "some_visits"),
+            cov_pink_and_visited = p_pink_and_visited - p_pink  * p_visited)
+```
+
+
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(p_pink_and_visited   = mean(petal_color == "pink" & visited  == "some_visits"),
+            p_pink               = mean(petal_color == "pink"),
+            p_visited            = mean(visited  == "some_visits"),
+            cov_pink_and_visited = p_pink_and_visited - p_pink  * p_visited) |>
+  kable(digits = 4)
+```
+
+
+Alternatively, R can calculate the covariance with the [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function. This only works if the values are numbers or logical (TRUE [1] / FALSE [0]). Note the slight mismatch between our calculation due to "Bessel's correction" (see fyi box, below).
+
+
+```{r}
+#| column: page-right
+#| eval: false
+gc_rils |>
+  summarise(cov_pink_visited = cov(petal_color == "pink", visited  == "some_visits"))
+```
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(cov_pink_visited = cov(petal_color == "pink", visited  == "some_visits")) |>
+  kable(digits = 4)
+```
+
+
+:::fyi
+Our answer differ slightly from one another. We used a denominator of $n$ (which calcualtes the population covariance), while the sample covariance has a denominator of $n-1$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). We will soon see that although the later is more appropriate --  their difference is negligible when n is large. We can convert the populaiton covariance to the sample covaraiance by multiplying by $\frac{n}{n-1}$. See the next section for a discussion of the difference between populaiton parameters and sample estimates.
+:::
+
+
+
+## From covariance to correlation 
+
+Covariance gives us a numerical measure of how far our data deviate from what we’d expect under independence. In this case, the value is 0.10 — but is that meaningful? It turns out a covariance is difficult to interpret as strong or weak. 
+The correlation, *r*, describes both the sign and strength of the association between variables. An absolute value  of *r* close to 1 means that x almost perfectly predicts y, while a value close to zero means x has no information about y. The sign of *r* describes if x and y  increase ($r > 0$), or  decrease ($r <0$) with one another. 
+
+
+We can convert a covariance to an effect size, known as a correlation (or *r*), by dividing the covariance by the product of standard deviations.
+
+
+
+$$r_{x,y}= \frac{cov_{x,y}}{s_x s_y}$$
+
+We have previously seen the equation for a standard deviation: $$s_x = \sqrt{\frac{\sum{(x_i-\bar{x})^2 }}{n-1}}$$.
+
+:::aside
+Again this simplification arises when we ignore Bessel’s correction and divide by n instead of n − 1. 
+:::
+
+
+For a binary variable, this equation equals $p_x (1-p_x)$. So in R: 
+
+
+```{r}
+#| column: page-right
+#| eval: false
+gc_rils |>
+  summarise(var_pink = mean(petal_color == "pink") * (1 - mean(petal_color == "pink")),
+            var_visited = mean(visited == "some_visits") * (1 -  mean(visited == "some_visits")),
+            cov_pink_visited = cov(petal_color == "pink", visited  == "some_visits"),
+            cor_pink_visited =  cov_pink_visited / (sqrt(var_pink) * sqrt(var_visited ))) 
+```
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(var_pink = mean(petal_color == "pink") * (1 - mean(petal_color == "pink")),
+            var_visited = mean(visited == "some_visits") * (1 -  mean(visited == "some_visits")),
+            cov_pink_visited = cov(petal_color == "pink", visited  == "some_visits"),
+            cor_pink_visited =  cov_pink_visited / (sqrt(var_pink) * sqrt(var_visited ))) |> kable(digits = 4)
+```
+
+
+This is a strong correlation! 
+
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils |>
+  summarise(cor_pink_visited = cor(petal_color == "pink", visited  == "some_visits"))
+```
+
+
+```{r}
+#| echo: false
+gc_rils |>
+  summarise(cor_pink_visited = cor(petal_color == "pink", visited  == "some_visits")) |> kable(digits = 4)
+```
+
+---
+
+:::fyi
+## Applications to population genetics:
+Two population genetic summaries tend to confuse genetics students -- deviations from Hardwy-Weinberg Equilibrium, and Linkage disequilibrium. Both can be naturally considered as covarances between two binary variables.   
+
+---
+
+**Hardy-Weinberg Equilbrium (HWE)**    
+
+According to the [Hardy-Weinberg Equilbrium principle](https://cooplab.github.io/popgen-notes/#hardyweinberg-proportions), states that under anumerous assumptions -- which essentially ensure that an individual's two alleles at a locus are chosen indepednently -- geneotypes at a locus are simply two random samples of alleles from a population,   
+
+   - Genotype frequencies should be $p^2$, $2p(1-p)$, and $(1-p)^2$ 
+   - Where $p$ is the freuqncy of one allele, A, at a locus.   
+
+We can think of this as a covariance between alleles inherited from mom and dad at the same locus.   
+
+   - So $p^2$ is actually $p_\text{A maternal} \times p_\text{A paternal}$.  
+   - The deviation from HWE, $F$, is simplythe difference between the observed frequency of homozygotes ($p_\text{AA} = p_\text{A maternal,A paternal}$) and their expected frequency, $p^2$. So $F = p_\text{AA}- p_A^2$.    
+
+---
+
+**Linkage Disequilibrium (LD)**   
+
+[Linkage disquilibrium](https://cooplab.github.io/popgen-notes/#correlations-between-loci-linkage-disequilibrium-and-recombination) quantifies the statistical asscoiation between alleles at different loci. The most standard quantification of linkage disequilbrium is $D = Cov(A,B) = p_{AB} - p_A p_B$. Where A and B asre alleles at two different loci. Although usually quantified as a covariance, other measures of LD include a correlation in allele frequencies between loci.
+
+
+
+
+
+:::

@@ -71,6 +71,17 @@ book:
         - book_sections/associations/cat_cont.qmd
         - book_sections/associations/associationsI_script.qmd
         - book_sections/associations/summarizing_associations_I.qmd
+    - part: book_sections/associations_II.qmd
+      chapters: 
+        - book_sections/associations/two_categorical_vars_II.qmd
+        - book_sections/associations/cont_cont.qmd
+        - book_sections/associations/associationsII_script.qmd
+        - book_sections/associations/summarizing_associations_II.qmd
+    - book_sections/filler.qmd
+    - book_sections/additional_resources_index.qmd
+    - part: book_sections/supps.qmd
+      chapters: 
+        - book_sections/effect_size_ref.qmd
     - references.qmd
 
 

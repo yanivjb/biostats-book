@@ -1,0 +1,14 @@
+
+# Additional Resources   {.unnumbered #additional_resources_index}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+```
+
+
+
+<article class="drop-cap">There are some things that I just always need to look up or refresh. Here, I provide these resources, so that you don't need to scour the book ot internet for them.</article><br>
+

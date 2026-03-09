@@ -1,0 +1,172 @@
+### • 7. Associations II: Script {.unnumbered #associationsII_script}
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+library(knitr)
+```
+
+---
+
+
+```{r}
+#| echo: false
+#| column: margin
+#| warning: false
+#| message: false
+#| fig-height: 6.5
+#| label: fig-ne
+#| fig-cap: "Survival counts for adult first-class passengers on the Titanic by sex. Stacked bars show the number of adult first-class passengers who did or did not survived, separated by sex."
+#| fig-alt: "Stacked bar chart showing counts of adult first-class Titanic passengers by sex and survival status. For males, the majority did not survive, with a smaller portion surviving. For females, most survived, with very few deaths. The y-axis shows counts, the x-axis shows sex, and colors distinguish survival status (teal = survived, coral = did not survive)."
+library(tidyr) # for "uncount"
+library(dplyr)
+library(janitor)
+library(ggplot2)
+titanic_first_class_adults <- Titanic["1st",,,]  |>
+    data.frame()                                 |> 
+    filter(Age == "Adult")                       |> 
+    select(-Age)                                 |>
+    uncount(weights = Freq)                      |>
+  slice_sample(prop = 1)
+titanic_first_class_adults |>
+  ggplot(aes(x = Sex, fill = Survived))+
+  geom_bar()+
+  theme(axis.text = element_text(size = 30),
+        axis.title = element_text(size = 25),
+        legend.position = "bottom", 
+        legend.text  = element_text(size = 25), 
+        legend.title = element_text(size = 25))
+
+
+```
+
+
+Here's a brief run down of the key functions and pipelines used in this chapter. 
+
+## Two categorical variables 
+
+Lets return to the survival of adults sitting first class on the Titanic from the previous chapter. Again, the code below takes the data from old-R style into the tidyverse framework we're used to. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Formatting the Titanic data"
+#| message: false
+#| warning: false
+library(tidyr) # for "uncount"
+library(dplyr)
+library(janitor)
+library(ggplot2)
+titanic_first_class_adults <- Titanic["1st",,,]  |>
+    data.frame()                                 |> 
+    filter(Age == "Adult")                       |> 
+    select(-Age)                                 |>
+    uncount(weights = Freq)                      |>
+  slice_sample(prop = 1)
+
+```
+
+@fig-ne shows the pattern we previously quantified and the conditional probability -- survival was lower for males than females. The code below quantifies this as a both a covariance and a correlation. We'll do so with  R's built in `cov()` and `cor()` functions because they are clean and easy.   
+
+
+```{r}
+#| echo: true
+#| eval: false
+titanic_first_class_adults                                      |>
+  # turn sex and survival into new, logical columns
+  mutate(   female     = Sex == "Female", lived = Survived == "Yes") |>
+  summarise(sample_cov = cov(female, lived),
+            sample_cor = cor(female, lived))
+```
+
+
+```{r}
+#| echo: false
+titanic_first_class_adults                                      |>
+  # turn sex and survival into new, logical columns
+  mutate(   female     = Sex == "Female", lived = Survived == "Yes") |>
+  summarise(sample_cov = cov(female, lived),
+            sample_cor = cor(female, lived))|>
+  kable(digits = 4)
+```
+
+---
+
+## Two continuous variables
+
+Returning to Clarkia RIL's let's examine the association between the petal area of pink plants at Sawmill Road (SR) that were and were not visited by pollinators. First we format the data: 
+
+```{r}
+#| code-summary: "Formatting the SR data"
+#| code-fold: true
+#| message: false
+#| warning: false
+library(readr)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) 
+
+pink_sr_rils <- ril_data |>
+    dplyr::filter(location == "SR",  petal_color == "pink", 
+                  !is.na(petal_area_mm), !is.na(mean_visits)) |>
+    rename(visits = mean_visits)
+```
+
+
+Then we make a plot and summarize the association. Note that this covariance is much higher than the example above, but the relationship is actually weaker as the correlation is smaller. 
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| column: margin
+#| fig-height: 6.5
+#| label: fig-X
+#| fig-cap: "**Association between petal area and pollinator visits in pink-flowered Clarkia xantiana RILs at the SR site.** Each point represents one plant. Plants with larger petals tended to receive more pollinator visits, though the relationship is noisy and many plants received few visits. The blue line shows the linear trend used to summarize the association."
+#| fig-alt: "Scatterplot showing pollinator visits versus petal area for pink Clarkia xantiana plants. Petal area ranges from about 30 to 110 mm² and visits range from 0 to about 5. Most plants receive between 0 and 2 visits. Points show a weak upward trend: plants with larger petals tend to receive more visits. A blue line shows the overall linear trend."
+pink_sr_rils |>
+  ggplot(aes(x = petal_area_mm, y = visits))+
+  geom_point(size = 6, alpha = .4)+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme(axis.text = element_text(size = 35),
+        axis.title = element_text(size = 35))+
+  labs(x = "Petal area (mm²)",
+       y = "Mean pollinator visits \n per 15 min observation")
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+
+library(effectsize)
+library(ggplot2)
+library(dplyr)
+
+# Make a plot
+pink_sr_rils |>
+  ggplot(aes(x = petal_area_mm, y = visits))+
+  geom_point(size = 6, alpha = .4)+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme(axis.text = element_text(size = 35),
+        axis.title = element_text(size = 40))
+
+# Covariance & Correlation
+pink_sr_rils |> 
+    summarise(cov_petal_area_visited = cov(petal_area_mm, visits),
+              cor_petal_area_visited = cor(petal_area_mm, visits))
+```
+
+
+```{r}
+#| echo: false
+pink_sr_rils |> 
+    summarise(cov_petal_area_visited = cov(petal_area_mm, visits),
+              cor_petal_area_visited = cor(petal_area_mm, visits))|>
+  kable(digits = 3)
+```
+
+---

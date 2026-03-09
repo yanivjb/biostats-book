@@ -1,4 +1,4 @@
-## • 6. Two numeric vars {.unnumbered #cont_cont}
+## • 7. Two numeric vars {.unnumbered #cont_cont}
 
 
 ```{r}
@@ -60,27 +60,42 @@ You are continuing your exploration of a new dataset. After checking its shape a
 
 ---
 
+## The covariance  {#cont_cont_the-covariance}   
+
+
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-height: 7
+#| fig-height: 5
+#| fig-cap: "**Association between petal size and hybrid seed production in Clarkia RILs.** Each point represents an individual recombinant inbred line planted at the GC site. The blue line is the line of best fit (more on that later)."
+#| fig-alt: "Scatterplot showing the relationship between log₁₀ petal area (mm²) and the proportion of hybrid seeds produced by individual plants. Points represent individual plants and are widely scattered, with many observations near zero hybrid proportion. A blue fitted line slopes upward, indicatiting a positive association between larger petal area and higher hybrid seed proportion."
 #| column: margin
+#| label: fig-dists
 
 ggplot(gc_rils, aes(x = log10_petal_area_mm,
                     y = prop_hybrid))+
-  geom_point(size = 6, alpha= .6)+
+  geom_point(size = 4, alpha= .6)+
   geom_smooth(method = "lm", linewidth = 2, se = FALSE)+
   theme(legend.position = "none",
         axis.text = element_text(size = 28),
         axis.title = element_text(size= 28),
-        plot.title = element_text(face = "bold", size=30))
+        plot.title = element_text(face = "bold", size=30))+
+  labs(x =  expression(log[10]("petal area in mm"^2*"")),
+       y = "proportion hybrid seed")
 ```
 
-## The covariance  {#cont_cont_the-covariance}   
 
-The covariance can also be used to describe the association between two numeric variables. For example, in our *Clarkia* RIL data, we could describe the association between $\text{log}_{10}$ petal area and the proportion of hybrid seeds using a covariance. As with two categorical variables, the covariance between two numeric variables reflects how much the observed association differs from what we’d expect if the variables were independent. There are two ways to calculate covariance — I introduce both here because each provides a different lens for understanding the concept, and each connects deeply to core ideas in statistics.
+In the previous section we used covariance to describe associations between two binary variables. We saw that -- for two binary variables -- the covariance measures how much the observed combination of values ($p_{A,B}$) differed from  expectations under independence ($p_A-p_B$). 
 
+Here, we extend this idea to numeric variables. Instead of asking whether two categories occur together more often than expected, we ask whether large values of one variable tend to occur with large (or small) values of another. For example, in our *Clarkia* RIL data, we could describe the association between $\text{log}_{10}$ petal area and the proportion of hybrid seeds using a covariance. 
+
+There are two ways to calculate covariance: 
+
+1. As a deviation from expectations: ($\overline{XY} - \bar{X}\bar{Y}$).    
+2. As a shared deviation from the mean: $\sum{(X_i-\bar{X})(Y_i-\bar{Y})}/(n-1)$.  
+
+I introduce both because each provides a different lens for understanding the concept. Reassuringly,  they give the same answer, so yu can decide which makes most sense to you. 
 
 ### The covariance as a deviation from expectations  
 
@@ -102,15 +117,200 @@ So, we can find the covariance between ($\text{log}_{10}$) petal area and the pr
 gc_rils |>
   filter(!is.na(log10_petal_area_mm), !is.na(prop_hybrid))|>
   summarise(mean_product        = mean(log10_petal_area_mm * prop_hybrid),
+            product_of_mean     = mean(log10_petal_area_mm) * mean(prop_hybrid),
+            approx_covariance   = mean_product - product_of_mean,
+            sample_covariance   = approx_covariance * n() / (n()-1) ))
+```
+
+
+```{r}
+#| echo: false
+gc_rils |>
+  filter(!is.na(log10_petal_area_mm), !is.na(prop_hybrid))|>
+  summarise(mean_product        = mean(log10_petal_area_mm * prop_hybrid),
             product_of_mean     =  mean(log10_petal_area_mm) * mean(prop_hybrid),
             approx_covariance   = mean_product - product_of_mean,
-            actual_covariance   = approx_covariance * n() /(n() - 1))
+            sample_covariance   = approx_covariance * n() / (n()-1))|>
+  kable(digits = 5)
 ```
+
 
 
 ---
 
 ### The covariance as the mean of cross products  
+
+
+Alternatively, we can think of the covariance as how far an individual's value of X and Y jointly differ from their means. 
+
+$$\text{Covariance }_{X,Y} = \frac{\Sigma{(X_i-\overline{X})(Y_i-\overline{Y})}}{(n-1)}$$
+
+In this formulation, 
+
+1. Find the deviation of X and Y from their means for each individual --  $(X_i-\overline{X})$, and $(Y_i-\overline{Y})$, respectively (@fig-cov, left).    
+2. Multiply these deviations to get a cross-product. In the left side of  @fig-cov, this corresponds to the area of the rectangle formed by the two deviations.
+3. Sum them to find the sum of cross products (@fig-cov, right, top).  
+4. Divide by the sample size minus one (@fig-cov, right, bottom).   
+
+```{r}
+#| column: page-right
+#| label: fig-cov
+#| echo: false
+#| fig-cap: "An animation to help understand the covariance. *Left:* We plot each point as the difference between x and y and their means. The area of that rectangle is the cross product. *Middle:* Shows how these cross products accumulate. *Right:* The cumulative sum of cross products and the running covariance estimate. The lower plot (covariance) is simply the top plot divided by (n-1)."
+#| fig-alt: "Animated figure illustrating the computation of covariance between log-transformed petal area and proportion hybrid. The left panel highlights how each observation contributes a cross product represented as a rectangle, based on deviation from the mean. The center panel accumulates cross products, and the right panel tracks the cumulative sum and the evolving covariance estimate across all observations."
+include_graphics("../../figs/summarizing_data/associations/crossprods.gif")
+```
+
+---
+
+
+
+
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils                                                        |>
+  filter(!is.na(log10_petal_area_mm),   !is.na(prop_hybrid))   |>
+  rename(x      = log10_petal_area_mm,  y = prop_hybrid )      |> # easier to read, not essential
+  mutate(mean_x = mean(x),              mean_y = mean(y) )     |> 
+  mutate(dev_x  = x - mean(x),          dev_y  = y - mean(y))  |>
+  summarise(sum_X_prod = sum(dev_x * dev_y),
+            covar   = sum_X_prod / (n()-1))
+```
+
+You can compute this yourself with the R code below or look at this [flipbook](https://ybrandvain.github.io/flipbooks/cov_flipbook.html).
+
+```{r}
+#| echo: false
+gc_rils                                                        |>
+  filter(!is.na(log10_petal_area_mm),   !is.na(prop_hybrid))   |>
+  rename(x      = log10_petal_area_mm,  y = prop_hybrid )      |> 
+  mutate(mean_x = mean(x),              mean_y = mean(y) )     |>
+  mutate(dev_x  = x - mean(x),          dev_y  = y - mean(y))  |>
+  summarise(sum_X_prod = sum(dev_x * dev_y),
+            covar = sum_X_prod / (n()-1),
+            covar_R = cov(x,  y))  |>
+  kable(digits = 4)
+```
+
+
+
+
+:::note
+The equation for the covariance $\text{Cov}_{X,Y} = \frac{\Sigma{(X_i-\overline{X})(Y_i-\overline{Y})}}{(n-1)}$ should remind you of the equation for the variance $\text{Var}_{X} = \frac{\Sigma{(X_i-\overline{X})(X_i-\overline{X})}}{(n-1)}$ (compare @fig-cov to [Figure 2 from 5. Summarizing variability](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#fig-ss)). In fact the variance is simply the covariance of a variable  with itself. See our section on summarizing variability for a refresher [link](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#parametric-summaries-of-variability). In fact you, can calculate the variance as the mean of the square minus the square of the mean. 
+:::
+
+
+### The [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function
+
+Both ways of computing the covariance — as the mean of cross-products and as the difference between the product of means and mean of products — are helpful for understanding association. But students are practical and often ask: "Which of these formulae should we use to calculate the covariance?" There are a few answers to this question — the first is "it depends," the second is "whichever you like," and the third is "neither, just use the  [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function in R." Here's how:
+
+:::aside
+The `use = "pairwise.complete.obs"` argument tells R to ignore NA values when calculating the covariance — just like `na.rm = TRUE` does when calculating the mean. You can use this argument or filter out NA values first. 
+:::
+
+
+```{r}
+#| column: page-right
+gc_rils |>
+  summarise(covariance = cov(log10_petal_area_mm, prop_hybrid, use = "pairwise.complete.obs"))
+```
+
+
+
+## The correlation   {#cont_cont_the-correlation}  
+
+Much like the variance and the difference in means, the covariance is  a very useful mathematical description, but its biological meaning can be difficult to interpret and communicate.  We therefore usually present the correlation coefficient (represented by the letter, *r*) -- a summary of the strength and direction of a linear association between two variables.  This also corresponds to how closely the points fall along a straight line in a scatterplot: the stronger the correlation, the more the points cluster along a line (positive or negative). 
+
+- **Large absolute values of** ***r*** indicate a strong linear relationship between variables (i.e. points are near a line on a scatterplot).    
+
+
+- ***r*** **values near zero** mean that we cannot  accurately predict values of one variable from another (i.e. points are not near a line on a scatterplot).       
+- **The sign of** ***r*** describes if the values increase with each other ($r > 0$, a positive slope), or if one variable decreases as the other increases ($ r < 0$, a negative slope).  
+
+Mathematically *r* is simply the covariance divided by the product of standard deviations ($s_X$ and $s_Y$), and we can find it in `R` with the  [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function: 
+
+$$r_{X,Y} = \frac{\text{Covariance}_{X,Y}}{s_X \times s_Y}$$
+
+```{r}
+#| eval: false
+gc_rils |>
+  dplyr::filter(!is.na(log10_petal_area_mm))  |>
+  dplyr::filter(!is.na(prop_hybrid))          |>
+  summarise(r = cov(log10_petal_area_mm, prop_hybrid) /
+                   ## -- Divide by produce of standard devs -- ##
+                   (sd(log10_petal_area_mm) * sd(prop_hybrid)))
+```
+
+```{r}
+#| echo: false
+
+gc_rils |>
+  dplyr::filter(!is.na(log10_petal_area_mm))  |>
+  dplyr::filter(!is.na(prop_hybrid))          |>
+  summarise(r = cov(log10_petal_area_mm, prop_hybrid) /
+                   ## -- Divide by produce of standard devs -- ##
+                   (sd(log10_petal_area_mm) * sd(prop_hybrid)))|>
+  kable(digits = 3)
+```
+
+
+---
+
+
+### $r$: effect size guide
+
+As in Cohen's D, what is a "large" or "small" correlation coefficient depends on the study, the question and the  field of study, but there are rough guides (see below). So our observed correlation between $log_{10}$ petal area and  proportion hybrid of 0.317  is worth paying attention to, but not massive. 
+
+
+
+| Size              | Range of $|r|$    |
+|------------------|------------------------|
+| Not worth reporting | < 0.005               |
+| Tiny              | 0.005 – 0.10           |
+| Small             | 0.01 – 0.20         |
+| **Medium**            | **0.2 – 0.35**           |
+| Large             | 0.35 – 0.50           |
+| Very large        | 0.50 – 0.75          |
+| Huge              | $> 0.75$                |
+
+
+
+
+
+
+
+---
+
+
+## Visualizing associations between continuous variables  
+
+We visualize associations between numeric variables with a scatterplot. In [`ggplot2`](https://ggplot2.tidyverse.org/) we do so with [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html). The  [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) function highlights trends in the data, and specifying `method = "lm"` adds the linear trend implied by the correlation.
+
+The [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) function highlights trends in the data, and specifying `method = "lm"` adds a straight line summarizing the overall linear pattern in the points. This line helps guide our interpretation of the correlation: the closer  the points fall close to the line, the stronger the correlation.
+
+For now, I am setting `se = FALSE` to highlight the trend, and not the uncertainty about it. As we introduce the ideas of uncertainty and its quantification through the standard error, you will have the tools to decide when it is useful to show the standard error around this line.
+
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: "**Association between petal size and hybrid seed production in Clarkia RILs.** This is a recreation of Figure 1."
+#| fig-alt: "Figure 1 -- again."
+#| label: fig-dists2
+
+ggplot(gc_rils, aes(x = log10_petal_area_mm,
+                    y = prop_hybrid))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
 
 ```{r}
 #| echo: false  
@@ -392,99 +592,3 @@ for (i in 2:length(gif1)) {
 }
 image_write(combined, "figs/summarizing_data/associations/crossprods.gif")
 ```
-
-
-Alternatively, we can think of the covariance as how far an individual's value of X and Y jointly differ from their means. In this formulation, 
-
-1. Find the deviation of X and Y from their means for each individual--  $(X_i-\overline{X})$, and $(Y_i-\overline{Y})$, respectively (@fig-cov, left).   
-2. Take the product of these values to find the cross product (the area of a given rectangle in @fig-cov, left).   
-3. Sum them to find the sum of cross products (@fig-cov, right, top).  
-4. Divide by the sample size minus one (@fig-cov, right, bottom).   
-
-:::aside
-The equation for the covariance $\text{Cov}_{X,Y} = \frac{\Sigma{(X_i-\overline{X})(Y_i-\overline{Y})}}{(n-1)}$ should remind you of the equation for the variance $\text{Var}_{X} = \frac{\Sigma{(X_i-\overline{X})(X_i-\overline{X})}}{(n-1)}$ (compare @fig-cov to [Figure 2 from 5. Summarizing variability](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#fig-ss)). In fact the variance is simply the covariance of a variable  with itself. See our section on summarizing variability for a refresher [link](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#parametric-summaries-of-variability). In fact you, can calcualte the variance as the mean of the square minus the sqaure of the mean. 
-:::
-
-This essentially finds the mean cross products, with Bessel's correction: 
-
-$$\text{Covariance }_{X,Y} = \frac{\Sigma{(X_i-\overline{X})(Y_i-\overline{Y})}}{(n-1)}$$
-
-```{r}
-#| column: page-right
-#| label: fig-cov
-#| echo: false
-#| fig-cap: "An animation to help understand the covariance. *Left:* We plot each point as the difference between x and y and their means. The area of that rectangle is the cross product. *Middle:* Shows how these cross products accumulate. *Right:* The cummulative sum of cross products and the running covariance estimate. The lower plot (covariance) is simply the top plot divided by (x-1)."
-#| fig-alt: "Animated figure illustrating the computation of covariance between log-transformed petal area and proportion hybrid. The left panel highlights how each observation contributes a cross product represented as a rectangle, based on deviation from the mean. The center panel accumulates cross products, and the right panel tracks the cumulative sum and the evolving covariance estimate across all observations."
-include_graphics("../../figs/summarizing_data/associations/crossprods.gif")
-```
-
-
-
-
-The flipbook below works you through how to conduct these calculations: 
-
-```{r}
-#| echo: false
-#| out-width: "100%"
-#| fig-height: 9
-include_url("https://ybrandvain.github.io/flipbooks/cov_flipbook.html")  
-```
-
-### The [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function
-
-Both ways of computing the covariance — as the mean of cross-products and as the difference between the product of means and mean of products — are helpful for understanding association. But students are practical and often ask: "Which of these formulae should we use to calculate the covariance?" There are a few answers to this question — the first is "it depends," the second is "whichever you like," and the third is "neither, just use the  [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function in R." Here's how:
-
-:::aside
-The `use = "pairwise.complete.obs"` argument tells R to ignore NA values when calculating the covariance — just like `na.rm = TRUE` does when calculating the mean. You can use this argument or filter out NA values first. 
-:::
-
-
-```{r}
-#| column: page-right
-gc_rils |>
-  summarise(covariance = cov(log10_petal_area_mm, prop_hybrid, use = "pairwise.complete.obs"))
-```
-
-
-
-## The correlation   {#cont_cont_the-correlation}  
-
-Much like the variance and the difference in means, the covariance is  a very useful mathematical description, but its biological meaning can be difficult to interpret and communicate.  We therefore usually present the correlation coefficient (represented by the letter, *r*) -- a summary of the strength and direction of a linear association between two variables.  This also corresponds to how closely the points fall along a straight line in a scatterplot: the stronger the correlation, the more the points cluster along a line (positive or negative). 
-
-- **Large absolute values of** ***r*** indicate that we can quite accurately predict one variable from the other (i.e. points are near a line on a scatterplot).    
-
-- ***r*** **values near zero** mean that we cannot  accurately predict values of one variable from another (i.e. points are not near a line on a scatterplot).       
-- **The sign of** ***r*** describes if the values increase with each other ($r > 0$, a positive slope), or if one variable decreases as the other increases ($ r < 0$, a negative slope).  
-
-Mathematically *r* is simply the covariance divided by the product of standard deviations ($s_X$ and $s_Y$), and we can find it in `R` with the  [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function: 
-
-$$r_{X,Y} = \frac{\text{Covariance}_{X,Y}}{s_X \times s_Y}$$
-```{r}
-#| column: page-right
-gc_rils |>
-  filter(!is.na(log10_petal_area_mm), !is.na(prop_hybrid))|>
-  summarise(covariance   = cov(log10_petal_area_mm, prop_hybrid),
-            cor_from_cov = covariance / (sd(log10_petal_area_mm) * sd(prop_hybrid)),
-            cor_from_function = cor(log10_petal_area_mm, prop_hybrid))
-```
-
-
-::: aside
-| Size              | Range of $|r|$    |
-|------------------|------------------------|
-| Not worth reporting | < 0.005               |
-| Tiny              | 0.005 – 0.10           |
-| Small             | 0.01 – 0.20         |
-| **Medium**            | **0.2 – 0.35**           |
-| Large             | 0.35 – 0.50           |
-| Very large        | 0.50 – 0.75          |
-| Huge              | $> 0.75$                |
-::: 
-
-As in Cohen's D, what is a "large" or "small" correlation coefficient depends on the study, the question and the  field of study, but there are rough guides (see table on right). So our observed correlation between $log_{10}$ petal area and  proportion hybrid is worth paying attention to, but not massive. 
-
-
-
-## Coming up next
-
-These summaries — covariance and correlation — give us tools to describe how two numeric variables relate. Later, we'll return to these ideas in the context of linear models, where we formalize the idea of one variable predicting another.

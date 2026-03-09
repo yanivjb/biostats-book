@@ -43,14 +43,13 @@ You're curious to know the extent to which two variables are associated and need
    - Identify when correlation may or may not reflect a causal relationship.   
    
 
-2. **Explain and interpret summaries of associations between a binary explanatory variable and wither a continuous or binary response variable.**    
+2. **Explain and interpret summaries of associations with a binary explanatory variable**    
 
+   - Describe an association between two binary variables.  
+       - As differences in conditional proportions.   
    - Describe an association between a binary explanatory variable and a continuous response 
        - As differences in conditional means.   
        - As an "effect size".   
-   - Describe associations between two binary variables.  
-       - Find expected joint probabilities by the "multiplication rule".  
-       - Use the deviation from this expectation to quantify "covariance."   
    - Use R to calculate and interpret summaries of association.  
    - Use R to visualize difference between two categorical predictor values.    
 
