@@ -26,7 +26,7 @@ include_graphics("https://imgs.xkcd.com/comics/survivorship_bias_2x.png")
 
 --- 
 
-##Links to:   [Summary](#sampling_summary_chapter-summary). [Chatbot tutor](#sampling_summary_chatbot_tutor).  [Questions](#sampling_summary_practice-questions). [Glossary](#sampling_summary_glossary-of-terms). [R functions](#sampling_summary_key-r-functions). [More resources](#sampling_summary_additional-resources).
+Links to:   [Summary](#sampling_summary_chapter-summary). [Chatbot tutor](#sampling_summary_chatbot_tutor).  [Questions](#sampling_summary_practice-questions). [Glossary](#sampling_summary_glossary-of-terms). [R functions](#sampling_summary_key-r-functions). [More resources](#sampling_summary_additional-resources).
 ---
 
 ## Chapter summary {#sampling_summary_chapter-summary}
