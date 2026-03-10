@@ -1,4 +1,4 @@
-# 7. Associations II {#associations_II}
+# 7. Associations: Part II {#associations_II}
 
 
 
@@ -84,8 +84,8 @@ We dicussed that process including coincidence, confounding and reverse causatio
 #| cap-location: margin
 #| fig-height: 9
 #| fig-width: 9
-#| fig-cap: ""
-#| fig-alt: "."
+#| fig-cap: "[A cartoon on causation from xkcd](https://xkcd.com/925/) The original rollover text says: “He holds the laptop like that on purpose, to make you cringe.” See [this link](https://www.explainxkcd.com/wiki/index.php/925:_Cell_Phones) for a more detailed explanation."
+#| fig-alt: "An xkcd comic about misleading correlations. One character says a large study found no evidence that cell phones cause cancer and wonders who funded it. Another responds, “Take a look,” showing a graph of U.S. trends from 1970 to 2010. The graph plots total cancer incidence (black line) and cell phone users (red line); cell phone use rises sharply while cancer incidence rises modestly and then levels off. The final panel shows the first character reconsidering, saying there are many problems with assuming causation from such a comparison and that they will wait for better evidence before concluding that cancer causes cell phones."
 include_graphics("https://imgs.xkcd.com/comics/cell_phones.png")
 ```
 
@@ -175,10 +175,12 @@ We again see such a case in our RIL data - leaf water content reliably predicts 
 ```{r}
 #| code-fold: true
 #| code-summary: "Code to make the plot, below."
+#| column: page-right
 #| message: false
 #| warning: false
 #| label: fig-lwc
 #| fig-cap: "**Predictions might not generalize.** The proportion of hybrid seed set reliably decreases with leaf water content in three locations (GC, LB, SR), but at the upper sawmill road site (US), there is no clear relationship. This cautions against assuming generalizable predictive patterns across environments."
+#| faig-alt: "A faceted scatterplot showing the relationship between leaf water content (x-axis) and the proportion of hybrid seeds (y-axis) across four locations: GC, LB, SR, and US. Each panel contains semi-transparent points representing individual recombinant inbred lines and a fitted linear regression line. In the GC, LB, and SR panels the regression lines slope downward, indicating that higher leaf water content is associated with lower proportions of hybrid seeds. In the US panel, the points are more scattered and the regression line is relatively flat, suggesting little or no relationship between leaf water content and hybrid seed proportion at that site."
 #| fig-height: 2.25
 filter(ril_data, !is.na(location)) |> 
   ggplot(aes(x= lwc,y =prop_hybrid))+

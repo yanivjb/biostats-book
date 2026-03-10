@@ -109,30 +109,6 @@ gc_rils                                                          |>
 
 ---
 
-#### For differences in mean prop_hybrid by petal color
-
-
-```{r}
-#| echo: false
-#| column: margin
- tibble(se = 0.042, lower_ci = 0.149, upper_ci = 0.312)|>kable()
-```
-
-```{r}
-gc_rils                                                          |>
-  filter(!is.na(petal_color))                                    |>
-  specify(prop_hybrid ~ petal_color)                             |>                      
-  generate(reps = n_boots, type = "bootstrap")                   |>                   
-  calculate(stat = "diff in means", order = c("pink", "white"))  |>
-  summarise(se = sd(stat),
-            lower_ci = quantile(stat, probs = alpha /2,),
-            upper_ci = quantile(stat, probs = 1 - alpha /2))
-```
-
----
-
-
-
 #### For slopes
 
 
