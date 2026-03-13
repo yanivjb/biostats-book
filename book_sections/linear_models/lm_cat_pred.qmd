@@ -1,0 +1,250 @@
+## • 12. Categorical predictor {.unnumbered}
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(kableExtra)
+library(ggplot2)
+library(tidyr)
+source("../../_common.R") 
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) |>
+  dplyr::mutate(growth_rate = case_when(growth_rate =="1.8O" ~ "1.80",
+                                          .default = growth_rate),  
+                growth_rate = as.numeric(growth_rate),
+                visited = mean_visits > 0)
+```
+
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Code for selecting data from a few columns from RILs planted at GC"
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) |>
+  dplyr::mutate(growth_rate = case_when(growth_rate =="1.8O" ~ "1.80",
+                                          .default = growth_rate),  
+                growth_rate = as.numeric(growth_rate),
+                visited = mean_visits > 0)
+gc_rils <- ril_data |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(mean_visits))|>
+  select(petal_color, petal_area_mm, num_hybrid, offspring_genotyped, prop_hybrid, mean_visits , asd_mm,visited )|>
+  mutate(log10_petal_area_mm = log10(petal_area_mm))
+```
+
+--- 
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating Scenario:**   You understand the concepts of a linear model (in general) and a conditional mean. So, we now turn to modeling a numeric response variable as a function of a categorical variable.
+
+**Learning Goals: By the end of this subchapter, you should be able to:**
+
+1. **Understand a conditional  mean as a linear model.**   
+
+2. **Build a linear model** with a numeric response as a function of a categorical explanatory variable in `R`.   
+
+3. **Interpret coefficients in a linear model** with a numeric response as a function of a categorical explanatory variable.   
+   - Find $\hat{y}_i$ from a linear model for a plant with a given explanatory-variable value.  
+   - Show that an individual's $\hat{y_i}$ equals the conditional mean. 
+
+4. **Calculate and interpret residuals** from a linear model with a categorical predictor.  
+
+
+
+
+::: 
+
+---
+
+The previous two sections showed that we can think about a simple mean as an intercept in a linear model with no explanatory variables. But in the introduction to linear models, I introduced $\hat{y}_i$ as a conditional mean. This section builds on our understanding of the intercept as a mean, moving toward our goal of understanding $\hat{y}_i$ as a conditional mean. To do so, we will start with a binary explanatory variable. Because I find this hard to introduce abstractly, we'll jump right back into the *Clarkia* hybridization example.
+
+
+## Proportion Hybrid Seeds = f(Petal Color)
+
+Surely we can do better than making the same prediction for each flower!! Some flowers are pink, some are white, some are big, some are small... We want to know how different values of such explanatory variables change our prediction for the  response variable (proportion hybrid seeds).
+
+To start, let’s focus on petal color, because perhaps white petals do not attract pollinators and consequently produce fewer hybrids. 
+
+As a linear model, this is: 
+
+$$\hat{y}_i = b_0 + x_i \times b_1$$ In general words:    $$\text{Prediction} = \text{Intercept} + \text{``Effect'' of thing} \times \text{value of thing}$$ In our case:  $$\text{Predicted prop hybrid} = \text{Intercept} + \text{``Effect'' of petal color} \times \text{value of thing} $$   
+
+
+With that groundwork laid, we are ready to build and interpret this linear model!! 
+
+
+
+
+
+## Building a model with lm()
+
+
+
+
+As before we build a linear model with the `lm()` function. But now we model our response as a function of our explanatory variable as follows:  `lm(response ~ explanatory, data = data_set)`. Or, for our case: 
+
+```{r}
+lm(prop_hybrid ~ petal_color, data = gc_rils)
+```
+
+The output of this linear model shows an `(Intercept)` of 0.2598 and an effect of `petal_colorwhite` of -0.2277. Let's map this onto our model above, because it's actually a bit confusing. 
+
+
+## Interpreting `lm()` output
+
+Let's start with the easy part, the intercept: 
+
+
+$$\text{Predicted prop hybrid} = 0.2598  + \text{``Effect'' of petal color} \times \text{value of petal color}$$   
+The next bit is a bit tricky, we see a value of -0.2277 for `petal_colorwhite` but no value for `petal_colorpink`. What's the deal with that? 
+
+*Here's the trick:* The mean proportion hybrid seeds for pink flowers is the intercept, 0.2598.    
+
+So, what do we make of "$\text{Effect of petal color} \times \text{value of petal color}$?" 
+
+*The answer is:* The effect of petal color is the difference in mean proportion hybrid seed set between white- and pink-flowered plants, and  `petal_colorwhite` =  -0.2277. Here `petal_colorwhite` is an indicator variable: it equals 1 for white flowers and 0 for pink flowers.  So, 
+
+$$\text{Predicted prop hybrid | Pink flower} = 0.2598  - 0.2277 \times 0 = 0.2598$$
+
+$$\text{Predicted prop hybrid | White flower} = 0.2598  - 0.2277 \times 1 = 0.0321$$
+  
+## Predicted values are simply conditional means! 
+
+We can arrive at these same predictions by a somewhat simpler path. We can just find the conditional means in R, [as before](#cat_cont). 
+
+```{r}
+gc_rils                                             |>
+  filter(!is.na(petal_color) , !is.na(prop_hybrid)) |>
+  group_by(petal_color)                             |>
+  summarise(mean_prop_hybrid = mean(prop_hybrid))
+```
+
+Reassuringly, these values match results from our linear model! This is reassuring, but it might make you sigh and say "why bother?" We bother because this framework is super extensible and allows us to elegantly test null hypotheses and quantify uncertainty, as we will see shortly.
+
+## Residuals
+
+
+As in the case for the mean, we calculate residuals as the difference between each observed value, $y_i$, and its predicted value, $\hat{y}_i$. However, in this case, $\hat{y}_i$ differs for plants with different petal colors. Again, hovering over a point in @fig-plotly_color reveals its residual. Also, as before we can use the `augment()` function to see predictions and residuals.   
+
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| fig-height: 3.5
+#| label: fig-plotly_color
+#| fig-cap: "**An interactive plot showing the proportion of hybrid seeds for each** ***Clarkia xantiana subspecies parviflora*** **recombinant inbred line (RIL) planted at GC split by petal color**. Each point represents a line’s observed proportion hybrid seed, and the dashed line shows the group mean across all lines with pink (left) and white (right) petals. Hovering over a point reveals its residual — the difference between the observed value and the group mean. The green point provides an example datapoint to focus on for understanding."
+#| fig-alt: "Interactive scatterplot of observed proportion hybrid values for pink and white Clarkia RILs. Points are plotted by line ID along the x-axis, with proportion hybrid on the y-axis, and the two facets representing pink and white petaled plants. Horizontal dashed  line marks the  mean proportion hybrid for white- and pink- flowered plants. When hovering over a point, the residual (difference between the observed value and the group mean) is displayed."
+#| cap-location: margin
+library(plotly)
+prop_hybrid_plot_color <-  gc_rils                    |>
+  filter(!is.na(prop_hybrid),!is.na(petal_color))     |>
+  mutate(i = 1:n())                                   |>
+  group_by(petal_color)                               |> 
+  mutate(y_hat_i = mean(prop_hybrid))                 |>
+  ungroup()                                           |>
+  mutate(y_i     = round(prop_hybrid, digits = 3),
+         y_hat_i = round(y_hat_i, digits = 3),
+         e_i     = round(y_i - y_hat_i, digits = 3))  |>
+  mutate(color2 = ifelse(i == 3, "3" , petal_color))|>
+  ggplot(aes(x = i, y = y_i, y_hat_i = y_hat_i, e_i = e_i, color = color2))+
+  geom_point(size = 4, alpha = .6)+
+  geom_hline(data = gc_rils    |> 
+               filter(!is.na(prop_hybrid),!is.na(petal_color)) |> 
+               group_by(petal_color)|> 
+               summarise(prop_hybrid = mean(prop_hybrid)),
+             aes(yintercept = prop_hybrid), linetype = "dashed", size = 2)+
+  facet_wrap(~petal_color)+
+  labs(y = "Proportion hybrid", title ="This plot is interactive!! Hover over a point to see its residual")+
+  theme_dark()+
+  scale_color_manual(values= c("darkgreen","pink","white"))+
+  theme(legend.position = "none")
+
+ggplotly(prop_hybrid_plot_color)
+```
+
+
+
+:::example
+**Worked example**.   
+
+Take, for example, individual 3 ($i = 3$, green point in the plot above), where 1/4 of its seeds are hybrids:  
+
+- **Its observed value, $y_i$,** is the proportion of its seeds that are hybrids, which is 0.25.   
+- **Its predicted value, $\hat{y}_i$,** is the proportion of seeds from pink-flowered plants that are hybrids (dashed line), which is 0.260.  
+- **Its residual value, $e_i = y_i - \hat{y}_i$,** is the difference between its observed proportion hybrid and the mean proportion hybrid among pink-flowered plants. In this case, that is $0.250 - 0.260 =  - 0.010$. Scroll over the third data point in @fig-plotly_color to verify this. 
+
+Note that this data point had a large residual when we modeled proportion of hybrid seeds as a simple mean, but now has a residual value near zero when we model proportion of hybrid seeds as a function of petal color. 
+:::
+
+## Residual Sum of Squares & Residual Standard Deviation
+
+As in the previous chapter, we summarize the fit of our model to data with the sum of squared residuals, and the residual standard deviation. Again we can calculate these both with [`broom`](https://broom.tidymodels.org)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function.
+
+As a refresher, let's look into [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)'s output:
+
+```{r}
+#| eval: false
+library(broom)
+library(dplyr)
+lm(prop_hybrid ~ petal_color, data = gc_rils)         |>
+  augment()                                           |>
+  select(prop_hybrid,  petal_color, .fitted, .resid)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(DT)
+library(broom)
+lm(prop_hybrid ~ petal_color, data = gc_rils)         |>
+  augment()                                           |>
+  select(prop_hybrid,  petal_color, .fitted, .resid)  |>
+  mutate_at(c(1,3,4), round, digits = 3)              |>
+  datatable(options = list(pageLength = 5))
+```
+
+---
+
+Now we can calculate the sum of squared residuals, and the residual standard deviation:  
+
+```{r}
+lm(prop_hybrid ~ petal_color, data = gc_rils)         |>
+  augment()                                           |>
+  mutate(sq_resid=.resid^2)|>
+  summarise(SS_resid = sum(sq_resid), 
+            n        = n(),
+            sd_resid = sqrt(SS_resid / (n - 2)))
+```
+
+
+:::aside
+For technical reasons we will see later, we calculate the residual standard deviation as  $SS_\text{resid}$ divided  by n - # parameters estimated in our linear model. For the case with a mean only this was n-1.  For the case with a binary predictor it's n-2, as the two parameters are the intercept and the effect of thing. 
+:::
+
+
+Or more simply:
+
+
+```{r}
+lm(prop_hybrid ~ petal_color, data = gc_rils)         |>
+  sigma()
+```
+
+---
+
+**Conclusion:** We have ten fewer observations than in the previous section because petal color was not recorded for ten plants, so we cannot compare the sums of squared residuals directly. But we can see that including petal color in the model reduced the residual standard deviation by about 10%.  

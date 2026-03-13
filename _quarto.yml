@@ -109,6 +109,16 @@ book:
         - book_sections/shuffling/permute_nonindependent.qmd
         - book_sections/shuffling/shuffling_summary.qmd
     - book_sections/filler.qmd
+    - book_sections/stats_4_linear_models_index.qmd
+    - part: book_sections/linear_models.qmd
+      chapters: 
+        - book_sections/linear_models/mean.qmd
+        - book_sections/linear_models/resids.qmd
+        - book_sections/linear_models/lm_cat_pred.qmd
+        - book_sections/linear_models/regression.qmd
+        - book_sections/linear_models/two_predictors.qmd
+        - book_sections/linear_models/lm_summary.qmd
+    - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
       chapters: 
