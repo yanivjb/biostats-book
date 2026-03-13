@@ -34,59 +34,59 @@ jobs:
           use-public-rspm: true
           extra-repositories: https://cranhaven.r-universe.dev
 
-      - name: Install R packages
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            tidyverse
-            knitr
-            rmarkdown
-            blogdown
-            knitr
-            gt
-            gtExtras
-            patchwork
-            cowplot
-            devtools
-            tufte
-            kableExtra
-            DT
-            webexercises
-            plotly
-            ggthemes
-            palmerpenguins
-            GGally
-            ggrepel
-            ggforce
-            ggfortify
-            ggeffects
-            nlme
-            lme4
-            lmerTest
-            FactoMineR
-            datasauRus
-            factoextra
-            highcharter
-            shinylive
-            maps
-            mapproj
-            munsell
-            ggimage
-            ggtext
-            infer
-            boot
-            Hmisc
-            ggridges
-            janitor
-            gganimate
-            ggExtra
-            caret
-            pwr
-            multcomp
-            dagitty
-            ggdag
-            bslib
-            
+      - name: Debug package install
+        run: |
+          Rscript -e 'install.packages("pak", repos="https://cloud.r-project.org")'
+          Rscript -e 'pak::pkg_install(c(
+            "tidyverse",
+            "knitr",
+            "rmarkdown",
+            "blogdown",
+            "gt",
+            "gtExtras",
+            "patchwork",
+            "cowplot",
+            "devtools",
+            "tufte",
+            "kableExtra",
+            "DT",
+            "webexercises",
+            "plotly",
+            "ggthemes",
+            "palmerpenguins",
+            "GGally",
+            "ggrepel",
+            "ggforce",
+            "ggfortify",
+            "ggeffects",
+            "nlme",
+            "lme4",
+            "lmerTest",
+            "FactoMineR",
+            "datasauRus",
+            "factoextra",
+            "highcharter",
+            "shinylive",
+            "maps",
+            "mapproj",
+            "munsell",
+            "ggimage",
+            "ggtext",
+            "infer",
+            "boot",
+            "Hmisc",
+            "ggridges",
+            "janitor",
+            "gganimate",
+            "ggExtra",
+            "caret",
+            "pwr",
+            "multcomp",
+            "dagitty",
+            "ggdag",
+            "bslib"
+          ), ask = FALSE)'
+
       - name: Render book
         run: quarto render
 
@@ -94,6 +94,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
