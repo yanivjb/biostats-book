@@ -103,7 +103,8 @@ jobs:
             "multcomp",
             "dagitty",
             "ggdag",
-            "bslib"
+            "bslib",
+            "effectsize"
           ), repos = c("https://cloud.r-project.org", "https://cranhaven.r-universe.dev"))'
 
       - name: Render book
