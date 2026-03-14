@@ -101,9 +101,7 @@ datatable(normal_sampling_sim |> mutate(x = round(x, digits = 4)))
 We know by now that the **standard error is the standard deviation of the sampling distribution.** I briefly informed you that for the normal the mathematical formula for the standard error of the mean is:     
  
 $$\sigma_\bar{x} = \sigma/\sqrt{n}\text{ where: }$$        
-git config pull.rebase false  # merge
-hint:   git config pull.rebase true   # rebase
-hint:   git config pull.ff only       # fast-forward only
+
 - $\sigma = \sqrt{\frac{\Sigma{(x_i-\mu)^2}}{n}}$.    
 - $n$ is the sample size.     
 
