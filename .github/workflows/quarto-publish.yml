@@ -34,6 +34,26 @@ jobs:
           use-public-rspm: true
           extra-repositories: https://cranhaven.r-universe.dev
 
+      - name: Install system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libjpeg-dev \
+            libtiff5-dev \
+            libgit2-dev \
+            libglpk-dev \
+            libgmp3-dev \
+            libudunits2-dev \
+            libmagick++-dev
+            
       - name: Install R packages
         run: |
           Rscript -e 'install.packages(c(
