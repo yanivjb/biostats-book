@@ -53,59 +53,21 @@ jobs:
             libgmp3-dev \
             libudunits2-dev \
             libmagick++-dev
-            
-      - name: Install R packages
-        run: |
-          Rscript -e 'install.packages(c(
-            "tidyverse",
-            "knitr",
-            "rmarkdown",
-            "blogdown",
-            "gt",
-            "gtExtras",
-            "patchwork",
-            "cowplot",
-            "devtools",
-            "tufte",
-            "kableExtra",
-            "DT",
-            "webexercises",
-            "plotly",
-            "ggthemes",
-            "palmerpenguins",
-            "GGally",
-            "ggrepel",
-            "ggforce",
-            "ggfortify",
-            "ggeffects",
-            "nlme",
-            "lme4",
-            "lmerTest",
-            "FactoMineR",
-            "datasauRus",
-            "factoextra",
-            "highcharter",
-            "shinylive",
-            "maps",
-            "mapproj",
-            "munsell",
-            "ggimage",
-            "ggtext",
-            "infer",
-            "boot",
-            "Hmisc",
-            "ggridges",
-            "janitor",
-            "gganimate",
-            "ggExtra",
-            "caret",
-            "pwr",
-            "multcomp",
-            "dagitty",
-            "ggdag",
-            "bslib",
-            "effectsize"
-          ), repos = c("https://cloud.r-project.org", "https://cranhaven.r-universe.dev"))'
+
+      - name: Install pak
+        run: Rscript -e 'install.packages("pak", repos = "https://cloud.r-project.org")'
+
+      - name: Install dependencies
+        run: Rscript -e 'pak::pak(c(
+          "tidyverse","knitr","rmarkdown","blogdown","gt","gtExtras",
+          "patchwork","cowplot","devtools","tufte","kableExtra","DT",
+          "webexercises","plotly","ggthemes","palmerpenguins","GGally",
+          "ggrepel","ggforce","ggfortify","ggeffects","nlme","lme4",
+          "lmerTest","FactoMineR","datasauRus","factoextra","highcharter",
+          "shinylive","webr","maps","mapproj","munsell","ggimage","ggtext",
+          "infer","boot","Hmisc","ggridges","janitor","gganimate","ggExtra",
+          "caret","pwr","multcomp","dagitty","ggdag","bslib","effectsize"
+        ))'
 
       - name: Render book
         run: quarto render
