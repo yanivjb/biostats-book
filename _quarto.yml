@@ -118,6 +118,16 @@ book:
         - book_sections/linear_models/regression.qmd
         - book_sections/linear_models/two_predictors.qmd
         - book_sections/linear_models/lm_summary.qmd
+    - part: book_sections/normal.qmd
+      chapters: 
+        - book_sections/normal/normal_intro.qmd
+        - book_sections/normal/normal_properties.qmd
+        - book_sections/normal/p_norm.qmd
+        - book_sections/normal/is_it_normal.qmd
+        - book_sections/normal/clt.qmd
+        - book_sections/normal/transform.qmd
+        - book_sections/normal/normal_summary.qmd
+        - book_sections/normal/noRmal.qmd
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
