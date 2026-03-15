@@ -19,7 +19,7 @@ source("../../_common.R")
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-**Motivating Example:**  We've summarized our data (with uncertainty) and checked our assumptions. Now we can conduct a formal hypothesis test.  This section provides a step-by-step.
+**Motivating Example:**  We’ve summarized our data, quantified uncertainty, and checked assumptions. Now we can conduct a formal hypothesis test. This section provides a step-by-step guide.  
 
 **Learning Goals:** By the end of this section, you will be able to:   
 
@@ -142,7 +142,7 @@ range_shift_summary <- range_shift |>
 ```{r}
 #| code-fold: true
 #| column: margin
-#| code-summary: "Plotting $t_{30}$ and out t-value."
+#| code-summary: "Plotting $t_{30}$ and our t-value."
 #| fig-height: 4
 #| label: fig-t30sig
 #| fig-cap: "The probability density function for a t-distribution with 30 degrees of freedom. The t-score is on the x-axis, and the probability density is on the y-axis. Dashed red lines show the value in our data."
@@ -163,13 +163,13 @@ ggplot(t_30, aes(x = t, y = prob_density)) +
 ```
 
 
-We don't need R to tell us this what we'll do to the null, @fig-t30sig makes it clear that the p-value is very small. More generally,    
+We don't need R to tell us what we'll do to the null, @fig-t30sig makes it clear that the p-value is very small. More generally,    
 
 - When t is less than 1.96 (the critical Z-value) we will fail to reject the null.  
 - When t is greater than 2.5 (and our sample size is greater than seven) we will reject the null at the traditional $\alpha$ value of 0.05.  **Here t is much greater than two and a half (it's seven) and our sample size is way more than seven (it's thirty one) --  we will reject the null.**   
 - When t is between 1.96 and 2.5 we may or may not reject the null depending on the degrees of freedom and the value of t.    
 
-But let's find the p-value anyways: 
+But let's find the p-value anyway: 
 
 ```{r}
 #| eval: false
@@ -186,9 +186,9 @@ signif(2 * pt(7.14, df = 30, lower.tail = FALSE), 3) |> formatC()
 
 ### Step 4. Make a decision     
 
-Our p-value is minuscule. We reject the null hypothesis. Only one in fifteen million samples from the null distribution would have generated a  t-statistic with an absolute value of 7.14 or more. 
+Our p-value is minuscule. We reject the null hypothesis. Only one in fifteen million samples from the null distribution would have generated a t-statistic with an absolute value of 7.14 or more. 
 
-### Step 5. Write up  
+### Step 5. Write-up  
 
 Let's work on writing these results. A write up should include the biological motivation, study design, sample summaries, effect sizes, test statistics, p-values, and what we do to the null. Here is a short version:
 

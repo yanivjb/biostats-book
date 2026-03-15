@@ -1,4 +1,4 @@
-## • 14. The "Paired" t-test  {.unnumbered #paired_t_test}
+## • 14. The paired t-test  {.unnumbered #paired_t_test}
 
 
 ```{r}
@@ -27,7 +27,7 @@ ril_data <- readr::read_csv(ril_link) |>
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-**Motivating Example:** You want to look into the differences between treatments in a great experiment in which pairs of otherwise identical individuals had a different treatment. 
+**Motivating Example:** You want to look into the differences between treatments in an experiment where pairs of otherwise identical individuals receive different treatments. 
 
 **Learning Goals:** By the end of this section, you will be able to:
 
@@ -39,9 +39,9 @@ ril_data <- readr::read_csv(ril_link) |>
 
 :::
 
-## Paired t-test    
+## The paired t-test    
 
-A common use of the one-sample t-test is to compare groups when there are natural pairs in each group. These pairs should be similar in every way, except for the difference we are investigating. 
+A common use of the one-sample t-test is to compare groups when there are natural pairs in each group. These pairs should be similar in every way except for the treatment difference we are investigating.  
 
 
 
@@ -57,14 +57,14 @@ For example, suppose we wanted to test the idea that more money leads to more pr
 ## Paired t-test Example:   
 
 
-I miss our parviflora plants too much - let's get back to them.  Recall that Brooke created "lines" (RILs) of parviflora plants. Although each RIL differed from all the others, each RIL can be replicated (by self fertilization), so Brooke planted genetically identical genotypes at each location. 
+I miss our parviflora plants too much - let's get back to them.  Recall that Brooke created lines (RILs) of parviflora plants. Although each RIL differed from all the others, each RIL can be replicated (by self-fertilization), so Brooke planted genetically identical genotypes at each location. 
 
-We can therefore test if the hybridization rate differed across locations. Here we focus on two locations -- Lower Breckenridge (LB), and Sawmill Road (SR).   The data are presented in  @fig-paired1. Panels A and B show the same data in unpaired and paired form; panel C shows the distribution of within-RIL difference.
+We can therefore test if the hybridization rate differs across locations. Here we focus on two locations -- Lower Breckenridge (LB) and Sawmill Road (SR).   The data are presented in  @fig-paired1. Panels A and B show the same data in unpaired and paired form; panel C shows the distribution of within-RIL difference.
 
-Below I introduce the paired t-test, which tests the null hypothesis that the mean difference between pairs is zero. To do so, we simply run a one sample t-test on the difference in values for each pair and test against the null of zero. This means our degrees of freedom equals the number of pairs minus one.  Because this "pairing" accounts for differences across pairs and the paired t-test provides high statistical power to reject a false null hypothesis by focusing exclusively on differences within pairs.  
+Below I introduce the paired t-test, which tests the null hypothesis that the mean difference between pairs is zero. To do this, we run a one-sample t-test on the differences within each pair. This means our degrees of freedom equals the number of pairs minus one. By accounting for variation between RILs, the paired t-test focuses on differences within each pair. This often increases statistical power (i.e. our ability to reject a false null hypothesis).
 
 :::aside 
-**The next chapter introduces the two-sample t-test.** Although the two-sample t-test is less powerful than the paired t-test it is useful because it can be applied when data are not paired. 
+**The next chapter introduces the two-sample t-test.** Although the two-sample t-test is usually less powerful than a paired t-test when true pairing exists, the teo-sample t-tesst is useful because it can be applied when data are not paired. 
 :::
 
 ```{r}
@@ -74,7 +74,7 @@ Below I introduce the paired t-test, which tests the null hypothesis that the me
 #| label: fig-paired1
 #| column: page-right
 #| fig-cap: "**(A)** Unpaired view: Hybridization proportion for each RIL at Lower Breckenridge (LB) and Sawmill Road (SR), with means ± 95% confidence intervals shown. **(B) Paired view:** Each line connects the same RIL grown at both sites. **(C)** The distribution of differences in hybridization rate for each RIL between sites (SR – LB). The red horizontal error bar shows the 95% confidence interval of the mean difference."
-#| fig-alt: "A three panel figure comparing hybridization proportions of *Clarkia parviflora* lines at two sites. **Panel A (Unpaired):** Dots show hybridization at LB and SR; black points with error bars mark site means and confidence intervals. **Panel B (Paired):** Each RIL is connected by a line across sites; red lines indicate higher hybridization at LB, green at SR, blue ties. **Panel C:** Histogram of within-RIL differences (SR – LB). A red confidence interval bar narrowly overlapps zero.”"
+#| fig-alt: "A three panel figure comparing hybridization proportions of *Clarkia parviflora* lines at two sites. **Panel A (Unpaired):** Dots show hybridization at LB and SR; black points with error bars mark site means and confidence intervals. **Panel B (Paired):** Each RIL is connected by a line across sites; red lines indicate higher hybridization at LB, green at SR, blue ties. **Panel C:** Histogram of within-RIL differences (SR – LB). A red confidence interval bar narrowly overlaps zero.”"
 library(ggforce)
 library(patchwork)
 lb_sr_data <- ril_data |> 
@@ -138,17 +138,17 @@ plot_a + plot_b + plot_c+plot_annotation(tag_levels = "A")
 
 ### Evaluating assumptions
 
-Because a paired t-test is simply a one-sample t-test on the differences in each pair, all our assumptions apply to the distribution of difference within pairs.
+Because a paired t-test is simply a one-sample t-test on the differences in each pair, all our assumptions apply to the distribution of differences within pairs. In other words, the paired test converts two measurements per pair into a single variable: the difference.
 
-We know that  data are independent, and collected without bias (way to go Brooke!). I also think that the mean seems like a reasonable summary of the data. 
+We know that  data are independent and collected without bias (way to go Brooke!). I also think that the mean seems like a reasonable summary of the data. 
 
 However, **I know that the differences in each pair are not perfectly normal** because:   
 
 - The original data are bounded between zero and one - so differences are bounded between negative one and one.   
 - The data are discrete -- it's one proportion minus another (each usually in increments of one eighth, as we usually assayed eight offspring).  
-- It also looks like there are an excess of zeros (i.e. the data are "zero inflated") because many RILs made zero hybrids at both sites.   
+- It also looks like there are an excess of zeros (i.e. the data are zero-inflated) because many RILs made zero hybrids at both sites.   
 
-But we're not looking for a perfect normal distribution. We want data to be normal enough so that we believe in our statistics. Because the t-test is robust to minor violations of assumptions of normality, and because our qq-plot (@fig-qq_diffs) doesn't look so bad, we can move on and do some stats.  
+But we're not looking for a perfect normal distribution. We want the data to be normal enough so that we believe in our statistics. Because the t-test is robust to minor violations of the normality assumption, and because our qq-plot (@fig-qq_diffs) doesn't look so bad, we can move on and do some stats.  
 
 ```{r}
 #| column: margin
@@ -167,7 +167,7 @@ ggplot(wide_lb_sr, aes(sample = diffs))+
 
 ### Summarizing data  
 
-While you are free to report means and confidence intervals for each "treatment" in a paired t-test, we are actually focused on the difference in pairs. In the tibble below, I have calculated this as:   
+While you are free to report means and confidence intervals for each "treatment" in a paired t-test, we are actually focused on the differences between pairs. In the tibble below, I have calculated this as:   
 
 $$\text{diffs} = \text{Prop hybrid}_\text{ Sawmill Road} - \text{Prop hybrid}_\text{ Lower Breckenridge}$$  
 
@@ -194,13 +194,13 @@ diffs_summaries  |>
 **🛑STOP🛑** Before we conduct a null hypothesis significance test you should immediately notice two things:   
 
 1. Any effect, if real is not particularly  strong - a Cohen's D value is "tiny"   (0.01 – 0.20).  
-2. This will not be significant at the $\alpha = 0.05$ level -- results will never be statistically significant when t is less than 1.96.   
+2. This will not be significant at the $\alpha = 0.05$ level -- results will never be statistically significant when the absolute value of t is less than 1.96.   
 
 But let's move on to a formal test because we're doing it. 
 
 ### The paired t-test in R 
 
-If your data are formatted like mine (see margin), the t.test function provides  two equivalent ways to conduct a paired t-test. Both approaches give the same result, since they are just two ways of formulating the same test. I show you how to do them below:   
+If your data are formatted like these (see margin), the [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) function provides  two equivalent ways to conduct a paired t-test. Both approaches give the same result, since they are just two ways of formulating the same test. I show you how to do them below:   
 
 - **The one sample version:** `t.test(x = DIFFERENCES, mu = 0)`.   
 - **The paired version:** `t.test(x = CONDITION ONE, y = CONDITION TWO, paired = TRUE)`.     

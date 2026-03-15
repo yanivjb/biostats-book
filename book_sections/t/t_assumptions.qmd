@@ -28,7 +28,7 @@ range_shift <- read_csv(range_shift_file) |>
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-**Motivating scenario:** Statistical modelling allows us to test null hypotheses and quantify uncertainty. But results from these models are only as good as the data and the fit between data and assumptions of the analysis. Here we learn  how to check these assumptions, and learn what to do when assumptions are violated. 
+**Motivating scenario:** Statistical modelling allows us to test null hypotheses and quantify uncertainty. But results from these models are only as good as the data and how well those data match the assumptions of the analysis. Here we learn  how to check these assumptions, what to do when assumptions are violated. 
 
 **Learning goals:** By the end of this section, you should be able to:
 
@@ -44,13 +44,13 @@ range_shift <- read_csv(range_shift_file) |>
 ## Assumptions in statistical models 
 
 
-Modeling uncertainty and testing null hypotheses requires an appropriate sampling distribution. But remember our challenge - we are stuck with a single sample so we don't have a sampling distribution.  To make this distribution, we must make some assumptions. For resampling methods like bootstrapping and permutation, we assume the data are independent and collected without bias. Parametric methods, like the t-test, use a well-defined statistical distribution (here, the t-distribution) as a shortcut to get a sampling distribution. This shortcut is only valid if its own assumptions are met. When using the t-distribution, we assume: 
+Modeling uncertainty and testing null hypotheses requires an appropriate sampling distribution. But remember our challenge - we are stuck with a single sample, so we do not have a sampling distribution.  To approximate this distribution, we must make some assumptions. For resampling methods like bootstrapping and permutation, we assume the data are independent and collected without bias. Parametric methods, like the t-test, use a well-defined statistical distribution (here, the t-distribution) as a shortcut to get a sampling distribution. This shortcut is only valid if its own assumptions are met. When using the t-distribution, we assume: 
   
 
 - Data are independent.   
 - Data are collected without bias.  
-- The mean is an appropriate summary of the data. AND  
-- Data are normally distributed. 
+- The mean is an appropriate summary of the data.  
+- The sampling distribution of the mean is approximately normal.  
 
 
 
@@ -58,9 +58,10 @@ Modeling uncertainty and testing null hypotheses requires an appropriate samplin
 
 If our data meet assumptions, we can trust our inference. If data do not meet assumptions, the validity of our inferences is no longer guaranteed. Rather we must think hard about our data and what we know about our distribution to evaluate whether we can trust our inference (i.e. if our inferences are robust to violations of assumptions) or not. 
 
-The robustness of our inference depends on which assumptions are broken, and how severe any such violations are. For example, because the central limit theorem states any sampling distribution approaches the normal distribution as sample sizes get large the t-distribution is robust to modest deviations from normality.  Here's  what to do if our data violate different assumption:   
+The robustness of our inference depends on which assumptions are broken, and how severe any such violations are. For example, because the central limit theorem states any sampling distribution approaches a normal distribution as sample sizes get large the t-distribution is robust to modest deviations from normality.  Here's  what to do if our data violate different assumption:   
 
-   
+  
+
 - **Bias** is very difficult to address and is best managed by designing a better study. However, if you fully know the bias of the data, you can try an advanced technique to model this bias.         
 
 - **Whether the mean is a meaningful summary** is a biological question, and a different summary could be evaluated by other methods. For example you could bootstrap the data and generate some other summary of the data if you want. 
@@ -69,7 +70,7 @@ The robustness of our inference depends on which assumptions are broken, and how
 
 
 - **The normality assumption is the easiest to address.** If this assumption is violated, we can:  
-   - Ignore it (if the violation is minor) because the central limit theorem helps us. OR  
+   - Ignore it (if the violation is minor), because the central limit theorem helps us. OR  
    - Transform the data to an appropriate scale. OR  
    - Use bootstrapping to estimate uncertainty and/or conduct a [binomial test](https://en.wikipedia.org/wiki/Binomial_test), treating values greater than $\mu_0$ as "successes" and less than $\mu_0$ as "failures" (covered in future chapters).  
 
@@ -137,7 +138,7 @@ ggsave(plot = reveal_plot ,filename = "../../figs/linear_models/t/reveal.png",  
 - **Is the mean a meaningful summary of the data?** My sense is yes, but take a look and judge for yourself.
 
 
-- **Are the data independent?** I'm not sure about this. We see that some locations and some taxa are there more than once (@fig-nonindep). My sense is this means the data are not actually independent.  What if there's something unique about low-elevation regions in the UK? This isn't necessarily a reason to stop the analysis, but it's worth considering.  
+- **Are the data independent?** I'm not sure about this. We see that some locations and some taxa are there more than once (@fig-nonindep). My sense is that this means the data may not be fully independent. What if there's something unique about low-elevation regions in the UK? This isn't necessarily a reason to stop the analysis, but it's worth considering.  
 
 ```{r}
 #| echo: false
@@ -174,7 +175,7 @@ ggplot(data_structure, aes(y = taxon, x = location, fill = factor(n))) +
 
 
 
-- **Is the sample (or more specifically, the sampling distribution) normal?** My sense is that the data are normal enough! But you can view the data and decide for yourself. As a guide, the image below displays nine quantile-quantile plots -- one shows our data while the other eight were generated with `rnorm()`. Can you easily tell which one is from the real data? I sure can't, so this seems normal enough to me! 
+- **Is the sample (or more specifically, the sampling distribution) normal?** My sense is that the data are normal enough for this analysis. But you can view the data and decide for yourself. As a guide, the image below displays nine quantile-quantile plots -- one shows our data while the other eight were generated with R's function to generate a random sample from the normal distribution, [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html). Can you easily tell which one is from the real data? I sure can't, so this seems normal enough to me! 
 
 ```{r}
 #| column: margin
