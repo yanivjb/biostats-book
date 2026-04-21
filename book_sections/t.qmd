@@ -30,7 +30,7 @@ gc_rils <- ril_data |>
 
 
 
-**Motivating scenario:** We just learned about the normal distribution and Z-tests, but we realized a problem - we have a sample not a population. This means we can estimate the mean ($\bar{x}$) and the standard deviation ($s$), but we don't know their true parameter values $\mu$ and $\sigma$ (that's why we're doing stats after all). What to do? We can turn to the t-distribution!!
+**Motivating scenario:** We just learned about the normal distribution and Z-tests, but we realized a problem - we have a sample, not a population. This means we can estimate the mean ($\bar{x}$) and the standard deviation ($s$), but we don't know their true parameter values $\mu$ and $\sigma$ (that's why we're doing stats after all). What to do? We can turn to the t-distribution!!
 
 **Learning goals: By the end of this chapter you should be able to:**    
 
@@ -79,7 +79,7 @@ Don't despair! The t-distribution can rescue us!!!
 - Like the standard normal ("Z") distribution, the t-distribution is unimodal and symmetric.   
 - But, to account for the additional uncertainty that comes from using the sample standard deviation ($s$) instead of the true population value ($\sigma$), the t-distribution has "fatter tails" than the Z distribution.
 
-Because the tails are "fatter",  a larger proportion the area lies beyond $\pm2$ (greater than 4.55%, compared to approximately 4.55% for the Z-distribution).   
+Because the tails are "fatter",  a larger proportion of the area lies beyond $\pm2$ (greater than 4.55%, compared to approximately 4.55% for the Z-distribution).   
 
 ## Degrees of freedom   
 
@@ -136,7 +136,7 @@ Now you might be wondering:
 
 The answers to these questions depend on which t-distribution we're talking about. There are many, each associated with a different number of degrees of freedom. 
 
-The degrees of freedom reflect the number of observations that can vary before all values are determined, which is related to the uncertainty in our estimate --the more the degrees of freedom, the less uncertainty! As such, tails become less "fat," and the t-distribution looks more and more like the standard normal (z) distribution as the degrees of freedom increase (@fig-tvz).
+The degrees of freedom reflect the number of observations that can vary before all values are determined, which is related to the uncertainty in our estimate. So, the more degrees of freedom, the more certainty! As such, tails become less "fat," and the t-distribution looks more and more like the standard normal (Z) distribution as the degrees of freedom increase (@fig-tvz).
 
 
 
@@ -149,7 +149,7 @@ Since most sampling distributions are normal, but we rarely know the true popula
 
 
 :::fyi
-**You may see Z-tests in the literature.** Z tests are never the "right" thing to do, because we never have a population, but in some cases they aren't meaningfully "wrong". As sample sizes get large, the t and z distributions converge and so they will give essentially the same answer. For convenience you may see people use the z test in such cases, and that's fine by me.
+**You may see Z-tests in the literature.** Z tests are 100% correct, because we never have a population. But, in many cases a Z-test  is not meaningfully "wrong". As sample sizes get large, the t- and Z- distributions converge, and so they will give essentially the same answer. For convenience you may see people use the Z test in such cases, and that's fine by me.
 
 :::
 
@@ -164,5 +164,5 @@ In this chapter we introduce the *t*-distribution.
 * Next, we [review standard summaries of single continuous variables](#summaries_4_t), and consider the [assumptions required to justify using the *t*-distribution](#t_assumptions) to model such data.
 * We then [calculate 95% confidence intervals for data modeled by the *t*-distribution](#t_CI), and show how the ["one sample" *t*-test](#one_sample_t_test) can be used to evaluate the null hypothesis that a sample comes from a population with mean \$\mu\_0\$. After working through the math and logic of this "one-sample *t*-test," we see how [R can do most of this heavy lifting for us](#one_sample_t_test_in_R).
 * Finally, we work through the ["paired" *t*-test](#paired_t_test), a particularly useful version of the one-sample test that asks whether the mean difference between paired observations under different treatments differs from zero (i.e., no difference).
-* As always, we conclude with a [chapter summary]().
+* As always, we conclude with a [chapter summary](#t_summary).
 

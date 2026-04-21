@@ -64,7 +64,7 @@ We can therefore test if the hybridization rate differs across locations. Here w
 Below I introduce the paired t-test, which tests the null hypothesis that the mean difference between pairs is zero. To do this, we run a one-sample t-test on the differences within each pair. This means our degrees of freedom equals the number of pairs minus one. By accounting for variation between RILs, the paired t-test focuses on differences within each pair. This often increases statistical power (i.e. our ability to reject a false null hypothesis).
 
 :::aside 
-**The next chapter introduces the two-sample t-test.** Although the two-sample t-test is usually less powerful than a paired t-test when true pairing exists, the teo-sample t-tesst is useful because it can be applied when data are not paired. 
+**The next chapter introduces the two-sample t-test.** A paired t-test generally provides more statistical power to reject the null hypothesis and estimates the difference in means with less uncertainty than a two-sample t-test. However, the two-sample t-test is useful because it can be applied when data are not paired.  
 :::
 
 ```{r}
@@ -74,7 +74,7 @@ Below I introduce the paired t-test, which tests the null hypothesis that the me
 #| label: fig-paired1
 #| column: page-right
 #| fig-cap: "**(A)** Unpaired view: Hybridization proportion for each RIL at Lower Breckenridge (LB) and Sawmill Road (SR), with means ± 95% confidence intervals shown. **(B) Paired view:** Each line connects the same RIL grown at both sites. **(C)** The distribution of differences in hybridization rate for each RIL between sites (SR – LB). The red horizontal error bar shows the 95% confidence interval of the mean difference."
-#| fig-alt: "A three panel figure comparing hybridization proportions of *Clarkia parviflora* lines at two sites. **Panel A (Unpaired):** Dots show hybridization at LB and SR; black points with error bars mark site means and confidence intervals. **Panel B (Paired):** Each RIL is connected by a line across sites; red lines indicate higher hybridization at LB, green at SR, blue ties. **Panel C:** Histogram of within-RIL differences (SR – LB). A red confidence interval bar narrowly overlaps zero.”"
+#| fig-alt: "A three panel figure comparing hybridization proportions of *Clarkia parviflora* lines at two sites. **Panel A (Unpaired):** Dots show hybridization at LB and SR; black points with error bars mark site means and confidence intervals. **Panel B (Paired):** Each RIL is connected by a line across sites; red lines indicate higher hybridization at LB, green at SR, blue ties. **Panel C:** Histogram of within-RIL differences (SR – LB). A red confidence interval bar narrowly overlaps zero."
 library(ggforce)
 library(patchwork)
 lb_sr_data <- ril_data |> 
@@ -193,7 +193,7 @@ diffs_summaries  |>
 
 **🛑STOP🛑** Before we conduct a null hypothesis significance test you should immediately notice two things:   
 
-1. Any effect, if real is not particularly  strong - a Cohen's D value is "tiny"   (0.01 – 0.20).  
+1. Because Cohen's D is in th "tiny" (0.01 – 0.20) range, even if the estimated effect was true, it woud not be particularly  strong.   
 2. This will not be significant at the $\alpha = 0.05$ level -- results will never be statistically significant when the absolute value of t is less than 1.96.   
 
 But let's move on to a formal test because we're doing it. 

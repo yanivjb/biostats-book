@@ -77,6 +77,15 @@ The interactive R environment below allows you to work without switching tabs.
 
 `r hide("Click here for an explanation")`
 
+```{r}
+#| echo: false
+#| label: fig-floatingpoint
+#| fig-cap: "An [xkcd comic](https://xkcd.com/3228/) about floating point issues. Rollover text said \"It has been −2,147,483,648 days since our last integer overflow.\". See [explain xkcd](https://www.explainxkcd.com/wiki/index.php/3228:_Day_Counter) for more info."
+#| fig-alt: "An xkcd comic. White Hat, Ponytail, Cueball, and Megan are all below a large sign, which appears to be attached to the wall at its four corners. White Hat and Ponytail appear to be discussing something, while Cueball is sitting at his desk working on a laptop and Megan is walking away. The sign has text on it, as well as a large display presumably meant to show a number. A sign says it has been -0.00000000000000044 days since our last floating point error."
+include_graphics("https://imgs.xkcd.com/comics/day_counter_2x.png")
+```
+
+
 This is a [floating-point precision issue](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problems). In R (and most programming languages), some decimal values cannot be represented exactly in the binary code that they use under the hood. To see this, try *(0.2 + 0.1) - 0.3*:
 
 ```{r}

@@ -48,7 +48,7 @@ range_shift <- read_csv(range_shift_file) |>
 
 ## Stats in R
 
-> "“What does a one-sample t-test in R even mean?” you might ask, since we just did one." Let me explain... 
+> “What does a one-sample t-test in R even mean?” you might ask, "since we just did one." Let me explain... 
 
 ```{r}
 #| echo: false
@@ -133,7 +133,7 @@ See [section on Residuals](#resids) in the [linear model chapter](#linear_models
 $$Y_i = \hat{Y_i} + e_i$$
 $$Y_i =  a+e_i$$
 
-The [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function in `R` builds such linear models. If we are only modelling the mean, the syntax is:     
+The [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function in `R` builds such linear models. If we are only modeling the mean, the syntax is:     
 
 - `lm(y ~ 1)` if `y` is a  vector, or   
 - `lm(y ~ 1, data = dataset)` if `y` is a column in the `dataset`.
@@ -156,7 +156,7 @@ This may seem like overkill for a one-sample t-test, but the linear model framew
 
 ### [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) provides p-values and test statistics  
 
-[`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) just returns the mean, but it actually calculates so much more! To access information like the standard error, t-value, p-value (reported as `Pr(>|t|)`), and degrees of freedom,  pipe the output to [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html):     
+[`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) just returns the mean, but it actually calculates so much more! To access information like the standard error, t-value, p-value (reported as `Pr(>|t|)`), and degrees of freedom,  pipe the model to [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html):     
 
 ```{r}
 lm(elevationalRangeShift ~ 1, data = range_shift) |>

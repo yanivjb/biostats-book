@@ -1,0 +1,178 @@
+## • 15. Two-t Calculations {.unnumbered #2t_calcs}
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+source("../../_common.R") 
+```
+
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating scenario:** We want to compare means of two samples. So, we first must summarize differences in the means.     
+
+**Learning goals:** By the end of this section, you should be able to:   
+
+- **Calculate** the common summaries of two samples.    
+    - Means. 
+    - "Pooled" variance.  
+    - Cohen's D.  
+:::
+
+```{r}
+#| column: margin
+#| code-fold: true
+#| code-summary: "Loading and processing data"
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+SR_visits <- readr::read_csv(ril_link) |>
+    dplyr::rename(visits = mean_visits)  |>
+    dplyr::filter(location == "SR",
+                  !is.na(petal_color),
+                  !is.na(visits))        |>
+    dplyr::select(petal_color, visits)
+```
+
+---
+
+
+## Estimates  
+
+```{r}
+#| column: margin
+#| label: fig-visits
+#| code-fold: true
+#| code-summary: "Plotting the data"
+#| fig-cap: "Each point shows an individual RIL's mean pollinator visits. Vertical lines95% confidence intervals for each flower color. The dashed line connects the group means to facilitate comparison."
+#| fig-alt: "A scatterplot with two groups on the x-axis, labeled \"pink\" and \"white.\" Pink points (left) and white points (right) represent visit counts for individual RILs. The pink group has a higher spread of values, many above zero, while the white group clusters closer to zero. Bold black vertical bars indicate the mean and confidence interval for each group, and a dashed black line connects the two means, showing that the pink group has more visits than the white group."
+library(ggforce)
+ggplot(SR_visits, aes(x  = petal_color,
+                    y    = visits,
+                    fill = petal_color))+
+  geom_sina(pch = 21, size = 7)+
+  scale_fill_manual(values = c("pink", "white"))+
+  stat_summary(fun.data   = "mean_cl_normal", linewidth = 3)+
+  stat_summary(geom = "line", linewidth = 1, linetype = 2,aes(group = 1))+
+  theme(legend.position = "none",
+        axis.text  = element_text(size = 26),
+        axis.title = element_text(size = 26))+
+  labs(y = "visits")
+```
+
+Here's a brief refresher of our [previously](#cat_cont) introduced standard summaries of associations between a categorical explanatory variable and a continuous response.
+
+
+Remember that even though data do not fully meet assumptions (we can even see the right skew in the sina plot - @fig-visits). Recall that if data meet assumptions of our parametric model, we can reasonably trust the results of our analysis. If data do not  meet assumptions of the parametric model, results may or may not be valid, depending on how robust the test is. We will therefore conduct a permutation test and a bootstrap later to see if our t-test was trustworthy. 
+
+
+### Estimating summaries of each group:  
+
+We can summarize within group means, and variances (or even 95% CIs, if we want) as we saw in the previous chapter. I present some of these high-level summaries in @fig-visits and calculate them below:
+
+```{r}
+#| echo: false
+#| column: margin
+SR_visits |>
+  group_by(petal_color)|>
+  summarise(MEAN       = mean(visits),
+            VAR        = var(visits),
+            N          = n())|>
+  mutate_at(-1, round, digits = 3)|>
+  gt()
+```
+
+```{r}
+color_visit_summaries <- SR_visits |>
+  group_by(petal_color)|>
+  summarise(MEAN  = mean(visits),
+            VAR   = var(visits),
+            N     = n())
+```
+
+### Estimating summaries of differences:    
+
+We would also like to summarize the two groups jointly by estimating the pooled variance, the difference in group means, and a standardized version of that difference.
+
+- **The pooled variance:** To estimate both the effect size as Cohen’s D and uncertainty, we need to calculate the variance. But we have two groups, so we need something like "the average variance within each group." The pooled variance, $s^2_p$ -- the variance in each group weighted by their degrees of freedom and divided by the total degrees of freedom, is this average (see margin for hand calculation).    
+
+:::aside 
+$$
+\begin{align}
+s^2_p &= \frac{df_1 \times s^2_1 + df_2 \times s^2_2}{df_1+df_2} \\
+ &= \frac{(n_\text{pink}-1) \times s^2_\text{pink} + (n_\text{white}-1) \times s^2_\text{white}}{n_\text{pink}-1+n_\text{white}-1} \\
+ &= (56\times 2.71 + 49\times 0.833) / (56+49) \\
+ &= (151.76 + 40.67)/(56+49)\\ & = 192.5/105\\ &= 1.833
+\end{align}
+$$
+:::
+
+- **The difference in means:** To find this, simply subtract one mean from the other: $\text{mean}\_\text{diff}=  1.76 - 0.733 =  1.03$. <br><br>
+
+- **Cohen's D** as the difference in means standardized by the pooled standard deviation. Cohen's D $=\frac{\text{mean diff}}{s_p}$ $=\frac{1.03}{\sqrt{1.833}}$ $=\frac{1.03}{1.35}$   $= 0.76$.  This is considered a medium (borderline large) effect, so it likely matters (if true). 
+
+
+
+We can calculate these global summaries from the caculations of each petal color (above):
+
+:::aside
+
+| Size              | Cohen's D     |
+|------------------|------------------------|
+| Tiny              | 0.01 – 0.20           |
+| Small             | 0.20 – 0.50           |
+| **Medium**            | **0.50 – 0.80**           |
+| Large             | 0.80 – 1.20           |
+| Very large        | 1.20 – 2.00           |
+| Huge              | > 2.00                |
+:::
+
+
+```{r}
+#| eval: false
+color_visit_summaries|>
+    summarise(mean_diff  = diff(MEAN) |> abs(), 
+              pooled_var = sum((N-1)*(VAR)) / (sum(N)-2),
+              pooled_sd  = sqrt(pooled_var),
+              cohens_D   = mean_diff / pooled_sd)
+```
+
+
+
+```{r}
+#| echo: false
+color_visit_summaries|>
+  mutate(DF = N-1)|>
+  summarise(mean_diff  = diff(MEAN) |> abs(), 
+            pooled_var = sum(DF*(VAR)) / (sum(DF)),
+            pooled_sd  = sqrt(pooled_var),
+            cohens_D   = mean_diff / pooled_sd)|>
+    pivot_longer(values_to = "estimate", cols=1:4,names_to = "summary")|>
+    mutate(estimate = round(estimate, digits=2))|>
+    pivot_wider(names_from = summary, values_from = estimate)|>
+  gt()
+```
+
+
+:::fyi
+
+The [`cohens_d()`](https://easystats.github.io/effectsize/reference/cohens_d.html) function in the [`effectsize`](https://easystats.github.io/effectsize/) package will calculate Cohen's D for you! It even provides a 95% confidence interval for this estimated effect size. This package includes additional summaries of the effect size in a two-sample analysis depending on modeling assumptions. Read more [here](https://easystats.github.io/effectsize/articles/standardized_differences.html).
+
+```{r}
+# Not working? Install the effectsize package!
+
+library(effectsize) 
+cohens_d(visits ~ petal_color, data = SR_visits )
+```
+
+:::

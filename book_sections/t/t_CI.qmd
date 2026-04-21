@@ -106,8 +106,8 @@ As you can see, the only difference between the standard error when the populati
 
 The difference between $\sigma$ and $s$ comes from how they are calculated:  
 
-- The population standard deviation ($\sigma$) divides the true population mean ($\mu$) by $n$.   
-- The sample standard deviation ($s$) divides the sample mean (\bar{x}) by $n - 1$.    
+- The population standard deviation ($\sigma$) divides the sum of squared deviations from the true population mean ($\Sigma (x_i - \mu)^2$) by $n$ and then finds the quare root.   
+- The sample standard deviation ($s$) divides the sum of squared deviations from the estimated population mean ($\Sigma (x_i - \bar{x})^2$) by $n - 1$  and then finds the quare root.    
 
 This adjustment reflects the fact that once we estimate the mean from the data, we lose one degree of freedom.  
 
@@ -169,7 +169,7 @@ ggplot(t_30, aes(x = t, y = prob_density)) +
 #| label: fig-tcrit
 #| column: margin
 #| fig-cap: "Critical values for the t-distribution with x degrees of freedom (α= 0.05). The dashed red line shows the Z critical value (i.e. df = ∞)."
-#| fig-atl: "A scatterplot showing the critical value of the t-distribution (α = 0.05) versus degrees of freedom from 2 to 25. The critical value starts above 4 for very small degrees of freedom and steadily decreases as degrees of freedom increase, approaching about 2. A dashed red horizontal line at 1.96 shows the corresponding critical value from the normal (Z) distribution, illustrating that t critical values approach the Z value as sample size increases."
+#| fig-alt: "A scatterplot showing the critical value of the t-distribution (α = 0.05) versus degrees of freedom from 2 to 25. The critical value starts above 4 for very small degrees of freedom and steadily decreases as degrees of freedom increase, approaching about 2. A dashed red horizontal line at 1.96 shows the corresponding critical value from the normal (Z) distribution, illustrating that t critical values approach the Z value as sample size increases."
 tibble(df = 2:25,crit_val = abs((qt(.025,2:25))))|>
     ggplot(aes(x =df, y = crit_val))+
     geom_point(size= 3)+

@@ -47,7 +47,7 @@ range_shift <- read_csv(range_shift_file) |>
 We have previously considered standard [summaries of univariate data](#univariate_summaries). Because the $t$-distribution assumes a normal distribution, we  focus on standard parametric estimates. These include:    
 
 - **The mean:** A measure of central tendency, $\bar{x} = \frac{\Sigma x_i}{n}$.    
-- **The standard deviation:** A measure of central spread, $s = \frac{\Sigma(x_1-\bar{x})^2}{n-1}$.    
+- **The standard deviation:** A measure of spread, $s = \frac{\Sigma(x_1-\bar{x})^2}{n-1}$.    
 - **Cohen's D:** A standardized measure of effect size, $D = \frac{\bar{x}-\mu_0}{s}$. 
 
 

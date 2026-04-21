@@ -165,8 +165,8 @@ ggplot(t_30, aes(x = t, y = prob_density)) +
 
 We don't need R to tell us what we'll do to the null, @fig-t30sig makes it clear that the p-value is very small. More generally,    
 
-- When t is less than 1.96 (the critical Z-value) we will fail to reject the null.  
-- When t is greater than 2.5 (and our sample size is greater than seven) we will reject the null at the traditional $\alpha$ value of 0.05.  **Here t is much greater than two and a half (it's seven) and our sample size is way more than seven (it's thirty one) --  we will reject the null.**   
+- When the absolute value of t is less than 1.96 (the critical Z-value) we will fail to reject the null.  
+- When the absolute value of t is greater than 2.5 (and our sample size is greater than seven) we will reject the null at the traditional $\alpha$ value of 0.05.  **Here t is much greater than two and a half (it's seven) and our sample size is way more than seven (it's thirty one) --  we will reject the null.**   
 - When t is between 1.96 and 2.5 we may or may not reject the null depending on the degrees of freedom and the value of t.    
 
 But let's find the p-value anyway: 

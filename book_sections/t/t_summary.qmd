@@ -41,7 +41,7 @@ Links to: [Summary](#t_summary_chapter-summary). [Chatbot tutor](#t_summary_chat
 #| echo: false
 #| column: margin
 #| label: fig-teacherst
-#| fig-cap: "[T distribution adapted from xkcd](https://xkcd.com/1347/). The rollover text says \"If data fails the teachers t-test you can force it to take it again until it passes.\" See the related [explainxkcd](https://www.explainxkcd.com/wiki/index.php/1347:_t_Distribution) for more info!"
+#| fig-cap: "[T distribution adapted from xkcd](https://xkcd.com/1347/). The rollover text says \"If data fails the teachers T-test you can force it to take it again until it passes.\" See the related [explainxkcd](https://www.explainxkcd.com/wiki/index.php/1347:_t_Distribution) for more info!"
 #| fig-alt: "[A physical bell-curve-shaped object labeled \"Student's t distribution\" is resting on a table. Cueball is working with it and a piece of paper.] Cueball: Hmm. [Cueball looks at the piece of paper.] Cueball: ...nope.  [Cueball picks up the object and begins to walk off the panel with it.] [Cueball comes back onto the panel, now carrying an object shaped like a much more complex curve, with many symmetric spikes and dips, labeled \"Teacher's t distribution\".]"
 include_graphics("../../figs/linear_models/t/teacherst.png")
 ```
@@ -49,7 +49,7 @@ include_graphics("../../figs/linear_models/t/teacherst.png")
 ## Chapter summary {#t_summary_chapter-summary}  
 
 
-The *t*-distribution is a symmetric, bell-shaped curve defined by its degrees of freedom. Like the standard normal deviate, *Z*, the *t*-value measures the distance (in units of standard errors) between a sample estimate and a hypothesized population parameter. Compared to the *Z*-distribution, the *t*-distribution has "fatter tails," reflecting the extra uncertainty from estimating the standard deviation. 
+The *t*-distribution is a family of symmetric, bell-shaped curves defined by their degrees of freedom. Like the standard normal deviate, *Z*, the *t*-value measures the distance (in units of standard errors) between a sample estimate and a hypothesized population parameter. Compared to the *Z*-distribution, the *t*-distribution has "fatter tails," reflecting the extra uncertainty from estimating the standard deviation. 
 
 We use the *t*-distribution to quantify uncertainty and to conduct a *one-sample t-test* of the null hypothesis that an approximately normally distributed sample came from a population with mean $\mu_0$. A particularly useful application is the *paired t-test*. Here, each natural pair is split across two conditions, and we calculate differences in the response variable within each pair. The test then evaluates whether these differences are consistent with a null mean difference of $\mu_0=0$.
 
@@ -88,7 +88,7 @@ Try these questions! By using the R environment you can work without leaving thi
 
 ---
 
-**Q3.**  The t and z distributions will never be the exact same. But when will they be nearly identical?   `r longmcq(c( answer = "When the sample size is large","When the standard deviation is small","When data are normal", "Never, these are very different distributions - this is akin to asking when an orange and apple are similar."))`
+**Q3.**  The t and z distributions are never perfectly identical. But when will they be super close to one another?   `r longmcq(c( answer = "When the sample size is large","When the standard deviation is small","When data are normal", "Never, these are very different distributions - this is akin to asking when an orange and apple are similar."))`
 
 
 ---
@@ -271,7 +271,7 @@ This is the t-value!
 ---
 
 
-**Q7*.* The 95% CI is calculated as the mean ± ___ times the critical t-value at 𝛼= 0.05. `r mcq(c("Cohen's d", "The standard deviation", "The variance", "t", answer = "The standard error", "1.96"))`
+**Q7*.* The 95% CI is calculated as the mean ± the critical t-value at 𝛼= 0.05 times ___ . `r mcq(c("Cohen's d", "The standard deviation", "The variance", "t", answer = "The standard error", "1.96"))`
 
 ---
 
@@ -307,7 +307,7 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
 
 ---
 
-**Q9.** Given the answers to *Q7* and *Q8* do you think the difference between subordinates and dominants is statistically significant at the $\alpha = 0.05$ level? `r longmcq(c(answer = "yes because t is greater than the critical value", "no because t is greater than the critical value","we can't know this until we find our p-value"))`
+**Q9.** Given the answers to *Q7* and *Q8* do you think the difference between subordinates and dominants is "statistically significant" (i.e. would you reject the null) at the $\alpha = 0.05$ level? `r longmcq(c(answer = "yes because t is greater than the critical value", "no because t is greater than the critical value","we can't know this until we find our p-value"))`
 
 ---
 
@@ -318,7 +318,7 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
 
 ---
 
-**Q11.** Say you found a p-value of *p*. Which would be a correct  interpretation of  p? `r longmcq(c("p is the probability that the null hypothesis generated the data (or something more extreme).", "p is the probability that the null hypothesis is true.", answer = "p is the probability that a random sample from the null hypothesis would be as or more extreme than the data"))` 
+**Q11.** Say you found a p-value of *p*. Which would be a correct  interpretation of  p? `r longmcq(c("p is the probability that the null hypothesis generated the data (or something more extreme).", "p is the probability that the null hypothesis is true.", answer = "p is the probability that a random sample from the null distribution would be as or more extreme than the data"))` 
 
 ---
 
@@ -341,7 +341,7 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
 * **t-value**: The distance in estimated standard errors between a sample estimate of the mean $\bar{x}$, and its hypothesized value under the null hypothesis, $\mu_0$.    
     - *t* is  calculated as $\frac{\bar{x} - \mu_0}{s_\bar{x}}$, where $s_\bar{x}$ is the estimate of the standard error (below). 
     - *t* is the test statistic for a t-test.    
-* **Standard Error (SE)**: An estimate of the standard deviation of the sampling distribution, calculated as $s_\bar{x}=\frac{s}{\sqrt{n}}$  for the mean of a normal or t-distribution.  
+* **Standard Error (SE)**: An estimate of the standard deviation of the sampling distribution, calculated as $s_\bar{x}=\frac{s}{\sqrt{n}}$  for the mean of a normal or t distribution.  
 * **One-Sample t-test**: A test used to compare the mean of a single sample to a hypothesized population mean.  
 * **Paired t-test**: A test comparing the means of two related samples (e.g., before vs. after, or paired individuals), by analyzing the distribution of their differences.  
 
@@ -370,7 +370,7 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
     - *Paired:* `t.test(x = your_vector_of_diffs, mu = 0)`.  OR    `t.test(x = vector_treat_a,y = vector_treat_b, paired = TRUE)`.  
 
 
-- `lm():` Fits linear models; an intercept-only model (lm(y ~ 1)) is equivalent to a one-sample t-test.   
+- `lm():` Fits linear models; an intercept-only model (`lm(y ~ 1)`) is equivalent to a one-sample t-test.   
 
 `geom_qq()` and `geom_qq_line()`: Create QQ plots to visually check whether data are close enough to normal. 
     - Remember to set `aes(sample = THING)` instead of `aes(x = THING)`. 

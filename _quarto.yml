@@ -133,6 +133,22 @@ book:
         - book_sections/t/one_sample_t_test_in_R.qmd
         - book_sections/t/paired_t_test.qmd
         - book_sections/t/t_summary.qmd
+    - part: book_sections/two_ts.qmd
+      chapters: 
+        - book_sections/two_ts/2groupviz.qmd
+        - book_sections/two_ts/2t_assumptions.qmd
+        - book_sections/two_ts/2t_calcs.qmd
+        - book_sections/two_ts/uncertain2t.qmd
+        - book_sections/two_ts/nhs2t.qmd
+        - book_sections/two_ts/2t_summary.qmd
+    - part: book_sections/f.qmd
+      chapters: 
+        - book_sections/f/from_sampling.qmd
+        - book_sections/f/f_calcs.qmd
+        - book_sections/f/FR.qmd
+        - book_sections/f/Finding_connections.qmd        
+        - book_sections/f/from_sampling.qmd        
+        - book_sections/f/f_summary.qmd        
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
