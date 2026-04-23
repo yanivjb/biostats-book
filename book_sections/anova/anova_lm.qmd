@@ -1,0 +1,297 @@
+## •  17. ANOVA is a  linear model  {.unnumbered  #anova_lm}
+
+
+
+---
+format: html
+webr:
+  packages: ['dplyr', 'readr' ,'ggplot2', 'forcats']
+  autoload-packages: true
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(janitor)
+library(ggforce)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(broom)
+library(forcats)
+source("../../_common.R") 
+
+hz_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/zones_df_admix_weight_cutoff0.9_gps_dist2het_phenos_excl_GC.csv"
+
+clarkia_hz <- read_csv(hz_link)|> 
+  select(-weighted)|>
+  rename(admix_proportion = `cutoff0.9`) |>
+  filter(!is.na(admix_proportion))|>
+  clean_names() |>
+  mutate(site = if_else(site == "SAW", "SR", site)) |>
+  filter(subsp=="P")|>
+  mutate(site = fct_reorder(site, mean_petal_area_sq_cm))
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+**Motivating Scenario:**  You know that many statistical models are simply a type of linear model. How can we think about an ANOVA as a linear model and interpret the coefficients from this model?   
+
+
+**Learning Goals: By the end of this subchapter, you should be able to:**    
+
+1. Recognize that ANOVA is a special case of a linear model.  
+
+2. Interpret model coefficients (intercept, slopes) in the context of group means.  
+
+3. Know what a residual is and calculate residuals    
+   - Calculate residuals "by hand."
+   - Find residuals with [`broom`](https://broom.tidymodels.org/index.html)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function.
+  
+4. Change the reference level and interpret how it affects model output.  
+:::
+
+---
+
+## Setting up our linear model 
+
+Recall that "linear models" are "linear" because we find an individual's predicted value $\hat{Y_i}$ by adding up predictions from each component of the model. So, for example, $\hat{Y_i}$ equals the parameter estimate for the "intercept", $a$, plus its value for the first explanatory variable, $x_{1,i}$, times the effect of this variable, $b_1$, plus its value for the second explanatory variable, $x_{2,i}$, times its effect, $b_2$, etc.
+
+
+
+$$\hat{Y}_i = a + b_1 x_{1,i} + b_2 x_{2,i} + \dots{}$$
+
+Just like a one- or two-sample t-test, the ANOVA is a linear model. As such, it models group means as a function of group membership. This works by: 
+
+picking one group as the  "reference level" and having that group's mean represented as the intercept. Then each "slope" $b$ is the difference between that group's mean and the reference group's mean, and the corresponding $x_i$s are one if the  individual is in that group and zero otherwise.   
+ 
+:::aside
+By default R chooses the reference levels as the alphabetically first one. We often don't want that (e.g. you may want the control to be first). The [`fct_relevel()` function](https://forcats.tidyverse.org/reference/fct_relevel.html) in the [`forcats` package](https://forcats.tidyverse.org/) can help (see fyi below)!
+:::
+
+
+
+```{r}
+hybrid_anova <- lm(admix_proportion ~ site, data = clarkia_hz)
+```
+
+```{r}
+#| echo: false
+hybrid_anova$coefficients |> round(digits = 4)
+```
+
+We cast this as a linear model as follows: $\widehat{\text{admix prop}}_i = 0.0071 + 0.0183 \times \text{S22}_{i}  + 0.0025 \times \text{SM}_{i}  +  0.0221  \times \text{S6}_{i}$. 
+
+Here SR is the "reference level", so: 
+
+- SR's mean admixture proportion equals the intercept, 0.0071.    
+- S22's mean admixture proportion equals 0.0254. This represents the intercept, 0.0071, plus the term for S22, 0.0183. 
+
+
+
+### Practice
+
+
+
+Use the linear model output to find the estimated admixture proportion at each of the following locations:
+
+```{webr-r}
+# Model output from above
+#(Intercept)  siteS22   siteSM   siteS6 
+#     0.0071   0.0183   0.0025   0.0221 
+#--------------------------------------
+# Run Calculations below
+0.0071           # SR
+0.0071 + 0.0183  # Site 22
+                 # Site SM
+                 # Site S6
+```
+
+:::exercises
+
+#### Have a try! 
+
+- **Squirrel Mountain (SM)** `r fitb(0.0096,tol = 0.0005,num = TRUE)`.  
+- **Site 6 (S6)** `r fitb( 0.0292,tol = 0.0003,num = TRUE)`.  
+
+:::
+
+
+## Residuals
+
+Of course, individual observations deviate from their predicted value. As you now know, the residual, $e_i$, describes the difference between an observation, $Y_i$, and its predicted value, $\hat{Y_i}$. @fig-resid shows the residuals as the length of the lines connecting individual observations to group means. 
+
+:::aside
+**Mathematical descriptions of residuals** 
+
+$$e_i=Y_i - \hat{Y_i}$$
+
+$$Y_i=\hat{Y_i}+e_i$$
+
+
+:::
+
+
+```{r}
+#| fig-height: 3
+#| fig-width: 12
+#| label: fig-resid
+#| echo: false
+clarkia_hz |>
+  arrange(as.numeric(as.factor(site)) + admix_proportion)|>
+  filter(!is.na(admix_proportion))|>
+  mutate(id= 1:n())|>
+  group_by(site)|>
+  mutate(mean_prop = mean(admix_proportion))|>
+  ggplot(aes(x = id, y = admix_proportion, color = site))+
+  geom_point()+
+  geom_segment(aes(xend = id, yend = mean_prop) ,linewidth = .3)+
+  theme(legend.position = "inside",legend.position.inside = c(0.08,.8),
+        axis.text.x = element_blank(), axis.title.x = element_blank())
+
+```
+
+Recall that [`broom`](https://broom.tidymodels.org/index.html)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function in the [`broom`](https://broom.tidymodels.org/index.html) package shows $\hat{Y_i}$ as the `.fitted` column, and the residuals as the `.resid` column: 
+
+```{r}
+#| eval: false
+library(broom)
+augment(hybrid_anova)
+```
+
+
+```{r}
+#| echo: false
+augment(hybrid_anova)|> 
+select(1:4)|>head()|>
+mutate_at(c(1,3,4), round, digits = 4)|>kable()
+```
+
+:::warning
+R assigns reference levels in alphabetical order. This does not necessarily reflect our biological understanding or experimental design. 
+:::
+
+---
+
+
+
+```{webr-r}
+#| context: setup
+library(ggplot2)
+library(dplyr)
+library(forcats)
+# 1. Create a hidden, protected environment
+.course_env <- new.env()
+
+# 2. Define your "permanent" objects
+.course_env$plant_growth  <- plant_growth <- PlantGrowth |> 
+  mutate(group = case_when(group == "ctrl"~"control",
+                           group == "trt1"~"cold",
+                           group == "trt2"~"warm"))|>
+  rename(biomass = weight)
+
+# 3. Attach it to the search path (placed right behind the Global Environment)
+# name = "CourseData" makes it easy to find if you need to debug
+attach(.course_env, name = "CourseData")
+
+
+```
+
+### Changing reference levels 
+
+Alphabetical order is not always the "right" order. For example, the analysis below compares plant growth (measured as biomass) in a control environment to hot or cold treatments (`group`).  
+
+
+```{r}
+#| echo: false
+library(dplyr)
+library(forcats)
+
+plant_growth <- PlantGrowth |> mutate(group = case_when(group == "ctrl"~"control",
+                                        group == "trt1"~"cold",
+                                        group == "trt2"~"warm"))|>
+    rename(biomass = weight)
+```
+
+
+```{r}
+lm(biomass ~ group, data = plant_growth)
+```
+
+In this case, it makes the most sense to use "control" as the reference level and to express treatment effects as deviations from the control. However, alphabetically, "cold" comes before "control," so "cold" is used as the reference level by default. Changing the reference level will not affect our statistical conclusions, but it can make the model output and interpretation easier to present and discuss.  
+
+---
+
+The [`fct_relevel()` function](https://forcats.tidyverse.org/reference/fct_relevel.html) in the [`forcats` package](https://forcats.tidyverse.org/) makes changing the reference level straightforward:
+
+```{r}
+#| eval: false
+# Replace data with the name of the data object
+# Replace x with the name of the explanatory variable
+# Replace "<REF LEVEL>" with the name of the reference level
+
+data <- data |>
+  mutate(x = fct_relevel(x, "<REF LEVEL>"))
+```
+ 
+Now you try! Changing the reference level of `group` to `control` in the `plant_growth` data. Then run the relevant linear model.
+
+```{webr-r}
+# load packages: 
+library(dplyr)
+library(forcats)
+
+# Change reference level
+plant_growth <- plant_growth |>
+  mutate(...)
+
+# Run the linear model  
+
+```
+
+
+`r hide("Click here to see the answer")`
+
+```{r}
+# load packages: 
+library(dplyr)
+library(forcats)
+
+# Change reference level
+plant_growth <- plant_growth |>
+  mutate(group = fct_relevel(group, "control"))
+  
+# Run the linear model  
+lm(biomass ~ group, data = plant_growth)
+```
+
+
+
+`r unhide()`
+
+---
+
+As you can see from your work (or my answer), we have changed the reference level:  our model now includes the terms `(Intercept)`,  `groupcold`, and `groupwarm`!
+
+---
+
+:::exercises
+
+#### Have a try! 
+
+**Practice** From the output above, we see the mean biomass in the control is (write -99 for NA): `r fitb(answer =  5.032,num = TRUE, tol = .035)`.  
+
+
+**Practice.** In the new model, the value 0.494 represents: `r longmcq(c("The mean biomass in the warm treatment","The difference in mean biomass in the warm and cold treatments", answer = "The difference in mean biomass in the warm and control treatments"))`.  
+
+**Practice.** Compared to the initial model, this new version: `r longmcq(c("Provides more reliable p-values","Asks a different statistical question", answer = "Will generate the same statistical conclusions."))`.  
+
+
+:::

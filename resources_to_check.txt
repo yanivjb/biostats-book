@@ -1,0 +1,17 @@
+
+
+
+Additional resources to consult. 
+
+
+https://epirhandbook.com/en/
+
+
+https://www.modernstatisticswithr.com/
+
+
+Models as Prediction Machines: How to Convert Confusing Coefficients Into Clear Quantities. https://journals.sagepub.com/doi/epdf/10.1177/25152459261424825
+
+
+Gene regulatory networks: from correlative models to causal explanations https://www.nature.com/articles/s41576-026-00939-1
+
