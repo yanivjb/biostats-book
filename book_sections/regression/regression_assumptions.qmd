@@ -1,0 +1,341 @@
+## • 18. Regression assumptions  {.unnumbered #regression_assumptions}
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(broom)
+library(DT)
+library(infer)
+library(ggforce)
+library(webexercises)
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:**   We have now fit a linear regression to our data. But before getting carried away in our analyses, we want to see if the model is a reasonable summary of the data and whether the assumptions behind our uncertainty estimates are plausible.
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+1. Name the main assumptions of linear regression.  
+2. Evaluate whether the data collection process fits the assumptions of unbiased sampling and independence.  
+3. Generate diagnostic plots and use them to evaluate whether the modeled data meet linear model assumptions.  
+4. Identify possible next steps when data do not meet the assumptions of a linear model.  
+:::
+---
+
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Loading and formatting data"
+#| message: false
+#| warning: false
+
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+gc_rils <- readr::read_csv(ril_link) |>
+  dplyr::mutate(visited = mean_visits > 0) |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(petal_area_mm))|>
+  dplyr::select(ril, location, prop_hybrid, petal_area_mm)|>
+  mutate(petal_area_quartile = cut( petal_area_mm,
+                                    breaks = quantile(petal_area_mm, probs = seq(0, 1, 0.25), na.rm = TRUE),
+                                    include.lowest = TRUE))
+```
+
+---
+
+
+So we now have our linear regression equation:
+
+
+```{r}
+#| echo: false 
+hybrid_lm <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+```
+
+$$\text{PROP HYBRID} = `r coef(hybrid_lm )[[1]]|>round(digits = 3)` + `r coef(hybrid_lm)[[2]]|>round(digits = 5)` \times \text{PETAL AREA}$$
+
+That is, we found that for each $1\text{ mm}^2$ increase in petal area, we expect a 0.57 percentage point increase in proportion hybrid seeds. 
+
+
+Now we must ask how much we can trust this equation to describe the data, and how much we can trust the linear modeling framework to estimate uncertainty and test null hypotheses. Thus we must consider how well our model meets the assumptions of linear models. 
+
+--- 
+
+
+
+
+## Assumptions of Linear Models  
+
+```{r}
+#| echo: false
+#| fig-alt: "A meme showing a stern-looking man in sunglasses pointing toward the viewer. Over the image, bold white text reads: Yes, I always ensure assumptions concerning normality, homoscedasticity, and n size are satisfied prior to analysis. I also always follow the speed limit and like everyone I meet. Next question."
+#| fig-cap: "I just wanted a fun meme here."
+#| label: fig-meme
+include_graphics("https://i1-c.pinimg.com/736x/bd/72/49/bd72496fcb9f62cabe270fb648713f61.jpg")
+```
+
+--- 
+
+Linear regression relies on the same general assumptions as other standard linear models. However, these assumptions take on slightly different meanings when $X$ is numeric.
+
+- **Unbiased data collection**: The data were collected in a way that lets us answer the biological question without systematic bias. </br></br>
+
+- **Independence**: Observations, and therefore residuals, are independent of one another after accounting for the predictors in the model.</br></br>
+
+- **Linearity**: The model describes the expected value of the response by adding up components of the model. For a linear regression this means that we assume we can make reasonable predictions by adding $b \times X_i$ to the intercept. </br></br>
+
+- **Normality of residuals**: The residuals are approximately normally distributed.  In a two-sample t-test or ANOVA, we could take a shortcut to evaluating this idea by evaluating normality within groups. In a linear regression, we cannot take this shortcut (because there are not "groups"), so we evaluate the normality of residuals $e_i$.</br></br>
+
+- **Homoscedasticity**: The variance of residuals is roughly constant across fitted values, $\hat{Y}_i$. In a two-sample t-test or ANOVA this meant that we expected equal variance among groups. In a linear regression this means that variance in the residuals should be roughly constant as we move across the $X$ axis. </br></br>
+
+
+::: note
+**Linear regression makes very few assumptions about $X$.**
+
+- Linear regression **does not** assume that $X$ is normally distributed. 
+ 
+- Linear regression **does not** assume that $X$ is sampled randomly from a population. 
+
+:::
+
+## Evaluating assumptions 
+
+The standard list of assumptions of linear models consists of two types of assumptions. 
+
+One class is about how the data are collected (e.g. without bias, and independently). Others are about whether this particular linear model is a reasonable approximation of the data (e.g. the linearity and normality assumptions).  
+
+
+### Evaluating if study design meets assumptions
+
+---
+
+The assumptions that data are collected without bias and that observations are independent are more easily evaluated by looking at the design of the study than by looking at the data themselves. 
+
+
+
+- **Independence:** In this study, we considered one plant from each RIL at site GC. This avoids "repeated measures" from the same individual or line. If, however, we had measured more than one plant from each RIL, or if some plants were close relatives while others were unrelated, our observations would not be independent. Similarly, if we planted rows of white-flowered RILs followed by rows of pink-flowered RILs, we would have a problem of non-independence. Because nearby plants may share a pollinator environment, observations within rows may be more similar to one another than observations from different rows. This non-independence (if not addressed by a more complex model) would  fool us into thinking our estimates are more precise than they really are, and we will be more likely to reject a true null than the desired $\alpha$.  </br></br>
+
+::: aside
+"Repeated measures" are not a bad thing -- in fact they can be a powerful research design. However, analyzing data from these designs requires an approach that models this non-independence.
+
+:::
+
+- **Unbiased data collection:** Say that small-petaled plants flowered earlier than large-petaled plants. If we grew all plants at the same time, the small-petaled plants might be more mature by the time we measured hybridization. This could result in bias. Rather than learning about the effect of petal size on hybridization, as we hoped to, we could actually be seeing the effect of flowering time or developmental stage. A linear model cannot rescue us from this kind of bias. So before interpreting the model, we should ask whether the groups we are comparing are otherwise treated identically. Think hard about this, because such biases can be subtle.
+
+
+
+### Evaluating if data meet assumptions. 
+
+:::aside 
+To show you how these plots are made, I will build these from `augmented_hybrid_lm` with standard `ggplot`  syntax. Because these plots are so useful, R makes them easy to build (see below). </br></br>
+
+- With base R, typing `plot(<THIS LM>)` e.g. in our example, typing (`plot(hybrid_lm)`), will generate these "diagnostic plots" + a few more. </br></br>
+
+- With `ggplot2` and the `ggfortify` package,  the `autoplot(<THIS LM>)` function will do the same.
+:::
+
+---
+
+
+The other standard assumptions of linear models (Linearity, Normality of residuals, and Homoscedasticity) must be addressed by considering the actual data - not just the study design. Like our [evaluation of normality](#is_it_normal), these assumptions are better addressed visually than by formal statistical tests. 
+
+So, to get started, we will build our linear model, and pass the output to [`broom`](https://broom.tidymodels.org/)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function which provides helpful information about each data point in the model. 
+
+
+```{r}
+library(broom)
+hybrid_lm <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+augmented_hybrid_lm <- augment(hybrid_lm)
+```
+
+`r hide("Click here to see augmented_hybrid_lm")`
+
+
+To help us focus, the table below excludes columns: `.sigma`, `.cooksd`, and `.hat` which we are not using or thinking about in this section.
+
+```{r}
+#| echo: false
+augmented_hybrid_lm  |> 
+  dplyr::select(-.sigma, -.cooksd, -.hat)|>
+  mutate_all(round, digits =3)    |>
+  datatable(augmented_hybrid_lm, options = list(pageLength = 5)) 
+```
+
+`r unhide()`
+
+--- 
+
+::: fyi
+**NOTE:** [Here is a great resource](https://library.virginia.edu/data/articles/diagnostic-plots) that works through these plots in more detail. Check it out if you want more details.
+
+:::
+
+---
+
+
+
+
+
+#### **Evaluating linearity with the residual vs fitted plot**
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| column: margin
+#| fig-cap: "A residuals vs fitted plot from our data. If the relationship was linear, there would be no discernible patterns in these points."
+#| fig-alt: "Scatterplot with fitted values on the x-axis and residuals on the y-axis. Points are not randomly scattered around zero. A blue smooth line starts near zero, dips below zero for intermediate fitted values, and then rises at higher fitted values. A band of points slopes downward below zero, while several large positive residuals appear above the main cloud. The pattern suggests nonlinearity or structure not captured by the model."
+#| label: fig-resid_fitted
+ggplot(augmented_hybrid_lm,  aes(x = .fitted, y = .resid)) +
+  geom_point(size = 4)+
+  geom_smooth(se = FALSE, linewidth = 2) +                                labs(title = "Residuals vs Fitted")+theme(axis.title = element_text(size = 28), axis.text = element_text(size =28),title = element_text(size =28))
+```
+
+The residual vs fitted plot (@fig-resid_fitted) shows the fitted value, $\hat{Y_i}$, on the x-axis, and the residual, $e_i$, on the y-axis. Ideally, we should see no patterns at all in these data. The curvature of the blue trend line and the distinct downward slope of the set of points in @fig-resid_fitted suggest that this model does not fully fit the data. The set of points with that distinct downward slope are all plants with zero hybrid seeds. Later in this book we will see how to model such data. For now however, these issues are noticeable, but not severe. 
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+# Code for residuals vs fitted plot
+ggplot(augmented_hybrid_lm,  aes(x = .fitted, y = .resid)) +
+  geom_point()+
+  geom_smooth(se = FALSE) 
+```
+
+
+#### **Evaluating homoscedasticity with the Scale-Location plot**
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| column: margin
+#| fig-cap: "The Scale-Location plot from our model. If residual variance was equal across predicted values, points would randomly deviate about a flat line."
+#| fig-alt: "Scatterplot with fitted values on the x-axis and the square root of the absolute standardized residuals on the y-axis. A blue smooth line rises from left to right, showing that the size of residuals tends to increase with fitted values. Several high points appear at intermediate and high fitted values. This pattern suggests heteroscedasticity, meaning residual variance is not constant across the range of predictions."
+#| label: fig-scale_loc
+
+ggplot(augmented_hybrid_lm,  aes(x = .fitted, y = sqrt(abs(.std.resid)))) +
+  geom_point(size = 4)+
+  geom_smooth(se = FALSE, linewidth = 2) + 
+  labs(title = "Scale-Location")+
+  theme(axis.title = element_text(size = 28), axis.text = element_text(size =28),title = element_text(size =28))
+```
+
+The Scale-Location plot (@fig-scale_loc) shows the fitted value, $\hat{Y_i}$, on the x-axis, and the square-root of the absolute value of the residuals (divided by the standard deviation in residuals) on the y-axis. While that y-axis  is a mouthful, it simply communicates how far data are from their predicted value. If the variance of the residual does not change with the prediction (as assumed in linear regression), we should see a cloud of points. Noticeable trends in the best-fit line suggests heteroscedasticity. The positive slope in @fig-scale_loc informs us that the variance in residuals increases with the predicted value. Again, this violation of assumption is real and worth noting, but does not necessarily invalidate any linear regression-based analysis.
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+# Code for Scale-Location plot
+ggplot(augmented_hybrid_lm,  aes(x = .fitted, y = sqrt(abs(.std.resid)))) +
+  geom_point()+
+  geom_smooth(se = FALSE) 
+```
+
+
+
+
+#### **Evaluating normality of residuals with a QQ plot**
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| column: margin
+#| fig-cap: "A Q-Q plot from the model. If residuals were normally distributed data points would roughly land along the one-to-one line."
+#| fig-alt: "Q-Q plot comparing model residuals to theoretical normal quantiles. The points deviate from the diagonal reference line, especially in the upper right tail, where several points rise far above the line. The lower and middle residuals also show curvature rather than following a straight line. This indicates that the residuals are not approximately normally distributed." 
+#| label: fig-qq
+
+augmented_hybrid_lm |>
+  ggplot( aes(sample = .resid)) +
+  geom_qq(size = 4)+
+  geom_qq_line(linewidth = 2) + 
+  labs(title = "Normal Q-Q")+
+  theme(axis.title = element_text(size = 28), axis.text = element_text(size =28),title = element_text(size =28))
+```
+
+
+As seen in our [introduction to the normal distribution](#quantile-quantile-plots-and-the-eye-test), the assumption of normality is better assessed visually, by, for example, a Q-Q plot, rather than by a formal statistical test. When evaluating the normality of residuals in a linear model, we again use a QQ plot, now plotting residuals from our model rather than raw data. As a reminder, if residuals were normally distributed, the QQ plot would be nearly a straight line. The  curving away from the expected one-to-one line in  @fig-qq shows that the residuals are not normally distributed. This deviation from the  assumption of normality is real, but we know that linear models are often robust to such violations. What to do now? 
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+# Code for Normal QQ plot
+augmented_hybrid_lm |>
+  ggplot( aes(sample = .resid)) +
+  geom_qq()+
+  geom_qq_line() 
+```
+
+
+#### **Easily making all of these plots at once**
+
+As noted above, you would rarely write the code (like I did) to make these diagnostic plots. Rather, you would use the [`autoplot()`] function in [`ggfortify`]() or the [`plot()`]() function in Base R (no packages needed) to make these plots for you, as in  @fig-diagnostic. 
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-diagnostic
+#| fig-width: 12
+#| fig-height: 3.2
+#| column: page-right 
+#| fig-cap: "All three diagnostic plots shown above, plus the Residuals vs Leverage plot which shows if any data points have a particularly large influence on our model."
+#| fig-alt: "The diagnostic plots built  above, plus a fourth plot which evaluates if any points have large influence on our linear model estimates."
+library(ggfortify)
+autoplot(hybrid_lm,nrow = 1) # or plot(hybrid_lm)
+```
+
+### What to do?
+
+The good news is that our study design is pretty straightforward, so we need not worry about violations of the assumptions of unbiased data collection or non-independence. The bad news is that data are somewhat nonlinear, the variance increases with the predicted value, and the residuals are not normally distributed. 
+
+There are numerous ways to analyze data that do not meet assumptions of your model, including:   
+
+1. *Bringing the model closer to the data* by building a more complex model that better matches the data-generating process. This could include adding in another explanatory variable or a polynomial term into the model, or for example, building  a mixed effect model to model non-independence, or a generalized linear model to model data whose distribution is better described by a standard parametric but non-normal distribution (e.g. poisson, binomial etc...).</br></br>       
+
+
+
+2. *Bringing the data closer to the model* by transformation. For example, if $Y$ grows exponentially with $X$ a log transform of $Y$ may make the relationship more linear. When transforming your data, make sure that the transformation both follows the rules of data transformation (e.g. maintaining a monotonic one-to-one correspondence with the raw data), and that the transformed scale is biologically and mathematically interpretable, See the [previous section on transformation](#normal_transform) for more information.</br></br>   
+
+3. *Using nonparametric and/or resampling based approaches* to analyze the data. For example, we could [bootstrap to estimate uncertainty](#uncertainty) and [permute to test the null hypothesis](#shuffling). Alternatively you could use "rank-based" nonparametric tests like Spearman's $\rho$ or Kendall's $\tau$ to test the null. However such approaches require thought and caution as "no-parametric" does not mean assumption free.  </br></br>  
+
+4. *Cautiously analyzing the data with the simple linear model, while acknowledging  minor violations of the assumptions.* Linear models are famously robust to minor violations of assumptions, so we can often conduct a linear regression even if we slightly violate the assumptions. In such cases it is worth complementing the linear model with a permutation and bootstrap to ensure that the results of the linear model are trustworthy. This is the approach we will take in this chapter.  
+
+
+
+---
+
+
+```{r}
+#| echo: false
+#| fig-alt: "A meme showing a serious-looking man in a tank top leaning toward the viewer. Bold white text reads: “Yeah, I keep to myself. I learned stats on the mean streets of violated assumptions and limited sample sizes. I don’t like to talk about it much.”."
+#| fig-cap: "I'm just in a meme-y mood this section. Meme of Mark Wahlberg from Shooter"
+#| label: fig-meme2
+include_graphics("https://i1-c.pinimg.com/736x/b0/1a/a0/b01aa06f274607562e8812d51f49d62b.jpg")
+```
+
+---
+
+::: warning
+Too often students (and even researchers) spend more time worrying about if data meet assumptions than thinking hard about the scientific model, the data, the statistical hypothesis and how they all relate. 
+
+A minor violation of the assumption of equal variance or normal distribution of residuals is rarely a show-stopper. In fact, linear models are often robust to minor violations of these assumptions. 
+
+So when assumptions are violated, put your thinking cap on. You can then either proceed with  caution (perhaps validating with permutation and/or bootstrapping), or consider a more appropriate alternative statistical model (e.g. modeling nonlinearity) and perhaps look for alternative statistical approaches and/or additional lines of evidence.  
+
+
+:::

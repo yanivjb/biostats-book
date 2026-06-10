@@ -1,0 +1,366 @@
+# Regression Chapter Tutor Knowledge Base
+
+## Chapter context
+
+This chapter introduces **simple linear regression** as a way to describe how the expected value of one numeric variable changes with another numeric variable.
+
+Students have already learned about:
+
+* numeric variables
+* means and residuals
+* variance and standard deviation
+* covariance and correlation
+* linear models for comparing groups
+* uncertainty and null hypothesis testing
+
+This chapter extends those ideas to models with a **numeric explanatory variable**.
+
+The main example uses *Clarkia* recombinant inbred lines, asking whether the observed number of pollinator visits predicts the proportion of hybrid seed produced.
+
+---
+
+## Big idea
+
+Linear regression is a model for the conditional mean of a numeric response variable.
+
+The model is:
+
+[
+\hat{Y_i} = a + bX_i
+]
+
+where:
+
+* (\hat{Y_i}) is the fitted value for observation (i)
+* (a) is the intercept
+* (b) is the slope
+* (X_i) is the explanatory variable
+
+The slope tells us the expected change in (Y) for a one-unit increase in (X). The intercept helps place the line, but its default p-value is often not biologically meaningful.
+
+Students should understand regression as more than “run `lm()`.” They should ask:
+
+* What does the slope mean biologically?
+* What does the intercept mean?
+* How much variation does the model explain?
+* How uncertain is the slope?
+* Are the model assumptions reasonable?
+* Are outliers or influential points driving the result?
+* Are predictions being made within the range and context of the data?
+* Does the model describe association, prediction, or causation?
+
+---
+
+## Section-level flow
+
+### 1. Regression summaries
+
+Students begin by connecting regression to covariance and correlation.
+
+Key ideas:
+
+* Covariance describes whether two variables vary together.
+* Correlation standardizes covariance to a unitless scale from -1 to 1.
+* The regression slope uses covariance but keeps the original units of (Y) per unit (X).
+
+Important formulas:
+
+[
+b = \frac{cov_{xy}}{s_x^2}
+]
+
+[
+r = \frac{cov_{xy}}{s_xs_y}
+]
+
+[
+R^2 = r^2
+]
+
+In simple linear regression, (R^2) is the proportion of total variation in (Y) explained by the model.
+
+---
+
+### 2. Regression as a linear model
+
+Regression is a linear model with a numeric explanatory variable.
+
+Important terms:
+
+* **Observed value**: (Y_i)
+* **Fitted value**: (\hat{Y_i})
+* **Residual**: (e_i = Y_i - \hat{Y_i})
+* **Slope**: expected change in (Y) per one-unit increase in (X)
+* **Intercept**: predicted value of (Y) when (X = 0)
+
+Students should understand that the intercept is mathematically necessary, but the hypothesis that the intercept equals zero is often not the biological question of interest.
+
+Common misconception:
+
+* The intercept p-value is not a test of whether the explanatory variable matters.
+* It only tests whether the predicted response at (X = 0) differs from zero.
+
+---
+
+### 3. Assumptions and diagnostics
+
+Students learn to evaluate whether a linear model is a reasonable summary.
+
+Important assumptions and concerns:
+
+* independence of observations
+* appropriate study design
+* linearity
+* approximately normal residuals
+* roughly equal residual variance
+* no single influential point driving the result
+* predictions stay within the observed range and biological context
+
+Diagnostic plots include:
+
+* residuals vs. fitted values
+* normal Q-Q plot
+* scale-location plot
+* residuals vs. leverage
+
+Important distinction:
+
+* **Outlier**: unusual in (Y), often seen through a large residual.
+* **High leverage point**: unusual in (X).
+* **Influential point**: a point that strongly changes the fitted model.
+
+Influence depends on both leverage and residual size. A point with an extreme (X) value can strongly affect the slope even if it is not the largest residual outlier.
+
+---
+
+### 4. Uncertainty in regression
+
+Students learn that fitted slopes and intercepts are estimates with uncertainty.
+
+Important ideas:
+
+* The standard error of the slope measures uncertainty in the estimated slope.
+* Confidence intervals describe plausible values for the true slope.
+* The gray band around a `geom_smooth(method = "lm")` line is usually a confidence interval for the fitted mean trend, not a prediction interval for new observations.
+* Prediction intervals are wider because individual observations vary around the mean trend.
+
+Important formula:
+
+[
+t = \frac{b}{SE_b}
+]
+
+For simple linear regression, the slope test uses:
+
+[
+df = n - 2
+]
+
+because the model estimates two parameters: intercept and slope.
+
+---
+
+### 5. Null hypothesis testing for regression
+
+The main null hypothesis for simple linear regression is:
+
+[
+H_0: b = 0
+]
+
+Biologically, this means that the expected response does not change as the explanatory variable changes.
+
+Students encounter three related ways to test this null:
+
+1. a t-test for the slope
+2. an F-test using model and error sums of squares
+3. a permutation test that breaks the association between (X) and (Y)
+
+In simple linear regression with one slope:
+
+[
+F = t^2
+]
+
+The F-test compares variation explained by the model to variation left unexplained as residual error.
+
+Important sums of squares:
+
+[
+SS_{total} = \sum(Y_i - \bar{Y})^2
+]
+
+[
+SS_{model} = \sum(\hat{Y_i} - \bar{Y})^2
+]
+
+[
+SS_{error} = \sum(Y_i - \hat{Y_i})^2
+]
+
+And:
+
+[
+SS_{total} = SS_{model} + SS_{error}
+]
+
+The F statistic is:
+
+[
+F = \frac{MS_{model}}{MS_{error}}
+]
+
+where:
+
+[
+MS_{model} = \frac{SS_{model}}{df_{model}}
+]
+
+[
+MS_{error} = \frac{SS_{error}}{df_{error}}
+]
+
+For simple linear regression:
+
+* (df_{model} = 1)
+* (df_{error} = n - 2)
+
+---
+
+### 6. Prediction and caveats
+
+Regression equations are useful for prediction, but predictions are only trustworthy when they stay close to the observed range and biological context.
+
+Key cautions:
+
+* Do not predict outside the observed range of (X).
+* Do not assume a model from one biological context applies in another.
+* A statistically detectable slope does not prove causation.
+* A model can have a small p-value but still explain little variation.
+* A model can fit the observed data but fail badly when extrapolated.
+* Influential points can change conclusions.
+
+Students should learn to treat regression as a useful summary, not an automatic truth machine.
+
+---
+
+## Key R tools
+
+Important R functions and packages:
+
+* `ggplot()`
+* `geom_point()`
+* `geom_jitter()`
+* `geom_smooth(method = "lm")`
+* `lm()`
+* `coef()`
+* `summary()`
+* `confint()`
+* `anova()`
+* `broom::tidy()`
+* `broom::augment()`
+* `broom::glance()`
+* `ggfortify::autoplot()`
+* `infer::specify()`
+* `infer::hypothesize()`
+* `infer::generate()`
+* `infer::calculate()`
+* `infer::get_confidence_interval()`
+
+Students should focus on what each function helps them understand, not just on memorizing syntax.
+
+---
+
+## Figure-specific knowledge
+
+### Scatterplot with regression line
+
+The chapter uses scatterplots of proportion hybrid seed versus pollinator visits or petal area. Points represent RILs. The fitted regression line shows the expected mean trend. The gray band shows uncertainty in the fitted mean trend.
+
+Students should notice:
+
+* direction of the association
+* approximate intercept
+* approximate slope
+* spread around the line
+* whether the fitted line seems like a reasonable summary
+
+### Diagnostic plots
+
+The diagnostic plot figure includes:
+
+* residuals vs fitted
+* normal Q-Q
+* scale-location
+* residuals vs leverage
+
+Students should use this figure to ask:
+
+* Are residuals centered around zero?
+* Is there obvious nonlinearity?
+* Is residual spread roughly constant?
+* Are residuals approximately normal?
+* Are any points unusually influential?
+
+In the practice example, point 34 is the largest residual outlier, while point 13 has the most influence because it has high leverage.
+
+### Decomposition figure
+
+The decomposition figure shows three ways to measure vertical deviations:
+
+* observed values to the mean
+* observed values to the fitted line
+* fitted values to the mean
+
+These correspond to total deviation, residual/error deviation, and model deviation.
+
+Students should connect this figure to:
+
+* (SS_{total})
+* (SS_{error})
+* (SS_{model})
+* (R^2)
+* the F-test
+
+---
+
+## Common pitfalls
+
+Students may:
+
+* confuse confidence intervals with prediction intervals
+* think the gray band contains 95% of the data
+* treat the intercept p-value as biologically important by default
+* forget that the slope test uses (df = n - 2)
+* confuse correlation with slope
+* interpret a p-value as the probability the null is true
+* assume regression proves causation
+* extrapolate outside the observed range
+* delete influential points automatically
+* think a small p-value means the model is good
+* think assumptions are automatically satisfied because `lm()` ran
+* confuse outliers, leverage, and influence
+* forget that (R^2) is about variation explained, not statistical significance
+
+---
+
+## What students should be able to do
+
+By the end of the chapter, students should be able to:
+
+1. Interpret the slope and intercept of a simple linear regression.
+2. Connect covariance, correlation, slope, and (R^2).
+3. Use `lm()` to fit a regression model in R.
+4. Use `broom::tidy()`, `augment()`, and `glance()` to interpret model output.
+5. Explain fitted values and residuals.
+6. Interpret confidence intervals for regression estimates.
+7. Distinguish confidence intervals from prediction intervals.
+8. State the null hypothesis that the slope equals zero.
+9. Interpret t-tests, F-tests, and permutation tests for a regression slope.
+10. Explain how sums of squares partition variation into model and error components.
+11. Interpret (R^2) as the proportion of variation explained by the model.
+12. Use diagnostic plots to identify problems with assumptions.
+13. Distinguish outliers, leverage, and influential points.
+14. Avoid unsafe extrapolation.
+15. Explain why regression describes association, not necessarily causation.
+16. Summarize regression results in biological language with appropriate caution.

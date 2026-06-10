@@ -1,4 +1,4 @@
-## • 12. Linear regression {.unnumbered}
+## • 12. Linear regression {.unnumbered #linear_regress}
 
 ---
 format: html

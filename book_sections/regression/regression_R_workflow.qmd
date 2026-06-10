@@ -1,0 +1,189 @@
+## • 18. Regression: R workflow {.unnumbered #regression_R}
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(broom)
+library(DT)
+library(infer)
+library(webexercises)
+library(tidyr)
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating scenario:**
+We have now learned how to fit a regression, interpret a slope, quantify uncertainty, test a null hypothesis, check model assumptions, and compare parametric results to simulation-based approaches. Now you just want to do it! 
+
+**Learning goals: By the end of this section, you should be able to:**
+
+1. Visualize a linear relationship with a scatterplot and regression line.  
+2. Fit a linear model with [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html).    
+3. Extract estimates, standard errors, confidence intervals, and p-values from a fitted model.  
+4. Make basic diagnostic plots for a linear model.  
+5. Use permutation and bootstrap approaches to evaluate a regression slope.  
+:::
+
+---
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Loading and formatting data"
+#| message: false
+#| warning: false
+library(broom)
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+
+gc_rils <- readr::read_csv(ril_link) |>
+  dplyr::mutate(visited = mean_visits > 0) |>
+  filter(location == "GC", !is.na(prop_hybrid), !is.na(petal_area_mm)) |>
+  dplyr::select(ril, location, prop_hybrid, petal_area_mm) |>
+  mutate(
+    petal_area_quartile = cut(
+      petal_area_mm,
+      breaks = quantile(petal_area_mm, probs = seq(0, 1, 0.25), na.rm = TRUE),
+      include.lowest = TRUE
+    )
+  )
+```
+
+---
+
+This chapter was a bit long. As a quick reference for doing a linear regression in R, I present a simple workflow.  This does not mean you should ignore the rest of this chapter - it is  key for understanding what goes into these functions and for helping you responsibly interpret this output. 
+
+
+## Step 1: Plot the data
+
+Remember ABP - Always Be Plotting. The first step in any analysis is to look at your data. The code below generates a simple plot with a regression line, like @fig-regression-workflow-plot.
+
+```{r}
+#| label: fig-regression-workflow-plot
+#| message: false
+#| warning: false
+#| fig-cap: "Relationship between petal area and proportion hybrid seed in Clarkia RILs from the GC site. Points show individual RILs, and the blue line shows the fitted linear regression."
+#| fig-alt: "A scatterplot shows proportion hybrid seed on the y-axis and petal area in square millimeters on the x-axis. Each point represents one Clarkia RIL from the GC site. A blue regression line slopes upward, showing that RILs with larger petals tend to have a higher proportion of hybrid seed."
+ggplot(gc_rils, aes(x = petal_area_mm, y = prop_hybrid)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE)
+```  
+
+## Step 2: Build a model 
+
+Now we fit the linear model of the expected proportion of hybrid seed as a linear function of petal area, with R's  [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function.
+
+```{r}
+hybrid_lm <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+```
+
+
+
+## Step 3: Extract estimates and uncertainty
+
+Base R's [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) function gives a lot of useful information about the model:
+
+```{r}
+summary(hybrid_lm)
+```
+
+--- 
+
+We can also find confidence intervals with R's [`confint()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/confint.html) function: `confint(hybrid_lm)`. Broom's  tidy function is even slicker! 
+
+```{r}
+#| eval: false
+tidy(hybrid_lm, conf.int = TRUE)
+```
+
+```{r}
+#| echo: false
+tidy(hybrid_lm, conf.int = TRUE)|> mutate_at(-1, round, digits = 4)|> kable()
+```
+
+## Step 4: Generate diagnostic plots
+
+Before trusting the model too much, we should check whether the model looks reasonable. The [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) function in Base R generates a useful set of diagnostic plots (@fig-regression-diagnostics) for [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) objects. See the section on [regression assumptions](#regression_assumptions) for help on how to interpret these. 
+
+
+```{r}
+#| eval: false
+plot(hybrid_lm)
+```
+
+
+When you run this on your computer, R will show you one plot at a time. So for reproducible code, try the trick in the box below. 
+ 
+`r hide("Code for a reproducible pipeline")`
+
+```{r}
+#| eval: false
+par(mfrow = c(2, 2))
+plot(hybrid_lm)      # make base r plots 2x2
+par(mfrow = c(1, 1)) # reset layout
+```
+
+`r unhide()`
+
+```{r}
+#| label: fig-regression-diagnostics
+#| fig-width: 8
+#| fig-height: 8
+#| fig-cap: "Diagnostic plots for the linear model of proportion hybrid seed as a function of petal area. The residuals vs. fitted plot helps identify nonlinearity or unequal variance; the Q-Q plot helps evaluate whether residuals are approximately normal; the scale-location plot gives another view of changing residual spread; and the residuals vs. leverage plot helps identify observations that may have unusually strong influence on the fitted model."
+#| fig-alt: "A four-panel diagnostic plot for a linear regression model. The panels show residuals versus fitted values, a normal Q-Q plot of standardized residuals, a scale-location plot, and residuals versus leverage. These plots are used to check whether the linear model has obvious problems such as nonlinear patterns, non-normal residuals, unequal residual variance, or highly influential observations."
+#| echo: false
+par(mfrow = c(2, 2))
+plot(hybrid_lm)
+par(mfrow = c(1, 1))
+```
+
+
+## When data violate assumptions   
+
+If data violate assumptions you can: 
+
+1. Build a more appropriate model (we will discuss this later).  
+2. Use a nonparametric test (e.g. [Spearman's rho](https://psyteachr.github.io/handyworkbook/spearman-correlation.html))
+3. Transform (Use  `mutate()` once you get the right transformation).  
+4. Ignore minor violations.  
+5. I usually pair 4 with bootstrap and permutation to help me feel ok about ignoring these violations (or not).  Here is the code: 
+
+
+### Bootstrap based Uncertainty
+
+```{r}
+#| message: false
+#| warning: false
+
+boot_dist <- gc_rils |>
+  specify(prop_hybrid ~ petal_area_mm) |> 
+  generate(reps = 10000, type = "bootstrap") |>
+  calculate(stat = "slope")
+
+boot_dist |>
+  get_confidence_interval(level = 0.95, type = "percentile")
+```
+ 
+ 
+### Permutation based NHST 
+
+```{r}
+library(infer)
+perm_dist <- gc_rils |>
+  specify(prop_hybrid ~ petal_area_mm) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 10000, type = "permute") |>
+  calculate(stat = "slope")
+
+obs_slope <- coef(hybrid_lm)["petal_area_mm"]
+
+perm_dist |>
+  mutate(as_or_more_extreme = abs(stat) >= abs(obs_slope)  )|>
+  summarise(p_value = mean(as_or_more_extreme))
+```
+
+

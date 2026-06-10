@@ -1,4 +1,5 @@
-
+NOTES TO YANIG 
+MAYB WHAT ARE WE DOING HERE / REVIEW AFTER CH11
 
 
 Additional resources to consult. 
@@ -14,4 +15,88 @@ Models as Prediction Machines: How to Convert Confusing Coefficients Into Clear 
 
 
 Gene regulatory networks: from correlative models to causal explanations https://www.nature.com/articles/s41576-026-00939-1
+
+
+
+Regression
+
+Review Linear Models
+Estimation: Review covariance and Correlation. Introduce Slope and Intercepts  + lm()
+Visualization
+Assumptions
+Partitioning variance: 
+Uncertainty: se *t OR . []bootstrap and 
+NHST + perm
+Warnings: Do not predict out of range
+Warnings: Attenuation 
+Sumary
+
+
+
+
+
+18. Linear Regression
+19. Two-way anova
+20. Multiple Regression
+21. Interactions and polynomial regression 
+
+---------
+Then I was thinking of a big picture section:
+22. Model Evaluation
+23. Bias
+24. Experimental Design
+25. Casual inference
+26. Better Plots
+27. Better Plots in R
+28. LLMs and the present and future of stats and coding
+
+Then special topics [optional self paced]
+
+
+
+---------
+# Special / advanced topics
+------------------------
+How to deal with data that violate assumptions
+------------------------
+1. Section: Random and mixed Effects
+2. Section: GLMM. - logistic regression, poison regression, beta, zero inflated data etc. spatial autocorrelation 
+3. Section GLMMM
+3. Nonparametric stats, Robust regression,
+
+
+Multivariate data
+------------------------
+1. MANOVA
+2. Ordination
+3. Clustering
+
+
+---------
+Appendix 1: Probability Theory 
+Appendix 2: Intro to likelihood based inference 
+
+
+
+
+Machine learning
+------------------------
+Random Forest
+PLR
+CNN
+
+
+Simulation 
+-------------------------
+Validation
+Data generation
+ABC
+Training and CNN
+
+
+
+
+Bayesian Stats
+------------------------
+Causal discovery
 

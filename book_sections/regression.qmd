@@ -1,0 +1,219 @@
+# 18. Regression {.unnumbered #Regression}
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(broom)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+source("../_common.R") 
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link) |>
+  dplyr::mutate(growth_rate = case_when(growth_rate =="1.8O" ~ "1.80",
+                                          .default = growth_rate),  
+                growth_rate = as.numeric(growth_rate),
+                visited = mean_visits > 0)
+
+gc_rils <- ril_data |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(mean_visits))|>
+  dplyr::select(prop_hybrid, petal_area_mm)
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+
+
+**Motivating scenario:** You want to know the extent to which a numeric explanatory variable helps predict variation in a numeric response variable. Linear regression lets us model this relationship, estimate its uncertainty, and test the null hypothesis that there is no linear relationship between the variables (i.e. the slope is zero).
+
+**Learning goals: By the end of this chapter you should be able to:**
+
+1. Explain the difference between a correlation and a regression slope.
+
+2. Explain how linear regression models the conditional mean of a response variable as a function of an explanatory variable.
+
+3. Fit and interpret a simple linear regression. 
+
+4. Use a regression model to predict the value of a continuous response variable from a continuous explanatory variable, and  calculate residuals.   
+
+5. Partition variation in a linear regression using sums of squares, and use this to: calculate the *F* statistic, and test the null hypothesis that the slope is zero.
+
+6. Use *t* tests and confidence intervals to estimate uncertainty in the slope and  test the null hypothesis that the slope is zero.
+
+7. Fit, summarize, and interpret linear regression models in R. 
+
+8. Recognize the assumptions, limitations, and common pitfalls of linear regression.
+
+
+:::
+
+---
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Loading and formatting data"
+#| message: false
+#| warning: false
+
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+
+gc_rils <- readr::read_csv(ril_link) |>
+  dplyr::mutate(visited = mean_visits > 0) |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(petal_area_mm))|>
+  dplyr::select(ril, location, prop_hybrid, petal_area_mm)|>
+  mutate(petal_area_quartile = cut( petal_area_mm,
+                                    breaks = quantile(petal_area_mm, probs = seq(0, 1, 0.25), na.rm = TRUE),
+                                    include.lowest = TRUE))
+```
+
+--- 
+
+
+
+
+<article class="drop-cap">As biologists, we are often interested in whether one measurement can help predict another. Do plants with larger flowers receive more pollinator visits? Do larger animals produce more offspring? Does temperature predict growth rate? In these cases, we aren't comparing groups, but rather we ask how variation in an explanatory numeric variable is associated with variation in the response. Lucky for us, the linear model framework can naturally accommodate such cases.   In this section, we will investigate how well petal area predicts the proportion of hybrid seeds on parviflora RILs planted at the GC field site.</article><br>  
+
+## Why not an ANOVA?   
+
+
+```{r}
+#| column: margin 
+#| label: fig-ANOVA
+#| echo: false
+#| fig-cap: "Proportion hybrid seed of parviflora RILs planted at the GC field site as a function of petal area quartile. The quartiles are:  Q1: 33.8 -- 51.6, Q2: 51.6 -- 61.6, Q3: 61.6 -- 72.1, Q4: 72.1 -- 103."
+#| fig-alt: "A jittered plot showing proportion hybrid seeds for Clarkia parviflora RILs grouped into four petal-area quartiles. The x-axis shows quartiles Q1 through Q4, and the y-axis shows proportion hybrid seeds from 0 to 1. Most observations in every quartile are near zero, but each quartile also includes some higher values. Red points and vertical error bars show the mean and 95% confidence interval for each quartile, with a dashed line connecting the group means. The group means generally increase from Q1 to Q4, but the binned view is coarse and variable."
+gc_rils|>
+    ggplot(aes(x = petal_area_quartile, y = prop_hybrid))+
+    geom_jitter(width = .15, height = 0.02, size = 5, alpha = .4)+
+    stat_summary(geom = "line", aes(group=1), size = 1, lty = 2)+
+    stat_summary(color = "red", fun.data = "mean_cl_normal", geom = "errorbar", width = .2,size = 1)+
+  labs(x = "Petal area quartile",
+       y = "Proportion hybrid seeds")+
+  scale_x_discrete(labels = c("Q1", "Q2", "Q3","Q4"))+
+  theme(axis.title = element_text(size = 25),
+        axis.text = element_text(size = 25))
+```
+
+
+
+
+Of course, we **could** address this question in a classic ANOVA framework, by binning the x variable into categories. @fig-ANOVA displays this approach: We first bin petal area into quartiles, and then conduct an ANOVA to test the null hypothesis that  the proportion of hybrid seeds does not differ as a function of petal area. 
+
+This procedure  uses three degrees of freedom (one for each model estimate aside from the intercept -- Table 1), and does not allow us to reject the null hypothesis ($p > 0.05$, Table 2). While a fine start, these results are partly a consequence of this modeling decision, not just the underlying relationship in the data.   
+
+1. It makes the same prediction for each observation in a given category, regardless of their precise petal area. These imprecise predictions are both less informative and generate more residual variation than a model that treats x as a true numeric variable.     
+```{r}
+#| echo: false
+#| column: margin 
+qual_model <- lm(prop_hybrid ~ petal_area_quartile, data = gc_rils)
+coef(qual_model)|>data.frame(row.names = c("(Intercept)","petal_area:Q2","petal_area:Q3","petal_area:Q4"))|> kable(digits = 3,caption = "Table 1) Model coefficients for categorical model.")
+```
+
+2. It spreads the model variation across three degrees of freedom, thereby reducing our power to reject the null hypothesis.   
+
+
+
+
+
+```{r}
+#| eval: false
+qual_model <- lm(prop_hybrid ~ petal_area_quartile, data = gc_rils)
+coef(qual_model)
+anova(qual_model)
+```
+
+
+```{r}
+#| echo: false
+anova(qual_model)|> kable(digits = 3, caption = "Table 2) Anova table for categorical model.",
+  escape = FALSE
+)
+```
+
+
+
+## The answer: A linear regression!  
+
+```{r}
+#| column: margin 
+#| label: fig-regression
+#| echo: false
+#| fig-cap: "Proportion hybrid seed of parviflora RILs planted at the GC field site by the  petal area."
+#| fig-alt: "A scatterplot showing proportion hybrid seeds as a function of petal area in square millimeters for Clarkia parviflora RILs at the GC field site. The x-axis shows petal area, ranging roughly from 35 to 105 mm², and the y-axis shows proportion hybrid seeds from 0 to 1. Many observations have hybrid seed proportions near zero, especially at smaller and intermediate petal areas, but higher hybridization values occur more often at larger petal areas. A fitted linear regression line slopes upward, with a gray confidence band that widens toward the edges, indicating a positive association between petal area and proportion hybrid seeds."
+gc_rils|>
+    ggplot(aes(x = petal_area_mm, y = prop_hybrid))+
+    geom_jitter(width = .15, height = 0.02, size = 5, alpha = .4)+
+  geom_smooth(method = "lm")+
+  labs(x = "Petal area (mm^2)",
+       y = "Proportion hybrid seeds")+
+  theme(axis.title = element_text(size = 25),
+        axis.text = element_text(size = 25))
+```
+
+
+ 
+```{r}
+#| echo: false
+#| column: margin 
+linear_model <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+coef(linear_model)|>data.frame(row.names = c("(Intercept)","petal_area_mm"))|> kable(digits = 5,caption = "Table 3) Model coefficients for linear regression.")
+```
+
+A linear regression circumvents these issues by directly modeling the response variable as a function of the numeric explanatory variable (@fig-regression). Thus, each observation gets its own prediction, and the petal-area term uses only one degree of freedom: the slope (Table 3). As a result, we have both a slightly greater model sum of squares than the categorical case, and a much larger model mean square, so we now strongly reject the null hypothesis (Table 4)!
+
+
+```{r}
+#| eval: false
+linear_model <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+coef(linear_model)
+anova(linear_model)
+```
+
+
+```{r}
+#| echo: false
+linear_model <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+anova(linear_model)|> kable(digits = 4, caption = "Table 4) Anova table for linear regression.",
+  escape = FALSE
+)
+```
+
+
+
+## What's Ahead
+
+
+In this chapter we will consider linear regression
+
+## What's ahead
+
+In this chapter, we will consider linear regression. A linear regression is model for describing how the expected value of a numeric response variable changes with a numeric explanatory variable.
+
+* We begin by reviewing three related [summaries of association between two numeric variables](#regression_summaries): covariance, correlation, and slope.     
+
+* Next, we treat linear regression as a [linear model](regression_linear_model). Just like the models with categorical an explanatory variable and a numeric response, a regression model generates predicted values and residuals. The difference is that regression uses a numeric explanatory variable directly, rather than first sorting observations into groups. We will see how the intercept and slope define the regression line, how to use this line to make predictions, and how to calculate residuals.  
+
+* Before we get too excited about our model, we will [pause to consider assumptions of linear regression](#regression_assumptions). We will also discuss what to do when these assumptions are imperfect, because real biological data rarely behave perfectly.
+
+* We then learn to [quantify uncertainty in our regression coefficients](#regression_uncertainty).
+
+* Next, we will learn to [test the null hypothesis that the slope equals zero](#regression_NHST). We will do this in three related ways: with a t-test for the slope, with an ANOVA/F-test based on model and error variation, and with a permutation test that builds a null distribution by shuffling the data. 
+
+* After that, we will step back and [consider caveats in making predictions from linear models](#regression_caveats). We will see that predictions from linear regression are only trustworthy when they stay close to the range and context of the data used to fit the model.  
+
+* Finally, we will end with a [practical workflow regression in R](#regression_R). 
+
+
+This chapter lays the foundation for the more complex linear models  in the remainder of this section. 

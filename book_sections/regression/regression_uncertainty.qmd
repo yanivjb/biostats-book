@@ -1,0 +1,414 @@
+## • 18. Regression: Uncertainty   {.unnumbered #regression_uncertainty}
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(broom)
+library(DT)
+library(infer)
+library(webexercises)
+library(tidyr)
+```
+
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating scenario:**     We fit a regression line because we want to describe how $Y$  changes with $X$. But we know that the line we see is only one estimate from one sample, not the true population parameter. Here, we quantify uncertainty in estimates of the slope and intercept with both mathematical and resampling-based approaches.   
+
+
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+1. Explain why estimated regression slopes and intercepts vary from sample to sample.    
+2. Calculate and interpret standard errors and 95% confidence intervals for regression coefficients.  
+    - With math.   
+    - With `R`'s  [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function and/or with the [`confint()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/confint.html), and [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) functions.  
+    - By bootstrapping. 
+3. Distinguish among uncertainty in parameters, uncertainty in the mean fitted trend, and uncertainty for new observations.  
+
+
+
+:::
+
+---
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Loading and formatting data"
+#| message: false
+#| warning: false
+library(broom)
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+gc_rils <- readr::read_csv(ril_link) |>
+  dplyr::mutate(visited = mean_visits > 0) |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(petal_area_mm))|>
+  dplyr::select(ril, location, prop_hybrid, petal_area_mm)|>
+  mutate(petal_area_quartile = cut( petal_area_mm,
+                                    breaks = quantile(petal_area_mm, probs = seq(0, 1, 0.25), na.rm = TRUE),
+                                    include.lowest = TRUE))
+
+
+hybrid_lm <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+augmented_hybrid_lm <- augment(hybrid_lm)
+```
+
+---
+
+
+## Uncertainty of parameter estimates
+
+@fig-lmunc shows not just the data and the best fit line, but also uncertainty in this line. This follows best practices in statistical reporting --  in statistics, a simple estimate of the slope or intercept is not good enough. That is because the unavoidable process of sampling error ensures that the parameters we estimate from samples will differ from true population parameters. Here we go through how to quantify this uncertainty.
+
+:::aside
+Recall that we represent true population parameters with Greek letters, and estimates with English letters, so </br></br>   
+
+- $a$ is our estimate of the true intercept $\alpha$, and   
+- $b$ is our estimate of the true slope, $\beta$.
+:::
+
+---
+
+
+```{r}
+#| eval: false  
+ggplot(gc_rils , aes(x = petal_area_mm, y = prop_hybrid))+
+  geom_point() +
+  geom_smooth(method = "lm")
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-lmunc
+#| fig-cap: "A plot showing petal area and proportion hybrid of 103 RILs planted in GC. The blue line is the line of best fit. The shaded band around it is the 95% confidence interval for the mean of Y, prop_hybrid seeds, conditional on X, petal area."
+#| fig-alt: "Scatterplot of proportion hybrid seed against petal area in millimeters for 103 Clarkia RILs planted at GC. Petal area ranges from about 35 to 100 mm², and proportion hybrid ranges from 0 to 1. Many points lie at zero across much of the petal-area range, while other points are spread between about 0.1 and 1.0. A fitted blue regression line slopes upward slightly, suggesting that RILs with larger petals tend to have somewhat higher hybrid seed proportions. The gray confidence band widens toward both ends of the petal-area range, especially at high petal area, showing greater uncertainty where there are fewer observations."
+ggplot(gc_rils , aes(x = petal_area_mm, y = prop_hybrid))+
+  geom_jitter(width = 0, height = 0.015, size = 4, alpha = 0.6) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "Petal area (mm²)",
+    y = "Proportion hybrid seed"
+  ) +
+  theme(
+    axis.text = element_text(size = 18), 
+    axis.title = element_text(size = 18)
+  )
+```
+
+---
+
+### Quantifying uncertainty from the t-distribution
+
+
+::: aside 
+
+---
+
+**Expression of critical t,** $t^*$.   
+
+For those of you who think in terms of calculus, I have added these mathematical descriptions of the critical t-value, $t^*$. In these equations, $f_{\text{df}}(t)$ describes the probability density of $t$ for the specified degrees of freedom, $df$. 
+
+$$1-\alpha = \int_{-t^*_{\text{df}}}^{t^*_{\text{df}}}
+f_{\text{df}}(t)\,dt$$
+
+So,
+
+$$\frac{\alpha}{2} =
+\int_{t^*_{\text{df}}}^{\infty}
+f_{\text{df}}(t)\,dt$$
+
+and 
+
+$$\frac{\alpha}{2} =  \int_{-\infty}^{-t^*_{\text{df}}}
+f_{\text{df}}(t)\,dt$$
+:::
+
+We can follow standard formulas to find the standard error and 95% Confidence Intervals for the slope and intercept.  So, let's review these standard formulas:  
+
+
+
+- *The 95% Confidence Interval* equals the parameter estimate $\pm$ the standard error times the critical t-value. This means we need to find both the critical t value and the standard error to calculate the 95% confidence interval</br></br>   
+
+
+
+
+- *The critical t-value*, $t^*$, tells us how many standard errors we need to move away from the center to capture the middle $1-\alpha$ of a $t$-distribution with a given number of degrees of freedom. The area between the negative and positive critical values is $1-\alpha$, while the remaining area, $\alpha$, is split equally between the two tails of area $\frac{\alpha}{2}$.</br></br>   
+
+
+- *The degrees of freedom error* equals the sample size minus the number of parameters estimated in the model. Because a linear regression estimates two parameters (the slope and intercept), a linear regression has  $n-2$ degrees of freedom error.
+
+So now we just need formulas for the standard errors of the slope and intercept and we can find the 95% confidence intervals!
+
+---
+
+#### **Uncertainty in the slope**
+
+The standard error of the slope, $SE_b$, is one divided by the square root of $(n-2)$, times the ratio of standard deviation in residuals, $s_e$, to standard deviation in X, $s_X$.  We can now find the SE and 95% CI of the slope on our own in R:
+
+::: aside 
+$$\text{SE}_b = \frac{1}{\sqrt{n-2}}\left( \frac{s_e}{s_x }\right)$$
+:::
+
+
+```{r}
+#| eval: false
+augmented_hybrid_lm |>
+    summarise(slope    = (hybrid_lm |> coef())[[2]],
+              n        = n(),
+              df_error = n - 2,
+              crit_t   = abs(qt(0.05/2, df_error)),
+              SE_b     = (1/sqrt(n-2))*(sd(.resid)/sd(petal_area_mm)) ,
+              lower_95 = slope - crit_t * SE_b,
+              upper_95 = slope + crit_t * SE_b)
+```
+
+
+```{r}
+#| echo: false
+augmented_hybrid_lm |>
+    summarise(slope    = (hybrid_lm |> coef())[[2]],
+              n        = n(),
+              df_error = n - 2,
+              crit_t   = abs(qt(0.05/2, df_error)),
+              SE_b     = (1/sqrt(n-2))*(sd(.resid)/sd(petal_area_mm)) ,
+              lower_95 = slope - crit_t * SE_b,
+              upper_95 = slope + crit_t * SE_b)|>
+  mutate_all(round,digits = 4)|>
+  kable()
+```
+
+---
+
+#### **Uncertainty in the intercept**
+
+The standard error in the intercept, $SE_a$, is not easy to wrap our heads around intuitively. So I simply present this equation on the right, and hold on tight as we turn the crank  in R:
+
+::: aside 
+$$
+\text{SE}_a=\frac{s_e}{\sqrt{n-2}} \sqrt{ \frac{n-1}{n} + \left(\frac{\bar{x}}{s_x}\right)^2}
+$$
+:::
+
+
+```{r}
+#| eval: false
+augmented_hybrid_lm |>
+    summarise(intercept= (hybrid_lm |> coef())[[1]],
+              n        = n(),
+              df_error = n - 2,
+              crit_t= abs(qt(0.05/2, df_error)),
+              s_e   = sd(.resid),
+              s_x   = sd(petal_area_mm),
+              x_bar = mean(petal_area_mm),
+              SE_a  = (s_e/sqrt(n-2)) *sqrt( (n-1)/n + (x_bar/s_x)^2),
+              lower_95 = intercept - crit_t * SE_a,
+              upper_95 = intercept + crit_t * SE_a)|>
+  dplyr::select(-s_e, -s_x, -x_bar)
+```
+
+
+```{r}
+#| echo: false
+augmented_hybrid_lm |>
+    summarise(intercept= (hybrid_lm |> coef())[[1]],
+              n       = n(),
+              df_error= n - 2,
+              crit_t  = abs(qt(0.05/2, df_error)),
+              s_e     = sd(.resid),
+              s_x     = sd(petal_area_mm),
+              x_bar   = mean(petal_area_mm),
+              SE_a    = (s_e/sqrt(n-2)) *sqrt( (n-1)/n + (x_bar/s_x)^2),
+              lower_95 = intercept - crit_t * SE_a,
+              upper_95 = intercept + crit_t * SE_a)|>
+  dplyr::select(-s_e, -s_x, -x_bar)|>
+  mutate_all(round,digits = 4)|>
+  kable()
+```
+
+---
+
+#### **Having R calculate our uncertainty** 
+
+We can avoid these calculations altogether! R will return the standard errors with the  [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) function and the confidence intervals with the [`confint()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/confint.html) function.  Or, more concisely, R will return both with [`broom`](https://broom.tidymodels.org/)'s [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function:
+
+
+```{r}
+#| eval: false
+tidy(hybrid_lm, conf.int = TRUE, conf.level = 0.95)|>
+  dplyr::select(-p.value)
+```
+
+::: aside
+To avoid distracting you, I did not show you the p-value (`select(-p.value)`). We will learn how to find p-values,  test null hypotheses, and interpret these results in the next section.  
+:::
+
+```{r}
+#| echo: false
+tidy(hybrid_lm, conf.int = TRUE, conf.level = 0.95)|>
+  dplyr::select(-p.value)|>
+  mutate_at(-1,round, digits = 4)|>
+  kable()
+```
+
+`r hide("Click here for confint() and summary() outputs")`
+
+```{r}
+confint(hybrid_lm)
+summary(hybrid_lm)
+```
+
+`r unhide()`
+
+
+---
+
+### Bootstrap-based uncertainty
+
+Because our data do not fit assumptions of the linear model particularly well ([see previous section](#regression_assumptions)), we must find a way to see how much we can trust the estimates of uncertainty calculated above. Bootstrapping -- that is, resampling our data with replacement, estimating the slope and intercept of this "bootstrapped" dataset, and repeating this many times, provides an alternative way to estimate uncertainty without relying on the assumptions of the t-distribution. 
+
+
+
+```{r}
+library(infer)
+boot_regression <- gc_rils |>
+  specify(prop_hybrid ~ petal_area_mm) |>
+  generate(reps = 10000, type = "bootstrap") |>
+  fit()
+```
+
+`r hide("Click here to see the first 100 bootstrap estimates")`
+
+```{r}
+#| echo: false
+boot_regression |>
+  mutate(estimate =round(estimate, digits = 4)) |>
+  ungroup()|>
+  slice(1:200) |>
+  datatable(options = list(pageLength = 6))
+```
+
+`r unhide()`
+
+```{r}
+#| eval: false
+boot_regression |>
+  group_by(term)|>
+  summarise(se = sd(estimate), 
+            lower_95_CI = quantile(estimate, prob = 0.025),
+            upper_95_CI = quantile(estimate, prob = 0.975)) 
+```
+
+
+```{r}
+#| echo: false
+boot_regression |>
+  group_by(term)|>
+  summarise(se = sd(estimate), 
+            lower_95_CI = quantile(estimate, prob = 0.025),
+            upper_95_CI = quantile(estimate, prob = 0.975)) |>
+  kable(digits = 4)
+```
+
+
+
+---
+
+These bootstrap-based estimates are quite close to our t-based summaries (Intercept: SE = `r tidy(hybrid_lm)|>filter(term == "(Intercept)") |> pull(std.error)|> round(digits = 4)`, 95% CI =  {`r as.numeric(confint(hybrid_lm)[1,][1:2])|> round(digits = 4) |> paste(collapse = " , ")`}, Slope: SE = `r tidy(hybrid_lm)|>filter(term == "petal_area_mm") |> pull(std.error)|> round(digits = 4)`, 95% CI =  {`r as.numeric(confint(hybrid_lm)[2,][1:2])|> round(digits = 4) |> paste(collapse = " , ")`}). 
+
+@fig-boot also reveals something interesting -- our estimates of the slope and intercept are non-independent. When we overestimate the slope we will tend to underestimate the intercept and vice-versa. This makes sense when you think for a minute, but is not obvious in our linear summaries above. 
+
+
+
+```{r}
+#| echo: false
+#| column: page-right
+#| fig-height: 5
+#| fig-width: 12
+#| label: fig-boot
+#| fig-cap: "Bootstrapped uncertainty in a linear regression. Panel A shows the observed relationship between petal area and proportion hybrid seed, with the fitted regression line in red and 1,000 bootstrapped regression lines in gray. Panel B shows the bootstrap distribution of the estimated intercepts and slopes from many resampled datasets. The red point marks the slope and intercept from the original dataset."
+#| fig-alt: "Two-panel figure showing bootstrap uncertainty for a regression of prop_hybrid on petal_area_mm. Panel A is a scatterplot with petal area in millimeters on the x-axis and proportion hybrid seed on the y-axis. Points are widely scattered, with many observations at zero hybrid seed and some observations between about 0.25 and 1.00. A red fitted regression line slopes upward, indicating that plants with larger petals tend to have higher predicted hybrid seed proportion. Many faint gray bootstrap regression lines are drawn behind it, forming a cloud of possible fitted lines around the original fit. Panel B plots the bootstrap estimates of intercepts on the x-axis and slopes on the y-axis. The points form a narrow downward-sloping band: bootstrap samples with higher intercepts tend to have lower slopes, and samples with lower intercepts tend to have higher slopes. Marginal histograms show the bootstrap distributions of intercepts and slopes. A red point marks the intercept and slope estimated from the original data."
+library(ggExtra)
+library(patchwork)
+a <- ggplot(gc_rils, aes(x = petal_area_mm, y = prop_hybrid)) + 
+  geom_abline(data = boot_regression|> pivot_wider(id_cols = replicate,names_from = term, values_from = estimate)|>ungroup()|>slice_sample(n=1000), 
+              alpha = .025 , 
+              aes(slope = petal_area_mm, intercept = intercept))+
+  geom_point(alpha = .7, size =3)+
+  labs(title ="The bootstrap dist of regression lines\n\n\n")+
+  geom_abline(slope = coef(hybrid_lm)[[2]], intercept = coef(hybrid_lm)[[1]],color = "red",linewidth = 1.2)+
+  theme(axis.title = element_text(size = 18), axis.text = element_text(size = 15),
+        title = element_text(size = 15))
+
+hybrid_boot_plot <- ggplot(boot_regression|> pivot_wider(id_cols = replicate,names_from = term, values_from = estimate)|>ungroup(),  
+                          aes(x = intercept, y = petal_area_mm)) +
+  geom_point(alpha = .4)+
+  geom_point(y = coef(hybrid_lm)[[2]], x =  coef(hybrid_lm)[[1]],color = "red",size = 3)+
+  theme(axis.title = element_text(size = 18), axis.text = element_text(size = 15),
+        title = element_text(size = 15))+
+  labs(y = "slope", title = "\nThe bootstrap dist. of slopes & intercepts")
+
+# Add histograms to the margins
+b <- ggMarginal(hybrid_boot_plot , type = "histogram", color = "white")
+
+a + b + plot_annotation(tag_levels = 'A')   +plot_layout(widths = c(4,5))
+
+
+```
+
+## Optional 
+
+
+::: fyi 
+## Uncertainty in predictions
+
+
+We often think of a regression line as "predicting" the value of the response variable, given the value of the explanatory variable. But what exactly is being predicted? The fitted value, $\widehat{Y_i}$, is our estimate of the mean value of $Y$ for observations with a given value of $X$. In this example, the regression line estimates the mean proportion hybrid for RILs with a given petal area (@fig-lmunc). The confidence interval around the regression line shows uncertainty in this estimated mean. But this is not the same as predicting where a new individual observation will fall. 
+
+If we want a range where we expect a new observation of $Y$ to fall, conditional on $X$, we use a prediction interval. As seen in @fig-pred, prediction intervals are wider than confidence intervals because they describe uncertainty for individual observations. This figure also highlights problems with this model: all points that fall  outside the prediction interval are above it, and much of the prediction interval extends below zero. I dont need a standard error to know that's wrong. We will address these issues with more flexible models in a later chapter.
+
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| label: fig-pred
+#| fig-cap: "95% prediction interval (in light purple) for the hybrid proportion as a function of petal area data set." 
+#| fig-alt: "Scatterplot of proportion hybrid seed against petal area in square millimeters for Clarkia RILs. Petal area ranges from about 35 to 100 mm², and proportion hybrid seed ranges from 0 to 1. Many points lie at zero across most of the petal-area range, while other points are spread between about 0.1 and 1.0. A blue fitted regression line slopes upward slightly, suggesting higher predicted hybrid seed proportion for larger petals. A narrow gray confidence band surrounds the fitted line, while a much wider purple prediction interval extends from below zero to above much of the observed data. The purple interval is widest near the ends of the petal-area range and includes biologically impossible negative proportions."
+
+augment(hybrid_lm,   interval = "prediction") |>
+  arrange(petal_area_mm)|>
+  ggplot(aes(x = petal_area_mm, y = prop_hybrid)) +
+  geom_point(size = 4) +
+  geom_ribbon(
+    aes(ymin = .lower, ymax = .upper),
+    alpha = 0.25,
+    fill = "purple"
+  ) +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "Petal area (mm²)",
+    y = "Proportion hybrid seed"
+  ) +
+  theme(
+    axis.text = element_text(size = 18), 
+    axis.title = element_text(size = 18)
+  )
+```
+
+
+
+
+:::
+

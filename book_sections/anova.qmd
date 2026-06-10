@@ -62,7 +62,7 @@ include_graphics("../clarkia_pics/xan_greenhouse.png")
 ```
 
 
-We have considered both the two-sample t-test, and the variance partitioning approach, to test the null hypothesis that group means are equal. We saw that these approaches give the same answers when analyzing a continuous response variable with a binary explanatory variable. Here, we consider what to do when our explanatory variable has more than two "levels". 
+<article class="drop-cap">We have considered both the two-sample t-test, and the variance partitioning approach, to test the null hypothesis that group means are equal. We saw that these approaches give the same answers when analyzing a continuous response variable with a binary explanatory variable. Here, we consider what to do when our explanatory variable has more than two "levels".</article><br>   
 
 We will see that testing for a difference between each group mean in a pairwise manner introduces a "multiple testing problem." The multiple testing problem simply means that the probability of rejecting one or more true null hypotheses increases as you test more null hypotheses.
 

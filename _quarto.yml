@@ -158,6 +158,16 @@ book:
         - book_sections/anova/sig_groups.qmd
         - book_sections/anova/Ranova_pipeline.qmd
         - book_sections/anova/anova_summary.qmd
+    - part: book_sections/regression.qmd
+      chapters: 
+        - book_sections/regression/regression_summaries.qmd
+        - book_sections/regression/regression_linear_model.qmd
+        - book_sections/regression/regression_assumptions.qmd
+        - book_sections/regression/regression_uncertainty.qmd
+        - book_sections/regression/regression_NHST.qmd
+        - book_sections/regression/regression_caveats.qmd        
+        - book_sections/regression/regression_R_workflow.qmd        
+        - book_sections/regression/regression_summary.qmd
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
@@ -169,7 +179,7 @@ book:
 # causal inference https://ngreifer.github.io/software/ causal
 # fix honest_plots chatbot
 # fix clear_plots chatbot
-
+# https://medium.com/@StatisticsAndDataScience
 
 bibliography: ["assets/modeling.bib", "assets/packages.bib"]
 csl: 'assets/apa-single-spaced.csl'

@@ -1,0 +1,1340 @@
+## • 18. Regression caveats   {.unnumbered #regression_caveats}
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(broom)
+library(DT)
+library(infer)
+library(tidyr)
+library(tufte)
+library(knitr)
+#https://bookdown.org/jgscott/DSGI/getting-started-in-r.html
+#https://bookdown.org/jgscott/DSGI/experiments.html#causal-vs.-statistical-questions
+#https://bookdown.org/jgscott/DSGI/basic-regression.html
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+gc_rils <- readr::read_csv(ril_link) |>
+  dplyr::mutate(visited = mean_visits > 0) |>
+  filter(location == "GC", !is.na(prop_hybrid), ! is.na(petal_area_mm))|>
+  dplyr::select(ril, location, prop_hybrid, petal_area_mm)|>
+  mutate(petal_area_quartile = cut( petal_area_mm,
+                                    breaks = quantile(petal_area_mm, probs = seq(0, 1, 0.25), na.rm = TRUE),
+                                    include.lowest = TRUE))
+
+
+hybrid_lm <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
+augmented_hybrid_lm <- augment(hybrid_lm)
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** You now have a linear model that you feel good about! You are excited to unleash it on the world and make predictions. Before you get carried away, consider these limitations. 
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+
+1. Explain when and where it is (un)safe to generate predictions from a linear regression equation.      
+
+2. Judge if a rogue data point or two are hijacking your model.
+
+
+3. Recognize the impact of error in measuring explanatory and/or response variables on the estimation of slopes and correlations. 
+
+
+:::
+
+---
+
+
+
+To me, at least, the idea of having an equation to make predictions is super compelling. I mean you collect some data, fit a model, and now you can suddenly make predictions about the world. I often find myself getting carried away. So before getting too wild, I wanted to provide a few notes about when we can and cannot  trust regression predictions..
+
+## Be Wary of Extrapolation
+
+
+
+Someone$^*$ famously said: 
+
+
+::: aside
+$^*$ It is not clear who said this first  -- it has been attributed to Niels Bohr, Yogi Berra, Mark Twain, and even Nostradamus. This is an example of how "famous things that are said… tend to be attributed to even more famous people." Have a listen to [this fun episode of Under Understood](https://underunderstood.com/podcast/episode/orange-door-hinge-rhyme/) for more.
+:::
+
+
+
+> Det er vanskeligt at spaa, især naar det gælder Fremtiden.   
+> 
+> It is difficult to predict, especially when it comes to the future.
+> </br></br> 
+>
+> `r tufte::quote_footer("— Niels Bohr, Yogi Berra, Mark Twain or someone?")`
+
+This quote  captures a challenge in using the regression equation (or any statistical model) to make predictions. Models can make useful predictions, but those predictions are most trustworthy for cases that resemble the data used to fit the model. This issue has inspired a related quote:
+
+
+> It is difficult to predict from a linear regression, especially when it comes to data outside the model’s range or context.
+> 
+> `r tufte::quote_footer("— Me")`
+
+::: aside 
+
+**NOTE:** This issue goes beyond the standard linear modeling assumptions, even if all assumptions are met (see [regression assumptions](#regression_assumptions)), predictions made outside the range or context of a model cannot be trusted. 
+
+:::
+
+
+
+### Do not predict out of range
+
+
+
+Recall our linear model:  
+
+$$\text{PROP HYBRID} = `r coef(lm(prop_hybrid ~ petal_area_mm, data = gc_rils))[[1]]|>round(digits = 3)` + `r coef(lm(prop_hybrid ~ petal_area_mm, data = gc_rils))[[2]]|>round(digits = 5)` \times \text{PETAL AREA}$$
+
+This model can predict the proportion hybrid seed of a RIL with a petal area $10\text{ mm}^2$ or $150\text{ mm}^2$ as -0.15 and 0.65, respectively. The problem is that these predictions are garbage. 
+
+We should not trust them because the petal areas  are outside of the range for which we collected data. The prediction of a negative proportion of hybrid seeds for the hypothetical RIL with a petal area of $10 \text{ mm}^2$ makes this obvious. But even the plausible sounding prediction for a RIL with a petal area of $150 \text{ mm}^2$ is suspect for the same reason -- we have no observations to ground this prediction. @fig-extrap shows how silly such extrapolation can get. 
+
+
+
+```{r}
+#| echo: false
+#| label: fig-extrap
+#| fig-cap: "An [xkcd comic](https://xkcd.com/605/) poking fun of extrapolation. Original rollover text: By the third trimester there will be hundreds of babies inside of you. See the [associated explain xkcd](https://www.explainxkcd.com/wiki/index.php/605:_Extrapolating) for more."
+#| fig-alt: "An xkcd comic with the title, My Hobby: Extrapolating.  [There is a graph. Time runs along the horizontal axis; Number of Husbands on the vertical graph. Yesterday and today are labeled in time, 0 and 1 in number of husbands. Points are plotted with 0 at yesterday, 1 at today. A straight line is fitted through them, and dotted lines joining perpendicularly the points to the axes.] [Cueball is holding a pointer to the graph, and looking at Megan wearing a bridal train and veil, who seems to be thinking.] Cueball: As you can see, by late next month you'll have over four dozen husbands. Cueball: Better get a bulk rate on wedding cake."
+include_graphics("https://imgs.xkcd.com/comics/extrapolating.png")
+```
+
+
+
+### Do not predict out of context   
+
+
+
+Just like we should not trust prediction for values outside the range in which we collected our data, we should be skeptical of predictions in conditions that differ from the context of our data.
+
+For example, in our study we examined RILs planted in four different field sites. Predictions from site GC may not apply to other sites. Why? Because they are different! They could have different numbers and types of pollinators, or different weather etc.  @fig-ass shows that the predictions from the model built from GC data (red line) happen to fit the Sawmill Road (SR) data relatively well, but makes terrible predictions at the Upper Sawmill (US) location.
+
+The problem in porting predictions is not that the regression equation stopped working mathematically. The problem is that we asked it a biological question that the GC data alone could not answer.
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-height: 3.9
+#| fig-width: 12
+#| column: page-right
+#| echo: false
+#| label: fig-ass 
+#| fig-alt: "Faceted scatterplot of proportion hybrid seed versus petal area at LB, SR, and US. Gray points show individual observations. Blue lines show site-specific regressions with gray confidence ribbons; the red line shows the GC regression repeated in each panel. The GC model is fairly similar to the local model at SR, somewhat different at LB, and much steeper than the local model at US, illustrating that predictions from one site may not generalize to another."
+#| fig-cap: "A model fit in one context may not predict well in another. Gray points show individual RILs. In each panel, the blue line shows the site-specific linear model and the gray ribbon its 95% confidence interval. The red line shows the model fit from GC applied to each site."
+gc_line <- tibble(
+  model = "GC",
+  slope = .0057,
+  intercept = -0.208
+)
+readr::read_csv(ril_link) |>
+  dplyr::mutate(visited = mean_visits > 0) |>
+  filter(location != "GC", !is.na(prop_hybrid), !is.na(petal_area_mm)) |>
+  ggplot(aes(x = petal_area_mm, y = prop_hybrid)) +
+  geom_point(size = 4, alpha = .5) +
+  facet_wrap(~location, ncol = 3, labeller = "label_both") +
+  geom_smooth(aes(color = "focal site"),
+              method = "lm", linewidth = 0, se = TRUE) +
+  geom_smooth(method = "lm", linewidth = 2, se = TRUE)  +
+  geom_abline(data = gc_line,
+              aes(slope = slope, intercept = intercept, color = model),
+              linewidth = 2, show.legend = TRUE) +
+  theme(
+    axis.title = element_text(size = 15),
+    axis.text = element_text(size = 15),
+    strip.text = element_text(size = 15),
+    legend.text = element_text(size = 15),
+    legend.title = element_text(size = 15),
+    legend.position = "bottom"
+  ) +
+  scale_color_manual(
+    name = "model",
+    values = c("focal site" = "blue", "GC" = "firebrick")
+  )
+```
+
+## Do not get pushed around by extremes    
+
+A linear model finds the line that best fits all of the data. But not all data points are the same. Occasionally a scatter plot reveals some extreme observations (e.g. @fig-extreme).    
+
+- **An Outlier**  has an extreme value of $Y$, or more precisely, an  extreme residual value (@fig-extreme A). What is extreme? As a rule of thumb, a data point two standard deviations away from its expected value (a standardized residual of two or more) is somewhat suspect.  
+
+- **A High Leverage Point:** has an extreme value of $X$ (@fig-extreme B).     
+
+- **An Influential Point:** strongly changes the result of a regression. Influential points are both outliers and high leverage points (@fig-extreme C).  
+
+```{r}
+#| fig-width: 12
+#| fig-height: 3.5
+#| column: page-right
+#| echo: false
+#| label: fig-extreme
+#| message: false
+#| warning: false
+#| fig-cap: "**Extreme points:** Three scatterplots with an unusual data point colored in red. A) The red point has an unusual value of Y (an outlier), but it is not especially extreme in the explanatory variable. B) The red point has an extreme  value of X (a high-leverage point), but it falls close to the fitted line and therefore has little influence on the slope. C) The red point is extreme for both X and Y -- it is a *high leverage outlier* (aka an influential point). As such, it generates a negative relationship between X and Y despite no strong pattern in the other data points."
+#| fig-alt: "Three side-by-side scatterplots illustrating different kinds of extreme observations in simple linear regression. In panel A, one red point has an unusually low y-value but is not far from the other points in x. In panel B, one red point has an unusually high x-value but lies close to the fitted line. In panel C, one red point has both high x and low y, strongly pulling the fitted regression line downward."
+library(patchwork)
+set.seed(11);
+outlier_point <- slice_sample(tibble(x = c(rnorm(11)), y = c(rnorm(10),-3)),prop = 1)
+highleverage_point <-slice_sample( tibble(x = c(rnorm(10),4), y = rnorm(11)),prop = 1)
+influential_point <- tibble(x = c(rnorm(10),4), y = c(rnorm(10),-3))
+
+
+outlier_plot <- ggplot(outlier_point, aes(x = x, y=y))+ geom_point(size = 4,alpha = .5)+geom_smooth(method = "lm")+ geom_point(data = outlier_point|>filter(abs(x)>=3 | abs(y)>=3), color = "red",size =4)+labs(title = "A) Outlier in y")+theme(axis.text = element_text(size = 15),axis.title =  element_text(size = 15),title =  element_text(size = 15),)
+highleverage_plot <- ggplot(highleverage_point, aes(x = x, y=y))+ geom_point(size = 4,alpha = .5)+geom_smooth(method = "lm")+ geom_point(data = highleverage_point|>filter(abs(x)>=3 | abs(y)>=3), color = "red",size =4)+labs(title = "B) High leverage point")+theme(axis.text = element_text(size = 15),axis.title =  element_text(size = 15),title =  element_text(size = 15),)
+influential_plot <- ggplot(influential_point, aes(x = x, y=y))+ geom_point(size = 4,alpha = .5)+geom_smooth(method = "lm")+ geom_point(data = influential_point|>filter(abs(x)>=3 | abs(y)>=3), color = "red",size =4)+labs(title = "C) Influential point")+theme(axis.text = element_text(size = 15),axis.title =  element_text(size = 15),title =  element_text(size = 15),)
+
+outlier_plot + highleverage_plot + influential_plot
+
+```
+
+### Identifying extreme points
+
+
+You can usually spot extreme values by looking at a scatter plot like @fig-extreme. Of course, in real life, points do not come colored by how extreme they are. However, there are some standard numerical summaries that can help us identify extreme points (@tbl-influential-points).   
+
+| Summary  | What it tells us | When to take note |
+|--|--|------|
+| Standardized residual (`augment` header: `.std.resid`) | Quantifies how "outlier-$y$" a point is. Calculated as the residual divided by the standard deviation of residuals| When it is greater than two.  |
+| Leverage  (`augment` header: `.hat`)  | Quantifies how "outlier-$x$" a point is. The calculation is complicated so check [Wikipedia](https://en.wikipedia.org/wiki/Leverage_(statistics)) for more. | When it is greater than two times the number of model parameters divided by the sample size. |
+| Cook's distance  (`augment` header: `.cooksd`)|  Quantifies "influence" as how much the fitted model would change if that observation were removed.  | When it is either greater than one or if it is greater than four divided by the sample size.|
+: Common summaries for identifying unusual or influential observations in a linear model. {#tbl-influential-points}
+
+---
+
+#### **Identifying exteme points with [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)** 
+
+All summaries in @tbl-influential-points are output by [`broom`](https://broom.tidymodels.org/)'s   [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function. The code below reminds you of the syntax required to generate something like @tbl-augment: 
+
+
+```{r}
+#| eval: false
+extreme_example <- lm(y ~ x, data = influential_point)
+augment(extreme_example)
+```
+
+---
+
+```{r}
+#| echo: false
+#| label: tbl-augment
+#| tbl-cap: "Output from the augment() function."
+extreme_example <- lm(y ~ x, data = influential_point)
+
+extreme_example |>
+  augment()     |> 
+  mutate_all(round,digits = 3)|>
+  datatable(options = list(pageLength =3))
+```
+
+---
+
+#### **Identifying exteme points with [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) or [`autoplot()`](https://cran.r-project.org/web/packages/ggfortify/refman/ggfortify.html#autoplot.lm)**   
+We could peruse all of [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)'s output for each data point, or use our [`dplyr`](https://dplyr.tidyverse.org/) skills to find potentially concerning data points using thresholds in @tbl-influential-points.   However, these approaches are tedious.   
+
+::: aside 
+In `R` we can make "Residuals vs Leverage" plots by providing the linear model to either the [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) function in Base R, or the [`autoplot()`](https://cran.r-project.org/web/packages/ggfortify/refman/ggfortify.html#autoplot.lm) function in the [`ggfortify`](https://cran.r-project.org/web/packages/ggfortify/index.html) package.  These are the same functions we [previously used to generate "diagnostic plots"](@regression_assumptions).
+:::
+
+
+It's easiest to just look at these summaries and spot potentially concerning data points. In addition a plot of the raw data (e.g. @fig-extreme),  a "Residuals vs Leverage" plot can help identify potentially problematic points. As seen in @fig-resid-leverage-types, such plots display "leverage" (how extreme a point is for the explanatory variable) on the x-axis, and the standardized residual (how extreme a point is for the response variable) on the y. While extremes in leverage or residuals are worth noting, the most concerning data points (i.e. the "influential points") are extreme for both. Thus, we pay special attention to the points in the top or bottom right of the residuals vs leverage plot. Helpfully when making this plot with the `plot()` function, R provides lines to show Cook's distance.  
+
+
+```{r}
+#| eval: false
+extreme_example <- lm(y ~ x, data = influential_point)
+plot(extreme_example, which = 5)
+
+```
+
+```{r}
+#| label: fig-resid-leverage-types
+#| echo: false
+#| column: page-right
+#| fig-width: 12
+#| fig-height: 4
+#| fig-cap: "Residuals-versus-leverage plots for three kinds of unusual observations. Panel A shows a point that is unusual in its response value but not especially unusual in x. Panel B shows a point with high leverage because it is far from the other observations in x, but it is not especially influential because it lies close to the fitted pattern. Panel C shows an influential point: it has high leverage and a large residual, so it strongly affects the fitted model."
+#| fig-alt: "Three residuals-versus-leverage diagnostic plots from simple linear models. Panel A, Outlier, shows one observation with a large standardized residual but moderate leverage. Panel B, High leverage point, shows one observation with high leverage but a small standardized residual. Panel C, Influential point, shows one observation with both high leverage and a large standardized residual, placing it near or beyond Cook's distance contours."
+# ── Slightly thicker Cook's distance lines ──────────────────────────────────
+# R's plot.lm draws Cook's contours via an internal hook; we override lty/lwd
+# by patching the graphical parameters before each call.
+op <- par(
+  mfrow     = c(1, 3),
+  mar       = c(5, 6, 4, 2),
+  oma       = c(0, 0, 0, 0),   # no outer title — avoids the stray supertitle
+  cex.axis  = 1.8,
+  cex.lab   = 2.0,
+  cex.main  = 2.2,
+  font.main = 2,
+  lwd       = 2.5
+)
+plot_panel <- function(data, title) {
+  fit <- lm(y ~ x, data = data)
+  plot(
+    fit,
+    which   = 5,
+    main    = title,
+    sub     = "",
+    caption = "",
+    pch     = 21,
+    bg      = "white",
+    col     = "black",
+    cex     = 2.2,
+    cex.id  = 1.8
+  )
+  # White out the old small label
+  rect(
+    xleft   = par("usr")[1],
+    ybottom = par("usr")[3],
+    xright  = par("usr")[1] + diff(par("usr")[1:2]) * 0.35,
+    ytop    = par("usr")[3] + diff(par("usr")[3:4]) * 0.08,
+    col     = "white",
+    border  = NA,
+    xpd     = TRUE
+  )
+  # Draw new larger label
+  text(
+    x      = par("usr")[1],
+    y      = par("usr")[3],
+    labels = "-- Cook's distance",
+    col    = "gray50",
+    cex    = 1.6,
+    adj    = c(-0.1, -0.5),
+    xpd    = TRUE
+  )
+}
+
+plot_panel(outlier_point,      "A)  Outlier")
+plot_panel(highleverage_point, "B)  High Leverage")
+plot_panel(influential_point,  "C)  Influential")
+
+par(op)
+```
+
+
+
+### What to do with extreme points? 
+
+Whenever you encounter an extreme point,  first verify that the point is real, and if it is real  ask whether it influences your results, and then draw an honest conclusion.
+
+
+1. **Verify the data.** We all make mistakes, so before getting carried away, make sure the extreme point is legit. Go back to the original data sheet and see if something obvious went wrong. Perhaps a value was reported in centimeters rather than millimeters, an eight was mistaken for a zero, or a decimal point was entered in the wrong place. If the extreme value was simply a mistake, fix it if you know the correct value. If you do not know the correct value, document the problem and treat the value as missing.
+
+
+2. **See if your results are sensitive to the extreme point.** In a sensitivity analysis, we rerun our analysis after making a reasonable change to the data (or model in other cases). So, compare results of a model with and without the extreme point, and compare the results. Did the slope change a little or a lot? Did the sign change? Did our biological conclusion change? It is usually best to report both analyses, especially if they lead to different interpretations.
+
+
+3. **Come to a conclusion.** If your sensitivity analysis revealed that your results are robust to this extreme point, that's great. If not, be honest that the conclusion depends on that observation. Then interpret results from both models cautiously. If you want a more formal approach, you can also try a robust regression method ([Wikipedia page](https://en.wikipedia.org/wiki/Robust_regression), [review paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC7444710/)).
+
+
+**Take-home message.** As with all topics in statistics our goal is not to have a clean result, or achieve statistical significance. Rather, our goal is to understand our results and clearly communicate this understanding. 
+
+
+### An extreme example
+
+Let's take a quick break from our Clarkia data (because there weren't super obvious worrisome points), and turn to a data set that is quite easy to generate - the association between height (in inches) and shoe size (in centimeters). The data (available [here](https://online.stat.psu.edu/stat462/sites/onlinecourses.science.psu.edu.stat462/files/data/height_foot/index.txt) comes from 33 male college students.
+
+I will  first make a simple x-y scatter plot -- with X as foot length and y as height. But rather than making a simple plot, I will:  
+
+- First put the data through a simple linear model and give the model output to [`broom`](https://broom.tidymodels.org/)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function.  **This will not change the data I plot at all.**  
+- But I can now attach additional information to each data point (including `id = 1:n())`.  
+- Then I can make a plot and then make it interactive with the [`ggplotly()`]()  function in the [`plotly`](https://github.com/plotly/plotly.R) package. 
+
+You don't need to do this - but I am to give you a more thorough view: 
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+#| column: page-inset-right
+# Loading the data and libraries
+library(readr)
+library(ggplot2)
+library(broom)
+library(plotly)
+library(dplyr)
+
+shoe_link <- "https://online.stat.psu.edu/stat462/sites/onlinecourses.science.psu.edu.stat462/files/data/height_foot/index.txt"
+shoe_data <- read.delim(shoe_link) # I use read_delim instead of read_csv because it's a .txt file, not a .csv
+shoe_lm <- lm( height ~ foot , data = shoe_data) 
+augmented_shoe <- augment(shoe_lm)  |> 
+  mutate(sample_id = 1:n())|>
+  mutate_all(round, digits = 3)
+
+shoe_plot <- augmented_shoe |>
+  ggplot(aes(x = foot, y = height,   ID = sample_id, Leverage = .hat, 
+             Std_Resid = .std.resid, Influence = .cooksd))+
+  geom_point() +
+  geom_smooth(method = "lm")
+
+ggplotly(shoe_plot)
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-shoe-outlier
+#| fig-cap: "Height and foot length for 33 male college students. Each point is one student. The fitted line shows the linear relationship between foot length and height. One point has an unusually low height for its foot length and is highlighted by the diagnostic summaries available when hovering over the interactive plot."
+#| fig-alt: "Interactive scatterplot of height versus foot length. Most students follow a positive relationship: students with larger feet tend to be taller. One point falls far below this pattern, indicating a student with much lower height than expected from foot length. Hover text gives each point's row ID, leverage, standardized residual, and Cook's distance."
+# Loading the data and libraries
+
+# Loading the data and libraries
+library(readr);  library(ggplot2);  library(broom);  library(plotly);   library(dplyr)
+
+shoe_link <- "https://online.stat.psu.edu/stat462/sites/onlinecourses.science.psu.edu.stat462/files/data/height_foot/index.txt"
+shoe_data <- read.delim(shoe_link) # I use read_delim instead of read_csv because it's a .txt file, not a .csv
+shoe_lm <- lm( height ~ foot , data = shoe_data) 
+augmented_shoe <- augment(shoe_lm)  |> 
+  mutate(sample_id = 1:n())|>
+  mutate_all(round, digits = 3)
+
+shoe_plot <- ggplot(augmented_shoe, 
+                    aes(x = foot, y = height,
+                        ID = sample_id,
+                        Leverage = .hat,
+                        Std_Resid = .std.resid,
+                        Influence = .cooksd))+
+  geom_point() +
+  geom_smooth(method = "lm")
+
+ggplotly(shoe_plot)
+```
+
+Looking at @fig-shoe-outlier, we clearly see one extreme outlier. Rolling our mouse over it, we see that this extreme point:  
+
+- Is in row 28, of the dataset. 
+- Has a HUGE standardized residual of 4.263 (i.e. the `2 * pnorm(4.263, lower.tail = FALSE)` equals the 0.002 percent tail of the standard normal).   
+- Has relatively little leverage, 
+- Might be somewhat influential. That is, while Cook's distance is way less than one, it is greater than four divided by n = 33).  
+
+The residuals vs leverage plot (@fig-residlevshoe) tells the same story. 
+
+```{r}
+#| label: fig-residlevshoe
+#| fig-cap: "Residuals-versus-leverage plot for the height and foot length model. Row 28 stands out because it has a very large standardized residual, but it has relatively little leverage. Its Cook's distance is noticeable but not extreme by the common threshold of one."
+#| fig-alt: "Diagnostic plot with leverage on the x-axis and standardized residuals on the y-axis. Most observations cluster near zero standardized residual and low leverage. Observation 28 has a very large positive standardized residual but only modest leverage, making it an outlier in y rather than a high-leverage point."
+
+plot(shoe_lm , which = 5)
+```
+
+---
+
+This all looks fine to me! But to be sure, let's compare model parameters with and without this outlier:
+
+```{r}
+# Full data set
+lm( height ~ foot , data = shoe_data)  |> 
+  coef() |> 
+  round(digits = 3)
+lm( height ~ foot , data = slice(shoe_data , -28))  |> 
+  coef() |> 
+  round(digits = 3)
+```
+
+
+
+
+## Attenuation: The effect of measurement error: 
+
+Measurements are rarely perfect.  This imperfection can occur because we measured hurriedly (e.g. quickly measured flower length with a tape measure), or because sampling error caused observations of the variable we measured deviated from their true values by sampling error (e.g. we only watched pollinators visit plants for 15 minutes and only estimated the maternal proclivity to set hybrid seed by genotyping eight offspring etc..) 
+
+
+So because we rarely measure all values of $X$ and $Y$ perfectly, we must consider how  measurement error in $X$ and/or $Y$ affect our estimated correlations and slopes.
+
+**The impact of noisy data on estimated associations is called attenuation.** Grokking the effect of such noise is a bit tricky because it differs depending on the measure of association (slope vs correlation)  and the noisy variable ($X$, $Y$, or both):   
+
+- **For correlation, measurement error in $X$ and/or $Y$** both increases the variance of residuals and biases the correlation closer to zero, pulling it away from its true value.
+
+- **For the slope, measurement error in $X$** increases the variance of residuals and similarly biases the slope closer to zero, moving it away from its true value.
+
+- **For the slope, measurement error in $Y$** does not systematically increase or decrease the slope estimate. However, it tends to increase the standard error, the residual variance, and the p-value.
+
+I find these ideas hard to make sense of. Luckily [this fantastic tweet](https://x.com/robertostling/status/1494418783951372291) and [blog post](https://observablehq.com/@tophtucker/recreating-ostlings-regression-visualizations) include visualizations that clarify attenuation. I present a modified version of these visualizations below: 
+
+---
+
+**NOISY X brings correlations and slopes closer to zero (on average).**
+
+```{=html}
+<div id="x-error-demo" class="attenuation-demo">
+  <style>
+    .attenuation-demo {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 520px;
+      margin: 1.5rem auto;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .attenuation-demo h3 {
+      margin-top: 0;
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+
+    .attenuation-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .attenuation-controls input[type="range"] {
+      width: 160px;
+    }
+
+    .attenuation-button {
+      border: 1px solid #aaa;
+      background: #f7f7f7;
+      border-radius: 6px;
+      padding: 0.25rem 0.55rem;
+      cursor: pointer;
+    }
+
+    .attenuation-button:hover {
+      background: #eee;
+    }
+
+    .attenuation-stat {
+      font-size: 0.88rem;
+      color: #444;
+      margin-top: 0.35rem;
+    }
+
+    .attenuation-caption {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .true-point {
+      fill: #cfcfcf;
+      opacity: 0.55;
+    }
+
+    .obs-point {
+      fill: #333;
+      opacity: 0.72;
+    }
+
+    .true-line {
+      stroke: #777;
+      stroke-width: 2;
+      stroke-dasharray: 5 4;
+    }
+
+    .fit-line {
+      stroke: #c0392b;
+      stroke-width: 3;
+    }
+
+    .line-label {
+      font-size: 11px;
+      fill: #444;
+    }
+  </style>
+
+  <h3>D. Measurement error in <em>x</em>: the slope is attenuated</h3>
+
+  <div class="attenuation-controls">
+    <button class="attenuation-button" id="play-x-error">Play</button>
+    <label for="x-error-slider">measurment error in x (in SD units):</label>
+    <input id="x-error-slider" type="range" min="0" max="3" step="0.01" value="0">
+    <span id="x-error-value">0.00</span>
+  </div>
+
+  <svg id="plot-x-error" width="500" height="370" role="img"
+       aria-label="Scatterplot showing that measurement error in x attenuates the regression slope."></svg>
+
+  <div class="attenuation-stat" id="x-error-stat"></div>
+
+  <div class="attenuation-caption">
+    Gray points show the original data. Black points show the measured data after adding error to <em>x</em>.
+    The dashed gray line is the true relationship; the red line is the regression line fit to the measured data.
+    As measurement error in <em>x</em> increases, the fitted slope is pulled toward zero.
+  </div>
+</div>
+
+<script>
+(function() {
+
+  function mulberry32(seed) {
+    return function() {
+      let t = seed += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  const rand = mulberry32(12345);
+
+  function rnorm() {
+    let u = 0, v = 0;
+    while (u === 0) u = rand();
+    while (v === 0) v = rand();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+
+  const n = 200;
+  const alpha = 0;
+  const beta = 0.75;
+  const residualSD = 0.75;
+
+  const data = Array.from({ length: n }, () => {
+    const x = rnorm();
+    const y = alpha + beta * x + residualSD * rnorm();
+
+    return {
+      x: x,
+      y: y,
+      xError: rnorm()
+    };
+  });
+
+  function mean(a) {
+    return a.reduce((x, y) => x + y, 0) / a.length;
+  }
+
+  function ols(points) {
+    const xs = points.map(d => d.xObs);
+    const ys = points.map(d => d.yObs);
+    const mx = mean(xs);
+    const my = mean(ys);
+
+    let sxy = 0;
+    let sxx = 0;
+    let syy = 0;
+
+    for (let i = 0; i < points.length; i++) {
+      sxy += (xs[i] - mx) * (ys[i] - my);
+      sxx += (xs[i] - mx) * (xs[i] - mx);
+      syy += (ys[i] - my) * (ys[i] - my);
+    }
+
+    const slope = sxy / sxx;
+    const intercept = my - slope * mx;
+    const r = sxy / Math.sqrt(sxx * syy);
+
+    return { slope, intercept, r };
+  }
+
+  const width = 500;
+  const height = 370;
+  const margin = { top: 18, right: 18, bottom: 42, left: 46 };
+  const innerWidth = width - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
+
+  const xDomain = [-5, 5];
+  const yDomain = [-5, 5];
+
+  function xScale(x) {
+    return margin.left + ((x - xDomain[0]) / (xDomain[1] - xDomain[0])) * innerWidth;
+  }
+
+  function yScale(y) {
+    return margin.top + innerHeight - ((y - yDomain[0]) / (yDomain[1] - yDomain[0])) * innerHeight;
+  }
+
+  function makeSVG(tag, attrs) {
+    const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (const [key, value] of Object.entries(attrs)) {
+      el.setAttribute(key, value);
+    }
+    return el;
+  }
+
+  function clear(svg) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+  }
+
+  function lineEndpoints(intercept, slope) {
+    const x1 = xDomain[0];
+    const x2 = xDomain[1];
+
+    return {
+      x1: xScale(x1),
+      y1: yScale(intercept + slope * x1),
+      x2: xScale(x2),
+      y2: yScale(intercept + slope * x2)
+    };
+  }
+
+  function drawAxes(svg) {
+    svg.appendChild(makeSVG("rect", {
+      x: margin.left,
+      y: margin.top,
+      width: innerWidth,
+      height: innerHeight,
+      fill: "#fafafa",
+      stroke: "#ddd"
+    }));
+
+    svg.appendChild(makeSVG("line", {
+      x1: xScale(0),
+      y1: yScale(yDomain[0]),
+      x2: xScale(0),
+      y2: yScale(yDomain[1]),
+      stroke: "#e1e1e1"
+    }));
+
+    svg.appendChild(makeSVG("line", {
+      x1: xScale(xDomain[0]),
+      y1: yScale(0),
+      x2: xScale(xDomain[1]),
+      y2: yScale(0),
+      stroke: "#e1e1e1"
+    }));
+
+    svg.appendChild(makeSVG("line", {
+      x1: xScale(xDomain[0]),
+      y1: yScale(yDomain[0]),
+      x2: xScale(xDomain[1]),
+      y2: yScale(yDomain[0]),
+      stroke: "#999"
+    }));
+
+    svg.appendChild(makeSVG("line", {
+      x1: xScale(xDomain[0]),
+      y1: yScale(yDomain[0]),
+      x2: xScale(xDomain[0]),
+      y2: yScale(yDomain[1]),
+      stroke: "#999"
+    }));
+
+    const xLabel = makeSVG("text", {
+      x: margin.left + innerWidth / 2,
+      y: height - 8,
+      "text-anchor": "middle",
+      "font-size": 12,
+      fill: "#555"
+    });
+    xLabel.textContent = "measured x";
+    svg.appendChild(xLabel);
+
+    const yLabel = makeSVG("text", {
+      x: 14,
+      y: margin.top + innerHeight / 2,
+      "text-anchor": "middle",
+      "font-size": 12,
+      fill: "#555",
+      transform: `rotate(-90 14 ${margin.top + innerHeight / 2})`
+    });
+    yLabel.textContent = "y";
+    svg.appendChild(yLabel);
+  }
+
+  function drawXError(errorAmount) {
+    const svg = document.getElementById("plot-x-error");
+    clear(svg);
+    drawAxes(svg);
+
+    const points = data.map(d => ({
+      xTrue: d.x,
+      yTrue: d.y,
+      xObs: d.x + errorAmount * d.xError,
+      yObs: d.y
+    }));
+
+    const fit = ols(points);
+
+    points.forEach(d => {
+      svg.appendChild(makeSVG("circle", {
+        cx: xScale(d.xTrue),
+        cy: yScale(d.yTrue),
+        r: 2.8,
+        class: "true-point"
+      }));
+    });
+
+    points.forEach(d => {
+      svg.appendChild(makeSVG("circle", {
+        cx: xScale(d.xObs),
+        cy: yScale(d.yObs),
+        r: 2.8,
+        class: "obs-point"
+      }));
+    });
+
+    const trueLine = lineEndpoints(alpha, beta);
+    svg.appendChild(makeSVG("line", {
+      x1: trueLine.x1,
+      y1: trueLine.y1,
+      x2: trueLine.x2,
+      y2: trueLine.y2,
+      class: "true-line"
+    }));
+
+    const fitLine = lineEndpoints(fit.intercept, fit.slope);
+    svg.appendChild(makeSVG("line", {
+      x1: fitLine.x1,
+      y1: fitLine.y1,
+      x2: fitLine.x2,
+      y2: fitLine.y2,
+      class: "fit-line"
+    }));
+
+    document.getElementById("x-error-stat").innerHTML =
+      `true slope = ${beta.toFixed(2)}; fitted slope = ${fit.slope.toFixed(2)}; correlation = ${fit.r.toFixed(2)}`;
+  }
+
+  const slider = document.getElementById("x-error-slider");
+  const value = document.getElementById("x-error-value");
+  const button = document.getElementById("play-x-error");
+
+  let playing = false;
+  let direction = 1;
+  let timer = null;
+
+  function update() {
+    const amount = Number(slider.value);
+    value.textContent = amount.toFixed(2);
+    drawXError(amount);
+  }
+
+  slider.addEventListener("input", update);
+
+  button.addEventListener("click", () => {
+    playing = !playing;
+    button.textContent = playing ? "Pause" : "Play";
+
+    if (playing) {
+      timer = setInterval(() => {
+        let next = Number(slider.value) + direction * 0.025;
+
+        if (next >= 3) {
+          next = 3;
+          direction = -1;
+        }
+
+        if (next <= 0) {
+          next = 0;
+          direction = 1;
+        }
+
+        slider.value = next;
+        update();
+      }, 30);
+    } else {
+      clearInterval(timer);
+    }
+  });
+
+  update();
+
+})();
+</script>
+```
+
+
+
+
+
+**NOISY Y brings correlations closer to zero, and makes slopes noisy.**  
+
+
+
+
+
+```{=html}
+<div id="yerr2-demo" class="yerr2-demo">
+  <style>
+    .yerr2-demo {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 520px;
+      margin: 1.5rem auto;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    .yerr2-demo h3 {
+      margin-top: 0;
+      font-size: 1.05rem;
+      line-height: 1.35;
+    }
+
+    .yerr2-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .yerr2-controls input[type="range"] {
+      width: 160px;
+    }
+
+    .yerr2-button {
+      border: 1px solid #aaa;
+      background: #f7f7f7;
+      border-radius: 6px;
+      padding: 0.25rem 0.55rem;
+      cursor: pointer;
+    }
+
+    .yerr2-button:hover {
+      background: #eee;
+    }
+
+    .yerr2-stat {
+      font-size: 0.88rem;
+      color: #444;
+      margin-top: 0.35rem;
+    }
+
+    .yerr2-caption {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .yerr2-true-point {
+      fill: #cfcfcf;
+      opacity: 0.55;
+    }
+
+    .yerr2-obs-point {
+      fill: #333;
+      opacity: 0.72;
+    }
+
+    .yerr2-true-line {
+      stroke: #777;
+      stroke-width: 2;
+      stroke-dasharray: 5 4;
+    }
+
+    .yerr2-fit-line {
+      stroke: #c0392b;
+      stroke-width: 3;
+    }
+  </style>
+
+  <h3>E. Measurement error in <em>y</em>: more noise, but no systematic attenuation</h3>
+
+  <div class="yerr2-controls">
+    <button class="yerr2-button" id="yerr2-play">Play</button>
+    <label for="yerr2-slider">measurement error in y (in SD units):</label>
+    <input id="yerr2-slider" type="range" min="0" max="3" step="0.01" value="0">
+    <span id="yerr2-value">0.00</span>
+  </div>
+
+  <svg id="yerr2-plot" width="500" height="370" role="img"
+       aria-label="Scatterplot showing that measurement error in y adds noise but does not systematically attenuate the regression slope."></svg>
+
+  <div class="yerr2-stat" id="yerr2-stat"></div>
+
+  <div class="yerr2-caption">
+    Gray points show the original data. Black points show the measured data after adding error to <em>y</em>.
+    The dashed gray line is the true relationship; the red line is the regression line fit to the measured data.
+    Measurement error in <em>y</em> makes the relationship noisier, so the fitted slope wiggles from frame to frame,
+    but it is not systematically pulled toward zero.
+  </div>
+</div>
+
+<script>
+(function() {
+
+  // -----------------------------
+  // Reproducible random numbers
+  // -----------------------------
+  function yerr2Mulberry32(seed) {
+    return function() {
+      let t = seed += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  let yerr2Rand = yerr2Mulberry32(67890);
+
+  function yerr2Rnorm() {
+    let u = 0, v = 0;
+    while (u === 0) u = yerr2Rand();
+    while (v === 0) v = yerr2Rand();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+
+  // A separate RNG for the fixed underlying dataset
+  const yerr2BaseRand = yerr2Mulberry32(12345);
+
+  function yerr2BaseRnorm() {
+    let u = 0, v = 0;
+    while (u === 0) u = yerr2BaseRand();
+    while (v === 0) v = yerr2BaseRand();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+
+  // -----------------------------
+  // Stats helpers
+  // -----------------------------
+  function yerr2Mean(a) {
+    return a.reduce((x, y) => x + y, 0) / a.length;
+  }
+
+  function yerr2OLS(points) {
+    const xs = points.map(d => d.xObs);
+    const ys = points.map(d => d.yObs);
+    const mx = yerr2Mean(xs);
+    const my = yerr2Mean(ys);
+
+    let sxy = 0;
+    let sxx = 0;
+    let syy = 0;
+
+    for (let i = 0; i < points.length; i++) {
+      sxy += (xs[i] - mx) * (ys[i] - my);
+      sxx += (xs[i] - mx) * (xs[i] - mx);
+      syy += (ys[i] - my) * (ys[i] - my);
+    }
+
+    const slope = sxy / sxx;
+    const intercept = my - slope * mx;
+    const r = sxy / Math.sqrt(sxx * syy);
+
+    return { slope, intercept, r };
+  }
+
+  // -----------------------------
+  // Underlying data
+  // -----------------------------
+  const yerr2N = 200;
+  const yerr2Alpha = 0;
+  const yerr2Beta = 0.75;
+  const yerr2ResidualSD = 0.75;
+
+  // First generate x values
+  const yerr2XVals = Array.from({ length: yerr2N }, () => yerr2BaseRnorm());
+
+  // Then generate residuals
+  let yerr2Residuals = Array.from({ length: yerr2N }, () => yerr2BaseRnorm());
+
+  // Center x and residuals
+  const yerr2MeanX = yerr2Mean(yerr2XVals);
+  const yerr2XCentered = yerr2XVals.map(x => x - yerr2MeanX);
+
+  const yerr2MeanResidual = yerr2Mean(yerr2Residuals);
+  yerr2Residuals = yerr2Residuals.map(e => e - yerr2MeanResidual);
+
+  // Remove accidental sample-level covariance between x and the residuals.
+  // This makes the fitted slope of the original sample equal the true slope.
+  let yerr2CovXResidual = 0;
+  let yerr2VarX = 0;
+
+  for (let i = 0; i < yerr2N; i++) {
+    yerr2CovXResidual += yerr2XCentered[i] * yerr2Residuals[i];
+    yerr2VarX += yerr2XCentered[i] * yerr2XCentered[i];
+  }
+
+  const yerr2ResidualProjection = yerr2CovXResidual / yerr2VarX;
+  yerr2Residuals = yerr2Residuals.map((e, i) => e - yerr2ResidualProjection * yerr2XCentered[i]);
+
+  // Rescale residuals back to the desired SD
+  const yerr2ResidualScale = Math.sqrt(yerr2Mean(yerr2Residuals.map(e => e * e)));
+  yerr2Residuals = yerr2Residuals.map(e => e / yerr2ResidualScale * yerr2ResidualSD);
+
+  // Build the dataset
+  const yerr2Data = yerr2XVals.map((x, i) => {
+    const y = yerr2Alpha + yerr2Beta * x + yerr2Residuals[i];
+
+    return {
+      x: x,
+      y: y
+    };
+  });
+
+  function yerr2NearlyUncorrelatedYError() {
+    const xs = yerr2Data.map(d => d.x);
+    const mx = yerr2Mean(xs);
+    const xCentered = xs.map(x => x - mx);
+
+    let err = null;
+    let rXE = 1;
+    let tries = 0;
+
+    // Try random y-error vectors until the accidental correlation with x is small.
+    // This keeps the demo honest without forcing the slope to be mathematically identical.
+    while (Math.abs(rXE) > 0.04 && tries < 1000) {
+      err = Array.from({ length: yerr2N }, () => yerr2Rnorm());
+
+      const merr = yerr2Mean(err);
+      err = err.map(e => e - merr);
+
+      let covXE = 0;
+      let varX = 0;
+      let varE = 0;
+
+      for (let i = 0; i < yerr2N; i++) {
+        covXE += xCentered[i] * err[i];
+        varX += xCentered[i] * xCentered[i];
+        varE += err[i] * err[i];
+      }
+
+      rXE = covXE / Math.sqrt(varX * varE);
+      tries++;
+    }
+
+    // Rescale error to SD about 1
+    const sd = Math.sqrt(yerr2Mean(err.map(e => e * e)));
+    err = err.map(e => e / sd);
+
+    return err;
+  }
+
+  // -----------------------------
+  // Plotting helpers
+  // -----------------------------
+  const yerr2Width = 500;
+  const yerr2Height = 370;
+  const yerr2Margin = { top: 18, right: 18, bottom: 42, left: 46 };
+  const yerr2InnerWidth = yerr2Width - yerr2Margin.left - yerr2Margin.right;
+  const yerr2InnerHeight = yerr2Height - yerr2Margin.top - yerr2Margin.bottom;
+
+  const yerr2XDomain = [-3.5, 3.5];
+  const yerr2YDomain = [-4, 4];
+
+  function yerr2XScale(x) {
+    return yerr2Margin.left +
+      ((x - yerr2XDomain[0]) / (yerr2XDomain[1] - yerr2XDomain[0])) * yerr2InnerWidth;
+  }
+
+  function yerr2YScale(y) {
+    return yerr2Margin.top + yerr2InnerHeight -
+      ((y - yerr2YDomain[0]) / (yerr2YDomain[1] - yerr2YDomain[0])) * yerr2InnerHeight;
+  }
+
+  function yerr2MakeSVG(tag, attrs) {
+    const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (const [key, value] of Object.entries(attrs)) {
+      el.setAttribute(key, value);
+    }
+    return el;
+  }
+
+  function yerr2Clear(svg) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+  }
+
+  function yerr2LineEndpoints(intercept, slope) {
+    const x1 = yerr2XDomain[0];
+    const x2 = yerr2XDomain[1];
+
+    return {
+      x1: yerr2XScale(x1),
+      y1: yerr2YScale(intercept + slope * x1),
+      x2: yerr2XScale(x2),
+      y2: yerr2YScale(intercept + slope * x2)
+    };
+  }
+
+  function yerr2DrawAxes(svg) {
+    svg.appendChild(yerr2MakeSVG("rect", {
+      x: yerr2Margin.left,
+      y: yerr2Margin.top,
+      width: yerr2InnerWidth,
+      height: yerr2InnerHeight,
+      fill: "#fafafa",
+      stroke: "#ddd"
+    }));
+
+    svg.appendChild(yerr2MakeSVG("line", {
+      x1: yerr2XScale(0),
+      y1: yerr2YScale(yerr2YDomain[0]),
+      x2: yerr2XScale(0),
+      y2: yerr2YScale(yerr2YDomain[1]),
+      stroke: "#e1e1e1"
+    }));
+
+    svg.appendChild(yerr2MakeSVG("line", {
+      x1: yerr2XScale(yerr2XDomain[0]),
+      y1: yerr2YScale(0),
+      x2: yerr2XScale(yerr2XDomain[1]),
+      y2: yerr2YScale(0),
+      stroke: "#e1e1e1"
+    }));
+
+    svg.appendChild(yerr2MakeSVG("line", {
+      x1: yerr2XScale(yerr2XDomain[0]),
+      y1: yerr2YScale(yerr2YDomain[0]),
+      x2: yerr2XScale(yerr2XDomain[1]),
+      y2: yerr2YScale(yerr2YDomain[0]),
+      stroke: "#999"
+    }));
+
+    svg.appendChild(yerr2MakeSVG("line", {
+      x1: yerr2XScale(yerr2XDomain[0]),
+      y1: yerr2YScale(yerr2YDomain[0]),
+      x2: yerr2XScale(yerr2XDomain[0]),
+      y2: yerr2YScale(yerr2YDomain[1]),
+      stroke: "#999"
+    }));
+
+    const xLabel = yerr2MakeSVG("text", {
+      x: yerr2Margin.left + yerr2InnerWidth / 2,
+      y: yerr2Height - 8,
+      "text-anchor": "middle",
+      "font-size": 12,
+      fill: "#555"
+    });
+    xLabel.textContent = "x";
+    svg.appendChild(xLabel);
+
+    const yLabel = yerr2MakeSVG("text", {
+      x: 14,
+      y: yerr2Margin.top + yerr2InnerHeight / 2,
+      "text-anchor": "middle",
+      "font-size": 12,
+      fill: "#555",
+      transform: `rotate(-90 14 ${yerr2Margin.top + yerr2InnerHeight / 2})`
+    });
+    yLabel.textContent = "measured y";
+    svg.appendChild(yLabel);
+  }
+
+  function yerr2Draw(errorAmount) {
+    const svg = document.getElementById("yerr2-plot");
+    yerr2Clear(svg);
+    yerr2DrawAxes(svg);
+
+    const yError = yerr2NearlyUncorrelatedYError();
+
+    const points = yerr2Data.map((d, i) => ({
+      xTrue: d.x,
+      yTrue: d.y,
+      xObs: d.x,
+      yObs: d.y + errorAmount * yError[i]
+    }));
+
+    const fit = yerr2OLS(points);
+
+    points.forEach(d => {
+      svg.appendChild(yerr2MakeSVG("circle", {
+        cx: yerr2XScale(d.xTrue),
+        cy: yerr2YScale(d.yTrue),
+        r: 2.8,
+        class: "yerr2-true-point"
+      }));
+    });
+
+    points.forEach(d => {
+      svg.appendChild(yerr2MakeSVG("circle", {
+        cx: yerr2XScale(d.xObs),
+        cy: yerr2YScale(d.yObs),
+        r: 2.8,
+        class: "yerr2-obs-point"
+      }));
+    });
+
+    const trueLine = yerr2LineEndpoints(yerr2Alpha, yerr2Beta);
+    svg.appendChild(yerr2MakeSVG("line", {
+      x1: trueLine.x1,
+      y1: trueLine.y1,
+      x2: trueLine.x2,
+      y2: trueLine.y2,
+      class: "yerr2-true-line"
+    }));
+
+    const fitLine = yerr2LineEndpoints(fit.intercept, fit.slope);
+    svg.appendChild(yerr2MakeSVG("line", {
+      x1: fitLine.x1,
+      y1: fitLine.y1,
+      x2: fitLine.x2,
+      y2: fitLine.y2,
+      class: "yerr2-fit-line"
+    }));
+
+    document.getElementById("yerr2-stat").innerHTML =
+      `true slope = ${yerr2Beta.toFixed(2)}; fitted slope = ${fit.slope.toFixed(2)}; correlation = ${fit.r.toFixed(2)}`;
+  }
+
+  // -----------------------------
+  // Interactivity
+  // -----------------------------
+  const yerr2Slider = document.getElementById("yerr2-slider");
+  const yerr2Value = document.getElementById("yerr2-value");
+  const yerr2Button = document.getElementById("yerr2-play");
+
+  let yerr2Playing = false;
+  let yerr2Direction = 1;
+  let yerr2Timer = null;
+
+  function yerr2Update() {
+    const amount = Number(yerr2Slider.value);
+    yerr2Value.textContent = amount.toFixed(2);
+    yerr2Draw(amount);
+  }
+
+  yerr2Slider.addEventListener("input", yerr2Update);
+
+  yerr2Button.addEventListener("click", () => {
+    yerr2Playing = !yerr2Playing;
+    yerr2Button.textContent = yerr2Playing ? "Pause" : "Play";
+
+    if (yerr2Playing) {
+      yerr2Timer = setInterval(() => {
+        let next = Number(yerr2Slider.value) + yerr2Direction * 0.01;
+
+        if (next >= 3) {
+          next = 3;
+          yerr2Direction = -1;
+        }
+
+        if (next <= 0) {
+          next = 0;
+          yerr2Direction = 1;
+        }
+
+        yerr2Slider.value = next;
+        yerr2Update();
+      }, 150);
+    } else {
+      clearInterval(yerr2Timer);
+    }
+  });
+
+  yerr2Update();
+
+})();
+</script>
+```
+
+
+## FINALLY: Do not confuse association with causation  
+
+We've been over this before, but this is a good place to re-remind you. 
+
+A linear model is descriptive and can make predictions  on the scale and context of our study. A linear regression model **predicts** the value of $Y$  for a data point at position $X$.  
+
+::: aside
+Unless, of course, your linear model comes from an appropriately designed causal study.
+:::   
+
+A linear model is not a causal model. It does not tell us what will happen to $Y$ if you change $X$ experimentally$^*$.
+
