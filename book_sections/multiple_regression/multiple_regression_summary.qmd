@@ -1,0 +1,316 @@
+## • 19. Multiple regression summary {.unnumbered #multiple_regression_summary}
+
+
+---
+format: html
+webr:
+  packages: ['dplyr', 'readr', 'ggplot2', 'palmerpenguins', 'broom', 'car', 'emmeans']
+  autoload-packages: true
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(webexercises)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(palmerpenguins)
+library(broom)
+```
+
+
+Links to: [Summary](#multiple_regression_summary_chapter-summary). [Chatbot tutor](#multiple_regression_summary_chatbot-tutor). [Questions](#multiple_regression_summary_practice-questions). [Glossary](#multiple_regression_summary_glossary-of-terms). [R functions](#multiple_regression_summary_key-r-functions). [R packages](#multiple_regression_summary_r-packages-introduced). [More resources](#multiple_regression_summary_additional-resources).
+
+---
+
+## Chapter summary {#multiple_regression_summary_chapter-summary}
+
+Multiple regression lets us model a response variable as a function of several explanatory variables at once. In additive models - like those in this chapter - we make predictions by adding up the contribution of each explanatory variable. With multiple regression, we ask if an explanatory variable is associated with the response after adjusting for other variables in the model. But don't be fooled  this adjustment is just that, an adjustment, and not a proper scientific control.
+
+
+### Chatbot tutor {#multiple_regression_summary_chatbot-tutor}
+
+:::tutor
+
+Please interact with this custom chatbot ([**ChatGPT**](https://chatgpt.com/g/g-6a595fcdf00c8191978a393df65aa9c7-multiple-regression-chatbot-tutor), or [Gemini](https://gemini.google.com/gem/1jIGhA_O1NNy3paeCj8zRsS5Wsb9YZBkx?usp=sharing)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up and then stopping when you feel like you got what you needed from it.
+
+:::
+
+
+## Practice Questions {#multiple_regression_summary_practice-questions}
+
+Try these questions! By using the R environment you can work without leaving this "book". I even pre-loaded the packages you need.
+
+### Setup
+
+To see if you can transfer these ideas beyond the *Clarkia* example, let's use *iris*. Suppose we want to model petal length as a function of sepal length and species.
+
+```{webr-r}
+#| context: setup
+#| message: false
+#| warning: false
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(car)
+library(emmeans)
+
+iris_model <- lm(
+  Petal.Length ~ Sepal.Length + Species,
+  data = iris
+)
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+iris_model <- lm(Petal.Length ~ Sepal.Length + Species, data = iris)
+iris_model 
+```
+
+
+
+:::exercises
+
+
+
+**Q1)** The model includes `r mcq(c("One explanatory variable", answer = "Two explanatory variables",  "Three explanatory variables", "Four explanatory variables"))`.
+
+**Q2)** The coefficient for `Sepal.Length` describes the expected change in `Petal.Length` for a one cm increase in `Sepal.Length`, `r longmcq(c("Without accounting for species.",  "After controlling for species", "After adjusting for species and petal width.","Only for setosa plants.",answer = "After adjusting for species."))`
+
+
+**Q3)** The coefficient for `Speciesversicolor` compares versicolor petal length to `r longmcq(c( "The average petal length of the other two Iris species.", "Setosa petal length, without accounting for sepal length.", "Virginica petal length, after adjusting for sepal length.", answer = "Setosa petal length, after adjusting for sepal length.",  "The extra change in petal length per 1 cm sepal length for versicolor compared with setosa."))`
+
+
+**Q4)** It is better to say this model "adjusts for species" rather than "controls for species" because `r longmcq(c("Species is a categorical variable.", "The model cannot include species.", "Species has more than two levels.",  answer = "Species was not experimentally manipulated  --- whatever that would mean."))`
+
+
+:::
+
+---
+
+### Plots should match models
+
+Here are two ways of plotting petal length as a function of sepal length and species.
+
+```{r}
+#| echo: false
+#| fig-height: 3
+#| fig-width: 9
+#| label: fig-iris-multiple-summary
+#| fig-cap: "Petal length as a function of sepal length and species in iris. The two plots show the same data but with different models."
+#| fig-alt: "Scatterplot of iris petal length  against sepal length, colored by species. Fitted lines are shown for each species with the lines being somewhat different in A (different slopes), and B (same slopes)."
+library(patchwork)
+library(honestlm)
+
+a <- iris |>
+  ggplot(aes(x = Sepal.Length, y = Petal.Length, color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "Sepal length",
+    y = "Petal length",
+    color = "Species"
+  )
+
+b <- iris |>
+  ggplot(aes(x = Sepal.Length, y = Petal.Length, color = Species)) +
+  geom_point() +
+  geom_lm_smooth() +
+  labs(
+    x = "Sepal length",
+    y = "Petal length",
+    color = "Species"
+  )
+
+a + b +
+  plot_layout(
+    guides = "collect",
+    axes = "collect_y",
+    axis_titles = "collect_y"
+  ) +
+  plot_annotation(tag_levels = "A") &
+  theme(legend.position = "right")
+```
+
+:::exercises
+
+
+
+**Q5)** Which plot in @fig-iris-multiple-summary best corresponds to the model, `Petal.Length ~ Sepal.Length + Species`?  `r longmcq(c("A because each species gets its own slope.",  "A because the lines minimize the sum of squared residuals separately for each species.", answer = "B because all species share the same slope.", "Trick question, this is an opinion, not a fact."))`
+
+**Q6)** Which function was used to add best fit lines in @fig-iris-multiple-summary B?  `r mcq(c("geom_smooth(method = \'lm\')", answer = "geom_lm_smooth()"))`
+
+:::
+
+---
+
+### Coefficient p-values are not always the tests we want
+
+Here is the usual `summary()` output:
+
+```{r}
+#| column: page-right
+summary(iris_model)
+```
+
+:::exercises
+
+
+
+**Q7)** Why should we avoid using these p-values as our main NHST approach for multiple regression in this chapter? `r longmcq(c("Because R calculated them incorrectly.", answer = "Because they test individual coefficients, not necessarily whole model terms.", "Because p-values cannot be calculated for linear models.", "Because p-values are wrong. Use Bayesian approaches instead."))`
+
+**Q8)** For the species term, `summary()` gives rows for `Speciesversicolor` and `Speciesvirginica`. These are `r longmcq(c(answer = "Comparisons to setosa, after adjusting for sepal length.", "A test of whether species is significant, after adjusting for sepal length.", "Post-hoc tests to see which species matter, after adjusting for sepal length."))`
+
+:::
+
+---
+
+Instead, for additive multiple regression models, we use Type II sums of squares with `car::Anova()`:
+
+```{r}
+#| message: false
+#| warning: false
+car::Anova(iris_model, type = "II")
+```
+
+:::exercises
+
+**Q9)** The `car::Anova()` table above is useful because it tests `r longmcq(c("Only the intercept.", "Only the first term in the model.", answer = "Model terms after accounting for the other terms in the additive model.", "Whether the residuals are normal."))`
+
+**Q10)** Base R's `anova(iris_model)` is inappropriate here because it uses `r longmcq(c(answer = "Type I, sequential sums of squares.","Type II sums of squares.","Post-hoc pairwise comparisons.", "Standardized coefficients."))`
+
+**Q11)** If a categorical predictor with more than two levels is significant, the next natural question is often `r longmcq(c("What is the intercept p-value?", answer = "Which levels differ from which other levels?", "Can I remove the response variable?", "Can I ignore the model assumptions?"))`
+
+:::
+
+---
+
+### Post-hoc tests and adjusted means
+
+```{r}
+species_means <- emmeans::emmeans(iris_model, ~ Species)
+species_means
+```
+
+```{r}
+emmeans::contrast(species_means, method = "pairwise", adjust = "tukey")
+```
+
+:::exercises
+
+**Q12)** The estimated means above are `r longmcq(c("Raw species means.", answer = "Model-adjusted means.", "Residuals.", "Variance inflation factors."))`
+
+**Q13)** The pairwise contrasts above ask which `r longmcq(c(  answer = "Species differ from one another after adjusting for sepal length.","Individual iris plants are outliers after adjusting for sepal length..","Variables are normally distributed.","Terms should be entered first in the model."))`
+
+:::
+
+---
+
+### Effect sizes and assumptions
+
+:::exercises
+
+**Q14)** Why is it hard to compare the raw coefficient for `Sepal.Length` to the raw coefficient for `Speciesversicolor`? `r longmcq(c(answer = "Because they describe different kinds of comparisons.", "Because one is a response variable and the other is not.", "Because categorical variables cannot be included in regression.", "Because coefficients are always unitless."))`
+
+**Q15)**  What information is conveyed by partial $R^2$ that we cannot get from looking at model coefficients? `r longmcq(c(  "The direction of the association between a predictor and the response.",  "The expected change in the response for a one-unit change in a predictor.",  answer = "How much variation in the response is associated with a term after accounting for the others.","Which variable causes the resposne."))`
+
+
+:::
+
+
+## 📊 Glossary of Terms {#multiple_regression_summary_glossary-of-terms}
+
+:::glossary
+
+#### 📚 **1. Model Concepts**
+
+- **Multiple regression**: A linear model with more than one explanatory variable.
+- **Additive model**: A model in which we add the contributions of explanatory variables, without interactions.
+- **Conditional association**: The association between a focal explanatory variable and the response after adjusting for other variables in the model.
+- **Statistical adjustment**: Including a variable in a model to account for its association with the response and/or other predictors. This is not experimental control.
+
+
+
+#### 📏 **2. Model Evaluation**
+
+- **Type I sums of squares**: Sequential sums of squares. Results can depend on the order of terms in the formula.
+- **Type II sums of squares**: Sums of squares for a term after accounting for other terms in an additive model.
+- **Partial $R^2$**: A term-level effect size describing how much residual variation is reduced by adding a focal term.
+- **VIF**: Variance inflation factor; a measure of how much uncertainty in a coefficient is inflated by correlations among predictors.
+- **Model-adjusted mean**: A predicted mean for a group after accounting for other variables in the model.
+
+:::
+
+
+## 🛠️ Key R Functions {#multiple_regression_summary_key-r-functions}
+
+:::functions
+
+#### Building and interpreting models
+
+- `lm(y ~ x1 + x2 + group, data = data)` fits an additive multiple regression.
+- [`honest_lm(y ~ x1 + x2 + group, data = data)`](https://yanivjb.github.io/honestlm/reference/honest_lm.html) fits an additive multiple regression with guardrails.
+- [`broom::tidy(model, conf.int = TRUE)`](https://generics.r-lib.org/reference/tidy.html) creates a coefficient table with confidence intervals.
+- [`broom::augment(model)`](https://generics.r-lib.org/reference/augment.html) adds fitted values and residuals to the data.  
+- `ggfortify::autoplot(model)` makes standard diagnostic plots for a fitted model.  
+
+#### Significance, effect sizes, and uncertainty
+
+- [`car::Anova(model, type = "II")`](https://cran.r-project.org/web/packages/car/refman/car.html#Anova) gives Type II term-level tests.
+- [`emmeans::emmeans(model, ~ group)`](https://rvlenth.github.io/emmeans/reference/emmeans.html) estimates model-adjusted means.
+- [`emmeans::contrast(..., method = "pairwise", adjust = "tukey")`](https://rvlenth.github.io/emmeans/reference/contrast.html) runs post-hoc tests.
+- [`car::vif(model)`](https://cran.r-project.org/web/packages/car/refman/car.html#vif) calculates variance inflation factors.
+- [`honestlm::partial_r2(model)`](https://yanivjb.github.io/honestlm/reference/partial_r2.html) calculates partial $R^2$ and Cohen's $f^2$.
+- [`honestlm::av_transform()`](https://yanivjb.github.io/honestlm/reference/av_transform.html) helps make added variable plots.
+- [`modelbased::estimate_means(model, by = "group")`](https://easystats.github.io/modelbased/reference/estimate_means.html) estimates model-adjusted means.
+- [`modelbased::estimate_slopes(model, trend = "x")`](https://easystats.github.io/modelbased/reference/estimate_slopes.html) estimates model-based slopes.
+- [`parameters::standardize_parameters(model)`](https://easystats.github.io/parameters/reference/standardize_parameters.html) reports standardized coefficients.
+
+
+#### Model-matching plots
+
+- [`honestlm::geom_lm_smooth()`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) plots additive linear-model smooths.
+- [`honestlm::stat_lm_means()`](https://yanivjb.github.io/honestlm/reference/stat_lm_means.html) plots additive model-based means.
+
+:::
+
+## R Packages Introduced {#multiple_regression_summary_r-packages-introduced}
+
+:::packages
+
+- [`car`](https://cran.r-project.org/web/packages/car/index.html): Provides tools for regression diagnostics and term-level tests, including [`Anova()`](https://cran.r-project.org/web/packages/car/refman/car.html#Anova) for Type II sums of squares and [`vif()`](https://cran.r-project.org/web/packages/car/refman/car.html#vif) for multicollinearity.
+- [`emmeans`](https://rvlenth.github.io/emmeans/): Estimates model-adjusted means and compares them with post-hoc contrasts.
+- [`honestlm`](https://yanivjb.github.io/honestlm/index.html): Provides helper functions for plotting additive linear models and calculating partial $R^2$.
+- [`broom`](https://broom.tidymodels.org/): Converts model output into tidy data frames with [`tidy()`](https://generics.r-lib.org/reference/tidy.html) and [`augment()`](https://generics.r-lib.org/reference/augment.html).
+- [`modelbased`](https://easystats.github.io/modelbased/index.html): Estimates model-based means, slopes, predictions, and contrasts.
+- [`parameters`](https://easystats.github.io/parameters/index.html): Summarizes and standardizes model parameters.
+- [`ggfortify`](https://github.com/sinhrks/ggfortify): Makes diagnostic plots for models with `autoplot()`.
+
+:::
+
+
+## Additional resources {#multiple_regression_summary_additional-resources}
+
+:::learnmore
+
+**Chapter tutor:**  
+
+
+- [ModernDive: Multiple Regression](https://moderndive.com/v2/multiple-regression.html): Another tidyverse focused overview of multiple regression
+
+- [Regression fire and dangerous things](https://elevanth.org/blog/2021/06/15/regression-fire-and-dangerous-things-1-3/). A blog post by [Richard McElreath](https://www.eva.mpg.de/ecology/staff/richard-mcelreath/) that explains the problem with the "causal salad" of multiple regression.
+
+
+- [How to break regression](https://www.pewresearch.org/decoded/2018/07/18/how-to-break-regression/). A nice explanation with r based simulation code about how what you put in your model matters.  
+
+- [Why Adjusted Regression Coefficients Are Less Descriptive Than They Look](https://rpsychologist.com/descriptive-adjustment/). I nice blogpost with interactive apps which highlight how coeffcieints from a multiple regression depend on other variables in the model. 
+
+**Videos** 
+
+- Statistics 101: [Multiple regression playlist](https://www.youtube.com/playlist?list=PLIeGtxpvyG-IqjoU8IiF0Yu1WtxNq_4z-), [ANCOVA playlist](https://www.youtube.com/playlist?list=PLIeGtxpvyG-LnuBJ7TayqusxOERwpTvAv). 
+
+:::

@@ -1,0 +1,191 @@
+## • 19. Uncertainty  {.unnumbered #multiple_uncertainty}
+
+:::aside
+.
+:::
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Loading and cleaning data"
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(tidyr)
+library(emmeans)
+library(parameters)
+source("../../_common.R") 
+
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** Each multiple regression coefficient is an estimate. But we know that estimates come with uncertainty, and that it is best practice to accompany estimates with statements of uncertainty. In this subsection we look into quantifying and communicating uncertainty in multiple regression coefficients. 
+
+**Learning goals: By the end of this section, you should be able to:**
+
+
+* Use `emmeans()` to estimate model-adjusted means and their uncertainty.
+* Distinguish raw means from model-adjusted means.
+* Report and visualize estimates with uncertainty.
+:::
+
+---
+
+Let's start by describing uncertainty in our estimated coefficients from our model. We can do this using Base R's [`confint()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/confint.html) function or [`broom`](https://broom.tidymodels.org/)'s [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function. Here I do the latter because it provides more useful output. 
+ 
+
+
+```{r}
+#| column: page-right
+#| output: false
+library(broom)
+library(dplyr)
+
+full_model <- lm(prop_hybrid ~  asd_mm + petal_color + petal_area_mm + location, data = rils )
+
+# Because tidy provides a column called `p.value` which can mislead us, 
+# I make sure we don't  see it with select(-p.value). 
+
+# I also rename the column `statistic` to t_value, so its meaning is more obvious 
+
+broom::tidy(full_model, conf.int = TRUE)|> 
+  dplyr::select(-p.value)|>
+  rename(t.value = statistic)
+```
+
+
+```{r}
+#| echo: false
+broom::tidy(full_model, conf.int = TRUE)|> 
+  dplyr::select(-p.value)|>
+  kable(digits = 3)
+```
+
+### Uncertainty in model-adjusted means 
+
+While confidence intervals for model coefficients are useful, it can be more natural to consider uncertainty in means. Because we are dealing with a multiple regression, these means are adjusted for the other terms in the model. We can find them with [`emmeans()`](https://rvlenth.github.io/emmeans/reference/emmeans.html) function in the [`emmeans`](https://rvlenth.github.io/emmeans/) package:  
+
+
+```{r}
+library(emmeans)
+emmeans(full_model, ~ location)
+```
+
+Note that these are marginal means (i.e. accounting for the other variables). Thus, they can differ from a simple estimate of the mean. For example,  comparing the marginal mean proportion hybrid seed by petal color and the actual means reveals a modest difference (see below). 
+
+```{r}
+emmeans(full_model, ~ petal_color)
+```
+
+
+
+
+```{r}
+rils |> 
+  group_by(petal_color)|> 
+  summarise(simple_mean = mean(prop_hybrid))
+```
+
+
+:::fyi
+You can similarly use the [`modelbased`](https://easystats.github.io/modelbased/) package introduced below. For example to report uncertainty by petal_color with  the [`estimate_means()`](https://easystats.github.io/modelbased/reference/estimate_means.html) function from model based, type: 
+
+```{r}
+library(modelbased)
+col_est <- estimate_means(full_model, by="petal_color")
+col_est
+```
+:::
+
+### Visualizing uncertainty in estimates
+
+Sometimes it is easier to interpret pictures than tables. So, in multiple regression you may want to visualize your estimates our uncertainty in them. The [`modelbased`](https://easystats.github.io/modelbased/) package can do this for us!
+
+
+```{r}
+library(modelbased)
+```
+
+The standard pipeline is  to estimate means [`estimate_means(full_model, by="var")`](https://easystats.github.io/modelbased/reference/estimate_means.html) and then plot the output with the `plot()` function. 
+
+
+---
+
+#### Visualizing uncertainty in a continuous explanatory variable
+
+For example, to visualize uncertainty in the association between the proportion of hybrid seeds and petal area (adjusted for all other variables in the model), type:
+
+
+```{r}
+#| fig-height: 3.5
+#| fig-width: 6
+#| label: fig-cont
+#| fig-cap: "Model-based predictions for the association between petal area and proportion of hybrid seeds. The line shows predicted values from the multiple regression model, adjusted for the other explanatory variables, and the shaded region shows uncertainty around those predictions."
+#| fig-alt: "Plot showing predicted proportion of hybrid seeds across values of petal area. A fitted line shows the model-based prediction, with a shaded confidence band around the line."
+estimate_means(full_model, by = "petal_area_mm") |>
+  plot()
+```
+
+---
+
+####  Visualizing uncertainty by levels of a categorical explanatory variable
+
+To visualize uncertainty in the estimated marginal mean proportion of hybrid seeds across levels of a single categorical explanatory variable, type:
+
+```{r}
+#| fig-height: 3.5
+#| fig-width: 6
+#| label: fig-cat
+#| fig-cap: "Estimated marginal mean proportion of hybrid seeds by location. Points show model-based means from the multiple regression model, adjusted for the other explanatory variables, with intervals showing uncertainty."
+#| fig-alt: "Plot showing model-adjusted mean proportion of hybrid seeds for each location. Each location has an estimated mean and an interval showing uncertainty."
+estimate_means(full_model, by = "location") |>
+  plot()
+```
+
+---
+
+#### Visualizing uncertainty by two categorical explanatory variables
+
+To visualize uncertainty in the estimated marginal mean proportion of hybrid seeds across levels of two categorical explanatory variables, type:
+
+```{r}
+#| fig-height: 3.5
+#| fig-width: 6
+#| label: fig-uncertainty-2cat
+#| fig-cap: "Estimated marginal mean proportion of hybrid seeds by location and petal color. Estimates come from the multiple regression model and are adjusted for the other explanatory variables."
+#| fig-alt: "Plot showing model-adjusted mean proportion of hybrid seeds for combinations of location and petal color, with intervals showing uncertainty around each estimate."
+estimate_means(full_model, by = c("location", "petal_color")) |>
+  plot()
+```
+
+
+---
+
+#### Visualizing uncertainty by many explanatory variables
+
+We can expand this to include more explanatory variables. The plotting function will make some choices for us:
+
+```{r}
+#| fig-height: 5
+#| fig-width: 6
+#| label: fig-mix
+#| fig-cap: "Model-based predictions for proportion of hybrid seeds across petal area, petal color, and location. Estimates come from the multiple regression model and are adjusted for the other explanatory variables."
+#| fig-alt: "Plot showing predicted proportion of hybrid seeds across petal area, separated by petal color and location. The figure shows model-based estimates with uncertainty."
+estimate_means(full_model,
+  by = c("petal_area_mm", "petal_color", "location")) |>
+  plot()
+```

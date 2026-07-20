@@ -268,9 +268,9 @@ t.test(hatched_eggs ~ treatment,
 
 **Q10)** The output of the code above shows a p-value of $\approx 0.30$, so we fail to reject the null hypothesis. The output also shows a t-value of $\approx 1$. 
 
-**Q10A)** If all I knew was that $t \approx  1$, but did not kow the degrees of freedom, would I be able to reject the null at $\alpha = 0.05$? `r mcq(c("Yes", answer = "No","Can't tell you without the degress of freedom."))`
+**Q10A)** If all I knew was that $t \approx  1$, but did not know the degrees of freedom, would I be able to reject the null at $\alpha = 0.05$? `r mcq(c("Yes", answer = "No","Can't tell you without the degrees of freedom."))`
 
-**Q10B)** Say for a different dataset I knew that $t = 2$ (rather than one) but did not kow the degrees of freedom, would I be able to reject the null at $\alpha = 0.05$? `r mcq(c("Yes","No",  answer =  "Can't tell you without the degrees of freedom."))`
+**Q10B)** Say for a different dataset I knew that $t = 2$ (rather than one) but did not know the degrees of freedom, would I be able to reject the null at $\alpha = 0.05$? `r mcq(c("Yes","No",  answer =  "Can't tell you without the degrees of freedom."))`
 
 
 `r hide("Click for an explanation")` 

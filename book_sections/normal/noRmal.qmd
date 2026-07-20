@@ -37,9 +37,7 @@ library(tidyr)
 
 ## Simulating from Normal Distributions in R
 
-
-In the previous section, we used a web app to calculate probabilities from a normal distribution. Here, we'll take a different approach: simulation. We'll use R's [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to generate our own random data. This approach both builds intuition for the sampling process and allows us to double-check our math.  
-
+In the previous section, we used a web app to calculate probabilities from a normal distribution. Here, I introduce R's [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to generate random data from the normal distribution. The simple [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) simulation below will give us the same answer as our calculations above. I teach simulation because I think its randomness builds intuition, and because simulation also works in more complex cases where there isn't a mathematical answer.
 
 
 ## Simple Simulation with `rnorm()`   
@@ -140,7 +138,7 @@ sample_means <- normal_sampling_sim |>
 #| label: fig-norm_sampling_dist
 #| message: false
 #| warning: false
-#| fig-cap: "Simulating many samples of size 9 from a population with μ=0 and σ=1. **A.** The first 12 random samples. Note the variability in the shapes of the histograms and the sample means (red dashed lines). **B.** The sampling distribution of the mean, constructed from 100,000 sample means. Note that the spread of of data in each sample (A), exceeds the spread of sample means in B."
+#| fig-cap: "Simulating many samples of size 9 from a population with μ=0 and σ=1. **A.** The first 12 random samples. Note the variability in the shapes of the histograms and the sample means (red dashed lines). **B.** The sampling distribution of the mean, constructed from 100,000 sample means. Note that the spread of data in each sample (A), exceeds the spread of sample means in B."
 #| fig-alt: "A two-panel plot demonstrating the concept of a sampling distribution. Panel A shows 12 small histograms, each representing a random sample of 9 observations from a normal population; red dashed lines indicate that the sample means vary. Panel B shows a single, large, bell-shaped histogram of 100,000 such sample means, which is much narrower than the histograms of the individual data points."
 library(patchwork)
 a <- normal_sampling_sim |>

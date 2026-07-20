@@ -127,7 +127,7 @@ Throughout this chapter we will model a single response variable -- the proporti
 
 - We will start with the simplest linear model -- [the mean](#mean). While we have already [introduced the mean](#summarizing_center), presenting it in the context of a linear model helps us prepare for our next steps!   Specifically, we will use the mean to introduce: 
 
-   - **`R`'s [`lm()`]() function** that builds a linear model, and    
+   - **`R`'s [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function** that builds a linear model, and    
    - **Residuals** -- The difference between an individual data point, $Y_i$, and its value predicted from a linear model, $\hat{Y_i}$. In this section we will also learn how to   
       - Identify residuals on a plot, and 
       - Use the [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function from the [`broom`](https://broom.tidymodels.org/reference/augment.lm.html) package find residuals in R.  

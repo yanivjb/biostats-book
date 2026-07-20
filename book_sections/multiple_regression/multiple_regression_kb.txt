@@ -1,0 +1,464 @@
+# Knowledge Base: Multiple Regression Chapter
+
+## Chapter Context
+
+This chapter teaches multiple regression as an extension of linear models. Students learn how to model a numeric response as a function of several explanatory variables, interpret coefficients as conditional associations, visualize additive models, evaluate assumptions, compare effect sizes, test model terms, summarize uncertainty, and run a first-pass workflow in R.
+
+The chapter's main biological example uses Clarkia recombinant inbred lines (RILs). The focal response is `prop_hybrid`, the proportion of hybrid seeds. Key explanatory variables are:
+
+- `asd_mm`: anther-stigma distance, numeric
+- `petal_area_mm`: petal area, numeric
+- `petal_color`: categorical, usually pink/white
+- `location`: categorical, multiple field locations
+- `ril`: recombinant inbred line ID; repeated observations create non-independence
+
+The tutor should know this example but should not make every answer about Clarkia. For student data, adapt to the variables the student provides.
+
+## Big Ideas
+
+### Multiple regression models conditional associations
+
+A multiple regression model estimates the expected response as a function of several predictors at once.
+
+For an additive model:
+
+```r
+lm(y ~ x1 + x2 + group, data = dat)
+```
+
+the model asks about the association between each predictor and the response after adjusting for the other predictors.
+
+Use the phrase "adjusted for" or "after accounting for," not "controlled for."
+
+### Additive models are no-interaction models
+
+In this chapter, models are mostly additive:
+
+```r
+y ~ x1 + x2
+```
+
+This means the contribution of one predictor does not depend on the value of another predictor. Interactions come in the next chapter.
+
+For a numeric predictor plus a categorical predictor, an additive model means shared slopes and different intercepts. A plot with separate slopes suggests an interaction.
+
+### Regression adjustment is not experimental control
+
+An experimental control is part of study design. Statistical adjustment is part of analysis. Multiple regression can compare observations that are similar in measured variables, but it cannot by itself prove causation.
+
+### Plots should match models
+
+Default `geom_smooth(method = "lm")` with color/groups often fits separate lines by group, which can visually imply an interaction. For additive no-interaction fits, the chapter uses `honestlm::geom_lm_smooth()` for shared-slope smooths and `honestlm::stat_lm_means()` for model-based means.
+
+### Do not use `summary()` for NHST in this chapter
+
+The chapter teaches students not to use `summary(lm(...))` for null hypothesis significance testing in multiple regression. Explain the reason:
+
+- `summary()` gives coefficient-level tests.
+- Term-level tests are often the desired question.
+- For factors with more than two levels, coefficient p-values are reference-level comparisons, not tests of the whole categorical predictor.
+- The intercept p-value is rarely biologically meaningful.
+
+For additive multiple regression, recommend:
+
+```r
+car::Anova(model, type = "II")
+```
+
+### Type II sums of squares
+
+Type II sums of squares ask how much a term contributes after accounting for the other terms in the additive model.
+
+The chapter frames this as:
+
+```text
+SS_term = SS_model(full model) - SS_model(model without term)
+```
+
+or equivalently for nested linear models fit to the same observations:
+
+```text
+SS_term = SS_residual(model without term) - SS_residual(full model)
+```
+
+Base R `anova(model)` uses Type I, sequential sums of squares. In multiple regression, Type I tests can depend on the order of predictors in the formula. The chapter warns students not to use `anova()` for the main term tests.
+
+### Post-hoc tests
+
+If a categorical predictor with more than two levels is significant, the term-level test does not tell which levels differ. Use `emmeans`:
+
+```r
+library(emmeans)
+location_means <- emmeans(model, ~ location)
+contrast(location_means, method = "pairwise", adjust = "tukey")
+```
+
+Emmeans are model-adjusted means, not raw means.
+
+### Effect sizes
+
+Raw coefficients have units:
+
+- numeric predictor: expected response change per one unit of predictor
+- binary categorical predictor: difference relative to reference level
+- multi-level categorical predictor: multiple reference-level comparisons
+
+Students should not compare raw coefficients across different units as if they were directly comparable.
+
+Standardized coefficients help compare continuous predictors but are awkward with mixed continuous and categorical predictors.
+
+Partial R2 is taught as a term-level effect-size measure:
+
+```text
+R2_partial = 1 - SS_error(full model) / SS_error(model without focal predictor)
+```
+
+Partial R2 values do not generally add up to the full-model R2.
+
+The chapter uses `honestlm::partial_r2(model)`.
+
+### Uncertainty
+
+Coefficient uncertainty can be summarized with `confint()` or `broom::tidy(model, conf.int = TRUE)`, but p-values should be handled carefully.
+
+Model-adjusted means and their uncertainty can be estimated with:
+
+```r
+emmeans(model, ~ group)
+modelbased::estimate_means(model, by = "group")
+```
+
+For continuous predictors, model-based prediction plots can show how expected response changes across the predictor while adjusting for other variables.
+
+### Assumptions
+
+Multiple regression inherits linear-model assumptions:
+
+- unbiased data collection / appropriate design
+- independence
+- linearity/additivity
+- roughly normal residuals
+- roughly constant residual variance
+- no highly influential points
+
+New emphasis:
+
+- no severe multicollinearity among explanatory variables
+
+Use `car::vif(model)` for variance inflation factors. With multi-level factors, `car::vif()` returns GVIF; pay attention to `GVIF^(1/(2*Df))`.
+
+The Clarkia example violates independence because the same RILs appear across locations. It also has a bounded proportion response, so linear-model assumptions are imperfect. The chapter frames the linear model as an honest first-pass analysis and foreshadows GLMMs.
+
+## Section-Level Flow
+
+### 1. Multiple Predictors chapter introduction
+
+Students see why separate one-predictor models can be misleading:
+
+- biology does not change one variable at a time
+- unexplained variation can dampen signal
+- many separate tests create multiple-comparisons issues
+
+The chapter introduces statistical adjustment and nuisance variables. Location is a nuisance variable in the Clarkia example: it may not be biologically central but can explain variation and sharpen inference about floral traits.
+
+### 2. Extending linear models
+
+Students review prediction from linear models and then add predictors with `+`.
+
+Key teaching points:
+
+- Start with the intercept.
+- Add each coefficient times its variable value.
+- Categorical predictors are represented by indicator variables.
+- Coefficients in additive models are contributions to expected response.
+- Predictions are conditional on the model and can be unsafe outside observed data combinations.
+
+### 3. Visualizing more than one predictor
+
+Key teaching point: visualizations should match the model.
+
+For one continuous plus one categorical predictor:
+
+- `geom_smooth(method = "lm")` with color gives separate slopes.
+- `honestlm::geom_lm_smooth()` shows additive shared slopes.
+
+For two categorical predictors:
+
+- `honestlm::stat_lm_means()` overlays additive model-predicted means and intervals.
+- x-axis and facets can be swapped to highlight different comparisons.
+
+For two continuous predictors:
+
+- pairwise scatterplots are useful but incomplete
+- mapping a continuous predictor to color/size often disappoints
+- added variable plots can show adjusted associations
+
+### 4. Assumptions
+
+Students learn:
+
+- multicollinearity means predictors are so strongly associated that separate contributions are hard to estimate
+- VIF diagnoses inflation of coefficient uncertainty
+- repeated RILs violate independence
+- bounded proportion responses are not ideal for ordinary linear models
+- a simpler imperfect analysis can be a useful start if limitations are stated honestly
+
+### 5. Effect sizes
+
+Students learn:
+
+- raw coefficients answer unit-specific questions
+- standardized coefficients help compare continuous predictors
+- categorical predictors complicate standardized comparisons
+- partial R2 compares term-level contribution after adjusting for other predictors
+- effect size does not imply causal effect
+
+### 6. P-values and NHST
+
+Students learn:
+
+- p-values depend on what question is being tested
+- coefficient-level tests are not always the desired term-level tests
+- Type II sums of squares test each term after accounting for other terms
+- `car::Anova(type = "II")` is preferred for additive models
+- base `anova()` gives Type I sequential tests
+- post-hoc tests use `emmeans`
+
+### 7. Uncertainty
+
+Students learn:
+
+- estimates need uncertainty
+- coefficient CIs and adjusted-mean CIs answer different questions
+- model-adjusted means can differ from raw means
+- `modelbased` can quickly plot model-based estimates and uncertainty
+
+### 8. Multiple Regression in R workflow
+
+This is a recipe section. The workflow:
+
+1. load packages
+2. fit model
+3. interpret coefficients
+4. visualize data and model-based predictions
+5. check assumptions
+6. compare effect sizes
+7. test terms with Type II sums of squares
+8. run post-hoc tests if needed
+9. summarize uncertainty
+
+## Figure Awareness
+
+Figures are numbered by rendered section, so students may refer to "the first figure in the visualization section" rather than internal labels. Use section and content to identify figures.
+
+### Main chapter introduction figures
+
+Figure: Clarkia flower / anther-stigma distance
+
+- Shows a Clarkia flower and illustrates anther-stigma distance.
+- Use this when students ask what ASD means biologically.
+- Key idea: smaller distance between anther and stigma can encourage selfing before hybridization.
+
+Figure: Pairwise associations among response and predictors
+
+- Six panels.
+- Panels A-C show proportion hybrid seed vs petal color, petal area, and ASD.
+- Panels D-F show associations among explanatory variables.
+- Key teaching point: pairwise associations can be tangled; multiple regression asks which associations remain after adjustment.
+
+### Visualizing more than one predictor figures
+
+Figure: ASD simple model vs ASD plus petal color
+
+- Panel A shows `prop_hybrid ~ asd_mm`.
+- Panel B shows additive `prop_hybrid ~ petal_color + asd_mm`.
+- Panel B has parallel lines because there is one shared ASD slope.
+- Use this to explain why adding petal color changes the ASD slope.
+
+Figure: `geom_lm_smooth()` vs `geom_smooth(method = "lm")`
+
+- Panel A shows additive no-interaction model with shared slope.
+- Panel B shows separate group slopes and visually suggests an interaction.
+- Use this when students ask why the default ggplot line may not match their additive model.
+
+Figure: Two categorical predictors
+
+- Panel A: petal color on x-axis, separate panels for location.
+- Panel B: location on x-axis, separate panels for petal color.
+- Both include raw jittered points and black model-based means/intervals.
+- Use this to discuss how plotting choices highlight different comparisons.
+
+Figure: Two continuous predictors
+
+- Three pairwise scatterplots: response vs ASD, response vs petal area, ASD vs petal area.
+- Key point: no single flat plot fully shows a two-continuous-predictor additive model.
+
+Figure: Added variable plots
+
+- One panel for ASD adjusted for petal area and petal color.
+- One panel for petal area adjusted for ASD and petal color.
+- X-axis is residualized focal predictor; Y-axis is residualized response.
+- Slope equals the coefficient for the focal predictor in the full model.
+- Use this to explain adjusted associations for continuous predictors.
+
+### Assumptions figures
+
+Figure: Number of locations per RIL
+
+- Histogram showing most RILs appear at three or four locations.
+- Key point: rows are not fully independent because the same RIL appears multiple times.
+
+Figure: Diagnostic plots
+
+- Four model diagnostic plots for the Clarkia multiple regression.
+- Residuals vs fitted shows banding.
+- QQ plot shows some tail departure.
+- Scale-location shows a V-shaped pattern.
+- These patterns reflect bounded/binomial-ish proportion data.
+- Use this to foreshadow GLMs/GLMMs while explaining why the chapter continues with a first-pass linear model.
+
+### Uncertainty figures
+
+Figure: Continuous predictor uncertainty
+
+- Model-based predictions for petal area and proportion hybrid seeds.
+- Shows predicted line and uncertainty band after adjusting for other variables.
+
+Figure: Categorical predictor uncertainty
+
+- Estimated marginal means by location with intervals.
+- These are model-adjusted means, not raw means.
+
+Figure: Two categorical predictor uncertainty
+
+- Model-adjusted means for combinations of location and petal color.
+- Use this when students ask how uncertainty can be visualized for multiple categorical predictors.
+
+Figure: Many predictor uncertainty
+
+- Model-based predictions across petal area, petal color, and location.
+- The plotting function makes layout choices; useful but less hand-controlled.
+
+## Common Student Confusions
+
+### "Can I use summary()?"
+
+Answer: For this chapter's NHST, do not use `summary()` p-values. Explain coefficient-level vs term-level tests. Recommend `car::Anova(type = "II")`.
+
+### "What does a factor coefficient mean?"
+
+It is a comparison to the reference level, holding other predictors fixed. For a factor with more than two levels, individual coefficient rows are not the whole-predictor test.
+
+### "What does the intercept mean?"
+
+The intercept is the expected response when numeric predictors equal zero and categorical predictors are at their reference levels. It may help define the model but its p-value is usually not a biological question.
+
+### "What does adjusted for mean?"
+
+It means the model asks about a focal predictor among observations similar in the other predictors. It does not mean experimental control.
+
+### "Do significant predictors cause the response?"
+
+Not necessarily. In observational data, multiple regression estimates conditional associations. Causal claims require design and assumptions beyond the model output.
+
+### "Why are my ggplot lines different from my model?"
+
+Default grouped `geom_smooth(method = "lm")` fits separate slopes. If the model is additive, use a shared-slope/model-based plot.
+
+### "Why do Type I and Type II p-values differ?"
+
+Type I sums of squares are sequential and depend on predictor order. Type II asks about each term after the other terms in the additive model.
+
+### "Do partial R2 values add to model R2?"
+
+No, not generally. Each partial R2 is a term-level contribution after accounting for the other terms, so they are not independent pieces that must sum to the full-model R2.
+
+### "Are model-adjusted means raw means?"
+
+No. Adjusted means are predictions from the model after accounting for other predictors. They can differ from simple group means.
+
+## R Tools
+
+### Fit an additive multiple regression
+
+```r
+model <- lm(y ~ x1 + x2 + group, data = dat)
+```
+
+### Term-level tests for additive models
+
+```r
+car::Anova(model, type = "II")
+```
+
+### Avoid for main multiple-regression NHST
+
+```r
+summary(model)
+anova(model)
+```
+
+Use these only with clear explanation of what they test.
+
+### Post-hoc comparisons
+
+```r
+means <- emmeans::emmeans(model, ~ group)
+emmeans::contrast(means, method = "pairwise", adjust = "tukey")
+```
+
+### Effect sizes
+
+```r
+honestlm::partial_r2(model)
+```
+
+### Visualizing additive models
+
+```r
+honestlm::geom_lm_smooth()
+honestlm::stat_lm_means()
+```
+
+### Added variable plots
+
+```r
+av_data <- honestlm::av_transform(dat, y = y, x = x1, adjust = c(x2, group))
+ggplot(av_data, aes(x = .adjusted_x1, y = .adjusted_y)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  honestlm::av_labs(av_data)
+```
+
+### Model-adjusted means and uncertainty
+
+```r
+emmeans::emmeans(model, ~ group)
+modelbased::estimate_means(model, by = "group")
+```
+
+### Diagnostics and multicollinearity
+
+```r
+plot(model)
+ggfortify::autoplot(model)
+car::vif(model)
+```
+
+## Response Templates
+
+### Brief answer about summary()
+
+"For this chapter, don't use `summary()` for NHST in multiple regression. It gives coefficient-level tests, and those can be misleading for categorical predictors or when you want a term-level question. Use `car::Anova(model, type = 'II')` for the additive model."
+
+### Brief answer about adjustment
+
+"I would say adjusted for, not controlled for. The model is comparing observations that are similar in the other predictors, but it did not experimentally hold those predictors constant."
+
+### Brief answer about plotting
+
+"That plot is showing a different model than the one you fit. Separate `geom_smooth(method = 'lm')` lines imply different slopes by group; your additive model has one shared slope unless you included an interaction."
+
+### Brief answer about partial R2
+
+"Partial R2 asks how much extra residual variation is explained by one term after the other terms are already in the model. It is a term-level effect size, not a coefficient and not a causal effect."

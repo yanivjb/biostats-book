@@ -1,0 +1,221 @@
+## • 19. Parsing effect sizes {.unnumbered #effect_sizes}
+ 
+ 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(forcats)
+library(honestlm)
+source("../../_common.R") 
+```
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Loading and cleaning data"
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select( ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color)|>
+  na.omit()
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** We can now build linear models with multiple explanatory variables and use them to estimate the expected value of a response for an individual, conditional on its values for those explanatory variables. But how do we compare which explanatory variables are most strongly associated with the response when they are measured on different scales or represented in different ways? In this section, we introduce several ways to compare effect sizes across predictors while keeping track of what each comparison does, and does not, mean.
+
+
+**Learning goals: By the end of this section, you should be able to:**
+
+* Compare effect sizes using biologically meaningful ranges of predictor values.
+* Explain why coefficients measured in different units cannot be compared directly.
+* Explain what standardized regression coefficients do and when they are useful.
+* Use partial $R^2$ to compare term-level effect sizes in multiple regression.
+
+:::
+
+
+---
+
+## Model coefficients  
+
+
+We care not just to model the world, and not just to test the null hypothesis that two variables are unassociated. Rather we want to know if an explanatory variable matters for our response. Ultimately, deciding the strength that "matters" is up to the decision maker -- for example, a government might decide how much increase in cancer risk is acceptable when putting in a new power plant or whatever, or in the context of our Clarkia data, an evolutionary theorist might know the maximum amount of gene flow two populations can experience before they merge into one species. 
+
+For both the examples above, the key measure of effect was simply the coefficient in the multiple regression model. This measure of effect is very handy -- especially in the hands (or brains) of experts, who can make use of this information. 
+
+Our model coefficients are:
+
+
+```{r}
+#| echo: false
+#| column: margin
+lm(prop_hybrid ~ petal_area_mm + petal_color+ asd_mm, data = rils) |> coef() |>data.frame()|>kable(col.names = c("term", "coefficient"), digits = 4)
+```
+
+
+```{r}
+#| eval: false
+lm(prop_hybrid ~ petal_area_mm + petal_color+ asd_mm, data = rils) |> 
+  coef()
+```
+
+---
+
+
+
+
+**But say I wanted to know which floral phenotype was most strongly associated with the proportion of hybrid seeds**, after adjusting for the other variables. For example,
+
+> The coefficient for ASD, measured in $mm$, is more than eight times greater than the coefficient for petal area, measured in $mm^2$. Does this mean that ASD is nearly eight times more important?
+
+
+Not necessarily. Petal area ranges from `r paste(rils |> pull(petal_area_mm) |> range() |> round(), collapse = " to ")` $mm^2$, while ASD ranges from `r paste(rils |> pull(asd_mm) |> range() |> round(digits = 2), collapse = " to ")` $mm$.
+
+```{r}
+#| echo: false
+model_effects <- lm(
+  prop_hybrid ~ petal_area_mm + petal_color + asd_mm,
+  data = rils
+)
+coefs_effects <- coef(model_effects)
+
+petal_area_effect <- coefs_effects[["petal_area_mm"]] *
+  diff(range(rils$petal_area_mm))
+
+asd_effect <- coefs_effects[["asd_mm"]] *
+  diff(range(rils$asd_mm))
+```
+
+As a first attempt, we could compare the predicted difference between the smallest and largest observed value of each trait. In that case, the model predicts a difference of `r round(petal_area_effect, digits = 3)` in the proportion of hybrid seeds between the RILs with the largest and smallest petal areas. It predicts a difference of `r round(asd_effect, digits = 3)` between the RILs with the largest and smallest anther–stigma distances. This "difference in extremes" is more informative than simply comparing two coefficients. However, because it focuses on extremes, this approach is not a perfect summary of effect size either. 
+
+
+
+
+> Similarly, how do we compare the importance of petal color vs petal area? 
+
+We saw that our model predicts a difference of `r round(petal_area_effect, digits = 3)` in the proportion of hybrid seed between RILs with the largest and smallest petals. How do we compare this with the expected difference between pink- and white-flowered RILs?
+
+In this subsection, I introduce methods to make such fair comparisons.
+
+
+
+::: warning
+Effect sizes are great, but don't let the name fool you. 
+
+- “Effect size” measures the strength of an association, often after putting effects on a more comparable scale.  
+- "Effect size" does not imply a causal effect. 
+
+:::
+
+---
+
+
+
+
+### Standardizing continuous explanatory variables  
+
+
+```{r}
+#| echo: false
+#| column: margin
+lm(scale(prop_hybrid) ~ scale(petal_area_mm) + scale(asd_mm) + petal_color, data = rils) |> coef() |>data.frame()|>kable(col.names = c("term", "coefficient"), digits = 3)
+```
+
+One way to compare the "effect" of continuous explanatory variables is to [Z-transform](#normal_properties) them (as well as the response variable).  After doing so, we can interpret linear model coefficients as the increase in the response, measured in standard deviations, for every standard deviation increase in a continuous explanatory variable.
+
+
+```{r}
+#| column:  page-right
+#| eval: false
+lm(scale(prop_hybrid) ~ scale(petal_area_mm) + scale(asd_mm) + petal_color, data = rils)
+```
+
+These "[standardized regression coefficients](https://en.wikipedia.org/wiki/Standardized_coefficient)" are useful because they can be directly compared between continuous explanatory variables. So we can now easily see the stronger standardized association between petal area and the proportion of hybrid seeds than between ASD and the proportion of hybrid seeds.
+
+
+
+However, standardized coefficients have some drawbacks: 
+
+- First, the coefficients for continuous and categorical explanatory variables represent different kinds of comparisons: a one-standard-deviation increase for a continuous variable versus a difference between categories. 
+
+- Second, although standardization does not require normally distributed variables, one standard deviation may not represent a natural or typical change when an explanatory variable is strongly skewed or contains extreme values. 
+
+- Finally, it is not always natural or useful to think in standard deviation units.
+
+This doesn't mean we should never use standardized regression coefficients. It simply means that we should know when they are and are not appropriate, and how to cautiously present and interpret them.
+
+
+::: fyi
+
+## What about categorical predictors?
+
+Above, I Z- transformed the continuous response and continuous predictors, but did not change the categorical predictor. This still changes the meaning (and value) of the coefficient(s) for the categorical predictor(s). Now the petal color coefficient describes the number of standard deviations that separate the proportion of hybrid seeds on pink- and white-flowered RILs. 
+:::
+
+---
+
+### Partial $R^2$ as a measure of effect size. 
+
+Perhaps the most fair way to compare the "effect size" of a mix of categorical and continuous explanatory variables is the partial $R^2$  ($R^2_\text{partial}$). 
+
+The partial $R^2$ describes the proportion of variation in the response variable "explained" by a focal explanatory variable. This is equal to one minus the ratio of $SS_\text{error}$ in a model with and without the focal explanatory variable. 
+
+$$R^2_\text{partial} = 1-\frac{SS_\text{error (full model)}}{SS_\text{error (model without focal predictor)}}$$
+
+::: aside
+Because partial $R^2$ adjusts for other variables in the model, $\sum R^2$ does not generally add up to the $R^2$ of the full model. 
+:::
+
+The [`drop1()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/add1.html) function compares the full model to a series of reduced models, each missing one model term. It returns various summaries of each "reduced" model (as well as the full model in the first row, labeled `<none>`, which represents the full model). For our purposes, we will focus on the residual sums of squares (aka $SS_\text{error}$ aka $SS_\text{residual}$), `RSS`. To show you that this works for categorical predictors with more than two levels, I will add location into the model.
+
+```{r}
+#| column: page-right
+full_model <- lm( prop_hybrid ~ petal_area_mm + asd_mm + petal_color +location, data = rils)
+
+drop1(full_model)
+```
+
+We can find the partial $R^2$ as:
+
+```{r}
+drop1(full_model)|> 
+  dplyr::select(RSS )|>
+  as_tibble(rownames = "term")|>
+  mutate(partial_r2 = 1 - min(RSS) / RSS)
+```
+
+
+This result makes it clear that, after adjusting for other variables in the model, petal color and planting location explain most of the variation in the proportion of hybrid seeds on a RIL (15% and 11%, respectively), with petal area explaining another 5% of this variation. By contrast ASD explains less 0.3% of the variation in the proportion of hybrid seed. 
+
+---
+
+::: fyi
+## [`partial_r2()`](https://yanivjb.github.io/honestlm/reference/partial_r2.html)  in  [`honestlm`](https://yanivjb.github.io/honestlm/index.html) 
+
+I added a [`partial_r2()`](https://yanivjb.github.io/honestlm/reference/partial_r2.html) function to my  [`honestlm`](https://yanivjb.github.io/honestlm/index.html)  package to calculate $R^2_\text{partial}$ from an `lm` object. The syntax is as follows: 
+
+```{r}
+library(honestlm)
+partial_r2(full_model)
+```
+
+This function also returns [Cohen's $f^2$](https://pmc.ncbi.nlm.nih.gov/articles/PMC3328081/) a related measure of effect size. Cohen’s $f^2$ is just a transformation of partial $r^2$, where $f^2 = R^2_\text{partial} / (1 - R^2_\text{partial})$, so larger values mean a larger term-level contribution.
+:::
+
+---
+
+#### Cautions for interpreting $R^2_\text{partial}$  
+
+Just like a traditional $R^2$, a partial $R^2$ is only interpretable in the study we are conducting. We could not say, for example, that "*petal area explains 5% of the variation in proportion hybrid seed set.*" We could only say "*In this study petal area explains 5% of the variation in proportion hybrid seed set*."  

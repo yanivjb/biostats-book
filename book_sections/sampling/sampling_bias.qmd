@@ -67,7 +67,7 @@ include_graphics("https://images.prismic.io/sketchplanations/f2fdb7cb-f126-4897-
 
 ## (Avoiding) Sampling Bias
 
-Say we we are interested in knowing the proportion of *Clarkia xantiana* plants that are hybrids between the two subspecies, *parviflora* and *xantiana*. To make this problem a bit easier, lets focus our attention on one field site, GC. Here we change our question from "what proportion of *Clarkia xantiana* plants are hybrids between the subspecies?" to the more precise "what proportion of *Clarkia xantiana* plants **at GC** are hybrids between the subspecies?"  
+Say we want to  know the proportion of *Clarkia xantiana* plants that are hybrids between the two subspecies, *parviflora* and *xantiana*. To make this problem a bit easier, let's focus our attention on one field site, GC. Here we change our question from "what proportion of *Clarkia xantiana* plants are hybrids between the subspecies?" to the more precise "what proportion of *Clarkia xantiana* plants **at GC** are hybrids between the subspecies?"  
 
 
 Lucky for us, Dave is a very diligent researcher, and this population is not too large. So he censused the population -- finding each plant and inferring its subspecies identity by genomic analyses (@fig-gcmap). But, what if the population was too large to census, or what if we weren't as motivated as Dave?  How could we randomly sample the population to get this estimate and how could things go wrong if we do not sample randomly?  Below I lay out some potential problems that could lead to a biased sample.

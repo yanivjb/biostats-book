@@ -61,7 +61,7 @@ gc_rils <- ril_data |>
 
 ## Bootstrap gone wrong  
 
-**Bootstrapping is great!** It allows us to estimate uncertainty without relying on formulas or strong distributional assumptions. But as with all stats tools, there are limits to the use of bootstrapping. So before moving onto the next section it is worth going over   these limits and how to deal with them.
+**Bootstrapping is great!** By bootstrapping, we can estimate uncertainty without relying on formulas or assumptions about the distribution of the data. But, as with all stats tools, there are limits to the use of bootstrapping. So before moving onto the next section, I present these limits and how to deal with them.
 
 ### Bootstrapping itself is a sample  
 

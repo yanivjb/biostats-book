@@ -79,7 +79,7 @@ You have a fresh new dataset and want to check it out. Before providing numeric 
 #| echo: false
 #| label: fig-clarkia_flowers
 #| fig-cap: "Measuring *Clarkia xantiana* flowers. Image from [CalPhotos](https://calphotos.berkeley.edu/cgi/img_query?enlarge=0000+0000+0620+1969) shared by [Chris Winchell](mailto:cjwinchell_NO_SPAM@gmail.com) with a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 ([CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/)) license."
-#| fig-alt: "A photograph of two *Clarkia xantiana* flowers placed on a ruler for scale. The flower on the left is significantly larger, with broader petals and a more robust structure, while the flower on the right is much smaller, with narrower petals. Both flowers have a similar pinkish-purple coloration with dark markings near the center. The ruler beneath them provides a size reference, with the larger flower spanning approximately 20 to 23 cm and the smaller flower measuring around 23 to 25 cm. The image illustrates the variation in floral size within *Clarkia xantiana*."
+#| fig-alt: "A photograph of two *Clarkia xantiana* flowers placed on a ruler for scale. The flower on the left is way bigger."
 include_graphics("../../figs/intro_to_r/univariate_summaries/1969.png")
 ```
 

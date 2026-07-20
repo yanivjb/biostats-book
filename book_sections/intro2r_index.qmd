@@ -58,7 +58,7 @@ Years of learning and teaching have taught me the following key points about lea
 ```{r}
 #| echo: false
 #| label: "fig-r_mindset"
-#| fig-cap: "Video of Yaniv\\'s hints for succesfull R coding."
+#| fig-cap: "Video of Yaniv\\'s hints for succesful R coding."
 include_url("https://player.vimeo.com/video/745985537")
 ```
 
@@ -78,7 +78,7 @@ include_graphics("../figs/intro_to_r/intro_to_R/balanced.png")
 
 - **`R` is literally a language.** Languages take a while to learn -- at first, looking at an unfamiliar alphabet or hearing people speak a foreign language makes no sense. Aluksi vieraan aakkoston katsominen tai vieraan kielen puhumisen kuuleminen ei tunnu lainkaan järkevältä. With time and effort, you can make sense of a bunch of words and sentences but it takes time. You are not dumb for not understanding the sentence I pasted above (and if you do understand it is because you know Finnish, not because you are smart).
 
-- **You don't need to memorize anything.** You have access to dictionaries, translators, LLMs etc etc. That said, these tools or more useful the more you know.  
+- **You don't need to memorize anything.** You have access to dictionaries, translators, LLMs etc etc. That said, these tools are more useful the more you know.  
 
 - **Do not compare yourself to others.** R will come fast to some, and slower to others. This has absolutely nothing to do with either your intelligence or your long-term potential as a competent R user. 
 

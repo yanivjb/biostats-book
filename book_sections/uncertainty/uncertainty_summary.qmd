@@ -59,7 +59,7 @@ Try these questions! By using the R environment you can work without leaving thi
 
 `r hide("Explanation of Q1")`
 
-The **Sampling distribution** is the foundation idea for thinking about uncertainty. It's a the distribution sample estimates, and it's what allows us to think about the nature of sampling error.   
+The **Sampling distribution** is the foundation idea for thinking about uncertainty. It's the distribution sample estimates, and it's what allows us to think about the nature of sampling error.   
 
 `r hide("Why standard error is not quite right.")`
 If you chose "Standard error": You're on the right track! The standard error is how we quantify or measure the uncertainty. However, the sampling distribution is the larger idea or conceptual framework that allows us to understand where that standard error comes from.   
@@ -127,7 +127,7 @@ In this case we are sampling from a population with a known actual parameter!
 
 :::
 
-**The faithful data:** Old faithful is meant to erupt pretty regularly, how regularly is this? Lets look into it by estimating our uncertainty in the mean waiting time in the faithful data set in R.
+**The faithful data:** Old faithful is meant to erupt pretty regularly, how regularly is this? Let's look into it by estimating our uncertainty in the mean waiting time in the faithful data set in R.
 
 First, let’s take a glimpse of the faithful data.
 
@@ -270,7 +270,7 @@ Notice this question asks for a **99% confidence interval**. We choose a higher 
 
 **Webapps:**   
 
-- This [webapp](https://www.zoology.ubc.ca/~whitlock/Kingfisher/CIMean.htm) from @whitlock2020 is great for thinking about confidence intervals. It's math-based, not bootstrapped-based, but hte concepts and ideas are the same.
+- This [webapp](https://www.zoology.ubc.ca/~whitlock/Kingfisher/CIMean.htm) from @whitlock2020 is great for thinking about confidence intervals. It's math-based, not bootstrap-based, but the concepts and ideas are the same.
 
 
 :::

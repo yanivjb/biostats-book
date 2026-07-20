@@ -9,7 +9,7 @@ webr:
 ---
 
 
-Links to: [Summary](#summarizing_summaries_chapter-summary). [Chatbot tutor](#data_in_R_summaryChatbot) [Questions](#summarizing_summaries_practice-questions). [Glossary](#summarizing_summaries_glossary-of-terms). [R functions](#summarizing_summaries_key-r-functions). [R packages](#summarizing_summaries_r-packages-introduced). [More resources](#summarizing_summaries_additional-resources).  
+Links to: [Summary](#summarizing_summaries_chapter-summary). [Chatbot tutor](#summarizing_summaries_summaryChatbot) [Questions](#summarizing_summaries_practice-questions). [Glossary](#summarizing_summaries_glossary-of-terms). [R functions](#summarizing_summaries_key-r-functions). [R packages](#summarizing_summaries_r-packages-introduced). [More resources](#summarizing_summaries_additional-resources).  
 
 
   
@@ -30,7 +30,7 @@ include_graphics("../../figs/pretty_stressed_clarkia.png")
 
 Because they can be used to parameterize an entire distribution, the mean and variance (or its square root, the standard deviation) are the most common summaries of a variable’s center and spread. However, these summaries are most meaningful when the data resemble a bell curve. To make informed choices about how to summarize a variable, we must first consider its shape, typically visualized with a histogram.  When data are skewed or uneven, we can either transform the variable to make its distribution more balanced, or use alternative summaries like the median and interquartile range, which better capture the center and spread in such cases.
 
-### Chatbot tutor   {#data_in_R_summaryChatbot}  
+### Chatbot tutor   {#summarizing_summaries_summaryChatbot}  
 
 :::tutor
 Please interact with this custom chatbot ([**link to ChatGPT bot here**](https://chatgpt.com/g/g-683138e4af688191a0d0fe7c9a3badc4-univariate-summaries-tutor), [**link to Gemini bot here**](https://gemini.google.com/gem/1duzWKm4d7AC_XNcd2xckfu3iaNEG6J47?usp=sharing)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
@@ -130,7 +130,7 @@ penguins |>
 
 **Q3)** I calculate means in two different ways above and get different answers. Which is correct? `r mcq(c("mean_mass_1",  answer= "mean_mass_2", "it depends"))`
 
-**Q4)** What went wrong in calculating these means?  `r longmcq(c(answer = "n()  counts the number of entries, but we need the number of non-NA entries.",  "na.rm should be set to TRUE, not T", "The denominator for the mean is (n - 1), not n.", "Nothing -- they are both potentially correct depedning on your goals."))`
+**Q4)** What went wrong in calculating these means?  `r longmcq(c(answer = "n()  counts the number of entries, but we need the number of non-NA entries.",  "na.rm should be set to TRUE, not T", "The denominator for the mean is (n - 1), not n.", "Nothing -- they are both potentially correct depending on your goals."))`
 
 
 ---  

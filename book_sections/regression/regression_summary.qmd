@@ -496,17 +496,17 @@ pf(7.1,1,47,lower.tail = FALSE)
 
 **Videos:**         
 
-[Simple Linear Regression](https://www.youtube.com/watch?v=WWqE7YHR4Jc), a video introduction to fitting and interpreting a regression line.
+- [Simple Linear Regression](https://www.youtube.com/watch?v=WWqE7YHR4Jc), a video introduction to fitting and interpreting a regression line from Crash Course Statistics.  
 
 **Interactive resources:**  
 
-[Least-Squares Regression](https://phet.colorado.edu/sims/html/least-squares-regression/latest/least-squares-regression_all.html), from PhET Interactive Simulations. Drag points around and watch how the fitted line, residuals, and least-squares criterion change.
+- [Least-Squares Regression](https://phet.colorado.edu/sims/html/least-squares-regression/latest/least-squares-regression_all.html), from PhET Interactive Simulations. Drag points around and watch how the fitted line, residuals, and least-squares criterion change.  
 
 **Readings:**  
 
-- [Inference for linear regression with a single predictor](https://openintro-ims.netlify.app/inf-model-slr), from OpenIntro. This is a useful follow-up for reviewing confidence intervals, hypothesis tests, and assumptions for simple linear regression.
+- [Inference for linear regression with a single predictor](https://openintro-ims.netlify.app/inf-model-slr), from OpenIntro Introduction to Modern Statistics (@cetinkayarundel2024). This is a useful follow-up for reviewing confidence intervals, hypothesis tests, and assumptions for simple linear regression.
 
-- [Basic Regression](https://moderndive.com/5-regression.html), from *ModernDive*. This chapter gives a tidyverse-friendly introduction to regression using `ggplot2`, `lm()`, and model interpretation.
+- [Basic Regression](https://moderndive.com/5-regression.html), from *ModernDive* (@ismay2019). This chapter gives a tidyverse-friendly introduction to regression using `ggplot2`, `lm()`, and model interpretation.
 
 - [Regression II: Linear Regression](https://datasciencebook.ca/regression2.html#overview-7), from *Data Science: A First Introduction*. This chapter frames regression as a prediction tool and discusses model fit, outliers, and interpretation.
 

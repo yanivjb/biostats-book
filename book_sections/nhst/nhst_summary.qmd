@@ -164,6 +164,8 @@ include_graphics("../../figs/stats_foundations/nhst/null_dist.png")
 
 - Numerous readings from the [Scientist Sees Squirrel blog](https://scientistseessquirrel.wordpress.com) by [Stephen B. Heard](https://sheard.ext.unb.ca/) including:  [In defence of the P-value](https://scientistseessquirrel.wordpress.com/2015/02/09/in-defence-of-the-p-value/), [Is “nearly significant” ridiculous?](https://scientistseessquirrel.wordpress.com/2015/11/16/is-nearly-significant-ridiculous/), and [Two tired misconceptions about null hypotheses](https://scientistseessquirrel.wordpress.com/2017/04/03/two-tired-misconceptions-about-null-hypotheses/).  
 
+- [The Null Hypothesis Is Always Wrong](https://ecoevoevoeco.blogspot.com/2026/03/the-null-hypothesis-is-always-wrong.html). An interesting blog post from the [Eco Evo Evo Eco blog](https://ecoevoevoeco.blogspot.com/).
+
 - [Some Natural Solutions to the p-Value Communication Problem—and Why They Won’t Work](https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1311263?casa_token=60fh_ztCytkAAAAA:Swz3jXQlf9LWUw-HAHXhHh2r5_OgxJS3-L5g1Waq1GugNX_txrsQJTGsVdjHQodQIsUsVF5ot3kmKQ) [@gelman2017].   
 
 -  [Statement on P-values from the American Statistical Association](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2016.1154108?needAccess=true) [@wasserstein2016].  
@@ -183,6 +185,11 @@ include_graphics("../../figs/stats_foundations/nhst/null_dist.png")
 
 - [Probability, Part 7: What is Null Hypothesis Significance Testing?](https://www.youtube.com/watch?v=2QsTJclNqVs) from  Simplistics (QuantPsych). An opinionated but entertaining presentation of p-values & NHST. 
 
+
+**Podcasts:**     
+
+- [What is the value of a p-value with Charlie Poole and Chuck Scales.](https://podcasts.apple.com/us/podcast/what-is-the-value-of-a-p-value-with-charlie/id1485892859?i=1000559517137). From the casual inference podcast.   
+  
 :::
 
 ```{r}

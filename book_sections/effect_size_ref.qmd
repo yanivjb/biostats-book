@@ -6,9 +6,9 @@
 ---
 
 :::warning
-**EFFECT SIZE MEASUREES THE STRENGTH OF AN ASSOCIATION -- IT IS NOT CAUSAL**   
+**EFFECT SIZE MEASURES THE STRENGTH OF AN ASSOCIATION -- IT IS NOT CAUSAL**   
 
-"Effect size" is a poorly chosen name for the strength of an association. There are few different measures of the effect size, depedning on our models etc. But they generally describe estimates of parameters in linear models standardize by residual variability.  
+"Effect size" is a poorly chosen name for the strength of an association. There are few different measures of the effect size, depending on our models etc. But they generally describe estimates of parameters in linear models standardize by residual variability.  
 
 :::
 
@@ -55,9 +55,9 @@ cohens_d(y ~ x, data = data)
 
 
 
-## The correlation   {#cont_cont_the-correlation}  
+## The correlation   {#cont_cont_the-correlation_again}  
 
-The correlation coefficient,  *r* -- a summary of the strength and direction of a linear association between two variables. So it's absolute value, *|r|* mesuares the strength of an association.  Mathematically *r* is simply the covariance divided by the product of standard deviations ($s_X$ and $s_Y$), and we can find it in `R` with the  [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function: 
+The correlation coefficient,  *r* -- a summary of the strength and direction of a linear association between two variables. So its absolute value, *|r|* measures the strength of an association.  Mathematically *r* is simply the covariance divided by the product of standard deviations ($s_X$ and $s_Y$), and we can find it in `R` with the  [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function: 
 
 $$r = \frac{\text{Covariance}_{X,Y}}{s_X \times s_Y}$$
 

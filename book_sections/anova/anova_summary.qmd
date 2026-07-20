@@ -508,7 +508,7 @@ Let’s hone in on the comparisons with `p.adj` $< 0.05$ (i.e., where we reject 
 
 
 
-## Additional resources   {#2t_summary_additional-resources}
+## Additional resources   {#anova_summary_additional-resources}
 
 :::learnmore 
 

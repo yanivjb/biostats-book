@@ -35,7 +35,7 @@ source("../../_common.R")
 
 ## Storing data
 
-Collecting data is hard work. It is therefore important to make sure the data does not get lost or corrupted, and can be easily analyzed by us and other researchers. We therefore must consider stable and convenient data storage over the short and long term. 
+Collecting data is hard work. It is therefore important to make sure the data do not get lost or corrupted, and can be easily analyzed by us and others. We therefore must consider stable and convenient data storage over the short and long term. 
 
 ### Backing up data   
 
@@ -67,6 +67,6 @@ Exactly how you structure your folder for a project is up to you, and depends on
 
 ### Long-term storage  
 
-By sharing our data, we make our science more transparent, our work more reproducible, and make our data accessible for people to further investigate (or combine with other studies).  As such it is the expectation in most fields that data is  made available after publication. Repositories like [data DRYAD](https://datadryad.org/stash), [figshare](https://figshare.com/) or [DRUM](https://conservancy.umn.edu/collections/6c548d8b-0f3a-4f6b-b16e-4154c88136c0) make this easy. 
+By sharing our data, we make our science more transparent and reproducible, and allow others to further investigate it (or combine with other studies). This makes our science even more useful.  As such, it is the expectation in most fields that data is  made available after publication. Repositories like [data DRYAD](https://datadryad.org/stash), [figshare](https://figshare.com/) or [DRUM](https://conservancy.umn.edu/collections/6c548d8b-0f3a-4f6b-b16e-4154c88136c0) make this easy. 
 
 This is perhaps most helpful for you - the author of the project. You are the one most likely to want to revisit your previous code and data, and as noted above, the long term survival of such data in your hands cannot be guaranteed. 

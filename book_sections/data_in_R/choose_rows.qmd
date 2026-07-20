@@ -55,7 +55,7 @@ ril_data <- ril_data |>
 
 ---   
 
-@fig-bad is not good. Most of the space is wasted on `NA` values. Not only is this wasteful and distracting, but it makes it difficult to spot any true pattern. The solution is clear - we should remove cases in which we did not record pollinator visits (i.e. when `visits` are `NA`). Below I show how to use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`filter`](https://dplyr.tidyverse.org/reference/filter.html)  function to achieve this!
+@fig-bad is not good. Most of the space is wasted on `NA` values. This waste also obscured the true pattern. We can fix this by removing cases in which we did not record pollinator visits (i.e. when `visits` are `NA`).  Below, I show how to use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`filter`](https://dplyr.tidyverse.org/reference/filter.html)  function to do this!
 
 ```{r}
 #| fig-height: 4

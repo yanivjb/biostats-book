@@ -1,0 +1,981 @@
+## • 19. Multiple Regression in R {.unnumbered #multiple_regression_R_workflow}
+
+
+---
+format: html
+webr:
+  packages: ['dplyr', 'readr' ,'ggplot2']
+  autoload-packages: true
+---
+
+```{webr-r}
+#| context: setup
+
+honest_factor_info <- function(model) {
+  mf <- stats::model.frame(model)
+  if (ncol(mf) == 0) {
+    return(list())
+  }
+
+  response <- as.character(stats::formula(model)[[2]])
+  predictors <- setdiff(names(mf), response)
+
+  factor_vars <- predictors[vapply(
+    mf[predictors],
+    function(x) is.factor(x) || is.character(x),
+    logical(1)
+  )]
+
+  stats::setNames(
+    lapply(factor_vars, function(var) {
+      x <- mf[[var]]
+      if (!is.factor(x)) {
+        x <- factor(x)
+      }
+
+      list(
+        name = var,
+        n_levels = nlevels(x),
+        levels = levels(x),
+        reference = levels(x)[1]
+      )
+    }),
+    factor_vars
+  )
+}
+
+honest_multilevel_factor_rows <- function(model, terms) {
+  factor_info <- honest_factor_info(model)
+  rows <- rep(FALSE, length(terms))
+
+  if (length(factor_info) == 0) {
+    return(rows)
+  }
+
+  for (info in factor_info) {
+    if (info$n_levels <= 2) {
+      next
+    }
+
+    rows <- rows | (startsWith(terms, info$name) & terms != info$name)
+  }
+
+  rows
+}
+
+honest_contrast_notes <- function(model, terms) {
+  factor_info <- honest_factor_info(model)
+  notes <- rep(NA_character_, length(terms))
+
+  if (length(factor_info) == 0) {
+    return(notes)
+  }
+
+  for (info in factor_info) {
+    term_matches <- startsWith(terms, info$name) & terms != info$name
+    if (!any(term_matches)) {
+      next
+    }
+
+    if (info$n_levels > 2) {
+      notes[term_matches] <- paste0(
+        "comparison to reference level `",
+        info$reference,
+        "`; not a test of whether `",
+        info$name,
+        "` matters overall"
+      )
+    } else {
+      notes[term_matches] <- paste0(
+        "comparison to reference level `",
+        info$reference,
+        "`"
+      )
+    }
+  }
+
+  notes
+}
+
+honest_plot_group_var <- function(data) {
+  candidates <- intersect(
+    c("colour", "color", "fill", "linetype", "shape"),
+    names(data)
+  )
+
+  candidates <- candidates[vapply(
+    data[candidates],
+    function(x) length(unique(x[!is.na(x)])) > 1,
+    logical(1)
+  )]
+
+  if (length(candidates) == 0) {
+    return(NULL)
+  }
+
+  candidates[1]
+}
+
+format_number <- function(x, digits) {
+  format(signif(x, digits), trim = TRUE)
+}
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
+
+
+StatLmSmooth <- ggplot2::ggproto(
+  "StatLmSmooth",
+  ggplot2::Stat,
+
+  required_aes = c("x", "y"),
+  extra_params = c("na.rm", "se", "level", "n", "fullrange"),
+
+  compute_layer = function(self, data, params, layout) {
+    se <- params$se %||% TRUE
+    level <- params$level %||% 0.95
+    n <- params$n %||% 100
+    fullrange <- params$fullrange %||% FALSE
+
+    keep <- stats::complete.cases(data[, c("x", "y", "group")])
+    data <- data[keep, , drop = FALSE]
+
+    if (nrow(data) == 0) {
+      return(data[0, , drop = FALSE])
+    }
+
+    has_groups <- "group" %in% names(data) && length(unique(data$group)) >= 2
+
+    if (!has_groups) {
+      fit <- stats::lm(y ~ x, data = data)
+
+      aesthetic_cols <- intersect(
+        c("colour", "color", "fill", "alpha", "linetype", "linewidth", "size"),
+        names(data)
+      )
+      x_global <- range(data$x, na.rm = TRUE)
+      panels <- unique(data$PANEL)
+
+      grid <- lapply(panels, function(this_panel) {
+        this_data <- data[data$PANEL == this_panel, , drop = FALSE]
+        x_range <- if (isTRUE(fullrange)) x_global else range(this_data$x, na.rm = TRUE)
+
+        pred_data <- data.frame(
+          x = seq(x_range[1], x_range[2], length.out = n),
+          PANEL = this_panel,
+          group = -1
+        )
+
+        for (aesthetic in aesthetic_cols) {
+          pred_data[[aesthetic]] <- this_data[[aesthetic]][1]
+        }
+
+        pred_data
+      })
+
+      pred_data <- do.call(rbind, grid)
+      pred <- stats::predict(fit, newdata = pred_data, se.fit = TRUE)
+      pred_data$y <- as.numeric(pred$fit)
+
+      if (isTRUE(se)) {
+        crit <- stats::qt((1 + level) / 2, df = stats::df.residual(fit))
+        pred_data$se <- as.numeric(pred$se.fit)
+        pred_data$ymin <- pred_data$y - crit * pred_data$se
+        pred_data$ymax <- pred_data$y + crit * pred_data$se
+      }
+
+      return(pred_data)
+    }
+
+    data$.lm_group <- factor(data$group)
+    fit <- stats::lm(y ~ x + .lm_group, data = data)
+
+    aesthetic_cols <- intersect(
+      c("colour", "color", "fill", "alpha", "linetype", "linewidth", "size"),
+      names(data)
+    )
+    x_global <- range(data$x, na.rm = TRUE)
+    panel_group_combos <- unique(data[, c("PANEL", "group"), drop = FALSE])
+
+    grid <- lapply(seq_len(nrow(panel_group_combos)), function(i) {
+      this_panel <- panel_group_combos$PANEL[i]
+      this_group <- panel_group_combos$group[i]
+      this_data <- data[data$PANEL == this_panel & data$group == this_group, , drop = FALSE]
+      x_range <- if (isTRUE(fullrange)) x_global else range(this_data$x, na.rm = TRUE)
+
+      pred_data <- data.frame(
+        x = seq(x_range[1], x_range[2], length.out = n),
+        PANEL = this_panel,
+        group = this_group
+      )
+      pred_data$.lm_group <- factor(this_group, levels = levels(data$.lm_group))
+
+      for (aesthetic in aesthetic_cols) {
+        pred_data[[aesthetic]] <- this_data[[aesthetic]][1]
+      }
+
+      pred_data
+    })
+
+    pred_data <- do.call(rbind, grid)
+    pred <- stats::predict(fit, newdata = pred_data, se.fit = TRUE)
+    pred_data$y <- as.numeric(pred$fit)
+
+    if (isTRUE(se)) {
+      crit <- stats::qt((1 + level) / 2, df = stats::df.residual(fit))
+      pred_data$se <- as.numeric(pred$se.fit)
+      pred_data$ymin <- pred_data$y - crit * pred_data$se
+      pred_data$ymax <- pred_data$y + crit * pred_data$se
+    }
+
+    pred_data
+  }
+)
+geom_lm_smooth <- function (mapping = NULL, data = NULL, ..., interaction = FALSE, 
+    method = NULL, se = TRUE, level = 0.95, n = 100, fullrange = FALSE, 
+    na.rm = FALSE, show.legend = NA, inherit.aes = TRUE) 
+{
+    if (!is.null(method) && !identical(method, "lm")) {
+        warning("`geom_lm_smooth()` always uses linear models; ignoring `method = ", 
+            deparse(method), "`.", call. = FALSE)
+    }
+    if (isTRUE(interaction)) {
+        return(ggplot2::geom_smooth(mapping = mapping, data = data, 
+            method = "lm", formula = y ~ x, se = se, level = level, 
+            n = n, fullrange = fullrange, na.rm = na.rm, show.legend = show.legend, 
+            inherit.aes = inherit.aes, ...))
+    }
+    ggplot2::layer(data = data, mapping = mapping, stat = StatLmSmooth, 
+        geom = "smooth", position = "identity", show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(se = se, level = level, 
+            n = n, fullrange = fullrange, na.rm = na.rm, ...))
+}
+
+
+StatLmMeans <- ggplot2::ggproto(
+  "StatLmMeans",
+  ggplot2::Stat,
+
+  required_aes = c("x", "y"),
+  extra_params = c("na.rm", "interaction", "se", "level"),
+
+  compute_layer = function(self, data, params, layout) {
+    interaction <- params$interaction %||% FALSE
+    se <- params$se %||% TRUE
+    level <- params$level %||% 0.95
+
+    group_var <- honest_plot_group_var(data)
+    needed <- c("x", "y", "PANEL", group_var)
+    keep <- stats::complete.cases(data[, needed, drop = FALSE])
+    data <- data[keep, , drop = FALSE]
+
+    if (nrow(data) == 0) {
+      return(data[0, , drop = FALSE])
+    }
+
+    same_partition <- function(a, b) {
+      a <- factor(a)
+      b <- factor(b)
+      nlevels(base::interaction(a, b, drop = TRUE)) == max(nlevels(a), nlevels(b))
+    }
+
+    x_levels <- sort(unique(data$x))
+    data$.lm_x <- factor(data$x, levels = x_levels)
+    x_has_multiple_levels <- length(x_levels) > 1
+
+    panel_levels <- unique(data$PANEL)
+    data$.lm_panel <- factor(data$PANEL, levels = panel_levels)
+    panel_has_multiple_levels <- nlevels(data$.lm_panel) > 1
+
+    group_has_multiple_levels <- FALSE
+    include_group <- FALSE
+    if (!is.null(group_var)) {
+      data$.lm_group <- factor(data[[group_var]], levels = unique(data[[group_var]]))
+      group_has_multiple_levels <- nlevels(data$.lm_group) > 1
+      include_group <- group_has_multiple_levels &&
+        !same_partition(data$.lm_group, data$.lm_x) &&
+        !(panel_has_multiple_levels && same_partition(data$.lm_group, data$.lm_panel))
+    }
+
+    include_panel <- panel_has_multiple_levels &&
+      !same_partition(data$.lm_panel, data$.lm_x) &&
+      !(include_group && same_partition(data$.lm_panel, data$.lm_group))
+
+    terms <- character(0)
+    if (x_has_multiple_levels) {
+      terms <- c(terms, ".lm_x")
+    }
+    if (include_group) {
+      terms <- c(terms, ".lm_group")
+    }
+    if (include_panel) {
+      terms <- c(terms, ".lm_panel")
+    }
+
+    formula <- if (length(terms) == 0) {
+      y ~ 1
+    } else if (isTRUE(interaction) && include_group && x_has_multiple_levels) {
+      stats::as.formula(paste("y ~", paste(c(".lm_x * .lm_group", setdiff(terms, c(".lm_x", ".lm_group"))), collapse = " + ")))
+    } else {
+      stats::as.formula(paste("y ~", paste(terms, collapse = " + ")))
+    }
+    fit <- stats::lm(formula, data = data)
+
+    combo_cols <- c("PANEL", "x", group_var)
+    combos <- unique(data[, combo_cols, drop = FALSE])
+    combos <- combos[order(combos$PANEL, combos$x), , drop = FALSE]
+
+    pred_data <- combos
+    pred_data$.lm_x <- factor(pred_data$x, levels = levels(data$.lm_x))
+    pred_data$.lm_panel <- factor(pred_data$PANEL, levels = levels(data$.lm_panel))
+    if (!is.null(group_var)) {
+      pred_data$.lm_group <- factor(pred_data[[group_var]], levels = levels(data$.lm_group))
+    }
+
+    group_inputs <- pred_data[, combo_cols, drop = FALSE]
+    pred_data$group <- as.integer(do.call(base::interaction, c(group_inputs, drop = TRUE)))
+
+    pred <- stats::predict(fit, newdata = pred_data, se.fit = TRUE)
+    pred_data$y <- as.numeric(pred$fit)
+
+    if (isTRUE(se)) {
+      crit <- stats::qt((1 + level) / 2, df = stats::df.residual(fit))
+      pred_data$se <- as.numeric(pred$se.fit)
+      pred_data$ymin <- pred_data$y - crit * pred_data$se
+      pred_data$ymax <- pred_data$y + crit * pred_data$se
+    }
+
+    aesthetic_cols <- intersect(
+      c("colour", "color", "fill", "alpha", "linetype", "linewidth", "size", "shape"),
+      names(data)
+    )
+
+    for (aesthetic in aesthetic_cols) {
+      if (!is.null(group_var) && identical(aesthetic, group_var)) {
+        next
+      }
+
+      pred_data[[aesthetic]] <- vapply(
+        seq_len(nrow(pred_data)),
+        function(i) {
+          rows <- data$PANEL == pred_data$PANEL[i] & data$x == pred_data$x[i]
+          if (!is.null(group_var)) {
+            rows <- rows & data[[group_var]] == pred_data[[group_var]][i]
+          }
+          data[[aesthetic]][which(rows)[1]]
+        },
+        data[[aesthetic]][1]
+      )
+    }
+
+    pred_data
+  }
+)
+
+
+stat_lm_means <- function(mapping = NULL,
+                          data = NULL,
+                          geom = "pointrange",
+                          position = "identity",
+                          ...,
+                          interaction = FALSE,
+                          se = TRUE,
+                          level = 0.95,
+                          na.rm = FALSE,
+                          show.legend = NA,
+                          inherit.aes = TRUE) {
+  ggplot2::layer(
+    data = data,
+    mapping = mapping,
+    stat = StatLmMeans,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      interaction = interaction,
+      se = se,
+      level = level,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+partial_r2 <- function(model, details = FALSE) {
+  if (!inherits(model, "lm")) {
+    stop("`model` must be an `lm` or `honest_lm` object.", call. = FALSE)
+  }
+
+  details <- isTRUE(details)
+  term_labels <- attr(stats::terms(model), "term.labels")
+
+  if (length(term_labels) == 0) {
+    stop("`model` must contain at least one model term.", call. = FALSE)
+  }
+
+  lm_model <- model
+  class(lm_model) <- setdiff(class(lm_model), "honest_lm")
+
+  drop_table <- stats::drop1(lm_model, test = "F")
+  drop_df <- as.data.frame(drop_table)
+  drop_df$term <- row.names(drop_df)
+  drop_df <- drop_df[drop_df$term != "<none>", , drop = FALSE]
+  drop_df <- drop_df[!is.na(drop_df$Df) & drop_df$Df > 0, , drop = FALSE]
+
+  ss_full_error <- stats::deviance(lm_model)
+  ss_reduced_error <- drop_df$RSS
+  delta_ss <- drop_df[["Sum of Sq"]]
+
+  partial <- delta_ss / ss_reduced_error
+  f2 <- delta_ss / ss_full_error
+
+  out <- tibble::tibble(
+    term = drop_df$term,
+    df = drop_df$Df,
+    partial_r2 = as.numeric(partial),
+    f2 = as.numeric(f2)
+  )
+
+  if (details) {
+    out$statistic <- as.numeric(drop_df[["F value"]])
+    out$p_value <- as.numeric(drop_df[["Pr(>F)"]])
+    out$ss_full_error <- rep(ss_full_error, nrow(out))
+    out$ss_reduced_error <- as.numeric(ss_reduced_error)
+    out$delta_ss <- as.numeric(delta_ss)
+  }
+
+  out
+}
+
+penguins <- penguins |>
+  filter(!is.na(sex),!is.na(body_mass),!is.na(flipper_len))
+
+full_model <- lm(flipper_len ~ body_mass  + species +  sex, data = penguins)
+
+```
+
+:::aside
+.
+:::
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(tidyr)
+library(emmeans)
+library(parameters)
+source("../../_common.R") 
+
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** Throughout this section I have sprinkled in R code about how to do things, but this code was mixed with explanations, theory, and the like. Now that you understand the concepts of a multiple regression, you want a quick resource about how to do this in R.  
+
+**Learning goals: By the end of this section, you should be able to:**
+
+- Complete a first-pass analysis of data. 
+
+:::
+
+---
+
+::: warning
+## This is not enough
+
+Just copying and pasting code from this section will not be a strong analysis. Please read the entire chapter! Rather, this serves as a "first-pass" resource for a more detailed analysis.
+:::
+
+### Getting started with multiple regression
+
+Let's first load the key packages we use to assist us in multiple regression:
+
+```{r}
+#| warning: false
+#| message: false
+library(car)
+library(ggplot2)
+library(dplyr)
+library(honestlm)
+library(emmeans)
+library(modelbased)
+library(parameters)
+library(broom)
+penguins <- penguins |>
+  filter(!is.na(sex),!is.na(body_mass),!is.na(flipper_len))
+```
+
+```{r}
+#| echo: false
+
+# Format values using three significant figures
+fmt_sig <- function(x, digits = 3) {
+  vapply(
+    x,
+    function(z) {
+      if (is.na(z)) return(NA_character_)
+      if (z == 0) return("0")
+
+      decimal_places <- max(
+        digits - 1 - floor(log10(abs(z))),
+        0
+      )
+
+      formatC(
+        z,
+        format = "f",
+        digits = decimal_places
+      )
+    },
+    character(1)
+  )
+}
+
+format_means_table <- function(model, by) {
+
+  means <- modelbased::estimate_means(
+    model,
+    by = by
+  ) |>
+    as.data.frame() |>
+    dplyr::mutate(
+      `95% CI` = paste0(
+        "[",
+        fmt_sig(CI_low), ", ",
+        fmt_sig(CI_high),
+        "]"
+      )
+    ) |>
+    dplyr::select(
+      -tidyselect::any_of(
+        c("CI", "CI_low", "CI_high", "df_error")
+      )
+    ) |>
+    dplyr::relocate(
+      `95% CI`,
+      .after = SE
+    )
+
+  # Numeric columns to format and align
+  number_cols <- names(means)[
+    vapply(means, is.numeric, logical(1))
+  ]
+
+  # Format p separately if the output happens to include it
+  ordinary_number_cols <- setdiff(number_cols, "p")
+
+  table <- means |>
+    gt::gt() |>
+
+    gt::cols_label(
+      Mean = "Mean",
+      SE = "SE",
+      `95% CI` = "95% CI"
+    ) |>
+
+    gt::fmt_number(
+      columns = tidyselect::all_of(ordinary_number_cols),
+      n_sigfig = 3,
+      use_seps = FALSE
+    ) |>
+
+    gt::cols_align_decimal(
+      columns = tidyselect::all_of(ordinary_number_cols)
+    ) |>
+
+    gt::cols_align(
+      align = "center",
+      columns = `95% CI`
+    ) |>
+
+    gt::tab_style(
+      style = gt::cell_borders(
+        sides = "right",
+        color = "grey80",
+        weight = gt::px(1)
+      ),
+      locations = list(
+        gt::cells_body(
+          columns = tidyselect::everything()
+        ),
+        gt::cells_column_labels(
+          columns = tidyselect::everything()
+        )
+      )
+    )
+
+  # Apply conventional p-value formatting only when p exists
+  if ("p" %in% names(means)) {
+    table <- table |>
+      gt::fmt(
+        columns = p,
+        fns = function(x) {
+          ifelse(
+            x < 0.001,
+            "<0.001",
+            formatC(x, format = "f", digits = 3)
+          )
+        }
+      ) |>
+      gt::cols_align(
+        align = "right",
+        columns = p
+      )
+  }
+
+  table
+}
+```
+---
+
+### Model building
+
+For this example, I will take the penguins data set and model flipper length as a function of body mass, sex, and species. 
+
+```{r}
+#| column: page-right
+#| output: false
+full_model <- lm(flipper_len ~ body_mass  + species +  sex, data = penguins)
+coef(full_model)
+```
+
+```{r}
+#| echo: false
+full_model |>
+  coef() |>
+  signif(digits = 3) |>
+  t() |>
+  knitr::kable()
+```
+
+From these coefficients, we can build a linear model.  
+
+$$
+\widehat{\text{flip len}_i}
+=
+`r round(coef(full_model)[["(Intercept)"]], 0)`
++
+`r signif(coef(full_model)[["body_mass"]], 3)`
+(\text{body mass}_i)
++
+`r round(coef(full_model)[["speciesChinstrap"]], 2)`
+(\text{Chinstrap}_i)
++
+`r round(coef(full_model)[["speciesGentoo"]], 1)`
+(\text{Gentoo}_i)
++
+`r round(coef(full_model)[["sexmale"]], 2)`
+(\text{male}_i)
+$$
+
+
+Remember that levels of categorical "indicator variables" (e.g. male, Gentoo, etc)  are 0 if you are not that thing, and 1 if you are. So, for example, an Adelie female has a flipper length of $`r round(coef(full_model)[["(Intercept)"]], 0)`+`r signif(coef(full_model)[["body_mass"]], 3)` \times \text{its body mass}$, while an  Adelie male has a flipper length of $`r round(coef(full_model)[["(Intercept)"]], 0)` + `r round(coef(full_model)[["sexmale"]], 2)`+`r signif(coef(full_model)[["body_mass"]], 3)` \times \text{its body mass.}$
+
+
+
+---
+
+### Visualization 
+
+The next step is to look at the data. Remember that 
+
+1. There are numerous ways to visualize multivariate data.   
+2. Slopes and means from [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) and [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html), respectively, are specific to each group and do not necessarily correspond to predictions from a simple additive model. 
+
+So, rather than making you a static plot, I am providing this webR environment, with my [`honestlm`](https://yanivjb.github.io/honestlm/index.html) package loaded, with [`geom_lm_smooth()`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) and [`stat_lm_means()`](https://yanivjb.github.io/honestlm/reference/stat_lm_means.html) ready to go! 
+
+Have a look at the output and see what you notice. Then try swapping mapping of sex and species (i.e. facet by sex and color by species). Then try putting body mass on the y. What do you notice? How does this guide your understanding of the data and model?
+
+
+```{webr-r}
+#| autorun: true
+#| fig-height: 2.5
+penguins                            |>
+  ggplot(aes(x = body_mass, 
+             y = flipper_len, 
+             color = sex))          +
+  facet_wrap(~species)+
+  geom_point(alpha = .3)            +
+  geom_lm_smooth()
+
+penguins                           |>
+  ggplot(aes(x = sex, 
+             y = flipper_len, 
+             color = sex))         +
+  facet_wrap(~species)+
+  geom_jitter(height=0, width = .1)+
+  stat_lm_means(color = "black",
+                geom = "errorbar", 
+                width = .2) 
+```
+
+---
+
+### Evaluating assumptions
+
+Now we are ready to evaluate assumptions. 
+
+- First we can evaluate the possibility of multicollinearity with the [`vif()`](https://search.r-project.org/CRAN/refmans/car/html/vif.html) function from the [`car`](https://cran.r-project.org/web/packages/car/index.html) package: 
+
+```{r}
+vif(full_model)
+```
+
+While we see some association among predictors, I don't think we're in the danger zone yet.  
+
+- Next we evaluate assumptions of linearity, normality of residuals, and homoscedasticity with diagnostic plots:
+
+```{r}
+#| eval: false
+plot(full_model)
+```
+
+```{r}
+#| column: page-right
+#| fig-width: 12
+#| fig-height: 3
+#| echo: false
+par(mfrow = c(1, 4))
+plot(full_model)
+par(mfrow = c(1, 1))
+```
+
+These plots all seem reasonably good. There is a slight deviation from normality assumptions but this does not worry me!
+
+
+
+---
+
+### Parsing effect sizes
+
+We can now compare effect sizes with the [`partial_r2()`](https://yanivjb.github.io/honestlm/reference/partial_r2.html) function in my [`honestlm`](https://yanivjb.github.io/honestlm/index.html) package. 
+
+```{r}
+partial_r2(full_model)
+```
+
+We see that compared to species and body mass, sex explains a relatively small proportion of individual variation in flipper length, after adjusting for all associations among explanatory variables. 
+
+--- 
+
+
+### Evaluating significance 
+
+
+Making sure to use car's [`Anova()`](https://search.r-project.org/CRAN/refmans/car/html/Anova.html) function, we find strongly significant association between all explanatory variables and flipper length, even after adjusting for associations among explanatory variables. 
+
+```{r}
+Anova(full_model, type = "II")
+```
+
+With a post-hoc test, we find that the flipper length of all species differ from one another after adjusting for associations between explanatory variables.
+
+```{r}
+emmeans(full_model, ~ species) |>
+  contrast(method = "pairwise", adjust = "tukey")
+```
+
+
+--- 
+
+
+### Summarizing uncertainty
+
+Here, I will only use the [`model_based`](https://easystats.github.io/modelbased/) and the related [`parameters`](https://easystats.github.io/parameters/) (both in the [`easystats`](https://easystats.github.io/easystats/) family of packages) packages to summarize uncertainty. This deviation from the text just shows you other ways to do things! Pick your favorite.
+
+- Uncertainty in model coefficients:
+
+```{r}
+#| eval: false
+model_parameters(full_model)
+```
+
+
+```{r}
+#| echo: false
+
+# Format values using three significant figures
+fmt_sig <- function(x, digits = 3) {
+  vapply(
+    x,
+    function(z) {
+      if (is.na(z)) return(NA_character_)
+      if (z == 0) return("0")
+
+      decimal_places <- max(
+        digits - 1 - floor(log10(abs(z))),
+        0
+      )
+
+      formatC(
+        z,
+        format = "f",
+        digits = decimal_places
+      )
+    },
+    character(1)
+  )
+}
+
+params <- model_parameters(full_model) |>
+  as.data.frame() |>
+  dplyr::mutate(
+    # Preserve literal square brackets in the rendered table
+    Parameter = gsub(
+      "[",
+      "&#91;",
+      Parameter,
+      fixed = TRUE
+    ),
+    Parameter = gsub(
+      "]",
+      "&#93;",
+      Parameter,
+      fixed = TRUE
+    ),
+
+    `95% CI` = paste0(
+      "[",
+      fmt_sig(CI_low), ", ",
+      fmt_sig(CI_high),
+      "]"
+    )
+  ) |>
+  dplyr::rename(
+    t_328 = t
+  ) |>
+  dplyr::select(
+    -CI,
+    -CI_low,
+    -CI_high,
+    -df_error
+  ) |>
+  dplyr::relocate(
+    `95% CI`,
+    .after = SE
+  )
+
+# Numeric columns to format and align,
+# excluding p because it receives special formatting
+number_cols <- names(params)[
+  vapply(params, is.numeric, logical(1))
+]
+
+number_cols <- setdiff(number_cols, "p")
+
+params |>
+  gt::gt() |>
+
+  # Render the HTML entities as literal square brackets
+  gt::fmt_markdown(
+    columns = Parameter
+  ) |>
+
+  gt::cols_label(
+    Parameter = "Parameter",
+    Coefficient = "Coefficient",
+    SE = "SE",
+    `95% CI` = "95% CI",
+    t_328 = gt::md("$t_{328}$"),
+    p = gt::md("$p$")
+  ) |>
+
+  # Three significant figures
+  gt::fmt_number(
+    columns = tidyselect::all_of(number_cols),
+    n_sigfig = 3,
+    use_seps = FALSE
+  ) |>
+
+  # Display very small p-values as <0.001
+  gt::fmt(
+    columns = p,
+    fns = function(x) {
+      ifelse(
+        x < 0.001,
+        "<0.001",
+        formatC(x, format = "f", digits = 3)
+      )
+    }
+  ) |>
+
+  # Align ordinary numeric columns at decimal points
+  gt::cols_align_decimal(
+    columns = tidyselect::all_of(number_cols)
+  ) |>
+
+  # Center confidence intervals
+  gt::cols_align(
+    align = "center",
+    columns = `95% CI`
+  ) |>
+
+  gt::cols_align(
+    align = "right",
+    columns = p
+  ) |>
+
+  # Add vertical lines between columns
+  gt::tab_style(
+    style = gt::cell_borders(
+      sides = "right",
+      color = "grey80",
+      weight = gt::px(1)
+    ),
+    locations = list(
+      gt::cells_body(
+        columns = tidyselect::everything()
+      ),
+      gt::cells_column_labels(
+        columns = tidyselect::everything()
+      )
+    )
+  )
+```
+
+
+::: warning
+## Ignore these p-values
+Remember, the p-values here refer to the deviation of model coefficients from a null value of zero. This is rarely what we care about. I suggest ignoring them. For term-level tests, use the Type II sums of squares approach above.
+:::
+
+- Uncertainty in adjusted means:
+
+
+```{r}
+#| eval: false
+estimate_means(full_model, by="sex")
+```
+
+```{r}
+#| echo: false
+
+format_means_table(
+  full_model,
+  by = "sex"
+)
+```
+
+
+```{r}
+#| eval: false
+estimate_means(full_model, by="species")
+```
+
+```{r}
+#| echo: false
+
+format_means_table(
+  full_model,
+  by = "species"
+)
+```

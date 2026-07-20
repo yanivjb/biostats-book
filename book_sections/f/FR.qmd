@@ -92,7 +92,7 @@ glance(admix_anova)
 ## The [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) pipeline
 
 Alternatively, we can fit a linear model and then hand it to [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html)
- to create the ANOVA table. This produces the same output as [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sumary.lm.html), but the intermediate object is an lm object rather than an aov object. Sometimes one format is just easier to work with than the other, but your results will be the same.
+ to create the ANOVA table. This produces the same output as [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html), but the intermediate object is an lm object rather than an aov object. Sometimes one format is just easier to work with than the other, but your results will be the same.
  
 
 

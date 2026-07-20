@@ -162,7 +162,9 @@ You do not need to know this yet, but know that these approaches usually yield v
 
 ## Visualizing confidence intervals 
 
-We have previously discussed the importance of presenting honest, clear, and transparent plots. This includes both showing your data and highlighting patterns. It is therefore best practice to include both means and a confidence interval in your plots. You can do this with ggplot's [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) function. 
+
+
+A good plot is clear and honest. So, be sure to include both raw data, an uncertainty in your parameter estimates in your plots. ggplot makes this easy with  [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) function. 
 
 :::aside
 **NOTE** [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) requires the [`Hmisc` package](https://cran.r-project.org/web/packages/Hmisc/index.html) so you will likely need to install and load it.
@@ -228,6 +230,10 @@ ggplot(ril_data, aes(x = location, y =prop_hybrid, color = location))+
         axis.text = element_text(size = 14),
         axis.title = element_text(size = 16))
 ```
+
+::: fyi
+For years I taught intro biostats with Base R tools. One big reason I switched to ggplot and the tidyverse was how easy ggplot2 makes it to add error bars. This took loads of effort in the Base R days.
+:::
 
 
 ## What influences the width of a confidence interval?

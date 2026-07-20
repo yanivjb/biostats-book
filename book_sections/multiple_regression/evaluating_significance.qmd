@@ -1,0 +1,241 @@
+## • 19. P-values & NHST {.unnumbered #evaluating_significance}
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Loading and cleaning data"
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(forcats)
+source("../../_common.R") 
+fmt <- function(x) format(round(x, 3), nsmall = 3)
+
+pm <- function(x) {
+  ifelse(
+    x < 0,
+    paste0(" - ", fmt(abs(x))),
+    paste0(" + ", fmt(x))
+  )
+}
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** You built a multiple regression model but now want to get onto the dirty business of null hypothesis significance testing. 
+
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+* Describe the logic of Type II sums of squares.
+* Explain why Type I sums of squares can depend on the order of predictors in the model.
+* Use [`car::Anova()`](https://search.r-project.org/CRAN/refmans/car/html/Anova.html) to test model terms in a multiple regression.
+* Avoid the mistake of using `anova()`,to find p-values for terms in a multiple regression, and explain why these are wrong. 
+* Avoid the mistake of using coefficient p-values from `summary()` and `tidy()` as term-level tests, and explain why these can be misleading.
+:::
+
+---
+
+The point of multiple regression is to model a response variable as a function of several explanatory variables in one coherent equation, rather than trying to reason our way through a pile of separate models. With multiple regression, we can ask about the association between one explanatory variable and the response while accounting for the others in the model. 
+
+But how do we calculate p-values for each term in our model? The answer comes down to how we break up the sums of squares for the overall model into the specific terms in the model. Type II sums of squares -- a common  approach, and the one I advocate here -- has a logic similar to the partial $R^2$ calculation from the previous section. For each term in the model, we compare the sums of squares from the full model to a reduced model that contains all the other terms but leaves out the focal term. 
+
+
+I think about this as asking the question "how much extra variation in the response is captured when a given term is added to the model?": 
+
+
+::: aside 
+You may also see the same idea written using residual sums of squares:
+
+$$SS_\text{term} = SS_\text{residual(model without term)}-SS_\text{residual(full model)}$$
+
+In the (relatively simple) linear models in this and the next chapter, both equations give the same answer.
+:::
+
+
+$$SS_\text{term} =SS_\text{model(full model)}-SS_\text{model(model without term)}$$
+
+::: warning
+## Reminder: Don't use [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) for NHST 
+
+The p-values from  [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) (as well as [`broom`](https://broom.tidymodels.org/)'s [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function) test the significance of model coefficients away from zero. These are not the tests we want and these p-values will often mislead you.  
+:::
+
+### Calculating $SS_\text{term}$
+
+Let's walk through these calculations with [`broom`](https://broom.tidymodels.org/)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function. Recall that [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) takes a linear model and provides detailed info for each observation. Most importantly for this effort, it provides $\hat{Y_i}$ in the column, `.fitted`. For this example we will focus on `asd_mm`
+
+
+- First let's calculate $SS_\text{asd}$ following our equation, $SS_\text{term} =SS_\text{model(full model)}-SS_\text{model(model without term)}$, recalling that $SS_\text{model} = \sum{(\hat{Y_i} - \bar{Y})^2}$: 
+
+```{r}
+#| column: page-right
+library(broom)
+
+full_model     <- lm(prop_hybrid ~  asd_mm + petal_color + petal_area_mm + location, data = rils )
+reduced_model  <- lm(prop_hybrid ~ petal_color + petal_area_mm + location, data = rils )
+
+ss_model_full <- augment(full_model) |> 
+  summarize(ss_model_full = sum((.fitted - mean(prop_hybrid))^2))|>
+  pull()
+
+ss_model_reduced <- augment(reduced_model)  |> 
+  summarize(ss_model_reduced = sum((.fitted - mean(prop_hybrid))^2))|>
+  pull()
+
+ss <- tibble(ss_model_full  , ss_model_reduced  ) |>
+  mutate(ss_asd = ss_model_full - ss_model_reduced)
+```
+
+```{r}
+#| echo: false
+kable(ss,digits = 3)
+```
+---
+
+- Now that we have $SS_\text{asd} = `r ss["ss_asd"] |> round(digits = 3) |> pull()`$, **we can calculate mean squares term, mean squares error, F, and p [as usual](#anova):** 
+
+```{r}
+#| output: false 
+#| column: page-right
+ss_error_full <- augment(full_model) |> 
+  summarize(ss_error_full = sum((.fitted - prop_hybrid)^2))|>
+  pull()
+
+ss_asd        <- pull(ss,ss_asd )
+df_asd        <- 1
+ms_asd        <- ss_asd / df_asd
+ss_error      <- ss_error_full
+df_error      <- df.residual(full_model)
+ms_error      <- ss_error  / df_error
+f_val         <- ms_asd / ms_error
+p_val         <- pf(f_val, df_asd, df_error,lower.tail = FALSE)
+
+tibble(ss_asd, df_asd, ms_asd, ss_error, df_error, ms_error, f_val, p_val)
+```
+
+```{r}
+#| echo: false
+#| column: page-right
+tibble(ss_asd, df_asd, ms_asd, ss_error, df_error, ms_error, f_val, p_val) |>
+  kable(digits = 3)
+```
+
+---
+
+So, with a p-value of `r p_val|>round(digits=3)`  we do not have strong evidence that anther-stigma distance is associated with proportion of hybrid seeds after adjusting for petal area, petal color, and location. This is despite a very low p-value ($p \approx 0.00005$) for the simple linear regression: `lm(prop_hybrid ~ asd_mm, data = rils)`.
+
+::: fyi
+
+Because sums of squares for each term come after adjusting for the other terms, the full model’s model sum of squares will usually not equal the sum of the sums of squares for each term in the model. 
+
+:::
+
+### The [`Anova()`](https://search.r-project.org/CRAN/refmans/car/html/Anova.html) function can use Type II Sums of Squares
+
+The section above was meant to explain how to calculate Type II sums of squares from a multiple regression and then get a p-value.  But it would be a tremendous pain to do this for all terms in our model. Instead you can use the [`Anova()`](https://search.r-project.org/CRAN/refmans/car/html/Anova.html) **with a capital A** function from the `car` package to do this for you.
+
+```{r}
+#| column: page-right
+library(car)
+lm(prop_hybrid ~  asd_mm + petal_color + petal_area_mm + location, data = rils ) |>
+  Anova(type = "II")
+```
+
+---
+
+We now see that after adjusting for other variables, all but anther-stigma distance remain strongly associated with the proportion of hybrid seeds. 
+
+
+---
+
+::: warning
+
+## Be careful with [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) for multiple regression
+
+
+
+Base R's [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) function uses Type I sums of squares. In multiple regression, this means the p-value for a term can depend on where that term appears in the formula. This is usually not what we want (see below). 
+
+:::
+
+### Watch out for Type I Sums of Squares
+
+
+In sequential sums of squares, sums of squares for the first term are calculated as if it were the only term in the model. Then sums of squares for the second term are calculated adjusting for the first term. The sums of squares for the third term adjust for the first two terms, etc etc.  
+
+This means that if we accidentally use Type I sums of squares (which R does when we use the [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html),  the p-value for a term can literally depend on the order it is entered into the lm() function.
+
+
+
+So, for example, with Type I sums of squares we can wrongly conclude that anther-stigma distance is associated with proportion of hybrid seeds (if it is entered first)
+
+```{r}
+#| column: page-right
+lm(prop_hybrid ~  asd_mm + petal_color + petal_area_mm + location, data = rils ) |>
+    anova()
+```
+
+Or not (if it is entered later)
+
+```{r}
+#| column: page-right
+lm(prop_hybrid ~   petal_color + petal_area_mm + location + asd_mm, data = rils ) |>
+    anova()
+```
+
+#### When are Type I sums of squares ok?
+
+In my view Type I sums of squares are never "right," but there are two cases in which they are "not wrong".
+
+- In a "balanced  design" in which we experimentally ensure that there are no associations between our explanatory variables, Type I and Type II sums of squares provide the same answer. 
+
+- If you only care about the p-value of one term in your model, you can enter it last and then use Type I sums of squares, as the last term in a multiple regression will have the same p-value regardless of the type of sums of squares. 
+
+In practice, I think it's best to always use Type II sums of squares for additive multiple regression models as there is no case where Type I is better, just some cases where it doesn't really matter. 
+
+
+### Post-hoc tests
+
+:::aside
+In the [ANOVA](#post_hoc) section, we used [`multcomp`](https://cran.r-project.org/web/packages/multcomp/index.html)'s [`glht()`](https://search.r-project.org/CRAN/refmans/multcomp/html/glht.html) function for a post hoc test. We can also do this for a multiple regression (but be sure to convert location to a factor). 
+
+Here I chose to use the [`emmeans`](https://rvlenth.github.io/emmeans/) package, because we will also use it in the next section to quantify uncertainty. 
+:::
+
+From this analysis we now see that petal area, petal color, and location are significantly associated with proportion of hybrid seeds after accounting for all other variables in the model. But for categorical variables like `location`, we do not know which classes differ from one another. As we saw in our introduction to the ANOVA, we answer this question with a [post-hoc test](#post_hoc). 
+
+For multiple regression, a post-hoc test asks which values of a categorical variable differ from each other after adjusting for the other terms in the model. We can do this in R with the [`contrast()`](https://rvlenth.github.io/emmeans/reference/contrast.html) function in the [`emmeans`](https://rvlenth.github.io/emmeans/) package: 
+
+
+```{r}
+library(emmeans)
+location_means <- emmeans(full_model, ~ location)
+
+emmeans(full_model, ~ location) |>
+  contrast(method = "pairwise", adjust = "tukey")
+```
+---
+
+
+From this post-hoc test, we conclude that, after adjusting for the other explanatory variables in the model, plants at location US (Upper Sawmill) have a significantly smaller proportion of hybrid seeds than plants at each other location. No other pairs of locations significantly differ from one another.
+
+xxxx
+https://019b2da8-edfb-a262-61be-7973c056d9ae.share.connect.posit.cloud/intro.html

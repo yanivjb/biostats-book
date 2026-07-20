@@ -206,7 +206,7 @@ The following sections provide the underlying logic, mathematical  formulas, and
 
 The following sections introduce how to summarize associations between variables by:  
  
-- [Revisiting our descrition of associations between two categorical variables](#two_categorical_vars_II), by introducing the  [covariance](#two_categorical_vars_deviations-from-independence-the-covariance).     
+- [Revisiting our description of associations between two categorical variables](#two_categorical_vars_II), by introducing the  [covariance](#two_categorical_vars_deviations-from-independence-the-covariance).     
 - [Describing associations between two continuous  variables](#cont_cont), including the [covariance](#cont_cont_the-covariance) and the [correlation](#cont_cont_the-correlation).
 
 

@@ -42,7 +42,7 @@ library(tidyr)
 ---
 
 
-<article class="drop-cap">Science relies on the collection and analysis of data to understand the  world. Data are at the core of this endeavor - data provides the foundation for testing hypotheses, refining theories, and suggesting which actions are likely to pay off. Thus, while theory is important to science, data is king. But data on it's own is just a pile pf numbers. We need to be able to analyze data and make sense of it. Here, I introduce tools for the standard scientific tasks of organizing, exploring, and wrangling data effectively. Throughout we focus on how to do theis producibly. This chapter will prepare you for data summaries (in the following two chapters), and statistical analyses (later in the book). </article> 
+<article class="drop-cap">Science relies on the collection and analysis of data to understand the  world. Data are the backbone of all scientifically informed decisions. But data on it's own is just a pile pf numbers. We must analyze data and make sense of it. Here, I introduce tools for the standard scientific tasks of organizing, exploring, and dealing with data. Throughout we focus on how to do this reproducible.  </article> 
 
 
 ---

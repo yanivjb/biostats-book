@@ -67,7 +67,7 @@ augmented_hybrid_lm <- augment(hybrid_lm)
 
 ## Uncertainty of parameter estimates
 
-@fig-lmunc shows not just the data and the best fit line, but also uncertainty in this line. This follows best practices in statistical reporting --  in statistics, a simple estimate of the slope or intercept is not good enough. That is because the unavoidable process of sampling error ensures that the parameters we estimate from samples will differ from true population parameters. Here we go through how to quantify this uncertainty.
+@fig-lmunc  shows the data, the best-fit line, and uncertainty in that line. This is important because, as you know, estimates are not the truth. That is, the unavoidable process of sampling error ensures that the parameters we estimate from samples will differ from true population parameters. Here's how to quantify this uncertainty in our regression model.
 
 :::aside
 Recall that we represent true population parameters with Greek letters, and estimates with English letters, so </br></br>   

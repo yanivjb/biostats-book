@@ -5,7 +5,7 @@
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating scenario:**  You can do a bit in R - but you know that a major benefit of R is not just doing things, but having a record of how to do it again.           
+**Motivating scenario:**  You can do a bit in R. But you have heard a major benefit of R is that it can make your work reproducible, and don't see how to do it.
 
 **Learning goals: By the end of this sub-chapter you should be able to**  
 
@@ -90,7 +90,7 @@ There are long-standing conventions for writing clear R scripts. A simple, effec
 
 1. **Header comments** including your name, the date, and the goal of this script. If there is still work to do on the script, I often include the to-do list here as well. This practice means that when we next open or share our script, we will know what we have done, when and why we did it, and what else needs doing.    
 2. **Load packages and data you will use**
-3. **Main code sections**  I usually add strong differentiation and comments between distinct section (either those asking different questions), or between e.g. making figures and doing stats. 
+3. **Main code sections**  I usually add strong differentiation and comments between distinct sections (either those asking different questions), or between e.g. making figures and doing stats. 
 
 
 To see this in action, check out my example, below:

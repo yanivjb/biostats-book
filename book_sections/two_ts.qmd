@@ -58,7 +58,7 @@ gc_rils <- ril_data |>
 * *What’s the difference in hybridization rate between pink and white plants?*
 
 :::aside
-**Remmeber, correlation is not causation!**  we usually want to know the cause (e.g., “Will a vaccine help or hurt?”), but we're often stuck with associations (e.g., “What’s the difference between vaccinated and unvaccinated people?”). Causal claims require careful experiments or other formal approaches to causal inference.
+**Remmember, correlation is not causation!**  We usually want to know the cause (e.g., “Will a vaccine help or hurt?”), but we're often stuck with associations (e.g., “What’s the difference between vaccinated and unvaccinated people?”). Causal claims require careful experiments or other formal approaches to causal inference.
 :::
 
 

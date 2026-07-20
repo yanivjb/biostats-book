@@ -37,8 +37,7 @@ include_graphics("https://imgs.xkcd.com/comics/normal_distribution_2x.png")
 
 ## Chapter summary {#normal_summary_chapter-summary}  
 
-
-The Normal Distribution is a symmetric, bell-shaped curve defined by its mean ($\mu$) and standard deviation ($\sigma$). Its importance in statistics comes from its frequent use in statistics, which is justified by the Central Limit Theorem, which states that regardless of the distribution of the population parameter, the sampling distribution of the mean will be approximately normal as the sample size gets large. We can standardize any normal distribution using a Z-transformation to calculate Z-scores, which allows us to find probabilities using the Probability Density Function of the Standard Normal Distribution. We assess if data are normal by using a Quantile-Quantile (QQ) Plot and can transform data to make it normal.
+The Normal Distribution is a symmetric, bell-shaped curve defined by its mean ($\mu$) and standard deviation ($\sigma$). It is worth knowing because many statistical models assume normality. Before you come at me with “nothing is perfectly normal,” let me reassure you: the Central Limit Theorem implies that when sample sizes are not too small, and deviations from normality are not too extreme, it is often ok to assume normality. If you are worried about this assumption, use a Quantile-Quantile (QQ) plot to see how far your data are from normal. If things look really bad, try transforming your data.
 
 
 ### Chatbot tutor  {#normal_summary_chatbot_tutor} 

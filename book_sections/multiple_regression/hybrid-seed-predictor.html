@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybrid Seed Predictor</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1b2430;
+      --muted: #637086;
+      --line: #d9e0ea;
+      --panel: rgba(255, 255, 255, 0.92);
+      --panel-solid: #ffffff;
+      --pink: #dc3f8e;
+      --pink-dark: #9d2466;
+      --green: #12856f;
+      --leaf: #5a9f58;
+      --soil: #8a5a35;
+      --gold: #c57a10;
+      --blue: #2d6fbb;
+      --shadow: 0 16px 36px rgba(30, 43, 62, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(120deg, rgba(220, 63, 142, 0.12), transparent 35%),
+        linear-gradient(240deg, rgba(18, 133, 111, 0.14), transparent 35%),
+        #f5f7fb;
+    }
+
+    main {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 24px 0 32px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      padding: 12px 0 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3.4vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .reset {
+      border: 1px solid var(--line);
+      background: var(--panel-solid);
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 10px 13px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(31, 43, 62, 0.08);
+      white-space: nowrap;
+    }
+
+    .layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .playground {
+      display: grid;
+      grid-template-columns: minmax(360px, 1.15fr) minmax(300px, 0.85fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .scene,
+    .controls,
+    .prediction {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .scene {
+      min-height: 590px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .field-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .plot {
+      min-height: 76px;
+      border: 1px solid rgba(27, 36, 48, 0.13);
+      border-radius: 7px;
+      background: #f9fbfd;
+      cursor: pointer;
+      padding: 8px;
+      display: grid;
+      align-content: end;
+      gap: 4px;
+      color: var(--muted);
+      font-weight: 800;
+      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+    }
+
+    .plot::before {
+      content: "";
+      display: block;
+      height: 32px;
+      border-radius: 5px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.28) 1px, transparent 1px) 0 0 / 18px 100%,
+        linear-gradient(0deg, rgba(255,255,255,0.32) 1px, transparent 1px) 0 0 / 100% 10px,
+        var(--soil);
+    }
+
+    .plot[data-value="GC"]::before {
+      background-color: #846347;
+    }
+
+    .plot[data-value="LB"]::before {
+      background-color: #367a65;
+    }
+
+    .plot[data-value="SR"]::before {
+      background-color: #9a7840;
+    }
+
+    .plot[data-value="US"]::before {
+      background-color: #6f7e97;
+    }
+
+    .plot.active {
+      color: #075b4b;
+      border-color: rgba(18, 133, 111, 0.55);
+      background: rgba(18, 133, 111, 0.10);
+      transform: translateY(-2px);
+    }
+
+    .flower-stage {
+      height: 512px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(#eaf6ff 0 57%, #d9efd2 57% 100%);
+      position: relative;
+    }
+
+    .paint-palette {
+      position: absolute;
+      z-index: 2;
+      top: 16px;
+      right: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      width: min(260px, calc(100% - 32px));
+      padding: 8px;
+      border: 1px solid rgba(27, 36, 48, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 8px 22px rgba(31, 43, 62, 0.12);
+    }
+
+    .paint-pot {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 850;
+      color: var(--ink);
+    }
+
+    .paint-pot[data-value="pink"] {
+      background: linear-gradient(135deg, #f690c7, #dc3f8e);
+      color: #411229;
+    }
+
+    .paint-pot[data-value="white"] {
+      background: linear-gradient(135deg, #ffffff, #f2eef5);
+      color: #4f4650;
+    }
+
+    .paint-pot.active {
+      outline: 3px solid rgba(18, 133, 111, 0.25);
+      border-color: rgba(18, 133, 111, 0.7);
+    }
+
+    .flower-stage::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 118px;
+      background:
+        radial-gradient(circle at 20% 32%, rgba(255,255,255,0.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 64% 44%, rgba(255,255,255,0.65) 0 2px, transparent 3px),
+        linear-gradient(0deg, rgba(57, 110, 60, 0.14), transparent);
+      pointer-events: none;
+    }
+
+    svg {
+      width: min(100%, 650px);
+      height: 100%;
+      touch-action: none;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .petal {
+      fill: var(--pink);
+      stroke: rgba(96, 35, 72, 0.22);
+      stroke-width: 2;
+      transition: fill 160ms ease, transform 90ms ease;
+      cursor: pointer;
+    }
+
+    .white-flower .petal {
+      fill: #fff8fb;
+      stroke: rgba(108, 94, 103, 0.35);
+    }
+
+    #flower-head {
+      cursor: pointer;
+    }
+
+    .drag-handle {
+      fill: #ffffff;
+      stroke: var(--ink);
+      stroke-width: 3;
+      cursor: grab;
+      filter: drop-shadow(0 3px 5px rgba(27, 36, 48, 0.2));
+    }
+
+    .flower-value {
+      fill: var(--ink);
+      paint-order: stroke;
+      stroke: rgba(255, 255, 255, 0.9);
+      stroke-width: 5;
+      stroke-linejoin: round;
+      font-size: 18px;
+      font-weight: 850;
+      pointer-events: none;
+    }
+
+    .flower-caption {
+      fill: var(--muted);
+      paint-order: stroke;
+      stroke: rgba(255, 255, 255, 0.9);
+      stroke-width: 4;
+      stroke-linejoin: round;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .drag-handle:active,
+    .petal:active,
+    .anther-hit:active {
+      cursor: grabbing;
+    }
+
+    .stigma {
+      fill: #f5c443;
+      stroke: #815209;
+      stroke-width: 2;
+    }
+
+    .anther {
+      fill: #f0a21a;
+      stroke: #8a5400;
+      stroke-width: 2;
+    }
+
+    .anther-hit {
+      fill: transparent;
+      cursor: grab;
+    }
+
+    .stem {
+      fill: none;
+      stroke: var(--leaf);
+      stroke-width: 13;
+      stroke-linecap: round;
+    }
+
+    .leaf {
+      fill: #77af5b;
+      stroke: rgba(27, 36, 48, 0.18);
+      stroke-width: 2;
+    }
+
+    .controls {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .checklist-title {
+      margin: 0 0 4px;
+      font-size: 1.08rem;
+      line-height: 1.2;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 12px;
+      color: var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .check-row input {
+      inline-size: 20px;
+      block-size: 20px;
+      accent-color: var(--green);
+    }
+
+    .include {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 750;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .include input {
+      inline-size: 20px;
+      block-size: 20px;
+      accent-color: var(--green);
+    }
+
+    input[type="range"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .prediction {
+      padding: 18px;
+    }
+
+    .label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 850;
+    }
+
+    .big-number {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 6px 0 12px;
+    }
+
+    #percent {
+      font-size: clamp(3rem, 8vw, 5.9rem);
+      font-weight: 900;
+      line-height: 0.95;
+    }
+
+    .unit {
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 750;
+    }
+
+    .gauge {
+      position: relative;
+      height: 24px;
+      border-radius: 5px;
+      overflow: hidden;
+      background: linear-gradient(90deg, #f1d6de, #f6e7a9, #b9e6da);
+      border: 1px solid rgba(28, 36, 48, 0.12);
+    }
+
+    .marker {
+      position: absolute;
+      top: -6px;
+      width: 4px;
+      height: 36px;
+      border-radius: 3px;
+      background: var(--ink);
+      transform: translateX(-2px);
+      transition: left 180ms ease;
+    }
+
+    .gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.83rem;
+      margin-top: 7px;
+    }
+
+    .equation {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #f6f8fb;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .equation-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .equation-line span:first-child {
+      color: var(--muted);
+    }
+
+    .equation-total {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      font-weight: 850;
+    }
+
+    @media (max-width: 900px) {
+      header,
+      .playground {
+        grid-template-columns: 1fr;
+      }
+
+      .scene {
+        min-height: auto;
+      }
+
+      .flower-stage {
+        height: 470px;
+      }
+
+    }
+
+    @media (max-width: 560px) {
+      .field-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flower-stage {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Hybrid Seed Predictor</h1>
+        <p class="subtitle">Build a Clarkia flower and see the model's predicted hybrid seed proportion.</p>
+      </div>
+      <button class="reset" type="button" id="reset">Reset flower</button>
+    </header>
+
+    <section class="layout" aria-label="Interactive model predictor">
+      <aside class="prediction">
+        <p class="label">Predicted proportion hybrid seed</p>
+        <div class="big-number">
+          <output id="percent">1.0</output>
+          <span class="unit">%</span>
+        </div>
+        <div class="gauge" aria-hidden="true">
+          <div class="marker" id="marker"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>0%</span>
+          <span>50%</span>
+          <span>100%</span>
+        </div>
+        <div class="equation" id="equation"></div>
+      </aside>
+
+      <div class="playground">
+        <section class="scene" aria-label="Interactive flower">
+          <div class="field-strip" data-buttons="location" aria-label="Location">
+            <button class="plot active" type="button" data-value="GC">GC</button>
+            <button class="plot" type="button" data-value="LB">LB</button>
+            <button class="plot" type="button" data-value="SR">SR</button>
+            <button class="plot" type="button" data-value="US">US</button>
+          </div>
+
+          <div class="flower-stage">
+            <div class="paint-palette" data-buttons="petal_color" aria-label="Paint flower color">
+              <button class="paint-pot active" type="button" data-value="pink">Paint pink</button>
+              <button class="paint-pot" type="button" data-value="white">Paint white</button>
+            </div>
+
+            <svg id="flower-svg" viewBox="0 0 520 520" role="img" aria-label="Clarkia flower model">
+              <path class="stem" d="M260 300 C250 360 247 410 238 500"></path>
+              <path class="leaf" d="M247 405 C190 372 162 403 129 446 C189 445 225 435 247 405"></path>
+              <path class="leaf" d="M246 432 C298 405 332 428 367 467 C309 471 270 459 246 432"></path>
+
+              <g id="flower-head">
+                <g id="petal-group">
+                  <ellipse class="petal" cx="260" cy="182" rx="58" ry="118" transform="rotate(0 260 230)"></ellipse>
+                  <ellipse class="petal" cx="260" cy="278" rx="58" ry="118" transform="rotate(180 260 230)"></ellipse>
+                  <ellipse class="petal" cx="212" cy="230" rx="58" ry="118" transform="rotate(-90 260 230)"></ellipse>
+                  <ellipse class="petal" cx="308" cy="230" rx="58" ry="118" transform="rotate(90 260 230)"></ellipse>
+                </g>
+                <circle cx="260" cy="230" r="39" fill="#f5d45a" stroke="#9a6d11" stroke-width="3"></circle>
+                <line id="style-line" x1="260" y1="230" x2="260" y2="190" stroke="#6b8b3f" stroke-width="7" stroke-linecap="round"></line>
+                <circle class="stigma" cx="260" cy="188" r="12"></circle>
+                <g id="anther-group">
+                  <line x1="260" y1="230" x2="260" y2="224" stroke="#7b6f2c" stroke-width="5" stroke-linecap="round"></line>
+                  <ellipse class="anther" cx="247" cy="224" rx="13" ry="9"></ellipse>
+                  <ellipse class="anther" cx="273" cy="224" rx="13" ry="9"></ellipse>
+                  <circle class="drag-handle" id="asd-handle" cx="260" cy="224" r="8"></circle>
+                  <rect class="anther-hit" x="224" y="198" width="72" height="54" rx="14"></rect>
+                </g>
+                <circle class="drag-handle" id="area-handle" cx="364" cy="230" r="10"></circle>
+                <text class="flower-caption" id="area-caption" x="386" y="212">petal area</text>
+                <text class="flower-value" id="area-value" x="386" y="234">62 mm²</text>
+                <text class="flower-caption" id="asd-caption" x="304" y="196">ASD</text>
+                <text class="flower-value" id="asd-value" x="304" y="218">0.85 mm</text>
+              </g>
+            </svg>
+          </div>
+        </section>
+
+        <section class="controls" aria-label="Model controls">
+          <h2 class="checklist-title">Include in model</h2>
+          <label class="check-row"><input type="checkbox" id="use-location"> Location</label>
+          <label class="check-row"><input type="checkbox" id="use-petal-area"> Petal area</label>
+          <label class="check-row"><input type="checkbox" id="use-color"> Petal color</label>
+          <label class="check-row"><input type="checkbox" id="use-asd"> Anther-stigma distance</label>
+          <input id="petal-area" type="range" min="25" max="120" step="1" value="62" aria-label="Petal area">
+          <input id="asd" type="range" min="0" max="6" step="0.05" value="0.85" aria-label="Anther-stigma distance">
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const model = {
+      meanY: 0.1376806,
+      intercept: 0.009550,
+      means: {
+        petalArea: 62.15682,
+        asd: 0.8654625,
+        white: 0.5024876,
+        locationEffects: {
+          GC: 0,
+          LB: 0.073067,
+          SR: 0.017549,
+          US: -0.114336
+        },
+        locationMix: {
+          GC: 0.2313433,
+          LB: 0.2263682,
+          SR: 0.2611940,
+          US: 0.2810945
+        }
+      },
+      beta: {
+        petalArea: 0.003218,
+        white: -0.173831,
+        asd: 0.030596
+      }
+    };
+
+    const state = {
+      useLocation: false,
+      usePetalArea: false,
+      useColor: false,
+      useAsd: false,
+      location: "GC",
+      petalArea: 62,
+      color: "pink",
+      asd: 0.85
+    };
+
+    const ids = {
+      svg: document.querySelector("#flower-svg"),
+      flowerHead: document.querySelector("#flower-head"),
+      petalGroup: document.querySelector("#petal-group"),
+      antherGroup: document.querySelector("#anther-group"),
+      styleLine: document.querySelector("#style-line"),
+      areaHandle: document.querySelector("#area-handle"),
+      asdHandle: document.querySelector("#asd-handle"),
+      areaValue: document.querySelector("#area-value"),
+      areaCaption: document.querySelector("#area-caption"),
+      asdValue: document.querySelector("#asd-value"),
+      asdCaption: document.querySelector("#asd-caption"),
+      percent: document.querySelector("#percent"),
+      marker: document.querySelector("#marker"),
+      equation: document.querySelector("#equation"),
+      petalArea: document.querySelector("#petal-area"),
+      asd: document.querySelector("#asd")
+    };
+
+    const checks = {
+      location: document.querySelector("#use-location"),
+      petalArea: document.querySelector("#use-petal-area"),
+      color: document.querySelector("#use-color"),
+      asd: document.querySelector("#use-asd")
+    };
+
+    let petalPointerStart = null;
+    let suppressPetalClick = false;
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function signed(value, digits = 3) {
+      const sign = value >= 0 ? "+" : "-";
+      return `${sign}${Math.abs(value).toFixed(digits)}`;
+    }
+
+    function svgPoint(event) {
+      const point = ids.svg.createSVGPoint();
+      point.x = event.clientX;
+      point.y = event.clientY;
+      return point.matrixTransform(ids.svg.getScreenCTM().inverse());
+    }
+
+    function setActiveButton(group, value) {
+      document.querySelectorAll(`[data-buttons='${group}'] button`).forEach(button => {
+        button.classList.toggle("active", button.dataset.value === value);
+      });
+    }
+
+    function syncLocationButtons(value) {
+      setActiveButton("location", value);
+    }
+
+    function setLocation(value, include = true) {
+      state.location = value;
+      if (include) state.useLocation = true;
+      checks.location.checked = state.useLocation;
+      syncLocationButtons(value);
+      render();
+    }
+
+    function setColor(value, include = true) {
+      state.color = value;
+      if (include) state.useColor = true;
+      checks.color.checked = state.useColor;
+      setActiveButton("petal_color", value);
+      render();
+    }
+
+    function setPetalArea(value, include = true) {
+      state.petalArea = clamp(Number(value), 25, 120);
+      if (include) state.usePetalArea = true;
+      checks.petalArea.checked = state.usePetalArea;
+      ids.petalArea.value = state.petalArea;
+      render();
+    }
+
+    function setAsd(value, include = true) {
+      state.asd = clamp(Number(value), 0, 6);
+      if (include) state.useAsd = true;
+      checks.asd.checked = state.useAsd;
+      ids.asd.value = state.asd;
+      render();
+    }
+
+    function calc() {
+      const pieces = [];
+      let yhat = model.intercept;
+
+      if (state.useLocation) {
+        const contribution = model.means.locationEffects[state.location];
+        yhat += contribution;
+        pieces.push({
+          name: "Location",
+          value: contribution,
+          text: state.location,
+          detail: `Location ${state.location}`
+        });
+      } else {
+        pieces.push({ name: "Location", value: 0, text: "NA" });
+      }
+
+      if (state.usePetalArea) {
+        const contribution = model.beta.petalArea * state.petalArea;
+        yhat += contribution;
+        pieces.push({
+          name: "Petal area",
+          value: contribution,
+          text: `${state.petalArea.toFixed(0)} mm²`,
+          detail: `Petal area: ${state.petalArea.toFixed(0)} mm² * ${model.beta.petalArea.toFixed(4)}`
+        });
+      } else {
+        pieces.push({ name: "Petal area", value: 0, text: "NA" });
+      }
+
+      if (state.useColor) {
+        const isWhite = state.color === "white" ? 1 : 0;
+        const contribution = model.beta.white * isWhite;
+        yhat += contribution;
+        pieces.push({
+          name: "Petal color",
+          value: contribution,
+          text: state.color,
+          detail: state.color === "white" ? "Petal color white" : "Petal color pink"
+        });
+      } else {
+        pieces.push({ name: "Petal color", value: 0, text: "NA" });
+      }
+
+      if (state.useAsd) {
+        const contribution = model.beta.asd * state.asd;
+        yhat += contribution;
+        pieces.push({
+          name: "ASD",
+          value: contribution,
+          text: `${state.asd.toFixed(2)} mm`,
+          detail: `ASD: ${state.asd.toFixed(2)} mm * ${model.beta.asd.toFixed(4)}`
+        });
+      } else {
+        pieces.push({ name: "ASD", value: 0, text: "NA" });
+      }
+
+      return { yhat, pieces };
+    }
+
+    function renderFlower() {
+      const areaScale = 0.72 + ((state.petalArea - 25) / 95) * 0.62;
+      const colorClass = state.color === "white" ? "white-flower" : "";
+      const gap = 10 + (state.asd / 6) * 105;
+      const antherY = 188 + gap;
+      const stemEnd = antherY - 4;
+      const areaX = 260 + 78 * areaScale;
+      const areaLabelX = Math.min(areaX + 20, 416);
+      const asdLabelY = Math.min(antherY + 32, 340);
+
+      ids.flowerHead.setAttribute("class", colorClass);
+      ids.petalGroup.setAttribute("transform", `translate(260 230) scale(${areaScale}) translate(-260 -230)`);
+      ids.areaHandle.setAttribute("cx", String(areaX));
+      ids.areaHandle.setAttribute("cy", "230");
+      ids.antherGroup.setAttribute("transform", `translate(0 ${antherY - 224})`);
+      ids.styleLine.setAttribute("y2", String(stemEnd));
+      ids.areaCaption.setAttribute("x", String(areaLabelX));
+      ids.areaValue.setAttribute("x", String(areaLabelX));
+      ids.areaValue.textContent = `${state.petalArea.toFixed(0)} mm²`;
+      ids.asdCaption.setAttribute("y", String(asdLabelY - 22));
+      ids.asdValue.setAttribute("y", String(asdLabelY));
+      ids.asdValue.textContent = `${state.asd.toFixed(2)} mm`;
+    }
+
+    function render() {
+      renderFlower();
+
+      const { yhat, pieces } = calc();
+      const clamped = clamp(yhat, 0, 1);
+      ids.percent.value = (yhat * 100).toFixed(1);
+      ids.marker.style.left = `${clamped * 100}%`;
+
+      const activePieces = pieces.filter(piece => piece.text !== "NA");
+      const contributionLines = activePieces.map(piece => `
+        <div class="equation-line">
+          <span>${piece.detail ?? `${piece.name}: ${piece.text}`}</span>
+          <strong>${signed(piece.value)}</strong>
+        </div>
+      `).join("");
+
+      ids.equation.innerHTML = `
+        <div class="equation-line">
+          <span>intercept</span>
+          <strong>${model.intercept.toFixed(3)}</strong>
+        </div>
+        ${contributionLines}
+        <div class="equation-line equation-total">
+          <span>sum</span>
+          <strong>${yhat.toFixed(3)}</strong>
+        </div>
+      `;
+    }
+
+    checks.location.addEventListener("change", event => {
+      state.useLocation = event.target.checked;
+      render();
+    });
+
+    checks.petalArea.addEventListener("change", event => {
+      state.usePetalArea = event.target.checked;
+      render();
+    });
+
+    checks.color.addEventListener("change", event => {
+      state.useColor = event.target.checked;
+      render();
+    });
+
+    checks.asd.addEventListener("change", event => {
+      state.useAsd = event.target.checked;
+      render();
+    });
+
+    document.querySelectorAll("[data-buttons='location'] button").forEach(button => {
+      button.addEventListener("click", () => setLocation(button.dataset.value));
+    });
+
+    document.querySelectorAll("[data-buttons='petal_color'] button").forEach(button => {
+      button.addEventListener("click", () => setColor(button.dataset.value));
+    });
+
+    ids.petalArea.addEventListener("input", event => setPetalArea(event.target.value));
+    ids.asd.addEventListener("input", event => setAsd(event.target.value));
+
+    ids.petalGroup.addEventListener("pointerdown", event => {
+      ids.svg.setPointerCapture(event.pointerId);
+      petalPointerStart = {
+        pointerId: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        moved: false
+      };
+    });
+
+    ids.flowerHead.addEventListener("click", event => {
+      if (event.target.closest("#anther-group") || event.target.closest("#area-handle")) return;
+      if (suppressPetalClick) {
+        suppressPetalClick = false;
+        return;
+      }
+      setColor(state.color === "pink" ? "white" : "pink");
+    });
+
+    ids.areaHandle.addEventListener("pointerdown", event => {
+      ids.svg.setPointerCapture(event.pointerId);
+      ids.svg.dataset.drag = "area";
+      setPetalArea(state.petalArea);
+    });
+
+    ids.antherGroup.addEventListener("pointerdown", event => {
+      ids.svg.setPointerCapture(event.pointerId);
+      ids.svg.dataset.drag = "asd";
+      setAsd(state.asd);
+    });
+
+    ids.svg.addEventListener("pointermove", event => {
+      if (petalPointerStart?.pointerId === event.pointerId) {
+        const dx = event.clientX - petalPointerStart.x;
+        const dy = event.clientY - petalPointerStart.y;
+        if (Math.hypot(dx, dy) > 6) {
+          petalPointerStart.moved = true;
+          ids.svg.dataset.drag = "area";
+          setPetalArea(state.petalArea);
+        }
+      }
+
+      const drag = ids.svg.dataset.drag;
+      if (!drag) return;
+      const point = svgPoint(event);
+
+      if (drag === "area") {
+        const area = 25 + clamp((point.x - 316) / 86, 0, 1) * 95;
+        setPetalArea(area);
+      }
+
+      if (drag === "asd") {
+        const asd = clamp((point.y - 198) / 105, 0, 1) * 6;
+        setAsd(asd);
+      }
+    });
+
+    ids.svg.addEventListener("pointerup", event => {
+      if (petalPointerStart?.pointerId === event.pointerId && petalPointerStart.moved) {
+        suppressPetalClick = true;
+      }
+      petalPointerStart = null;
+      ids.svg.dataset.drag = "";
+    });
+
+    ids.svg.addEventListener("pointercancel", () => {
+      petalPointerStart = null;
+      ids.svg.dataset.drag = "";
+    });
+
+    document.querySelector("#reset").addEventListener("click", () => {
+      Object.assign(state, {
+        useLocation: false,
+        usePetalArea: false,
+        useColor: false,
+        useAsd: false,
+        location: "GC",
+        petalArea: 62,
+        color: "pink",
+        asd: 0.85
+      });
+
+      checks.location.checked = false;
+      checks.petalArea.checked = false;
+      checks.color.checked = false;
+      checks.asd.checked = false;
+      ids.petalArea.value = state.petalArea;
+      ids.asd.value = state.asd;
+      syncLocationButtons(state.location);
+      setActiveButton("petal_color", state.color);
+      render();
+    });
+
+    syncLocationButtons(state.location);
+    setActiveButton("petal_color", state.color);
+    render();
+  </script>
+</body>
+</html>

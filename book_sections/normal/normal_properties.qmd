@@ -139,7 +139,7 @@ You can solve this in one step with the web app! Click your mouse at x = 1 and d
 
 The web app is a great tool for understanding the standard normal distribution. But how does this help us with our flower data, which has a mean of 1.7815 and a standard deviation of 0.0998?
 
-The answer is a powerful tool called the **Z-transformation**. It's a simple formula that allows us to convert any value from any normal distribution into an equivalent value on the standard normal distribution. This means we can solve any normal distribution problem by converting it to the standard normal first.
+The answer is the **Z-transformation**, a simple formula that allows us to convert any value from any normal distribution into an equivalent value on the standard normal distribution. This means we can solve any normal distribution problem by converting it to the standard normal first.
 
 We z-transform data by taking each value, subtracting the mean, and dividing by the standard deviation. So, if the $i^{th}$ observation has a value of $x_i$, its z-value is:
 

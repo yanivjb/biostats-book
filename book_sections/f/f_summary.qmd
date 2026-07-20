@@ -59,7 +59,7 @@ Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/
 
 
 
-## Practice Questions {#t_summary_practice-questions}
+## Practice Questions {#f_summary_practice-questions}
 
 
 Try these questions! By using the R environment you can work without leaving this "book". I even pre-loaded all the packages you need! 

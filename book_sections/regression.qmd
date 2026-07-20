@@ -88,6 +88,14 @@ gc_rils <- readr::read_csv(ril_link) |>
 ## Why not an ANOVA?   
 
 
+
+Of course, we **could** address this question in a classic ANOVA framework, by binning the x variable into categories. @fig-ANOVA displays this approach: We first bin petal area into quartiles, and then conduct an ANOVA to test the null hypothesis that  the proportion of hybrid seeds does not differ as a function of petal area. 
+
+
+---
+
+
+
 ```{r}
 #| column: margin 
 #| label: fig-ANOVA
@@ -108,25 +116,6 @@ gc_rils|>
 
 
 
-
-Of course, we **could** address this question in a classic ANOVA framework, by binning the x variable into categories. @fig-ANOVA displays this approach: We first bin petal area into quartiles, and then conduct an ANOVA to test the null hypothesis that  the proportion of hybrid seeds does not differ as a function of petal area. 
-
-This procedure  uses three degrees of freedom (one for each model estimate aside from the intercept -- Table 1), and does not allow us to reject the null hypothesis ($p > 0.05$, Table 2). While a fine start, these results are partly a consequence of this modeling decision, not just the underlying relationship in the data.   
-
-1. It makes the same prediction for each observation in a given category, regardless of their precise petal area. These imprecise predictions are both less informative and generate more residual variation than a model that treats x as a true numeric variable.     
-```{r}
-#| echo: false
-#| column: margin 
-qual_model <- lm(prop_hybrid ~ petal_area_quartile, data = gc_rils)
-coef(qual_model)|>data.frame(row.names = c("(Intercept)","petal_area:Q2","petal_area:Q3","petal_area:Q4"))|> kable(digits = 3,caption = "Table 1) Model coefficients for categorical model.")
-```
-
-2. It spreads the model variation across three degrees of freedom, thereby reducing our power to reject the null hypothesis.   
-
-
-
-
-
 ```{r}
 #| eval: false
 qual_model <- lm(prop_hybrid ~ petal_area_quartile, data = gc_rils)
@@ -134,6 +123,16 @@ coef(qual_model)
 anova(qual_model)
 ```
 
+---
+  
+```{r}
+#| echo: false
+qual_model <- lm(prop_hybrid ~ petal_area_quartile, data = gc_rils)
+coef(qual_model)|>data.frame(row.names = c("(Intercept)","petal_area:Q2","petal_area:Q3","petal_area:Q4"))|> kable(digits = 3,caption = "Table 1) Model coefficients for categorical model.")
+```
+
+
+---
 
 ```{r}
 #| echo: false
@@ -141,6 +140,15 @@ anova(qual_model)|> kable(digits = 3, caption = "Table 2) Anova table for catego
   escape = FALSE
 )
 ```
+
+---
+
+This procedure  uses three degrees of freedom (one for each model estimate aside from the intercept -- Table 1), and does not allow us to reject the null hypothesis ($p > 0.05$, Table 2). **While a fine start, these results -- and particularly our inability to reject the null hypothesis -- are partly a consequence of this modeling decision, not just the underlying relationship in the data.** There are two main reasons why this is a less than ideal choice:    
+
+1. It makes the same prediction for each observation in a given category, regardless of their precise petal area. These imprecise predictions are both less informative and generate more residual variation than a model that treats x as a true numeric variable.   
+2. It spreads the model variation across three degrees of freedom, thereby reducing our power to reject the null hypothesis.   
+
+
 
 
 
@@ -199,7 +207,7 @@ In this chapter we will consider linear regression
 
 ## What's ahead
 
-In this chapter, we will consider linear regression. A linear regression is model for describing how the expected value of a numeric response variable changes with a numeric explanatory variable.
+In this chapter, we will consider linear regression. A linear regression is a model to describe how the expected value of a numeric response variable changes with a numeric explanatory variable.
 
 * We begin by reviewing three related [summaries of association between two numeric variables](#regression_summaries): covariance, correlation, and slope.     
 

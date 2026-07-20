@@ -1,0 +1,434 @@
+## • 19. Visualizing >1 predictor {.unnumbered #regression_summaries}
+ 
+ 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(forcats)
+library(honestlm)
+source("../../_common.R") 
+```
+
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Loading and cleaning data"
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select( ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color)|>
+  na.omit()
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** We want to understand how multiple explanatory variables (e.g. petal area, anther-stigma distance, petal color etc.) are simultaneously  associated with a response (e.g. the proportion of hybrid seeds produced by *Clarkia* RILs). 
+
+**Learning goals: By the end of this section, you should be able to:**
+
+* Visualize data with >1 explanatory variable.
+* Match a visualization to the additive linear models presented in this section.
+* Recognize why two continuous predictors are hard to visualize, and do your best to present reasonable visualizations in this case.   
+
+:::
+
+
+---
+
+
+
+
+## Always Be Visualizing!  
+
+Data visualization is among the most important steps in data analysis because it allows us to understand key trends, notice extreme data points, see the shape of the data, and think about what kind of model may be appropriate. When building complex models with numerous predictors, visualizations of the raw data become even more valuable, because it is easy to lose track of the actual observations under a mound of complex analyses. 
+
+
+
+Unfortunately, visualizing multivariate data is also a real challenge. There is not one perfect way to draw a response variable as a function of two or three predictors. The best plot depends on the biological question and on the model we are trying to understand.  **So in this section, I introduce the idea of making visualizations that match your model.** 
+
+
+
+
+This becomes especially important when presenting our results, as we would like our visualizations to match our model. As we saw [in the previous section](#extending_linear_models), here we focus on simple additive models - with no interactions. This means that each explanatory variable contributes additively to the expected response, without its contribution depending on the value of another explanatory variable. Unfortunately, ggplot makes it difficult to plot an "additive no interaction model." So, I developed a package, [`honestlm`](https://yanivjb.github.io/honestlm/index.html) to make this easier. Because my package is on GitHub and not CRAN, installing it requires the [`remotes`](https://remotes.r-lib.org/) package. So first type:  `install.packages("remotes")` if `remotes` is not yet installed. Then
+
+
+
+--- 
+
+```{r}
+#| eval: false
+library(remotes)         
+install_github("yanivjb/honestlm")  # To get my package
+```
+
+Then load as usual: 
+
+```{r}
+library(honestlm)                   # To load my package
+```
+
+---
+
+
+### A continuous and categorical explanatory variable
+
+---
+
+
+With one categorical and one continuous explanatory variable, we usually map the continuous explanatory variable onto the x-axis, and distinguish between the values of the categorical explanatory variable with color, shape, or separate panels. But before worrying about layout, let's focus on the model question.
+
+Let's return to our interest in seeing if anther-stigma distance (ASD) is associated with the proportion of hybrid seed after adjusting for another related phenotype. So, e.g. we ask here:
+
+> Does the proportion of hybrid seeds increase with ASD after accounting for petal color?
+
+Recall that our additive linear model is:
+
+
+```{r}
+#| echo: false
+lm(prop_hybrid ~ petal_color + asd_mm, data = rils)
+```
+
+You can see that our model has just one slope, but a simple geom_smooth will show two slopes (see below for an example). Petal color shifts the expected proportion of hybrid seeds up or down, but the ASD slope is shared by both petal colors. So the fitted lines should be parallel.
+
+We also see that including petal color roughly halves the slope, as we also noted in interpreting the coefficients in the previous subsection. The unadjusted ASD slope is about 0.128, but after adding petal color it is about 0.063. So the plot should help us see why the coefficient changed, not just decorate the result. In @fig-asd-additive, panel **A** shows the simple relationship between ASD and hybrid seed proportion. Panel **B** adjusts for petal color and shows the additive model we are actually fitting.
+
+To minimize distraction, I hid the code for the complete plot (Click "Code" to unhide). The code for **@fig-asd-additive B** looks like this:
+
+```{r}
+#| eval: false
+#| column: page-right
+library(honestlm)
+ggplot(rils, aes(x = asd_mm, y = prop_hybrid, color = petal_color)) +
+  geom_point() +
+  geom_lm_smooth()
+```
+
+
+```{r}
+#| code-fold: true
+#| fig-height: 3.75
+#| fig-width: 12
+#| column: page-right
+#| label: fig-asd-additive
+#| fig-cap: "Adding petal color changes how we visualize the relationship between ASD and hybrid seed proportion. **(A)** The simple model shows proportion hybrid seeds as a function of ASD alone. **(B)** The additive model includes both ASD and petal color; petal color shifts expected hybrid seed proportion, while ASD has one shared slope."
+#| fig-alt: "Two-panel figure. Panel A is a scatterplot of proportion hybrid seeds against anther-stigma distance with one fitted linear trend. Panel B shows the same response and x-axis, but points are colored by petal color and the fitted additive model shows parallel lines for pink- and white-flowered Clarkia RILs."
+asd_plot <- rils |>
+  ggplot(aes(x = asd_mm, y = prop_hybrid)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "prop_hybrid ~ asd_mm",
+       x = "Anther-stigma distance (mm)",
+       y = "Proportion hybrid seeds")
+
+asd_petal_color_plot <- rils |>
+  ggplot(aes(x = asd_mm,
+             y = prop_hybrid,
+             color = petal_color)) +
+  geom_point() +
+  geom_lm_smooth() +
+  labs(title = "prop_hybrid ~ petal_color + asd_mm",
+       x = "Anther-stigma distance (mm)",
+       y = "Proportion hybrid seeds",
+       color = "Petal color")
+
+(asd_plot + asd_petal_color_plot) +
+  plot_layout(guides = "collect",
+              axes = "collect_y",
+              axis_titles = "collect_y") +
+  plot_annotation(tag_levels = "A")
+```
+
+---
+
+#### **Comparing separate slopes `geom_smooth(method = "lm")` to a shared slope `geom_lm_smooth()`**. 
+
+::: aside
+In the next chapter I introduce the idea of statistical interactions. In models with interactions, we ask if e.g. the association between petal area and proportion of hybrid seed differs by for white- and pink- petaled RILS (i.e. is the slope difference for white and pink).
+:::
+
+The difference between [`geom_smooth(method = "lm")`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) and [`geom_lm_smooth()`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) is easier to see  if we switch from ASD to petal area. Here the separate fitted slopes by petal color differ more visually. That might be interesting! But it is not the model we are fitting yet. In this chapter, we build models in which explanatory variables additively contribution to the response. That is we ask  what is the relationship between petal area and hybrid seed proportion after accounting for petal color, without allowing that relationship to differ by petal color?
+
+
+```{r}
+#| column: margin
+#| echo: false
+lm(prop_hybrid ~ petal_color + petal_area_mm, rils)|>coef()|> round(digits = 4)|>kable(col.names = c("term","coefficient"))
+```
+
+
+The coefficients from the simple additive model (see margin) describe the contribution of each explanatory variable to the expected response without its effect depending on the value of another explanatory variable. As described in the previous section, we make predictions by simply adding up the contribution of each trait to proportion hybrid seed. 
+
+This simple additive model is reflected in @fig-catcont A. By contrast @fig-catcont B shows a model with different slopes for pink- and white-flowered RILs. Both models represented by the panels in @fig-catcont are reasonable. The goal here is to make sure our plots match the model so as not to mislead the reader. 
+
+
+```{r}
+#| fig-height: 3.75
+#| code-fold: true
+#| fig-width: 12
+#| column: page-right
+#| label: fig-catcont
+#| fig-cap: "Two ways to visualize the relationship between petal area, petal color, and the proportion of hybrid seeds. **(A)** `geom_lm_smooth()` draws the additive no-interaction model, with one shared petal-area slope and different intercepts for petal color. **(B)** `geom_smooth(method = \"lm\")` fits separate lines for each petal color, visually suggesting an interaction."
+#| fig-alt: "Two-panel figure comparing fitted lines for proportion hybrid seeds against petal area, colored by petal color. Panel A shows parallel fitted lines from an additive model, indicating a shared petal-area slope with different expected values for pink and white flowers. Panel B shows separate linear smooths for pink and white flowers, with noticeably different slopes."
+
+
+geom_lm_smooth_plot <-  rils |>
+  ggplot(aes(x = petal_area_mm, y = prop_hybrid, color = petal_color))+
+  geom_point()+
+  geom_lm_smooth()+
+  ggtitle("A) One slope: geom_lm_smooth()")
+
+geom_smooth_plot <- rils |>
+  ggplot(aes(x = petal_area_mm, y = prop_hybrid, color = petal_color))+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  ggtitle("B) Separate slopes: geom_smooth(method = \"lm\")")
+
+
+(geom_lm_smooth_plot + geom_smooth_plot  ) + 
+  plot_layout(guides = "collect", 
+              axes = "collect_y", 
+              axis_titles = "collect_y") 
+```
+
+
+---
+
+::: fyi
+The next chapter introduces **statistical interactions** - in which the contribution of one variable depends on the value of another (e.g. different slopes like @fig-catcont B). Interactions are super interesting, both biologically and statistically, but a bit complicated to understand. So we will hold off for now.
+:::
+
+---
+
+### Two categorical explanatory variables
+
+
+
+
+With two categorical explanatory variables, the major choice we must make is: which variable goes on the x-axis and which variable defines the facets. These two plots show the same data, but arrange the predictors differently. As you compare panels **A** and **B** in @fig-2cat, think about what each plot reveals, highlights, and hides. Does one arrangement better highlight differences among locations, differences between petal colors, or both? Which plot most effectively communicates the key result of this study?
+
+```{r}
+#| echo: false
+lm(prop_hybrid ~ petal_color + location, data = rils)$call
+```
+
+This model compares petal colors after accounting for location, and compares locations after accounting for petal color. Again, because our model does not include an interaction, we are not asking whether the difference between pink and white flowers changes from one location to another. We will address this question of interactions in the next chapter. 
+
+```{r}
+#| eval: false
+library(honestlm)
+rils |>
+  ggplot(aes(x = petal_color, y = prop_hybrid, color = petal_color)) +
+  geom_jitter() +
+  facet_wrap(~location, nrow = 1) +
+  stat_lm_means(color = "black") 
+```
+
+---
+
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| label: fig-2cat
+#| column: page-right
+#| fig-cap: "Two ways to see the proportion of hybrid seed as a function of petal color and location. **(A)** Proportion hybrid seeds by petal color, shown separately for each location. Points show individual RILs; black points and intervals show additive model-predicted means and confidence intervals. **(B)** Proportion hybrid seeds by location, shown separately for each petal color. Points show individual RILs; black points and intervals show the same kind of additive model-predicted means."
+#| fig-alt: "Panel A is a faceted plot with proportion hybrid seeds on the y-axis and petal color on the x-axis, with separate panels for locations. Panel B is a faceted plot with proportion hybrid seeds on the y-axis and location on the x-axis, with separate panels for petal colors. In both panels, individual RILs appear as jittered colored points, and black points with error bars show additive model-predicted means and confidence intervals."
+A <- rils |>
+  ggplot(aes(x = petal_color, y = prop_hybrid, color = petal_color)) +
+  geom_jitter(height = .025, width = .2, show.legend = FALSE, alpha = .4) +
+  facet_wrap(~location, nrow = 1, labeller = "label_both") +
+  stat_lm_means(interaction = FALSE, color = "black", size = .3) +
+  labs(x = "Petal color", y = "Proportion hybrid seeds",  title = "A) Petal color on x, Location on facet.")
+
+B <- rils |>
+  ggplot(aes(x = location, y = prop_hybrid, color = location)) +
+  geom_jitter(height = .025, width = .2, show.legend = FALSE, alpha = .4) +
+  facet_wrap(~petal_color, nrow = 1, labeller = "label_both") +
+  stat_lm_means(interaction = FALSE, color = "black", size = .3) +
+  labs(x = "Location", y = "Proportion hybrid seeds", title = "B) Location on x, Petal color on facet.")
+
+A / B +   plot_layout(axes = "collect_y", 
+              axis_titles = "collect_y") &
+  theme(axis.title = element_text(size = 12),
+        axis.text  = element_text(size = 12))
+  
+```
+
+The panels in @fig-2cat provide two ways to view the data.  
+
+::: exercises
+After reflecting on these plots, complete this Google questionnaire below, or via [Google Forms](https://docs.google.com/forms/d/e/1FAIpQLSfeupDq8o1zdIwKXhWPbc2E3p4v8f9ngjIlWF8K-63pxugB6g/viewform?usp=header).
+
+```{=html}
+<div style="height:750px; overflow:hidden;">
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSfeupDq8o1zdIwKXhWPbc2E3p4v8f9ngjIlWF8K-63pxugB6g/viewform?embedded=true"
+    width="100%"
+    height="2150"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    style="margin-top:-900px;">
+    Loading...
+  </iframe>
+</div>
+```
+
+:::
+
+
+
+---
+
+
+### Two continuous explanatory variables
+
+
+```{r}
+#| code-fold: true
+#| fig-height: 6
+#| fig-width: 12
+#| column: page-right
+#| label: fig-two-continuous
+#| fig-cap: "Pairwise views of a model with two continuous predictors. **(A)** Proportion hybrid seeds as a function of ASD. **(B)** Proportion hybrid seeds as a function of petal area. **(C)** The relationship between the two explanatory variables, ASD and petal area. Together, these plots show pieces of the multivariable problem, but no one panel shows the full additive model."
+#| fig-alt: "Three scatterplots for Clarkia RILs. Panel A shows proportion hybrid seeds against anther-stigma distance with a fitted linear trend. Panel B shows proportion hybrid seeds against petal area with a fitted linear trend. Panel C shows anther-stigma distance against petal area, showing how the two explanatory variables relate to each other."
+asd_response <- rils |>
+  ggplot(aes(x = asd_mm, y = prop_hybrid)) +
+  geom_point() +
+  geom_lm_smooth() +
+  labs(title = "A) Response ~ ASD",
+       x = "ASD (mm)",
+       y = "Prop. hybrid seeds")
+
+area_response <- rils |>
+  ggplot(aes(x = petal_area_mm, y = prop_hybrid)) +
+  geom_point() +
+  geom_lm_smooth() +
+  labs(title = "B) Response ~ petal area",
+       x = "Petal area (mm^2)",
+       y = "Prop. hybrid seeds")
+
+predictor_relationship <- rils |>
+  ggplot(aes(x = petal_area_mm, y = asd_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "C) ASD ~ petal area",
+       x = "Petal area (mm^2)",
+       y = "ASD (mm)")
+
+(asd_response + area_response) / predictor_relationship 
+```
+
+
+
+Visualizing a continuous response as a function of two continuous explanatory variables is difficult. With a simple scatterplot, our eyes are pretty good at reading horizontal and vertical position: we can see how a response variable changes along an explanatory variable. But our eyes and brain have more trouble picking out patterns with 3D plots, or by trying to present a quantitative variable mapped onto color or point size.
+
+For example, suppose we want to ask whether the proportion of hybrid seeds is associated with both ASD and petal area:
+
+```{r}
+#| echo: false
+lm(prop_hybrid ~ asd_mm + petal_area_mm, data = rils)$call
+```
+
+```{r}
+#| column: margin
+#| echo: false
+lm(prop_hybrid ~ asd_mm + petal_area_mm, data = rils)|>coef()|> round(digits = 3)|>kable(col.names = c("term","coefficient"))
+```
+
+Now both explanatory variables are quantitative. There is no obvious grouping variable to put in color or facets. We can still make useful plots, but we should be honest that no single flat figure will show the whole model perfectly.
+
+So, here are my usual strategies for dealing with these data:
+
+* I begin by plotting all three pairwise combinations of the variables as simple scatterplots: `y` against `x1`, `y` against `x2`, and `x1` against `x2`. This helps me see the relationship between each explanatory variable and the response, and also tells me whether the two explanatory variables are strongly related to each other (@fig-two-continuous). While this can be helpful - and is often sufficient - these fitted lines show the unadjusted pairwise associations, not the coefficients from the two-predictor model.
+
+
+* Next, I often give in to temptation and map one of the continuous explanatory variables to color, size, or transparency. For example, I might plot `y` against `x1`, while using color to show `x2`. This sometimes helps, especially when the pattern is strong, but fails roughly nine times out of ten. Or I decide to [try to make a 3D plot](https://www.tylermw.com/posts/data_visualization/3d-ggplots-with-rayshader.html), or a [fitted response surface](https://ggplot2.tidyverse.org/reference/geom_contour.html) only to realize they rarely work well. 
+
+* To get a better sense of the adjusted association of a focal explanatory variable of interest, I sometimes generate an [added variable plot](https://en.wikipedia.org/wiki/Partial_regression_plot).  Here the X-axis displays the residual value of the focal explanatory variable after accounting for the other explanatory variables, and the Y-axis displays the residual value of the response variable after accounting for those same other explanatory variables. 
+
+
+
+
+The code below uses the [`av_transform()`](https://yanivjb.github.io/honestlm/reference/av_transform.html) and  [`av_labs()`](https://yanivjb.github.io/honestlm/reference/av_labs.html) functions in my [`honestlm`](https://yanivjb.github.io/honestlm/index.html) package to generate an added variable plot. This goes a step further than above as it adjusts for both petal area and petal color. So, instead of asking “is ASD associated with hybrid seed production?”, this plot asks “among RILs with similar petal area and petal color, do RILs with unusually large ASD also have unusually high or low hybrid seed production?”
+
+```{r}
+#| eval: false
+#| column: page-right
+library(honestlm)
+av_data <- av_transform(rils,
+        y = prop_hybrid,
+        x = asd_mm, 
+        adjust = c(petal_area_mm, petal_color)) 
+
+ggplot(av_data,aes(x = .adjusted_asd_mm, y = .adjusted_prop_hybrid))+
+  geom_point() +
+  geom_smooth(method = "lm")+  
+  av_labs(av_data)
+```
+
+---
+
+The slope in this plot is the same as the coefficient for the focal explanatory variable in the full linear model. So **@fig-avplot A** shows almost no linear association between ASD and proportion hybrid seed after adjusting for petal area and petal color, while **@fig-avplot B** shows  a strong linear association between petal area and proportion hybrid seed after adjusting for ASD and petal color. 
+
+---
+
+```{r}
+#| code-fold: true
+#| fig-height: 4
+#| fig-width: 12
+#| column: page-right
+#| label: fig-avplot
+#| fig-cap: "Added variable plots showing the adjusted associations between floral traits and the proportion of hybrid seeds produced by Clarkia RILs. In each panel, the X-axis shows the part of the focal explanatory variable left over after accounting for the other explanatory variables, and the Y-axis shows the part of hybrid seed production left over after accounting for those same other variables. The fitted line visualizes the coefficient for the focal explanatory variable in the corresponding additive linear model."
+#| fig-alt: "Two added variable plots for Clarkia RILs. The left panel shows the adjusted relationship between anther-stigma distance and proportion hybrid seeds after accounting for petal area and petal color. The right panel shows the adjusted relationship between petal area and proportion hybrid seeds after accounting for anther-stigma distance and petal color. Points represent RILs, and each panel includes a fitted linear regression line."
+library(honestlm)
+av_data <- av_transform(rils,
+        y = prop_hybrid,
+        x = asd_mm, 
+        adjust = c(petal_area_mm, petal_color)) 
+
+a <- ggplot(av_data,aes(x = .adjusted_asd_mm, y = .adjusted_prop_hybrid))+
+  geom_point() +
+  geom_smooth(method = "lm")+  
+  av_labs(av_data)+
+  theme(axis.title = element_text(size = 12))+
+  labs(title = "A) Association between ASD and prop hybrid seed", 
+       subtitle = "Adjusting for petal area and petal color")
+
+av_data <- av_transform(rils,
+        y = prop_hybrid,
+        x = petal_area_mm, 
+        adjust = c(asd_mm, petal_color)) 
+
+b <- ggplot(av_data,aes(x = .adjusted_petal_area_mm, y = .adjusted_prop_hybrid))+
+  geom_point() +
+  geom_smooth(method = "lm")+  
+  av_labs(av_data)+
+  labs(title = "B) Association between petal area and prop hybrid seed", 
+       subtitle = "Adjusting for ASD and petal color")+
+  theme(axis.title = element_text(size = 12))
+
+a + b
+```
+
+TL;DR: This is hard, and you can rarely do better than simple scatterplots two variables at a time. 
+
+## One quick warning before moving on
+
+::: warning
+
+While you have tremendous leeway in how to present data with multiple predictors, map quantitative values onto the x- or y-axis whenever possible. Color, size, opacity, and shape can be useful for grouping or highlighting, but they rarely communicate quantitative values as clearly as position.
+
+:::

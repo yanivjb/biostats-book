@@ -49,7 +49,7 @@ Answering questions like these is fundamental to scientific research, and Null H
 
 ```{r}
 #| fig-cap: "Listen to the permutation anthem [here](https://www.youtube.com/watch?v=KQ6zr6kCPj8)."
-#| fig-alt: "Animated GIF showing a group of dancers with the text *Everyday Im shuffling* overlaid. This visual can be used as a playful reference to the process of shuffling data during permutation tests in statistics, where the data is repeatedly randomized to simulate a null hypothesis."
+#| fig-alt: "Animated GIF showing a group of dancers with the text *Everyday I’m shuffling* overlaid. This visual can be used as a playful reference to the process of shuffling data during permutation tests in statistics, where the data is repeatedly randomized to simulate a null hypothesis."
 #| column: margin
 #| echo: FALSE
 #| label: fig-lmfao
@@ -58,7 +58,7 @@ include_graphics("https://i.imgur.com/TD6Hc06.gif")
 
 But how do we find the null sampling distribution? One way, known as **permutation**, generates a null distribution directly from the data by randomly shuffling the explanatory variable labels across observations. By breaking the link between variables and reshuffling many times, permutation simulates the null distribution because any observed differences or associations in the permuted data must be due to random chance because the relationship between variables has been broken. We can then generate a p-value by comparing our test statistic to this empirically generated (permuted) null distribution.
 
-Unlike mathematical tricks we will cover later, permutation makes very few assumptions. The most critical assumptions are that samples are random, independent, collected without bias, and that the null hypothesis assumes no association.  What's more, fancier permutation methods can accommodate some assumption violations (as we will see in the [Structured Permutation section](#permute_nonindependent)). Because permutation tests are highly versatile, they can be applied to a wide range of scenarios. This makes them a flexible tool for testing hypotheses, even in more complex designs.
+Unlike mathematical tricks we will cover later, permutation makes very few assumptions. The most critical assumptions are that samples are random, independent, collected without bias, and that the null hypothesis assumes no association.  What's more, fancier permutation methods can accommodate some assumption violations (as we will see in the [Structured Permutation section](#permute_nonindependent)). But more advanced permutaiton require more advanced thinkjing and coding so that we can shuffle appropriately. 
 
 
 

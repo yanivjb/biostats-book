@@ -57,3 +57,4 @@ Untitled.R
 *.tmp
 *.bak
 *.log
+**/*.quarto_ipynb

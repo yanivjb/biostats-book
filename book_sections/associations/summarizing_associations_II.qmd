@@ -35,7 +35,7 @@ Associations describe how variables relate to one another. Here we introduced co
 
 :::tutor
 
-Please interact with this custom chatbot ([**ChatGPT version here**](https://chatgpt.com/g/g-69ae41fd16a08191a53c4d11e80c0236-associations-ii-tutor-bot), [Gemeni version](https://gemini.google.com/gem/1kufG_36cx2nhX9ODUyYayj9kwpy0TevN?usp=sharing)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT version here**](https://chatgpt.com/g/g-69ae41fd16a08191a53c4d11e80c0236-associations-ii-tutor-bot), [Gemini version](https://gemini.google.com/gem/1kufG_36cx2nhX9ODUyYayj9kwpy0TevN?usp=sharing)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 :::
 
 
@@ -43,7 +43,7 @@ Please interact with this custom chatbot ([**ChatGPT version here**](https://cha
 ## Practice Questions   {#summarizing_associations_practice-questions_II}  
 
 
-Try these questions! By using the R environment you can work without leaving this "book". To help you jump right into thinking and analysis, I have loaded the ril data, cleaned it some, an have started some of the code!  
+Try these questions! By using the R environment you can work without leaving this "book". To help you jump right into thinking and analysis, I have loaded the ril data, cleaned it some, and have started some of the code!  
 
 
 

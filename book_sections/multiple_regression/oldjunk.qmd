@@ -1,0 +1,843 @@
+
+```{r}
+lm(prop_hybrid ~ petal_area_mm + petal_color + asd_mm, data = rils) 
+```
+
+
+
+```{r}
+lm(prop_hybrid ~ location + petal_area_mm + petal_color + asd_mm, data = rils) 
+```
+
+
+
+`r hide("Review how to make predictions from linear models")`
+
+
+
+
+---
+
+#### Petal color: a binary explanatory variable
+
+Let's start with a model of proportion of hybrid seed as a function of petal color. 
+
+```{r}
+lm(prop_hybrid ~ petal_color, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_pc <- coef(lm(prop_hybrid ~ petal_color, data = rils))
+```
+
+
+We see an intercept of `r lm_pc[1] |> round(digits = 3)` and an estimate of the petal color white parameter of `r lm_pc[2] |> round(digits = 3)`.
+
+You might ask: "What does this mean?" and "What about pink flowers?" Well, I'm glad you asked.  It means that pink is the reference group (i.e. its mean is the intercept), and we find the mean of white flowers as the intercept plus the white coefficient.  Or in math: 
+
+$$\widehat{Y}_i = b_0 + b_1 \times \text{white}_i$$
+
+:::aside
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{pink}} 
+  &= b_0 + b_1 \times 0 \\
+  &= `r fmt(lm_pc[1])` + 0 \\
+  &= `r fmt(lm_pc[1])`
+\\[1em]
+\widehat{Y}_{i|\text{white}} 
+  &= b_0 + b_1 \times 1\\
+  &= `r fmt(lm_pc[1])``r pm(lm_pc[2])` \\
+  &= `r fmt(lm_pc[1] + lm_pc[2])`
+\end{aligned}
+$$
+:::
+
+where $\text{white}_i = 0$ for pink-flowered RILs and $\text{white}_i = 1$ for white-flowered RILs. I work out the expected proportion of hybrid seeds for a RIL conditional on petal color in the margin: 
+
+
+
+---
+
+
+
+
+
+#### Planting location: a categorical explanatory variable
+
+
+Now let's build a model of proportion of hybrid seed as a function of planting location. This is, in spirit, very similar to the example above. Except here, there are four potential places the RILs could have been planted. 
+
+```{r}
+lm(prop_hybrid ~ location, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_loc <- coef(lm(prop_hybrid ~ location, data = rils))
+```
+
+Here GC is the reference location, so the linear equation is: 
+
+:::aside
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{GC}} 
+  &= b_0 \\
+  &= `r fmt(lm_loc[1])`
+\\[1em]
+\widehat{Y}_{i|\text{LB}} 
+  &= b_0 + b_{\text{LB}} \\
+  &= `r fmt(lm_loc[1])``r pm(lm_loc[2])` \\
+  &= `r fmt(lm_loc[1] + lm_loc[2])`
+\\[1em]
+\widehat{Y}_{i|\text{SR}} 
+  &= b_0 + b_{\text{SR}} \\
+  &= `r fmt(lm_loc[1])``r pm(lm_loc[3])` \\
+  &= `r fmt(lm_loc[1] + lm_loc[3])`
+\\[1em]
+\widehat{Y}_{i|\text{US}} 
+  &= b_0 + b_{\text{US}} \\
+  &= `r fmt(lm_loc[1])``r pm(lm_loc[4])` \\
+  &= `r fmt(lm_loc[1] + lm_loc[4])`
+\end{aligned}
+$$
+
+:::
+
+
+
+
+
+$$\widehat{Y}_i = b_0 + b_{\text{LB}} \times \text{LB}_i + b_{\text{SR}} \times \text{SR}_i + b_{\text{US}} \times \text{US}_i$$
+
+Each location variable is an indicator variable: it equals 1 if the RIL was planted in that location and 0 otherwise. Again, I work out the expected proportion of hybrid seeds for a RIL conditional on planting location in the margin
+
+
+
+---
+
+
+
+
+
+#### Anther stigma distance: a continuous explanatory variable
+
+Now, let's look at a continuous explanatory variable.
+
+```{r}
+lm(prop_hybrid ~ asd_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+lm_asd <- coef(lm(prop_hybrid ~ asd_mm, data = rils))
+```
+
+A linear model with a continuous explanatory variable looks similar to one with a single categorical explanatory variable
+
+$$\widehat{Y}_i = b_0 + b_1 X_i$$
+
+
+
+Here, the intercept marks the expected proportion of hybrid seed of hypothetical RILs with asd of zero, and $X_i$ is the distance between anther and stigma (in mm) of RIL $i$:
+
+:::aside
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{asd = 0.5}} 
+  &= b_0 + b_1 \times 0.5 \\
+  &= `r fmt(lm_asd[1])` +`r fmt(lm_asd[2])` \times 0.5 \\
+  &= `r fmt(lm_asd[1])` +`r fmt(lm_asd[2] * 0.5)` \\
+  &= `r fmt(lm_asd[1] + lm_asd[2] * 0.5)`
+\\[1em]
+\widehat{Y}_{i|\text{asd = 2.0}} 
+  &= b_0 + b_1 \times 2.0 \\
+  &= `r fmt(lm_asd[1])` +`r fmt(lm_asd[2])` \times 2.0 \\
+  &= `r fmt(lm_asd[1])` +`r fmt(lm_asd[2] * 2.0)` \\
+  &= `r fmt(lm_asd[1] + lm_asd[2] * 2.0)`
+\end{aligned}
+$$
+:::
+
+
+$$\widehat{Y}_i = `r fmt(lm_asd[1])``r pm(lm_asd[2])` \times \text{anther stigma distance}_i$$
+
+
+We can find the expected mean proportion of hybrid conditional on a given anther stigma distance by plugging in different values for $X_i$. In the margin I do this for asd values of 0.5 and 2.0. 
+
+
+
+---
+
+#### Petal area: a continuous explanatory variable
+
+Below I provide estimates and the equation for the proportion of hybrid seed as a function of petal area. I do not go through how to find conditional means, as it is the same as we saw above. 
+
+```{r}
+lm(prop_hybrid ~ petal_area_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+lm_pa <- coef(lm(prop_hybrid ~ petal_area_mm, data = rils))
+```
+
+So, we can write the linear equation as: 
+
+
+
+
+
+$$\widehat{Y}_i = `r fmt(lm_pa[1])``r pm(lm_pa[2])` \times \text{petal area}_i$$
+
+
+As before, we can find the expected mean proportion of hybrid seed conditional on a given petal area by plugging in different values for $X_i$. 
+
+
+
+
+
+`r unhide()`
+
+If you have completed (or do not need) this review, we're now ready to learn about  making predictions from linear models with >1 explanatory variable.
+
+
+---
+
+### Predictions with more than one explanatory variable {#extending_linear_models-multivar}
+
+We can easily extend this to include more than one explanatory variable. For example, we could model the proportion of a RIL's seeds that are hybrid as a function of petal color planting location, or petal color and petal area, or  petal color, planting location and petal area etc... 
+
+To do so, we simply add another explanatory variable and another parameter estimate. Here I present example with:
+
+- Two categorical explanatory variables.    
+- A categorical and continuous explanatory variable.    
+- Two continuous explanatory variables.    
+
+
+---
+
+
+
+
+
+#### Location and Petal color: two categorical explanatory variables  
+
+
+To model proportion of a RIL's seeds that are hybrid as a function of petal color and planting location as follows:
+
+```{r}
+lm(prop_hybrid ~ location + petal_color, data = rils)
+```
+
+```{r}
+#| echo: false
+lm_pa_pl <- lm(prop_hybrid ~ location + petal_color, data = rils) |> coef()
+```
+
+
+We can write this extended linear regression equation as below: 
+
+
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{petal color \& location}} 
+  &= b_0 + b_{\text{LB}} \times \text{LB}_i + b_{\text{SR}} \times \text{SR}_i + b_{\text{US}} \times \text{US}_i +  b_{\text{white}} \times \text{white}_i\\
+  &= `r fmt(lm_pa_pl[1])`  
+`r pm(lm_pa_pl[2])`  \times \text{LB}_i 
+`r pm(lm_pa_pl[3])`  \times \text{SR}_i 
+`r pm(lm_pa_pl[4])`  \times \text{US}_i  
+`r pm(lm_pa_pl[5])`  \times \text{white}_i 
+\\[1em]
+\end{aligned}
+$$
+
+
+
+In this example, pink flowered RILs planted as GC are the reference group. We know this because neither `petal_colorpink` nor `locationGC` appear in the model coefficients. We can use this euqation to find conditional means, $Y_i$. For example: 
+
+
+
+- $\widehat{Y}_{i|\text{pink \& GC}} = b_0 = `r fmt(lm_pa_pl[1])`$.   
+
+- $\widehat{Y}_{i|\text{white \& GC}} = b_0 +  b_{\text{white}}= `r fmt(lm_pa_pl[1])` `r pm(lm_pa_pl["petal_colorwhite"])`= `r fmt(lm_pa_pl[1]  + lm_pa_pl["petal_colorwhite"])`$.  
+
+- $\widehat{Y}_{i|\text{pink \& US}}  = b_0 +  b_{\text{US}} = `r fmt(lm_pa_pl[1])` `r pm(lm_pa_pl["locationUS"])`= `r fmt(lm_pa_pl[1]  + lm_pa_pl["locationUS"])`$.    
+
+- $\widehat{Y}_{i|\text{white \& SR}} = b_0 +  b_{\text{US}} = `r fmt(lm_pa_pl[1])` `r pm(lm_pa_pl["petal_colorwhite"])` `r pm(lm_pa_pl["locationSR"])`= `r fmt(lm_pa_pl[1] + lm_pa_pl["petal_colorwhite"]+ lm_pa_pl["locationSR"])`$.  
+
+
+An alternative (and more succinct) way to consider these predcitions is:  
+
+$$
+\widehat{Y}_{i|\text{color, location}} =
+\text{intercept} + \text{petal-color effect} + \text{location effect}
+$$
+`r hide("Click here to see a table with all predictions below")`
+
+The table below shows how we can find conditional means for each RIL planted at each location:
+
+
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+rils <- rils |>
+  dplyr::mutate(
+    petal_color = factor(petal_color, levels = c("pink", "white")),
+    location = factor(location, levels = c("GC", "LB", "SR", "US"))
+  )
+
+mod_color_location <- lm(prop_hybrid ~ petal_color + location, data = rils)
+
+b <- coef(mod_color_location)
+
+fmt <- function(x) format(round(x, 3), nsmall = 3)
+
+signed <- function(x) {
+  ifelse(
+    x < 0,
+    paste0("-", fmt(abs(x))),
+    paste0("+", fmt(x))
+  )
+}
+
+intercept <- unname(b["(Intercept)"])
+
+petal_effects <- c(
+  pink  = 0,
+  white = unname(b["petal_colorwhite"])
+)
+
+location_effects <- c(
+  GC = 0,
+  LB = unname(b["locationLB"]),
+  SR = unname(b["locationSR"]),
+  US = unname(b["locationUS"])
+)
+
+predictions <- outer(
+  petal_effects,
+  location_effects,
+  FUN = function(petal_effect, location_effect) {
+    intercept + petal_effect + location_effect
+  }
+)
+
+prediction_table <- dplyr::tibble(
+  `Petal-color effect` = signed(petal_effects),
+  `Petal color` = names(petal_effects)
+) |>
+  dplyr::bind_cols(
+    as.data.frame(predictions) |>
+      dplyr::mutate(dplyr::across(dplyr::everything(), fmt))
+  )
+
+names(prediction_table) <- c(
+  "Petal-color<br>effect",
+  "Petal color",
+  paste0(
+    names(location_effects),
+    "<br><span style='font-weight: normal;'>",
+    signed(location_effects),
+    "</span>"
+  )
+)
+
+knitr::kable(
+  prediction_table,
+  format = "html",
+  escape = FALSE,
+  align = c("r", "l", rep("r", length(location_effects))),
+  caption = paste0(
+    "Predicted proportion hybrid seeds from an additive linear model. ",
+    "Intercept = ", fmt(intercept), "."
+  )
+) |>
+  kableExtra::add_header_above(
+    c(" " = 2, "Location effect" = length(location_effects)),
+    escape = FALSE
+  ) |>
+  kableExtra::kable_styling(
+    full_width = FALSE,
+    bootstrap_options = c("striped", "hover", "condensed")
+  ) |>
+  kableExtra::column_spec(2, bold = TRUE) 
+```
+
+`r unhide()`
+
+:::fyi
+If helps me to think about an ANOVA framework as an extended linear model, because each indicator variable (LB, SR, US) is itself an extra parameter.
+:::
+
+
+
+
+
+
+
+## • 19. Extending linear models {.unnumbered #extending_linear_models}
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Loading and cleaning data"
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+```{r}
+#| echo: false
+
+fmt <- function(x) format(round(x, 3), nsmall = 3)
+
+pm <- function(x) {
+  ifelse(
+    x < 0,
+    paste0(" - ", fmt(abs(x))),
+    paste0(" + ", fmt(x))
+  )
+}
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:**  
+We are interested in the traits and circumstances that influence hybridization risk, measured here as the proportion of hybrid seeds produced by *Clarkia parviflora* RILs.
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+- Explain how binary, categorical, and continuous explanatory variables can all be included in linear models.
+- Translate model coefficients into predicted values.
+- Explain what it means to interpret one coefficient while holding other explanatory variables constant.
+- Recognize that additive models with multiple explanatory variables extend the same logic as simpler linear models.
+
+:::
+
+### Review: Predictions from linear models
+
+We are interested in the traits and circumstances that influence the risk of hybridization. Toward that end, we developed *parviflora* RILs to shuffle genetic differences among populations and allow us to test which traits that differ among *parviflora* populations actually affect hybridization risk. We grew these RILs at four different field locations. 
+
+Now, with the data in hand, we could use the tools we have built in the previous few chapters to build separate linear models of the proportion of hybrid seeds produced by a *parviflora* RIL as a function of *petal color* (white or pink), *planting location* (GC, LB, SR, or US), and *anther-stigma distance* or *petal area* (both continuous traits). 
+
+We have [discussed the potential shortcomings](#multiple_regression) of this "one variable at a time" approach. Therefore, in this section we will prepare to build and interpret models with multiple explanatory variables. But first, let's quickly review how linear models make predictions. **If you do not need this review, skip ahead to the section on [predictions from linear models with >1 explanatory variable](#extending_linear_models-multivar).**
+
+---
+
+#### Petal color: a binary explanatory variable
+
+Let's start with a model of proportion hybrid seed as a function of petal color. 
+
+```{r}
+lm(prop_hybrid ~ petal_color, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_pc <- coef(lm(prop_hybrid ~ petal_color, data = rils))
+```
+
+We see an intercept of `r fmt(lm_pc[1])` and an estimate of the petal color white parameter of `r fmt(lm_pc[2])`.
+
+You might ask: "What does this mean?" and "What about pink flowers?" I'm glad you asked. It means that pink is the reference group. So its mean is the intercept, and we find the mean of white flowers as the intercept plus the white coefficient. Or in math: 
+
+$$
+\widehat{Y}_i = b_0 + b_1 \times \text{white}_i
+$$
+
+where $\text{white}_i = 0$ for pink-flowered RILs and $\text{white}_i = 1$ for white-flowered RILs. I work out the expected proportion of hybrid seeds for a RIL conditional on petal color in the margin.
+
+:::aside
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{pink}} 
+  &= b_0 + b_1 \times 0 \\
+  &= `r fmt(lm_pc[1])` + 0 \\
+  &= `r fmt(lm_pc[1])`
+\\[1em]
+\widehat{Y}_{i|\text{white}} 
+  &= b_0 + b_1 \times 1\\
+  &= `r fmt(lm_pc[1])``r pm(lm_pc[2])` \\
+  &= `r fmt(lm_pc[1] + lm_pc[2])`
+\end{aligned}
+$$
+
+:::
+
+---
+
+#### Planting location: a categorical explanatory variable
+
+Now let's build a model of proportion hybrid seed as a function of planting location. This is, in spirit, very similar to the example above. Except, in this case, there are four potential places the RILs could have been planted. 
+
+```{r}
+lm(prop_hybrid ~ location, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_loc <- coef(lm(prop_hybrid ~ location, data = rils))
+```
+
+Here GC is the reference location, so the linear equation is: 
+
+$$
+\widehat{Y}_i =
+b_0 +
+b_{\text{LB}} \times \text{LB}_i +
+b_{\text{SR}} \times \text{SR}_i +
+b_{\text{US}} \times \text{US}_i
+$$
+
+Each location variable is an indicator variable: it equals 1 if the RIL was planted in that location and 0 otherwise. Again, I work out the expected proportion of hybrid seeds for a RIL conditional on planting location in the margin.
+
+:::aside
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{GC}} 
+  &= b_0 \\
+  &= `r fmt(lm_loc[1])`
+\\[1em]
+\widehat{Y}_{i|\text{LB}} 
+  &= b_0 + b_{\text{LB}} \\
+  &= `r fmt(lm_loc[1])``r pm(lm_loc[2])` \\
+  &= `r fmt(lm_loc[1] + lm_loc[2])`
+\\[1em]
+\widehat{Y}_{i|\text{SR}} 
+  &= b_0 + b_{\text{SR}} \\
+  &= `r fmt(lm_loc[1])``r pm(lm_loc[3])` \\
+  &= `r fmt(lm_loc[1] + lm_loc[3])`
+\\[1em]
+\widehat{Y}_{i|\text{US}} 
+  &= b_0 + b_{\text{US}} \\
+  &= `r fmt(lm_loc[1])``r pm(lm_loc[4])` \\
+  &= `r fmt(lm_loc[1] + lm_loc[4])`
+\end{aligned}
+$$
+
+:::
+
+---
+
+#### Anther-stigma distance: a continuous explanatory variable
+
+Now, let's look at a continuous explanatory variable.
+
+```{r}
+lm(prop_hybrid ~ asd_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_asd <- coef(lm(prop_hybrid ~ asd_mm, data = rils))
+```
+
+A linear model with a continuous explanatory variable looks similar to one with a single categorical explanatory variable:
+
+$$
+\widehat{Y}_i = b_0 + b_1 X_i
+$$
+
+Here, the intercept marks the expected proportion of hybrid seeds of a hypothetical RIL with anther-stigma distance of zero, and $X_i$ is the distance between anther and stigma, in mm, of RIL $i$:
+
+$$
+\widehat{Y}_i = `r fmt(lm_asd[1])``r pm(lm_asd[2])` \times \text{anther-stigma distance}_i
+$$
+
+We can find the expected mean proportion hybrid conditional on a given anther-stigma distance by plugging in different values for $X_i$. In the margin I do this for ASD values of 0.5 and 2.0. 
+
+:::aside
+
+$$
+\begin{aligned}
+\widehat{Y}_{i|\text{ASD = 0.5}} 
+  &= b_0 + b_1 \times 0.5 \\
+  &= `r fmt(lm_asd[1])``r pm(lm_asd[2])` \times 0.5 \\
+  &= `r fmt(lm_asd[1])``r pm(lm_asd[2] * 0.5)` \\
+  &= `r fmt(lm_asd[1] + lm_asd[2] * 0.5)`
+\\[1em]
+\widehat{Y}_{i|\text{ASD = 2.0}} 
+  &= b_0 + b_1 \times 2.0 \\
+  &= `r fmt(lm_asd[1])``r pm(lm_asd[2])` \times 2.0 \\
+  &= `r fmt(lm_asd[1])``r pm(lm_asd[2] * 2.0)` \\
+  &= `r fmt(lm_asd[1] + lm_asd[2] * 2.0)`
+\end{aligned}
+$$
+
+:::
+
+---
+
+#### Petal area: a continuous explanatory variable
+
+Below I provide estimates and the equation for the proportion of hybrid seed as a function of petal area. I do not go through how to find conditional means, as it is the same as we saw above. 
+
+```{r}
+lm(prop_hybrid ~ petal_area_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_pa <- coef(lm(prop_hybrid ~ petal_area_mm, data = rils))
+```
+
+So, we can write the linear equation as: 
+
+$$
+\widehat{Y}_i = `r fmt(lm_pa[1])``r pm(lm_pa[2])` \times \text{petal area}_i
+$$
+
+As before, we can find the expected mean proportion hybrid conditional on a given petal area by plugging in different values for $X_i$. 
+
+
+
+
+
+So how to add variables? Just add paremeters Now we are ready to extend the same logic to models with more than one explanatory variable. The big idea is the same as before: a linear model makes predictions by starting with the intercept and then adding the relevant coefficients. The new wrinkle is that each prediction is now **conditional on more than one thing at once**.
+
+This is where the phrase **holding the other variables constant** becomes useful. In a model with two explanatory variables, the coefficient for one variable tells us how the expected response changes with that variable, **holding the other explanatory variable constant**.
+
+In this section, we will start with **additive models**. That means we allow more than one explanatory variable to shape the expected proportion of hybrid seeds, but we do not yet allow the effect of one variable to depend on the value of another. We will return to that idea when we discuss interactions.
+
+---
+
+#### Two categorical explanatory variables
+
+Let's begin with two categorical explanatory variables: petal color and planting location.
+
+```{r}
+lm(prop_hybrid ~ petal_color + location, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_pc_loc <- lm(prop_hybrid ~ petal_color + location, data = rils)
+coef_pc_loc <- coef(lm_pc_loc)
+```
+
+This model asks how the expected proportion of hybrid seeds differs among petal colors and planting locations.
+
+Because both explanatory variables are categorical, R represents them with indicator variables. In this model, pink flowers and the GC planting location are the reference categories. So the model is:
+
+$$
+\widehat{Y}_i =
+b_0 +
+b_{\text{white}} \times \text{white}_i +
+b_{\text{LB}} \times \text{LB}_i +
+b_{\text{SR}} \times \text{SR}_i +
+b_{\text{US}} \times \text{US}_i
+$$
+
+This looks like a longer version of the one-variable categorical models above. To make a prediction, we start with the intercept and then add the coefficients that apply to that RIL.
+
+For example, the expected proportion of hybrid seeds for a pink-flowered RIL planted at GC is just the intercept:
+
+$$
+\widehat{Y}_{i|\text{pink, GC}} = b_0
+$$
+
+The expected proportion of hybrid seeds for a white-flowered RIL planted at LB is:
+
+$$
+\widehat{Y}_{i|\text{white, LB}} =
+b_0 + b_{\text{white}} + b_{\text{LB}}
+$$
+
+So in this additive model, each coefficient makes its own contribution to the prediction.
+
+:::aside
+
+```{r}
+#| echo: false
+
+pred_pc_loc <- tidyr::expand_grid(
+  petal_color = c("pink", "white"),
+  location = c("GC", "LB", "SR", "US")
+)
+
+pred_pc_loc$predicted_prop_hybrid <- predict(lm_pc_loc, newdata = pred_pc_loc)
+
+knitr::kable(
+  pred_pc_loc,
+  digits = 3,
+  col.names = c("Petal color", "Location", "Predicted proportion hybrid")
+)
+```
+
+:::
+
+The table in the margin shows the predicted proportion of hybrid seeds for each combination of petal color and planting location.
+
+One important thing to notice is that this model assumes that the difference between pink and white flowers is the same at every planting location. It also assumes that the difference among planting locations is the same for pink- and white-flowered RILs. That is what makes this an **additive** model.
+
+---
+
+#### One categorical and one continuous explanatory variable
+
+Next, let's combine one categorical explanatory variable and one continuous explanatory variable. Here we will model the proportion of hybrid seeds as a function of petal color and anther-stigma distance.
+
+```{r}
+lm(prop_hybrid ~ petal_color + asd_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_pc_asd <- lm(prop_hybrid ~ petal_color + asd_mm, data = rils)
+coef_pc_asd <- coef(lm_pc_asd)
+```
+
+This model includes one categorical predictor, petal color, and one continuous predictor, anther-stigma distance:
+
+$$
+\widehat{Y}_i =
+b_0 +
+b_{\text{white}} \times \text{white}_i +
+b_{\text{ASD}} \times \text{ASD}_i
+$$
+
+where $\text{ASD}_i$ is the anther-stigma distance of RIL $i$.
+
+Because pink is the reference petal color, the prediction for a pink-flowered RIL is:
+
+$$
+\widehat{Y}_{i|\text{pink}} =
+b_0 +
+b_{\text{ASD}} \times \text{ASD}_i
+$$
+
+And the prediction for a white-flowered RIL is:
+
+$$
+\widehat{Y}_{i|\text{white}} =
+b_0 +
+b_{\text{white}} +
+b_{\text{ASD}} \times \text{ASD}_i
+$$
+
+So this model fits two lines: one for pink-flowered RILs and one for white-flowered RILs. Because this is an additive model, those two lines have the same slope. The coefficient for petal color shifts the line up or down, while the coefficient for anther-stigma distance gives the slope of both lines.
+
+:::aside
+
+```{r}
+#| echo: false
+
+pred_pc_asd <- tidyr::expand_grid(
+  petal_color = c("pink", "white"),
+  asd_mm = c(0.5, 2.0)
+)
+
+pred_pc_asd$predicted_prop_hybrid <- predict(lm_pc_asd, newdata = pred_pc_asd)
+
+knitr::kable(
+  pred_pc_asd,
+  digits = 3,
+  col.names = c("Petal color", "Anther-stigma distance", "Predicted proportion hybrid")
+)
+```
+
+:::
+
+The table in the margin shows predictions for pink- and white-flowered RILs at two different values of anther-stigma distance.
+
+This is the first place where **holding the other variable constant** becomes especially important. The petal color coefficient compares white- and pink-flowered RILs **with the same anther-stigma distance**. The anther-stigma distance coefficient describes how predicted hybridization changes with ASD **within a petal color**.
+
+---
+
+#### Two continuous explanatory variables
+
+Finally, let's combine two continuous explanatory variables: anther-stigma distance and petal area.
+
+```{r}
+lm(prop_hybrid ~ asd_mm + petal_area_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+
+lm_asd_pa <- lm(prop_hybrid ~ asd_mm + petal_area_mm, data = rils)
+coef_asd_pa <- coef(lm_asd_pa)
+```
+
+This model is:
+
+$$
+\widehat{Y}_i =
+b_0 +
+b_{\text{ASD}} \times \text{ASD}_i +
+b_{\text{area}} \times \text{petal area}_i
+$$
+
+Now the model has two slopes: one for anther-stigma distance and one for petal area.
+
+The coefficient for anther-stigma distance tells us how much the expected proportion of hybrid seeds changes for a 1 mm increase in anther-stigma distance, **holding petal area constant**.
+
+The coefficient for petal area tells us how much the expected proportion of hybrid seeds changes for a 1 mm$^2$ increase in petal area, **holding anther-stigma distance constant**.
+
+:::aside
+
+```{r}
+#| echo: false
+
+asd_examples <- stats::quantile(rils$asd_mm, probs = c(0.25, 0.75), na.rm = TRUE)
+area_examples <- stats::quantile(rils$petal_area_mm, probs = c(0.25, 0.75), na.rm = TRUE)
+
+pred_asd_pa <- tidyr::expand_grid(
+  asd_mm = as.numeric(asd_examples),
+  petal_area_mm = as.numeric(area_examples)
+)
+
+pred_asd_pa$predicted_prop_hybrid <- predict(lm_asd_pa, newdata = pred_asd_pa)
+
+knitr::kable(
+  pred_asd_pa,
+  digits = 3,
+  col.names = c("Anther-stigma distance", "Petal area", "Predicted proportion hybrid")
+)
+```
+
+:::
+
+The table in the margin shows predictions for combinations of smaller and larger values of anther-stigma distance and petal area.
+
+With one continuous explanatory variable, we can picture the model as a line. With two continuous explanatory variables, we can picture the model as a plane. The plane describes how the expected proportion of hybrid seeds changes across combinations of anther-stigma distance and petal area.
+
+As before, this model is additive. It assumes that the slope for anther-stigma distance is the same at every petal area, and that the slope for petal area is the same at every anther-stigma distance. If we think the relationship between anther-stigma distance and hybridization depends on petal area, we would need an interaction. But for now, we are starting with the simpler additive model.
+
+---
+
+### What changes when we add more explanatory variables?
+
+The mechanics of prediction have not changed. We still start with the intercept and add the relevant pieces of the model.
+
+What has changed is the meaning of each coefficient.
+
+In a one-variable model, a coefficient describes how the expected response changes with one explanatory variable. In a model with more than one explanatory variable, each coefficient describes how the expected response changes with one explanatory variable **while holding the others constant**.
+
+That phrase is doing a lot of work. It reminds us that multiple regression is not just a bigger version of simple regression. It lets us ask how one variable relates to the response after accounting for other variables in the model.
+
+This is powerful, but it is also where we need to start being careful. Adding more explanatory variables can help us describe patterns more clearly, but it can also make models harder to interpret, especially when explanatory variables are correlated with one another. In the next sections, we will build on this foundation to interpret coefficients, visualize model predictions, and think carefully about what our models do — and do not — tell us.

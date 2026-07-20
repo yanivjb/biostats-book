@@ -73,7 +73,7 @@ One amazing thing about the world is just how frequently normal distributions oc
 **A [Galton board](https://en.wikipedia.org/wiki/Galton_board)!** At every peg, a bead has a 50/50 chance of bouncing left or right. The final position of the bead in a bin at the bottom is the sum of all these random left and right steps. Most often paths right and left even out and the bead lands in the center, but not always! This ultimately generates a normal distribution. 
 :::
 
-An important consequence of this is that the sampling distribution of means tends to be normally distributed, provided the sample size is not too small. This principle, known as the **Central Limit Theorem**, is very useful in statistics. It allows us to create reasonable statistical models of sample means by assuming normality, even when the underlying data may not be perfectly normal.
+An important consequence of this is that the sampling distribution of means tends to be normally distributed, provided the sample size is not too small. This principle, known as the **Central Limit Theorem**, is very useful. It implies that e.g. models of sample means that assume normality will work reasonably well even if the data aren't perfectly normal.
 
 :::fyi
 The Central Limit Theorem is crucial for statistics because many of the statistical analyses we perform, which assume normality, are still valid even if the underlying data are not perfectly normal. **This central limit theorem is remarkably useful because it means we can use statistical tests that assume normality (like the t-test) to make inferences about the mean, even if our raw data aren't quite normally distributed.** 

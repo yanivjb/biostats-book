@@ -37,10 +37,4 @@ In my roles as a biostatistics professor and Data Editor at [The American Natura
 
 ## Making science reproducible    
 
-This chapter walks you through the key steps for making your science reproducible—from field notes to final scripts. You will learn how to:
-
-- [Appropriately collect and store data](#collecting_data).    
-- [Safely store data](#storing_data).  
-- [Load data into R](#loading_data).    
-- [Peek at your data in R, and prepare it for analysis](#check_and_prep).   
-- [Make sure your code follows best practices in. reproducibility](#reproducible_analyses).    
+Here, I present a soup-to-nuts breakdown of how to conduct a reproducible research project. I first introduce how to [appropriately collect and enter/save data](#collecting_data) and then how to [safely store data](#storing_data).  Then, I introduce how to handle your data in R, from [loading the data into R](#loading_data), to [having a look at the data, and preparing it for analysis](#check_and_prep), all while [making sure your code follows best practices in reproducibility](#reproducible_analyses).    

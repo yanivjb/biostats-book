@@ -27,6 +27,7 @@ library(webexercises)
 3. Generate diagnostic plots and use them to evaluate whether the modeled data meet linear model assumptions.  
 4. Identify possible next steps when data do not meet the assumptions of a linear model.  
 :::
+
 ---
 
 
@@ -283,7 +284,7 @@ augmented_hybrid_lm |>
 
 #### **Easily making all of these plots at once**
 
-As noted above, you would rarely write the code (like I did) to make these diagnostic plots. Rather, you would use the [`autoplot()`] function in [`ggfortify`]() or the [`plot()`]() function in Base R (no packages needed) to make these plots for you, as in  @fig-diagnostic. 
+As noted above, you would rarely write the code (like I did) to make these diagnostic plots. Rather, you would use the [`autoplot()`](https://rpkg.net/packages/ggfortify/reference/autoplot.lm.ob) function in [`ggfortify`](https://cran.r-project.org/web/packages/ggfortify/index.html) or the [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) function in Base R (no packages needed) to make these plots for you, as in  @fig-diagnostic. 
 
 
 ```{r}

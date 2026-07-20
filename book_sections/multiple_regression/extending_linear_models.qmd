@@ -1,0 +1,418 @@
+## • 19. Extending linear models {.unnumbered #extending_linear_models}
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Loading and cleaning data"
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(forcats)
+source("../../_common.R") 
+fmt <- function(x) format(round(x, 3), nsmall = 3)
+
+pm <- function(x) {
+  ifelse(
+    x < 0,
+    paste0(" - ", fmt(abs(x))),
+    paste0(" + ", fmt(x))
+  )
+}
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating example:** ASD is associated with the proportion of hybrid seed, but ASD is also associated with other floral traits. So, when we see that RILs with larger ASD have more hybrid seed, we want to know whether ASD itself is associated with hybrid seed proportion, or whether this association is partly explained by other traits that covary with ASD.
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+- Use coefficients from linear models to make predictions.
+- Interpret coefficients in models with more than one explanatory variable.
+- Explain what it means to account for another explanatory variable.
+- Compare simple and multiple regression models to ask whether an association holds up after adding additional predictors.
+
+:::
+
+---
+
+We aim to build a multiple regression model to ask if the association between ASD and proportion of hybrid seed holds up after accounting for associations between ASD and the other explanatory variables. But first, let's review how linear models make predictions.
+
+### Review: Predictions from linear models
+
+#### Proportion hybrid seed increases with ASD
+
+```{r}
+#| echo: false
+coefs <- lm(prop_hybrid ~ asd_mm, data = rils) |> coef() |> round(digits = 3)
+```
+
+From a simple linear regression, we find the predicted proportion of hybrid seeds, $\hat{Y_i}$, of a RIL with an ASD of $\text{ASD}_{mm}$ is:
+
+```{r}
+#| column: margin
+#| eval: false
+lm(prop_hybrid ~ asd_mm, 
+   data = rils) 
+```
+                
+```{r}
+#| column: margin
+#| echo: false
+lm(prop_hybrid ~ asd_mm, 
+   data = rils) |> 
+  coef() |> 
+  round(digits = 3) |> 
+  t() |> 
+  kable()
+```
+
+$$\hat{Y_i} = `r coefs[[1]]` + `r coefs[[2]]` \times \text{ASD}_{mm}$$
+
+That is, we expect an additional `r coefs[[2]] * 100`% hybrid seed for each mm increase in anther-stigma distance. So, for a RIL with ASD of 1 mm, we expect a hybrid seed proportion of $`r coefs[[1]]` + `r coefs[[2]]` \times 1 = `r coefs[[1]] + coefs[[2]] * 1`$, and we expect a hybrid seed proportion of $`r coefs[[1]]` + `r coefs[[2]]` \times 2 = `r coefs[[1]] + coefs[[2]] * 2`$ for a RIL with ASD of 2 mm.
+
+But, as we saw in the previous section, ASD is also associated with petal color and petal area:
+
+#### White-flowered RILs have smaller ASD than pink-flowered RILs 
+
+```{r}
+#| echo: false
+coefs <- lm(asd_mm ~ petal_color, data = rils) |> coef() |> round(digits = 3)
+```
+
+A similarly simple linear model shows that white-petaled RILs have anther-stigma distances about 0.2 mm shorter than pink-petaled RILs.
+
+```{r}
+#| column: margin
+#| eval: false
+lm(asd_mm ~ petal_color, 
+   data = rils) 
+```
+
+```{r}
+#| column: margin
+#| echo: false
+lm(asd_mm ~ petal_color, 
+   data = rils) |> 
+  coef() |> 
+  round(digits = 3) |> 
+  t() |> 
+  kable()
+```
+
+$$
+\widehat{ASD}_i =
+`r coefs[[1]]` 
+`r pm(coefs[[2]])`
+\times
+\begin{cases}
+0, & \text{if petal color is pink} \\
+1, & \text{if petal color is white}
+\end{cases}
+$$
+
+That is, the average pink-petaled RIL has an ASD of `r coefs[[1]]`, and the average white-petaled RIL has an ASD of `r coefs[[1]] + coefs[[2]]`.
+
+#### ASD increases with petal area
+
+```{r}
+#| echo: false
+coefs <- lm(asd_mm ~ petal_area_mm, data = rils) |> coef() |> round(digits = 5)
+```
+
+From a simple linear regression, we find the ASD, $\widehat{ASD_i}$, of a RIL with a petal area of $\text{petal area}_{mm^2}$ is:
+
+```{r}
+#| column: margin
+#| eval: false
+lm(asd_mm ~ petal_area_mm, 
+   data = rils) 
+```
+                
+```{r}
+#| column: margin
+#| echo: false
+lm(asd_mm ~ petal_area_mm,
+   data = rils) |> 
+  coef() |> 
+  round(digits = 5) |> 
+  t() |> 
+  kable()
+```
+
+$$\widehat{ASD_i} = `r coefs[[1]]` + `r coefs[[2]]` \times \text{petal area}_{mm^2}$$
+
+That is, we expect an additional `r coefs[[2]]` ASD in mm for each $mm^2$ increase in petal area. So, for a RIL with petal area of $40$ $mm^2$, we expect an ASD of $`r coefs[[1]]` + `r coefs[[2]]` \times 40 = `r coefs[[1]] + coefs[[2]] * 40`$ mm, and we expect an ASD of $`r coefs[[1]]` + `r coefs[[2]]` \times 100 = `r coefs[[1]] + coefs[[2]] * 100`$ mm for a RIL with a petal area of $100$ $mm^2$.
+
+### Two predictors  
+
+Now let's see how adjusting for petal color or petal area influences the association between ASD and proportion of hybrid seed. To help us understand and interpret these models, we will initially consider each pair of traits before building a bigger model with more of the traits. 
+
+---
+
+#### Adjusting for petal color  
+
+We can add petal color into the model with a `+` sign. We see that doing so nearly halves the increase in proportion of hybrid seed with increasing ASD:
+
+```{r}
+lm(prop_hybrid ~ petal_color + asd_mm, data = rils) 
+```
+
+```{r}
+#| echo: false
+coefs <- lm(prop_hybrid ~ petal_color + asd_mm, data = rils) |> coef() |> round(digits = 3)
+```
+
+We can use the coefficients to find the expected proportion of hybrid seed, $\hat{Y_i}$, for a plant with a given petal color and anther-stigma distance (ASD). To do so, start with the intercept (`r coefs[[1]]`), then add the contribution of each explanatory variable. For example: 
+
+|  | **ASD = 1**<br>add `r coefs[[3]] * 1` | **ASD = 2**<br>add `r coefs[[3]] * 2` |
+|:-----------------|:---------------------------------:|:---------------------------------:|
+| **Pink**<br>add 0 | $\hat{Y} = `r coefs[[1]]` + `r coefs[[3]] * 1`$<br>$= `r coefs[[1]] + coefs[[3]] * 1`$ | $\hat{Y} = `r coefs[[1]]` + `r coefs[[3]] * 2`$<br>$= `r coefs[[1]] + coefs[[3]] * 2`$ |
+| **White**<br>subtract `r abs(coefs[[2]])` | $\hat{Y} = `r coefs[[1]]` `r pm(coefs[[2]])` + `r coefs[[3]] * 1`$<br>$= `r coefs[[1]] + coefs[[2]] + coefs[[3]] * 1`$ | $\hat{Y} = `r coefs[[1]]` `r pm(coefs[[2]])` + `r coefs[[3]] * 2`$<br>$= `r coefs[[1]] + coefs[[2]] + coefs[[3]] * 2`$ |
+
+---
+
+#### Adjusting for petal area
+
+We can similarly add petal area to the model with a `+` sign. After accounting for petal area, the estimated contribution of ASD to our prediction again decreases, although not by as much as it did after accounting for petal color:
+
+```{r}
+lm(prop_hybrid ~ petal_area_mm + asd_mm, data = rils) 
+```
+
+```{r}
+#| echo: false
+coefs <- lm(prop_hybrid ~ petal_area_mm + asd_mm, data = rils) |> 
+  coef() |> 
+  round(digits = 3)
+```
+
+Again, we can use these coefficients to find the expected proportion of hybrid seed, $\hat{Y}_i$, for a plant with a given petal area and ASD. To do so, start with the intercept, then add the contribution of each explanatory variable:
+
+$$\hat{Y}_i = \text{intercept} + (\text{petal-area coefficient} \times \text{petal area}) + (\text{ASD coefficient} \times \text{ASD})$$ 
+
+In our case:
+
+$$
+\hat{Y}_i
+=
+`r coefs[[1]]`
++
+`r coefs[[2]]` \times \text{petal area}
++
+`r coefs[[3]]` \times \text{ASD}
+$$
+
+For example, we can find the predicted proportion of hybrid seed for RILs with a petal area of 50 or 100 mm^2 and an ASD of 1 or 2 mm as follows:
+
+| | **ASD = 1**<br>add $`r coefs[[3]]` \times 1 = `r coefs[[3]] * 1`$ | **ASD = 2**<br>add $`r coefs[[3]]` \times 2 = `r coefs[[3]] * 2`$ |
+|:----------------------------------------------------------------------------------|:---------------------------------:|:---------------------------------:|
+| **Petal area = 50**<br>add $`r coefs[[2]]` \times 50 = `r coefs[[2]] * 50`$ | $\hat{Y} = `r coefs[[1]]` + `r coefs[[2]] * 50` + `r coefs[[3]] * 1`$<br>$= `r coefs[[1]] + coefs[[2]] * 50 + coefs[[3]] * 1`$ | $\hat{Y} = `r coefs[[1]]` + `r coefs[[2]] * 50` + `r coefs[[3]] * 2`$<br>$= `r coefs[[1]] + coefs[[2]] * 50 + coefs[[3]] * 2`$ |
+| **Petal area = 100**<br>add $`r coefs[[2]]` \times 100 = `r coefs[[2]] * 100`$ | $\hat{Y} = `r coefs[[1]]` + `r coefs[[2]] * 100` + `r coefs[[3]] * 1`$<br>$= `r coefs[[1]] + coefs[[2]] * 100 + coefs[[3]] * 1`$ | $\hat{Y} = `r coefs[[1]]` + `r coefs[[2]] * 100` + `r coefs[[3]] * 2`$<br>$= `r coefs[[1]] + coefs[[2]] * 100 + coefs[[3]] * 2`$ |
+
+### More than two predictors  
+
+There is nothing special about stopping at two explanatory variables. We can continue adding explanatory variables to our model with `+` signs. 
+
+---
+
+#### Three predictors
+
+For example, we can account for petal area and petal color when estimating the association between ASD and the proportion of hybrid seed:
+
+```{r}
+lm(prop_hybrid ~ petal_area_mm + asd_mm + petal_color, data = rils) 
+```
+
+Now the ASD coefficient describes the expected change in proportion of hybrid seed associated with a one-mm increase in ASD among RILs with the same petal area and petal color. **Importantly, after adjusting for petal area and petal color, proportion of hybrid seed only modestly increases with ASD**, going from a slope of about 0.13 in a model with ASD alone to a slope of about 0.03 in a model with the other two explanatory variables. This suggests that much of the increase in proportion of hybrid seed with increasing ASD can be explained by petal area and petal color. 
+
+```{r}
+#| echo: false
+coefs_three <- lm(
+  prop_hybrid ~ petal_area_mm + asd_mm + petal_color, 
+  data = rils
+) |> 
+  coef() |> 
+  round(digits = 3)
+```
+
+As before, each coefficient tells us how much to add to our prediction. The only difference is that we now have three explanatory variables to account for. 
+
+$$
+\hat{Y}_i
+=
+\text{intercept}
++
+(\text{petal-area coefficient} \times \text{petal area})
++
+(\text{ASD coefficient} \times \text{ASD})
++
+\text{petal-color term}
+$$
+
+In our case:
+
+$$
+\hat{Y}_i =
+`r coefs_three[[1]]` +
+`r coefs_three[[2]]` \times \text{petal area}+
+`r coefs_three[[3]]` \times \text{ASD}
+`r pm(coefs_three[[4]])`
+\times
+\begin{cases}
+0, & \text{if petal color is pink} \\
+1, & \text{if petal color is white}
+\end{cases}
+$$
+
+The petal-color term is zero for a pink-petaled RIL and `r coefs_three[[4]]` for a white-petaled RIL. For example, the expected proportion of hybrid seed for a white-petaled RIL with a petal area of 50 mm^2 and an ASD of 1 mm is:
+
+$$
+\begin{aligned}
+\hat{Y}
+&=
+`r coefs_three[[1]]`
++
+(`r coefs_three[[2]]` \times 50)
++
+(`r coefs_three[[3]]` \times 1)
++
+`r coefs_three[[4]]`\\
+&=
+`r coefs_three[[1]] + coefs_three[[2]] * 50 + coefs_three[[3]] * 1 + coefs_three[[4]]`.
+\end{aligned}
+$$
+
+So our predictions now look like this:
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+table_fmt <- function(x) trimws(fmt(x))
+prediction_examples <- tidyr::expand_grid(
+  petal_color = c("pink", "white"),
+  petal_area_mm = c(50, 100),
+  asd_mm = c(1, 2)
+) |>
+  dplyr::mutate(
+    `petal area` = petal_area_mm,
+    ASD = asd_mm,
+    intercept = table_fmt(coefs_three[[1]]),
+    `+ petal area` = table_fmt(coefs_three[[2]] * petal_area_mm),
+    `+ petal color` = table_fmt(dplyr::if_else(petal_color == "white", coefs_three[[4]], 0)),
+    `+ ASD` = table_fmt(coefs_three[[3]] * asd_mm),
+    `predicted hybrid seed` = table_fmt(
+      coefs_three[[1]] +
+        coefs_three[[2]] * petal_area_mm +
+        dplyr::if_else(petal_color == "white", coefs_three[[4]], 0) +
+        coefs_three[[3]] * asd_mm
+    )
+  ) |>
+  dplyr::select(
+    `petal color` = petal_color,
+    `petal area`,
+    ASD,
+    intercept,
+    `+ petal area`,
+    `+ petal color`,
+    `+ ASD`,
+    `predicted hybrid seed`
+  )
+
+knitr::kable(prediction_examples, align = "llrrrrrr")
+```
+
+---
+
+#### Four predictors
+
+We can continue in the same way and add location to the model:
+
+```{r}
+#| column: page-right
+lm(prop_hybrid ~ location + petal_area_mm + petal_color + asd_mm, data = rils) 
+```
+
+This model estimates the association between ASD and proportion of hybrid seed after accounting for location, petal area, and petal color. Again, a prediction begins with the intercept, and then we add the contribution of each explanatory variable:
+
+$$
+\hat{Y}_i
+=
+\text{intercept}
++
+\text{location term}
++
+(\text{petal-area coefficient} \times \text{petal area})
++
+\text{petal-color term}
++
+(\text{ASD coefficient} \times \text{ASD}).
+$$
+
+Rather than work through this somewhat burdensome math by hand, I have developed an app below that allows you to build a linear model, set trait values, and find $\hat{Y_i}$:
+
+```{=html}
+<iframe
+  src="hybrid-seed-predictor.html"
+  title="Hybrid Seed Predictor"
+  width="150%"
+  height="1250"
+  style="border: 0; display: block;">
+</iframe>
+```
+
+
+## Caveats in "predictions"
+
+::: warning
+Do not trust these predictions for variable combinations outside your data.
+:::
+
+
+**Prediction is not the same as causation.** This app (or any multiple regression) lets us change values of petal area, petal color, ASD, and location and see how the predicted proportion of hybrid seed changes under a linear model. This is useful for understanding how multiple regression makes predictions.
+
+But moving the sliders in the app (or changing values in a linear model) is not the same thing as doing an experiment.
+
+- In an **experimental study**, we manipulate an explanatory variable and compare outcomes across treatments. For example, if we could experimentally increase ASD while holding other relevant traits constant, then a difference in hybrid seed could support a causal claim about ASD.
+
+- In an **observational study**, we measure traits as they naturally occur. In that case, regression can tell us whether ASD is associated with hybrid seed after accounting for other measured variables, such as petal area, petal color, and location. But it cannot, by itself, prove that ASD causes a change in hybrid seed, because RILs that differ in ASD may also differ in other ways we did not measure or include in the model.
+
+So, in this section, we should interpret regression coefficients as conditional associations: expected differences in predicted hybrid seed among RILs with the same values of the other variables in the model.
+
+---
+
+
+**Q1)** The app lets us move ASD and see the predicted proportion of hybrid seed change. What can we conclude from this model? `r longmcq(c("If we experimentally changed ASD, hybrid seed would definitely change by the ASD coefficient.",    answer = "In these observational data, ASD is associated with predicted hybrid seed after accounting for the other variables in the model.",    "ASD must cause changes in hybrid seed because it appears in the regression equation.",    "Multiple regression turns an observational study into an experimental study."  ))`
+
+`r hide("Explanation")`
+
+This is an observational study: we measured traits of RILs as they occurred. Multiple regression can ask whether ASD is associated with hybrid seed after accounting for other measured variables. But that is not the same as experimentally changing ASD while holding other relevant factors constant. So here we interpret coefficients as conditional associations, not necessarily causal effects.
+
+`r unhide()`
+
+---
+
+**Q2)** The app lets us make predictions for many combinations of petal color, petal area, ASD, and location. What else should we be careful about? `r longmcq(  c("Any combination we can make in the app is equally well supported by the data.",    "Multiple regression guarantees accurate predictions for rare combinations of explanatory variables.",    answer = "Some combinations of variables may be rare or absent in the data, so predictions for those combinations may be poorly supported.",    "If a variable is included in the model, then it must have caused the predicted change."  ))`
+
+`r hide("Explanation")`
+
+The app can make predictions for combinations of variables that may be rare, or even absent, in the original data. For example, if very large petal area is mostly seen in one petal color or one location, then a prediction for that petal area in a different color or location may be extrapolating beyond the data that informed the model. Multiple regression can make a numerical prediction for such cases, but that does not mean the prediction is equally trustworthy.
+
+`r unhide()`

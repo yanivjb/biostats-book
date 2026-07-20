@@ -168,6 +168,16 @@ book:
         - book_sections/regression/regression_caveats.qmd        
         - book_sections/regression/regression_R_workflow.qmd        
         - book_sections/regression/regression_summary.qmd
+    - part: book_sections/multiple_regression.qmd
+      chapters: 
+        - book_sections/multiple_regression/extending_linear_models.qmd
+        - book_sections/multiple_regression/multivariate_viz.qmd
+        - book_sections/multiple_regression/multiple_assumptions.qmd
+        - book_sections/multiple_regression/effect_sizes.qmd
+        - book_sections/multiple_regression/evaluating_significance.qmd
+        - book_sections/multiple_regression/multiple_uncertainty.qmd
+        - book_sections/multiple_regression/multiple_regression_R_workflow.qmd
+        - book_sections/multiple_regression/multiple_regression_summary.qmd
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
