@@ -120,6 +120,7 @@ jobs:
             "magick",
             "modelbased",
             "parameters",
+            "marginaleffects",
             "praise",
             "readxl",
             "rstatix",
