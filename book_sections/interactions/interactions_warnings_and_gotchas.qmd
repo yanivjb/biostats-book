@@ -1,0 +1,84 @@
+## • 20. Interactions "gotchas" {.unnumbered #interaction_warnings_and_size_gotchas}
+
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Loading and cleaning data"
+library(dplyr)
+library(readr)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(honestlm)
+library(dplyr)
+library(readr)
+library(tibble)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(forcats)
+source("../../_common.R") 
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating scenario:** Interaction terms are easy to add to a model, but they can be difficult to estimate reliably and even harder to interpret well. Here I advocate for thinking carefully before shoving terms in models. 
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+- Explain why adding more interactions does not necessarily improve a model.
+- Choose interactions based on biological questions and study design.
+
+:::
+---
+
+
+> It is remarkably easy to include an interaction term in your model. It is remarkably difficult to estimate the strength of an interaction.
+
+The tools of multiple regression and modelling interactions are remarkably liberating. Now you can build complex models of your focal response variable as afunction of all sorts of terms and their interactions. But beware, more terms and more interactions are not always better. In the next section of the book I introduce some formal techniques to consider when building models. But for now let's just build some rough intuition and critical thinking. 
+
+### Build models to capture the essence of the problem 
+
+Our goal is not to maximize $R^2$, rather our goal is to understand the world. So, for each dataset build a small number of models (usually one) to capture the essence of the problem. 
+
+For example, for our RIL data, I would model the proportion of hybrid seeds as a function of petal area, petal color, the interaction between petal  color and petal area, plus location:
+
+```{r}
+#| eval: false
+#| column: page-right
+lm(prop_hybrid ~ petal_area_mm + petal_color + petal_area_mm:petal_color + location,
+   data = rils)
+```
+
+I would include petal area, petal color and their interaction because this gets to the heart of the biology we care about. I would add location as a "nuisance variable" to allow our model to better identify the key biological signal here. I would, for example, not include the interaction between location and petal traits because I do not care. That was not my mission.
+
+
+### Estimating interactions requires large samples   
+
+The standard error of an interaction is about twice that of a main effect. With this idea, and a few more assumptions,  Gelman estimated that [You need 16 times the sample size to estimate an interaction than to estimate a main effect](https://statmodeling.stat.columbia.edu/2018/03/15/need16/). 
+
+You might ask, "why not just throw in an interaction, worst case is that I fail to reject the null?" No, probably the worst case is that you reject the null, despite being underpowered, as this would mean that you way over-estimated the interaction effect. 
+
+So do not casually include an interaction in your model just because you can type `*` about as easily as `+`. Model interactions when you think they are biologically important and when you have the power and experimental design to estimate interactions with confidence. 
+
+
+
+
+
+::: aside
+.
+:::

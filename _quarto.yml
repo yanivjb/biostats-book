@@ -103,6 +103,15 @@ book:
         - book_sections/shuffling/permute.qmd
         - book_sections/shuffling/permute_nonindependent.qmd
         - book_sections/shuffling/shuffling_summary.qmd
+#    - part: book_sections/study_design.qmd
+#      chapters:
+#        - book_sections/study_design/why_design_matters.qmd
+#        - book_sections/study_design/measurement_samples_and_bias.qmd
+#        - book_sections/study_design/experiments_randomization_and_control.qmd
+#        - book_sections/study_design/experimental_bias_and_controls.qmd
+#        - book_sections/study_design/replication_blocking_and_power.qmd
+#        - book_sections/study_design/observational_studies.qmd
+#        - book_sections/study_design/study_design_summary.qmd
     - book_sections/filler.qmd
     - book_sections/stats_4_linear_models_index.qmd
     - part: book_sections/linear_models.qmd
@@ -178,6 +187,14 @@ book:
         - book_sections/multiple_regression/multiple_uncertainty.qmd
         - book_sections/multiple_regression/multiple_regression_R_workflow.qmd
         - book_sections/multiple_regression/multiple_regression_summary.qmd
+    - part: book_sections/interactions.qmd
+      chapters: 
+        - book_sections/interactions/linear_models_w_interactions.qmd
+        - book_sections/interactions/evaluating_significant_interactions.qmd
+        - book_sections/interactions/interaction_effect_sizes.qmd
+        - book_sections/interactions/interactions_warnings_and_gotchas.qmd
+        - book_sections/interactions/polynomial_regression.qmd
+        - book_sections/interactions/interaction_summary.qmd
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
@@ -185,11 +202,6 @@ book:
         - book_sections/effect_size_ref.qmd
     - references.qmd
 
-# bootstraping  https://acclab.github.io/dabestr/articles/tutorial_basics.html
-# causal inference https://ngreifer.github.io/software/ causal
-# fix honest_plots chatbot
-# fix clear_plots chatbot
-# https://medium.com/@StatisticsAndDataScience
 
 bibliography: ["assets/modeling.bib", "assets/packages.bib"]
 csl: 'assets/apa-single-spaced.csl'
@@ -218,3 +230,32 @@ filters:
 resources:
   - widget.html
   - widget-script.js 
+  
+
+# bootstraping  https://acclab.github.io/dabestr/articles/tutorial_basics.html
+# causal inference https://ngreifer.github.io/software/ causal
+# fix honest_plots chatbot
+# fix clear_plots chatbot
+# https://medium.com/@StatisticsAndDataScience
+# https://collinn.github.io/sbi/ch3.html
+# https://openintrostat.github.io/ims/data-design.html
+# https://www.openbookpublishers.com/books/10.11647/obp.0333
+# https://019b2da8-edfb-a262-61be-7973c056d9ae.share.connect.posit.cloud/
+# GLM https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000493368462
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000511304063
+# P-values https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000559517137
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000586448781
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000589696324
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000602644636
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000610390863
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000646279554
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000651295256
+# https://podcasts.apple.com/us/podcast/casual-inference/id1485892859?i=1000704716366
+# https://podcasts.apple.com/us/podcast/storytelling-with-data-podcast/id1318029970?i=1000748908097
+# https://podcasts.apple.com/us/podcast/storytelling-with-data-podcast/id1318029970?i=1000658509481
+# https://podcasts.apple.com/us/podcast/storytelling-with-data-podcast/id1318029970?i=1000609314725
+# https://podcasts.apple.com/us/podcast/storytelling-with-data-podcast/id1318029970?i=1000520542419
+# https://psy652.colostate.edu/
+
+# https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12386
+# https://lukaswallrich.github.io/GoldCoreQuants/dealing-with-missing-data.html

@@ -1,0 +1,649 @@
+## • 20. Interactions in linear models {.unnumbered #linear_models_w_interactions}
+
+
+---
+format: html
+webr:
+  packages: ['dplyr', 'readr',  'broom', 'car', 'emmeans']
+  autoload-packages: true
+---
+
+
+```{webr-r}
+#| context: setup
+#| message: false
+#| warning: false
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(car)
+library(emmeans)
+
+library(dplyr)
+library(readr)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Loading and cleaning data"
+library(dplyr)
+library(readr)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(tibble)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(forcats)
+source("../../_common.R") 
+fmt <- function(x) format(round(x, 3), nsmall = 3)
+
+pm <- function(x) {
+  ifelse(
+    x < 0,
+    paste0(" - ", fmt(abs(x))),
+    paste0(" + ", fmt(x))
+  )
+}
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating scenario:** We can build models with more than one explanatory variable while assuming that each variable independently influences the response. But now we are interested in whether the influence of one variable changes depending on the value of another.
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+
+- Explain what a statistical interaction is. 
+- Fit linear models containing interactions using `:` and `*`.
+- Use coefficients from interaction models to calculate predicted values.
+- Explain why main-effect coefficients are conditional when an interaction is present.
+- Visualize interaction models and use the observed range of the data to interpret fitted patterns.
+
+:::
+
+---
+
+### Review: Linear models without interactions
+
+We aim to understand how numerous floral traits influence the proportion of hybrid seeds on a *parviflora* RIL. In the previous chapter, we increased the sophistication of our analysis by modelling  the proportion of hybrid seed as a function of two or more explanatory variables. In those analyses, we assumed that the contributions of explanatory variables to our response were independent.  
+
+
+--- 
+
+```{r}
+#| eval: false
+lm(prop_hybrid ~ petal_color + petal_area_mm, data = rils)
+```
+
+
+
+```{r}
+#| echo: false
+lm(prop_hybrid ~ petal_color + petal_area_mm, data = rils)$coef|> round(digits = 4) |> enframe() |> kable()
+```
+
+---
+
+So, for example, to find the predicted proportion of hybrid seeds for a pink-flowered RIL with a petal area of $100\ \text{mm}^2$ we started with the intercept (0.0070), we added one hundred times the coefficient for petal area ($100 \times 0.0036$) equals 0.367. *Note:* We did not include a petal color coefficient because pink was the reference level. To find the predicted proportion of hybrid seeds for a white-flowered RIL with a petal area of $100mm^2$  we would simply add the coefficient for `petal_colorwhite` (-0.18) to our previous prediction for a predicted proportion of 0.187. 
+
+### Building models with interactions with `lm()`
+
+
+::: fyi
+## Specifying interactions in `lm()`  
+
+- You specify an interaction between variables inside `lm()` with a colon. So, e.g. `petal_color:petal_area_mm` tells `lm()` to model an interaction between petal color and petal area. So to explicitly model main effects and an interaction, we type: 
+
+```{r}
+#| eval: false
+lm(y ~ x1 + x2 + x1:x2, data = dat1)
+```
+
+- Alternatively, you can simultaneously specify main effects and interactions with a `*` as follows: 
+
+```{r}
+#| eval: false
+lm(y ~ x1 * x2, data = dat1)
+```
+
+These two approaches give the same answer, the first is more explicit and the second is more concise. 
+
+:::
+
+### Linear models with an interaction
+
+Without an interaction, the model adds a single coefficient for white petals and uses the same petal-area slope for pink- and white-petaled RILs. With an interaction, the slope relating petal area to proportion hybrid seed differs between petal colors.
+
+
+---
+
+```{r}
+#| eval: false
+#| column: page-right
+lm(prop_hybrid ~ petal_color + petal_area_mm + petal_color:petal_area_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+a <- lm(prop_hybrid ~ petal_color + petal_area_mm + petal_color:petal_area_mm, data = rils)$coef|> round(digits = 4)
+enframe(a) |> kable()
+```
+
+---
+
+```{r}
+#| echo: false
+#| column: margin
+#| label: fig-interactionmodel
+#| fig-cap: "Predicted proportion of hybrid seed across petal area for pink- and white-petaled flowers under a linear model with an interaction."
+#| fig-alt: "Two fitted lines show predicted proportion of hybrid seed from petal area zero to 150 square millimeters. The pink-flower line rises steeply, while the white-flower line is nearly flat. The lines cross, so which petal color has the higher predicted hybrid-seed proportion depends on petal area."
+
+line_data <- tibble(
+    petal_color = c("pink", "white"),
+    x = 0,
+    xend = 150,
+    y = c(
+        a["(Intercept)"],
+        a["(Intercept)"] + a["petal_colorwhite"]
+    ),
+    yend = c(a["(Intercept)"] +a["petal_area_mm"] * 150,
+        a["(Intercept)"] + a["petal_colorwhite"] +
+            (a["petal_area_mm"] + a["petal_colorwhite:petal_area_mm"]) * 150
+    )
+)
+
+ggplot(line_data) +
+    geom_segment(
+        aes(
+            x = x,
+            xend = xend,
+            y = y,
+            yend = yend,
+            color = petal_color
+        ),
+        linewidth = 3.5,
+    ) +
+
+    labs(
+        x = expression("Petal area (" * mm^2 * ")"),
+        y = "(predicted)\nProp. hybrid seed",
+        color = "Petal color"
+    ) +
+  theme(axis.title = element_text(size = 32),
+        axis.text = element_text(size = 27),
+        legend.text = element_text(size = 27),
+        legend.title = element_text(size = 32),
+        legend.position = "bottom")
+```
+
+To help understand what this model implies, I drew it out in @fig-interactionmodel, and show the math for pink and white flowers separately, below. Note that the interaction term acts to make the slope -- which is quite steep for pink flowers --  nearly zero in white flowers (0.0075 - 0.0067 = 0.0008).
+
+
+
+$$\hat{Y}_\text{i|pink} =  `r a[[1]]` + \text{PETAL AREA} \times `r a[[3]]`$$
+$$\hat{Y}_\text{i|white} =  `r a[[1]]` + `r a[[2]]` + \text{PETAL AREA} \times (`r a[[3]]` - `r abs(a[[4]])`)$$
+From a quick glance at this model, you may be confused to see that the coefficient for white petals is large and positive. This should strike you as weird, as everything else we have seen shows that white-petaled RILs have a lower proportion of hybrid seed. To resolve this confusion, remember that the `petal_colorwhite` term refers to the deviation from the "(Intercept)" at  zero petal area (Bottom left corner of @fig-interactionmodel).
+
+So the model predicts a 0.0017 proportion of hybrid seeds on white-petaled RILS with a petal area of zero, compared to a -0.236  proportion of hybrid seeds on pink-petaled RILS with a petal area of zero. 
+
+**But these "predictions" are meaningless, as we know not to extrapolate beyond the range of the data.** This does not mean that we should ignore the negative intercept or the large positive coefficient for white-petaled RILs (See more on marginal effects soon), it just means we should think of these as cogs to make the model go, not biologically meaningful information. The biologically meaningful information is the prediction within the range of our data.
+
+### Visualizing a linear model with an interaction 
+
+To look into this more, lets view our data and the model in the range of our data. Because we are considering a statistical interaction, the default behavior of `geom_smooth(method = 'lm')` is appropriate: 
+
+::: aside
+Although you could use [`geom_lm_smooth(interaction = TRUE)`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) from my [`honestlm`](https://yanivjb.github.io/honestlm/index.html) package, if you prefer.
+:::
+
+```{r}
+#| fig-height: 3.2
+#| fig-cap: "Observed proportion of hybrid seed and fitted relationships with petal area for pink- and white-petaled RILs. The fitted slopes differ between petal colors."
+#| fig-alt: "A scatterplot shows proportion of hybrid seed against petal area for pink- and white-petaled RILs, with a separate fitted regression line for each color. The fitted line for pink flowers rises strongly with petal area, while the fitted line for white flowers is nearly flat. Across nearly all observed petal areas, the pink fitted line lies above the white fitted line."
+#| label: fig-interactDATA
+ggplot(rils, aes(x = petal_area_mm, 
+                 y = prop_hybrid, 
+                 color = petal_color))+
+    geom_point()+
+    geom_smooth(method = "lm")
+```
+
+@fig-interactDATA now clearly shows that, despite the large positive coefficient for white-petals, pink-petaled RILs are predicted to have a higher proportion of hybrid seed than white petaled RILs through nearly all of the range  of our data. This highlights the need for visualizing your data and the model, and for carefully interpreting  linear model coefficients in the presence of interactions. 
+
+::: {.callout-note}
+## Key finding
+Our model predicts a similarly low proportion of hybrid seeds for the smallest pink- and white- petaled RILs. As petal area increases, however, the predicted proportion of hybrid seed rises strongly among pink-petaled RILs, and hardly  changes for white-petaled RILs. So, the difference in hybridization between petal colors is small for small-petaled RILs, and increases with petal area.
+
+:::
+
+
+### Interactions between categorical explanatory variables 
+
+
+
+In @fig-interactDATA, the association between petal area and hybrid seed production depends on petal color. We can "see" this interaction as the steeper slope for pink petaled RILs than white-petaled RILs. 
+
+The same idea applies to interactions between two categorical explanatory variables. Although such variables do not have proper "slopes" we can connect group means by lines. @fig-2catinteract shows that the lines connecting the mean proportion of hybrid seeds of pink- and white-petaled RILs are steep at GC, LB, and SR, but shallow at US. From this plot we can see that the proportion of hybrid seeds is associated with petal color, planting location and their interaction. 
+
+
+```{r}
+#| code-fold: true
+#| column: page-right
+#| label: fig-2catinteract
+#| fig-height: 2
+#| fig-cap: "Proportion of hybrid seed for pink- and white-petaled RILs across planting locations. Points show individual RILs, error bars summarize each group, and dashed lines connect the group means within each location. Data are facetted by location."
+#| fig-alt: "Four faceted plots show proportion of hybrid seed for pink- and white-petaled RILs at different planting locations. Individual points are jittered within each petal-color group, with black error bars and a dashed line connecting the group means. Pink-petaled RILs have substantially higher mean hybrid seed proportion than white-petaled RILs at most locations, but the two means are much closer at Upper Sawmill."
+ggplot(rils, aes(x = petal_color, 
+                 y = prop_hybrid, 
+                 color = petal_color))+
+  geom_jitter(height = 0, width = .2, size = 3, alpha = .5) +
+  stat_summary(geom = "errorbar", width = .2, color = "black")+
+  facet_wrap(~location, nrow = 1) +
+  stat_summary(aes(group=1),
+               geom = "line", linewidth = .8, color = "black",  lty=2)+
+  theme(legend.position = "none")
+```
+
+---
+
+I generate the linear model coefficients, below. Let's think about how to use this to find $\hat{Y}$. 
+
+- We start with the intercept.  
+- We then have our first variable, location, for which there are three potential coefficients. Recall that these are "indicator variables" so we multiply the coefficient by one if we are in that location and zero if we are not. The reference location, GC, does not receive its own coefficient because it is already represented by the intercept.
+- We then hit our second variable, petal color. Again this is an indicator variable, which we multiply by one if white, and by zero otherwise.  The reference petal color, pink, does not receive its own coefficient because it is already represented by the intercept. 
+- We then hit our interaction between petal color and location. This is the product of the two previous indicators. Now we multiply the coefficient by one if we are in that location and zero if we are not, and we multiply this number by one if we are white and zero otherwise. In other words, we add the interaction term if we fall into both categories. 
+
+Note the very small numbers for all interaction terms except `locationUS:petal_colorwhite`. Note also the weirdness of the strong positive interaction for `locationUS:petal_colorwhite`. 
+
+---
+
+```{r}
+#| eval: false
+#| column: page-right
+lm(prop_hybrid ~ location * petal_color, data = rils)
+```
+
+```{r}
+#| echo: false
+ab <- lm(prop_hybrid ~ location + petal_color + location:petal_color, data = rils) |>
+  coef()|> 
+  round(digits = 3)
+enframe(ab)|>
+  kable()
+```
+
+---
+
+
+
+
+As in the previous example, this might make you initially misinterpret these coefficients. For example, you may think that this combination was awesome for proportion hybrid seed. But it does not. Rather, this means that their predicted value is higher than the negative 10%  of hybrid seeds we would predict  by simply subtracting these coefficients from the intercept. 
+
+We can use these coefficients to find $\hat{Y}_i$ for all combinations of petal color and planting location. I present a few of these below: 
+
+\begin{aligned}
+\hat{Y}_{i\mid \text{pink, GC}}
+  &= `r ab[["(Intercept)"]]` \\[0.5em]
+
+\hat{Y}_{i\mid \text{pink, LB}}
+  &= `r ab[["(Intercept)"]]`
+   `r pm(ab[["locationLB"]])` \\
+  &= `r ab[["(Intercept)"]] + ab[["locationLB"]]` \\[0.5em]
+
+\hat{Y}_{i\mid \text{white, LB}}
+  &= `r ab[["(Intercept)"]]`
+   `r pm(ab[["locationLB"]])`
+   `r pm(ab[["petal_colorwhite"]])`
+   `r pm(ab[["locationLB:petal_colorwhite"]])` \\
+  &= `r ab[["(Intercept)"]] + ab[["locationLB"]] + ab[["petal_colorwhite"]] + ab[["locationLB:petal_colorwhite"]]` \\[0.5em]
+
+\hat{Y}_{i\mid \text{pink, US}}
+  &= `r ab[["(Intercept)"]]`
+   `r pm(ab[["locationUS"]])` \\
+  &= `r ab[["(Intercept)"]] + ab[["locationUS"]]` \\[0.5em]
+
+\hat{Y}_{i\mid \text{white, US}}
+  &= `r ab[["(Intercept)"]]`
+   `r pm(ab[["locationUS"]])`
+   `r pm(ab[["petal_colorwhite"]])`
+   `r pm(ab[["locationUS:petal_colorwhite"]])` \\
+  &= `r ab[["(Intercept)"]] + ab[["locationUS"]] + ab[["petal_colorwhite"]] + ab[["locationUS:petal_colorwhite"]]`
+\end{aligned}
+
+**The app below shows predictions from the interaction model and compares it to a model without interactions. Play with it to find $\hat{Y_i}$ for different combinations of petal color and location in models with and without interactions**
+
+```{=html}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interaction Prediction Explorer</title>
+<style>
+  *{box-sizing:border-box}
+  .app{max-width:760px;margin:18px auto;padding:14px}
+  h1{font-size:1.35rem;margin:0 0 12px}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  select,button{font:inherit;padding:7px 10px;border:1px solid #ccc;border-radius:8px;background:white}
+  button{cursor:pointer;font-weight:700}
+  button.active{background:#5555c8;color:white;border-color:#5555c8}
+  .card{background:white;border:1px solid #ddd;border-radius:12px;padding:14px}
+  .formula{font-family:ui-monospace,monospace;background:#f2f3f6;padding:9px;border-radius:8px;margin-bottom:10px}
+  .row{display:grid;grid-template-columns:1.7fr .8fr .55fr .85fr;gap:8px;padding:6px 0;border-bottom:1px solid #eee;font-size:.9rem}
+  .row.head{font-weight:700;color:#666}
+  .row:last-child{border-bottom:none}
+  .on{font-weight:800}
+  .pred{margin-top:10px;padding:10px;background:#eeeeff;border-radius:9px}
+  .big{font-size:1.6rem;font-weight:800}
+  .compare{margin-top:8px;font-size:.9rem;color:#555}
+  @media(max-width:600px){
+    .row{grid-template-columns:1.5fr .75fr .5fr .8fr;font-size:.82rem}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>Interaction Prediction Explorer</h1>
+
+  <div class="controls">
+    <select id="location">
+      <option value="GC">GC</option>
+      <option value="LB">LB</option>
+      <option value="SR">SR</option>
+      <option value="US">US</option>
+    </select>
+
+    <select id="color">
+      <option value="pink">Pink</option>
+      <option value="white">White</option>
+    </select>
+
+    <button class="model" data-model="additive">No interaction</button>
+    <button class="model active" data-model="interaction">Interaction</button>
+  </div>
+
+  <div class="card">
+    <div id="formula" class="formula"></div>
+
+    <div class="row head">
+      <div>Term</div><div>Coef.</div><div>Use</div><div>Add</div>
+    </div>
+    <div id="terms"></div>
+
+    <div class="pred">
+      <div>Prediction</div>
+      <div id="prediction" class="big"></div>
+      <div id="sumline"></div>
+    </div>
+
+    <div id="compare" class="compare"></div>
+  </div>
+</div>
+
+<script>
+const additive={
+  "(Intercept)":0.24071475,
+  "locationLB":0.07047425,
+  "locationSR":0.01815048,
+  "locationUS":-0.12025684,
+  "petal_colorwhite":-0.17895864
+};
+
+const interaction={
+  "(Intercept)":0.270461310,
+  "locationLB":0.071313582,
+  "locationSR":0.014916049,
+  "locationUS":-0.225980790,
+  "petal_colorwhite":-0.240434854,
+  "locationLB:petal_colorwhite":0.002256721,
+  "locationSR:petal_colorwhite":0.007942111,
+  "locationUS:petal_colorwhite":0.209501133
+};
+
+let active="interaction";
+const loc=document.getElementById("location");
+const col=document.getElementById("color");
+
+function ind(term,l,c){
+  if(term==="(Intercept)") return 1;
+  if(term==="petal_colorwhite") return c==="white"?1:0;
+  if(term.includes(":")){
+    const site=term.match(/location(LB|SR|US)/)[1];
+    return l===site && c==="white" ? 1 : 0;
+  }
+  if(term.startsWith("location")) return l===term.replace("location","")?1:0;
+  return 0;
+}
+
+function pred(model,l,c){
+  return Object.entries(model).reduce((s,[t,b])=>s+b*ind(t,l,c),0);
+}
+
+function label(term){
+  return term
+    .replace("(Intercept)","Intercept")
+    .replace("petal_colorwhite","White")
+    .replace("locationLB:petal_colorwhite","LB × white")
+    .replace("locationSR:petal_colorwhite","SR × white")
+    .replace("locationUS:petal_colorwhite","US × white")
+    .replace("locationLB","LB")
+    .replace("locationSR","SR")
+    .replace("locationUS","US");
+}
+
+function f(x){return x.toFixed(3)}
+
+function render(){
+  const model=active==="additive"?additive:interaction;
+  const l=loc.value, c=col.value;
+  document.getElementById("formula").textContent=
+    active==="additive"
+    ? "Ŷ = intercept + location + color"
+    : "Ŷ = intercept + location + color + location × color";
+
+  const terms=document.getElementById("terms");
+  terms.innerHTML="";
+  const adds=[];
+
+  Object.entries(model).forEach(([term,b])=>{
+    const i=ind(term,l,c);
+    if(i===0) return;
+    const a=b;
+    adds.push(a);
+    const row=document.createElement("div");
+    row.className="row";
+    row.innerHTML=`<div>${label(term)}</div><div>${f(b)}</div><div class="on">1</div><div>${f(a)}</div>`;
+    terms.appendChild(row);
+  });
+
+  const p=pred(model,l,c);
+  document.getElementById("prediction").textContent=f(p);
+  document.getElementById("sumline").textContent=
+    adds.map(f).join(" + ").replace(/\+ -/g,"− ")+" = "+f(p);
+
+  const pa=pred(additive,l,c);
+  const pi=pred(interaction,l,c);
+  document.getElementById("compare").textContent=
+    `No interaction: ${f(pa)}   |   Interaction: ${f(pi)}`;
+}
+
+document.querySelectorAll(".model").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".model").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    active=b.dataset.model;
+    render();
+  };
+});
+
+loc.onchange=render;
+col.onchange=render;
+render();
+</script>
+```
+---
+
+
+### Interactions between continuous  explanatory vars. 
+
+Of course, the interaction between two continuous explanatory variables can also contribute to our predictions. Here I will model the proportion of hybrid seeds as a function of petal area and anther stigma distance. We can build this interaction model as before: 
+
+::: aside 
+**NOTE:** from our previous analyses, it seems likely that ASD does not influence the proportion of hybrid seed. But it is highly correlated with petal color which likely does.
+:::
+
+
+---
+
+```{r}
+#| eval: false
+#| column: page-right
+lm(prop_hybrid ~ petal_area_mm * asd_mm, data = rils)
+```
+
+```{r}
+#| echo: false
+ab <- lm(prop_hybrid ~ petal_area_mm * asd_mm, data = rils) |>
+  coef()|> 
+  round(digits = 4)
+enframe(ab)|>
+  kable()
+```
+
+---
+
+So the model looks like this:
+
+$$\hat{Y_i} =  .1872 -.0021 \times \text{PETAL AREA}  -.2684 \times \text{ASD} + .0057  \times \text{ASD}\times \text{PETAL AREA}$$
+
+
+#### **Finding $\hat{Y_i}$**
+
+We can find predicted values for combinations of continuous explanatory variables by plugging the relevant values  into the model. 
+
+For example, we find the expected proportion of hybrid seeds for a RIL with a petal area of $30 mm^2$ and an anther stigma distance of 0.5 mm as: 
+
+\begin{aligned}
+\hat{Y}
+&= 0.187 - (0.0021 \times 30) - (0.2684 \times 0.5) + (0.0057 \times 30 \times 0.5)  \\
+&= 0.187 - 0.063 - 0.134 + 0.086 \\
+&= 0.076
+\end{aligned}
+
+---
+
+**NOW YOU TRY:** Use the webr environment below to find additional $\hat{Y_i}$ values. 
+
+```{webr-r}
+
+```
+
+::: exercises
+
+**Q1)** The predicted proportion of hybrid seeds for a RIL with a petal area of $100\ \text{mm}^2$ and an ASD of $0.5\ \text{mm}$ is `r fitb(0.128, tol = 0.028, width = 6)`.
+
+`r hide("Click for answer")`
+
+
+\begin{aligned}
+\hat{Y}
+&= .1872 - (.0021\times 100) - (.2684 \times .5) + (.0057 \times 100 \times .5) \\
+&= 0.1872 - 0.2100 - 0.1342 + 0.2850 \\
+&= 0.1280
+\end{aligned}
+
+
+`r unhide()`
+
+
+**Q2)** The predicted proportion of hybrid seeds for a RIL with a petal area of $30\ \text{mm}^2$ and an ASD of $2.0\ \text{mm}$ is `r fitb(-0.071, tol = 0.028, width = 6)`.
+
+`r hide("Click for answer")`
+
+
+\begin{aligned}
+\hat{Y}
+&= .1872 - (.0021\times 30) - (.2684 \times 2.0) + (.0057 \times 30 \times 2.0) \\
+&= 0.1872 - 0.0630 - 0.5368 + 0.3420 \\
+&= -0.0706
+\end{aligned}
+
+
+`r unhide()`
+
+
+**Q3)** The predicted proportion of hybrid seeds for a RIL with a petal area of $100\ \text{mm}^2$ and an ASD of $2.0\ \text{mm}$ is `r fitb(0.580, tol = 0.028, width = 6)`.
+
+`r hide("Click for answer")`
+
+
+\begin{aligned}
+\hat{Y}
+&= .1872 - (.0021\times 100) - (.2684 \times 2.0) + (.0057 \times 100 \times 2.0) \\
+&= 0.1872 - 0.2100 - 0.5368 + 1.1400 \\
+&= 0.5804
+\end{aligned}
+
+
+`r unhide()`
+
+:::
+
+#### **Visualizing interacting continuous variables**
+
+It is very hard to visualize more than two continuous variables. It is even harder to spot nonlinear trends in such cases. Rather than forcing all three variables into one plot, let's try making the problem easier.
+
+I usually turn one of the continuous predictors into an ordinal variable, and then visually compare slopes. For example, in @fig-quantint, I break anther stigma into quartiles. I then compare the relationship between petal area and the proportion of hybrid seed across asd quartiles. @fig-quantint shows a slope near zero for the bottom two quartiles, but a sharp slope for larger values of ASD. Thus, while this does not perfectly reproduce  our model, it is giving interaction. 
+
+
+
+```{r}
+#| column: page-right
+#| fig-height: 2
+#| label: fig-quantint
+#| fig-cap: "Relationship between petal area and the proportion of hybrid seed across four anther–stigma distance groups. Points show individual RILs, and black lines show separate linear fits within each ASD quartile group."
+#| fig-alt: "Four panels show proportion of hybrid seed against petal area for RILs grouped from the lowest to highest anther–stigma distance. The fitted lines are nearly flat in the first two panels and increasingly positive in the third and fourth panels."
+
+rils <- rils |>
+  mutate(asd_quantile = cut(asd_mm,
+                            breaks = quantile(asd_mm, na.rm = TRUE),
+                            include.lowest = TRUE,
+                            labels = c("1st", "2nd","3rd","4th")))
+
+rils|>
+  ggplot(aes(x = petal_area_mm, 
+                 y = prop_hybrid, 
+                 color = asd_quantile))+
+    geom_point( alpha = .5) +
+    facet_wrap(~asd_quantile, nrow = 1, labeller = "label_both") +
+    geom_smooth(method = "lm", color = "black")+    
+    theme(legend.position = "none", 
+          strip.text = element_text(size = 10),
+          axis.text = element_text(size = 10),
+          axis.title = element_text(size = 10))
+```
+
+---
+
+My biological interpretation of this result is as follows. I suspect that this pattern does not primarily reflect a direct effect of ASD. But, because asd is associated with petal color, plants with large asd are more likely pink. Thus, @fig-quantint is just  @fig-interactDATA   in a trench coat. 
+
+

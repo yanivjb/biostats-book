@@ -1,0 +1,274 @@
+## • 20. BONUS: Polynomial regression  {.unnumbered #polynomial_interaction_warnings_and_size__regression}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(car)
+library(tidyverse)
+library(honestlm)
+library(patchwork)
+library(knitr)
+library(broom)
+```
+
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating scenario:** 
+A straight-line model assumes that each additional unit of $x$ has the same expected effect on $y$. But linear models need be limitted to straight lines. E.g. with interactions, the effect of increasing $x_1$ can depend on the value of $x_2$. In polynomial regression, we allow the effect of $x$ on $y$ to depend on the value of $x$ itself. This allows us to describe curved relationships. Although this approach can add biological realism, it can also complicate interpretation and increase the risk of overfitting.
+
+
+**Learning goals: By the end of this section, you should be able to:**  
+
+
+- Explain how polynomial regression can describe a curved relationship while remaining a linear model.
+- Fit a quadratic regression in R and add the fitted curve to a ggplot.
+- Use the coefficients of a quadratic model to calculate predictions.   
+- Recognize the risks of overfitting and extrapolating polynomial models.   
+
+:::
+
+---
+
+We have seen that linear models can include more than one term, and even "interactions" between thee terms. So,  the "linear" part of a linear model is not that it makes a clean, straight line, but rather, that we find $\hat{Y_i}$ by adding up all the components of the linear model equation. 
+
+Here, I introduce polynomial regression, another classic tool we can use to better capture biological reality by adding curvature to our linear model.  The most common polynomial regression includes an explanatory variable and its square (below). You can include cubic, quartic, or still higher-order terms. But as, always, think about what you're putting in your model and why.
+
+$$
+\widehat{Y}_i = a + b_1X_i + b_2X_i^2.
+$$ {#eq-polynomial}
+
+::: {.callout-warning}
+Adding a squared (or higher-order) term can make a better model. But each additional term complicates interpretation, and, **most importantly, can overfit the data**. Let your biological intuition and statistical reasoning guide you.
+:::
+
+### Biological set up:  
+
+
+As a quick break from the *Clarkia* data, let's consider data describing the relationship between pond productivity and the number of species found in each pond. Productivity may affect diversity through two opposing forces. At low productivity, increasing productivity may provide enough additional resources for more species to persist. At high productivity, however, competition may intensify, allowing a few species to dominate and reducing species richness.
+
+To investigate these questions,  @chase2002 collected data on the number of plant and animal species and the productivity of 30 ponds. Looking at the data, a straight line does not seem to describe this relationship very well (@fig-bmass). 
+
+
+
+
+```{r}
+#| label: fig-bmass
+#| code-fold: true
+#| code-summary: "Loading and plotting data."
+#| fig-cap: "Relationships between pond productivity and animal-producer richness (top) and plant-producer richness (bottom). Points represent ponds, and straight lines show fitted linear relationships. Data from [Chase and Leibold (2002)](https://www.nature.com/articles/416427a)."
+#| fig-alt: "Two vertically arranged scatterplots of species richness against pond productivity. The upper panel shows animal producers and the lower panel shows plant producers. Each point represents a pond. A straight fitted line is drawn through each panel, but the points appear to follow curved rather than strictly linear relationships."
+#| column: margin
+#| warning: false
+#| message: false
+#| fig-height: 12
+
+link <- "https://raw.githubusercontent.com/yanivjb/biostats-book-data/refs/heads/main/speciesXproductivity"
+bmass <- read_csv(link)
+bmass |>
+    ggplot(aes(x = Biomass, y = n.species, color = taxon)) +
+    geom_point(size = 4) +
+    labs(x = expression("Productivity (g " * cm^{-2} * "/15 days)"),
+         y = "Number of species") +
+    geom_lm_smooth(method = "lm", linewidth = 1) +
+    labs(title = "Linear term")+
+    facet_wrap(~taxon, ncol = 1, scales = "free_y")+
+    theme(axis.text = element_text(size = 30),
+          axis.title = element_text(size = 30),
+          title = element_text(size = 30), 
+          legend.position = "none",
+          strip.text = element_text(size = 40))
+
+```
+
+
+
+```{r}
+lm(n.species ~ Biomass + taxon, bmass) 
+```
+
+```{r}
+#| eval: false
+library(car)
+lm(n.species ~ Biomass + taxon, bmass) |> Anova()
+```
+
+```{r}
+#| echo: false
+format_scientific <- function(x, digits = 3, cutoff = 0.001) {
+  ifelse(
+    is.na(x),
+    "",
+    ifelse(
+      x < cutoff,
+      sub(
+        "e([+-]?[0-9]+)$",
+        " &times; 10<sup>\\1</sup>",
+        format(x, scientific = TRUE, digits = digits)
+      ),
+      formatC(x, format = "f", digits = digits)
+    )
+  )
+}
+
+
+lm(n.species ~ Biomass + taxon, bmass) |> Anova() |> tidy()|> rename("F value"  =  statistic , "Pr(>F)" = p.value)  |> mutate(`Pr(>F)` = format_scientific(`Pr(>F)`)) |> mutate(`F value` = round(`F value`, digits = 2))|> mutate(sumsq = round(sumsq, digits = 2))|>kable(escape = FALSE)
+
+```
+
+
+:::{.callout-note}
+**Note.** A formal statistical model fails to reject the null of no straight line between the number of species and productivity, adjusting for taxon (plant/animal, above). But even if we did reject the null, the model would still be bad because it's a poor fit to the data (@fig-bmass). 
+:::
+
+### Polynomial regression example 
+
+While @fig-bmass did not show a linear relationship, there does appear to be a hump shaped relationship. If true, this would imply that with low productivity, additional biomass allows more species to persist, but whith more biomass,  a few species to dominate. The linear model looks like this: 
+
+$$\text{N.SPECIES = CONSTANT + TAXON + PRODUCTIVITY + PRODUCTIVITY}^2$$
+We can write this in R as: 
+
+```{r}
+ lm(n.species ~ taxon + Biomass + I(Biomass^2), bmass)
+```
+
+
+
+We wrap `Biomass^2` in `I()` to tell R to treat the expression inside the parentheses as ordinary arithmetic.
+
+::: {.callout-note}
+R also provides the `poly()` function for fitting polynomial regressions. I prefer `Biomass + I(Biomass^2)` here because it makes the terms in our model explicit and easier to connect to the model equation.
+:::
+
+
+
+### Reading predictions from a polynomial regression
+
+```{r}
+#| echo: false
+ modl <- lm(n.species ~ taxon + Biomass + I(Biomass^2), bmass) |> coef()
+```
+
+The model above has: 
+
+- An intercept of `r modl["(Intercept)"] |> round(digits = 1)`
+- An effect of taxonplant of `r modl["taxonplant"] |> round(digits = 1)` 
+- A linear term of Biomass of  `r modl["Biomass"] |> round(digits = 3)`, and 
+- A quadratic term, Biomass$^2$, of  `r modl["I(Biomass^2)"] |> round(digits = 6)`.
+
+The intercept is the predicted number of animal species at a productivity of zero. As usual, we should be cautious about interpreting an intercept that lies outside the range of our data.
+
+The `Biomass` and `I(Biomass^2)` coefficients work together to describe the curved relationship. The coefficient for `Biomass` does **not** mean that species richness always increases with productivity. Likewise, the negative coefficient for `I(Biomass^2)` does not describe a separate biological effect of “squared productivity.” Together, the two terms produce a curve that rises and then falls.
+
+
+For animals, the indicator variable for plants equals zero, so we predict:
+
+$$
+\begin{aligned}
+\widehat{\text{n.species}}_{\text{animal},\,\text{Biomass}=50}
+  &= `r modl["(Intercept)"] |> round(3)`
+     + `r modl["Biomass"] |> round(4)` \times 50
+      `r modl["I(Biomass^2)"] |> round(6)` \times (50^2) \\
+  &\approx `r (modl["(Intercept)"] +
+                 modl["Biomass"] * 50 +
+                 modl["I(Biomass^2)"] * 50^2) |> round(2)`.
+\end{aligned}
+$$
+
+For plants, we also add the coefficient for `taxonplant`:
+
+$$
+\begin{aligned}
+\widehat{\text{n.species}}_{\text{plant},\,\text{Biomass}=50}
+  &= `r modl["(Intercept)"] |> round(3)`
+      `r modl["taxonplant"] |> round(3)`
+     + `r modl["Biomass"] |> round(4)` \times 50 
+      `r modl["I(Biomass^2)"] |> round(6)`\times (50^2) \\
+  &\approx `r (modl["(Intercept)"] +
+                 modl["taxonplant"] +
+                 modl["Biomass"] * 50 +
+                 modl["I(Biomass^2)"] * 50^2) |> round(2)`.
+\end{aligned}
+$$
+
+
+
+### Adding Quadratic Terms to Our Plot  
+
+We can add a quadratic fit to our `ggplot` by specifying `formula = y ~ x + I(x^2)` in  `geom_lm_smooth()` in my [`honestlm`](https://yanivjb.github.io/honestlm/index.html) package (@fig-bmass-quadratic). Of course, you could do the same in [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html), but that will fit different curves for the different categories.
+
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-height: 3
+#| label: fig-bmass-quadratic
+#| fig-cap: "Fitted quadratic relationship between pond productivity and species richness for animal producers and plant producers. Points represent individual ponds."
+#| fig-alt: "Two scatterplots show species richness against pond productivity for animal and plant producers. A smooth hump-shaped fitted curve rises at low productivity, reaches a maximum at intermediate productivity, and declines at high productivity. The curves have the same shape for both taxa but are vertically separated."
+bmass |>
+  ggplot(aes(x = Biomass, y = n.species, color = taxon)) +  
+  labs(x = expression("Productivity (g " * cm^{-2} * "/15 days)"),   
+       y = "Number of species",
+       title = "Linear + squared term") +
+  geom_point()+
+  geom_lm_smooth(formula = y ~ x + I(x^2), linewidth = 1) +
+  facet_wrap(~taxon, scales = "free_y")+
+  theme(legend.position = "none")
+```
+
+
+
+::: {.callout-caution collapse="true"}
+
+## Expand to learn about fitting quadratic models with `geom_smooth()`
+
+You can fit separate polynomial models with `geom_smooth(method = "lm", formula = y ~ x + I(x^2))` or with `geom_lm_smooth(method = "lm", formula = y ~ x + I(x^2), interaction = FALSE)`. Here, I show what happens with geom_smooth(). 
+
+If you look closely at @fig-bmass-separate-quadratics, you can see different curve shapes for plants in animals, while these shapes are idenitical in @fig-bmass-quadratic. 
+
+```{r}
+#| fig-height: 3
+#| label: fig-bmass-separate-quadratics
+#| fig-cap: "Separate quadratic regressions fitted to animal and plant producers by `geom_smooth()`. Because the data are grouped by taxon, each taxon receives its own intercept, linear term, and quadratic term; these curves therefore represent a different model from the additive quadratic model in @fig-bmass-quadratic."
+#| fig-alt: "Side-by-side scatterplots of species richness against pond productivity for animal and plant producers. Each panel has its own independently fitted quadratic curve, so the locations and shapes of the two curves may differ."
+bmass |>
+    ggplot(aes(x = Biomass, y = n.species, color = taxon)) +
+    geom_point(size = 4) +
+    labs(x = expression("Productivity (g " * cm^{-2} * "/15 days)"),
+         y = "Number of species") +
+    geom_smooth(method = "lm", formula = y ~ x + I(x^2)) +
+    labs(title = "Linear + squared term")+
+    facet_wrap(~taxon, ncol = 2, scales = "free_y")+
+    theme(legend.position = "none")
+```       
+
+:::
+
+### Does the relationship curve?
+
+
+
+We evaluate significance with Type II sums of squares, adjusting for the others  (including the squared term) when evaluating the significance of a focal term. 
+
+
+
+```{r}
+ lm(n.species ~ taxon + Biomass + I(Biomass^2), bmass) |> Anova() |> tidy()|> rename("F value"  =  statistic , "Pr(>F)" = p.value)  |> mutate(`Pr(>F)` = format_scientific(`Pr(>F)`)) |> mutate(`F value` = round(`F value`, digits = 2))|> mutate(sumsq = round(sumsq, digits = 2))|>kable(escape = FALSE)
+```
+
+
+A small p-value for `I(Biomass^2)` provides evidence that the relationship is curved rather than adequately described by a straight line. 
+
+- *QUESTION: What's the deal with the low p-value for `Biomass`?* Our sums of squares for `Biomass` in the "straight line" model was approximately twelve, and our F value was less than one. Why does adding the squared term make our linear term significant (SS = 233, $F_\text{1,55} = 20.8$) and what does this mean?   </br></br>
+
+- *ANSWER: The linear and squared terms work together to describe the curve.* So, this means that having a linear term (representing the "instantaneously slope" at zero productivity) improves the model, not that there is a linear increase. For this reason, I sometimes prefer to evaluate the significance of both linear and squared terms at once with the [`poly()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/poly.html) function. Here, the 2 means we want the linear and 2nd order (i.e. squared) term, and the `raw = TRUE` means that it will give us coefficients in the scale of our linear model (if we ask for them).   
+
+```{r}
+lm(n.species ~ taxon + poly(Biomass ,2, raw = TRUE), bmass) |> Anova()
+```
+
+
+::: {.callout-warning}
+A polynomial curve can behave wildly outside the range of the observed data. As always, be cautious about extrapolation. Also, do not add higher-order terms simply because R lets you—each new term makes the curve more flexible and easier to overfit.
+:::

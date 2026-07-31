@@ -297,10 +297,7 @@ emmeans::contrast(species_means, method = "pairwise", adjust = "tukey")
 
 :::learnmore
 
-**Chapter tutor:**  
-
-
-- [ModernDive: Multiple Regression](https://moderndive.com/v2/multiple-regression.html): Another tidyverse focused overview of multiple regression
+**Blog posts:**  
 
 - [Regression fire and dangerous things](https://elevanth.org/blog/2021/06/15/regression-fire-and-dangerous-things-1-3/). A blog post by [Richard McElreath](https://www.eva.mpg.de/ecology/staff/richard-mcelreath/) that explains the problem with the "causal salad" of multiple regression.
 
@@ -309,8 +306,13 @@ emmeans::contrast(species_means, method = "pairwise", adjust = "tukey")
 
 - [Why Adjusted Regression Coefficients Are Less Descriptive Than They Look](https://rpsychologist.com/descriptive-adjustment/). I nice blogpost with interactive apps which highlight how coeffcieints from a multiple regression depend on other variables in the model. 
 
-**Videos** 
+**Videos**   
 
 - Statistics 101: [Multiple regression playlist](https://www.youtube.com/playlist?list=PLIeGtxpvyG-IqjoU8IiF0Yu1WtxNq_4z-), [ANCOVA playlist](https://www.youtube.com/playlist?list=PLIeGtxpvyG-LnuBJ7TayqusxOERwpTvAv). 
+
+
+**Book Chapters**   
+
+- [ModernDive: Multiple Regression](https://moderndive.com/v2/multiple-regression.html): Another tidyverse focused overview of multiple regression
 
 :::

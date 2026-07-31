@@ -1,0 +1,798 @@
+## • 20. Interactions summary {.unnumbered #interaction_summary}
+
+
+---
+format: html
+webr:
+  packages: ['dplyr', 'ggplot2', 'broom', 'car', 'emmeans']
+  autoload-packages: true
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(webexercises)
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(car)
+library(emmeans)
+data(penguins, package = "datasets")
+```
+
+```{webr-r}
+#| context: setup
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(car)
+library(emmeans)
+honest_factor_info <- function(model) {
+  mf <- stats::model.frame(model)
+  if (ncol(mf) == 0) {
+    return(list())
+  }
+
+  response <- as.character(stats::formula(model)[[2]])
+  predictors <- setdiff(names(mf), response)
+
+  factor_vars <- predictors[vapply(
+    mf[predictors],
+    function(x) is.factor(x) || is.character(x),
+    logical(1)
+  )]
+
+  stats::setNames(
+    lapply(factor_vars, function(var) {
+      x <- mf[[var]]
+      if (!is.factor(x)) {
+        x <- factor(x)
+      }
+
+      list(
+        name = var,
+        n_levels = nlevels(x),
+        levels = levels(x),
+        reference = levels(x)[1]
+      )
+    }),
+    factor_vars
+  )
+}
+
+honest_multilevel_factor_rows <- function(model, terms) {
+  factor_info <- honest_factor_info(model)
+  rows <- rep(FALSE, length(terms))
+
+  if (length(factor_info) == 0) {
+    return(rows)
+  }
+
+  for (info in factor_info) {
+    if (info$n_levels <= 2) {
+      next
+    }
+
+    rows <- rows | (startsWith(terms, info$name) & terms != info$name)
+  }
+
+  rows
+}
+
+honest_contrast_notes <- function(model, terms) {
+  factor_info <- honest_factor_info(model)
+  notes <- rep(NA_character_, length(terms))
+
+  if (length(factor_info) == 0) {
+    return(notes)
+  }
+
+  for (info in factor_info) {
+    term_matches <- startsWith(terms, info$name) & terms != info$name
+    if (!any(term_matches)) {
+      next
+    }
+
+    if (info$n_levels > 2) {
+      notes[term_matches] <- paste0(
+        "comparison to reference level `",
+        info$reference,
+        "`; not a test of whether `",
+        info$name,
+        "` matters overall"
+      )
+    } else {
+      notes[term_matches] <- paste0(
+        "comparison to reference level `",
+        info$reference,
+        "`"
+      )
+    }
+  }
+
+  notes
+}
+
+honest_plot_group_var <- function(data) {
+  candidates <- intersect(
+    c("colour", "color", "fill", "linetype", "shape"),
+    names(data)
+  )
+
+  candidates <- candidates[vapply(
+    data[candidates],
+    function(x) length(unique(x[!is.na(x)])) > 1,
+    logical(1)
+  )]
+
+  if (length(candidates) == 0) {
+    return(NULL)
+  }
+
+  candidates[1]
+}
+
+format_number <- function(x, digits) {
+  format(signif(x, digits), trim = TRUE)
+}
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
+
+
+StatLmSmooth <- ggplot2::ggproto(
+  "StatLmSmooth",
+  ggplot2::Stat,
+
+  required_aes = c("x", "y"),
+  extra_params = c("na.rm", "se", "level", "n", "fullrange"),
+
+  compute_layer = function(self, data, params, layout) {
+    se <- params$se %||% TRUE
+    level <- params$level %||% 0.95
+    n <- params$n %||% 100
+    fullrange <- params$fullrange %||% FALSE
+
+    keep <- stats::complete.cases(data[, c("x", "y", "group")])
+    data <- data[keep, , drop = FALSE]
+
+    if (nrow(data) == 0) {
+      return(data[0, , drop = FALSE])
+    }
+
+    has_groups <- "group" %in% names(data) && length(unique(data$group)) >= 2
+
+    if (!has_groups) {
+      fit <- stats::lm(y ~ x, data = data)
+
+      aesthetic_cols <- intersect(
+        c("colour", "color", "fill", "alpha", "linetype", "linewidth", "size"),
+        names(data)
+      )
+      x_global <- range(data$x, na.rm = TRUE)
+      panels <- unique(data$PANEL)
+
+      grid <- lapply(panels, function(this_panel) {
+        this_data <- data[data$PANEL == this_panel, , drop = FALSE]
+        x_range <- if (isTRUE(fullrange)) x_global else range(this_data$x, na.rm = TRUE)
+
+        pred_data <- data.frame(
+          x = seq(x_range[1], x_range[2], length.out = n),
+          PANEL = this_panel,
+          group = -1
+        )
+
+        for (aesthetic in aesthetic_cols) {
+          pred_data[[aesthetic]] <- this_data[[aesthetic]][1]
+        }
+
+        pred_data
+      })
+
+      pred_data <- do.call(rbind, grid)
+      pred <- stats::predict(fit, newdata = pred_data, se.fit = TRUE)
+      pred_data$y <- as.numeric(pred$fit)
+
+      if (isTRUE(se)) {
+        crit <- stats::qt((1 + level) / 2, df = stats::df.residual(fit))
+        pred_data$se <- as.numeric(pred$se.fit)
+        pred_data$ymin <- pred_data$y - crit * pred_data$se
+        pred_data$ymax <- pred_data$y + crit * pred_data$se
+      }
+
+      return(pred_data)
+    }
+
+    data$.lm_group <- factor(data$group)
+    fit <- stats::lm(y ~ x + .lm_group, data = data)
+
+    aesthetic_cols <- intersect(
+      c("colour", "color", "fill", "alpha", "linetype", "linewidth", "size"),
+      names(data)
+    )
+    x_global <- range(data$x, na.rm = TRUE)
+    panel_group_combos <- unique(data[, c("PANEL", "group"), drop = FALSE])
+
+    grid <- lapply(seq_len(nrow(panel_group_combos)), function(i) {
+      this_panel <- panel_group_combos$PANEL[i]
+      this_group <- panel_group_combos$group[i]
+      this_data <- data[data$PANEL == this_panel & data$group == this_group, , drop = FALSE]
+      x_range <- if (isTRUE(fullrange)) x_global else range(this_data$x, na.rm = TRUE)
+
+      pred_data <- data.frame(
+        x = seq(x_range[1], x_range[2], length.out = n),
+        PANEL = this_panel,
+        group = this_group
+      )
+      pred_data$.lm_group <- factor(this_group, levels = levels(data$.lm_group))
+
+      for (aesthetic in aesthetic_cols) {
+        pred_data[[aesthetic]] <- this_data[[aesthetic]][1]
+      }
+
+      pred_data
+    })
+
+    pred_data <- do.call(rbind, grid)
+    pred <- stats::predict(fit, newdata = pred_data, se.fit = TRUE)
+    pred_data$y <- as.numeric(pred$fit)
+
+    if (isTRUE(se)) {
+      crit <- stats::qt((1 + level) / 2, df = stats::df.residual(fit))
+      pred_data$se <- as.numeric(pred$se.fit)
+      pred_data$ymin <- pred_data$y - crit * pred_data$se
+      pred_data$ymax <- pred_data$y + crit * pred_data$se
+    }
+
+    pred_data
+  }
+)
+geom_lm_smooth <- function (mapping = NULL, data = NULL, ..., interaction = FALSE, 
+    method = NULL, se = TRUE, level = 0.95, n = 100, fullrange = FALSE, 
+    na.rm = FALSE, show.legend = NA, inherit.aes = TRUE) 
+{
+    if (!is.null(method) && !identical(method, "lm")) {
+        warning("`geom_lm_smooth()` always uses linear models; ignoring `method = ", 
+            deparse(method), "`.", call. = FALSE)
+    }
+    if (isTRUE(interaction)) {
+        return(ggplot2::geom_smooth(mapping = mapping, data = data, 
+            method = "lm", formula = y ~ x, se = se, level = level, 
+            n = n, fullrange = fullrange, na.rm = na.rm, show.legend = show.legend, 
+            inherit.aes = inherit.aes, ...))
+    }
+    ggplot2::layer(data = data, mapping = mapping, stat = StatLmSmooth, 
+        geom = "smooth", position = "identity", show.legend = show.legend, 
+        inherit.aes = inherit.aes, params = list(se = se, level = level, 
+            n = n, fullrange = fullrange, na.rm = na.rm, ...))
+}
+
+
+StatLmMeans <- ggplot2::ggproto(
+  "StatLmMeans",
+  ggplot2::Stat,
+
+  required_aes = c("x", "y"),
+  extra_params = c("na.rm", "interaction", "se", "level"),
+
+  compute_layer = function(self, data, params, layout) {
+    interaction <- params$interaction %||% FALSE
+    se <- params$se %||% TRUE
+    level <- params$level %||% 0.95
+
+    group_var <- honest_plot_group_var(data)
+    needed <- c("x", "y", "PANEL", group_var)
+    keep <- stats::complete.cases(data[, needed, drop = FALSE])
+    data <- data[keep, , drop = FALSE]
+
+    if (nrow(data) == 0) {
+      return(data[0, , drop = FALSE])
+    }
+
+    same_partition <- function(a, b) {
+      a <- factor(a)
+      b <- factor(b)
+      nlevels(base::interaction(a, b, drop = TRUE)) == max(nlevels(a), nlevels(b))
+    }
+
+    x_levels <- sort(unique(data$x))
+    data$.lm_x <- factor(data$x, levels = x_levels)
+    x_has_multiple_levels <- length(x_levels) > 1
+
+    panel_levels <- unique(data$PANEL)
+    data$.lm_panel <- factor(data$PANEL, levels = panel_levels)
+    panel_has_multiple_levels <- nlevels(data$.lm_panel) > 1
+
+    group_has_multiple_levels <- FALSE
+    include_group <- FALSE
+    if (!is.null(group_var)) {
+      data$.lm_group <- factor(data[[group_var]], levels = unique(data[[group_var]]))
+      group_has_multiple_levels <- nlevels(data$.lm_group) > 1
+      include_group <- group_has_multiple_levels &&
+        !same_partition(data$.lm_group, data$.lm_x) &&
+        !(panel_has_multiple_levels && same_partition(data$.lm_group, data$.lm_panel))
+    }
+
+    include_panel <- panel_has_multiple_levels &&
+      !same_partition(data$.lm_panel, data$.lm_x) &&
+      !(include_group && same_partition(data$.lm_panel, data$.lm_group))
+
+    terms <- character(0)
+    if (x_has_multiple_levels) {
+      terms <- c(terms, ".lm_x")
+    }
+    if (include_group) {
+      terms <- c(terms, ".lm_group")
+    }
+    if (include_panel) {
+      terms <- c(terms, ".lm_panel")
+    }
+
+    formula <- if (length(terms) == 0) {
+      y ~ 1
+    } else if (isTRUE(interaction) && include_group && x_has_multiple_levels) {
+      stats::as.formula(paste("y ~", paste(c(".lm_x * .lm_group", setdiff(terms, c(".lm_x", ".lm_group"))), collapse = " + ")))
+    } else {
+      stats::as.formula(paste("y ~", paste(terms, collapse = " + ")))
+    }
+    fit <- stats::lm(formula, data = data)
+
+    combo_cols <- c("PANEL", "x", group_var)
+    combos <- unique(data[, combo_cols, drop = FALSE])
+    combos <- combos[order(combos$PANEL, combos$x), , drop = FALSE]
+
+    pred_data <- combos
+    pred_data$.lm_x <- factor(pred_data$x, levels = levels(data$.lm_x))
+    pred_data$.lm_panel <- factor(pred_data$PANEL, levels = levels(data$.lm_panel))
+    if (!is.null(group_var)) {
+      pred_data$.lm_group <- factor(pred_data[[group_var]], levels = levels(data$.lm_group))
+    }
+
+    group_inputs <- pred_data[, combo_cols, drop = FALSE]
+    pred_data$group <- as.integer(do.call(base::interaction, c(group_inputs, drop = TRUE)))
+
+    pred <- stats::predict(fit, newdata = pred_data, se.fit = TRUE)
+    pred_data$y <- as.numeric(pred$fit)
+
+    if (isTRUE(se)) {
+      crit <- stats::qt((1 + level) / 2, df = stats::df.residual(fit))
+      pred_data$se <- as.numeric(pred$se.fit)
+      pred_data$ymin <- pred_data$y - crit * pred_data$se
+      pred_data$ymax <- pred_data$y + crit * pred_data$se
+    }
+
+    aesthetic_cols <- intersect(
+      c("colour", "color", "fill", "alpha", "linetype", "linewidth", "size", "shape"),
+      names(data)
+    )
+
+    for (aesthetic in aesthetic_cols) {
+      if (!is.null(group_var) && identical(aesthetic, group_var)) {
+        next
+      }
+
+      pred_data[[aesthetic]] <- vapply(
+        seq_len(nrow(pred_data)),
+        function(i) {
+          rows <- data$PANEL == pred_data$PANEL[i] & data$x == pred_data$x[i]
+          if (!is.null(group_var)) {
+            rows <- rows & data[[group_var]] == pred_data[[group_var]][i]
+          }
+          data[[aesthetic]][which(rows)[1]]
+        },
+        data[[aesthetic]][1]
+      )
+    }
+
+    pred_data
+  }
+)
+
+
+stat_lm_means <- function(mapping = NULL,
+                          data = NULL,
+                          geom = "pointrange",
+                          position = "identity",
+                          ...,
+                          interaction = FALSE,
+                          se = TRUE,
+                          level = 0.95,
+                          na.rm = FALSE,
+                          show.legend = NA,
+                          inherit.aes = TRUE) {
+  ggplot2::layer(
+    data = data,
+    mapping = mapping,
+    stat = StatLmMeans,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      interaction = interaction,
+      se = se,
+      level = level,
+      na.rm = na.rm,
+      ...
+    )
+  )
+}
+
+partial_r2 <- function(model, details = FALSE) {
+  if (!inherits(model, "lm")) {
+    stop("`model` must be an `lm` or `honest_lm` object.", call. = FALSE)
+  }
+
+  details <- isTRUE(details)
+  term_labels <- attr(stats::terms(model), "term.labels")
+
+  if (length(term_labels) == 0) {
+    stop("`model` must contain at least one model term.", call. = FALSE)
+  }
+
+  lm_model <- model
+  class(lm_model) <- setdiff(class(lm_model), "honest_lm")
+
+  drop_table <- stats::drop1(lm_model, test = "F")
+  drop_df <- as.data.frame(drop_table)
+  drop_df$term <- row.names(drop_df)
+  drop_df <- drop_df[drop_df$term != "<none>", , drop = FALSE]
+  drop_df <- drop_df[!is.na(drop_df$Df) & drop_df$Df > 0, , drop = FALSE]
+
+  ss_full_error <- stats::deviance(lm_model)
+  ss_reduced_error <- drop_df$RSS
+  delta_ss <- drop_df[["Sum of Sq"]]
+
+  partial <- delta_ss / ss_reduced_error
+  f2 <- delta_ss / ss_full_error
+
+  out <- tibble::tibble(
+    term = drop_df$term,
+    df = drop_df$Df,
+    partial_r2 = as.numeric(partial),
+    f2 = as.numeric(f2)
+  )
+
+  if (details) {
+    out$statistic <- as.numeric(drop_df[["F value"]])
+    out$p_value <- as.numeric(drop_df[["Pr(>F)"]])
+    out$ss_full_error <- rep(ss_full_error, nrow(out))
+    out$ss_reduced_error <- as.numeric(ss_reduced_error)
+    out$delta_ss <- as.numeric(delta_ss)
+  }
+
+  out
+}
+
+
+data(penguins, package = "datasets")
+penguins <- penguins |>
+  filter(!is.na(sex),!is.na(body_mass),!is.na(flipper_len), !is.na(species))
+
+penguin_additive_model    <- lm(body_mass ~ sex + species, data = penguins)
+penguin_interaction_model <- lm(body_mass ~ sex + species + sex:species, data = penguins)
+```
+
+
+
+
+Links to: [Summary](#interaction_summary_chapter-summary). [Questions](#interaction_summary_practice-questions). [Glossary](#interaction_summary_glossary-of-terms). [R functions](#interaction_summary_key-r-functions). [R packages](#interaction_summary_r-packages-introduced). [More resources](#interaction_summary_additional-resources).
+
+---
+
+## Chapter summary {#interaction_summary_chapter-summary}
+
+Sometimes the impact of changing one variable depends on the value of another. Such statistical interactions can both illuminate biological processes and complicate stiatical analyses and interpretation. This chapter explains the best practices when modelling statistical interactions. I then show how we can think of an interaction of a variable with itself as a polynomial regression. This section serves to show that "linear models" can fit curved data.
+
+## Practice Questions {#interaction_summary_practice-questions}
+
+Try these questions using the penguins data.
+
+### Setup
+
+```{r, echo=FALSE}
+#| message: false
+#| warning: false
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(broom)
+library(car)
+library(emmeans)
+library(honestlm)
+library(modelbased)
+data(penguins, package = "datasets")
+penguins <- penguins |>
+  filter(!is.na(sex),!is.na(body_mass),!is.na(flipper_len), !is.na(species))
+
+penguin_model <- lm(body_mass ~ sex + species + sex : species, data = penguins)
+```
+
+```{r}
+#| column: page-right
+penguin_additive_model    <- lm(body_mass ~ sex + species, data = penguins)
+penguin_interaction_model <- lm(body_mass ~ sex + species + sex:species, data = penguins)
+```
+
+:::exercises
+
+**Q1)** The `sex:species` interaction in `penguin_interaction_model` asks whether `r longmcq(c( "Male penguins are heavier than female penguins.",  "Penguin species differ in average body mass.", answer = "The male-female difference in body mass differs among species.",   "The proportion of males and females differs among species."))`
+
+:::
+
+----
+
+#### Consider the coefficients from the models
+
+##### **Additive model**
+
+```{webr-r}
+# Additive model math here
+# Female Gentoo
+# Male Gentoo
+```
+
+
+```{r}
+#| eval: false
+# **Additive model**
+coef(penguin_additive_model)
+```
+
+```{r}
+#| echo: false
+#| column: page-right
+coef(penguin_additive_model) |> 
+  round() |> 
+  t() |> 
+  kable()
+```
+
+
+
+:::exercises
+
+**Q2)** For the additive model, predict the mean body mass of a **Female Gentoo penguin**: $\widehat{Y}_{\text{female Gentoo}}$ = `r fitb(4750)`
+
+**Q3)** For the additive model, predict the mean body mass of a **Male Gentoo penguin**: $\widehat{Y}_{\text{male Gentoo}}$ = `r fitb(5418)`
+
+:::
+
+---
+
+##### **Interaction model**
+
+```{webr-r}
+# Interaction model math here
+# Female Gentoo
+# Male Gentoo
+```
+
+```{r}
+#| echo: false
+#| column: page-right
+coef(penguin_interaction_model) |> 
+  round() |> 
+  t() |> 
+  kable()
+```
+
+
+:::exercises
+
+**Q4)** For the interaction model, predict the mean body mass of a **Female Gentoo penguin**: $\widehat{Y}_{\text{female Gentoo}}$ = `r fitb(4680)`
+
+**Q5)** For the interaction model, predict the mean body mass of a **Male Gentoo penguin**: $\widehat{Y}_{\text{male Gentoo}}$ = `r fitb( 5485)`
+:::
+
+---
+
+### Visualizing the interaction
+
+```{r}
+#| echo: false
+#| fig-height: 2.8
+#| label: fig-intq
+#| fig-cap: "Body mass by sex and species in the penguins data. Points show observed penguins. Large points show group means."
+#| fig-alt: "A plot of penguin body mass by sex, with separate colors for species. Points show individual penguins and larger points show group means."
+penguins |>
+  ggplot(aes(x = sex, y = body_mass, color = species)) +
+  geom_jitter(width = 0.12, alpha = 0.45) +
+  stat_summary(fun = mean, geom = "point", size = 5, aes(group = 1), color = "black", alpha = .3) +
+  stat_summary(fun = mean, geom = "line", aes(group = 1), color = "black", linetype = 2) +
+  labs(
+    x = "Sex",
+    y = "Body mass (g)",
+    color = "Species"
+  )+
+  facet_wrap(~species, nrow = 1)+
+  theme(legend.position = "none")
+```
+
+:::exercises
+
+**Q6)** Which aspect of @fig-intq suggests an interaction between sex and species? `r longmcq(c("That body mass differs by species.","That body mass differs by sex, i.e. the line connecting male and female means has a non-zero slope.",  answer = "That the line connecting male and female means is steeper for Gentoo penguins than for Adelie and Chinstrap penguins.","Such plots do not convey information about interactions."))`
+:::
+
+---
+
+### Testing the interaction
+
+```{r}
+library(car)
+Anova(penguin_interaction_model, type = "II")
+```
+
+:::exercises
+
+**Q7)** Why did we use `car::Anova()` rather than base R's `anova()` here? `r longmcq(c(    answer = "Because base Rs anova() uses sequential Type I sums of squares, so results can depend on the order of terms in the model.","Because base R cannot fit models with interactions.",  "Because anova() assumes that residuals are normally distributed.", "Because car::Anova() proves that the interaction is causal."))`
+
+**Q8)** The small p-value for `sex:species` means we reject the null that `r longmcq(c(  "Male and female penguins have the same average body mass.",  "All penguin species have the same average body mass.", "Sex and species are independent.", answer = "The sex difference in body-mass is identical across species."))`
+
+:::
+
+---
+
+#### Consider summary() output
+
+```{r}
+summary(penguin_interaction_model)
+```
+
+
+:::exercises
+
+**Q9)** Consider the `(Intercept)` p-value.   
+
+- **Q9.A)** This tests the null hypothesis that `r longmcq(c(  answer = "The mean body mass of female Adelie penguins is zero.",  "The mean body mass of all penguins is zero.",  "Sex has no association with body mass.",  "Species has no association with body mass."))`      
+- **Q9.B)** This test is silly because `r longmcq(c(  "Female Adelie penguins are not the reference group.",  answer = "We already know penguins do not have an average body mass of zero grams.",  "Intercepts cannot be estimated in models with interactions.",  "A small intercept p-value means the model is wrong."))`. 
+
+**Q10)** Why should we be cautious about interpreting the *speciesChinstrap* p-value from *summary(penguin_interaction_model)*? **NOTE:** *Find all correct answers* `r longmcq(c(answer = "It is only one reference-level comparison, not a test of the whole species term.",answer = "Main effects require extra care when interactions are in the model.",answer = "It does not account for the fact that we might make multiple species comparisons.","Because Chinstrap penguins were randomly assigned to species."))`
+
+`r hide("Answer")`
+
+All but the final answer are correct. 
+
+`r unhide()`
+
+
+
+:::
+
+---
+
+### emmeans output
+
+Consider the following output from `emmeans()` (I know we used model based but i like the warnings emmeans provides). 
+
+```{r}
+#| eval: false
+emmeans(penguin_interaction_model, pairwise ~ sex)
+```
+
+```{r}
+#| echo: false
+emmeans(penguin_interaction_model, pairwise ~ sex)$contrasts
+```
+
+
+```{r}
+#| eval: false
+emmeans(penguin_interaction_model, pairwise ~ species)
+```
+
+```{r}
+#| echo: false
+emmeans(penguin_interaction_model, pairwise ~ species)$contrasts
+```
+
+:::exercises
+
+**Q11)** Why does *emmeans()* warn that the sex comparison "may be misleading due to involvement in interactions"? `r longmcq(c(  "Because sex cannot be included in a model with species.", "Because the sex effect is not statistically significant.",  answer = "Because the estimated sex difference is averaged over species, even though the sex difference differs somewhat among species.",  "Because emmeans() cannot calculate contrasts for categorical variables."))`
+
+**Q12)** With the caveat above in mind, is it reasonable to say that males are heavier than females? `r longmcq(c("No, because any interaction makes main effects meaningless.",  answer = "Yes, but we should also say that the size of the male-female difference varies among species.",  "Yes, and the interaction means the male-female difference is exactly the same in every species.",  "No, because female Gentoo penguins have a greater body mass than male chinstrap penguins."))`
+
+**Q13)** The *female - male* contrast from *emmeans(penguin_interaction_model, pairwise ~ sex)* estimates `r longmcq(c("The sex difference for reference group (Adelie penguins) only.", answer = "The sex difference averaged over species.", "The sex:species interaction term."))`
+
+**Q16)** Why does the non-significant *Adelie - Chinstrap* contrast from *emmeans(..., pairwise ~ species)* differ from the significant *speciesChinstrap* p-value in *summary(penguin_interaction_model)*? (**NOTE:** *Find the two correct answers*) `r longmcq(c(  answer = "The emmeans() contrast compares Adelie and Chinstrap averaged over sex, while speciesChinstrap compares female Chinstrap to female Adelie.",  "The emmeans() contrast tests sex, while speciesChinstrap tests body mass.", answer = "The emmeans() p-value is adjusted by Tukey's method, while the speciesChinstrap p-value is not.", "They are the same test, so one of them must be wrong.", "Sampling error - these values are influence by chance."))`
+
+**Q17)** **Q)** Which of the following are linear models? `r longmcq(c("Modeling blood glucose in lizards kept at warm vs. cool temperatures.",  "Modeling algal growth as a function of nutrient concentration allowing for a hump or trough in this relationship.", "Modeling tadpole growth as a function of pond after adjusting for initial body size.", "Modelling the didferent effect of fertilizer on plant height in wet and dry soil.", "Modeling (log-transformed) metabolic rate as a function of (log-transformed) body mass.", answer = "All of the above."))`
+
+:::
+
+
+## Glossary of Terms {#interaction_summary_glossary-of-terms}
+
+
+:::glossary
+
+- **Statistical interaction**: A pattern in a model where the association between one explanatory variable and the response depends on another explanatory variable.
+
+- **Biological interaction**: A situation where two biological factors combine in a way that changes the outcome, such that their joint effect is not simply the sum of their separate effects.
+
+- **Interaction term**: The part of a model that allows the effect of one explanatory variable to depend on another explanatory variable, such as `sex:species` or `petal_area_mm:petal_color`.
+
+- **Additive model**: A model where explanatory variables contribute separately to the prediction. In an additive model, the model adds the effects of each predictor but does not let one predictor change the effect of another.
+
+- **Main effect**: The association between one explanatory variable and the response, apart from any interaction terms. In models with interactions, main effects often require extra care.
+
+- **Partial R²**: The proportion of remaining variation in the response associated with a model term after accounting for the other terms in the model.
+
+- **Polynomial regression**: A regression model that includes powers of a predictor, such as `x` and `x^2`, to describe curved relationships.
+
+- **Quadratic term**: A squared predictor, such as `I(x^2)`, used to model curvature.
+:::
+
+## Key R Functions {#interaction_summary_key-r-functions}
+
+
+:::functions
+
+- `lm(y ~ x1 * x2, data = data)` fits a model with the main effects of `x1` and `x2`, plus their interaction.
+
+- `lm(y ~ x1 + x2 + x1:x2, data = data)` fits the same interaction model, but writes the interaction term explicitly.
+
+- `:` specifies an interaction term between predictors in a model formula.
+
+- `*` expands to main effects plus their interaction. For example, `x1 * x2` means `x1 + x2 + x1:x2`.
+
+
+- `I(x^2)` tells R to include the squared value of `x` in a model formula.
+
+- `poly(x, degree = 2)` includes polynomial terms for `x`, often used for quadratic or higher-order relationships.
+
+- `car::Anova(model, type = "II")` gives Type II term-level tests.
+
+- `car::Anova(model, type = "III")` gives Type III term-level tests, often used when interpreting models with interactions.
+
+- `emmeans::emmeans(model, pairwise ~ x)` estimates marginal means and pairwise contrasts for `x`.
+
+- `emmeans::emmeans(model, pairwise ~ x | z)` estimates pairwise contrasts for `x` separately within levels of `z`.
+
+- `emmeans::contrast(...)` tests specific contrasts among estimated means.
+
+- `modelbased::estimate_means(model, by = ...)` estimates model-based means or predictions.
+
+- `modelbased::estimate_slopes(model, trend = ..., by = ...)` estimates slopes within levels or values of another predictor.
+
+- `geom_smooth(method = "lm")` plots fitted linear-model relationships, including separate fitted lines when data are grouped.
+:::
+
+## R Packages Introduced {#interaction_summary_r-packages-introduced}
+
+:::packages
+
+
+- [`modelbased`](https://easystats.github.io/modelbased/): Estimates model-based predictions, means, contrasts, and slopes. Useful here for turning interaction models into interpretable quantities.
+
+- [`emmeans`](https://rvlenth.github.io/emmeans/): Estimates marginal means and contrasts. Useful for comparing groups, especially when interactions make raw coefficients hard to read.
+
+- [`honestlm`](https://yanivjb.github.io/honestlm/): Provides helper functions for teaching and visualizing linear models, including interaction-friendly model plots and partial $R^2$.
+
+- [`car`](https://cran.r-project.org/package=car): Provides `Anova()`, which we use for Type II and Type III term-level tests.
+
+:::
+
+
+## Additional resources {#interaction_summary_additional-resources}
+
+:::learnmore
+- [Interactions in factorial designs](https://www.carlislerainey.com/powerrules/articles/interactions.html), by Carlisle Rainey.Describes why interactions are hard to estimate and why studies often have less power for interactions than for main effects, and has an accompanying R packge.
+
+- [You need 16 times the sample size to estimate an interaction than to estimate a main effect, explained](https://statmodeling.stat.columbia.edu/2023/11/09/you-need-16-times-the-sample-size-to-estimate-an-interaction-than-to-estimate-a-main-effect-explained/), by Andrew Gelman.
+
+- [Interaction Effects](https://online.stat.psu.edu/stat462/node/165/): A brief introduction from Penn State's Stat462 site. I like these guys.
+
+- [Interaction variables](https://www.youtube.com/watch?v=tC6DW6OPUzM). A youtube video from [Nathan Wozny]( https://www.usafa.edu/facultyprofile/?smid=10980)
+
+:::
+
+
+
+::: aside
+.
+:::
+

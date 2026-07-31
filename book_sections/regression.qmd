@@ -172,14 +172,15 @@ gc_rils|>
 
 
  
+A linear regression circumvents these issues by directly modeling the response variable as a function of the numeric explanatory variable (@fig-regression). Thus, each observation gets its own prediction, and the petal-area term uses only one degree of freedom: the slope (Table 3). As a result, we have both a slightly greater model sum of squares than the categorical case, and a much larger model mean square, so we now strongly reject the null hypothesis (Table 4)!
+
+
 ```{r}
 #| echo: false
 #| column: margin 
 linear_model <- lm(prop_hybrid ~ petal_area_mm, data = gc_rils)
 coef(linear_model)|>data.frame(row.names = c("(Intercept)","petal_area_mm"))|> kable(digits = 5,caption = "Table 3) Model coefficients for linear regression.")
 ```
-
-A linear regression circumvents these issues by directly modeling the response variable as a function of the numeric explanatory variable (@fig-regression). Thus, each observation gets its own prediction, and the petal-area term uses only one degree of freedom: the slope (Table 3). As a result, we have both a slightly greater model sum of squares than the categorical case, and a much larger model mean square, so we now strongly reject the null hypothesis (Table 4)!
 
 
 ```{r}
@@ -198,12 +199,6 @@ anova(linear_model)|> kable(digits = 4, caption = "Table 4) Anova table for line
 )
 ```
 
-
-
-## What's Ahead
-
-
-In this chapter we will consider linear regression
 
 ## What's ahead
 
