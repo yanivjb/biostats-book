@@ -1,0 +1,72 @@
+## Study Design, "What do you want to know?" Section (Tutor Knowledge Base)
+
+**Context:**
+This section introduces the chapter's central idea: before asking how to analyze data, researchers must ask what question they want the study to answer. The section distinguishes scientific models from statistical models and uses the Clarkia petal-size and hybridization study to show how a biological hypothesis becomes a set of design decisions.
+
+---
+
+### Learning Goals
+
+By the end of this section, students should be able to:
+
+1. Distinguish a scientific model from a statistical model.
+2. Explain why statistical models do not automatically answer biological questions.
+3. Translate a scientific question into concrete design choices.
+4. Identify the separate design decisions of who to measure, what to measure, where to measure, how many replicates to include, and what assignment or comparison is possible.
+5. Recognize that a study does not need a perfect statistical plan before it begins, but it does need a viable path from design to analysis.
+
+---
+
+### Key Concepts and Definitions
+
+* **Scientific model:** A simplified understanding of how the world works, grounded in biology or another science. It explains observations and makes predictions.
+* **Statistical model:** A mathematical description of patterns in data. It knows nothing about biology unless the researcher designs the study and interprets the model in biological context.
+* **Study design:** The set of decisions made before analysis: what population or units enter the study, what gets measured, where and when measurements happen, how treatments or comparisons are created, and how much replication is needed.
+* **Response variable:** The outcome the study tries to explain. In the Clarkia RIL example, this is the proportion of hybrid seeds.
+* **Explanatory variable:** The predictor or feature used to explain the response. In the Clarkia example, this includes petal area, with petal color, location, and other traits also relevant.
+
+---
+
+### Conceptual Takeaways
+
+* The first design question is not "what test should I run?" It is "what do I want to know?"
+* A statistical model can describe a pattern, but the study design determines whether the pattern addresses the scientific question.
+* Biological hypotheses often need to be sharpened into measurable variables and fair comparisons.
+* Design choices are compromises. The goal is not perfection, but a design good enough to inform the question.
+* It is acceptable to know that future tools, such as multiple regression or mixed-effect models, will be needed, as long as the study has a viable analysis path.
+
+---
+
+### Figures in This Section
+
+* **Statistician in the room tweet:** Use this to anchor the central tutor question: "What question are you trying to answer?"
+* **Holliday junction figure:** Panel A is a scientific model of a biological process. Panel B is a statistical model describing observed frequencies. Use this to help students separate biological explanation from statistical description.
+* **Clarkia petal-size motivation figure:** Petal size differs between sympatric and allopatric parviflora populations. This motivates the biological hypothesis that smaller parviflora flowers might reduce hybridization.
+
+---
+
+### Notes for Tutor Responses
+
+If a student asks why scientific and statistical models are different, do not start with a long definition. Try:
+
+> What is each model trying to do: explain how biology works, or summarize patterns in data?
+
+If a student asks whether the RIL study proves petal area causes hybridization, guide them toward the design limitation:
+
+> What would need to be randomly assigned for that causal claim to be clean?
+
+---
+
+### Common Student Confusions
+
+* Thinking a statistical model is automatically a scientific explanation.
+* Thinking a significant slope proves the biological mechanism.
+* Treating "what to measure" as obvious rather than as a design decision.
+* Forgetting that proxies, locations, replicates, and units all shape the claim.
+* Thinking a study must be perfect before it is worth doing.
+
+---
+
+### Tutor Guidance
+
+Keep returning to the sentence: "What claim can this design support?" Help students name the claim, then inspect whether the measured variables and comparison structure actually support it.

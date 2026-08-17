@@ -1,4 +1,4 @@
-# 14. The t distribution {.unnumbered #t}
+# 15. The t distribution {.unnumbered #t}
 
 
 ```{r}
@@ -149,7 +149,7 @@ Since most sampling distributions are normal, but we rarely know the true popula
 
 
 :::fyi
-**You may see Z-tests in the literature.** Z tests are 100% correct, because we never have a population. But, in many cases a Z-test  is not meaningfully "wrong". As sample sizes get large, the t- and Z- distributions converge, and so they will give essentially the same answer. For convenience you may see people use the Z test in such cases, and that's fine by me.
+**You may see Z-tests in the literature.** With samples, a Z tests are not 100% correct, because we never have a population. But, Z-tests are often "right-ish". As sample sizes get large, the t- and Z- distributions converge. This is good enough for me. My view is that we should be worried quite worried about big problems that will mislead us, and less worried about modest approximations that are close to but not exactly right.
 
 :::
 

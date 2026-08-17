@@ -90,7 +90,6 @@ include_graphics("../../figs/stats_foundations/sampling/gc_hz2.png")
 
 
 Imagine we were driving along the main road and stopped when we saw a large patch of *Clarkia* plants, roughly in the "zoomed in" region of @fig-gcmap. If we collected all of those plants, we would mistakenly conclude that the population was roughly 1/4 hybrid, 1/4 *xantiana*, and 1/2 *parviflora*. In fact, the population is roughly 85% *xantiana*, 10% *parviflora*, and 5% hybrid. It's not clear if this bias is due to luck (the hybrids and *parviflora*) just happen to be near the road, or something more predictable (e.g. hybrids and *parviflora*) do better in roadsides, it is clear that limiting our sample to the roadside would skew our view of the population. 
-Of course. Here is an edited version of that section.
 
 
 

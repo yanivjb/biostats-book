@@ -1,4 +1,4 @@
-# 13. Normal distribution {.unnumbered #normal}
+# 14. Normal distribution {.unnumbered #normal}
 
 
 ```{r}
@@ -138,4 +138,4 @@ Here is how we will wind through the normal distribution and learn a few other t
 We conclude, as always, with a chapter summary.
 
 
-If you want even more, I include an optoinal chapter on [simulating data from a normal distribution](#noRmal) to verify the mathematical properties of the normal to build a deeper intuition for the sampling process.
+If you want even more, I include an optional section chapter on [simulating data from a normal distribution](#noRmal) to verify the mathematical properties of the normal to build a deeper intuition for the sampling process.

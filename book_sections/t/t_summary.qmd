@@ -1,4 +1,4 @@
-## • 14. t Summary {.unnumbered #t_summary}
+## • 15. t Summary {.unnumbered #t_summary}
 
 ```{webr-r}
 #| context: setup
@@ -337,7 +337,7 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
 * **Degrees of Freedom (df)**: The number of independent values in a calculation that are free to vary. For a one-sample t-test, $df = n-1$.
 * **Critical Value ($t\_{\alpha/2, df}$)**: The cutoff from the t-distribution that marks the boundary for rejecting the null hypothesis at a chosen significance level $\alpha$.
 * **Effect Size**: A quantitative measure of the magnitude of a phenomenon; here it describes how far the sample mean is from the null hypothesis mean, in standardized units.
-    * **Cohen’s d**: A standardized effect size calculated as the mean difference divided by the sample standard deviation, $d = (\bar{x} - \mu\_0)/s$.
+    * **Cohen’s d**: A standardized effect size calculated as the mean difference divided by the sample standard deviation, $d = (\bar{x} - \mu_0)/s$.
 * **t-value**: The distance in estimated standard errors between a sample estimate of the mean $\bar{x}$, and its hypothesized value under the null hypothesis, $\mu_0$.    
     - *t* is  calculated as $\frac{\bar{x} - \mu_0}{s_\bar{x}}$, where $s_\bar{x}$ is the estimate of the standard error (below). 
     - *t* is the test statistic for a t-test.    

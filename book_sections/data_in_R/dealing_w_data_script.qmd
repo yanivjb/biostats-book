@@ -18,7 +18,7 @@ I used the following functions to handle the data (let's not focus on the ggplot
 - [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html). In the [`dplyr`](https://dplyr.tidyverse.org/) package. Adds or modifies a column.      
 - [`ifelse()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ifelse.html). In base R. This is a bonus function that you don't NEED to know now, but it is helpful! It allows you to do different things based on the output of a logical question. In  this case, I used it to have the values of `visited` equal `visited` if there are nonzero pollinator visits, and `not visited` if there are zero visits.. This gives us better x-labels than `TRUE` / `FALSE`.    
 - [`filter()`](https://dplyr.tidyverse.org/reference/filter.html). In the [`dplyr`](https://dplyr.tidyverse.org/) package. Allows you to choose rows to retain based on their values in  a column. Because there is another `filter()`  function,  always specify that you want dplyr's filter. You can do this by:   
-   - Using the [`conflict_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) function in the [`conflicted`](https://conflicted.r-lib.org/) package: `conflict_prefer("filter", winner = "dplyr")`.  OR
+   - Using the [`conflicts_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) function in the [`conflicted`](https://conflicted.r-lib.org/) package: `conflicts_prefer("filter", winner = "dplyr")`.  OR
    - Using the package::function() convention: `dplyr::filter()`.  
 
 ### Reproducible script   
@@ -40,7 +40,8 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(conflicted)
-conflict_prefer("filter", winner = "dplyr") # Prefer dplyr's filter function.
+conflicts_prefer(dplyr::filter) # Prefer dplyr's filter function.
+
 
 ###--------------------------
 ### Load data

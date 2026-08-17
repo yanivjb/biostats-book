@@ -50,7 +50,18 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_twocat.pn
 
 ### Categorical explanatory and response variables 
 
-Above, we saw that most plants received no visits, so we might prefer to compare the proportion of plants that did and did not receive a visit from a pollinator by some explanatory variable (e.g. petal color or location). Recall that we have added the logical variable, `visited`, by typing  `mutate(visited = mean_visits > 0)`.  
+Above, we saw that most plants received no visits, so we might prefer to compare the proportion of plants that did and did not receive a visit from a pollinator by some explanatory variable (e.g. petal color or location). 
+
+Removing plants without a know petal color and changing visits from a number to  yes/no requires tricks we will learn in the chapter on [dealing with data in R](#data_in_R). In the hidden code below, I used these tricks, to make the object, `ril_data_binary`. Unroll the box below to see how
+
+```{r}
+#| code-fold: true
+ril_data_binary <- ril_data |> 
+    filter(!is.na(petal_color), !is.na(mean_visits))|>
+    mutate(visited = mean_visits >0)
+```
+
+
 
 
 
@@ -79,9 +90,7 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/two_categoricals.png")
 ```{r}
 #| message: false
 #| warning: false
-ril_data |> 
-    filter(!is.na(petal_color), !is.na(mean_visits))|>
-    mutate(visited = mean_visits >0)|>
+ril_data_binary |>
   ggplot(aes(x = petal_color, fill = visited))+
   geom_bar()
 ```
@@ -98,9 +107,7 @@ ril_data |>
 ```{r}
 #| message: false
 #| warning: false
-ril_data |> 
-    filter(!is.na(petal_color), !is.na(mean_visits))|>
-    mutate(visited = mean_visits >0)|>
+ril_data_binary |>
   ggplot(aes(x = petal_color, fill = visited))+
   geom_bar(position = "dodge")
 ```
@@ -122,12 +129,11 @@ If you had aggregated data, like that below. We need to plot these data somewhat
 #| echo: false
 #| code-fold: true
 #| code-summary:  "Show code to make the tibble,  aggregated_pollinator_obs."
-aggregated_pollinator_obs <- ril_data |> 
-    filter(!is.na(petal_color), !is.na(mean_visits))|>
-    mutate(visited = mean_visits >0)|>
+aggregated_pollinator_obs <- ril_data_binary |>
     group_by(location, petal_color, visited)|>
     tally()
 ```
+
 ```{r}
 #| echo: false
 kable(aggregated_pollinator_obs )

@@ -1,4 +1,4 @@
-## • 18. Regression: a linear model {.unnumbered #regression_linear_model}
+## • 19. Regression: a linear model {.unnumbered #regression_linear_model}
 
 
 ```{r}

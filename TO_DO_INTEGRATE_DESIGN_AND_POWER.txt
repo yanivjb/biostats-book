@@ -1,0 +1,233 @@
+Yes. I’d write it up as a recurring design insert for the t-test / ANOVA chapters, something like this:
+
+**TODO: Add Design Aside To t-Test And ANOVA Chapters**
+
+Add a short “Design check” aside to the two-sample t-test, paired t-test, and ANOVA chapters using petal color as the running example.
+
+Core framing:
+
+Right now, our Clarkia petal-color examples are observational. We tried to mix up traits through the RIL design, but we did not fully randomize petal color itself. So when we compare pink and white flowers, the model can describe an association between petal color and the response, but it cannot by itself prove that petal color caused the difference.
+
+Then ask: what would the stronger experimental version look like?
+
+Example experimental framing:
+
+Imagine we used CRISPR/genetic engineering to turn some flowers white. Now petal color is experimentally manipulated rather than simply observed. That changes what different models mean.
+
+**Paired t-test design**
+
+Compare a pink flower and a CRISPR-made white flower from the same family/genetic background.
+
+Statistical idea:
+Use a paired t-test, or equivalently a one-sample t-test on within-family differences.
+
+Design idea:
+The family/genetic background is held constant, so the comparison focuses more directly on the effect of changing petal color.
+
+Model intuition:
+
+```r
+t.test(white_minus_pink)
+```
+
+or
+
+```r
+t.test(response_white, response_pink, paired = TRUE)
+```
+
+Teaching point:
+Pairing is a design choice that removes family-to-family variation from the comparison.
+
+**Two-sample t-test design**
+
+Compare CRISPR-made white flowers from some families to pink flowers from different families.
+
+Statistical idea:
+Use a two-sample t-test.
+
+Design issue:
+This is weaker than the paired design because petal color is now tangled up with family/genetic background unless families were randomly assigned to treatment.
+
+Teaching point:
+A two-sample t-test can compare two means, but the design determines whether that difference is causal or just associated with other differences between groups.
+
+**ANOVA design**
+
+Compare three groups:
+
+1. Pink, unedited flowers.
+2. CRISPR-made white flowers.
+3. CRISPR control flowers.
+
+Possible control:
+A sham-edited or procedural-control group: flowers that went through the same transformation/editing process but did not have the petal-color-changing edit. Another possibility is a CRISPR edit at a neutral/safe locus, if biologically defensible.
+
+Statistical idea:
+Use ANOVA to compare more than two group means.
+
+Design idea:
+The control group helps separate the effect of whiteness from the effect of the CRISPR/editing procedure itself.
+
+Teaching point:
+ANOVA asks whether group means differ. Design tells us what those groups mean.
+
+Possible aside text:
+
+```qmd
+::: {.design-note}
+**Design check:** In our real Clarkia data, petal color is observed, not randomly assigned. So a t-test or ANOVA can tell us whether pink and white flowers differ, but not whether petal color itself caused the difference.
+
+An experimental version would be stronger. If we used CRISPR to make some flowers white, we could compare pink and CRISPR-white flowers. A paired design, comparing flowers from the same family, would control for family background. A two-sample design, comparing flowers from different families, would be weaker unless families were randomly assigned. An ANOVA could add a procedural CRISPR control, helping distinguish the effect of petal color from the effect of the editing procedure itself.
+
+The model estimates the difference. The design tells us what that difference can mean.
+:::
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I’d put most design notes on the **main page introducing each chapter**, with maybe **one dedicated page only where design is central enough to teach as a method**.
+
+So:
+
+**Main Chapter Intro Is Best For Most Cases**
+For t-tests, ANOVA, regression, multiple regression, interactions, etc., a short design note on the chapter intro page is perfect. That way students see the design question before they learn the model details:
+
+> This model can estimate a difference/slope/effect. But what the estimate means depends on how the data were generated.
+
+That is enough. Then later subpages can refer back to it lightly.
+
+Examples:
+- `t.qmd`: “What kind of comparison does a t-test make, and what design would make it causal?”
+- `two_ts.qmd`: “Two groups: treatment/control vs naturally occurring groups.”
+- `anova.qmd`: “More than two groups: are these treatments, sites, genotypes, batches, or observational categories?”
+- `regression.qmd`: “Is x assigned, measured, or confounded?”
+- `multiple_regression.qmd`: “Controls are not magic; they depend on design and causal structure.”
+- `interactions.qmd`: “Was the study designed to estimate different slopes/effects?”
+
+**Own Page Only For Multiple Regression**
+I’d consider a dedicated page in multiple regression, because blocking/controls/adjustment is not just a note. It is a core conceptual bridge:
+
+Possible page title:
+
+```qmd
+## Blocking, Controls, and Adjustment
+```
+
+This could sit early in Multiple Regression, maybe after the intro or after additive models. It would explain:
+
+- blocking as design
+- controls as model terms
+- adjustment as comparison “holding other variables constant”
+- why adding a variable can help, do nothing, or make things worse
+- why confounders are different from colliders/mediators, if you want a light causal-inference preview
+
+**My Recommendation**
+Use a two-tier structure:
+
+1. **Recurring intro-page design notes**: short, 1 box per model chapter.
+2. **One real page** in Multiple Regression: blocking, controls, and adjustment.
+
+That gives the idea a heartbeat through the book without bloating every chapter. The recurring phrase can be:
+
+> The model estimates the pattern. The design tells us what the pattern can mean.
+
+
+
+
+
+
+
+
+
+Yes: teach **both meanings of power/precision**, but be explicit that they answer different planning questions.
+
+I’d introduce it in Study Design as:
+
+> When we plan a study, we usually want one or both of two things: enough **power** to detect an effect we would care about if it exists, and enough **precision** to estimate the effect closely enough to be useful. Power is about rejecting a null. Precision is about how wide our uncertainty will be.
+
+That little distinction will save you pain later.
+
+**Where Power Should Reappear**
+Definitely:
+
+- **Study Design / 12a**: introduce power and precision as design goals.
+- **Uncertainty / Ch. 9**: precision lives here naturally. CI width, standard error, bootstrap spread.
+- **NHST / Ch. 10**: power as “probability of rejecting H0 when a real effect of some size exists.”
+- **One-sample t / Ch. 14-ish**: good first concrete power example. Smallest meaningful difference from a reference/null value.
+- **Two-sample t / Ch. 15**: strongest power chapter. Balance, group sizes, within-group variability, effect size.
+- **ANOVA / Ch. 17**: power cost of many groups, planned contrasts vs all pairwise comparisons, allocation across groups.
+- **Regression / Ch. 18**: power/precision for slope depends on N, residual noise, and spread in x.
+- **Multiple regression / Ch. 19**: power cost of extra predictors; collinearity inflates uncertainty.
+- **Interactions / Ch. 20**: must include it. Interactions are easy to hypothesize and hard to estimate. They need more data than main effects.
+- **Model Evaluation / Ch. 21**: underpowered studies can look “clean” only because they cannot see much; overfit models can look impressive while estimating noise.
+
+Maybe not:
+- **Getting started / ggplot / data in R / simple summaries**: no need, except very light “more data is not always better if biased.”
+- **Associations I/II**: optional. Could mention that sample size affects how stable an observed association is, but I wouldn’t make it a formal power note yet.
+- **Normal distribution**: skip or only mention as distribution machinery that supports later power calculations.
+
+**Power For What?**
+Use both, but give them different names:
+
+1. **Power to detect**
+   Question: If a biologically meaningful effect exists, how likely is this design to reject the null?
+
+   Example:
+   “If CRISPR-white flowers truly differ from pink flowers by 0.5 standard deviations, what sample size gives us 80% or 90% power to detect that?”
+
+2. **Precision to estimate**
+   Question: How close do we need our estimate to be?
+
+   Example:
+   “How many plants do we need so that the confidence interval around the mean difference is narrow enough to tell whether the effect is biologically important?”
+
+I’d make a note when introduced:
+
+```qmd
+::: {.design-note}
+**Power for what?** Researchers often say they want a study to have enough "power," but that can hide two different goals.
+
+If the goal is hypothesis testing, power means the probability that we reject the null when an effect of a specified size is really present.
+
+If the goal is estimation, the parallel question is precision: how narrow do we need the confidence interval to be for the estimate to be useful?
+
+Both goals require us to say what effect size would matter biologically. Statistics cannot choose that threshold for us.
+:::
+```
+
+**Best Placement**
+Put the main “Power for what?” note in **Study Design / 12a**.
+
+Then use chapter-specific mini-notes:
+
+- One-sample t: “difference from what value?”
+- Two-sample t: “difference between groups; balance matters”
+- ANOVA: “how many groups and which contrasts?”
+- Regression: “slope precision depends on spread in x”
+- Multiple regression: “controls cost degrees of freedom and collinearity costs precision”
+- Interactions: “interaction power is expensive”
+
+**My Strongest Recommendation**
+Do not make power feel like a p-value side quest. Make it a planning question:
+
+> What effect would matter, and what design would let us learn about it?
+
+That phrasing keeps power tied to biology instead of ritual.

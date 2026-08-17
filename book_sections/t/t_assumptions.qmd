@@ -1,4 +1,4 @@
-## • 14. Assumptions of t {.unnumbered #t_assumptions}
+## • 15. Assumptions of t {.unnumbered #t_assumptions}
 
 
 ```{r}
@@ -138,7 +138,7 @@ ggsave(plot = reveal_plot ,filename = "../../figs/linear_models/t/reveal.png",  
 - **Is the mean a meaningful summary of the data?** My sense is yes, but take a look and judge for yourself.
 
 
-- **Are the data independent?** I'm not sure about this. We see that some locations and some taxa appear more than once (@fig-nonindep). MThis suggests the data may not be fully independent. For example, what if there's something unique about low-elevation regions in the UK? This isn't necessarily a reason to stop the analysis, but it's worth considering.  
+- **Are the data independent?** I'm not sure about this. We see that some locations and some taxa appear more than once (@fig-nonindep). This suggests the data may not be fully independent. For example, what if there's something unique about low-elevation regions in the UK? This isn't necessarily a reason to stop the analysis, but it's worth considering.  
 
 ```{r}
 #| echo: false

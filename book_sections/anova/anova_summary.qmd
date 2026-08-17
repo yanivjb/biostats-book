@@ -1,4 +1,4 @@
-## • 17. ANOVA summary {.unnumbered #anova_summary}
+## • 18. ANOVA summary {.unnumbered #anova_summary}
 
 
 ---
@@ -465,10 +465,10 @@ Let’s hone in on the comparisons with `p.adj` $< 0.05$ (i.e., where we reject 
 
 :::packages
 
-- [`broom`]([`broom`](https://broom.tidymodels.org/index.html): A collections of functions to tidy the outputs of a linear model,  including; `tidy()`, `augment()`, and `glance()`.     
-- [`multcomp`](https://multcomp.r-forge.r-project.org/). A packge with numerous tools for multiple comparisons, including general linear hypothesis testing (`glht()`) and functions to generate significance groupings (`cld()`).    
+- [`broom`](https://broom.tidymodels.org/index.html): A collections of functions to tidy the outputs of a linear model,  including; `tidy()`, `augment()`, and `glance()`.     
+- [`multcomp`](https://multcomp.r-forge.r-project.org/). A package with numerous tools for multiple comparisons, including general linear hypothesis testing (`glht()`) and functions to generate significance groupings (`cld()`).    
 - [`rstatix`](https://rpkgs.datanovia.com/rstatix/)   A package for statistical tests, including post-hoc procedures like the Games–Howell test (`games_howell_test()`).     
-- [`Hmisc`](https://hbiostat.org/r/hmisc/): An R package with "miscellaneous" functions. In this chapter, it is used for` mean_cl_normal`, which works with `stat_summary()` to add means and confidence intervals to plots.    
+- [`Hmisc`](https://hbiostat.org/r/hmisc/): An R package with "miscellaneous" functions. In this chapter, it is used for `mean_cl_normal`, which works with `stat_summary()` to add means and confidence intervals to plots.    
 
 :::
 

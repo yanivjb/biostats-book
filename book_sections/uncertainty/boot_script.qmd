@@ -80,7 +80,7 @@ gc_rils %>%
     generate(reps = n_boots, type = "bootstrap")  |> 
     calculate(stat = "mean")|>
     summarise(se = sd(stat),
-            lower_ci = quantile(stat, probs = alpha /2,),
+            lower_ci = quantile(stat, probs = alpha /2),
             upper_ci = quantile(stat, probs = 1 - alpha /2))
 ```
 
@@ -103,7 +103,7 @@ gc_rils                                                          |>
   generate(reps = n_boots, type = "bootstrap")                   |>                   
   calculate(stat = "diff in means", order = c("pink", "white"))  |>
   summarise(se = sd(stat),
-            lower_ci = quantile(stat, probs = alpha /2,),
+            lower_ci = quantile(stat, probs = alpha /2),
             upper_ci = quantile(stat, probs = 1 - alpha /2))
 ```
 
@@ -125,6 +125,6 @@ gc_rils                                           |>
   generate(reps = n_boots, type = "bootstrap")    |>  # Bootstrapping
   calculate(stat = "slope")                       |>
   summarise(se = sd(stat),
-            lower_ci = quantile(stat, probs = alpha /2,),
+            lower_ci = quantile(stat, probs = alpha /2),
             upper_ci = quantile(stat, probs = 1 - alpha /2))
 ```

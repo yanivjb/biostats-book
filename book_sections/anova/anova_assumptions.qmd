@@ -1,4 +1,4 @@
-## •  17. ANOVA assumptions  {.unnumbered  #anova_assumptions}
+## •  18. ANOVA assumptions  {.unnumbered  #anova_assumptions}
 
 ---
 format: html

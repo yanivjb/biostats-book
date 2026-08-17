@@ -368,17 +368,12 @@ a+b+c
 
 
 
-:::exercises
-
-
-
 
 
 ```{=html}
-<iframe src="../../widget.html?prompt_id=cool-down-summarizing-differently-shaped-distributions-1757603403" width="100%" height="800" style="border:none;"></iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfqRimup5rEgtHN9kZ6lxFxVt8AOn-FwA1AvDi-okvk_d7InQ/viewform?usp=sharing&ouid=100526388399423353231" width="100%" height="800" style="border:none;"></iframe>
 ```
 
-:::
 
 ---
 

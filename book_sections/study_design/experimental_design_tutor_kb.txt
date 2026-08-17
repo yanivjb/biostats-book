@@ -1,0 +1,79 @@
+## Study Design, "Experimental Design" Section (Tutor Knowledge Base)
+
+**Context:**
+This section explains why experiments are powerful for causal inference, but only when they are designed well. It starts from the Clarkia RIL result: petal area is strongly associated with hybrid seed, but the study cannot cleanly prove petal area causes hybridization because petal area was not randomly assigned. The section then covers random assignment, confounds, experimental artifacts, placebo effects, regression to the mean, controls, blinding, and ecological validity.
+
+---
+
+### Learning Goals
+
+By the end of this section, students should be able to:
+
+1. Explain why statistical significance does not prove the favored causal story.
+2. Explain how random assignment rules out systematic confounding.
+3. Identify common sources of bias in experiments.
+4. Explain how controls, sham treatments, placebos, and blinding protect an experiment.
+5. Explain ecological validity and why experimental causation does not automatically imply real-world causation.
+6. Critically evaluate whether experimental results match the claims made about them.
+
+---
+
+### Key Concepts and Definitions
+
+* **Random assignment:** Assigning treatments to experimental units by chance. This makes treatment independent of other causes on average.
+* **Confound:** A third variable that could explain an association between explanatory and response variables.
+* **Experimental artifact:** A result caused by the manipulation procedure rather than the treatment of interest.
+* **Control:** A comparison condition used to separate the treatment effect from background change or other causes.
+* **Sham treatment / placebo:** A control that mimics the treatment process without the active treatment.
+* **Blinding:** Keeping subjects, researchers, or both from knowing treatment assignment to reduce expectation and measurement bias.
+* **Regression to the mean:** Extreme observations tend to be less extreme on remeasurement because part of their extremeness was noise.
+* **Ecological validity:** Whether the experimental treatment and setting resemble the real-world conditions the claim is meant to address.
+
+---
+
+### Conceptual Takeaways
+
+* Correlation does not necessarily imply causation, even when the correlation is statistically significant.
+* Experiments reveal causation by assigning the treatment, not merely by measuring variables carefully.
+* Random assignment handles confounds you did not think to measure.
+* Controls and blinding handle biases introduced by the manipulation, expectations, and measurement process.
+* A cause in an experiment is not automatically a cause in the real world.
+* Treatment dose, context, population, and multiple causes all matter for interpretation.
+
+---
+
+### Figures and Media in This Section
+
+* **Field-site admixture figure:** Pink-petaled parviflora often have more xantiana ancestry than white-petaled plants at the same site. Use this to discuss association and possible causal directions.
+* **Possible-cause diagram:** A could cause B, B could cause A, C could cause both, or the association could be a false positive. Use this as the default map for correlation vs causation questions.
+* **Radiolab placebo clip:** Use only if useful for placebo or known-treatment bias.
+
+---
+
+### Notes for Tutor Responses
+
+If a student says "the result was significant, so petal area causes hybridization," ask:
+
+> What was randomly assigned here: petal area itself, or where the RILs were planted?
+
+If a student asks why random assignment is special, try:
+
+> Does random assignment work by measuring every possible confound, or by making treatment independent of them on average?
+
+---
+
+### Common Student Confusions
+
+* Thinking significance proves causation.
+* Thinking a controlled-looking study is automatically a randomized experiment.
+* Confusing random placement in the field with random assignment of petal area.
+* Thinking a "do nothing" control is always enough.
+* Forgetting that subjects and experimenters can bias outcomes when they know treatments.
+* Thinking an extreme experimental dose answers a normal real-world exposure question.
+* Thinking evidence for one cause is evidence against all other causes.
+
+---
+
+### Tutor Guidance
+
+Be precise and a bit stubborn about causal language. Help students say "consistent with," "supports," or "suggests" when the design does not justify "causes."

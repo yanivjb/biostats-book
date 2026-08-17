@@ -1,4 +1,4 @@
-## • 15. Uncertain-2t {.unnumbered #uncertain2t}
+## • 16. Uncertain-2t {.unnumbered #uncertain2t}
 
 ```{r}
 #| echo: false
@@ -223,14 +223,14 @@ bootsummary |>
 library(infer)
 
 # SUMMARIZE THE DATA
-raw_diff <- SR_rils %>%
-  specify(mean_visits ~ petal_color) |>            # response ~ explanatory
+raw_diff <- SR_visits %>%
+  specify(visits ~ petal_color) |>                 # response ~ explanatory
   calculate(stat = "diff in means",                # difference in group means
             order = c("pink", "white"))
 
 # BOOTSTRAP
-boot_SR_visits <-  SR_rils %>%
-  specify(mean_visits ~ petal_color) |>            # specify response ~ explanatory
+boot_SR_visits <-  SR_visits %>%
+  specify(visits ~ petal_color) |>                 # specify response ~ explanatory
   generate(reps = 5000, type = "bootstrap") |>     # resample
   calculate(stat = "diff in means",                # calculate difference in means
             order = c("pink", "white"))

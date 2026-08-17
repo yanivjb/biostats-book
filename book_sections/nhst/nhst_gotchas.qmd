@@ -120,7 +120,7 @@ We can break this down with new terminology:
 - $P(\text{Model})$: the "prior" — our prior belief about the probability of the model or parameter values before seeing the data. This can come from previous studies, expert knowledge, or assumptions.    
 - $P(\text{Data})$: the "evidence" — the overall probability of the data, which serves to normalize the result. It can be computationally intensive to calculate, but there are methods like Markov Chain Monte Carlo (MCMC) to approximate this value.
 
-$$\text{Posterior Probability} = \frac{\text{Likelihood}(\text{Model}|\text{Data}) \times \text{Prior}}{\text{Evidence}}$$
+$$\text{Posterior Probability} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}$$
 
 Notably, Bayesian methods allow us to study "credible intervals" — regions with a 95% probability of containing the true population parameter, as opposed to "confidence intervals," which in frequentist statistics only describe the frequency with which the interval will contain the true parameter in repeated samples.
 

@@ -1,4 +1,4 @@
-## •  17. ANOVA is a  linear model  {.unnumbered  #anova_lm}
+## •  18. ANOVA is a  linear model  {.unnumbered  #anova_lm}
 
 
 

@@ -1,0 +1,74 @@
+## Study Design, "Threats to Validity" Section (Tutor Knowledge Base)
+
+**Context:**
+This section introduces validity as a way to ask whether a study can answer the question it was meant to answer. It separates measurement validity, measurement reliability, internal validity, and external validity, using the Clarkia hybridization study and xkcd examples to show that every design decision is a compromise.
+
+---
+
+### Learning Goals
+
+By the end of this section, students should be able to:
+
+1. Recognize what makes a study "valid."
+2. Distinguish measurement validity from measurement reliability.
+3. Explain internal validity and identify threats to it.
+4. Explain external validity and identify limits to generalization.
+5. Explain why good-enough design is more useful than chasing perfect design.
+
+---
+
+### Key Concepts and Definitions
+
+* **Measurement validity / construct validity:** Whether the thing measured actually captures the thing the researcher cares about.
+* **Measurement reliability:** Whether repeated measurements would give similar answers.
+* **Proxy variable:** A measurable stand-in for something harder to observe directly.
+* **Internal validity:** Whether the design supports the specific causal conclusion within the study.
+* **External validity:** How far the study's result generalizes beyond the specific units, species, sites, doses, and conditions studied.
+* **Confounding variable:** A variable tangled with the explanatory variable that could be responsible for the observed response.
+
+---
+
+### Conceptual Takeaways
+
+* Validity is not one thing. Students should ask "valid for what claim?"
+* A measurement can be reliable but invalid: it can consistently measure the wrong thing.
+* A measurement can be valid but noisy: it captures the right thing, but with lots of sampling error.
+* Internal validity asks whether the causal interpretation works inside the study.
+* External validity asks how far the result can travel outside the study.
+* No study is the last word. A good study meaningfully informs a question.
+
+---
+
+### Figures in This Section
+
+* **Proxy variable xkcd:** Use this to discuss measurement validity. The measurable proxy must be connected to the thing we actually care about.
+* **Pairwise Clarkia plots:** Petal area, anther-stigma distance, and hybrid seed proportion are all associated. Use this to explain internal-validity threats from correlated traits.
+* **Petri dish cancer xkcd:** Use this to discuss external validity. A result can be true under one setting and still not generalize to the setting people care about.
+
+---
+
+### Notes for Tutor Responses
+
+If a student mixes up validity and reliability, ask:
+
+> Is the problem that we measured the wrong thing, or that repeated measurements would bounce around?
+
+If a student asks why correlated traits threaten internal validity, try:
+
+> If petal area and anther-stigma distance move together, how would we know which one is doing the work?
+
+---
+
+### Common Student Confusions
+
+* Thinking "valid" means "good study" in a vague global way.
+* Confusing measurement validity with measurement reliability.
+* Thinking more measurements fix an invalid proxy.
+* Thinking external validity is a criticism rather than a boundary on interpretation.
+* Treating correlated traits as harmless just because the association is significant.
+
+---
+
+### Tutor Guidance
+
+When students ask about any validity term, make them name the claim first. Then ask what would have to be true for that claim to be supported.

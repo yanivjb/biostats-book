@@ -120,7 +120,7 @@ include_graphics("../../figs/stats_foundations/uncertainty/hernandez_tweet.png")
 
 ```
 
-When we take a statistical  sample from a population, we do so **without replacement.** That, is we do not select the same individual twice -- rather we sample n distinct individuals. This is how we get our sample.  Conceptually we build sampling distributions by repeating this amny times (but of course in the real world we usually only have one sample).
+When we take a statistical  sample from a population, we do so **without replacement.** That, is we do not select the same individual twice -- rather we sample n distinct individuals. This is how we get our sample.  Conceptually we build sampling distributions by repeating this many times (but of course in the real world we usually only have one sample).
 
 Bootstrapping allows us to approximate the sampling distribution by choosing n individuals from our sample **with replacement** (i.e. we might pick the same sample more than once) as follows: 
 

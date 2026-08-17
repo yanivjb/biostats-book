@@ -1,4 +1,4 @@
-## • 14. The paired t-test  {.unnumbered #paired_t_test}
+## • 15. The paired t-test  {.unnumbered #paired_t_test}
 
 
 ```{r}
@@ -61,11 +61,11 @@ I miss our parviflora plants too much - let's get back to them.  Recall that Bro
 
 We can therefore test if the hybridization rate differs across locations. Here we focus on two locations -- Lower Breckenridge (LB) and Sawmill Road (SR).   The data are presented in  @fig-paired1. Panels A and B show the same data in unpaired and paired form; panel C shows the distribution of within-RIL difference.
 
-Below I introduce the paired t-test, which tests the null hypothesis that the mean difference between pairs is zero. To do this, we run a one-sample t-test on the differences within each pair. This means our degrees of freedom equals the number of pairs minus one. By accounting for variation between RILs, the paired t-test focuses on differences within each pair. This often increases statistical power (i.e. our ability to reject a false null hypothesis).
-
 :::aside 
 **The next chapter introduces the two-sample t-test.** A paired t-test generally provides more statistical power to reject the null hypothesis and estimates the difference in means with less uncertainty than a two-sample t-test. However, the two-sample t-test is useful because it can be applied when data are not paired.  
 :::
+
+Below I introduce the paired t-test, which tests the null hypothesis that the mean difference between pairs is zero. To do this, we run a one-sample t-test on the differences within each pair. This means our degrees of freedom equals the number of pairs minus one. By accounting for variation between RILs, the paired t-test focuses on differences within each pair. This often increases statistical power (i.e. our ability to reject a false null hypothesis).
 
 ```{r}
 #| echo: false
@@ -191,10 +191,20 @@ diffs_summaries  |>
   gt()
 ```
 
-**🛑STOP🛑** Before we conduct a null hypothesis significance test you should immediately notice two things:   
+--- 
 
-1. Because Cohen's D is in th "tiny" (0.01 – 0.20) range, even if the estimated effect was true, it woud not be particularly  strong.   
+<div style="text-align: center; color: darkred; font-size: 3em;">
+<strong>🛑 STOP 🛑</strong>
+</div>
+
+
+
+Before doing the whole NHST thing, you should immediately notice two things:   
+
+1. Because Cohen's D is in the "tiny" (0.01 – 0.20) range, even if the estimated effect was true, it would not be particularly  strong.   
 2. This will not be significant at the $\alpha = 0.05$ level -- results will never be statistically significant when the absolute value of t is less than 1.96.   
+
+---
 
 But let's move on to a formal test because we're doing it. 
 

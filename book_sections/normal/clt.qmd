@@ -1,4 +1,4 @@
-## • 13. The Normal is Common  {.unnumbered #clt}
+## • 14. The Normal is Common  {.unnumbered #clt}
 
 ---
 format: html

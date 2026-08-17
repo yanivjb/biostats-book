@@ -1,4 +1,4 @@
-## • 13. Normal Summary {.unnumbered #normal_summary}
+## • 14. Normal Summary {.unnumbered #normal_summary}
 
 
 ---
@@ -172,7 +172,7 @@ The standard deviation of the sampling distribution is the standard error, calcu
 
 * **Mutually Exclusive Events**: Two events that cannot occur at the same time. For example, a coin flip cannot be both heads and tails.  
 * **Addition Rule**: A probability rule stating that for mutually exclusive events, the probability of one event (A) or another event (B) occurring is the sum of their individual probabilities. $P(A \text{ or } B) = P(A) + P(B)$.
-* **Complement Rule**: A probability rulw stating that the probability of an event not occurring is equal to 1 minus the probability that the event does occur. $P(\text{not } A) = 1 - P(A)$.
+* **Complement Rule**: A probability rule stating that the probability of an event not occurring is equal to 1 minus the probability that the event does occur. $P(\text{not } A) = 1 - P(A)$.
 
 
 ### Transformations & Tests

@@ -1,0 +1,450 @@
+### • 12. Power and Precision  {.unnumbered #sec-power-precision}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(pwr)
+library(webexercises)
+library(knitr)
+```
+---
+
+
+::: {.motivation}
+
+**Motivating Scenario:**
+
+You're designing a study and need to decide how big to makes it.  Too few samples, and a real effect could hide in the noise, but too many samples represent an unnecessary  waste of time, money, and effort. Here we will think about design strategies to get the most information from your study, and how to decide how many samples you need
+
+**Learning Goals: By the end of this chapter, you should be able to:**
+
+- Describe how to design an experiment to decrease variability and increase precision.
+- Recognize pseudoreplication, how to avoid it, and what to do about it.  
+- Know that you can plan for power and precision and recognize the R packages and webapps  to plan a sample size with adequate statistical power.
+- Explain why small effects require disproportionately larger samples to detect, and why reducing variance can substitute for collecting more data.
+
+
+:::
+
+---
+
+> "You can't stop sampling error, you can only hope to contain it."
+>
+> -- Adapted from [Dan Patrick](https://en.wikipedia.org/wiki/Dan_Patrick_(sportscaster)) [catchphrase](https://www.espn.com/media/2000/q2/dan_000723contain.wav). 
+
+
+There is no stopping [sampling error](#sampling_error), the chance deviation between the true population parameter and our estimate from a sample.  But, this does not mean that we are stuck wandering around with hopeless uncertainty. There are proven ways to minimize sampling error, which can be broken up into two types of strategies. We can aim to decrease variability, and/or increase the number of independent samples. I note that I introduced some of these ideas in our section on [Sampling Better](#sampling_better).
+
+### Decreasing variability
+One simple way to increase the precision of an estimate is to decrease variability. We only have so much control over this, since some variability is natural -- but there are things we can do to increase the precision of our estimated effect and minimize extraneous variation.
+
+#### Increase measurement reliability 
+We cannot always measure the values of the explanatory or response variables with 100% accuracy. But we can take measures to increase the reliability of such measures. For example, in our RIL study, we measured the proportion of hybrid seeds on a RIL as the number of hybrids out of the eight seeds genotyped. Increasing the number of seeds genotyped would increase measurement reliability, and decrease variability.  </br></br> 
+
+
+
+####  Balanced design 
+Balance refers to the similarity in sample sizes across treatments. Say, for example, we wanted to estimate the difference in the proportion of hybrid seed on a total of fifty white- and pink-flowered *parviflora* RILs. If we had 50 pink RILs and 0 white RILs we would not be able to estimate this difference. Or if we had only a handful of white RILs our estimate for white would be noisy and so our estimated difference would be too. The best approach would be to equally split our efforts between white- and pink-flowered RILs. For a fixed total sample size, more balanced experiments decrease the uncertainty in mean differences between treatments.
+
+```{r}
+#| label: fig-matching
+#| column: margin
+#| fig-cap: "Matching pairs similar units and gives them different treatments. Here, five plants each carry one pink flower and one white flower, so plant-to-plant variation cancels out when we compare colors within a pair."
+#| fig-alt: "A single brown soil-colored panel representing one field site, showing five pairs of flower-like dots. Within each pair, a pink dot and a white dot sit close together and are joined by a thin line, indicating they belong to the same plant. The five pairs themselves are spread apart from one another across the panel."
+#| echo: false
+#| fig-height: 7
+library(ggplot2)
+library(dplyr)
+
+set.seed(1)
+
+n_pairs <- 5
+
+# Push pair anchors apart from each other -- same relaxation idea as the
+# blocking figure, but operating on pair centers rather than individual points.
+repel_points <- function(x, y, min_dist = 0.32, iterations = 300, bounds = c(0.12, 0.88)) {
+  n <- length(x)
+  for (iter in seq_len(iterations)) {
+    moved <- FALSE
+    for (i in seq_len(n - 1)) {
+      for (j in seq(i + 1, n)) {
+        dx <- x[i] - x[j]
+        dy <- y[i] - y[j]
+        d  <- sqrt(dx^2 + dy^2)
+        if (d < min_dist) {
+          angle <- if (d == 0) runif(1, 0, 2 * pi) else atan2(dy, dx)
+          push  <- (min_dist - d) / 2 + 1e-4
+          x[i] <- x[i] + cos(angle) * push
+          y[i] <- y[i] + sin(angle) * push
+          x[j] <- x[j] - cos(angle) * push
+          y[j] <- y[j] - sin(angle) * push
+          moved <- TRUE
+        }
+      }
+    }
+    x <- pmin(pmax(x, bounds[1]), bounds[2])
+    y <- pmin(pmax(y, bounds[1]), bounds[2])
+    if (!moved) break
+  }
+  data.frame(x = x, y = y)
+}
+
+pair_anchors <- repel_points(
+  x = runif(n_pairs, 0.15, 0.85),
+  y = runif(n_pairs, 0.15, 0.85)
+)
+pair_anchors$pair <- factor(seq_len(n_pairs))
+
+# Within each pair, offset pink/white a small fixed distance in a random
+# direction -- close enough to read as "same plant," regardless of where
+# the pair ended up after repulsion.
+within_pair_offset <- 0.045
+pair_angle <- runif(n_pairs, 0, 2 * pi)
+
+points <- bind_rows(
+  pair_anchors |>
+    mutate(
+      petal_color = "pink",
+      x = x + cos(pair_angle) * within_pair_offset,
+      y = y + sin(pair_angle) * within_pair_offset
+    ),
+  pair_anchors |>
+    mutate(
+      petal_color = "white",
+      x = x - cos(pair_angle) * within_pair_offset,
+      y = y - sin(pair_angle) * within_pair_offset
+    )
+)
+
+# Connecting segments: pink point to white point within each pair
+segments <- pair_anchors |>
+  mutate(
+    x_pink  = x + cos(pair_angle) * within_pair_offset,
+    y_pink  = y + sin(pair_angle) * within_pair_offset,
+    x_white = x - cos(pair_angle) * within_pair_offset,
+    y_white = y - sin(pair_angle) * within_pair_offset
+  )
+
+ggplot() +
+  geom_segment(
+    data = segments,
+    aes(x = x_pink, y = y_pink, xend = x_white, yend = y_white),
+    color = "black", linewidth = 1, alpha = 0.6
+  ) +
+  geom_point(
+    data = points,
+    aes(x = x, y = y, fill = petal_color),
+    shape = 21, size = 10, color = "black", stroke = 0.6
+  ) +
+  scale_fill_manual(values = c(pink = "pink", white = "white"), name = "Petal color") +
+  scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  theme_void(base_size = 14) +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(face = "bold", size = 35, hjust = 0.5),
+    plot.subtitle = element_text(size = 25, hjust = 0.5, margin = margin(b = 10)),
+    legend.text =  element_text(size = 25),
+    legend.title =  element_text(size = 25),
+    panel.background = element_rect(fill = "#8B5A2B", color = NA)
+  ) +
+  labs(
+    title = "Matching",
+    subtitle = "Each pair of flowers is on the same plant"
+  )
+```
+
+####  Matching
+A standard experimental design is to randomize who gets the treatment and who gets the control. But we can do even better than that. When, e.g., pairs of individuals are matched to be nearly identical in every way except the treatment, we have more power to observe the effect of treatment. So, for example, if we could turn some flowers on the same plant pink and others white (@fig-matching), we could remove the plant-to-plant variation in hybrid seed formation, and more precisely estimate the difference in hybrid formation between flower colors. This idea is statistically represented in the [paired t-test, which we will soon encounter](#paired_t_test). 
+
+####  Blocking
+We can scale up the same principle behind matching to larger groups. Say we're planting RILs at four different field sites. Of course, no two field sites are identical, they  differ in e.g. soil properties, microclimate, pollinator community, etc. Randomly planting pink- and white-petaled RILs across sites isn't the worst thing you could do, but it does add noise to our estimate. The site-to-site variation that has nothing to do with petal color or petal area will just add noise to our estimates. When blocking, we treat each site as a  mini-experiment: planting a balanced set of RILs -- both colors -- at every site (@fig-blocking). That way, when we analyze the data, we can account for the differences between sites directly, instead of having them blur into the uncertainty around our treatment estimate. This approach, known as a [Randomized Complete Block Design](https://online.stat.psu.edu/stat502/lesson/7/7.3), is analyzed statistically by including site as a blocking factor in our model (often with [multiple regression](#multiple_regression) or mixed effect models), allowing us to estimate the effect of petal color or petal area after accounting for site-to-site differences.
+
+
+```{r}
+#| label: fig-blocking
+#| fig-cap: "This is a Randomized Complete Block Design (RCBD): each field site (GC, LB, SR, US) is a block, and within every block we plant a balanced, complete set of both petal colors, so the effect of color can be separated from the effect of site."
+#| fig-alt: "One panel per field site (GC, LB, SR, US), each showing a brown soil-colored background with 10 randomly scattered flower-like dots -- 5 pink and 5 white -- spread apart so none overlap, resembling flowers planted in a field. The mix of pink and white is balanced within every site."
+#| echo: false
+#| fig-height: 3
+
+library(ggplot2)
+library(dplyr)
+
+set.seed(1)  # so the "random" planting layout is reproducible across renders
+
+sites <- c("GC", "LB", "SR", "US")
+n_per_color <- 5
+
+# Push any two points closer than min_dist apart, iteratively, so dots
+# don't overlap. Pure base R -- no extra dependency for a one-off diagram.
+repel_points <- function(x, y, min_dist = 0.18, iterations = 300, bounds = c(0.05, 0.95)) {
+    n <- length(x)
+    for (iter in seq_len(iterations)) {
+        moved <- FALSE
+        for (i in seq_len(n - 1)) {
+            for (j in seq(i + 1, n)) {
+                dx <- x[i] - x[j]
+                dy <- y[i] - y[j]
+                d  <- sqrt(dx^2 + dy^2)
+                if (d < min_dist) {
+                    angle <- if (d == 0) runif(1, 0, 2 * pi) else atan2(dy, dx)
+                    push  <- (min_dist - d) / 2 + 1e-4
+                    x[i] <- x[i] + cos(angle) * push
+                    y[i] <- y[i] + sin(angle) * push
+                    x[j] <- x[j] - cos(angle) * push
+                    y[j] <- y[j] - sin(angle) * push
+                    moved <- TRUE
+                }
+            }
+        }
+        x <- pmin(pmax(x, bounds[1]), bounds[2])
+        y <- pmin(pmax(y, bounds[1]), bounds[2])
+        if (!moved) break
+    }
+    data.frame(x = x, y = y)
+}
+
+block_design <- data.frame(
+    site        = rep(sites, each = 2 * n_per_color),
+    petal_color = rep(rep(c("pink", "white"), each = n_per_color), times = length(sites))
+) |>
+    group_by(site) |>
+    mutate(
+        x0 = runif(n(), min = 0.1, max = 0.9),
+        y0 = runif(n(), min = 0.1, max = 0.9)
+    ) |>
+    ungroup()
+
+# Repel within each site independently (each panel is its own 0-1 space)
+block_list <- split(block_design, block_design$site)
+block_list <- lapply(block_list, function(df) {
+    repelled <- repel_points(df$x0, df$y0)
+    df$x <- repelled$x
+    df$y <- repelled$y
+    df
+})
+block_design <- do.call(rbind, block_list)
+rownames(block_design) <- NULL
+
+ggplot(block_design, aes(x = x, y = y, fill = petal_color)) +
+    geom_point(shape = 21, size = 6, color = "black", stroke = 0.6) +
+    facet_wrap(~site, nrow = 1) +
+    scale_fill_manual(values = c(pink = "pink", white = "white"), name = "Petal color") +
+    scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+    scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+    theme_void() +
+    theme(
+        strip.text = element_text(face = "bold", size = 16),
+        legend.position = "bottom",
+        plot.title = element_text(face = "bold", size = 15, hjust = 0.5),
+        plot.subtitle = element_text(size = 12, hjust = 0.5, margin = margin(b = 10)),
+        panel.background = element_rect(fill = "#8B5A2B", color = NA),
+    ) +
+    labs(
+        title = "Randomized Complete Block Design",
+        subtitle = "Within each block, units are balanced across petal colors"
+    )
+```
+
+
+
+---
+
+####  Other techniques
+Blocking and matching are just two entries in a much bigger toolbox. Here I briefly introduce **Split-plot designs** (@fig-splitplot-blocked) because I see them often. Split plots are used when one factor is hard to randomize at a fine scale. Say we also wanted to test whether more fertilizer changes hybridization rates, alongside our petal color comparison. Fertilizer leaks across a plot, so it can only be randomized at the patch level (not flower by flower) within each field site. This gives us two nested levels of randomization: (1) The random spread of pink and white within a patch, and (2) the randomly placed patches within field sites. In our analysis, we can then model these  different sources of variability. 
+
+```{r}
+#| label: fig-splitplot-blocked
+#| fig-cap: "A split-plot design nested within blocks. Each of four field sites (GC, LB, SR, US) is its own block (heavy outer frame, panels separated). Within each site, two contiguous patches -- one High fertilizer, one Low -- are randomly placed side by side; petal color is then randomized within each patch."
+#| fig-alt: "One panel per field site: GC, LB, SR, US. Each panel is a square outlined with a thick black border and clearly separated from the other panels by empty space, representing four independent blocks. Inside each panel, a thin vertical line divides the square into two touching patches with no gap between them -- one dark brown patch labeled High and one light tan patch labeled Low, in random left-right order per site. Within every patch, four flower-like dots are scattered -- two pink and two white -- showing petal color is randomized independently within each patch."
+#| echo: false
+#| fig-width: 8.5
+#| fig-height: 3
+library(ggplot2)
+library(dplyr)
+
+set.seed(3)
+
+repel_points <- function(x, y, min_dist = 0.32, iterations = 300, bounds = c(0.12, 0.88)) {
+  n <- length(x)
+  for (iter in seq_len(iterations)) {
+    moved <- FALSE
+    for (i in seq_len(n - 1)) {
+      for (j in seq(i + 1, n)) {
+        dx <- x[i] - x[j]
+        dy <- y[i] - y[j]
+        d  <- sqrt(dx^2 + dy^2)
+        if (d < min_dist) {
+          angle <- if (d == 0) runif(1, 0, 2 * pi) else atan2(dy, dx)
+          push  <- (min_dist - d) / 2 + 1e-4
+          x[i] <- x[i] + cos(angle) * push
+          y[i] <- y[i] + sin(angle) * push
+          x[j] <- x[j] - cos(angle) * push
+          y[j] <- y[j] - sin(angle) * push
+          moved <- TRUE
+        }
+      }
+    }
+    x <- pmin(pmax(x, bounds[1]), bounds[2])
+    y <- pmin(pmax(y, bounds[1]), bounds[2])
+    if (!moved) break
+  }
+  data.frame(x = x, y = y)
+}
+
+sites <- c("GC", "LB", "SR", "US")
+
+# Two contiguous patches per site (left/right), fertilizer randomly
+# assigned to a side independently within each site.
+site_patches <- lapply(sites, function(s) {
+  data.frame(
+    site       = s,
+    xmin       = c(0, 0.5),
+    xmax       = c(0.5, 1),
+    ymin       = c(0, 0),
+    ymax       = c(1, 1),
+    fertilizer = sample(c("High", "Low"))
+  )
+}) |> bind_rows()
+
+site_patches$label_x     <- (site_patches$xmin + site_patches$xmax) / 2
+site_patches$label_y     <- 0.88
+site_patches$label_color <- ifelse(site_patches$fertilizer == "High", "white", "grey15")
+
+n_per_color <- 2
+dots <- lapply(seq_len(nrow(site_patches)), function(i) {
+  local_pts <- repel_points(
+    x = runif(2 * n_per_color, 0.15, 0.85),
+    y = runif(2 * n_per_color, 0.1, 0.72)  # keep clear of the fertilizer label
+  )
+  local_pts$petal_color <- rep(c("pink", "white"), each = n_per_color)
+  local_pts$site <- site_patches$site[i]
+  local_pts$x <- site_patches$xmin[i] + local_pts$x * (site_patches$xmax[i] - site_patches$xmin[i])
+  local_pts$y <- site_patches$ymin[i] + local_pts$y * (site_patches$ymax[i] - site_patches$ymin[i])
+  local_pts
+}) |> bind_rows()
+
+outer_frame <- data.frame(site = sites, xmin = 0, xmax = 1, ymin = 0, ymax = 1)
+
+ggplot() +
+  geom_rect(
+    data = site_patches,
+    aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = fertilizer),
+    color = "grey25", linewidth = 0.5
+  ) +
+  geom_text(
+    data = site_patches,
+    aes(x = label_x, y = label_y, label = fertilizer, color = label_color),
+    size = 3.8, fontface = "bold"
+  ) +
+  scale_color_identity() +
+  geom_point(data = dots, aes(x = x, y = y), size = 5.5, color = "black") +
+  geom_point(data = dots, aes(x = x, y = y, fill = petal_color), size = 4.5, shape = 21, color = "black") +
+  geom_rect(
+    data = outer_frame,
+    aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+    fill = NA, color = "black", linewidth = 2.2
+  ) +
+  facet_wrap(~site, nrow = 1) +
+  scale_fill_manual(
+    values = c(High = "#6B4423", Low = "#C9A66B", pink = "pink", white = "white"),
+    breaks = c("pink", "white"),
+    name = "Petal color"
+  ) +
+  scale_x_continuous(limits = c(-0.04, 1.04), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(-0.04, 1.04), expand = c(0, 0)) +
+  theme_void(base_size = 13) +
+  theme(
+    strip.text = element_text(face = "bold", size = 16),
+    legend.position = "bottom",
+    legend.text = element_text(size = 11),
+    legend.title = element_text(size = 12, face = "bold"),
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    plot.subtitle = element_text(size = 11.5, hjust = 0.5, margin = margin(b = 10)),
+    panel.spacing = unit(1.8, "lines"),
+    plot.margin = margin(10, 15, 10, 15)
+  ) +
+  labs(
+    title = "Split-plot design within blocks",
+    subtitle = "Each site is a block; fertilizer is randomized by patch; petal color is randomized within each patch"
+  )
+```
+
+--- 
+
+### Eliminate (or model) non-independence
+
+::: aside 
+Our *parviflora* RIL study includes pseudoreplication. We have multiple observations of the same RIL in e.g. different field sites. In our scientific papers, we have modeled this non-independence, but this involves statistical techniques about one step further than we will get in this book. So for now, we simply note this non-independence, and move forward for the purposes of teaching and learning. 
+:::
+
+**Pseudoreplication** describes the case in which our replicates are not independent (see the earlier section on [non-independent sampling](#nonindependence)). Ignoring pseudoreplication makes our estimate look far more precise than it really is.  
+
+The careful reader might notice an apparent contradiction. I just said that blocking (e.g. grouping RILs by site) and matching were *good* things, and then said to avoid pseudoreplication. Well, blocking and matching can be a good thing or not - the difference is whether that grouping gets modeled or ignored. Applying the appropriate statistical tools to a design with blocking allows us to use the nested structure to pull out site-to-site variance, and sharpen our estimate. By contrast, pseudoreplication without modelling this structure hides the noise instead of removing it. So when there is potential non-independence, be sure the unit of analysis matches our actual unit of randomization
+
+### Planning for power and precision
+
+
+> "Absence of evidence is not evidence of absence."
+>
+> -- Often attributed to Carl Sagan (but others said it first)
+
+
+
+We all know how to make estimates match true parameters -- measure the entire population. But this is impracticable, and a huge waste of time and energy. So in all studies trade-off precision of an estimate and. time/money/effort.  While we know that "failing to reject the null" doesn't make it false, failing to reject a false null with a relevant effect size is a bummer. So a key question when you plan your experiment is, how much certainty do you want in your estimate / how much "power" to reject the null do you want?
+
+
+
+
+
+As a BIOstats teacher, my key guidance is this: aim for an estimate that's slightly more precise than you'd strictly need to detect a biologically meaningful difference or inform a policy decision -- precise enough to give yourself some comfort, but not so precise that you're chasing precision for its own sake. Here's a rough guide to help:
+
+- **How precise an estimate do we need for our biological story?** In some cases small differences matter a lot; in other cases, ballpark estimates are good enough. It's your job as the researcher to know what your question requires.
+- **What effect size is worth knowing about?** The null hypothesis is basically always false. With an infinite sample size, we'd probably always reject it. But in many cases the true population parameter is close enough to zero that the null hypothesis might as well be true. Again, it's your job as a researcher to decide what size of effect you'd like to be able to detect.
+- **How much variability do we expect between measurements?** Your biological knowledge is required here too (or you can consider the difference relative to variability when thinking about precision and effect size together).
+
+Once you have a sense of the answers to these questions, we can use the tools below to find the appropriate sample size for your study.   
+
+#### Power: A brief review
+
+Because estimates are influenced by chance, our ability to correctly reject a false null hypothesis (or not) is probabilistic. **Power** -- that probability that we correctly reject a false null hypothesis is influence by two factors:  
+
+1. The "**effect size**" -- that is the difference between the true parameter and the null, and    
+ 
+2. The precision of our estimate. This itself influenced by the nature of the world (which we cannot control) by choices in experiment design (see above), including sample size (see below).
+
+
+#### Estimating an appropriate sample size
+
+**The power to reject the null:** We know that reject the null hypothesis is not the goal of . Still, if we are spending time and effort on a study, it is worth considering if that study would be able to identify biologically meaningful differences between treatments if they exist. We use power analyses to find the sample size needed for a study to have a good chance of rejecting a false null hypothesis. A power analysis basically finds the sample size necessary so that the sampling distribution of your experiment has:
+
+- Some specified power to differentiate between the null model and the smallest effect size you'd like to be able to identify, and/or  
+- Some specified probability of being as precise, or more precise, than you want.
+
+The traditional target power researchers shoot for is 80%, but in my opinion that's quite low -- aiming for 90% power seems more reasonable.
+
+##### Mathematical intuition  
+
+The sample size needed to reject the null for some desired level of power, scales roughly as $n \propto \frac{\sigma^2}{\text{effect}^2}$. So
+
+- **Finding a small effect requires a huge sample.** The required sample size grows as the square of one over the effect size. This means that it takes a hundredfold increase in n to find an effect that is ten times smaller. So  if you really want to find a small effect you will need to invest a lot of time energy and money. 
+
+- **Reducing noise is as good as adding data.** Variance ($\sigma^2$), enters the formula linearly. So using the techniques above to decrease variance provide the same  gain in power as doubling your sample size, and can often come with less expense and effort. 
+
+##### Computational approaches 
+
+There are both  online tools (e.g., [this one from UBC](https://www.stat.ubc.ca/~rollin/stats/ssize/n2.html)) and R packages (the [`pwr`](https://cran.r-project.org/web/packages/pwr/index.html) package is most popular) to find the power you need for a study. Similarly, the  `presize` [R package](https://dcr-unibe-ch.github.io/presize/) and [webapp](https://shiny.ctu.unibe.ch/presize/) provide a way for you to base study sizes on how certain you want to be in your estimate rather than the power you have to reject the null.
+
+Throughout the book, I will try to highlight these power analysis when possible.   However, I note that the tools above are built around relatively simple studies. When your analysis is more complex, you may need to simulate your study to estimate power.
+
+
+
+::: warning
+The sample size we start with is rarely the sample size we end with -- plants die, people drop out, RNA degrades, etc. Keep this in mind when designing your experiment, and increase your target sample size to accommodate the expected number of lost data points.
+:::
+

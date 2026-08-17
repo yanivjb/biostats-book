@@ -21,10 +21,10 @@
 
 ## R Functions  
 
-[**R functions:** See Posit’ss [recipe for R functions](https://posit.cloud/learn/recipes/basics/BasicB4) for more detail.]{.column-margin}
+[**R functions:** See Posit’s [recipe for R functions](https://posit.cloud/learn/recipes/basics/BasicB4) for more detail.]{.column-margin}
 
 
-R comes with tons of built-in functions that do everything from basic math to advanced statistical modeling. So not only can we calculate the mean and variance in *Clarkia xantiana* petal lengths with the [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html) and  [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) functions, respectively, but we can test the null hypothesis that mean petal size in *xantiana* is equal to that of *parviflora*  with the [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) function. Functions are the foundation of how we do things in R -- they save time and ensure consistency across your analyses.
+R comes with tons of built-in functions that do everything from basic math to advanced statistical modeling. So not only can we calculate the mean and variance in *Clarkia xantiana* petal lengths with the [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html) and  [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) functions, respectively, but we can test the null hypothesis that mean petal size in *xantiana* is equal to that of *parviflora*  with the [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) function.   Functions are the foundation of how we do things in R -- they save time and ensure consistency across your analyses.
 
 
 

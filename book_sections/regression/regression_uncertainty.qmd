@@ -1,4 +1,4 @@
-## • 18. Regression: Uncertainty   {.unnumbered #regression_uncertainty}
+## • 19. Regression: Uncertainty   {.unnumbered #regression_uncertainty}
 
 
 
@@ -376,7 +376,7 @@ a + b + plot_annotation(tag_levels = 'A')   +plot_layout(widths = c(4,5))
 
 We often think of a regression line as "predicting" the value of the response variable, given the value of the explanatory variable. But what exactly is being predicted? The fitted value, $\widehat{Y_i}$, is our estimate of the mean value of $Y$ for observations with a given value of $X$. In this example, the regression line estimates the mean proportion hybrid for RILs with a given petal area (@fig-lmunc). The confidence interval around the regression line shows uncertainty in this estimated mean. But this is not the same as predicting where a new individual observation will fall. 
 
-If we want a range where we expect a new observation of $Y$ to fall, conditional on $X$, we use a prediction interval. As seen in @fig-pred, prediction intervals are wider than confidence intervals because they describe uncertainty for individual observations. This figure also highlights problems with this model: all points that fall  outside the prediction interval are above it, and much of the prediction interval extends below zero. I dont need a standard error to know that's wrong. We will address these issues with more flexible models in a later chapter.
+If we want a range where we expect a new observation of $Y$ to fall, conditional on $X$, we use a prediction interval. As seen in @fig-pred, prediction intervals are wider than confidence intervals because they describe uncertainty for individual observations. This figure also highlights problems with this model: all points that fall  outside the prediction interval are above it, and much of the prediction interval extends below zero. I don't need a standard error to know that's wrong. We will address how to solve such issues with more flexible models in a later chapter.
 
 
 ```{r}

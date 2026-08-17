@@ -1,4 +1,4 @@
-## • 13. Is It Normal?  {.unnumbered #is_it_normal}
+## • 14. Is It Normal?  {.unnumbered #is_it_normal}
 
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
@@ -244,7 +244,7 @@ shinyApp(ui, server)
 Let's compare the samples from a normal distribution in our Shiny app above, to cases in which the data are not normal.   For example,  
 
 - **@fig-msleepqq A-D** makes it clear that across the three *Iris* species, petal length is bimodal.
--**@fig-msleepqq E-H** makes it clear that across all mammals the distribution of body weights is approximately exponential.  
+- **@fig-msleepqq E-H** makes it clear that across all mammals the distribution of body weights is approximately exponential.  
 
 These examples are a bit extreme. Over the course of the book, we'll get practice in visually assessing if data are normal-ish.
 
@@ -289,7 +289,7 @@ a1 <- ggplot(msleep, aes(x = bodywt)) + geom_histogram(bins = 20)+labs(title = "
 b1 <- ggplot(msleep, aes(x = bodywt))+ geom_density(fill = "grey")+labs(title = "\n F) Mammal body weights")+
   theme(axis.title = element_text(size = 18),
         axis.text = element_text(size = 14))
-c1 <- ggplot(msleep, aes(sample = bodywt))+ geom_qq() + geom_qq_line()+labs(title = "\n G)Mammal body weights")+   
+c1 <- ggplot(msleep, aes(sample = bodywt))+ geom_qq() + geom_qq_line()+labs(title = "\n G) Mammal body weights")+   
   labs(x = "Theoretical quantiles",
        y = "Observed body weight")+
   theme(axis.title = element_text(size = 18),

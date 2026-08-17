@@ -1,4 +1,4 @@
-## • 14. One sample t-test in R  {.unnumbered #one_sample_t_test_in_R}
+## • 15. One sample t-test in R  {.unnumbered #one_sample_t_test_in_R}
 
 
 ```{r}

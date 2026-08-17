@@ -1,4 +1,4 @@
-## • 20. BONUS: Polynomial regression  {.unnumbered #polynomial_interaction_warnings_and_size__regression}
+## • 21. BONUS: Polynomial regression  {.unnumbered #polynomial_interaction_warnings_and_size__regression}
 
 ```{r}
 #| echo: false

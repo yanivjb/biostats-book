@@ -204,7 +204,7 @@ iris |>
 #| context: setup
 library(dplyr)
 library(conflicted)
-conflict_prefer("filter","stats")
+conflicts_prefer("filter","stats")
 iris$Species <- as.character(iris$Species) 
 ```  
 

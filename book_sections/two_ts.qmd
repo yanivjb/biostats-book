@@ -1,4 +1,4 @@
-# 15. Comparing two means {.unnumbered #two_ts}
+# 16. Comparing two means {.unnumbered #two_ts}
 
 
 
@@ -37,7 +37,7 @@ gc_rils <- ril_data |>
 **Learning goals: By the end of this chapter you should be able to:**    
 
 
-1. **Describe the assumptions** underlying a two-sample t-test, and know what to do when they dont match our data.    
+1. **Describe the assumptions** underlying a two-sample t-test, and know what to do when they don't match our data.    
 2. **Visualize two samples** and their uncertainty using ggplot2.
 3. **Calculate and Interpret a t-value** from a two-sample comparison.   
 4. **Interpret Cohen's D** as a measure of effect size in a two-sample comparison.     
@@ -58,7 +58,7 @@ gc_rils <- ril_data |>
 * *What’s the difference in hybridization rate between pink and white plants?*
 
 :::aside
-**Remmember, correlation is not causation!**  We usually want to know the cause (e.g., “Will a vaccine help or hurt?”), but we're often stuck with associations (e.g., “What’s the difference between vaccinated and unvaccinated people?”). Causal claims require careful experiments or other formal approaches to causal inference.
+**Remember, correlation is not causation!**  We usually want to know the cause (e.g., “Will a vaccine help or hurt?”), but we're often stuck with associations (e.g., “What’s the difference between vaccinated and unvaccinated people?”). Causal claims require careful experiments or other formal approaches to causal inference.
 :::
 
 

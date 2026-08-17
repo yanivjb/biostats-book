@@ -1,4 +1,4 @@
-## • 16. F (ANOVA) summary {.unnumbered #f_summary}
+## • 17. F (ANOVA) summary {.unnumbered #f_summary}
 
 
 ---
@@ -331,9 +331,6 @@ $$D = 1.12$$
 
 :::
 
-https://bookdown.org/steve_midway/DAR/understanding-anova-in-r.html
-
-https://www.crumplab.com/rstatsforpsych/semester-project-2021.html
 
 
 ## 📊 Glossary of Terms {#f_summary_glossary-of-terms}
@@ -369,8 +366,8 @@ https://www.crumplab.com/rstatsforpsych/semester-project-2021.html
   * **$\text{SS}_\text{error}$ (aka $\text{SS}_\text{residual}$)**: Variability within groups, not explained by the model.
   * **$\text{SS}_\text{total}$**: Total variability in the response variable.
 * **Degrees of Freedom (df)**: The number of independent pieces of information used to estimate variability.   
-  - $\text{df}_\text{model} = $n_\text{groups}-1$.  
-  - $\text{df}_\text{error} = $n - n_\text{groups}$.  
+  - $\text{df}_\text{model} = n_\text{groups}-1$.  
+  - $\text{df}_\text{error} = n - n_\text{groups}$.  
 * **Mean Square (MS)**: An estimate of variance obtained by dividing SS by its degrees of freedom.
 
   * **$\text{MS}_\text{model}$** =$\frac{\text{SS}_\text{model}}{\text{df}_\text{model}}$  

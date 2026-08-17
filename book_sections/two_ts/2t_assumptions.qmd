@@ -1,4 +1,4 @@
-## • 15. Two-t Assumptions {.unnumbered #2t_assumptions}
+## • 16. Two-t Assumptions {.unnumbered #2t_assumptions}
 
 
 ```{r}

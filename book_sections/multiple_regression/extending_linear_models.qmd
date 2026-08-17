@@ -1,4 +1,4 @@
-## • 19. Extending linear models {.unnumbered #extending_linear_models}
+## • 20. Extending linear models {.unnumbered #extending_linear_models}
 
 ```{r}
 #| code-fold: true

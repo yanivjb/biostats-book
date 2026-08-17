@@ -1,4 +1,4 @@
-## •  16. *F*-inding connec*t*ions  {.unnumbered  #finding_connections}
+## •  17. *F*-inding connec*t*ions  {.unnumbered  #finding_connections}
 
 
 ```{r}
@@ -32,7 +32,7 @@ clarkia_hz <- read_csv(hz_link)|>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 **Motivating Scenario:**
-In the previous chapter we compared two groups using as two-sample t-test. In this chapter, we basically did the same thing as an ANOVA. You want to know the relationship between these approaches.
+You earlier saw how to compare two groups with a two-sample t-test. Then we just basically did the same thing as an ANOVA. Now, you are curious about the relationship between these approaches and why they give the same answer.
 
 **Learning Goals: By the end of this subchapter, you should be able to:**
 

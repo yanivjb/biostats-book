@@ -1,4 +1,4 @@
-## • 13. Normal Math  {.unnumbered #p_norm}
+## • 14. Normal Math  {.unnumbered #p_norm}
 
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}

@@ -1,4 +1,4 @@
-## • 20. Quantifying Interactions {.unnumbered #interaction_effect_sizes}
+## • 21. Quantifying Interactions {.unnumbered #interaction_effect_sizes}
 
 
 ```{r}

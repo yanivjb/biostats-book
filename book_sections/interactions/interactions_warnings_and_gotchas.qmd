@@ -1,4 +1,4 @@
-## • 20. Interactions "gotchas" {.unnumbered #interaction_warnings_and_size_gotchas}
+## • 21. Interactions "gotchas" {.unnumbered #interaction_warnings_and_size_gotchas}
 
 
 ```{r}

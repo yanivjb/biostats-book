@@ -184,7 +184,7 @@ In principle, in addition to a real effect, sampling bias, non-independent sampl
 
 
 ```{r}
-#| fig-cap: "Dont take it from me. Here's a TicTok  from professor [Christina Knudson](https://cknudson.com/) at St. Thomas."
+#| fig-cap: "Dont take it from me. Here's a TikTok  from professor [Christina Knudson](https://cknudson.com/) at St. Thomas."
 #| echo: FALSE
 #| column: margin
 #| out-width: "100%"
@@ -198,7 +198,7 @@ In null hypothesis significance testing, we aim to determine how easily our resu
 
 1. State the null hypothesis and its alternative hypothesis (subsection [Statistical Hypotheses](#statistical_hypotheses)).   
 2. Calculate a test statistic to summarize the data, and compare it to its sampling distribution under the null model  (subsection [P Values](#p_values)).     
-3. Interpret the results. If the test statistic falls in an extreme tail of the sampling distribution, we reject the null hypothesis; otherwise, we do not.  (subsection [Statistical Significance](#statistical_significance).  
+3. Interpret the results. If the test statistic falls in an extreme tail of the sampling distribution, we reject the null hypothesis; otherwise, we do not.  (subsection [Statistical Significance](#statistical_significance)).  
 
 This last step is relatively easy to do. But explaining and understanding this step represents one of the more challenging concepts in statistics. Part of the difficulty lies in the fact that what we traditionally do in the field doesn't entirely make sense.  We will therefore go over [Considerations for NHST](#nhst_gotchas) before moving on to our [chapter summary](#nhst_summary). 
 

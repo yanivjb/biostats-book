@@ -1,4 +1,4 @@
-## • 18. Regression assumptions  {.unnumbered #regression_assumptions}
+## • 19. Regression assumptions  {.unnumbered #regression_assumptions}
 
 
 

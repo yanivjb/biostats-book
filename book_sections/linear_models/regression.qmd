@@ -1,4 +1,4 @@
-## • 12. Linear regression {.unnumbered #linear_regress}
+## • 13. Linear regression {.unnumbered #linear_regress}
 
 ---
 format: html
@@ -132,7 +132,7 @@ In the previous section, we modeled proportion hybrid seed as a function of peta
 
 - The "slope" was the difference in mean hybrid seed proportion between groups.  
 
-- The value of the explanatory variable was zero for plant sin the reference group and 1 for plants in the other group.
+- The value of the explanatory variable was zero for plants in the reference group and 1 for plants in the other group.
 
 Thus, comparing two groups (and in fact all linear models) can be considered as special cases of linear regression.
 

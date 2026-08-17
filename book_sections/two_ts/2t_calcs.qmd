@@ -1,4 +1,4 @@
-## • 15. Two-t Calculations {.unnumbered #2t_calcs}
+## • 16. Two-t Calculations {.unnumbered #2t_calcs}
 
 
 ```{r}
@@ -54,7 +54,7 @@ SR_visits <- readr::read_csv(ril_link) |>
 #| label: fig-visits
 #| code-fold: true
 #| code-summary: "Plotting the data"
-#| fig-cap: "Each point shows an individual RIL's mean pollinator visits. Vertical lines95% confidence intervals for each flower color. The dashed line connects the group means to facilitate comparison."
+#| fig-cap: "Each point shows an individual RIL's mean pollinator visits. Vertical lines show the 95% confidence intervals for each flower color. The dashed line connects the group means to facilitate comparison."
 #| fig-alt: "A scatterplot with two groups on the x-axis, labeled \"pink\" and \"white.\" Pink points (left) and white points (right) represent visit counts for individual RILs. The pink group has a higher spread of values, many above zero, while the white group clusters closer to zero. Bold black vertical bars indicate the mean and confidence interval for each group, and a dashed black line connects the two means, showing that the pink group has more visits than the white group."
 library(ggforce)
 ggplot(SR_visits, aes(x  = petal_color,

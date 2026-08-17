@@ -43,7 +43,7 @@ Recall the steps in a permutation test:
    - The test statistic for a permutation test can be whatever best captures our biological hypothesis. In this case, we'll use the difference in the mean number of eggs hatched between non-preferred and preferred matings.    
 
 3. Calculate the test statistic for the actual data.   
-   - We found 345.11 eggs hatching  for preferred matings and 413.93 for non-preferred matings. So our test statistic is: 345.11 - 413.93 = -68.82. That is we summarize our data as a difference of -68.82 eggs hatched between preferred and non-preffered matings.   
+   - We found 345.11 eggs hatching  for preferred matings and 413.93 for non-preferred matings. So our test statistic is: 345.11 - 413.93 = -68.82. That is we summarize our data as a difference of -68.82 eggs hatched between preferred and non-preferred matings.   
 
 ---  
 
@@ -131,7 +131,7 @@ We generate the permuted distribution (to approximate the null sampling distribu
 
 
 :::aside
-**How many permutations?** There's no strict rule for the number of permutations. It's a trade-off between computational time and the precision of your p-value. As with bootstrapping, this is a trade-off between computational time and the precision of your p-value: more replicates are more precise but take longer to run. A good starting point is 5,000 permutations, but 1,000 is generally sufficient if the process is slow.
+**How many permutations?** There's no strict rule for the number of permutations. It's a trade-off between computational time and the precision of your p-value.A good starting point is five thousand permutations, but one thousand permutations are usually enough if the permuation is taking a while.
 :::
 
 ```{r}

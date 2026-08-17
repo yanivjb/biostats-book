@@ -1,0 +1,88 @@
+## Study Design, "Power and Precision" Section (Tutor Knowledge Base)
+
+**Context:**
+This section connects study design to sampling error, precision, and power. It emphasizes that researchers cannot eliminate sampling error, but can contain it through better design: more reliable measurements, balanced designs, matching, blocking, appropriate handling of non-independence, and planned sample sizes.
+
+---
+
+### Learning Goals
+
+By the end of this section, students should be able to:
+
+1. Describe design strategies that decrease variability and increase precision.
+2. Explain measurement reliability as a way to reduce noise.
+3. Explain why balanced designs improve estimates of treatment differences.
+4. Explain matching and blocking as strategies for removing irrelevant variation.
+5. Recognize pseudoreplication and explain why the unit of analysis must match the unit of randomization.
+6. Explain why small effects require disproportionately large samples.
+7. Recognize that reducing variance can substitute for collecting more data.
+8. Know that tools such as `pwr`, `presize`, and webapps can help plan sample size.
+
+---
+
+### Key Concepts and Definitions
+
+* **Precision:** How tightly an estimate is pinned down.
+* **Power:** The probability of correctly rejecting a false null hypothesis.
+* **Effect size:** The size of the relationship or difference the study is trying to detect.
+* **Measurement reliability:** Consistency of measurement. More reliable measurements reduce noise.
+* **Balanced design:** Similar sample sizes across treatment groups or comparison groups.
+* **Matching:** Pairing similar units and comparing within pairs to cancel out irrelevant variation.
+* **Blocking:** Grouping units by a nuisance factor and ensuring treatments are represented within each block.
+* **Randomized Complete Block Design:** A blocked design where every block contains a complete, balanced set of treatment levels.
+* **Split-plot design:** A design where one factor is randomized at a coarse scale and another at a finer scale.
+* **Pseudoreplication:** Treating non-independent observations as if they were independent replicates.
+
+---
+
+### Conceptual Takeaways
+
+* Sampling error cannot be stopped, but design can contain it.
+* More data is not the only path to more power. Reducing irrelevant variation can be just as important.
+* Balanced designs are especially important when estimating differences.
+* Matching and blocking are helpful because they let the analysis account for known sources of variation.
+* Blocking/matching and pseudoreplication are not contradictions. Grouping is useful when modeled and misleading when ignored.
+* Small effects are expensive to detect because required sample size grows roughly with one over effect size squared.
+* Researchers should choose a biologically meaningful effect size before planning power.
+
+---
+
+### Figures in This Section
+
+* **Matching figure:** Pink and white flowers are paired on the same plant. Use this to show how within-pair comparison removes plant-to-plant variation.
+* **Blocking figure:** Each field site contains a balanced set of pink and white RILs. Use this to show how each block becomes a mini-experiment.
+* **Split-plot figure:** Fertilizer is randomized at the patch level and petal color within patch. Use this to show nested randomization scales.
+
+---
+
+### Notes for Tutor Responses
+
+If a student says "just increase sample size," ask:
+
+> Is the problem too few independent units, too much irrelevant variation, or both?
+
+If a student asks whether blocking creates pseudoreplication, try:
+
+> The grouping is not the problem by itself. What happens if the analysis ignores that grouping?
+
+If a student asks what effect size to use in power analysis, guide them back to biology:
+
+> What is the smallest difference that would actually matter for the scientific question?
+
+---
+
+### Common Student Confusions
+
+* Thinking power only means sample size.
+* Thinking standard deviation of raw data and precision of an estimate are the same thing.
+* Thinking balanced design is about fairness rather than precision.
+* Thinking matching or blocking removes the need to model the design.
+* Treating repeated measures on the same unit as independent samples.
+* Thinking 80% power is a magic rule rather than a convention.
+* Forgetting to plan for lost samples, dead plants, degraded RNA, dropouts, or missing data.
+
+---
+
+### Tutor Guidance
+
+Keep power grounded in the biological question. Do not let students chase "significance" for its own sake. Ask what estimate or effect size would be informative.

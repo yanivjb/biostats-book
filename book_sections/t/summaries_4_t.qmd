@@ -1,4 +1,4 @@
-## • 14. Data summaries for t {.unnumbered #summaries_4_t}
+## • 15. Data summaries for t {.unnumbered #summaries_4_t}
 
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
@@ -47,7 +47,7 @@ range_shift <- read_csv(range_shift_file) |>
 We have previously considered standard [summaries of univariate data](#univariate_summaries). Because the $t$-distribution assumes a normal distribution, we  focus on standard parametric estimates. These include:    
 
 - **The mean:** A measure of central tendency, $\bar{x} = \frac{\Sigma x_i}{n}$.    
-- **The standard deviation:** A measure of spread, $s = \frac{\Sigma(x_1-\bar{x})^2}{n-1}$.    
+- **The standard deviation:** A measure of spread, $s =\sqrt{\frac{\Sigma(x_i-\bar{x})^2}{n-1}}$.    
 - **Cohen's D:** A standardized measure of effect size, $D = \frac{\bar{x}-\mu_0}{s}$. 
 
 
@@ -98,7 +98,7 @@ So, our observed Cohen's D of 1.28 means that this effect is quite strong!
 
 ## Data visualization   
 
-We will develop a few visualizations of our data. For now, I present a simple histogram.  @fig-histele, clearly shows that most species have moved uphill. It also allows us to evaluate if the data are  normalish, as assumed by the t distribution. We spend the next section thinking harder about assumptions of the t distribution, and if our data.  
+We will develop a few visualizations of our data. For now, I present a simple histogram.  @fig-histele, clearly shows that most species have moved uphill. It also allows us to evaluate if the data are  normalish, as assumed by the t distribution. We spend the next section thinking harder about assumptions of the t distribution, and if our data meet these assumptions.  
 
 ```{r}
 #| eval: false

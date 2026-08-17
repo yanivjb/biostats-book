@@ -1,4 +1,4 @@
-## •  19. ANOVA Example  {.unnumbered  #anova_example}
+## •  18. ANOVA Example  {.unnumbered  #anova_example}
 
 ```{r}
 #| echo: false

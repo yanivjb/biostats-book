@@ -1,0 +1,206 @@
+# 12. Study Design {.unnumbered #study_design}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(ggforce)
+library(patchwork)
+library(tidyr)
+library(janitor)
+library(forcats)
+library(tufte)
+source("../_common.R")
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+
+**Motivating Scenario:**
+
+You are planning a study, or reading someone else's, and you want to know what claims the design can actually support.
+
+**Learning Goals: By the end of this chapter, you should be able to:**
+
+- Explain why statistical analysis cannot rescue a badly designed study.
+- Distinguish sampling, measurement, and assignment as separate design problems.
+- Explain how random assignment supports causal claims.
+- Identify common threats to validity.
+- Explain pseudoreplication and match the unit of analysis to the unit of randomization.
+- Describe how power and precision influence study planning.
+- Separate what an observational study shows from what it merely suggests.
+
+:::
+
+---
+
+> To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of.</br></br>
+>
+> `r tufte::quote_footer('--- R.A. Fisher, "Presidential Address to the First Indian Statistical Congress," 1938.')`
+
+---
+
+<article class="drop-cap">Statisticians (or, at least, frequentist statisticians) believe that the TRUTH is out there. That is, that populations have true parameters, that a treatment has a true effect, and the like.</article></br>
+
+At the same time, they argue that this truth is blurred by sampling error, sampling bias, the imperfect fit between statistical and biological models, and scientific studies that cannot unambiguously speak to the question they were built to address.
+
+:::aside
+Professionally, I have spent much effort trying to make claims from pre-existing data. I find this fun because there is so much data out there to make use of. But I've also felt the intense frustration that comes with wishing I'd actually designed the study myself."
+:::
+
+Fisher's quote (above) can be taken to mean that thinking about statistics while designing a study lets us actually answer our question, while running statistics on a pile of preexisting data is more likely to reveal problems with the data than to answering the question.
+
+So, now that we have an understanding of the basics of statistics and before we dive deep into the world of common statistical models, it is worth taking some time to think hard about designing scientific studies.
+
+### The goals of statistics
+
+Given the view that the truth is out there to be found, the main goal of statistics is to provide tools to uncover such truth. I break this overarching goal into three subgoals:
+
+- **Describe things:** This means estimating population parameters ranging from simple means to complex parameters in statistical models. Because we know that sampling error will cause estimates from samples to deviate from true population parameters, these estimates should usually come with a measure of uncertainty. So, for example, the slope of 0.13 in @fig-pairwise2 A describes the expected increase in the proportion of hybrid seeds for every 1 mm increase in anther-stigma distance.</br></br>
+
+- **Test the null:** We are often interested in the blunt question of if the true population parameters differ from some boring value proposed by the null hypothesis. That is, is the difference from the null and the observations easy to chalk up to sampling error if the null were true. All null hypotheses in @fig-pairwise2 are strongly rejected with very small p-values. These results suggest that observations like ours are unlikely under the simple null.</br></br>
+
+- **Infer causation:** We want to learn about the biological process that generates our observations. So, for example, in our Clarkia RILs, is the relationship between anther-stigma distance and the proportion of hybrid seeds (@fig-pairwise2 A) caused by anther-stigma distance? Or is it an indirect relationship mediated by the strong association between anther-stigma distance and petal color, which itself is strongly associated with the proportion of hybrid seeds?
+
+```{r}
+#| echo: false
+#| column: page-right
+#| fig-cap: "The proportion of hybrid seed set in parviflora RILs is strongly associated with anther-stigma distance (A). But anther-stigma distance differs by petal color (B), and petal color is also associated with the proportion of hybrid seed (C)."
+#| label: fig-pairwise2
+#| fig-height: 3
+#| fig-width: 12
+library(ggplot2)
+library(ggforce)
+library(patchwork)
+library(readr)
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+
+small_theme <- theme(
+  legend.position = "none",
+  axis.title = element_text(size = 14),
+  axis.text  = element_text(size = 14),
+  plot.title = element_text(size = 14),
+  plot.subtitle = element_text(size = 14, face = "italic")
+)
+
+violin_summary <- function() {
+  list(
+    geom_violin(alpha = .5),
+    geom_sina(alpha = .3),
+    stat_summary(
+      fun.data = mean_se,
+      color = "red",
+      geom = "errorbar",
+      width = .25,
+      linewidth = 1.2
+    ),
+    scale_fill_manual(values = c("pink", "white"))
+  )
+}
+
+a <- ggplot(rils, aes(x = asd_mm, y = prop_hybrid)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm", formula = y ~ x) +
+  labs(
+    title = "A) Hybrid seed ~ ASD",
+    subtitle = expression(slope == 0.13*"," ~ italic(P) == 5.61 %*% 10^-5),
+    x = "Anther-stigma distance (mm)",
+    y = "Proportion hybrid seed"
+  ) +
+  small_theme
+
+b <- ggplot(rils, aes(x = petal_color, y = asd_mm, fill = petal_color)) +
+  violin_summary() +
+  labs(
+    title = "B) ASD ~ petal color",
+    subtitle = expression(CohensD == 0.58*"," ~ italic(P) == 1.01 %*% 10^-8),
+    x = "Petal color",
+    y = "Anther-stigma distance (mm)"
+  ) +
+  small_theme
+
+c <- ggplot(rils, aes(x = petal_color, y = prop_hybrid, fill = petal_color)) +
+  violin_summary() +
+  labs(
+    title = "C) Hybrid seed ~ petal color",
+    subtitle = expression(CohensD == 0.84*"," ~ italic(P) < 1 %*% 10^-15),
+    x = "Petal color",
+    y = "Proportion hybrid seed"
+  ) +
+  small_theme
+
+(a | b | c)
+```
+
+### Experiments: One weird trick to infer causation
+
+**A randomized control experiment,** in which *treatments are randomly assigned to individuals* is considered the gold-standard for establishment of causation. If neither the subjects nor the experimenters know the treatment, a randomized control study can allow us to infer causation. However, some caution is warranted here - a causal relationship in a controlled experiment under specified settings may not imply a causal relationship in nature. For example, exceptionally high doses of a pesticide may cause squirrels to die, but this does not mean that the smaller dose of insecticide found around farm fields is responsible for squirrel death.
+
+Randomized control experiments are often unfeasible, impractical, and/or impossible. As such, scientists often rely on **observational studies** in which *treatments are not randomly assigned to individuals*.  In observational studies, **confounding variables** – *unmodelled variables which distort the relationship between explanatory and response variables* – can bias our interpretation. We therefore must show extreme caution when attempting to learn about causation from observational studies. However, the rapidly developing field of causal inference is establishing a set of approaches that can help us disentangle correlation and causation.
+
+---
+
+*Remember:* the distinction between an experimental and an observational experimental study is not about the equipment used or the lab vs. the field. For example, comparing patterns of methylation between live bearing and egg laying species of fish is an observation, not an experiment, as we did not randomly assign live-bearing or egg-laying to fish in this study.
+
+---
+
+### Designing scientific studies
+
+Because we analyze scientific data with statistics, we should consider these goals when designing a scientific study. Specifically, we aim to design studies that:
+
+
+- Estimate parameters with enough precision to address our motivating questions. This means developing strategies to reduce sampling error.  
+- Avoid confounds and artifacts that might otherwise bias our estimates.  
+- Distinguish association from causation. When possible, experiments do this by manipulating explanatory variables and randomly assigning individuals to treatments. When experiments are not possible, we must think carefully about alternative explanations for the patterns we observe.
+
+
+### Looking ahead 
+
+In this chapter, I lay out best practices for designing studies that can actually answer the question that motivated them. This includes how to minimize sampling error, avoid bias, build experiments that test your idea directly, and how to collect and consider  observational data when we cannot do an experiment.
+
+:::aside
+.
+:::
+
+
+
+
+
+
+
+---
+
+Estimation
+Hypothesis testing, and
+Causal inference,
+
+what the true experimental unit is;
+how treatments will be randomized;
+what needs to be replicated or blocked;
+what controls and measurements are needed;
+how much precision or power is required;
+and what analysis will correspond to the design.
+
+
+This chapter sits between randomization-based inference and linear models because design comes before modeling.
+Shuffling helps us ask what random chance could do.
+Linear models help us describe patterns in data.
+But neither can tell us whether the data were collected in a way that makes our conclusion reasonable.
+
+In this section, we ask a different kind of statistical question: what sort of claim is this study allowed to make?
+
+:::note
+Writer note: This part page should probably be short. Use it to frame the whole study-design section as a bridge: randomization/shuffling showed how chance behaves; study design asks whether the data-generating process matches the scientific claim; linear models come next.
+:::
+

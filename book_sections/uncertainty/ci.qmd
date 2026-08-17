@@ -26,7 +26,7 @@ boot_dist <- read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/ref
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:** We understand the importance of quantifying uncertainty, and can build a bootstrap distribution. We now want to put a reasonable range on our estimate.  Here, we will learn how a confidence interval solves this problem, and what it does and does not mean."
+**Motivating Scenario:** We understand the importance of quantifying uncertainty, and can build a bootstrap distribution. We now want to put a reasonable range on our estimate.  Here, we will learn how a confidence interval solves this problem, and what it does and does not mean.
 
 **Learning Goals: By the end of this subsection, you should be able to:**
     
@@ -45,7 +45,7 @@ boot_dist <- read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/ref
 
 ## Understanding Confidence Intervals
 
-Confidence intervals offer a different way to describe uncertainty than the standard error. While the SE is a single number representing expected error (e.g. a standard error of 2.37% t hybridization around our estimated 15% hybridization rate for  *parviflora* RILs in GC), a **Confidence Interval provides a range of plausible values for the true population parameter**. 
+Confidence intervals offer a different way to describe uncertainty than the standard error. While the SE is a single number representing expected error (e.g. a standard error of 2.37), a **Confidence Interval provides a range of plausible values for the true population parameter**. 
 
 Confidence intervals can be tricky to interpret and explain. I think about a confidence interval as a net that does or does not catch the true population parameter. If we set a 95% confidence level, as is statistical tradition, we expect ninety-five of every one hundred 95% confidence intervals to capture the true population parameter.
 

@@ -1,4 +1,4 @@
-## • 19. Multiple regression summary {.unnumbered #multiple_regression_summary}
+## • 20. Multiple regression summary {.unnumbered #multiple_regression_summary}
 
 
 ---

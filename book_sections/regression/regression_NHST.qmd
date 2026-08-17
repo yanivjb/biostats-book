@@ -1,4 +1,4 @@
-## • 18. Regression: NHST   {.unnumbered #regression_NHST}
+## • 19. Regression: NHST   {.unnumbered #regression_NHST}
 
 
 
@@ -78,7 +78,7 @@ Reassuringly we will see that the t- and F- based analyses result in the exact s
 
 ### Does the intercept differ from zero?  
 
-Who cares that question is dumb. I will not calculate it for the intercept because its f$^&!ng stupid. *HINT:* It's a t-distribution and the so-called null is 0.
+NOBODY CARES!!! That question is dumb!!! I will not calculate it for the intercept because it's f$^&!ng stupid. *HINT:* It's a t-distribution and the so-called null is 0.
 
 ### Does the slope differ from zero?  
 
@@ -301,7 +301,7 @@ anova(hybrid_lm) |>
 
 ## Permutation based NHST
 
-Because our data do not perfectly match assumptions of the linear regression (see [prior section](#regression_assumptions)), we want to make sure this p-value is not fooling us. A simple way to do this is by a permutation test. As you may recall from the [chapter on permutation](#sec-shuffling) this amounts to generating a null distribution by shuffling the association between explanatory and response values: 
+Because our data do not perfectly match assumptions of the linear regression (see [prior section](#regression_assumptions)), we want to make sure this p-value is not fooling us. A simple way to do this is by a permutation test. As you may recall from the [chapter on permutation](#shuffling) this amounts to generating a null distribution by shuffling the association between explanatory and response values: 
 
 ```{r}
 #| eval: false

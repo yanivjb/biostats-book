@@ -71,13 +71,13 @@ We aimed to measure three kids per mom, but in some cases only one or two surviv
 
 - **The consequence:** If we naively used all  239 observations to generate a sampling distribution we would be overconfident in our estimates.  <br><br>
 
-- **Potential solutions:** So far, I've made these data independent by randomly choosing one kid per mom. An alternative approach would be to take the mean phenotype of the offspring, or two build a fancier model. For now I go with the random subsample because it is the most straightforward approach. 
+- **Potential solutions:** So far, I've made these data independent by randomly choosing one kid per mom. An alternative approach would be to take the mean phenotype of the offspring, or to build a fancier model. For now I go with the random subsample because it is the most straightforward approach. 
 
 
 
 
 
-### Pseudoreplication in Experimental Design
+### Pseudo replication in Experimental Design
 
 
 Let's switch from our hybrid zone study to our RIL experiment. Recall that some RILs were pink-flowered and some were white-flowered. We planted the RILs at  four field sites, and watched pollinator visitation and genotyped seeds to estimate the proportion of seeds on a flower that were hybrids. 
@@ -106,7 +106,7 @@ ril_data |>
     mutate(`petal color` = ifelse(location == "US", "pink\n(from US)","white\n(from LB)"))|>
     ggplot(aes(x = `petal color`, y = prop_hybrid, color = petal_color, fill = petal_color))+
     geom_jitter(height =0, width = .3, size= 3.5, alpha = .8)+
-    stat_summary(fun.y = "mean", geom= "bar", alpha = .3)+
+    stat_summary(fun = "mean", geom= "bar", alpha = .3)+
     stat_summary(fun.data  = mean_cl_boot, geom= "errorbar",
                  width = .2, color = "black",linewidth =1)+
     scale_color_manual(values = c("pink","white"))+
@@ -120,7 +120,7 @@ ril_data |>
 
 
 :::note
-**Psedudoreplication or sampling bias?** It's not clear to me if the example above is a case of pseudoreplication or sampling bias, it's probably both. 
+**Pseudoreplication or sampling bias?** It's not clear to me if the example above is a case of pseudoreplication or sampling bias, it's probably both. 
 
 **This is clearly pseudoreplication**  because unearned confidence in our estimated hybrid seed proportion comes from the fact that our repeated measurements come from  one location for each flower color. Thus our estimate of hybrid seed proportion is shielded from the variation across locations. 
 

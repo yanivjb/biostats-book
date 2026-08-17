@@ -67,9 +67,7 @@ The **Null Hypothesis ($H_0$)** is the ultimate skeptic. It argues that any patt
 knitr::include_graphics("https://tenor.com/view/ok-csb-cool-story-bro-tired-yawn-gif-5625279.gif")
 ```
 
-The **Alternative Hypothesis ($H_A$ or $H_1$)** is the claim that the null hypothesis is not true.  It claims that something other than random sampling error is responsible for the observed pattern.    This is a vague claim. So the alternative hypothesis is not making a specific claim -- its just there as a grab bag for all not in the null..  
-
-The Alternative Hypothesis ($H_A$ or $H_1$) is the claim that the null hypothesis is not true — that something other than random sampling error is responsible for the observed pattern.
+The **Alternative Hypothesis ($H_A$ or $H_1$)** is the claim that the null hypothesis is not true.  It claims that something other than random sampling error is responsible for the observed pattern.    This is a vague, so the alternative hypothesis is not making a specific claim -- rather  it's a grab bag for all ways the null could be wrong. 
 
 
 For our flower example, the null and alternative hypotheses are:
@@ -184,7 +182,7 @@ p_two + p_one
 
 @fig-tails shows the difference between a one- and two- tailed test. We almost always use a two-tailed test -- in which we note deviations from the null in either direction, unless one of the directions is completely meaningless. For example: 
 
-- Above, we conducted a **two-tailed test** of the null hypothesis. According to this, standard practice, thee null is that  proportions "differ" between white and pink morphs. It did not  specify a direction. In a wo tailed test, we are open to the effect going in either direction. 
+- Above, we conducted a **two-tailed test** of the null hypothesis. According to this, standard practice, the null is that  proportions "differ" between white and pink morphs. It did not  specify a direction. In a two-tailed test, we are open to the effect going in either direction. 
 
 - A **one-tailed test** is when we only care about a specific direction (e.g., $H_A$: pink flowers have a *higher* proportion of hybrids). In practice, one-tailed tests are rare and often inappropriate because we'd almost always want to know about a strong effect in the unexpected direction. Additionally, one-tailed tests often breed distrust in your audience -- they signal that you are trying to pull a fast one.   
 

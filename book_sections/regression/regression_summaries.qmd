@@ -1,4 +1,4 @@
-## • 18. Regression summaries {.unnumbered #regression_summaries}
+## • 19. Regression summaries {.unnumbered #regression_summaries}
  
 ```{r}
 #| message: false
@@ -199,7 +199,7 @@ This means that petal area explains about 12% of the variation in proportion hyb
 Later in this chapter, we will see that $R^2$ falls out of the  ANOVA table for regression. There, we will see that regression can be understood as dividing the total variation in $Y$ into variation explained by the model and variation left unexplained as residual error.
 
 ::: warning 
-Be careful! an $R^2$ of  0.12$ does not mean that petal area causes 12% of hybrid seed production. It also does not mean we can predict each RIL’s hybrid seed production with 88% error. 
+Be careful! An $R^2$ of  0.12 does not mean that petal area causes 12% of hybrid seed production. It also does not mean we will predict each RIL’s hybrid seed production with 88% error. 
 
 Rather, an $R^2$ 0.12  means that, in this sample, a linear model using petal area accounts for about 12% of the total variation in proportion hybrid seed.
 

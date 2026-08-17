@@ -1,4 +1,4 @@
-## •  17. Post hoc tests  {.unnumbered  #post_hoc}
+## •  18. Post hoc tests  {.unnumbered  #post_hoc}
 
 
 ```{r}

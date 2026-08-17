@@ -294,14 +294,16 @@ include_graphics("../../figs/stats_foundations/sampling/petal_area_sampling_dist
 
 :::aside
 
-> "Insanity is doing the same thing over and over and expecting different results." 
-> 
+> "Insanity is doing the same thing over and over and expecting different results." </br></br>
+>     
+>   
 >`r tufte::quote_footer('— Attributed to Albert Einstein')`
 
+---
 
-
-> "The sampling distribution is doing the same thing over and over and expecting the different results." 
->
+> "The sampling distribution is doing the same thing over and over and expecting the different results."  </br></br>
+>     
+>     
 > `r tufte::quote_footer('— Me')`
 
 :::
@@ -365,7 +367,7 @@ We cannot eliminate sampling error, but we can do things to decrease it. Here ar
 
 ```{r} 
 #| label: fig-smallN
-#| fig.cap: 'Comparing the sampling distribution of chinstrap penguins in samples of size five, thirty, and one hundred. The true population proportion is 0.198. Bars are colored by whether they are likely to be reported (less than 5% or more than 39%), with unremarkable observations in dark green.'
+#| fig.cap: 'Comparing the sampling distribution of chinstrap penguins in samples of size five, thirty, and one hundred. The true population proportion is 0.198. Bars are colored by whether they are likely to be reported (less than 5% or more than 50%), with unremarkable observations in dark green.'
 #| fig-alt: "Three histograms show the sampling distribution of the proportion of Chinstrap penguins from repeated samples of size 5, 30, and 100. A vertical dashed red line marks the true population proportion (about 0.20). With sample size 5, estimates vary widely, ranging from 0 to over 0.6, with many extreme values. With sample size 30, the estimates cluster more tightly around the population value but still show moderate spread. With sample size 100, the distribution is narrow and centered near 0.20. Bars are colored to indicate values that might be \"worth reporting\" (extreme values below 0.05 or above about 0.5, shown in black) versus more typical estimates (shown in green)."
 #| echo: FALSE
 #| message: FALSE
@@ -409,20 +411,23 @@ ggplot(penguin_samples_by_n, aes(x = prop, fill = `Worth reporting`)) +
 
 Because sampling error is most pronounced in small samples, estimates from small samples can easily mislead us. @fig-smallN compares the sampling distributions for the proportion of Chinstrap penguins in samples of size five, thirty, and one hundred. About one-third of samples of size five have exactly zero Chinstrap penguins. Seeing no Chinstrap penguins in such a sample would be unsurprising but could lead to misinterpretation. Imagine the headlines:
 
-> "Chinstrap penguins have disappeared, and may be extinct!..."
-> `r tufte::quote_footer('--- Some unscrupulous newspaper, probably.')`
+> "Chinstrap penguins have disappeared, and may be extinct!..."   </br>  
+>  
+> `r tufte::quote_footer('--- Some unscrupulous newspaper, probably.')`</br>
 
 The very same sampling procedure from that same population (with a sample size of five) could occasionally result in an extreme case where more than half the penguins are Chinstrap penguins (this happens in about 6% of samples of size five). Such a result would yield a quite different headline:
 
-> "Chinstrap penguins on the rise — could they be replacing other penguin species?"
-> `r tufte::quote_footer('--- Some unscrupulous newspaper, probably.')`
+> "Chinstrap penguins on the rise — could they be replacing other penguin species?"   </br>
+>    
+> `r tufte::quote_footer('--- Some unscrupulous newspaper, probably.')`</br>
 
 A sample of size thirty is much less likely to mislead—it will only result in a sample with zero or a majority of Chinstrap penguins about once in a thousand times.
 
 The numbers I provided above are correct and somewhat alarming. But it gets worse—since unremarkable numbers are hardly worth reporting (illustrated by the light grey coloring of unremarkable values in @fig-smallN), we’ll rarely see accurate headlines like this:
 
-> "A survey of penguins shows an unremarkable proportion of three well-studied penguin species..."
-> `r tufte::quote_footer('--- A responsible, but quite boring newspaper.')`
+> "A survey of penguins shows an unremarkable proportion of three well-studied penguin species..." </br>
+>   
+> `r tufte::quote_footer('--- A responsible, but quite boring newspaper.')`</br> 
 
 
 **In summary -- whenever you see an exceptional claim, be sure to look at the sample size and measures of uncertainty**. For a deeper dive into this issue, check out this optional reading: [The Most Dangerous Equation](https://www.americanscientist.org/article/the-most-dangerous-equation) [@wainer2007].

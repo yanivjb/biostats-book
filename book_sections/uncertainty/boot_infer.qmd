@@ -41,7 +41,7 @@ gc_rils <- ril_data |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:** We understand the importance of quantifying uncertainty, and can build a bootstrap distribution. We now want to put a reasonable range on our estimate.  Here, we will learn how a confidence interval solves this problem, and what it does and does not mean."
+**Motivating Scenario:** We understand the importance of quantifying uncertainty, and can build a bootstrap distribution. We now want to put a reasonable range on our estimate.  Here, we will learn how a confidence interval solves this problem, and what it does and does not mean.
 
 **Learning Goals: By the end of this subsection, you should be able to:**
     
@@ -190,7 +190,7 @@ gc_rils                           |>
 4.  Repeat this a bunch of times to find the bootstrap distribution.
 5.  Quantify uncertainty, for example, as the bootstrap standard error and the bootstrap 95% confidence interval.
 
-I could code this myself, but it's tedious. [`infer`](https://infer.netlify.app/) makes it straightforward. The code below uses the formula syntax `prop_hybrid ~ petal_color` (as we did in our [linear model setion](#linear_models)) inside [`specify()`](https://infer.netlify.app/reference/specify) to indicate our interest in this relationship. We then tell R to [`generate()`](https://infer.netlify.app/reference/generate) the bootstrap distribution and [`calculate()`](https://infer.netlify.app/reference/calculate) to find the `"diff in means"` for each bootstrap replicate:
+I could code this myself, but it's tedious. [`infer`](https://infer.netlify.app/) makes it straightforward. The code below uses the formula syntax `prop_hybrid ~ petal_color` (We will see more of this when we dive into [#linear_models](#linear_models)) inside [`specify()`](https://infer.netlify.app/reference/specify) to indicate our interest in this relationship. We then tell R to [`generate()`](https://infer.netlify.app/reference/generate) the bootstrap distribution and [`calculate()`](https://infer.netlify.app/reference/calculate) to find the `"diff in means"` for each bootstrap replicate:
 
 ```{r}
 library(infer)
@@ -309,7 +309,7 @@ ggplot( gc_rils, aes(x = petal_area_mm, y = prop_hybrid))+
         axis.title = element_text(size = 30))
 ```
 
-Here we conclude that a reasonable estimate of the increase in proportion hybrid seed for each unit increase in square mm of petal area  lies between  `r ((boot_slopes |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`. Importantly, this confidence  interval excludes zero, so  we are pretty sure that the proportion of hybrid see increase with petal area as seen in @fig-slope. For me this is super helpful, because without reflection, we could wrongly conclude that a slope of 0.00566 is unimpressive.
+Here we conclude that a reasonable estimate of the increase in proportion hybrid seed for each unit increase in square mm of petal area  lies between  `r ((boot_slopes |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`. Importantly, this confidence  interval excludes zero, so  we are pretty sure that the proportion of hybrid seed increase with petal area as seen in @fig-slope. For me this is super helpful, because without reflection, we could wrongly conclude that a slope of 0.00566 is unimpressive.
 
 ### ... and more! 
 

@@ -1,4 +1,4 @@
-## • 12. Residuals {.unnumbered #resids}
+## • 13. Residuals {.unnumbered #resids}
 
 
 ```{r}

@@ -1,4 +1,4 @@
-## • 20. Interactions in linear models {.unnumbered #linear_models_w_interactions}
+## • 21. Interactions in linear models {.unnumbered #linear_models_w_interactions}
 
 
 ---

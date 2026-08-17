@@ -227,7 +227,7 @@ gene_lengths <- read_csv(link)
 
 `r hide("Click for answer")`
 
-This is the entire populations. We have a parameter known withoutsampling error, so there is not standard error.
+This is the entire populations. We have a parameter known without sampling error, so there is not standard error.
 
 `r unhide()`
 

@@ -1,0 +1,81 @@
+## Study Design, "Observational Studies" Section (Tutor Knowledge Base)
+
+**Context:**
+This section argues that observational studies are not failed experiments. Sometimes experiments are impossible, unethical, too expensive, or too artificial. Observational studies can teach us about the real world, but they must be designed carefully. The section imports ideas from experimental design: thoughtful comparison groups, stratifying, matching, systematic sampling, natural experiments, triangulation, and honest reporting.
+
+---
+
+### Learning Goals
+
+By the end of this section, students should be able to:
+
+1. Explain why observational studies need careful design.
+2. Make meaningful comparisons in observational data.
+3. Use stratifying and matching to reduce confounding.
+4. Recognize natural experiments as useful opportunities for stronger causal inference.
+5. Explain why systematic sampling matters in observational studies.
+6. Evaluate alternative explanations for an observed association.
+7. Explain triangulation as combining multiple lines of evidence.
+8. Report observational findings honestly, with both support and caveats.
+
+---
+
+### Key Concepts and Definitions
+
+* **Observational study:** A study in which the researcher observes existing variation rather than randomly assigning treatment.
+* **Stratifying:** Comparing within levels of a suspected confounder, similar in spirit to blocking.
+* **Matching:** Pairing observations that are similar on potential confounders so the comparison focuses on the variable of interest.
+* **Residual confounding:** Confounding that remains after matching, stratifying, or adjustment.
+* **Natural experiment:** A real-world situation where something close to random assignment occurs without the researcher creating it.
+* **Systematic sampling:** Sampling according to a planned process rather than convenience or noticing.
+* **Triangulation:** Combining multiple lines of evidence with different weaknesses to build a stronger case.
+
+---
+
+### Conceptual Takeaways
+
+* Observational studies are designed. They are not just things someone noticed.
+* The lack of random assignment means confounding is always a central concern.
+* Good observational design chooses fair comparisons rather than blindly comparing two groups.
+* Stratifying and matching are observational analogs of blocking and matching in experiments.
+* Natural experiments are valuable because they can create unusually fair comparisons.
+* Observational claims should be honest: strong enough to be useful, caveated enough not to fool yourself.
+
+---
+
+### Figures and Examples in This Section
+
+* **Experimental astrophysics xkcd:** Use this to explain why experiments are sometimes impossible or absurd.
+* **Admixture table by site and petal color:** Use this to show why comparisons within sites are more informative than pooled comparisons when sites differ.
+* **Matched-pair Clarkia plot:** Pairs RILs within location and petal color by anther-stigma distance, then asks whether differences in petal area track differences in hybrid seed.
+* **Selection bias xkcd:** Use this to discuss why systematic sampling matters.
+* **Pink flowers vs introgression example:** Use this to teach competing causal explanations and distinguishing predictions.
+
+---
+
+### Notes for Tutor Responses
+
+If a student says observational studies cannot say anything useful, ask:
+
+> If we cannot ethically or biologically run the experiment, what design choices would make the comparison more fair?
+
+If a student asks about a correlation in observational data, guide them through:
+
+> Could X cause Y? Could Y cause X? Could something else cause both? Could this be chance? What prediction would distinguish those stories?
+
+---
+
+### Common Student Confusions
+
+* Thinking observational studies are useless because they are not randomized experiments.
+* Thinking observational studies are automatically realistic and therefore automatically better.
+* Comparing pooled groups while ignoring major confounders like site.
+* Thinking matching fully solves confounding without checking residual confounding.
+* Treating a natural experiment as magic rather than as an opportunity that still needs careful analysis.
+* Hiding caveats because they seem to weaken the argument.
+
+---
+
+### Tutor Guidance
+
+Use a balanced tone: experiments are magical for causation, but observational studies are necessary for understanding the real world. The student should leave with both skepticism and respect.

@@ -7,9 +7,9 @@
 
 **Learning goals: By the end of this chapter you should be able to:**
 
-1.  Use R's `rnorm()` function to simulate random draws from any normal distribution.
+1.  Use R's [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to simulate random draws from any normal distribution.
 2.  Simulate a sampling distribution of the mean of a normally distributed random variable.
-3.  Use `rnorm()`'s output to verify a theoretical properties of the normal distribution.
+3.  Use [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html)'s output to verify the theoretical properties of the normal distribution.
 
 
 :::
@@ -40,7 +40,7 @@ library(tidyr)
 In the previous section, we used a web app to calculate probabilities from a normal distribution. Here, I introduce R's [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to generate random data from the normal distribution. The simple [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) simulation below will give us the same answer as our calculations above. I teach simulation because I think its randomness builds intuition, and because simulation also works in more complex cases where there isn't a mathematical answer.
 
 
-## Simple Simulation with `rnorm()`   
+## Simple Simulation with [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html)   
 
 ```{r}
 #| echo: false
@@ -56,7 +56,7 @@ datatable(normal_sim |> mutate(x = round(x, digits = 4)))
 
 We previously saw that about 68% of a normal distribution falls within one standard deviation of the mean. We can validate this for ourselves by a simple simulation, using our log-transformed petal area ($X \sim \mathcal{N}(1.78,\,0.01)$) as an example. To do so 
 
-- We first simulate the data with `rnorm()` (see simulated data in the margin).    
+- We first simulate the data with [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) (see simulated data in the margin).    
 - We then find the proportion of draws within one standard deviation (i.e. greater than 1.68 and less than 1.88, code and answer below:)  
 
 ```{r}
@@ -71,7 +71,7 @@ normal_sim |>
 This is close to our mathematical result, but  sampling variability leaves this a bit off our precise expectation of 0.6826895. 
 
 :::note
-`rnorm()` (and all `_norm()` functions) defaults to the standard normal, so `rnorm(n = 10)` generate a sample of ten observations from a normal distirbution. 
+[`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) (and all `_norm()` functions) defaults to the standard normal, so `rnorm(n = 10)` generates a sample of ten observations from a normal distribution. 
 :::
 
 ### Multiple samples from a normal

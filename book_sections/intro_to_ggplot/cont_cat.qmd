@@ -83,7 +83,8 @@ gc_sr_rils <- ril_data |>
 
 ```{r}
 #| eval: false 
-gc_sr_rils # Pipe data into ggplot
+# Example: Pipe data into ggplot
+gc_sr_rils |>                           
   ggplot(aes(x = location, y = mean_visits))
 ```
 

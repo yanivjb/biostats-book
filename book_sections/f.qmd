@@ -1,4 +1,4 @@
-# 16. F this! {#f}
+# 17. F this! {#f}
 
 
 ```{r}
@@ -19,7 +19,7 @@ source("../_common.R")
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating scenario:**  You can compare two groups a two-sample t-test. You have also been told that a two-sample t-test is "just a specific linear model." So you are now ready to build from this t-test understanding to the wider world of linear models. 
+**Motivating scenario:**  You can compare two groups with a two-sample t-test. You also read my repeated words "that a two-sample t-test is just a specific linear model." So you are now ready to build from this t-test understanding to the wider world of linear models. 
 
 **Learning goals: By the end of this chapter, you should be able to**  
 

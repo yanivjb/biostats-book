@@ -1,4 +1,4 @@
-## • 19. Parsing effect sizes {.unnumbered #effect_sizes}
+## • 20. Parsing effect sizes {.unnumbered #effect_sizes}
  
  
 ```{r}

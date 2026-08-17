@@ -1,4 +1,4 @@
-## • 18. Regression caveats   {.unnumbered #regression_caveats}
+## • 19. Regression caveats   {.unnumbered #regression_caveats}
 
 
 
@@ -216,7 +216,7 @@ You can usually spot extreme values by looking at a scatter plot like @fig-extre
 
 ---
 
-#### **Identifying exteme points with [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)** 
+#### **Identifying extreme points with [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)** 
 
 All summaries in @tbl-influential-points are output by [`broom`](https://broom.tidymodels.org/)'s   [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function. The code below reminds you of the syntax required to generate something like @tbl-augment: 
 
@@ -243,7 +243,7 @@ extreme_example |>
 
 ---
 
-#### **Identifying exteme points with [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) or [`autoplot()`](https://cran.r-project.org/web/packages/ggfortify/refman/ggfortify.html#autoplot.lm)**   
+#### **Identifying extreme points with [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) or [`autoplot()`](https://cran.r-project.org/web/packages/ggfortify/refman/ggfortify.html#autoplot.lm)**   
 We could peruse all of [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)'s output for each data point, or use our [`dplyr`](https://dplyr.tidyverse.org/) skills to find potentially concerning data points using thresholds in @tbl-influential-points.   However, these approaches are tedious.   
 
 ::: aside 

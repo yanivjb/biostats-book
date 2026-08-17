@@ -94,16 +94,41 @@ Variable assignment gets even more useful when we're dealing with the real kind 
 
 By  assigning these vectors to variables with reasonable names our code is so much clearer! 
 
+#### **Variable Assignment**   
 
 ```{r}
 petals_per_flower <- 4 
 num_flowers       <- c(1,   2, 3, 2)
 seeds_per_flower  <- c(3, 0.5, 1, 1)
+```
 
-petals_per_flower  * num_flowers               # total petals
+---
+
+#### **Math on assigned variables**
+
+We can calculate the total number of seeds per plant as follows
+
+```{r}
 num_flowers        * seeds_per_flower          # total seeds (for each plant)
+```
+
+We could even assign this to a variable: 
+
+```{r}
+total_seeds <- num_flowers        * seeds_per_flower  
+```
+
+--- 
+
+#### **Applying functions**
+
+We can find the total number of seeds in the sample by summing: 
+
+```{r}
 sum(num_flowers    * seeds_per_flower)         # total seeds (overall)
 ```
+
+Or, using `total_seeds`, we type  `sum(num_flowers * seeds_per_flower)` and get `r sum(num_flowers    * seeds_per_flower)`.
 
 
 ---

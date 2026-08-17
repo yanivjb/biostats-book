@@ -1,0 +1,104 @@
+# 12. Study Design {.unnumbered #study_design}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(ggforce)
+library(patchwork)
+library(tidyr)
+library(janitor)
+library(forcats)
+library(tufte)
+source("../_common.R")
+```
+
+::: {.motivation}
+
+**Motivating Scenario:**
+
+You are planning a study, or reading someone else's, and you want to know what claims the design can actually support.
+
+**Learning Goals: By the end of this chapter, you should be able to:**
+
+- Explain why statistical analysis cannot rescue a badly designed study.
+- Distinguish sampling, measurement, and assignment as separate design problems.
+- Explain how random assignment supports causal claims.
+- Identify common threats to validity.
+- Explain pseudoreplication and match the unit of analysis to the unit of randomization.
+- Describe how power and precision influence study planning.
+- Separate what an observational study shows from what it merely suggests.
+
+:::
+
+---
+
+> To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of.
+>
+> `r tufte::quote_footer('--- R.A. Fisher, "Presidential Address to the First Indian Statistical Congress," 1938.')`
+
+---
+
+
+:::aside
+Professionally, I have spent much effort trying to make claims from pre-existing data. I find this fun because there is so much data out there to make use of. But I've also felt the intense frustration that comes with wishing I'd actually designed the study myself.
+:::
+
+<article class="drop-cap">Fisher's quote can be taken to mean that thinking about statistics *while designing* a study lets us actually answer our question, while running statistics on a pile of preexisting data is more likely to reveal problems with the data than to answer the question. </article> 
+
+That is, statisticians (or, at least, frequentist statisticians) believe that the TRUTH is out there. That is, that populations have true parameters, that a treatment has a true effect and the like. They argue that this truth is blurred by sampling error, sampling bias, the imperfect fit between statistical and biological models. Thus the optimistic statistician believes that the TRUE answer to any scientific question can be found if the appropriate study can be designed. 
+
+
+So before entering the world of common statistical models (i.e. *"How do we analyze this data?"*), here I introduce a different kind of question. That is, we ask *"How do we design a study that is likely to answer the question we care about?"* Without this upfront thought we are often stuck trying to force the answers we can find into the questions we actually had.
+
+### The three goals of statistics 
+
+
+
+The main goal of statistics is to uncover truths from data. This goal breaks into three parts:
+
+- **Describe things.** Also, because estimates of population parameters (from simple means to complex model coefficients)  come with sampling error, we must include a measure of uncertainty. So, while designing a study, we want to make decisions that allow us to estimate parameters with enough precision to help us answer our questions.   
+
+- **Test the null.** We're often asking a blunt question, *is the true parameter different from some boring default value,* or is the difference we see in our sample easy to chalk up to sampling error? So, as we design a study, we want to plan a study that is likely to reject the null when the difference is likely meaningful, while not wasting effort on rejecting nulls when the true difference is biologically meaningless. We also want to design a study that ensures we reject the null for the right reasons, not because of some poor aspect of study design.
+
+- **Infer causation.** We want to know what actually generates our observations, not just what correlates with what. This is the most ambitious of the three goals of statistics. This is largely a design problem rather than an analysis problem. The right study design can teach us about causation with relatively simple analyses, while the wrong design can have no information about cause. 
+
+
+
+### Experiments: One weird trick to infer causation
+There are broadly two types of scientific studies: **experimental studies**, in which we change something and see what happens, and **observational studies**, in which we compare things as they already exist in the world.
+
+- **In a randomized control experiment**  *treatments are randomly assigned to individuals*.  Randomized control experiments are the gold standard for establishing causation. A well-executed randomized control experiment  lets us infer causation directly. Some caution is still warranted: a causal relationship in a controlled experiment under specified settings may not imply the same causal relationship in nature. E.g. exceptionally high doses of a pesticide may cause squirrels to die, but that doesn't mean the much smaller doses found around farm fields are responsible for squirrel death.
+
+- **In an observational study**, treatments are not randomly assigned. Observational studies are inferior to randomized control experiments for establishing causation, but they're often the only option when running an experiment is unfeasible, impractical, or impossible. Unfortunately, observational studies introduce a problem -- we cannot randomly assign treatments to individuals. That's a problem because if treatments aren't randomly assigned, the groups being compared can differ in other ways that have nothing to do with the question at hand. So a difference in the response variable might not reflect the effect we care about at all — it might just reflect **confounding variables** — *unmodeled variables that distort the relationship between explanatory and response variables*.
+
+
+--- 
+
+**Remember:** the distinction between an experimental and an observational study isn't about equipment, or lab versus field. Comparing patterns of methylation between live-bearing and egg-laying species of fish, for instance, is an observation, not an experiment — we didn't randomly assign live-bearing or egg-laying to the fish in that study.
+
+---
+
+
+### Looking ahead
+
+This chapter lays out best practices for designing studies that can actually answer the question that motivated them. We build on the ideas of sampling, sampling error, sampling bias, and uncertainty from [Chapter 8](#sampling) and [Chapter 9](#uncertainty), as well as our ideas about null hypothesis significance testing, and power from [Chapter 10](#nhst) and [Chapter 11](#shuffling), as we prepare for the world of linear models.
+
+
+
+
+
+
+
+
+
+::: fyi
+I found this chapter hard to write. I didn't know if it should come before or after linear models. I didn't know how to separate the different bits etc etc etc. I think this was challenging to place and organize because study design weaves through all bits of our statistical endeavors. 
+:::

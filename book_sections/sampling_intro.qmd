@@ -91,7 +91,7 @@ So a major goal of a statistical analysis is how to go from conclusions about a 
 
 ### Uncertainty  from Sampling Error
 
-Because we usually have an estimate from a sample and not a parameter from a popultion, we can never avoid sampling error. However, the field of statistics is full of approaches to quantify uncertainty in our estimates that arise due to sampling error. All such approaches  "imagine" the process of sampling, and consider the distribution of estimates we would get under our sampling scheme. This imagined process is often translated into a statistical model. 
+Because we usually have an estimate from a sample and not a parameter from a population, we can never avoid sampling error. However, the field of statistics is full of approaches to quantify uncertainty in our estimates that arise due to sampling error. All such approaches  "imagine" the process of sampling, and consider the distribution of estimates we would get under our sampling scheme. This imagined process is often translated into a statistical model. 
 
 
 

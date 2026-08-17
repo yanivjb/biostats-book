@@ -151,39 +151,7 @@ pink_gc_rils <- ril_data |>
 ```
 
 
-```{r}
-#| echo: false
-#| warning: false
-#| column: margin
-#| fig-height: 6.5
-#| fig-cap: "Mean petal area differs slightly between visited and unvisited pink-flowered RILs at the GC site. Each point represents an individual pink-flowered recombinant inbred line (RIL). Black points show individual observations. Red points indicate group means for plants receiving no visits and those receiving at least one visit. The dashed line connects the group mean."
-#| fig-alt: "Scatter plot of petal area (mm²) by visitation category (no_visits vs. some_visits) for pink-flowered plants. Black dots show individual plant values. Red dots show group means. The mean petal area for plants receiving visits is slightly larger than for plants receiving no visits. A dashed line connects the two group means, highlighting the small difference."
-pink_gc_rils |>
-  ggplot(aes(x = visited, y = petal_area_mm))+
-  geom_jitter(width = 0.2, height = 0, size= 4)+
-  stat_summary(aes(group = 1), geom = "line", lty = 2,linewidth = 1)+
-  stat_summary(geom = "point", color = "red",size = 6)+
-  theme(axis.text = element_text(size = 30),
-        axis.title = element_text(size = 25))
-```
 
-```{r}
-#| echo: false
-#| column: margin
-pink_gc_rils |> 
-  group_by(visited) |>
-  summarise(mean_petal_area = mean(petal_area_mm)) |>
-  kable(digits = 1)
-```
-
-
-```{r}
-#| echo: false
-#| column: margin
-library(effectsize)
-cohens_d(petal_area_mm ~ visited, data = pink_gc_rils,reference = "no_visits" )|> kable(digits = 2)
-
-```
 
 ```{r}
 #| message: false
@@ -200,12 +168,35 @@ pink_gc_rils |>
     geom_jitter(width = .2)+
     stat_summary(aes(group = 1), geom = "line", lty = 2)+
     stat_summary(geom = "point", color = "red",size = 2)
+```
 
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-height: 3
+#| fig-cap: "Mean petal area differs slightly between visited and unvisited pink-flowered RILs at the GC site. Each point represents an individual pink-flowered recombinant inbred line (RIL). Black points show individual observations. Red points indicate group means for plants receiving no visits and those receiving at least one visit. The dashed line connects the group mean."
+#| fig-alt: "Scatter plot of petal area (mm²) by visitation category (no_visits vs. some_visits) for pink-flowered plants. Black dots show individual plant values. Red dots show group means. The mean petal area for plants receiving visits is slightly larger than for plants receiving no visits. A dashed line connects the two group means, highlighting the small difference."
+pink_gc_rils |>
+  ggplot(aes(x = visited, y = petal_area_mm))+
+  geom_jitter(width = 0.2, height = 0)+
+  stat_summary(aes(group = 1), geom = "line", lty = 2,linewidth = 2)+
+  stat_summary(geom = "point", color = "red",size = 5)+
+  theme(axis.text = element_text(size = 20),
+        axis.title = element_text(size = 15))
+```
+
+
+```{r}
 # Conditional means
 pink_gc_rils |> 
     group_by(visited) |>
     summarise(mean_petal_area = mean(petal_area_mm))
+```
 
-# Cohen's D
-cohens_d(petal_area_mm ~ visited, data = pink_gc_rils,reference = "no_visits")
+```{r}
+#| column: page-right
+library(effectsize)
+cohens_d(petal_area_mm ~ visited, data = pink_gc_rils,reference = "no_visits" )
+
 ```

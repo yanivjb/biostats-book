@@ -1,0 +1,94 @@
+## Study Design Summary Section (Tutor Knowledge Base)
+
+**Context:**
+This section synthesizes the whole chapter: the success of a statistical analysis depends heavily on how the study was designed and how the data were generated. The summary emphasizes sampling, measurement, assignment, bias, random assignment, power, precision, experiments, observational studies, and honest claims.
+
+---
+
+### Chapter-Level Summary
+
+The main point is that good statistics starts before the data exist. Researchers must think carefully about who or what enters the study, what gets measured, how treatments or comparison groups are created, and what claims the design can support. Random assignment makes experiments powerful for causal inference, but experiments must still avoid artifacts, placebo effects, regression to the mean, poor controls, and unrealistic conditions. Observational studies cannot use random assignment, but they can still be carefully designed through fair comparisons, stratifying, matching, systematic sampling, natural experiments, and triangulation.
+
+---
+
+### Priority Concepts
+
+Students should be able to explain:
+
+* Why a statistical analysis cannot rescue a design that cannot answer the question.
+* The difference between random sampling and random assignment.
+* The difference between association and causation.
+* Why statistical significance does not prove a scientific model.
+* Why internal, external, ecological, measurement, and statistical-conclusion validity are different.
+* Why controls, blinding, and random assignment do different jobs.
+* Why power depends on effect size, variance, sample size, and design.
+* Why pseudoreplication inflates precision.
+* Why observational studies need design and honest caveats.
+* Why triangulating evidence can make a stronger case than one study alone.
+
+---
+
+### Key Glossary Terms
+
+* **Confounding variable:** An unmodeled variable that distorts the relationship between explanatory and response variables.
+* **Construct validity / measurement validity:** Whether the measured thing captures the intended concept.
+* **Measurement reliability:** Whether repeated measurements would give similar values.
+* **Internal validity:** Whether the design supports the specific causal conclusion inside the study.
+* **External validity:** How far the result generalizes beyond the study.
+* **Ecological validity:** Whether the treatment or context resembles what organisms actually experience.
+* **Statistical conclusion validity:** Whether the statistical inference itself is sound.
+* **Random assignment:** Assigning treatment to units by chance.
+* **Experimental artifact:** A result caused by the manipulation procedure rather than the treatment of interest.
+* **Placebo effect:** A response caused by belief or expectation rather than the active treatment.
+* **Regression to the mean:** Extreme observations tend to be less extreme when measured again.
+* **Blocking:** Grouping units by a nuisance factor and representing treatments within each block.
+* **Matching:** Pairing units that are similar except for the variable of interest.
+* **Split-plot design:** A design with randomization at multiple nested scales.
+* **Stratifying:** Comparing within levels of a suspected confounder.
+* **Natural experiment:** A real-world situation that approximates assignment.
+* **Pseudoreplication:** Treating non-independent observations as independent.
+* **Power:** The probability of rejecting a false null.
+* **Effect size:** The magnitude of the relationship or difference of interest.
+* **Triangulation:** Combining multiple lines of evidence.
+
+---
+
+### Practice-Question Themes
+
+The summary practice questions emphasize:
+
+* Random assignment versus random selection.
+* Why "effect size" language can be misleading for observational associations.
+* Scientific models versus statistical models.
+* Blocking and matching as ways to reduce irrelevant variability.
+* Random assignment as design-based protection from confounding.
+* Null results, low power, wrong context, and wrong dose.
+* Internal validity, external validity, and ecological validity in glyphosate/Roundup examples.
+* Lawsuit counts as biased evidence about true harm.
+* Natural-experiment logic using exposure changes over time.
+
+---
+
+### Notes for Tutor Responses
+
+If a student is preparing for the practice questions, do not hand them answers. Ask them to identify which validity concept or design principle the question is testing.
+
+If a student asks for a chapter-level summary, keep it short:
+
+> Design determines the claim. Sampling affects representation, measurement affects what you actually know, assignment affects causation, and replication/power affect whether you can see a meaningful effect.
+
+---
+
+### Common Student Confusions
+
+* Treating validity terms as interchangeable.
+* Thinking random assignment and random sampling are the same.
+* Thinking legal, regulatory, or public counts directly estimate biological harm without selection issues.
+* Thinking a null result settles a causal question.
+* Thinking a design caveat destroys a claim instead of clarifying its boundaries.
+
+---
+
+### Tutor Guidance
+
+The summary tutor should be a map, not a lecture. Help students locate the concept they are struggling with, then send them back to the design question: "What claim is being made, and what would the study need to support it?"

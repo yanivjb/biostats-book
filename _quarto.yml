@@ -8,6 +8,15 @@ book:
   title: "Applied Biostatistics"
   author: "Yaniv Brandvain"
   date: today
+  # New: without these, sharing the book link (Slack/email/Discord) previews
+  # as a bare URL with no title/image. favicon/image reuse the existing logo
+  # so no new asset is needed. Swap the description/site-url if you'd like.
+  favicon: "figs/fun_figs/stamp.png"
+  site-url: "https://yanivjb.github.io/biostats-book/"
+  description: "Applied Biostatistics — an open, Quarto-based textbook by Yaniv Brandvain, built around research on Clarkia xantiana speciation."
+  image: "figs/fun_figs/stamp.png"
+  open-graph: true
+  twitter-card: true
   sidebar:
     search: true
     background: '#3A5F0B' #"#9f86c0"
@@ -103,15 +112,14 @@ book:
         - book_sections/shuffling/permute.qmd
         - book_sections/shuffling/permute_nonindependent.qmd
         - book_sections/shuffling/shuffling_summary.qmd
-#    - part: book_sections/study_design.qmd
-#      chapters:
-#        - book_sections/study_design/why_design_matters.qmd
-#        - book_sections/study_design/measurement_samples_and_bias.qmd
-#        - book_sections/study_design/experiments_randomization_and_control.qmd
-#        - book_sections/study_design/experimental_bias_and_controls.qmd
-#        - book_sections/study_design/replication_blocking_and_power.qmd
-#        - book_sections/study_design/observational_studies.qmd
-#        - book_sections/study_design/study_design_summary.qmd
+    - part: book_sections/study_design.qmd
+      chapters:
+        - book_sections/study_design/why_design_matters.qmd
+        - book_sections/study_design/measurement_samples_and_bias.qmd
+        - book_sections/study_design/experimental_bias_and_controls.qmd
+        - book_sections/study_design/power_and_precision.qmd
+        - book_sections/study_design/observational_studies.qmd
+        - book_sections/study_design/study_design_summary.qmd
     - book_sections/filler.qmd
     - book_sections/stats_4_linear_models_index.qmd
     - part: book_sections/linear_models.qmd
@@ -156,13 +164,13 @@ book:
         - book_sections/f/f_calcs.qmd
         - book_sections/f/FR.qmd
         - book_sections/f/Finding_connections.qmd        
-        - book_sections/f/from_sampling.qmd        
         - book_sections/f/f_summary.qmd        
     - part: book_sections/anova.qmd
       chapters: 
         - book_sections/anova/multiple_testing.qmd
         - book_sections/anova/anova_lm.qmd
         - book_sections/anova/anova_assumptions.qmd
+        - book_sections/anova/anova_example.qmd
         - book_sections/anova/post_hoc.qmd
         - book_sections/anova/sig_groups.qmd
         - book_sections/anova/Ranova_pipeline.qmd
@@ -208,10 +216,26 @@ csl: 'assets/apa-single-spaced.csl'
 
 format:
   html:
-    theme: 
-      - flatly
-      - "assets/theme_corrected.scss"
+    theme:
+      # Now a light/dark pair instead of one fixed theme — Quarto auto-adds
+      # a toggle button in the navbar. Both use the same custom scss on top.
+      light:
+        - flatly
+        - "assets/theme_corrected.scss"
+      dark:
+        - darkly
+        - "assets/theme_corrected.scss"
     css: ["assets/sticky-notes.css", "assets/table-styles.css", "assets/webex.css"]
+    # NEW: 'mainfont: Crimson Text' below only sets which font-family CSS
+    # points to — it doesn't fetch the font file. There was no <link>/@import
+    # loading Crimson Text anywhere in the repo, so it's likely been quietly
+    # falling back to a generic system serif for every reader this whole time.
+    # This actually loads it.
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     include-after-body: assets/webex.js
     code-copy: true
     highlight-style: default

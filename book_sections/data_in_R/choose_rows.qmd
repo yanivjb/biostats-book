@@ -127,7 +127,7 @@ ril_data_no_missing_visits |>
 :::fyi
 ### Pay attention to two choices I made above. 
    
-- **Above, I used the `dplyr::filter()` syntax.** I did this because  the stats package that loads automatically with R contains a different function called `filter()`. Without explicit direction, R might use the wrong filter function and give us weird errors. I therefore always specify which function I want by typing dplyr::filter() or by using [`conflict_prefer()`](https://conflicted.r-lib.org/reference/conflict_prefer.html) from the [`conflicted`](https://conflicted.r-lib.org/) package:  
+- **Above, I used the `dplyr::filter()` syntax.** I did this because  the stats package that loads automatically with R contains a different function called `filter()`. Without explicit direction, R might use the wrong filter function and give us weird errors. I therefore always specify which function I want by typing dplyr::filter() or by using [`conflicts_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) from the [`conflicted`](https://conflicted.r-lib.org/) package:  
 
 ```{r}
 library(conflicted)

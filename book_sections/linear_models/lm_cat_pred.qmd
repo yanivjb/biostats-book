@@ -1,4 +1,4 @@
-## • 12. Categorical predictor {.unnumbered}
+## • 13. Categorical predictor {.unnumbered}
 
 
 
@@ -76,14 +76,27 @@ The previous two sections showed that we can think about a simple mean as an int
 
 Surely we can do better than making the same prediction for each flower!! Some flowers are pink, some are white, some are big, some are small... We want to know how different values of such explanatory variables change our prediction for the  response variable (proportion hybrid seeds).
 
-To start, let’s focus on petal color, because perhaps white petals do not attract pollinators and consequently produce fewer hybrids. 
+To start, let’s focus on petal color, because perhaps white petals do not attract pollinators and consequently may produce fewer hybrids. 
 
-As a linear model, this is: 
+As a vaguely stated  linear model, this is: 
 
-$$\hat{y}_i = b_0 + x_i \times b_1$$ In general words:    $$\text{Prediction} = \text{Intercept} + \text{``Effect'' of thing} \times \text{value of thing}$$ In our case:  $$\text{Predicted prop hybrid} = \text{Intercept} + \text{``Effect'' of petal color} \times \text{value of thing} $$   
+$$\hat{y}_i = b_0 + x_i \times b_1$$ In general words:    $$\text{Prediction} = \text{Intercept} + \text{``Effect'' of thing} \times \text{value of thing}$$ 
+
+In the specific case of petal color, and assuming pink is the "reference level":
+ 
+
+$$
+\text{Predicted prop hybrid} = \text{Intercept} + \text{``Effect'' of white} \times
+\begin{cases}
+1, & \text{if the petals are white},\\
+0, & \text{if the petals are pink}.
+\end{cases}
+$$
+
+where "Effect" of white is the difference between the mean proportion of hybrid seeds on white- and pink- flowered RILs. 
 
 
-With that groundwork laid, we are ready to build and interpret this linear model!! 
+Now let's build and interpret this linear model!! 
 
 
 

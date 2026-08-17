@@ -1,4 +1,4 @@
-## • 15. Visualizing two groups {.unnumbered #2groupviz}
+## • 16. Visualizing two groups {.unnumbered #2groupviz}
 
 
 ```{r}
@@ -84,7 +84,7 @@ SR_visits <- readr::read_csv(ril_link) |>
 ```
 
 
-The first step in any data analysis is to look at the data. Here we'll reintroduce some of the best ways to do this when comparing two groups.  See our [introduction to ggplot](#Intro_to_ggplot) for our initial presentation of these ideas. 
+The first step in any data analysis is to look at the data. Here we'll reintroduce some of the best ways to do this when comparing two groups.  See our [introduction to ggplot](#intro_to_ggplot) for our initial presentation of these ideas. 
 
 ## Visualizing distributions   
 

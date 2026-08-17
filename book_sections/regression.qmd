@@ -1,4 +1,4 @@
-# 18. Regression {.unnumbered #Regression}
+# 19. Regression {.unnumbered #Regression}
 
 
 ```{r}
@@ -101,7 +101,7 @@ Of course, we **could** address this question in a classic ANOVA framework, by b
 #| label: fig-ANOVA
 #| echo: false
 #| fig-cap: "Proportion hybrid seed of parviflora RILs planted at the GC field site as a function of petal area quartile. The quartiles are:  Q1: 33.8 -- 51.6, Q2: 51.6 -- 61.6, Q3: 61.6 -- 72.1, Q4: 72.1 -- 103."
-#| fig-alt: "A jittered plot showing proportion hybrid seeds for Clarkia parviflora RILs grouped into four petal-area quartiles. The x-axis shows quartiles Q1 through Q4, and the y-axis shows proportion hybrid seeds from 0 to 1. Most observations in every quartile are near zero, but each quartile also includes some higher values. Red points and vertical error bars show the mean and 95% confidence interval for each quartile, with a dashed line connecting the group means. The group means generally increase from Q1 to Q4, but the binned view is coarse and variable."
+#| fig-alt: "Jittered points show proportion hybrid seeds for Clarkia parviflora RILs grouped into four petal-area quartiles. The y-axis runs from 0 to 1. Red points and vertical error bars show means and 95% confidence intervals. Group means generally increase from Q1 to Q4, but the binned view is coarse and variable."
 gc_rils|>
     ggplot(aes(x = petal_area_quartile, y = prop_hybrid))+
     geom_jitter(width = .15, height = 0.02, size = 5, alpha = .4)+
@@ -206,7 +206,7 @@ In this chapter, we will consider linear regression. A linear regression is a mo
 
 * We begin by reviewing three related [summaries of association between two numeric variables](#regression_summaries): covariance, correlation, and slope.     
 
-* Next, we treat linear regression as a [linear model](regression_linear_model). Just like the models with categorical an explanatory variable and a numeric response, a regression model generates predicted values and residuals. The difference is that regression uses a numeric explanatory variable directly, rather than first sorting observations into groups. We will see how the intercept and slope define the regression line, how to use this line to make predictions, and how to calculate residuals.  
+* Next, we treat linear regression as a [linear model](#regression_linear_model). Just like the models with categorical an explanatory variable and a numeric response, a regression model generates predicted values and residuals. The difference is that regression uses a numeric explanatory variable directly, rather than first sorting observations into groups. We will see how the intercept and slope define the regression line, how to use this line to make predictions, and how to calculate residuals.  
 
 * Before we get too excited about our model, we will [pause to consider assumptions of linear regression](#regression_assumptions). We will also discuss what to do when these assumptions are imperfect, because real biological data rarely behave perfectly.
 

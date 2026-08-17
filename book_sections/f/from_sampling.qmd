@@ -1,4 +1,4 @@
-## •  16. F the ratio of variance  {.unnumbered  #from_sampling}
+## •  17. F the ratio of variance  {.unnumbered  #from_sampling}
 
 
 ```{r}

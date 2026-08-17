@@ -158,5 +158,19 @@
   color: #fff;
   background-color: #FF0000;
   border:  5px #FFFF00;
-  }     
-960018
+  }
+
+/* -----------Pink Motivation Note------------- */
+/* This used to be pasted as an inline style="..." attribute in every
+   chapter (118 times!) instead of living here as a class. Same look as
+   before (#ffe6f7 background) — now defined once, in one place, so
+   changing the color scheme is a one-line edit instead of a 118-file
+   find-and-replace. No icon, to match how it looked originally; add a
+   background-image line like the notes above if you want to give it one. */
+.motivation {
+  padding: 10px;
+  margin: 1em 0;
+  background-color: #ffe6f7;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  }

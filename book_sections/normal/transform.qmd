@@ -1,4 +1,4 @@
-## • 13. Make It Normal  {.unnumbered #normal_transform}
+## • 14. Make It Normal  {.unnumbered #normal_transform}
 
 ---
 format: html
@@ -81,9 +81,9 @@ There is nothing inherently "natural" about the linear scale, so transforming da
 
 There are several common transformations that can make data more normal, depending on their initial shape:
 
-| Name        | Formula                      | What type of data? |
-|-------------|------------------------------|--------------------|
-| Log         | $Y'=\log_x(Y + \epsilon)$     | Right skewed       |
+| Name | Formula               | What type of data? |
+| ---- | --------------------- | ------------------ |
+| Log  | (Y'=\log(Y+\epsilon)) | Right-skewed       |
 | Square-root | $Y'=\sqrt{Y+1/2}$             | Right skewed       |
 | Reciprocal  | $Y'=1/Y$                      | Right skewed       |
 | Arcsine     | $\displaystyle p'=arcsin[\sqrt{p}]$ | Proportions   |

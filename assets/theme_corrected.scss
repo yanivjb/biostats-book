@@ -43,7 +43,7 @@ li > p {
 
 // Mouse over link
 a:hover {
-  color: #f666fb;
+  color: #c2185b; // darkened from #f666fb for better contrast on white content background
   //color: darken(#31AFD4, 15%);
 }
 
@@ -157,63 +157,9 @@ body .sourceCode {
 
 
 
-/** Make the caption italic and black 
-.table caption{
-  font-style: italic;
-  color: black;
-  font-family: 'Crimson Text', serif;
-  font-size: 11px;
-}
-
-.table caption span{
-  font-style: normal;
-  font-weight: bold;
-  margin-bottom: 30px;
-}**/
-
-
-
-/** Change border color to black **/
-.table thead tr th {
-  border-color: black;
-  border-width: 1px;
-  font-family: 'Crimson Text', serif;
-  font-size: 11px;
-  font-weight: normal;
-}
-
-
-
-
-/** Add a top border to the table header row **/
-.table thead th { 
-  border-top: 1px solid black;
-  border-left: 0;
-  border-right: 0;
-}
-
-
-/** Format and remove borders within the table body **/
-.table tbody tr td {
-  border: none;
-  font-family: 'Crimson Text', serif;
-  font-size: 11px;
-}
-
-
-/** Add a bottom border to the table body **/
-.table tbody tr:last-child {
-  border-bottom: 1px solid black;
-}
-
-
-/** Format and remove borders within the table footer **/
-.table tfoot {
-  border: none;
-  font-family: 'Crimson Text', serif;
-  font-size: 11px;
-}
-
+// NOTE: .table styling used to be duplicated here AND in table-styles.css,
+// with conflicting font-sizes (11px here vs 18px there). Removed the copy
+// here — table-styles.css is now the single source of truth for table CSS.
 
 #references {
   margin-bottom: 5em;
@@ -223,7 +169,12 @@ body .sourceCode {
   -webkit-initial-letter: 4;
   initial-letter: 4;
   color: #FF7CFF;
-  font-family: 'Luminari', serif;
+  // 'Luminari' was a macOS-only system font — invisible on Windows/Linux/
+  // Chromebook/Android, which is most students. Swapped for a bold cut of
+  // the site's own webfont (now actually loaded, see _quarto.yml) so the
+  // effect shows up the same way for everyone.
+  font-family: 'Crimson Text', Georgia, serif;
+  font-weight: 700;
   font-size: 3rem; /* Adjusts size */
   line-height: 1;  /* Prevents cramping */
   margin-right: 0.75em;
@@ -240,9 +191,15 @@ div.sourceCode {
   border-radius: 0;
 }
 
+// The site's syntax highlighter (highlight-style: default in _quarto.yml)
+// is built for LIGHT backgrounds — dark green with only a few token colors
+// overridden left most keywords/strings/comments low-contrast or invisible.
+// Using a light background (in the site's own pink family) instead lets
+// the highlighter's own colors work as designed, and keeps the accent
+// colors below legible since they were already dark tones.
 body .sourceCode {
-  background-color: #3A5F0B !important;  // Soft green background
-  color: #ffe6f7 !important;  // Pastel pink text
+  background-color: #fff2fb !important;
+  color: #3A3A3A !important;
 }
 
 body .sourceCode .sourceCode-prompt {
@@ -250,20 +207,66 @@ body .sourceCode .sourceCode-prompt {
 }
 
 body .sourceCode .sourceCode-output {
-  color: #D63384 !important;  // Pastel pink output
+  color: #7A1240 !important;  // darkened from #D63384 for contrast on light bg
 }
 
 body .sourceCode .sourceCode-error {
   color: #9A0036 !important;  // Deep pink for errors
 }
 
+// R's printed OUTPUT (what shows up under a code chunk after it runs) is a
+// separate block from the pink .sourceCode INPUT above — Quarto renders it
+// as .cell-output. It had no styling of its own, so it was blending into
+// the plain page background. Shading it pale green (the site's other
+// accent color) makes "what you typed" vs. "what R said back" visually
+// distinct at a glance, without adding a third color to the palette.
+div.cell-output,
+div.cell-output-stdout {
+  background-color: #f6faf1 !important; // much lighter — was #eef5e4
+  border-left: 3px solid #3A5F0B;
+  border-radius: 0 5px 5px 0;
+  margin: 0.5em 0 1em 0;
+  padding: 0 !important; // kill Quarto's own default box padding here...
+}
+
+div.cell-output pre,
+div.cell-output-stdout pre {
+  background-color: transparent !important;
+  color: #2C4A0E !important; // dark green, readable on the pale green bg
+  padding: 10px !important; // ...so only this 10px applies, matching the code block above
+  margin: 0 !important;
+}
+
+// Warnings/errors printed by R keep their own distinct red/orange treatment
+// rather than joining the green output family, since they're a different
+// kind of signal to the student.
+div.cell-output-stderr,
+div.cell-output-error {
+  background-color: #fff3f3 !important;
+  border-left: 3px solid #9A0036;
+  border-radius: 0 5px 5px 0;
+  margin: 0.5em 0 1em 0;
+}
+
+div.cell-output-stderr pre,
+div.cell-output-error pre {
+  background-color: transparent !important;
+  color: #9A0036 !important;
+  padding: 10px !important;
+  margin: 0 !important;
+}
 
 
 
 
+
+// Toned from 1.3em to 1.15em — this rule applies to EVERY blockquote in the
+// book (including small asides like "You, probably."), so the original size
+// made every quote shout equally loud. Easy to tune back up if you want the
+// bigger, bolder look — this is one of the "mess with this" knobs.
 body .blockquote {
   color: #B91C5E !important;  // Darker pink for prompts
-  font-size:  1.3em !important;
+  font-size:  1.15em !important;
   font-family: 'Garamond', 'Georgia', serif !important;
 }
 
@@ -277,4 +280,42 @@ p code, li code, td code, th code, .callout code {
 /* If the highlighter wraps tokens in spans, kill their backgrounds */
 p code span, li code span, td code span, th code span, .callout code span {
   background: transparent !important;
+}
+
+/* -----------------------------------------------------------------------
+   Code OUTPUT (the printed R console result under a code chunk) is a
+   completely separate element from the code chunk itself — Quarto renders
+   it as .cell-output.cell-output-stdout, not part of .sourceCode. Shading
+   it green pairs it visually with the pink code-input block above it, so
+   "code you wrote" and "what R gave back" read as clearly different at a
+   glance. Verified against real Quarto-rendered HTML, not guessed. */
+.cell-output-stdout {
+  background-color: #eaf4e2;
+  border: 1px solid #cfe3bd;
+  border-radius: 0.3rem;
+  padding: 0.6em 0.9em;
+  margin-top: -0.3em; /* nudge up against the code block above it */
+}
+
+.cell-output-stdout pre,
+.cell-output-stdout code {
+  background-color: transparent !important; /* don't double up on shading */
+  color: #2E4A1D !important; /* dark green, readable on the light green */
+}
+
+/* Warnings/errors get the same treatment but in a color that reads as
+   "pay attention" rather than "here's your normal output" */
+.cell-output-stderr,
+.cell-output-error {
+  background-color: #fbe9ee;
+  border: 1px solid #f0b8c8;
+  border-radius: 0.3rem;
+  padding: 0.6em 0.9em;
+  margin-top: -0.3em;
+}
+
+.cell-output-stderr pre, .cell-output-stderr code,
+.cell-output-error pre, .cell-output-error code {
+  background-color: transparent !important;
+  color: #9A0036 !important;
 }

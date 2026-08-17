@@ -98,10 +98,14 @@ include_graphics("../figs/intro_to_r/intro_to_R/pretty_scene.png")
 
 Now we begin our intro to R. While we will keep practicing what we have learned and learning new R stuff all term, the  next four chapters, listed below will get you started:
 
-- **[Getting up and Running](https://ybrandvain.quarto.pub/applied-biostatistics-intro2r/book_sections/getting_started.html).** This section introduces RStudio, math in R, vectors, variable assignment, using functions, r packages, loading data (from the internet), and data types. There is a lot here! 
+- **[Getting up and Running](#getting_started).** This section introduces RStudio, math in R, vectors, variable assignment, using functions, r packages, loading data (from the internet), and data types. There is a lot here! 
 
-- **[Data in R](https://ybrandvain.quarto.pub/applied-biostatistics-intro2r/book_sections/data_in_R.html).**   Here we continue on our introduction to R. We first introduce the concept of tidy data, and introduce the capabilities of the tidyverse package, [dplyr](https://dplyr.tidyverse.org/).   
 
-- **[Intro to ggplot](https://ybrandvain.quarto.pub/applied-biostatistics-intro2r/book_sections/intro_to_ggplot.html).** The ggplot package allows us to make nice plots quickly. We will get started understanding how ggplot thinks, and introduce the wide variety of figures you can make. Later in this term we will make better figures in [ggplot](https://ggplot2.tidyverse.org/).
+- **[Intro to ggplot](#intro_to_ggplot).** The ggplot package allows us to make nice plots quickly. We will get started understanding how ggplot thinks, and introduce the wide variety of figures you can make. Later in this term we will make better figures in [ggplot](https://ggplot2.tidyverse.org/).
 
-- **[Reproducible science](https://ybrandvain.quarto.pub/applied-biostatistics-intro2r/book_sections/reproducible_science.html).** We consider how to collect data, and store it in a folder. We then introduce the concept of [R projects](https://r4ds.hadley.nz/workflow-scripts#projects) and loading data from our computer. Finally, we introduce the idea of saving [R scripts](https://r4ds.hadley.nz/workflow-scripts#scripts).
+
+- **[Reproducible science](#reproducible_science).** We consider how to collect data, and store it in a folder and write reproducible R pipelines.
+
+- **[Data in R](#data_in_R).**   Here we continue on our introduction to R. We first introduce the concept of tidy data, and introduce the capabilities of the tidyverse package, [dplyr](https://dplyr.tidyverse.org/).   
+
+- We then use R to summarize our data, both for a single variable ([Chapter 5](#univariate_summaries)), and for combinations of variables ([Chapter 6](#associations) and [Chapter 7](#associations_II)). 

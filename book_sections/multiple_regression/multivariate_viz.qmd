@@ -1,4 +1,4 @@
-## • 19. Visualizing >1 predictor {.unnumbered #regression_summaries}
+## • 20. Visualizing >1 predictor {.unnumbered #regression_summaries}
  
  
 ```{r}

@@ -42,7 +42,7 @@ Later, we will spend time considering experimental design, but given that we jus
 
 **The ideal sample is a large random sample.**   
 
-- **A large sample minimizes the extent of sampling error.**  Sampling error is unavoidable, but it can be minimized -- the larger the sample the less sampling error and the larger the sample the less sampling error (see the previous section on [Sampling error](#sampling_error)).  Of course, larger samples come at a cost of time and energy, and each additional sample becomes less useful as our sample size gets large. So later in the term we will consider how to balance these issues in planning for a good sample size. 
+- **A large sample minimizes the extent of sampling error.**  Sampling error is unavoidable, but it can be minimized -- the larger the sample the less sampling error  (see the previous section on [Sampling error](#sampling_error)).  Of course, larger samples come at a cost of time and energy, and each additional sample becomes less useful as our sample size gets large. So later in the term we will consider how to balance these issues in planning for a good sample size. 
 
 ::: aside
 According to the **law of large numbers** the average of a large random sample converges to the true population parameter.
@@ -63,7 +63,7 @@ include_graphics("https://imgs.xkcd.com/comics/blind_trials_2x.png")
 
 
 
-Of course, while getting a random sample is ideal, it's not always plausible. Your best alternatives include **Systematic Sampling** e.g. stretching a 100-foot transect line across the hillside and sampling the single plant closest to the line (and withing x square feet) every 5 feet. This disciplined approach prevents you from only sampling the convenient spots or the big, showy patches of flowers.
+Of course, while getting a random sample is ideal, it's not always plausible. Your best alternatives include **Systematic Sampling** e.g. stretching a 100-foot transect line across the hillside and sampling the single plant closest to the line (and within x square feet) every 5 feet. This disciplined approach prevents you from only sampling the convenient spots or the big, showy patches of flowers.
 
 
 

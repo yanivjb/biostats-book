@@ -1,4 +1,4 @@
-## • 12. The Mean as `lm(y ~ 1)` {.unnumbered #mean}
+## • 13. The Mean as `lm(y ~ 1)` {.unnumbered #mean}
 
 
 ```{r}
@@ -74,7 +74,7 @@ You are beginning to think about statistical models, and want to use something y
 
 
 
-We are beginning our tour of interpreting linear models with the mean. We start with the mean, not because I doubt that you understand what a mean ais. I know that you know how to calculate the mean as $\overline{y} = \frac{\sum y_i}{n}$.  Instead, we are starting here because your solid understanding of these concepts will help you better understand linear models.
+We are beginning our tour of interpreting linear models with the mean. We start with the mean, not because I doubt that you understand what a mean is. I know that you know how to calculate the mean as $\overline{y} = \frac{\sum y_i}{n}$.  Instead, we are starting here because your solid understanding of these concepts will help you better understand linear models.
 
 In a simple linear model with no predictors, the intercept is the mean and the only other term is the residual variation (see next section on residuals). So we predict the $i^{th}$ individual's value of the response variable to be: 
 

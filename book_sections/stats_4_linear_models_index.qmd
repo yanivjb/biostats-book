@@ -34,7 +34,7 @@ In our study of [associations between a categorical explanatory variable and a c
 :::
 
 
-In somewhat more formal notation, the conditional mean for the $i^\text{th}$ observation (e.g., the proportion of hybrid seeds of the $4^{\textth}$ plant in a spreadsheet) is written as $\hat{Y_i}$. This represents the predicted response for the explanatory variable values associated with that observation:   
+In somewhat more formal notation, the conditional mean for the $i^\text{th}$ observation (e.g., the proportion of hybrid seeds of the $4^\text{th}$ plant in a spreadsheet) is written as $\hat{Y_i}$. This represents the predicted response for the explanatory variable values associated with that observation:   
 
 
 \begin{equation} 
@@ -99,7 +99,7 @@ Linear models assume that the variance of residuals is independent of the predic
 :::aside
 Fancy words for these ideas are: <br> <br>
 
-**Homoscedasticity:** Variabilty of residuals is constant -- i.e.standard deviation in residuals, $\sigma_e$ does not vary by the predicted value, $\hat{Y}$.
+**Homoscedasticity:** Variabilty of residuals is constant -- i.e. standard deviation in residuals, $\sigma_e$ does not vary by the predicted value, $\hat{Y}$.
 
 **Heteroscedasticity:** Variance of residuals is not constant; it depends on predictors.
 
@@ -117,17 +117,19 @@ For models with multiple explanatory variables, it is assumed that predictors ar
 
 This section gets into linear models, the workhorse for data analysis. 
 
-- [Chapter 12](#linear_models), introduces the idea of [linear models](#linear_models), and preview several common types of linear models without worrying about uncertainty or hypothesis testing. We will also use this section to familiarize ourselves with R's [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function for building linear models, as well as the [`augment()`](https://generics.r-lib.org/reference/augment.html) function from the  [`broom`](https://broom.tidymodels.org/) package to extract residuals and predicted values from a model. 
+- [Chapter 13](#linear_models), introduces the idea of [linear models](#linear_models), and preview several common types of linear models without worrying about uncertainty or hypothesis testing. We will also use this section to familiarize ourselves with R's [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function for building linear models, as well as the [`augment()`](https://generics.r-lib.org/reference/augment.html) function from the  [`broom`](https://broom.tidymodels.org/) package to extract residuals and predicted values from a model. 
 
-- [Chapter 13](#normal) introduces key features of  the normal distribution, to prepare us for modelling normally distributed residuals.  
+- [Chapter 14](#normal) introduces key features of  the normal distribution, to prepare us for modelling normally distributed residuals.  
 
-- [Chapter 14](#t) address a challenge of linear models. Linear models assume normally distributed residuals, but because we estimate model parameters from data, don't know the parameter value of the population standard deviation. So, we introduce the t-distribution -- a distribution which is like the normal but incorporates the uncertainty in our estimate of the standard deviation. This allows us to both testing null hypotheses and estimate uncertainty using standard linear modelling tools. 
+- [Chapter 15](#t) address a challenge of linear models. Linear models assume normally distributed residuals, but because we estimate model parameters from data, don't know the parameter value of the population standard deviation. So, we introduce the t-distribution -- a distribution which is like the normal but incorporates the uncertainty in our estimate of the standard deviation. This allows us to both test null hypotheses and estimate uncertainty using standard linear modelling tools. 
 
-- [Chapter 15](#two_ts), we build on this by modelling means as a function of a binary explanatory variable. In this chapter, we estimate uncertainty in the difference of group means, and test the null that group means do not differ.
+- [Chapter 16](#two_ts), we build on this by modelling means as a function of a binary explanatory variable. In this chapter, we estimate uncertainty in the difference of group means, and test the null that group means do not differ.
 
-- [Chapter 16](#f) presents the final key component of linear modelling - partitioning variation into that explained by the model and the residual variation. We show that the ratio of these variance components provides another critical tool for evaluating null hypotheses posed by linear models.  
+- [Chapter 17](#f) presents the final key component of linear modelling - partitioning variation into that explained by the model and the residual variation. We show that the ratio of these variance components provides another critical tool for evaluating null hypotheses posed by linear models.  
 
-- With these tools in place we can now build models with a nominal categorical predictor ([Chapter 17](#anova)), a numeric predictor ([Chapter 18](#regression)), and all combinations thereof! 
+- [Chapter 18](#anova) shows how we can use the variance partitioning approach to evaluate caes in which there are more than two levels in the ordinal predictor. 
+
+- With these tools in place we can now build models with a numeric explanatory variable ([Chapter 19](#regression)), multiple explanatory variables ([Chapter 20](#multiple_regression)),  and cases in which the repsonse is influenced by interactions between explanatory variables ([Chapter 21](#interactions))! 
 
 
 

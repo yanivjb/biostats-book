@@ -1,0 +1,227 @@
+### • 12. Threats to Validity {.unnumbered #sec-threats-validity}
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(ggforce)
+library(patchwork)
+library(tidyr)
+library(cowplot)
+library(gridExtra)
+library(janitor)
+library(forcats)
+library(broom)
+library(tufte)
+library(kableExtra)
+library(pwr)
+source("../../_common.R")
+
+
+html_tag_audio <- function(file, type = c("mp3")) {
+  type <- match.arg(type)
+  htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = file,
+      type = glue::glue("audio/{type}", type = type)
+    )
+  )
+}
+
+```
+
+
+
+::: {.motivation}
+
+**Motivating Scenario:**
+
+You want to make sure your study has a reasonable chance to answer the question you care about - not some other question. 
+
+**Learning Goals: By the end of this chapter, you should be able to:**
+
+- Recognize what makes a study "valid". 
+- Distinguish measurement validity from measurement reliability.
+- Know what "internal validity" means, and recognize what can limit the internal validity of our study.  
+- Know what "external validity" means, and describe what limits how far a study's results generalize beyond the conditions it was run under.
+- Explain why every design decision is a compromise, why we should not try to have a perfect design, and why "good enough to inform the question" is good enough.
+
+:::
+
+---
+
+:::aside
+**Note:** Your study is not the last word on the topic. At best it meaningfully informs your scientific question. Remember science builds on itself, and thrives on replication. 
+:::
+
+Designing a scientific study requires us to make many choices. Nearly all these choices reflect some compromise between the ideal study and the one we can actually pull off. Time, money, and feasibility will naturally limit the science we can do. But it is our job to make decisions that best set us up for a study that will *inform* our scientific question.
+
+Here, I discuss some of the decisions we made in this study and how they relate to various aspects of the "validity" of a scientific study. 
+
+
+
+
+### Measurement validity and reliability 
+
+We decided to measure pollinator visitation and the proportion of hybrid seeds on a RIL (out of a sample of eight). These two measures bring up ideas of measurement: 
+
+
+```{r}
+#| echo: false
+#| fig-height: 3
+#| label: fig-proxy
+#| column: margin
+#| fig-cap: "An [xkcd comic](https://xkcd.com/2652/). rollover text: *Our work has produced great answers. Now someone just needs to figure out which questions they go with.* See the related [explain xkcd](https://www.explainxkcd.com/wiki/index.php/2652:_Proxy_Variable) for more info. CC BY-NC 2.5.Comic by Randall Munroe, xkcd.com"
+#| fig-alt: >-
+#|   Cueball is looking at Hairy, who points a pointer to a poster. On the
+#|   poster there is a line graph at the top and, below that, a candlestick
+#|   chart. The line graph appears to show a time series with a question mark
+#|   inside an ellipsoid at the end of the curve. The candlestick chart shows
+#|   a box-and-whiskers plot comparing two variables. There is no readable
+#|   text except the question mark. Hairy's stick points just below the line
+#|   chart. Hairy says: "We want to study this variable, but it's too hard to
+#|   observe." The poster shows a question mark. In a slim panel, only Hairy
+#|   and the poster are shown. His pointer now points to the left variable in
+#|   the box-and-whiskers plot. Hairy says: "So we're studying this proxy
+#|   variable." The poster shows a question mark. Back to Cueball and Hairy,
+#|   with the poster out of frame. Hairy holds the pointer down by his side.
+#|   Cueball says: "Is it correlated with the other variable?" Hairy replies:
+#|   "Look, we don't have the funding to answer every little question."
+library(knitr)
+include_graphics("https://imgs.xkcd.com/comics/proxy_variable_2x.png")
+```
+
+- *Measurement validity* (aka Construct validity) describes how well the thing we measure connects to the thing we care about. In this case, for example, we care about hybridization. So pollinator visitation may be an ok proxy. But it is not the thing we care about. Similar challenges occur across biology. For example, we may want to measure "organismal fitness" or "health" or "understanding", but we cannot always directly access these concepts. In such cases we need to think hard about the relationship between the thing we can measure and the thing we want to know.
+
+
+- *Measurement reliability:* describes how similar our measurement would be if we did it again. Because both the proportion of hybrid seed (out of eight) and pollinator visits in an average 15-minute observation session are associated with sampling error, they are not fully reliable. So we should remember that these are imperfect estimates of the thing we want to know. We could make them more reliable by e.g. watching longer or sequencing more plants, but this costs time and money. Other phenotypes, like petal area, can be measured with greater precision.
+
+
+
+### Internal validity   
+
+Internal validity describes how well a study design lets us draw the specific causal conclusion we're actually after, given the individuals and conditions used in *this* study. A study has high internal validity when we can be confident that the effect we observe is due to the explanatory variable we care about, and not to some other factor that happens to be tangled up with it. 
+
+In making our RILs we did our best to mix up traits, but some trait correlations persisted. These correlations are a threat to internal validity -- e.g. are associations between petal area and hybridization (@fig-pairwise2 A) due to petal area itself, or some correlated trait like anther-stigma distance (@fig-pairwise2 B), which is also associated with the proportion of hybrid seeds (@fig-pairwise2 C)? Luckily there are some paths we can walk down to assess how serious this threat to internal validity is.
+
+
+```{r}
+#| echo: false
+#| column: page-right
+#| fig-cap: "The proportion of hybrid seed set in parviflora RILs is strongly associated with petal area (A). But petal area is also strongly associated with anther-stigma distance (B), which is also associated with the proportion of hybrid seed (C)."
+#| fig-alt: "Three scatterplots with fitted regression lines. Panel A shows proportion hybrid seed increasing with petal area. Panel B shows petal area increasing with anther-stigma distance. Panel C shows proportion hybrid seed increasing with anther-stigma distance. All three relationships are positive, illustrating that petal area and anther-stigma distance are correlated with each other and both are associated with hybrid seed proportion."
+#| label: fig-pairwise2
+#| fig-height: 3
+#| fig-width: 12
+library(ggplot2)
+library(ggforce)
+library(patchwork)
+library(readr)
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+
+rils <- readr::read_csv(ril_link) |>
+  dplyr::select(ril, prop_hybrid, petal_area_mm, asd_mm, location, petal_color) |>
+  na.omit()
+
+small_theme <- theme(
+  legend.position = "none",
+  axis.title = element_text(size = 14),
+  axis.text  = element_text(size = 14),
+  plot.title = element_text(size = 14),
+  plot.subtitle = element_text(size = 14, face = "italic")
+)
+
+violin_summary <- function() {
+  list(
+    geom_violin(alpha = .5),
+    geom_sina(alpha = .3),
+    stat_summary(
+      fun.data = mean_se,
+      color = "red",
+      geom = "errorbar",
+      width = .25,
+      linewidth = 1.2
+    ),
+    scale_fill_manual(values = c("pink", "white"))
+  )
+}
+
+c <- ggplot(rils, aes(x = asd_mm, y = prop_hybrid)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm", formula = y ~ x) +
+  labs(
+    title = "C) Hybrid seed ~ ASD",
+    subtitle = expression(slope == 0.13*"," ~ italic(P) == 5.61 %*% 10^-5),
+    x = "Anther-stigma distance (mm)",
+    y = "Proportion hybrid seed"
+  ) +
+  small_theme
+
+b <- ggplot(rils, aes(x = asd_mm, y = petal_area_mm)) +
+    geom_point(alpha = .5) +
+    geom_smooth(method = "lm", formula = y ~ x) +
+    labs(
+        title = "B) petal area ~ asd",
+        subtitle = expression(slope == 9.4*","~ italic(P) ==5 %*% 10^-6),
+        x = "Anther-stigma distance (mm)",
+        y = "Petal Area (mm^2)"
+    ) +
+    small_theme
+
+a <- ggplot(rils, aes(x = petal_area_mm, y = prop_hybrid)) +
+    geom_point(alpha = .5) +
+    geom_smooth(method = "lm", formula = y ~ x) +
+    labs(
+        title = "A) Hybrid seed ~ petal area",
+        subtitle = expression(slope == 0.0035*","~ italic(P) ==4.4 %*% 10^-6),
+        x = "Petal Area (mm^2)",
+        y = "Proportion hybrid seed"
+    ) +
+    small_theme
+
+(a | b | c)
+```
+
+--- 
+
+
+
+```{r}
+#| echo: false
+#| label: fig-cells
+#| column: margin
+#| fig-cap: "An [xkcd comic](https://xkcd.com/1217/). rollover text: *Now, if it selectively kills cancer cells in a petri dish, you can be sure it's at least a great breakthrough for everyone suffering from petri dish cancer.* See the related [explain xkcd](https://www.explainxkcd.com/wiki/index.php/1217:_Cells) for more info. CC BY-NC 2.5.Comic by Randall Munroe, xkcd.com"
+#| fig-alt: >-
+#|   Caption above the panel: " When you see a claim that a common drug or vitamin "kills cancer cells in a petri dish,"
+#|   Keep in mind:
+#|   Cueball in a lab coat stands on a chair next to a desk, pointing a gun at a petri dish. There is a microscope on the desk.
+#|   Caption below the panel: "So does a handgun."
+library(knitr)
+include_graphics("https://imgs.xkcd.com/comics/cells.png")
+```
+
+
+### External validity   
+
+
+External validity describes how far our results generalize beyond this study. We replicated this study across four field sites to see how consistent our results were across sites. We believe this study is broadly valid for the xantiana-parviflora system. However, it may not apply to other species such as those that are pollinated by wind or flies, or where nectar rewards are more important than floral display, etc. 
+
+
+
+### This is important  
+
+
+::: warning
+## Do not let perfection be the enemy of good  
+It is important to design a scientific study that can answer your question. You should think long and hard about this. But, also know that no study is the last word, all research decisions include trade-offs, and progress is better than nothing. So, think hard about making the best decision you can, and then ask if it is "good enough," rather than aiming for the "perfect" experimental design.
+:::

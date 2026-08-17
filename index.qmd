@@ -8,7 +8,6 @@ webr:
 # Preface {.unnumbered}
 
 
-
 ```{r}
 #| message: false
 #| echo: false
@@ -242,6 +241,22 @@ The online community of statistics and `R` teaching is an amazing place. I have 
 -   [Peter D.R. Higgins](https://www.uofmhealth.org/profile/4/peter-doyle-higgins-md-phd) has created a truly marvelous book -- [Reproducible Medical Research With R](https://bookdown.org/pdr_higgins/rmrwr/) (@higgins2024). I have learned a lot and stolen some teaching tricks from this work.
 
 -   [Jenny Bryan](https://jennybryan.org/about/) has helped me think about getting students able to do things in R well and quickly. Her book, [STAT 545: Data wrangling, exploration, and analysis with R](https://stat545.com) (@bryan2020), is a classic.
+
+
+## Yaniv To do
+
+This book is not done. I  need to 
+
+
+
+- Add "design" notes in every linear model chapater.  
+- Add power and precision to each linear models chapter. 
+- Write chapter on model evaluation
+- Write chapter on Causal Inference 
+- Add good plots chapter + good plots in R
+- Add using chatbots chapter
+- Add using agents chapter
+- Straighten out goals of stats (compare linear model intro to design) (5 or three, what are they...).
 
 
 ```{r, echo=FALSE}

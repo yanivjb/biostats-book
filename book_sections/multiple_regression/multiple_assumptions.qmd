@@ -1,4 +1,4 @@
-## • 19. Multiple regression assumptions {.unnumbered #multiple_assumptions}
+## • 20. Multiple regression assumptions {.unnumbered #multiple_assumptions}
  
  
 ```{r}

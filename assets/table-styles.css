@@ -1,3 +1,8 @@
+/* SINGLE SOURCE OF TRUTH for .table styling.
+   (theme_corrected.scss used to have a duplicate/conflicting copy of these
+   same rules at 11px instead of 18px — that copy has been removed so table
+   font size is now consistent everywhere, not decided by CSS load order.) */
+
 /** Make the caption italic and black **/
 .table caption{
   font-style: italic;

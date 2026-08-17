@@ -1,4 +1,4 @@
-## • 13. Normal Properties {.unnumbered #normal_properties}
+## • 14. Normal Properties {.unnumbered #normal_properties}
 
 
 ```{r}

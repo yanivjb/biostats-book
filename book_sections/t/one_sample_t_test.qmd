@@ -1,4 +1,4 @@
-## • 14. One sample t-test  {.unnumbered #one_sample_t_test}
+## • 15. One sample t-test  {.unnumbered #one_sample_t_test}
 
 
 ```{r}
@@ -192,6 +192,6 @@ Our p-value is minuscule. We reject the null hypothesis. Only one in fifteen mil
 
 Let's work on writing these results. A write up should include the biological motivation, study design, sample summaries, effect sizes, test statistics, p-values, and what we do to the null. Here is a short version:
 
-*On average, species have shifted their range to higher elevations, with a mean shift of 39.3 meters, a standard error of 2.21 meters, and a 95% confidence interval between 28.1 and 50.6 meters. Although there is some variability among species (sd = 30.7), this variability is overshadowed by the overall trend toward higher elevations (Cohen's d = 1.28 -- A very large effect size). Such a large shift is highly unlikely under the null hypothesis (t = 7.14, df = 30, p = $6.06 \times 10^{-8}$). This result is not driven by the UK samples, which make up half of the dataset - we observe a similar result (mean = 48.6 meters, 95% confidence interval between 27.5 and 69.7 meters) after excluding them.*
+*On average, species have shifted their range to higher elevations, with a mean shift of 39.3 meters, a standard error of 5.51 meters, and a 95% confidence interval between 28.1 and 50.6 meters. Although there is some variability among species (sd = 30.7), this variability is overshadowed by the overall trend toward higher elevations (Cohen's d = 1.28 -- A very large effect size). Such a large shift is highly unlikely under the null hypothesis (t = 7.14, df = 30, p = $6.06 \times 10^{-8}$). This result is not driven by the UK samples, which make up half of the dataset - we observe a similar result (mean = 48.6 meters, 95% confidence interval between 27.5 and 69.7 meters) after excluding them.*
 
 

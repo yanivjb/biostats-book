@@ -1,4 +1,4 @@
-## •  17. R ANOVA pipeline  {.unnumbered  #Ranova_pipeline}
+## •  18. R ANOVA pipeline  {.unnumbered  #Ranova_pipeline}
 
 
 ```{r}
@@ -95,7 +95,7 @@ lm(Sepal.Width ~ Species, data = iris) |>
   anova()
 ```
 
-The [`tidy()`](https://broom.tidymodels.org/reference/tidy.lm.html) function in the [`broom`]([`broom`](https://broom.tidymodels.org/index.html) package makes this output tidy and shows our p-values are identical!
+The [`tidy()`](https://broom.tidymodels.org/reference/tidy.lm.html) function in the [`broom`](https://broom.tidymodels.org/index.html) package makes this output tidy and shows our p-values are identical!
 
 
 

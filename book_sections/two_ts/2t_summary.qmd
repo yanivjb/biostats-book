@@ -1,4 +1,4 @@
-## • 15. Two t Summary {.unnumbered #2t_summary}
+## • 16. Two t Summary {.unnumbered #2t_summary}
 
 
 ---
@@ -220,7 +220,7 @@ frogs |>
 
 **Q5.** Given the answers above, characterize this effect size. 
 
-`r longmcq(c(answer = "Not worth reporting (Cohen's D is less than 0.01)", "Tiny	(Cohen's D is between 0.01 and 0.20)", "Small	(Cohen's D is between 0.20 and 0.50)", "Medium	(Cohen's D is between 0.50 and 0.80)", "Large	(Cohen's D is between 0.80 and 1.10)", "Very large	(Cohen's D is between 1.20 and 2.00)", "Huge	(Cohen's D is greater than 2.00)"))`
+`r longmcq(c(answer = "Not worth reporting (Cohen's D is less than 0.01)", "Tiny	(Cohen's D is between 0.01 and 0.20)", "Small	(Cohen's D is between 0.20 and 0.50)", "Medium	(Cohen's D is between 0.50 and 0.80)", "Large	(Cohen's D is between 0.80 and 1.20)", "Very large	(Cohen's D is between 1.20 and 2.00)", "Huge	(Cohen's D is greater than 2.00)"))`
 
 
 ---

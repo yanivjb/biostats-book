@@ -1,4 +1,4 @@
-## • 14. Uncertain-t {.unnumbered #t_CI}
+## • 15. Uncertain-t {.unnumbered #t_CI}
 
 
 ```{r}
@@ -106,7 +106,7 @@ As you can see, the only difference between the standard error when the populati
 
 The difference between $\sigma$ and $s$ comes from how they are calculated:  
 
-- The population standard deviation ($\sigma$) divides the sum of squared deviations from the true population mean ($\Sigma (x_i - \mu)^2$) by $n$ and then finds the quare root.   
+- The population standard deviation ($\sigma$) divides the sum of squared deviations from the true population mean ($\Sigma (x_i - \mu)^2$) by $n$ and then finds the square root.   
 - The sample standard deviation ($s$) divides the sum of squared deviations from the estimated population mean ($\Sigma (x_i - \bar{x})^2$) by $n - 1$  and then finds the quare root.    
 
 This adjustment reflects the fact that once we estimate the mean from the data, we lose one degree of freedom.  

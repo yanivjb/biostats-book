@@ -108,13 +108,8 @@ include_graphics("../../figs/stats_foundations/nhst/null_dist.png")
 
 ---
 
-#**Q7)** What do we do to the null hypothesis in this case? `r mcq(c(answer = "Reject it", "Fail to Reject it", "Accept it","Fail to accept it", "Not enough information"))`
+**Q7)** What do we do to the null hypothesis in this case? `r mcq(c(answer = "Reject it", "Fail to Reject it", "Accept it","Fail to accept it", "Not enough information"))`
 
-```{r}
-#| echo: false
-#| eval: false
-
-```
 
 ---
 

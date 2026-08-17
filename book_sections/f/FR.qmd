@@ -1,4 +1,4 @@
-## •  16. F and ANOVA in R  {.unnumbered  #FR}
+## •  17. F and ANOVA in R  {.unnumbered  #FR}
 
 
 ```{r}
@@ -57,7 +57,7 @@ In so doing, we consider how to interpret R's output, and how to convert it to a
 
 ## The [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) pipeline
 
-The [`aov()`](https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/aov.html) function is built specifically to conduct ANOVA in R. To do so, it uses the familiar   formula syntax: `(RESPONSE ~ EXPLANATORY, data = DATA)` 
+The [`aov()`](https://stat.ethz.ch/R-manual/R-devel/RHOME/library/stats/html/aov.html) function is built specifically to conduct ANOVA in R. To do so, it uses the familiar   formula syntax: `aov(RESPONSE ~ EXPLANATORY, data = DATA)` 
 
 
 ```{r}

@@ -1,4 +1,4 @@
-## • 19. P-values & NHST {.unnumbered #evaluating_significance}
+## • 20. P-values & NHST {.unnumbered #evaluating_significance}
 
 ```{r}
 #| code-fold: true

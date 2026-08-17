@@ -1,0 +1,301 @@
+## • 12. Study design summary {.unnumbered #study_design_summary}
+
+
+---
+format: html
+webr:
+  packages: ['dplyr', 'ggplot2', 'pwr']
+  autoload-packages: true
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(webexercises)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(pwr)
+```
+
+---
+
+Links to: [Summary](#study_design_summary_chapter-summary). [Chatbot tutor](#study_design_summary_chatbot_tutor). [Questions](#study_design_summary_practice-questions). [Glossary](#study_design_summary_glossary-of-terms). [R packages](#study_design_summaryR_packages_introduced). [Additional resources](#study_design_summary_additional-resources).
+
+
+## Chapter summary {#study_design_summary_chapter-summary}
+
+
+```{r}
+#| column: margin
+#| echo: false
+#| label: fig-thedifference
+#| fig-cap: "An [xkcd comic](https://xkcd.com/242/). Rollover text: *How could you choose avoiding a little pain over understanding a magic lightning machine?.* See the related [explain xkcd](https://www.explainxkcd.com/wiki/index.php/242:_The_Difference) for more info. CC BY-NC 2.5, Comic by Randall Munroe, xkcd.com."
+#| fig-alt: "Cueball pulls a lever. Lightning hits Cueball. ZAP. Cueball still stands, obviously battered. An arrow labelled \"normal person\" points to a panel of Cueball thinking. Cueball (thinking): \"I guess I shouldn't do that.\" An arrow labelled \"scientist\" points to a panel of Cueball about to pull the level again. Cueball (thinking): I wonder if that happens every time."
+include_graphics("https://imgs.xkcd.com/comics/the_difference.png")
+```
+
+The ultimate success or failure of a statistical analysis is often shaped more by how the study was designed and the data were generated, than by how the statistics were performed. So, you should think carefully about who, what, and how to sample, measure, and assign individuals to a treatment group. As compared to observational studies, in which known or unknown confounds can prevent a clear causal understanding, the random assignment of individuals to treatment groups in experimental studies provides us an opportunity to learn about causation. It is therefore critical that we carefully design experiments to avoid potential sources of bias including experimental artifacts, placebo effects, and regression toward mediocrity. And, if you're going through the effort of doing scientific research, and designing a good study, you should make sure that you have the design and sample size needed to find interesting results, if they do indeed exist. Finally, while experiments are great, we sometimes cannot do them. Don't fret -- we can do our best to mitigate confounding, by applying best practices from experimental design to our observational studies!
+
+
+### Chatbot tutor {#study_design_summary_chatbot_tutor}
+
+:::tutor
+
+*(Add your ChatGPT and Gemini chatbot links here, matching the pattern from earlier chapters -- I don't have real links to provide, so I've left this as a placeholder rather than invent one.)*
+
+Please interact with this custom chatbot (**ChatGPT has stopped supporting this :/**, [**Gemini version here**](https://gemini.google.com/gem/19vacSXk8F0ng6KWpagTGccOmPzGAxVjW?usp=sharing)). I suggest interacting with at least ten back-and-forths to ramp up, and then stopping when you feel like you got what you needed from it.
+
+:::
+
+
+## Practice Questions {#study_design_summary_practice-questions}
+
+Try these questions!
+
+:::exercises
+
+**Q1)** Random assignment describes the a key feature of experimental design in which the experimenter `r longmcq(c(answer = "Randomly assigns individuals in a study to a treatment","Randomly assigns individuals to study.", "Gives participants random homework assignments to ensure they can appropriately complete the experiment"))`
+
+`r hide("btw")`
+That second option describes **random selection** (or random sampling). Random selection is about randomly choosing who gets into the study, from the broader population you care about. 
+
+By contrast **random assignment** describes randomly assigning treatments to individuals in the study. 
+
+`r unhide()`
+
+---
+
+**Q2)** IMO "effect size" is a bad name. Take for example, our RIL study, which estimated the "effect size" of petal area on proportion hybrid seed as $r = .227$. Why is calling this an effect size misleading?  `r longmcq(c("Because effect sizes below a certain threshold don't count as real effects.", answer = "Because we have not shown any effect, let alone quantified its \"size\"", "Because effect sizes are measured as Cohen's D.", "Because 0.227 is not a measure of size."))`
+`r hide("Explanation")`
+Because we often apply the term "effect size" to observational studies, which do not show "effects," just "associations."
+`r unhide()`
+
+---
+
+**Q3)** What distinguishes a scientific model from a statistical model? `r longmcq(c( answer = "A scientific model is meant to describe how (we think) the world actually works; a statistical model is a mathematical description of patterns in data.", "A statistical model is more accurate than a scientific model.", "There's no real difference -- the terms are interchangeable."))`
+
+
+---
+
+**Q4)** Two techniques in study design -- blocking and matching -- have a similar purpose.  In "blocking," we randomly assign treatments in our experiment within "blocks" (e.g. fields, schools, etc) so that the all treatments are well-represented in all blocks. In a "matching" experimental design we create pairs that are as similar as possible to each other, and then randomly apply the treatment to one member of the pair. Compared to other experimental approaches, what underlying problem are both of these techniques trying to solve? `r longmcq(c("Both aim to remove confounds.", "Both improve how well results generalize to new populations.", "Both remove the need for random assignment.", answer = "Both aim to increase power and precision by decreasing variability unrelated to the treamtment."))`
+
+`r hide("btw")`
+If you answered "Both aim to remove confounds confounding variables are eliminated," you're close. Random assignment already protects experiments against systematic confounding by treatment. Blocking and matching go a step further, they try to balance known sources of variation across treatments.
+`r unhide()`
+
+---
+
+**Q5)** TRUE or FALSE: Random assignment controls for covariates by modeling the effect of each one. `r torf(FALSE)`
+
+`r hide("Click here for explanation")`
+Random assignment does not model covariates. It works through study design. Treatment is assigned independently of other variables, so potential confounders should be balanced across treatment groups on average. Modeling covariates is a separate statistical adjustment. This is a great benefit of random assignment -- we can deal with confounds without guessing what they may be.
+`r unhide()`
+
+---
+
+**Q6)** Say we ran an experiment with appropriate controls and failed to reject the null hypothesis. Does this prove there's no true causal relationship? For each reason below, is it a valid explanation for why a true effect could still fail to reach significance?
+
+- The experiment's conditions were unnatural enough that they blocked the causal pathway from operating at all (e.g., testing a pollinator-attraction hypothesis with no pollinators present). `r torf(TRUE)`.     
+- The treatment's intensity or dose differed enough from what's experienced in nature that it didn't trigger the same effect. `r torf(TRUE)`.   
+- The study might simply have been underpowered -- too small a sample to reliably detect a real but modest effect. `r torf(TRUE)`.   
+- Failing to reject the null proves the null hypothesis is true. `r torf(FALSE)`.   
+
+`r hide("Explanation")`
+"Absence of evidence is not evidence of absence." A null result can mean the effect isn't there -- or it can mean the effect is there, but the study wasn't built to catch it: wrong context, wrong dose, or not enough power. None of the first three possibilities require you to abandon the causal hypothesis; they just mean this particular experiment couldn't settle the question.
+`r unhide()`
+:::
+
+
+**For the remaining questions, consider this setup:** Glyphosate is the active ingredient in Roundup, a very common herbicide. In 2015, the International Agency for Research on Cancer classified it as "probably carcinogenic to humans." By contrast,  the U.S. EPA has maintained that it's unlikely to cause cancer when used as directed. Since 2018, Bayer (which acquired Monsanto, Roundup's manufacturer) has faced > 100k lawsuits from people who developed non-Hodgkin lymphoma after using the product, including [school groundskeeper Dewayne Johnson](https://www.npr.org/2018/10/23/659848853/california-judge-cuts-award-to-78-5-million-in-monsanto-weedkiller-case), whose 2018 trial was the first to reach a jury, and [Edwin Hardeman](https://www.npr.org/2019/03/27/707439575/jury-awards-80-million-in-damages-in-roundup-weed-killer-cancer-trial), who sprayed Roundup on his own (56-acre) property for 20 years. The company formerly known as Monsanto (Bayer) has [paid > $10  billion](https://www.npr.org/2020/06/24/882949098/bayer-to-pay-more-than-10-billion-to-resolve-roundup-cancer-lawsuits) in settlements and verdicts to date, while still denying that glyphosate causes cancer. 
+
+
+:::exercises
+
+**Q7)** Agricultural workers exposed to glyphosate were often apply several other pesticides, so it can be hard to isolate glyphosate's effect from the others. Why is this is a threat to *internal validity* `r longmcq(c("Because farmers are a small, unrepresentative slice of the population.", answer = "Because it's unclear if glyphosate itself, the other pesticides applied alongside it, or some combination is/are responsible for the elevated cancer rate.", "Because self-reported pesticide use is not a reliable measurement.", "Because the sample size of farmers studied was too small to trust."))`
+
+`r hide("Explanation")`
+Co-exposure is a classic confound: workers weren't randomly assigned their glyphosate exposure, they were farmers doing normal farm work -- which came bundled with exposure to other chemicals too. A study can find a real, non-random association between glyphosate and cancer risk without being able to say glyphosate itself is the cause, because glyphosate use and other-pesticide use move together.
+`r unhide()`
+
+---
+
+**Q8)** The strongest  evidence connecting glyphosate to human cancer risk comes from studies of licensed agricultural applicators -- people with heavy, often decades-long occupational exposure. But the lawsuits about glyphosate include plaintiffs like Hardeman, whose exposure was residential. Why does this gap raises a question of *external validity*? `r longmcq(c("Because home gardeners weren't randomly assigned to use Roundup.", "Because occupational and residential users measure their exposure differently.", answer = "Because it's unclear whether a result from decades of heavy occupational exposure generalizes to occasional home use.", "Because agricultural applicators are a larger sample than home gardeners."))`
+
+`r hide("Explanation")`
+This is a real, live tension, not a hypothetical one: the core evidence base is heaviest for people like licensed applicators, but the plaintiff population is much broader. Whether findings from one population extend to the other is exactly what external validity asks -- and it's a genuine point of dispute in how this evidence has been applied in court and by regulators.
+`r unhide()`
+
+---
+
+**Q9)** Some of the animal evidence connecting glyphosate to cancer came from rodent studies using doses far above typical human exposure -- a standard practice called testing at the "maximum tolerated dose." Why does this raise a question of *ecological validity*? `r longmcq(c("Because rodents and humans metabolize chemicals too differently for animal studies to ever be useful.", answer = "Because a real effect at an extreme, rarely-encountered dose doesn't necessarily tell you what happens at the doses people actually encounter in ordinary life.", "Because the rodents in these studies weren't randomly assigned to dose groups.", "Because tumor rates in animals can't be measured reliably."))`
+
+`r hide("Explanation")`
+Testing at high doses isn't a design flaw on its own -- regulators require it specifically because it's often the only practical way to detect a rare effect in a study with a manageable number of animals. But it creates a real interpretive gap: a dose-response relationship near the maximum tolerated dose doesn't automatically tell you whether the same relationship holds at everyday exposure levels, which is exactly what regulatory agencies have had to argue about when interpreting this evidence.
+
+`r unhide()`
+
+
+---
+
+
+**Q10)** As of 2026, roughly 170,000 Roundup-related lawsuits have been filed. For each statement, is it a legitimate reason this count is an untrustworthy estimate of how many people glyphosate exposure has actually harmed?
+
+- It could plausibly *overstate* true harm. Filing a lawsuit doesn't require proving glyphosate caused that specific person's cancer, so some claims may be frivolous. `r torf(TRUE)`. 
+- It could plausibly *understate* true harm. Highly exposed populations with high occupational exposure -- especially undocumented agricultural workers -- are unlikely to pursue legal claims, for reasons unrelated to whether they were actually harmed. `r torf(TRUE)`
+- 170,000 is simply too large a number to be accurate. `r torf(FALSE)`
+- Bayer has settled most claims, so the true number of harmed people must be lower. `r torf(FALSE)`
+
+
+
+---
+
+**Q11)**  In 2023, Bayer began phasing glyphosate out of its U.S. residential lawn-and-garden products, while continuing to sell it for agricultural use. If glyphosate exposure really does drive non-Hodgkin lymphoma risk at levels common in residential application, what would you predict? `r longmcq(c(answer = "Non-Hodgkin lymphoma rates would drop substantially  among residential users, but not change much  among agricultural workers over the same period.", "Non-Hodgkin lymphoma rates should drop equally in both groups.", "Non-Hodgkin lymphoma rates should rise among agricultural workers, since they now use more glyphosate to compensate.", "No prediction is safe."))`
+
+`r hide("Explanation")`
+This is the distinguishing prediction, not just a justification after the fact. Bayer's decision changed exposure for one group (residential users) but not the other (agricultural workers), for reasons unrelated to either group's cancer risk. If glyphosate itself is driving risk, that predicts a specific, checkable pattern: a bigger drop in residential rates than agricultural rates over the same period. If we *don't* see that pattern -- say, rates drop equally in both groups -- that's evidence against glyphosate being the responsible agent, since something else would have to explain an equal drop in a group whose exposure didn't change. Comparing the *size of the change* in an exposed group against an otherwise-similar unexposed group, over the same period, is a specific, well-known technique you'll meet by name later in your statistical education.
+`r unhide()`
+
+
+
+
+:::
+
+
+## 📊 Glossary of Terms {#study_design_summary_glossary-of-terms}
+
+:::glossary
+
+* **Confounding variable**: An unmodeled variable that distorts the relationship between an explanatory and response variable, making it unclear whether the explanatory variable, the confound, or both are responsible for an observed association.
+* **Construct validity** (aka measurement validity): How well the thing you measured actually captures the thing you meant to study.
+* **Measurement reliability**: How similar your measurement would be if you took it again -- a question of consistency, separate from whether you're measuring the right thing in the first place.
+* **Internal validity**: How well a study design lets you draw the specific causal conclusion you're after, for the individuals and conditions used in that particular study.
+* **External validity**: How far a study's results generalize beyond the specific study that produced them.
+* **Ecological validity**: Whether a treatment's intensity falls within the range organisms actually experience in nature, rather than an artificially extreme dose or condition.
+* **Statistical conclusion validity**: Whether the statistical inference itself is sound -- adequate power, appropriate handling of non-independence -- separate from whether the design itself was valid.
+* **Random assignment**: Assigning treatment to experimental units by chance, so that any resulting group differences are attributable to the treatment rather than to pre-existing differences between units.
+* **Experimental artifact**: A result caused by some feature of the experimental manipulation itself, rather than by the treatment of actual interest.
+* **Placebo effect**: A change in outcome caused by the belief that one has received a treatment, rather than by the treatment itself.
+* **Regression to the mean**: The tendency for extreme observations to be closer to average on a second measurement, simply because part of what made them extreme was random noise unlikely to repeat.
+* **Blocking**: Deliberately grouping experimental units by a nuisance factor (like field site) and ensuring a balanced, complete set of treatments within each group, so that group-to-group variation can be modeled rather than left as noise.
+* **Randomized Complete Block Design (RCBD)**: The formal name for a blocked design in which every block contains a complete, balanced set of the treatment levels.
+* **Matching**: Pairing units that are as similar as possible except for the variable of interest, so that other sources of variation cancel out within each pair.
+* **Split-plot design**: A design used when one factor can only be randomized at a coarser scale (a whole plot) than another factor, which can be randomized more finely within it (a split plot).
+* **Stratifying**: Comparing outcomes within levels of a suspected confounder, rather than pooling across all levels -- the observational analog of blocking.
+* **Natural experiment**: A real-world situation in which something close to random assignment occurs without a researcher designing it, allowing for stronger causal inference than typical observational data.
+* **Pseudoreplication**: Treating non-independent observations as if they were independent replicates, which inflates apparent precision without actually adding independent information.
+* **Power**: The probability of correctly rejecting a false null hypothesis.
+* **Effect size**: The magnitude of the difference or relationship a study is trying to detect.
+* **Triangulation**: Using multiple lines of evidence with different likely failure modes to build a stronger case than any single study could support on its own.
+
+:::
+
+
+---
+
+## R Packages Introduced {#study_design_summaryR_packages_introduced}
+
+:::packages
+
+- **[`pwr`](https://cran.r-project.org/web/packages/pwr/index.html)**: the most widely used R package for power analysis -- finding the sample size needed to detect a given effect size with a given level of power, or vice versa.
+
+- **[`presize`](https://dcr-unibe-ch.github.io/presize/)**: a complementary package (with an accompanying [web app](https://shiny.ctu.unibe.ch/presize/)) for planning sample size around the *precision* of an estimate, rather than the power to reject a null.
+
+:::
+
+
+## Additional resources {#study_design_summary_additional-resources}
+
+:::learnmore
+
+**Readings:**
+    
+- [Pseudoreplication and the Design of Ecological Field Experiments](https://www.zoology.ubc.ca/~bio501/R/readings/hurlbert%201984%20ecol%20monogr%20-%20pseudoreplication.pdf) -- Hurlbert (1984). The classic paper that gave pseudoreplication its name.    
+
+**Book chapter:**
+
+- [Chapter 23: Sample Size Calculations with `{pwr}`](https://bookdown.org/pdr_higgins/rmrwr/sample-size-calculations-with-pwr.html) -- from *Reproducible Medical Research with R* (Higgins). A hands-on walkthrough of the `pwr` package with a full table mapping test type to function (t-tests, ANOVA, correlation, chi-squared, and more), plus worked clinical examples. 
+
+**Web app:**
+
+- [Power and Sample Size Calculator](https://www.stat.ubc.ca/~rollin/stats/ssize/n2.html) -- UBC. A quick, no-install way to get a sample size or power estimate without writing any R.
+
+**Podcast:**
+
+- [Placebo](https://radiolab.org/podcast/91539-placebo) -- Radiolab (2009). The full-length episode behind the short clip already excerpted in Experimental Design -- an hour on the neuroscience of belief, from the symbolic power of a doctor's coat to a visit with a faith healer.
+
+**Videos:**
+    
+- [Correlation Doesn't Equal Causation: Crash Course Statistics #8](https://www.youtube.com/watch?v=GtV-VYdNt_g)
+- [Controlled Experiments: Crash Course Statistics #9](https://www.youtube.com/watch?v=kkBDa-ICvyY)
+- - [Calling Bullshit video](https://callingbullshit.org/index.html) [3.5 Common Causes](https://www.youtube.com/watch?v=5iVN13tbVNc) -- How common causes can generate correlations between otherwise unrelated variables, including the correlational "evidence" that storks bring babies. Covers multiple contributing causes and the *post hoc ergo propter hoc* fallacy: mistaking sequence for causation.
+- [Calling Bullshit video](https://callingbullshit.org/index.html) [3.6 Manipulative Experiments](https://www.youtube.com/watch?v=-p7_HFJLA_k) -- How manipulative experiments can work out the direction of causation between correlated variables, and a summary of the questions worth asking when presented with a correlation.
+- [Calling Bullshit video](https://callingbullshit.org/index.html) [5.5 Criminal Machine Learning](https://www.youtube.com/watch?v=rga2-d1oi30) -- A case study on a paper that claimed machine learning could identify criminals from a photograph. That's bullshit, and this video explains why.
+       
+:::
+
+
+```{r}
+#| echo: false
+#| eval: false
+Both check out well and map onto different existing concepts in your book, so I built three genuinely distinct angles for each rather than three phrasings of the same question.
+
+## Processed meat (three versions)
+
+**V1 — Same category ≠ same magnitude (ties to your "effect size is a misleading name" idea)**
+
+**Q)** In 2015, IARC classified processed meat as a Group 1 carcinogen -- the same category as tobacco smoking and asbestos -- based on evidence it causes colorectal cancer. Headlines followed comparing bacon to cigarettes. What does the "Group 1" classification actually tell you, and what does it *not* tell you? `r longmcq(c("It tells you processed meat is exactly as dangerous as cigarettes.", answer = "It tells you how confident IARC is that a causal link exists at all -- it says nothing about how large the risk is. Smoking multiplies lung cancer risk many times over; processed meat's estimated effect (about 18% higher relative risk per daily 50g portion) is real but far smaller.", "It tells you processed meat causes cancer in a higher percentage of people than cigarettes do.", "It tells you processed meat has not been adequately studied."))`
+
+`r hide("Explanation")`
+IARC's Group 1/2A/2B/3 system ranks *strength of evidence*, not *size of effect* -- it's a confidence scale, not a danger scale. Two things can share a category by having equally strong evidence behind them while having wildly different actual magnitudes of risk. This is exactly the "effect size" trap from earlier in the chapter, wearing a different costume: a real, well-documented number gets misread as something bigger and scarier than what it actually measures.
+`r unhide()`
+
+
+**V2 — Relative vs. absolute risk**
+
+**Q)** IARC's report states that each daily 50-gram portion of processed meat increases colorectal cancer risk by about 18%. Why isn't this number, on its own, enough to know how worried to be? `r longmcq(c("Because 18% is too small a number to be statistically significant.", answer = "Because 18% is a *relative* increase -- to know what it means for you, you'd also need to know the *absolute* baseline risk it's being applied to. An 18% increase on a very small baseline risk is a very different real-world change than an 18% increase on a large one.", "Because IARC didn't specify which country's population was studied.", "Because processed meat contains many different chemicals, not just one."))`
+
+`r hide("Explanation")`
+Relative risk (a percentage increase) and absolute risk (your actual chance of developing the disease) are different numbers doing different jobs, and headlines almost always report only the relative one because it sounds more dramatic. An 18% relative increase applied to a lifetime colorectal cancer risk in the single digits produces a small absolute change -- real, worth knowing, but not the sweeping headline it often becomes.
+`r unhide()`
+
+**V3 — Headline compression / honest communication**
+
+**Q)** IARC's actual finding was narrower than most headlines suggested: "sufficient evidence in humans that consumption of processed meat causes colorectal cancer" -- specifically colorectal cancer, based on that classification. Headlines like "Bacon causes cancer" dropped a key qualifier. Which one? `r longmcq(c("That the finding applied only to organic, unprocessed bacon.", answer = "That the classification applied specifically to colorectal cancer -- not \"cancer\" as a single, general outcome affecting the whole body equally.", "That the finding only applied to bacon eaten raw.", "That IARC only surveyed European populations."))`
+
+`r hide("Explanation")`
+"Causes cancer" is often reported as if cancer were one disease with one uniform risk, when IARC's actual evidence was about one specific cancer type. This is a small qualifier, and it's exactly the kind of detail that survives in the original scientific report and disappears by the time a finding becomes a headline -- worth remembering as a habit of reading, not just a fact about this one case.
+`r unhide()`
+
+## Coffee (three versions)
+
+**V1 — Confounding explains the original (false) positive result**
+**Q)** In 1991, IARC classified coffee as "possibly carcinogenic" (Group 2B), based mainly on case-control studies linking coffee drinking to bladder cancer. In 2016, after reviewing over 1,000 newer studies, IARC reversed this, partly because the original studies hadn't adequately accounted for smoking -- coffee drinkers in that era were also disproportionately likely to smoke. What does this reveal about the 1991 classification? `r longmcq(c("That IARC lied to the public in 1991.", answer = "That the original association was likely driven by a confounding variable (smoking) rather than coffee itself -- coffee drinkers and smokers overlapped enough that coffee was standing in for a risk factor it didn't actually cause.", "That bladder cancer rates have changed since 1991.", "That coffee only became safe to drink after 2016."))`
+
+`r hide("Explanation")`
+This is the same confound structure as the glyphosate/other-pesticides question, just in beverages instead of herbicides: coffee drinking and smoking weren't randomly distributed across the population, so a study that didn't carefully separate the two could easily mistake smoking's effect for coffee's. The 2016 reversal isn't evidence that "science keeps flip-flopping and can't be trusted" -- it's closer to the opposite: a confound got identified and corrected as better-controlled studies became available.
+`r unhide()`
+
+
+**V2 — More/better evidence overturning a limited-evidence conclusion**
+
+**Q)** The 1991 coffee classification was based on roughly 20 case-control studies. The 2016 reversal drew on more than 1,000 studies, including large prospective cohorts. Why does going from ~20 studies to 1,000+ matter here, beyond just "more evidence is better"? `r longmcq(c("It doesn't matter -- more studies just means more chances for a false positive somewhere.", answer = "A larger, more varied body of evidence -- especially including prospective cohort studies, which track exposure before disease develops, rather than asking people to recall the past after diagnosis -- gives a much better chance of detecting or ruling out a real effect, and of catching confounds the earlier, smaller literature couldn't.", "It doesn't matter -- IARC's classification system doesn't consider sample size at all.", "It matters only because 1,000 is a rounder number than 20."))`
+
+`r hide("Explanation")`
+This connects two ideas from earlier in the book at once: more (and more independent, more rigorously designed) studies increase your power to detect a true effect and your ability to rule out confounds like the smoking one in V1 -- and prospective cohort designs, which follow people forward in time, sidestep some of the recall-bias problems that case-control designs can run into. The 2016 reversal is what triangulation looks like when it points *away* from an effect rather than toward one.
+`r unhide()`
+
+
+**V3 — What the science actually said vs. what got reported**
+
+**Q)** IARC's original 1991 language was already hedged: researchers described "a weak positive relationship" and explicitly noted "the possibility that this is due to bias or confounding cannot be excluded." Yet for 25 years, coffee carried a public reputation as something that "possibly causes cancer" without those caveats attached. What does this suggest about where the distortion happened? `r longmcq(c("IARC's scientists were being deliberately misleading in 1991.", answer = "The scientific classification itself was appropriately cautious and hedged from the start -- the distortion happened downstream, as \"possibly carcinogenic, weak association, can't rule out confounding\" got compressed into a flat, unqualified public message over repeated retelling.", "Coffee's chemical composition changed between 1991 and 2016.", "IARC only reverses classifications when new laws require it."))`
+
+`r hide("Explanation")`
+This is the shows-vs-suggests distinction in its natural habitat: the original report was honestly hedged, but hedging doesn't survive being repeated secondhand for 25 years. Every retelling has a chance to drop a qualifier, and qualifiers are exactly the part that's easiest to lose and hardest to notice is missing. The lesson isn't "don't trust classifications" -- it's "go find out what the classification actually said" before trusting the popular version of it.
+`r unhide()`
+
+
+All six checked against what I found rather than assumed — the Group 1/2A classifications, the 18% figure, the 1991→2016 coffee reversal, and the smoking-confound explanation for the original bladder cancer finding are all as reported in IARC's own materials and the secondary coverage I pulled.
+```

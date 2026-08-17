@@ -55,7 +55,7 @@ library(dplyr)
 library(readr)
 library(tidyr)
 library(conflicted)
-conflict_prefer(name = "select", winner = "dplyr")
+conflicts_prefer(dplyr::select)
 
 path <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
 ril_data <- read_csv(path)
@@ -156,8 +156,7 @@ library(tidyr)
 library(conflicted)
 conflict_prefer(name = "select", winner = "dplyr")
 
-path <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
-ril_data <- read_csv(path)
+
 path <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
 ril_data <- read_csv(path)
 ```
@@ -190,18 +189,12 @@ ril_data |>
          visits     = mean_visits) |>
   select(location,  prop_hybrid,  
          visits, petal_color, petal_area, 
-         asd_mm, growth_rate) 
+         asd, growth_rate) 
 ```
 
 ```{webr-r}
 library(dplyr)
 library(readr)
+# TRY HERE!
 
-# A)
-ril_data |> 
-  select(location,  prop_hybrid,  
-         mean_visits, petal_color, 
-         petal_area_mm, asd, growth_rate) |>
-  rename(petal_area = petal_area_mm,
-         visits     = mean_visits)
 ```

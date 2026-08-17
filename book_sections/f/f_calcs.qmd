@@ -1,4 +1,4 @@
-## •  16. F Calculations {.unnumbered  #f_calcs}
+## •  17. F Calculations {.unnumbered  #f_calcs}
 
 
 ```{r}
@@ -212,7 +212,7 @@ Before calculating these sums of squares and mean squares, it's worth visualizin
 
 In each panel of @fig-devs, we can square the length of each line and add them up to find each of the relevant sums of squares! But first we need to find the lengths of these lines. In R we can do this by:   
 
-- Building a linear model (See [Chapter 7](#linear_models)),     
+- Building a linear model (See [Chapter 12](#linear_models)),     
 - Finding predicted values (with the [`augment()`](https://generics.r-lib.org/reference/augment.html) function in the [`broom`](https://broom.tidymodels.org/) package).    
 - Using basic [`dplyr`](https://dplyr.tidyverse.org/) manipulations like [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) and [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) to do our calculations.   
 
@@ -293,7 +293,7 @@ Remember that testing the null hypothesis is only one goal of statistics -- we a
 
 $$R^2 = \frac{\text{SS}_\text{model}}{\text{SS}_\text{total}}$$ 
 
-$R^2$ summarizes the effect size as the proportion of variance in the response variable explained by our model. For our example, petal color "explains"  $R^2 = \frac{0.00183}{0.00288} =0.635$, or $\approx 63%$ of the variance in admixture proportion at Squirrel Mountain.
+$R^2$ summarizes the effect size as the proportion of variance in the response variable explained by our model. For our example, petal color "explains"  $R^2 = \frac{0.00183}{0.00288} =0.635$, or $\approx 63\%$ of the variance in admixture proportion at Squirrel Mountain.
 
 #### **INTERPRETING $R^2$**
 

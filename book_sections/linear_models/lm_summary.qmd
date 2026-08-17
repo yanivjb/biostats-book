@@ -1,4 +1,4 @@
-## • 12. Linear model summary {.unnumbered}
+## • 13. Linear model summary {.unnumbered}
 
 
 ---
@@ -252,7 +252,7 @@ library(palmerpenguins)
 - **Intercept (`b₀`)**: The expected value of the response when all explanatory variables are zero (sometimes called $a$). 
 - **Slope (`b₁`)**: The expected change   $\hat{y}_i$ with change in the predictor.     
    - *For numeric predictor:* The expected change in the response for a one-unit increase in a numeric explanatory variable. $b_1 = \text{cov}_{x,y}/\sigma^2_x$.   
-   - *For binary predictor:* The difference in the meane of non-reference and reference level.  
+   - *For binary predictor:* The difference in the mean of non-reference and reference level.  
 - $x_{1,i}$ The value of explanatory variable, $1$, in individual $i$.    
    - *For numeric predictors:* The value of the explanatory variable.    
    - *For binary predictors:* The value of the indicator variable.   
@@ -263,7 +263,7 @@ library(palmerpenguins)
 - **Observed value (`yᵢ`)**: The actual value of the response variable: $y_i = \hat{y}_i +e_i$.     
 - **Residual (`eᵢ`)**: The difference between an observed value and its model-predicted value, $e_i = y_i-\hat{y}_i$.  
 - **Residual Sum of Squares**: $\sum e_i^2$
-- **Residual Standard Deviation**: A measure of typical residual size — how far off predictions tend to be $\sum e_i^2/(n-1)$.
+- **Residual Standard Deviation**: A measure of typical residual size — how far off predictions tend to be $\sqrt{\frac{\sum e_i^2}{n-2}}$.
 
 
 

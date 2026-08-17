@@ -1,4 +1,4 @@
-## • 18. Regression Summary {.unnumbered #regression_summary}
+## • 19. Regression Summary {.unnumbered #regression_summary}
 
 
 ```{r}
@@ -45,8 +45,8 @@ Links to: [Summary](#regression_summary_chapter-summary). [Chatbot tutor](#regre
 ---
 
 
-### Regression summary (#regression_summary_chapter-summary).
-A linear regression is a linear model that describes a numeric response variable as a function of a numeric explanatory variable. It estimates two parameters: the intercept, $a$, and the slope, $b$. Together with an individual’s value for the explanatory variable, $X_i$, these parameters give the model’s expected value for that individual’s response: $\hat{Y_i} = a + bX_i$. The difference between what we observed and what the model predicted is called the residual.
+## Chapter summary {#regression_summary_chapter-summary}    
+A linear regression is a linear model that describes a numeric response variable as a function of a numeric explanatory variable. It estimates the intercept, $a$, and the slope, $b$. Together with an individual’s value for the explanatory variable, $X_i$, these parameters give the model’s expected value for that individual’s response: $\hat{Y_i} = a + bX_i$. The difference between what we observed and what the model predicted is called the residual.
 
 The slope tells us how much we expect $Y$ to change for a one-unit increase in $X$. Correlation answers a slightly different question: how tightly do $X$ and $Y$ move together along a straight-line trend? This chapter works through these ideas, shows how to fit linear regressions in R, and,  how to interpret regression results.
 
@@ -370,7 +370,7 @@ pf(7.1,1,47,lower.tail = FALSE)
 `r unhide()`
 
 
-**26)** What do we do to the null hypothesis? `r mcq(c(answer = "Reject it" , "Fail to reject it" , "Fail to accept it", "Accept it"))`
+**Q26)** What do we do to the null hypothesis? `r mcq(c(answer = "Reject it" , "Fail to reject it" , "Fail to accept it", "Accept it"))`
 
 **Q27)** What does rejecting this null hypothesis mean in this context?  `r longmcq(c(  "Pollinator visits definitely cause hybrid seed production.",  "The model explains all variation in proportion hybrid seed.","The intercept is biologically meaningful.",   answer = "The data provide evidence that RILs with more pollinator visits tend to have different expected proportions of hybrid seed."))`
 
