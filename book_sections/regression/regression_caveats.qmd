@@ -370,7 +370,7 @@ library(broom)
 library(plotly)
 library(dplyr)
 
-shoe_link <- "https://online.stat.psu.edu/stat462/sites/onlinecourses.science.psu.edu.stat462/files/data/height_foot/index.txt"
+shoe_link <- "https://raw.githubusercontent.com/yanivjb/biostats-book-data/refs/heads/main/foot.txt"
 shoe_data <- read.delim(shoe_link) # I use read_delim instead of read_csv because it's a .txt file, not a .csv
 shoe_lm <- lm( height ~ foot , data = shoe_data) 
 augmented_shoe <- augment(shoe_lm)  |> 
