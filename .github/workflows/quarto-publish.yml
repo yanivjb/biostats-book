@@ -129,6 +129,8 @@ jobs:
             "rstatix",
             "shiny",
             "transformr",
+            "pwr",
+            "presize",
             "yanivjb/honestlm"
           ))'
 

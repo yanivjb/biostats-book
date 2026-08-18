@@ -13,7 +13,6 @@ book:
   # so no new asset is needed. Swap the description/site-url if you'd like.
   favicon: "figs/fun_figs/stamp.png"
   site-url: "https://yanivjb.github.io/biostats-book/"
-  description: "Applied Biostatistics — an open, Quarto-based textbook by Yaniv Brandvain, built around research on Clarkia xantiana speciation."
   image: "figs/fun_figs/stamp.png"
   open-graph: true
   twitter-card: true
@@ -149,6 +148,7 @@ book:
         - book_sections/t/one_sample_t_test.qmd
         - book_sections/t/one_sample_t_test_in_R.qmd
         - book_sections/t/paired_t_test.qmd
+        - book_sections/t/t_experiments.qmd
         - book_sections/t/t_summary.qmd
     - part: book_sections/two_ts.qmd
       chapters: 

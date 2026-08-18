@@ -1,0 +1,268 @@
+---
+format: html
+webr:
+  packages: ['dplyr' ,'ggplot2', 'broom', 'pwr','presize']
+  autoload-packages: true
+---
+
+## • 15. t: Experiments {.unnumbered #t_experiments}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(broom)
+library(tidyr)
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+**Motivating Example:** You've decided a paired design is the right experimental setup! You know that pairing *can* add statistical power, but you want to know how to do that best. You also want to know the sample size you need to come to a reasonable scientific conclusion.
+
+**Learning Goals:** By the end of this section, you will be able to:
+
+- Avoid common sources of bias as you design a paired experimental design.
+- Use the `pwr` package to find the power of a planned paired t-test.
+- Use the `presize` package to find the expected precision (confidence interval width) of a planned paired t-test.
+:::
+
+---
+
+::: aside
+I will not go over design for a one-sample t-test, because these come up very rarely -- and besides, the power analysis logic below still holds.
+:::
+
+**Experimental considerations for paired t-tests.** Before we end this chapter, we will consider designing an experiment with a "paired" design. Remember that the benefit of a paired design is that we can increase power and precision by minimizing extraneous variation unrelated to the treatment. But in doing this, we should ensure that no bias arises, and that the pairs are adequately matched such that we decrease extraneous variability (otherwise we do not gain from a paired approach). Then, we can consider the sample size needed for the power and precision we desire.
+
+### Guarding against bias in paired designs
+
+Like all experiments, a paired design is susceptible to bias. And the ways to guard against this bias are just specific instances of the best practices in experimental design: random assignment, and avoiding experimental artifacts.
+
+- **Random assignment (within pairs).** Make sure that each member of the pair has an equal chance of being in either experimental group. For example, do not systematically keep the first flower to blossom unaltered and apply your treatment to the second. This makes sure that there isn't something about who or how you're assigning treatments that could bias the outcome.
+- **Avoid artifacts.** Make sure that your treatment only alters the thing you want to ask about. Follow best practices in blinding, realistic controls, and the like.
+
+### Making the most of a paired design 
+
+Paired designs **can** provide us with more power than unpaired designs. But this is only true if pairing actually reduces extraneous variation unrelated to treatment. If pairs are made arbitrarily, a paired design could have *less* power than an unpaired one.
+
+::: warning
+## Do not construct pairs based on the outcome you're testing.
+Pairing units after the fact, based on a measured covariate, can be a legit technique. 
+But be careful. Pairing based on the *response variable itself*, after you've already seen it, is not ok. This is wrong, and makes you a bad statistician and an even worse person.
+
+:::
+
+### Power and Precision Analyses for paired designs
+
+Recall that **power** quantifies the probability that we will correctly reject a false null hypothesis. **Precision**, by contrast, describes how certain we can be about our estimate -- quantified, for example, by the width of its confidence interval. First I will show you how to quickly find both with R packages. Then I will give you more intuition by simulating.
+
+::: note
+A weird thing about power and precision analyses is that you need to specify an effect size *before* you do your study. When I was a student I found this super confusing. Like, if I already know the effect, why am I doing the experiment? The effect size we specify in these analyses isn't the one that actually exists in the world -- we don't know that yet. It's the smallest effect we'd want to be able to detect, if it's really there.
+:::
+
+---
+
+#### R packages and websites for power planning
+
+How big of a sample do you need? Well, of course, the answer depends on what you need the sample for.
+
+Say you wanted to detect a small effect, because even a little bit of harm from something nearly everyone is exposed to (e.g. food dye, microplastics etc.) would add up to a real public health cost. A Cohen's *d* of 0.2 sits just over the hump of what's conventionally called a "small" effect. So, how big a sample would you need to reject the null, and estimate this effect relatively precisely? The tools below can help! 
+
+---
+
+##### **The [`pwr`](https://cran.r-project.org/web/packages/pwr/index.html) package for power analyses**
+
+
+The [`pwr`](https://cran.r-project.org/web/packages/pwr/index.html) package can tell us the power of a paired t-test directly. You provide the sample size (number of **pairs**), the effect size (Cohen's *d* = $\frac{\text{mean difference between pairs}}{\text{sd of the difference between pairs}}$) you want to be able to detect, and your significance threshold, $\alpha$ (by tradition $\alpha = 0.05$), and it finds your power.
+
+```{r}
+library(pwr)
+pwr.t.test(d = 0.2,
+           n = 60,
+           sig.level = 0.05,
+           type = "paired",
+           alternative = "two.sided")
+```
+
+So, we will reject the null in about one third of paired experiments, if we're planning around a Cohen's *d* of 0.2. This is not enough power for me, and we would actually substantially overestimate the effect when we did reject the null. I would bump my sample size up to 270 to reach ninety percent power.
+
+
+---
+
+
+
+##### **The [`presize`](https://dcr-unibe-ch.github.io/presize/) package to plan for precision**
+
+The [`presize`](https://dcr-unibe-ch.github.io/presize/) package specializes in finding the precision for a planned experiment. While it doesn't explicitly have a "paired" option, we know that a paired t-test is just a one-sample t-test for the difference between pairs, with a null of zero. So we can use [`prec_mean()`](https://dcr-unibe-ch.github.io/presize/reference/prec_mean.html) to find the expected width of the confidence interval around that mean difference. Recall that here (and above) *n* is the number of pairs, not the number of individuals.
+
+Note that the effect size is playing a slightly different role here than it did in our power calculation. There, `d = 0.2` was the smallest effect we wanted to be able to *detect*. Here, `mean = 0.2` is the effect size we're hypothetically *planning around* -- if the true difference really is about this size, how tightly would this sample size pin it down?
+
+So, for example, we can find the expected 95% CI for our estimate of the mean difference, planning around a mean of $\mu = 0.2$, $\sigma = 1$, and a sample of 270 pairs (our larger study that gave 90% power), as given by:
+
+
+
+```{r}
+#| eval: false
+library(presize)
+prec_mean(
+  mean = 0.2,
+  sd = 1,
+  n = 270,
+  conf.level = 0.95
+)
+```
+```{r}
+#| echo: false
+library(presize)
+library(knitr)
+prec_mean(
+    mean = 0.2,
+    sd = 1,
+    n = 270,
+    conf.level = 0.95)|>
+  as_tibble()|>
+  mutate_at(c(4,6:7), round, digits =4)
+```
+
+The output tells us our 95% CI would run from about 0.08 to 0.32 -- a width of 0.24. In other words, even with a well-powered sample of 270 pairs, we'd still expect our estimate of the true mean difference to be uncertain by roughly ±0.12. Planning for power tells you whether you're likely to detect an effect at all; planning for precision tells you how well you'll actually pin it down once you do -- two different, complementary questions worth asking about the same design.
+
+---
+
+::: exercises
+
+**Now try this yourself.** Use the web-R environment below (which has `presize` loaded) to compare the precision of our underpowered study of 60 pairs, using the same Cohen's *d* as above.
+
+```{webr-r}
+# Find the expected 95% CI of our initial smaller study.
+# (n = 60, d = 0.2) 
+library(presize)
+prec_mean(mean        = ,
+          sd          = ,
+          n           = ,
+          conf.level  =  )
+```
+
+---
+
+With 270 pairs, the width of the 95% CI is 0.32 − 0.08 = 0.24. Now find the width of the 95% CI from our *original* design (n = 60).
+
+**Q1)** What is the width of the 95% CI at n = 60? `r fitb(0.51, tol = 0.05, num = TRUE)`
+
+`r hide("btw")`
+Width = upper bound − lower bound, same calculation as the n = 270 example above, just using your own n = 60 output this time.
+`r unhide()`
+
+---
+
+**Q2)** A sample size of 270 is 4.5 times a sample size of 60. The 95% CI from the n = 60 design is about `r fitb(2.1, tol = 0.3, num = TRUE)` times as wide as the CI from the n = 270 design. 
+
+`r hide("Explanation")`
+Notice that a four-and-a-half-times increase in sample size only shrunk the CI width by a bit more than two times. This is what we expect -- CI width doesn't shrink in direct proportion to sample size, it shrinks with $\sqrt{n}$ (note $\sqrt{4.5} = 2.1$). This reflects our rule of thumb that $n \propto \sigma^2/\text{effect}^2$ (see the section on [Power and Precision in Chapter 12](#sec-power-precision)). This is why it's so much work and money to precisely estimate small effects.
+
+For many questions, small effects don't matter much in practice, so this cost isn't worth paying. But for some topics, even a small effect can have huge implications -- worth knowing which kind of question you're actually asking before you commit to a sample size.
+`r unhide()`
+
+:::
+
+---
+
+
+
+
+#### Web-apps to find power and precision. 
+
+- **A webapp for power:**  I found the n = 270 (the actual answer is 263, but 270 is a bit easier to write) above from the webapp: [Inference for a Mean: Comparing a Mean to a Known Value](https://www.stat.ubc.ca/~rollin/stats/ssize/n1.html) -- this is a one-sample t-test, which is equivalent to a paired t-test with a $\mu_0 = 0$. So, I set $\mu_0$  (the null difference) to zero, and $\mu_1$ (the difference we hope to be able to find) to 0.2 and $\sigma = 1$. I kept $\alpha$ at its traditional 0.05, and bumped desired power up to 0.90.  
+
+- **A webapp for precision:** The same `presize` package we used above is also available as a webapp [here](https://shiny.ctu.unibe.ch/presize/).
+
+---
+
+
+
+
+#### OPTIONAL: Simulation for power and precision  
+
+For me, the math never quite hits right. I find it much more satisfying to "see" chance via computer simulation.  
+
+To simulate for power we:
+
+1.  Make a sample of n pairs.  
+     a. I simulate the values of the "control" treatment as a draw from the normal distribution with `rnorm()` (*note*: This isn't an assumption of the paired t-test, but it's easy). 
+      b. I simulate the "treatment" as a sample which deviates from the "control" by some random amount. Here this amount is sampled from a normal distribution with mean and standard deviation specified by our power analysis. 
+   
+2. Run a statistical test and summarize the data.   
+
+3. Do this many times. 
+
+4. See our power and precision from this simulation. 
+
+Steps 1 - 3 are implemented in the functions I wrote, below:
+
+```{r}
+
+library(dplyr)
+library(broom)
+
+
+# ONE SIMULATION
+simulatePairs <- function(n_pairs, diff, sd){
+  # simulate paired data
+  pairs <- tibble(control = rnorm(n_pairs)) |>
+    mutate(treatment = control + rnorm(n_pairs, mean = diff, sd = sd))
+  
+  # paired t-test
+  test_result <- with(pairs,
+    t.test(treatment, control, paired = TRUE))
+  
+  # return the quantities we're interested in
+  glance(test_result) |> 
+    mutate(cohens_d_estimate = statistic / sqrt(parameter + 1)) |>
+    dplyr::select(diff_estimate = estimate, cohens_d_estimate, p.value)
+  } 
+
+# MANY REPS (1000 is default)
+pairedPower <- function(n_pairs, diff, sd, n_reps = 1000){
+  many_sims <- replicate( n = n_reps,
+    expr = simulatePairs(n_pairs, diff, sd),
+    simplify = FALSE) |>
+    bind_rows() |> 
+    mutate(diff_param = diff, 
+           replicate = 1:n(),
+           n_pairs = n_pairs,
+           cohens_d_param = diff / sd)
+  return(many_sims)
+}
+
+```
+
+---
+
+Now we can make run the simulation 
+
+```{r}
+#| column: page-right
+power_sim <- pairedPower(n_pairs = 270, diff = 0.2, sd = 1)
+```
+```{r}
+#| echo: false
+#| column: page-right
+power_sim 
+```
+
+---
+
+We can now, e.g. find power (at $\alpha = 0.05$) as the proportion of simulations with p < 0.05:
+
+```{r}
+power_sim |>
+  mutate(significant = p.value < 0.05)|>
+  summarise(power = mean(significant))
+```
+
+This simulation verifies our (ok the R packages and webapp's) math -- we have 90% power to reject the null of no difference between pairs, when we have 270 pairs and a true mean difference of Cohen's *d* = 0.2!

@@ -2,7 +2,7 @@
 
 
 :::note
-We are taking another break from our *Clarkia* data, as I couldn't find a great example for a one-tailed t-test there.
+We are taking another break from our *Clarkia* data, as I couldn't find a great example for a one-sample t-test there.
 :::
 
 ---
