@@ -70,11 +70,10 @@ The [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test
 - `x`: A vector of observations.   
 - `mu`: $\mu_0$ -- i.e. the expected value of `x` under the null hypothesis.  
 
-:::aside
-**Note:** Because `x` must be a vector, I [`pull()`](https://dplyr.tidyverse.org/reference/pull.html) the column out of its tibble.
-:::
+
 
 ```{r}
+ # **Note:** Because `x` must be a vector, I the column out of its tibble.
 t.test(x = pull(range_shift,elevationalRangeShift) , mu = 0)
 ```
 

@@ -260,6 +260,9 @@ Notice this question asks for a **99% confidence interval**. We choose a higher 
 
 **Readings:**         
 
+
+[Why you are not allowed to say that your 95% confidence interval contains the true parameter with a probability of 95%](https://www.the100.ci/2024/12/05/why-you-are-not-allowed-to-say-that-your-95-confidence-interval-contains-the-true-parameter-with-a-probability-of-95/). by [Julia M. Rohrer](https://juliarohrer.com/), from. her blog - [The 100% Confidence Interval](https://www.the100.ci/).
+
 -  [Resampling-based methods for biologists](https://peerj.com/articles/9089/) -  @fieberg2020.
 
 - [Chapter 8: Estimation, Confidence Intervals, and Bootstrapping](https://moderndive.com/v2/confidence-intervals.html) from [@ismay2019]. 

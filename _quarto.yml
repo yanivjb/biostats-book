@@ -157,6 +157,7 @@ book:
         - book_sections/two_ts/2t_calcs.qmd
         - book_sections/two_ts/uncertain2t.qmd
         - book_sections/two_ts/nhs2t.qmd
+        - book_sections/two_ts/two_ts_experiments.qmd
         - book_sections/two_ts/2t_summary.qmd
     - part: book_sections/f.qmd
       chapters: 

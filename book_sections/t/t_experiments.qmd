@@ -265,4 +265,4 @@ power_sim |>
   summarise(power = mean(significant))
 ```
 
-This simulation verifies our (ok the R packages and webapp's) math -- we have 90% power to reject the null of no difference between pairs, when we have 270 pairs and a true mean difference of Cohen's *d* = 0.2!
+This simulation verifies our (ok the R packages' and webapps') math -- we have 90% power to reject the null of no difference between pairs, when we have 270 pairs and a true mean difference of Cohen's *d* = 0.2!

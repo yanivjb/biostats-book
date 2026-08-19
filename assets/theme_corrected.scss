@@ -47,6 +47,30 @@ a:hover {
   //color: darken(#31AFD4, 15%);
 }
 
+// "Challenge"/"Solution" style tabs (Quarto .panel-tabset) render as
+// Bootstrap nav-tabs, and had no styling of their own here — so they were
+// inheriting the "flatly" theme's default INACTIVE tab color, a pale teal
+// that's genuinely low-contrast against white. Hovering then jumped to the
+// much darker a:hover pink above, which is why an inactive tab looked like
+// it was only visible on mouseover. Giving both states their own explicit,
+// readable color fixes this — no hovering required to read a tab label.
+.panel-tabset .nav-link,
+.nav-tabs .nav-link {
+  color: #5F634F !important; // matches heading color — readable at rest
+}
+
+.panel-tabset .nav-link.active,
+.nav-tabs .nav-link.active {
+  color: #2C2C2C !important; // darker still, so the selected tab is unmistakable
+  font-weight: 600;
+  border-bottom-color: #3A5F0B !important;
+}
+
+.panel-tabset .nav-link:hover,
+.nav-tabs .nav-link:hover {
+  color: #c2185b !important; // hover accent kept, now as a bonus rather than a requirement
+}
+
 // Figure caption
 .figure-caption {
   font-size: 11pt;

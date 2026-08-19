@@ -1,0 +1,94 @@
+---
+format: html
+webr:
+  packages: ['dplyr' ,'ggplot2', 'broom', 'pwr','presize']
+  autoload-packages: true
+---
+
+## • 16. 2t: Experiments {.unnumbered #two_ts_experiments}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+library(dplyr)
+library(readr)
+library(stringr)
+library(DT)
+library(webexercises)
+library(ggplot2)
+library(broom)
+library(tidyr)
+```
+
+::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
+**Motivating Example:** You've decided a two-sample (independent groups) design is the right experimental setup -- your two groups aren't matched or paired in any way. You want to know how to design this experiment well, and how much data you'll need to reach a reasonable scientific conclusion.
+
+**Learning Goals:** By the end of this section, you will be able to:
+
+- Avoid common sources of bias in a two-sample experimental design.
+- Explain why balance affects the power and precision of a two-sample design, without affecting the bias of the estimate itself.
+- Use the `pwr` package to find the power of a planned two-sample t-test.
+- Use the `presize` package to find the expected precision (confidence interval width) of a planned two-sample t-test.
+- Compare the sample size and precision needs of a two-sample design to those of a paired design.
+:::
+
+---
+
+**Experimental considerations for two-sample designs.** As in [our t chapter](#t_experiments), we will consider how experimental design choices affect the power and precision of a two-sample t-test.
+
+### Guarding against bias in two sample designs
+
+As always, follow the best practices in experimental design: random assignment, and avoiding experimental artifacts. 
+
+- **Random assignment.** Make sure that each individual in the study has an equal chance of being in either experimental group. For example, do not systematically give controls to the first to arrive, or the most in need etc etc. Otherwise you could bias the results.   
+
+- **Avoid artifacts.** Make sure that your treatment only alters the thing you want to ask about. Follow best practices in blinding, realistic controls, and the like.
+
+### Making the most of a two-sample design 
+
+For a fixed sample size, you get more power and precision with more balance (i.e. the closer you are to having an equal number of individuals in each group), so aim for a balanced design. Of course, don't throw away / refuse additional data --- all data increases power and precision, it's just that data that makes the design less balanced helps less than data that makes it more balanced.
+
+### Power and Precision Analyses for Two Sample designs
+
+
+
+
+```{r}
+#| column: margin
+library(pwr)
+pwr.t2n.test(d = 0.2,
+            n1 = 270,
+            n2 = 270,
+            sig.level = 0.05,
+    alternative = "two.sided")
+```
+
+
+
+Let's revisit our examination of the case when the null is false but the difference is small (Cohen's *d* = 0.2) as in the [paired t-test example](#t_experiments). We find power and precision much like before: 
+
+- The [`pwr.t2n.test()`](https://search.r-project.org/CRAN/refmans/pwr/html/pwr.t2n.test.html) function in the  [`pwr`](https://cran.r-project.org/web/packages/pwr/index.html) package can tell us the power of a two sample t-test directly. You provide the sample size in each group as `n1` and `n2`, the effect size (Cohen's *d* = $\frac{\text{difference in group means}}{\text{pooled sd}}$) you want to be able to detect, and your significance threshold, $\alpha$ (by tradition $\alpha = 0.05$), and it finds your power. We see that a sample of 540 (270 in each treatment) reaches 64% power, a notable decrease from the 90% power in a paired t-test. </br></br>
+
+
+
+- The [`prec_meandiff()`](https://search.r-project.org/CRAN/refmans/presize/html/prec_meandiff.html) function in the  [`presize`](https://dcr-unibe-ch.github.io/presize/) package finds the expected precision of your estimate. It takes arguments: `delta` (the difference in group means), `sd1` (the standard deviation in group 1, you can also optionally set `sd2` if you want to allow difference in variance), `n1` (the sample size in group 1), and `r` (the relative size of sample 2 compared to sample 1: r = n2/n1, so n1 × r = n2). Again this precision is less than that of the paired design.
+
+```{r}
+#| message: false
+#| warning: false
+library(presize)
+prec_meandiff(delta = .2, sd1 = 1,  n1 = 270, r = 1)                                         |> as_tibble()
+```
+
+--- 
+
+::: fyi 
+## Webapps to plan power and precision for two sample t-tests
+
+- **A webapp for power:**  The same  person that brought you "Inference for a Mean: Comparing a Mean to a Known Value", also made a power calculating webapp for a two sample t test: [Inference for Means: Comparing Two Independent Samples](https://www.stat.ubc.ca/~rollin/stats/ssize/n2.html).  
+
+- **A webapp for precision:** You can use the [presize webapp](https://shiny.ctu.unibe.ch/presize/), as before.
+
+:::
