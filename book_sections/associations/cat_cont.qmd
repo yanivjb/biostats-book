@@ -208,8 +208,8 @@ gc_rils                                                          |>
     summarise(mean_prop_hybrid = mean(prop_hybrid, na.rm =T))    |>
     pivot_wider(names_from = visited, 
                 values_from = mean_prop_hybrid)                  |>
-  mutate(difference = visited - not_visited,
-         ratio      = visited / not_visited)                     
+  mutate(difference = some_visits - no_visits,
+         ratio      = some_visits / no_visits)                     
 ```
 
 
@@ -219,12 +219,12 @@ pivot_wider() in the tidyr package makes data "wide". You don't need to know how
 
 ```{r}
 # Difference in conditional means 
-0.375 - 0.074 
+0.375 - 0.076 
 ```
 
 ```{r}
 # Ratio of conditional means 
-0.375 / 0.076 
+0.375 / 0.076
 ```
 
 But, as your R skills improve, it is best to avoid "hard coding" things. That is, deal with R objects rather than specific values
@@ -246,9 +246,9 @@ gc_rils                                                          |>
 
 ## Summarizing associations: Cohen's D  {#cat_cont_summarizing-associations-cohens-d}  
 
-Above, we found that on average, visited plants produced 0.287 more hybrids than not visited ones. That might seem like a big difference, but raw differences can be hard to interpret on their own. Is 0.287 a lot? A little? To better understand how meaningful that difference is, we can compare it to the variability in hybrid seed production. 
+Above, we found that on average, visited plants produced 0.299 more hybrids than not visited ones. That might seem like a big difference, but raw differences can be hard to interpret on their own. Is 0.299 a lot? A little? To better understand how meaningful that difference is, we can compare it to the variability in hybrid seed production. 
 
-Cohen’s D helps us do just that. Cohen’s D standardizes the difference in means by the variability within groups (the pooled standard deviation), allowing for more intuitive comparisons across studies and systems.  For this dataset, that gives us a D of 1.4 (see calculation below) — a very large effect size (see guide in margin). This suggests that being visited (during our observation window) is strongly associated with producing more hybrid seeds.
+Cohen’s D is a summary that addresses this question by standardizing the difference in means by the variability within groups (the pooled standard deviation), allowing for more intuitive comparisons across studies and systems.  For this dataset, that gives us a D of 1.47 (see calculation below) — a very large effect size (see guide in margin). This suggests that being visited (during our observation window) is strongly associated with producing more hybrid seeds.
 
 $$\text{Cohen's D} = \frac{\text{Difference in means}}{\text{pooled sd}}$$
 
@@ -345,7 +345,7 @@ library(effectsize)
 cohens_d(prop_hybrid ~ visited, data = gc_rils)|>kable(digits = 3)
 ```
 
-This shows both Cohen's D and a 95% confidence interval about this estimate. We will discuss confidence intervals in Chapter XXX.  
+This shows both Cohen's D and a 95% confidence interval about this estimate. We will discuss confidence intervals in [Chapter 9](#ci).  
 
 
 :::

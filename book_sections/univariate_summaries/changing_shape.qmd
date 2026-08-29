@@ -147,7 +147,7 @@ b <- ggplot(gc_rils , aes(x = log10_petal_area))+
 a/b
 ```
 
-Transformation in R is remarkably straightforward. Simply use [`dplyr's`](https://dplyr.tidyverse.org/) [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) function to add a transformed variable. Below, I show a log base 10 transformation — one of the most common and useful approaches for right-skewed data (see the next section for a more thorough description of this and other common transformations). As discussed in the previous chapter, @fig-log10 shows that this transformation changes the shape of the petal area distribution from right-skewed to roughly symmetric.
+Transformation in R is remarkably straightforward. Simply use [`dplyr's`](https://dplyr.tidyverse.org/) [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) function to add a transformed variable. Below, I show a log base 10 transformation — one of the most common and useful approaches for right-skewed data.  @fig-log10 shows that this $log_{10}$ transformation changes the shape of the petal area distribution from right-skewed to roughly symmetric.
 
 
 

@@ -279,7 +279,7 @@ tibble( location = c("GC","LB","SR","US"),
 
 **Q7c)** The **standard deviation** is `r fitb(0.08485281,tol = 0.035)` 
 
-**Q7d)**  Accounting for differences in their means, how does the variability in the proportion of hybrid seed across locations compare to the variability in petal area among RILs? ([refer to this section for reference](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#parametric-summaries-of-variability-example))  `r longmcq(c( "They are very similar", "Petal area among RILs is roughly thirty times as variable", answer = "The proportion of hybrid seed among sites is roughly two times as variable", "You cannot compare variability for different traits measured on such different scales" ))` 
+**Q7d)**  Accounting for differences in their means, how does the variability in the proportion of hybrid seed across locations compare to the variability in petal area among RILs? (refer to the section on [summarizing variability ](#summarizing_variability) for reference).  `r longmcq(c( "They are very similar", "Petal area among RILs is roughly thirty times as variable", answer = "The proportion of hybrid seed among sites is roughly two times as variable", "You cannot compare variability for different traits measured on such different scales" ))` 
 
 
 `r hide("Click here for hint")`

@@ -94,7 +94,7 @@ glimpse(ril_data)
 :::
 
 
-**dplyr's [`View()`](https://tibble.tidyverse.org/reference/view.html) function** opens up a new window in `R` (as a tab in the pane with your script) showing the complete data sheet. Again, I use this regularly  but you should never include it in a saved R script. If someone wants to View the data they can - they don't need to know that you did.
+**[`View()`](https://tibble.tidyverse.org/reference/view.html) function** opens up a new window in `R` (as a tab in the pane with your script) showing the complete data sheet. Again, I use this regularly  but you should never include it in a saved R script. If someone wants to View the data they can - they don't need to know that you did.
 
 ::: {.callout-note collapse="true"}
 ## Expand to see output of `View(ril_data)`

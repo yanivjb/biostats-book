@@ -258,7 +258,7 @@ ggplot(silphium_data, aes(x = location, y = yield))+
 
 - [Data integrity](https://www.youtube.com/embed/G9LDtFMsUmY): (By [Kate Laskowski](https://laskowskilab.faculty.ucdavis.edu/people/kate-laskowski/) who was the victim of data fabrication by her collaborator (and my former roommate) Jonathan Pruitt).    
 
-- [Tidying data with `pivor_longer`](https://www.youtube.com/embed/qivE6exNsZI?end=340) (From Stat454)
+- [Tidying data with `pivot_longer`](https://www.youtube.com/embed/qivE6exNsZI?end=340) (From Stat454)
 
 
 

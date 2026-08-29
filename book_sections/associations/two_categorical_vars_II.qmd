@@ -31,8 +31,7 @@ ril_data <- readr::read_csv(ril_link) |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:**   
-You are digging deeper into your summaries of associations between two categorical variables.
+**Motivating Scenario:**    You are digging deeper into your summaries of associations between two categorical variables.
 
 **Learning Goals: By the end of this subchapter, you should be able to:**  
 
@@ -69,7 +68,7 @@ gc_rils <- readr::read_csv(ril_link) |>
 
 ## Unconditional & conditional proportions  
 
-In the previous section we calculated UNCONDITIONAL (also known as marginal) proportions (n_case / n_total) of two binary categorical variables. Let';'s call these proportions: 
+In the previous section we calculated UNCONDITIONAL (also known as marginal) proportions (n_case / n_total) of two binary categorical variables. Let's call these proportions: 
 
 - $P_\text{pink}= n_\text{pink} / n_\text{plants}$
 

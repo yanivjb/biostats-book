@@ -236,6 +236,7 @@ ggplot(ril_data, aes(x = asd_mm, ))+
 - **[`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Creates a grid layout for multiple faceting variables.  
 - **[`scale_x_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Modifies x-axis scales (e.g., log transformation).  
 - **[`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Saves the most recent (or a specified) ggplot to a file.  
+- **[`ggplotly()`](https://plotly.com/ggplot2/)** *([plotly](https://plotly.com/r/))*: Converts a ggplot object into an interactive plot with hover, zoom, and pan.  
 :::
 
 ---

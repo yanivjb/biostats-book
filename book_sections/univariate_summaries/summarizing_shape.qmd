@@ -143,7 +143,7 @@ a+b +c
 :::fyi
 **Data transformations and skew:**  @fig-shape showed that $\text{log}_{10}$ petal area was roughly symmetric. The careful might be suspicious and wonder why I transformed the data. The answer is that area is usually right skewed and log transforming often removes such skew. 
 
-We discuss changing the shape of distributions by transformation in the [next section](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/changing_shape.html). Later we will see that symmetric data are often easier for statistical models than skewed data so such transformations are common.
+We discuss changing the shape of distributions by transformation in the [next section](#changing_shape). Later we will see that symmetric data are often easier for statistical models than skewed data so such transformations are common.
 
 ```{r, fig.height=3}
 #| echo: false
