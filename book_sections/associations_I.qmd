@@ -83,7 +83,7 @@ gc_rils|> dplyr::filter(!is.na(petal_color))|>mutate(log_petal_area = log10(peta
 <article class="drop-cap">Summarizing a single variable can be illuminating. But we usually want to know more than that in our biostatistical adventures. We want to know about associations between variables. A careful study of @fig-allcor (plus a bit more information) shows some potentially interesting associations:</article>        
 
 
-- Pink flowers seem to have a better chance of receiving at least one pollinator than do white flowers.    
+- It looks like pink flowers have a way better chance of receiving at least one pollinator than white flowers do.    
 - Despite our attempts to genetically disentangle floral traits by creating Recombinant  Inbred Lines (RILs), an association between petal area and anther stigma distance remains.     <br>
 
 
@@ -177,7 +177,7 @@ c <- ggplot(gc_rils , aes(x = petal_area_mm, y = prop_hybrid))+
 (a+c) /(b + (ggplot()+theme_minimal()))
 ```
 
-- **Confounding:** An association between two variables may reflect not a causal connection between them -- but rather the fact that both are caused by a third variable (known as a confound).  Such confounding may be at play in our RIL data -- we observe that anther–stigma distance is associated with the proportion hybrid seed, but anther–stigma distance is also associated petal area (presumably because both are caused by flower growth), which itself is associated with the proportion of hybrids (@fig-confound). So, does petal area or anther stigma distance (or both or neither) cause an increase in proportion of hybrid seed? The answer awaits better data, or at least better analyses (see section on causal inference), but I suspect that petal area, not anther stigma distance "causes" proportion hybrid. Unfortunately, we rarely know the confound, let alone its value. So, interpreting any association as causation requires exceptional caution.   
+- **Confounding:** An association between two variables may reflect not a causal connection between them -- but rather the fact that both are caused by a third variable (known as a confound).  Such confounding may be at play in our RIL data -- we observe that anther–stigma distance is associated with the proportion hybrid seed, but anther–stigma distance is also associated with petal area (presumably because both are caused by flower growth), which itself is associated with the proportion of hybrids (@fig-confound). So, does petal area or anther stigma distance (or both or neither) cause an increase in proportion of hybrid seed? The answer awaits better data, or at least better analyses (see section on causal inference), but I suspect that petal area, not anther stigma distance "causes" proportion hybrid. Unfortunately, we rarely know the confound, let alone its value. So, interpreting any association as causation requires exceptional caution.   
 
 3.  **Reverse causation:** @fig-switchx shows that pink flowers are more likely to receive a pollinator than are white flowers. We assume this means that pink attracts pollinators-- and with the caveat that we must watch out for coincidence and confounds, this conclusion makes sense. However, an association alone cannot tell if pink flowers attracted pollinators or if pollinator visitation turned plants pink. In this case the answer is clear -- petal color was measured for RILs in the greenhouse, and there’s no biological mechanism by which a pollinator could change petal color. However, these answers require us to bring in biological knowledge --  the data alone can’t tell us which way the effect goes. 
  
@@ -294,4 +294,4 @@ The following sections introduce how to summarize associations between variables
 Then we [summarize the chapter](#summarizing_associations), present [practice questions](#summarizing_associations_practice-questions), a [glossary](#summarizing_associations_glossary-of-terms), a review of [R functions](#summarizing_associations_key-r-functions) and [R packages](#summarizing_associations_r-packages-introduced) introduced, and [present additional resources](#summarizing_associations_additional-resources).  
 
 
-In the next chapter we will continue our study of associations as we will investigate associatiosn between continuous variables!
+In the next chapter we will continue our study of associations as we will investigate relationships between continuous variables!

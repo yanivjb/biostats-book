@@ -14,11 +14,11 @@ I used the following functions to handle the data (let's not focus on the ggplot
 
 - [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html). In the [`readr`](https://readr.tidyverse.org/reference/read_delim.html) package. It loads the data into R.   
 - [`select()`]((https://dplyr.tidyverse.org/reference/select.html)). In the[ `dplyr`](https://dplyr.tidyverse.org/) package allows us to winnow down our dataset to the columns we care about. *NOTE:* You can choose either the columns you want with their  names, or the columns you don't want with their name after a negative sign, `-`.   
-- [`rename()`](https://dplyr.tidyverse.org/reference/rename.html). In the  [`dplyr`](https://dplyr.tidyverse.org/) package. It allows us to change the names of columns: `rename(NEW_NAME, OLD_NAME)`.    
+- [`rename()`](https://dplyr.tidyverse.org/reference/rename.html). In the  [`dplyr`](https://dplyr.tidyverse.org/) package. It allows us to change the names of columns: `rename(NEW_NAME = OLD_NAME)`.    
 - [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html). In the [`dplyr`](https://dplyr.tidyverse.org/) package. Adds or modifies a column.      
 - [`ifelse()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ifelse.html). In base R. This is a bonus function that you don't NEED to know now, but it is helpful! It allows you to do different things based on the output of a logical question. In  this case, I used it to have the values of `visited` equal `visited` if there are nonzero pollinator visits, and `not visited` if there are zero visits.. This gives us better x-labels than `TRUE` / `FALSE`.    
 - [`filter()`](https://dplyr.tidyverse.org/reference/filter.html). In the [`dplyr`](https://dplyr.tidyverse.org/) package. Allows you to choose rows to retain based on their values in  a column. Because there is another `filter()`  function,  always specify that you want dplyr's filter. You can do this by:   
-   - Using the [`conflicts_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) function in the [`conflicted`](https://conflicted.r-lib.org/) package: `conflicts_prefer("filter", winner = "dplyr")`.  OR
+   - Using the [`conflicts_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) function in the [`conflicted`](https://conflicted.r-lib.org/) package: `conflicts_prefer(dplyr::filter)`.  OR
    - Using the package::function() convention: `dplyr::filter()`.  
 
 ### Reproducible script   

@@ -188,7 +188,7 @@ include_graphics("../figs/intro_to_r/intro_to_ggplot/clarkia_sketch.png")
 ## The idea of `ggplot`   
 
 ```{r}
-#| fig-cap: "Watch [this video](https://www.youtube.com/watch?v=cqcQT44mJTM?end=64) about getting started with ggplot2 (It is 7 min and 17 sec long), from STAT 545."
+#| fig-cap: "Watch [this video](https://www.youtube.com/watch?v=cqcQT44mJTM) about getting started with ggplot2 (It is 7 min and 17 sec long), from STAT 545."
 #| echo: false
 include_url("https://www.youtube.com/embed/cqcQT44mJTM?end=64")
 ```

@@ -186,7 +186,7 @@ ggplot(hz_data, aes(x = log10_avg_petal_area_sq_cm))+
 
 - In **bimodal distributions**, there are two distinct peaks separated by a trough. Bimodal distributions are particularly interesting because they suggest that the dataset is composed of two distinct groups or categories.
 
-- Of course, distributions can have more than two modes. **Trimodal distributions** have three peaks, and so on. However, be careful not to over-interpret small fluctuations—small dips can create false peaks from random variation. It's worth experimenting with bin sze to avoid overinterpreting such small blips.
+- Of course, distributions can have more than two modes. **Trimodal distributions** have three peaks, and so on. However, be careful not to over-interpret small fluctuations—small dips can create false peaks from random variation. It's worth experimenting with bin size to avoid overinterpreting such small blips.
 
 The number of modes is particularly important in the study of speciation, especially in populations that may be hybridizing.  
 
@@ -197,7 +197,7 @@ The number of modes is particularly important in the study of speciation, especi
 
 
 
-We were particularly interested in examining the distribution of phenotypes in seeds collected from *parviflora* / *xantiana* hybrid zones. @fig-hz shows that—unlike petal area in our RILs-most phenotypes from natural hybrid zones are largely bimodal. However, @fig-hzsite suggests that these distributions may themselves be a blend of different underlying distributions. While petal area appears bimodal in most populations, it may be unimodal at site S6. @fig-hz and @fig-hzsite highlight the benefit of digging into the data visually. We must visualize the distribution o values of a variable before we can provide a meaningful and interpretable summary statistic. . 
+We were particularly interested in examining the distribution of phenotypes in seeds collected from *parviflora* / *xantiana* hybrid zones. @fig-hz shows that—unlike petal area in our RILs-most phenotypes from natural hybrid zones are largely bimodal. However, @fig-hzsite suggests that these distributions may themselves be a blend of different underlying distributions. While petal area appears bimodal in most populations, it may be unimodal at site S6. @fig-hz and @fig-hzsite highlight the benefit of digging into the data visually. We must visualize the distribution of values of a variable before we can provide a meaningful and interpretable summary statistic.   
 
 
 

@@ -131,6 +131,10 @@ jobs:
             "transformr",
             "pwr",
             "presize",
+            "highcharter",
+            "ggimage",
+            "caret",
+            "mapproj",
             "yanivjb/honestlm"
           ))'
 

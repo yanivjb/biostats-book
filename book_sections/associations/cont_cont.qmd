@@ -95,7 +95,7 @@ There are two ways to calculate covariance:
 1. As a deviation from expectations: ($\overline{XY} - \bar{X}\bar{Y}$).    
 2. As a shared deviation from the mean: $\sum{(X_i-\bar{X})(Y_i-\bar{Y})}/(n-1)$.  
 
-I introduce both because each provides a different lens for understanding the concept. Reassuringly,  they give the same answer, so yu can decide which makes most sense to you. 
+I introduce both because each provides a different lens for understanding the concept. Reassuringly,  they give the same answer, so you can decide which makes most sense to you. 
 
 ### The covariance as a deviation from expectations  
 
@@ -198,7 +198,7 @@ gc_rils                                                        |>
 
 
 :::note
-The equation for the covariance $\text{Cov}_{X,Y} = \frac{\Sigma{(X_i-\overline{X})(Y_i-\overline{Y})}}{(n-1)}$ should remind you of the equation for the variance $\text{Var}_{X} = \frac{\Sigma{(X_i-\overline{X})(X_i-\overline{X})}}{(n-1)}$ (compare @fig-cov to [Figure 2 from 5. Summarizing variability](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#fig-ss)). In fact the variance is simply the covariance of a variable  with itself. See our section on summarizing variability for a refresher [link](https://ybrandvain.quarto.pub/applied-biostatistics-summarizingdata/book_sections/univariate_summaries/summarizing_variability.html#parametric-summaries-of-variability). In fact you, can calculate the variance as the mean of the square minus the square of the mean. 
+The equation for the covariance should remind you of the equation for the variance. This is because the  the variance is simply the covariance of a variable  with itself. (i.e $cov_{X,X} = \frac{\sum(X_i - \bar{X})(X_i - \bar{X}) }{n-1}$ = $\frac{\sum(X_i - \bar{X})^2 }{n-1}$ = $var_X$). You can also see this similarity by comparing @fig-cov, above, to  the earlier  [gif depicting variance calculations](#fig-ssgif), from our section on [summarizing variability for a refresher](#summarizing_variability).
 :::
 
 
@@ -269,7 +269,7 @@ As in Cohen's D, what is a "large" or "small" correlation coefficient depends on
 |------------------|------------------------|
 | Not worth reporting | < 0.005               |
 | Tiny              | 0.005 – 0.10           |
-| Small             | 0.01 – 0.20         |
+| Small             | 0.10 – 0.20         |
 | **Medium**            | **0.2 – 0.35**           |
 | Large             | 0.35 – 0.50           |
 | Very large        | 0.50 – 0.75          |

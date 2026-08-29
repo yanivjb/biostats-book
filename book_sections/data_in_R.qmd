@@ -42,7 +42,7 @@ library(tidyr)
 ---
 
 
-<article class="drop-cap">Science relies on the collection and analysis of data to understand the  world. Data are the backbone of all scientifically informed decisions. But data on it's own is just a pile pf numbers. We must analyze data and make sense of it. Here, I introduce tools for the standard scientific tasks of organizing, exploring, and dealing with data. Throughout we focus on how to do this reproducible.  </article> 
+<article class="drop-cap">Science relies on the collection and analysis of data to understand the  world. Data are the backbone of all scientifically informed decisions. But data on its own is just a pile of numbers. We must analyze data and make sense of it. Here, I introduce tools for the standard scientific tasks of organizing, exploring, and dealing with data. Throughout we focus on how to do this reproducibly.  </article> 
 
 
 ---
@@ -104,7 +104,7 @@ A tibble is the name for the primary structure that holds data in the tidyverse.
 :::
   
 
-The [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function that we [introduced earlier](getting_started.qmd#reading-data-into-r) to load data imports data as a tibble. Looking at the data below, you are probably surprised to see that growth rate is a character `<chr>`, because it should be a number `<dbl>`. A little digging reveals that the entry in the third row has a growth rate of `1.8O` (with the letter, O, at the end) which should be `1.80` (with the number 0 at the end)
+The [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) function that we [introduced earlier](reproducible_science/loading_data.qmd#loading-data) to load data imports data as a tibble. Looking at the data below, you are probably surprised to see that growth rate is a character `<chr>`, because it should be a number `<dbl>`. A little digging reveals that the entry in the third row has a growth rate of `1.8O` (with the letter, O, at the end) which should be `1.80` (with the number 0 at the end)
 
 ```{r}
 #| message: false

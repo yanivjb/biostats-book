@@ -257,7 +257,7 @@ This book is not done. I  need to
 - Add using chatbots chapter
 - Add using agents chapter
 - Straighten out goals of stats (compare linear model intro to design) (5 or three, what are they...).
-
+- Add an appendix on data munging.  
 
 ```{r, echo=FALSE}
 rm(list = ls())

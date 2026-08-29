@@ -40,7 +40,7 @@ More than a simple calculator, R can keep track of variables, and has functions 
 ### Chatbot tutor {#getting_started_summaryChatbot}
  
 :::tutor   
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-680a5b27740c8191b9cb63d729dc29fe-getting-started-with-r-tutor)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it.   
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-680a5b27740c8191b9cb63d729dc29fe-getting-started-with-r-tutor), [**Gemini link here**](https://gemini.google.com/gem/1NE4tGoNgsLBErBvNQaeZMq9ZyDBBczQ6?usp=sharing)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it.   
 :::
 
 ### Practice Questions {#getting_started_summaryPractice_questions}
@@ -100,7 +100,7 @@ If you are worried about floating point errors, use the  [*all.equal()*](https:/
 
 ---
 
-Use the data in the table below for the next question (each column is a leaf). For your convinience I have included a web-r workspace: 
+Use the data in the table below for the next question (each column is a leaf). For your convenience I have included a web-r workspace: 
 
 ```{r}
 #| echo: false
@@ -244,7 +244,7 @@ c) `install.packages("ggplot2")`
 d) `library(ggplot2)` 
 
 :::exercises
-**Q10)** Consider the lines of  code above, which two are best to include in your saved R script (assuming you are using functions from ggplot2)? `r longmcq(c("a & b",  "a & c", answer = "a & d", "b & c", "b & d", "c & d"))`
+**Q9)** Consider the lines of  code above, which two are best to include in your saved R script (assuming you are using functions from ggplot2)? `r longmcq(c("a & b",  "a & c", answer = "a & d", "b & c", "b & d", "c & d"))`
 
 
 `r hide("Explanation")`
@@ -259,7 +259,7 @@ d) `library(ggplot2)`
 
 
 :::exercises
-**Q11)** Which of the following is the best long-term strategy for improving in R?
+**Q10)** Which of the following is the best long-term strategy for improving in R?
 
 `r longmcq(c("Memorize as many functions as possible", "Avoid errors", answer = "Write code regularly and reflect on mistakes", "Ask AI to solve all your R problems and copy and paste its answers"))`
 :::
@@ -328,7 +328,7 @@ d) `library(ggplot2)`
 - **[`conflicted`](https://conflicted.r-lib.org/)**: Helps resolve function name conflicts when multiple packages have functions with the same name.
 
 
-- **[`praise`](https://github.com/rladies/praise)**: Provides ecouragement and kind words.
+- **[`praise`](https://github.com/rladies/praise)**: Provides encouragement  and kind words.
 
 :::
 

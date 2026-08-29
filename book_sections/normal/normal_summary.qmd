@@ -136,11 +136,19 @@ The standard deviation of the sampling distribution is the standard error, calcu
 
 
 
+**Q8)** Do you think baby weights are actually perfectly normal? If not, how might they deviate?    
 
 
-```{=html}
-<iframe src="../../widget.html?prompt_id=q8-normal-babies-1759264574" width="100%" height="800" style="border:none;"></iframe>
+<html><textarea rows="6" cols="50" placeholder="Your answer here..."></textarea></html>         
+
+
+
+```{r}
+#| echo: false
+#{=html}
+#<iframe src="../../widget.html?prompt_id=q8-normal-babies-1759264574" width="100%" height="800" style="border:none;"></iframe>
 ```
+
 
 ---
 

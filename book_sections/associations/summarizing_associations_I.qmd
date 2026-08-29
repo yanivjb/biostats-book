@@ -103,7 +103,7 @@ Replace "XXX", with each of these options, and then answer the following three q
 
 **Q2)** Which makes it easiest to read off the number of males in the crew that did not survive? `r mcq(c(answer ="dodge","fill", "stack"))`. 
 
-**Q3)** Which makes it easiest to compare survive probabilities of a males om fist clss vs the crew? `r mcq(c("dodge", answer = "fill", "stack"))`. 
+**Q3)** Which makes it easiest to compare compare survival probabilities of males in first class vs. the crew? `r mcq(c("dodge", answer = "fill", "stack"))`. 
 
 ::: 
 
@@ -133,7 +133,7 @@ Use the web R environment above to answer the following questions about the `tit
 
 - **Q4d)**  Survived, conditional on being in 1st class (i.e. the proportion of first-class males who survived), (i.e. P(Survive | 1st))?    `r fitb(num = TRUE, answer = 0.326, tol = 0.027)` </br></br>
 
-- **Q4e)**  Survived, conditional on being in 1st class (i.e. the proportion of males in the creq who survived),  (i.e. P(Survive | Crew))? `r fitb(num = TRUE, answer = 0.223, tol = 0.027)` </br></br>
+- **Q4e)**  Survived, conditional on being in crew class (i.e. the proportion of males in the crew who survived),  (i.e. P(Survive | Crew))? `r fitb(num = TRUE, answer = 0.223, tol = 0.027)` </br></br>
 
 `r hide("Code for answers:")`
 

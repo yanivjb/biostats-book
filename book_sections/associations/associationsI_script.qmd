@@ -15,7 +15,7 @@ Here's a brief run down of the key functions and pipelines used in this chapter.
 
 ## Two categorical variables 
 
-Lets look at a new (classic) data set - the survival of adults sitting first class on the Titanic. The code below takes the data from old-R style into the tidyverse framework we're used to. The data now look like this:
+Let's look at a new (classic) data set - the survival of adults sitting first class on the Titanic. The code below takes the data from old-R style into the tidyverse framework we're used to. The data now look like this:
 
 ```{r}
 #| code-fold: true

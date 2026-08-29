@@ -1,4 +1,4 @@
-### • 5. Summarizing Data: Code {.unnumbered #dealing_w_data_script}
+### • 5. Summarizing Data: Code {.unnumbered #summarizing_data_script}
 
 
 
@@ -150,7 +150,6 @@ gc_visits |>
 ## Summarizing center
 a <- gc_visits |>
   summarise(mean_visits   = mean(visits),                # Center: Mean
-            mode_visits   = quantile(visits, prob = .5), # Center: Mode
             median_visits = median(visits))              # Center: Median
 
 ## Summarizing center

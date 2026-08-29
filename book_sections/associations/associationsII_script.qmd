@@ -19,7 +19,7 @@ library(knitr)
 #| message: false
 #| fig-height: 6.5
 #| label: fig-ne
-#| fig-cap: "Survival counts for adult first-class passengers on the Titanic by sex. Stacked bars show the number of adult first-class passengers who did or did not survived, separated by sex."
+#| fig-cap: "Survival counts for adult first-class passengers on the Titanic by sex. Stacked bars show the number of adult first-class passengers who did or did not survive, separated by sex."
 #| fig-alt: "Stacked bar chart showing counts of adult first-class Titanic passengers by sex and survival status. For males, the majority did not survive, with a smaller portion surviving. For females, most survived, with very few deaths. The y-axis shows counts, the x-axis shows sex, and colors distinguish survival status (teal = survived, coral = did not survive)."
 library(tidyr) # for "uncount"
 library(dplyr)
@@ -48,7 +48,7 @@ Here's a brief run down of the key functions and pipelines used in this chapter.
 
 ## Two categorical variables 
 
-Lets return to the survival of adults sitting first class on the Titanic from the previous chapter. Again, the code below takes the data from old-R style into the tidyverse framework we're used to. 
+Let's return to the survival of adults sitting first class on the Titanic from the previous chapter. Again, the code below takes the data from old-R style into the tidyverse framework we're used to. 
 
 ```{r}
 #| code-fold: true

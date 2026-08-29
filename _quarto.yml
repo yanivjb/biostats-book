@@ -205,6 +205,27 @@ book:
         - book_sections/interactions/polynomial_regression.qmd
         - book_sections/interactions/interaction_summary.qmd
     - book_sections/filler.qmd
+    - book_sections/future_incomplete.qmd
+    - part: book_sections/data_viz.qmd
+      chapters:         
+        - book_sections/data_viz/audience&delivery.qmd
+        - book_sections/data_viz/honest_plots.qmd
+        - book_sections/data_viz/transparent_plots.qmd
+        - book_sections/data_viz/clear_plots.qmd
+        - book_sections/data_viz/avoid_distractions.qmd
+        - book_sections/data_viz/accessible_plots.qmd
+        - book_sections/data_viz/writing_about_figures.qmd
+        - book_sections/data_viz/dataviz_summary.qmd
+    - part: book_sections/betteR_plots.qmd
+      chapters:         
+        - book_sections/betteR_plots/plotting_tools.qmd
+        - book_sections/betteR_plots/cleaR_plots.qmd
+        - book_sections/betteR_plots/plots_foR_medium.qmd
+        - book_sections/betteR_plots/betteR_plots_summary.qmd   
+    - book_sections/model_evaluation.qmd
+    - book_sections/causal_inference.qmd
+    - book_sections/probability_and_likelihood.qmd
+    - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
       chapters: 

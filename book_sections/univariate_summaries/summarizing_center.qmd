@@ -219,7 +219,7 @@ Nonparametric summaries describe the data as it is, without assuming an underlyi
 
    - Selecting the value of the $\frac{n+1}{2}^{th}$ value  if there are an odd number of observations,
    - Selecting the average of the $\frac{n}{2}^{th}$ and $\frac{(n+2)}{2}^{th}$ observations if there are an even number of observations.   
-   - Or just use the [`median()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/median.html) function in R -- usually inside [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) (revisit the chapter on [summarizing columns in dplyr](https://ybrandvain.quarto.pub/applied-biostatistics/book_sections/intro_to_R/data_in_R/summarize_vars.html) for a refresher). Remember to specify `na.rm = TRUE`.
+   - Or just use the [`median()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/median.html) function in R -- usually inside [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html). Remember to specify `na.rm = TRUE`.
 
 
 ```{r}
@@ -259,7 +259,7 @@ Parametric summaries describe the data in a way that aligns with a probability m
 - *Mean:* The mean is the most common description of central tendency, and is known as *the expected value* or *the weight of the data*. 
 
    - We find this by adding up all values and dividing by the sample size. In math notation the mean, $\overline{X} = \frac{\Sigma x_i}{n}$, where  $\Sigma$ means that we sum over the first $i = 1$, second $i = 2$ ... up until the $n^{th}$ observation of  $x$, $x_n$. and divide by  $n$, where  $n$ is the size of our sample. Remember this size does not count missing values.
-   - Or just use the [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html) function in R -- usually inside [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) (revisit the chapter on [summarizing columns in dplyr](https://ybrandvain.quarto.pub/applied-biostatistics/book_sections/intro_to_R/data_in_R/summarize_vars.html) for a refresher). Remember to specify `na.rm = TRUE`.
+   - Or just use the [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html) function in R -- usually inside [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html). Remember to specify `na.rm = TRUE`.
 
 
 Revisiting our examples above, we get the following simple summaries of mean and median. To do so, I type something like the code below (with elaborations for prettier formatting etc).
@@ -381,7 +381,7 @@ a+b+c
 
 ### Use-full but used-less summaries  {#summarizing_center_use-full-but-used-less-summaries}  
 
-Below are a few additional, useful but less commonly used, summaries of central tendency.  It is good to know these exist. If this material is too slow / easy. for you, I recommend using your study time to familiarize yourself with these useful summaries, but otherwise don't worry about them.
+Below are a few additional, useful but less commonly used, summaries of central tendency.  It is good to know these exist. If this material is too slow / easy for you, I recommend using your study time to familiarize yourself with these useful summaries, but otherwise don't worry about them.
 
 These assume that you are modelling these non-linear processes on a linear scale. You can decide if transformation or a more relevant summary statistics on a linear scale is more effective for your specific goal. 
 

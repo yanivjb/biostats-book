@@ -42,13 +42,15 @@ include_graphics("../../figs/intro_to_r/data_in_R/pretty_stressed_clarkia.png")
 ```
 
 
-Keeping data in the tidy format—where each column represents a variable and each row represents an observation—allows you to fully leverage the powerful tools of the [**tidyverse**](https://www.tidyverse.org/). In the tidyverse, data are stored in tibbles, a modern update to data frames that enhances readability and maintains consistent data types. The [`dplyr`](https://dplyr.tidyverse.org/) package offers a suite of intuitive functions for transforming and analyzing data. These functions include:   [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) for adding or modifying columns.      
+By keeping data "tidy" (i.e. in a rectangle where each column represents a variable and each row represents an observation),  we can make use of the powerful tools of R's  [**tidyverse**](https://www.tidyverse.org/) approach. The [`dplyr`](https://dplyr.tidyverse.org/) package is our first step into the tidyverse. [`dplyr`](https://dplyr.tidyverse.org/)  offers a numerous usefull functions for transforming and analyzing data, including:   
+
+- [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) for adding or modifying columns.      
  
 - [`select()`](https://dplyr.tidyverse.org/reference/select.html) for choosing columns.    
 - [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) for subsetting rows,   and    
-- [`rename()`](https://dplyr.tidyverse.org/reference/rename.html). for changing column names.  
+- [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) for changing column names.  
 
-Together -- especially when used with the pipe operator—these -- tools enable clear, reproducible workflows. In the next two chapters we will begin summarizing data with dplyr tools.
+Together (and when combined with the pipe operator, `|>`) these tools allow us to get a lot done in R. In the next three chapters we learn how to use R to summarize single variable, and associations between variables in R. Thus we are well on our way, to being able to (1) load (2) visualize (3) work with, and (4) summarize data reprodicbly in R. WOohooHOO!.
 
 
 ### Chatbot tutor   {#data_in_R_summaryChatbot}
@@ -204,15 +206,16 @@ iris |>
 #| context: setup
 library(dplyr)
 library(conflicted)
-conflicts_prefer("filter","stats")
+conflicts_prefer(dplyr::filter)
 iris$Species <- as.character(iris$Species) 
+iris <- tibble(iris)
 ```  
 
 ```{webr-r}
 #| autorun: true
 library(conflicted)
 library(dplyr)
-
+conflicts_prefer(dplyr::filter)
 iris |>  
   filter(Species == "setosa")
 ```  
@@ -236,14 +239,15 @@ Try typing `glimpse(iris)`
 ---
 
 **Q10)** How to fix the error  \"Error: object 'Species' not found.\"? Find both correct answers `
-`r longmcq(c("Convert iris to a tibble first:</br><code>as_tibble(iris) |> filter(Species == \"setosa\")</code></br></br>",  answer = "Tell R to use dplyr's filter:</br><code>iris|>dplyr::filter(Species == \"setosa\")</code></br></br>", "Rename species to Species:</br><code> iris|>rename(Species=species)|>filter(Species==\"setosa\")</code></br></br>", "Filter on species, not Species:</br><code>iris|>filter(species == \"setosa\")</code></br></br>",answer = "Tell R to use dplyr's filter. After library(dplyr), type:</br><code>conflict_prefer(\"filter\",\"dplyr\")</code></br></br> "))`
+`r longmcq(c("Convert iris to a tibble first:</br><code>as_tibble(iris) |> filter(Species == \"setosa\")</code></br></br>",  answer = "Tell R to use dplyr's filter:</br><code>iris|>dplyr::filter(Species == \"setosa\")</code></br></br>", "Rename species to Species:</br><code> iris|>rename(Species=species)|>filter(Species==\"setosa\")</code></br></br>", "Filter on species, not Species:</br><code>iris|>filter(species == \"setosa\")</code></br></br>",answer = "Tell R to use dplyr's filter. After library(dplyr), type:</br><code>conflicts_prefer(dplyr::filter)</code></br></br> "))`
+
 
 
 `r hide("Reveal: Why did this happen?")`
 
-**Debugger’s note:** In a hidden setup chunk I wrote: `conflict_prefer("filter", "stats")` to tell R to prefer `stats::filter()` over `dplyr::filter()`.  Because of this, `filter()` no longer understands column names inside a data frame. So I forced this error on you.
+**Debugger’s note:** In a hidden setup chunk I wrote: `conflicts_prefer(dplyr::filter)` to tell R to prefer `stats::filter()` over `dplyr::filter()`.  Because of this, `filter()` no longer understands column names inside a data frame. So I forced this error on you.
 
-In real workflows, it can be hard to predict which version of a function R will use.  This issue arises even when I don't trick you. So always tell R which version of filter() you want to use. `filter()` may on your computer today without `dplyr::filter()` or `conflict_prefer("filter","dplyr")`, but it might not work on someone else computer (it might even fail on your computer next week).
+In real workflows, it can be hard to predict which version of a function R will use.  This issue arises even when I don't trick you. So always tell R which version of filter() you want to use. `filter()` may on your computer today without `dplyr::filter()` or `conflicts_prefer(dplyr::filter)`, but it might not work on someone else computer (it might even fail on your computer next week).
 
 `r unhide()`
 :::
@@ -291,10 +295,10 @@ In real workflows, it can be hard to predict which version of a function R will 
 
 - **[`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)** *([dplyr](https://dplyr.tidyverse.org/))*: Creates or modifies columns in a dataset.  
 
-- **[`dplyr::filter()`](https://dplyr.tidyverse.org/reference/filter.html)** *([dplyr](https://dplyr.tidyverse.org/). Because there is a different filter in a different package, always specify which filter you want r to use.)*: Only retains rows wihich meet some logical criteria.   
+- **[`dplyr::filter()`](https://dplyr.tidyverse.org/reference/filter.html)** *([dplyr](https://dplyr.tidyverse.org/). Because there is a different filter in a different package, always specify which filter you want r to use.)*: Only retains rows which meet some logical criteria.   
 
 
-- **[`rename`()`](https://dplyr.tidyverse.org/reference/rename.html)** *([dplyr](https://dplyr.tidyverse.org/)*: Allows you to manually changes column names.   
+- **[`rename()`](https://dplyr.tidyverse.org/reference/rename.html)** *([dplyr](https://dplyr.tidyverse.org/)*: Allows you to manually changes column names.   
 
 - **[`as.numeric()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/numeric.html)**: Converts a vector to a numeric data type.  
 

@@ -44,7 +44,7 @@ You have a fresh new dataset and want to check it out. How do you go about under
 
 3. **Find, explain and interpret summaries of the spread of a numeric variable.**  
    - Understand the mathematics behind these summaries and calculate them manually.  
-   - Combine dplyr's `summarise()` function with data summary functions (e.g. `mean()`, `median()`, `IQR()`, `sd()`, `var()`) to find standard summaries of the variability and central tendancy.  
+   - Combine dplyr's `summarise()` function with data summary functions (e.g. `mean()`, `median()`, `IQR()`, `sd()`, `var()`) to find standard summaries of the variability and central tendency.  
 
 4. **Recognize the difference between parametric and non-parametric summaries.**  
    - Identify situations where parametric vs. non-parametric summaries are appropriate.  

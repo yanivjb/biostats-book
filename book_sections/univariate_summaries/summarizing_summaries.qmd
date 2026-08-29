@@ -4,7 +4,7 @@
 ---
 format: html
 webr:
-  packages: ['dplyr', 'readr' ,'ggplot2', 'palmerpenguins']
+  packages: ['dplyr', 'readr' ,'ggplot2']
   autoload-packages: true
 ---
 
@@ -114,16 +114,14 @@ tibble(rivers = rivers) |>
 ### Penguins
 
 ```{webr-r}
-library(palmerpenguins)
-library(ggplot2)
 library(dplyr)
-
+# Calculate means
 penguins |>
-  group_by(species)|>
   summarise(n_samples = n(),
-     sum_mass = sum(body_mass_g, na.rm = TRUE),
+     sum_mass = sum(body_mass, na.rm = TRUE),
      mean_mass_1 = sum_mass / n_samples,
-     mean_mass_2 = mean(body_mass_g, na.rm = T))
+     mean_mass_2 = mean(body_mass, na.rm = T))
+
 ```
 
 :::exercises
@@ -132,32 +130,63 @@ penguins |>
 
 **Q4)** What went wrong in calculating these means?  `r longmcq(c(answer = "n()  counts the number of entries, but we need the number of non-NA entries.",  "na.rm should be set to TRUE, not T", "The denominator for the mean is (n - 1), not n.", "Nothing -- they are both potentially correct depending on your goals."))`
 
+---
 
----  
+**Use the head start provided in the webR environment below to answer:**  
 
 **Q5)** Accounting for species differences in mean body mass, which penguin species shows the greatest variability in body mass? `r mcq(c(answer = "Adelie", "Chinstrap", "Gentoo" ))`
 
 
-`r hide("Click here for code")`
+
+
+`r hide("Help")`
+
+**Calculate the coefficient of variation as $sd_x / \bar{x}$.** So... e.g.:  
 
 ```{r}
 #| message: false
 #| warning: false
-library(palmerpenguins)
-library(ggplot2)
+library(dplyr)
+penguins  |> 
+  summarise(sd_mass   =  sd(body_mass, na.rm = T),
+            var_mass  = var(body_mass, na.rm = T),
+            mean_mass = mean(body_mass, na.rm = T),
+            coef_var_mass = sd_mass / mean_mass)
+```  
+
+`r unhide()` 
+
+:::
+
+---
+
+
+
+```{webr-r}
 library(dplyr)
 
-penguins |>
-  group_by(species)|>
-  summarize(mean_mass = mean(body_mass_g, na.rm = T),
-            sd_mass   = sd(body_mass_g, na.rm = T),
-            coef_var_mass =   sd_mass / mean_mass 
+adelie    <- filter(penguins, species == "Adelie")
+chinstrap <- filter(penguins, species=="Chinstrap")
+gentoo    <- filter(penguins, species == "Gentoo")
+
+# Calculate spread
+adelie  |> 
+  summarise(sd_mass   =  sd(body_mass, na.rm = T),
+            var_mass  = var(body_mass, na.rm = T),
+            mean_mass = mean(body_mass, na.rm = T),
+            #THING_HERE = MATH HERE)
   )
 ```
 
-`r unhide()`. 
 
----
+::: aside
+**NOTE:** Here we find separate results for each species by analyzing different, tibbles each [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)ed by a different species. In the next chapter we will see how to [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) a categorical variable to smoothly group category specific summaries.
+:::
+
+---  
+
+
+:::exercises
 
 **For the next set of questions consider the boxplot below,** which summarizes the level of Lake Huron in feet every year from 1875 to 1972. 
 
@@ -167,6 +196,8 @@ penguins |>
 #| echo: false
 #| message: false
 #| warning: false
+library(ggplot2)
+library(dplyr) 
 ggplot(tibble(LakeHuron), aes(x =LakeHuron))+
     geom_boxplot(varwidth = .5)+scale_y_continuous(limits = c(-.6,.6))
 
@@ -260,11 +291,18 @@ We can compare the variability of traits measured on different scales by dividin
 
 **Q8)**  Why is it important to standardize by the mean when comparing variability between variables?   
 
-
-
-```{=html}
-<iframe src="../../widget.html?prompt_id=coefficient-of-variation-1757604089" width="100%" height="800" style="border:none;"></iframe>
+<html><textarea rows="6" cols="50" placeholder="Your answer here..."></textarea></html>         
+        
+        
+        
+```{r}
+#| echo: false
+#{=html}
+#<iframe src="../../widget.html?prompt_id=coefficient-of-variation-1757604089" width="100%" height="800" style="border:none;"></iframe>
 ```
+    
+---    
+
 
 ```{r}
 #| eval: false
@@ -286,12 +324,16 @@ We can compare the variability of traits measured on different scales by dividin
 
 ```
 
-**Q9** What is wrong with the code below (pick the most egregious issue). `r longmcq(c(answer = "I overwrote iris and lost the raw data", "I did not show the output", "I used summarise() rather than summarize()",  "I did not tell R to remove missing data when calculating the mean."))`
+**Q9** What is wrong with the code below (pick the most egregious issue). 
 
 ```{r}
 iris <- iris |> 
   summarise(mean_sepal_length =  mean(Sepal.Length))
 ```
+
+
+`r longmcq(c(answer = "I overwrote iris and lost the raw data", "I did not show the output", "I used summarise() rather than summarize()",  "I did not tell R to remove missing data when calculating the mean."))`
+
 
 
 :::

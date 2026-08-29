@@ -1,0 +1,30 @@
+# Miscellany and unpolished chapters  {.unnumbered}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+```
+
+
+
+
+
+
+<article class="drop-cap">The term is approaching rapdily, and I will ot be able to add more content at the quality we've been used to. So I will park some of my older unpublished stuff here which we will use this year. I will sort through this, improve it, and add / move bits in future</article>
+
+<br>
+
+**Likely topics include:**   
+- better figures.  
+- better figures in R.     
+- causal inference.    
+- model diagnostics.    
+- using chatbots to imprive stats.    
+- using AI agents
+- GLMs.  
+- Mixed effect models,   
+- Robust statistics.   
+- Intro to probability theory
+- $\chi^2$.  

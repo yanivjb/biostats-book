@@ -58,7 +58,7 @@ Effective data visualization begins with curiosity and clear biological question
 ### Chatbot tutor  {#ggplot_summaryChatbot} 
 
 :::tutor
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-681d8901c5bc819195bfa3ad35a99030-intro-to-ggplot-tutor)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-681d8901c5bc819195bfa3ad35a99030-intro-to-ggplot-tutor), (**Gemini link here**)[https://gemini.google.com/gem/1EY7xo6SLM90pfx2yeYFQGy_DI-bb2Hq1?usp=sharing]) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 :::
 
 ### Practice Questions  {#ggplot_summaryPractice_questions} 
@@ -158,11 +158,16 @@ ggplot(ril_data, aes(x = asd_mm, color = "green"))+
 
 `r hide("Click here for explanation")`
 
-As you can see the bar's color is the standard dark grey. The lines around the bars are redish. This is because we mapped the variable "green" onto color. Instead keep it out of an `aes()` call. Also be sure to note the difference between `color` and `fill` arguments.  
+As you can see the bar's color is the standard dark grey. The lines around the bars are reddish. This is because we mapped the variable "green" onto color. Instead keep it out of an `aes()` call. Also be sure to note the difference between `color` and `fill` arguments.
 
 ```{r}
-ggplot(ril_data, aes(x = asd_mm, color = "green"))+
-    geom_histogram()
+ggplot(ril_data, aes(x = asd_mm))+
+    geom_histogram(color = "green")
+```
+
+```{r}
+ggplot(ril_data, aes(x = asd_mm))+
+    geom_histogram(fill = "green")
 ```  
 
 `r unhide()`
@@ -214,6 +219,8 @@ ggplot(ril_data, aes(x = asd_mm, ))+
 
 
 :::functions
+
+
 
 - **[`ggplot()`](https://ggplot2.tidyverse.org/)** *([ggplot2](https://ggplot2.tidyverse.org/))*: The base function to create a ggplot.  
 - **[`aes()`](https://ggplot2.tidyverse.org/reference/aes.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Defines how data is mapped to visual elements.  
@@ -268,7 +275,7 @@ ggplot(ril_data, aes(x = asd_mm, ))+
 
 **Videos:**  
 
-- [Basic Data Manipulation](https://www.youtube.com/watch?v=Gms3zSPqCk8&t=4s): From Stat454.    
+- [ggplot2 Part 1: Introduction to Plotting (STAT 545 Episode 5-A)](https://www.youtube.com/watch?v=cqcQT44mJTM&list=PLC0dGnLDoE7F7TenUb_nn45W1203IhqyX&index=2): From Stat454.    
 
 
 

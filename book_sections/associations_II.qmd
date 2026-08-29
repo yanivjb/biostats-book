@@ -71,7 +71,7 @@ You're curious to know the extent to which two variables are associated and need
 
 - Causation means that changing one variable produces a change in the other.    
 
-We dicussed that process including coincidence, confounding and reverse causation, can generate correlations without the causation we wish to imply. So we cannot make causal claims or even good predictions from correlations alone. Let's push a bit more on this below.
+We discussed that process including coincidence, confounding and reverse causation, can generate correlations without the causation we wish to imply. So we cannot make causal claims or even good predictions from correlations alone. Let's push a bit more on this below.
 
 
 --- 
@@ -109,8 +109,7 @@ For example, no one will doubt that height gives a basketball player an advantag
 #| fig-height: 5
 #| fig-cap: "No relationship between height and Value over Replacement Player in the 2024-2025 NBA season."
 #| fig-alt: "Scatterplot showing NBA players' height (x-axis) versus their Value Over Replacement Player (VORP) (y-axis). Each point represents a player. A faint blue regression line runs slightly upward but remains almost flat, illustrating a very weak positive association between height and VORP. Notable players are labeled: Shai Gilgeous-Alexander (6'4.5\"), Giannis Antetokounmpo (6'11\"), and Nikola Jokić (6'11.5\"). The plot visually emphasizes that despite differences in height, there is little to no clear relationship between a player’s height and their value contribution above replacement level."
-nba_link <- "../data/nba_2024_2025.txt"
-Rba_data <- readr::read_csv(nba_link) 
+
 library(ggrepel);
 library(readxl)
 a<- read_xlsx("../data/nba.xlsx", "Sheet1")|>
@@ -147,7 +146,7 @@ Associations describe data we have -- they do not necessarily apply to other dat
 
 
 
-Their are different kinds of predictions we might want to make. 
+There are different kinds of predictions we might want to make. 
 
 - We may want to predict what we would expect for unsampled individuals from the same population as we are describing. In this case, a statistical association can be pretty useful.    
 

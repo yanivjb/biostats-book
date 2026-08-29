@@ -59,7 +59,7 @@ ril_data <- readr::read_csv(ril_link) |>
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Formmatting data"
+#| code-summary: "Formatting data"
 #| message: false
 #| warning: false
 library(readr)
@@ -67,7 +67,7 @@ library(dplyr)
 ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
 ril_data <- readr::read_csv(ril_link) |>
     mutate(log10_petal_area_mm = log10(petal_area_mm))|>
-  filter(!is.na(location))|>
+  dplyr::filter(!is.na(location))|>
   rename(petal_area = petal_area_mm,
          prop_hyb = prop_hybrid)
 ```
@@ -75,7 +75,8 @@ ril_data <- readr::read_csv(ril_link) |>
 ```{webr-r}
 # glimpse(ril_data) # un-comment to see all the variables 
 ril_data |> 
-  filter(!is.na(petal_area), !is.na(prop_hyb)) |>
+  dplyr::filter(!is.na(petal_area))|>
+  dplyr::filter(!is.na(prop_hyb))  |>
   summarise(my_cov = cov(petal_area, prop_hyb),
             my_cor = cor(petal_area, prop_hyb))
 ```
@@ -83,7 +84,30 @@ ril_data |>
 
 :::exercises
 
-**Q1)** Extend the analysis above to examine the association between leaf water content (*lwc*) and the proportion of hybrid seeds (*prop_hybrid*). The correlation between lwc and prop_hybrid is: `r mcq(c( "-0.202",answer ="-0.195","-0.000877", "-0.000914", "-0.000403" ))`  
+**Q1)** Extend the analysis above to examine the association between leaf water content (*lwc*) and the proportion of hybrid seeds (*prop_hybrid*). The correlation between lwc and prop_hybrid is: `r mcq(c(answer ="-0.202","-0.000877", "-0.000914", "-0.000403" ))`  
+`r hide("I don\'t see my answer")`
+If you found these answer as -0.195 have a look at what you [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)ed...   
+
+**You likely typed:**  
+
+```{r}
+ril_data |> 
+  dplyr::filter(!is.na(petal_area))|>
+  dplyr::filter(!is.na(prop_hyb))  |>
+  summarise(my_cor = cor(lwc, prop_hyb))
+```
+
+**Instead of:**     
+
+
+```{r}
+ril_data |> 
+  dplyr::filter(!is.na(lwc))|>
+  dplyr::filter(!is.na(prop_hyb))  |>
+  summarise(my_cor = cor(lwc, prop_hyb))
+```
+
+`r unhide()`
 
 **Q2)** Based on the analysis above, which variable  -- leaf water content (*lwc*), or petal area (*log10_petal_area_mm*)  is more plausibly interpreted as influencing proportion hybrid seed set (*prop_hybrid*)? `r longmcq(c( "**Equally likely** — because the absolute values of their correlation coefficients are similar", "**Petal area** — because it has the stronger correlation coefficient", "**Neither** — the covariances are both near zero", answer = "**Petal area** — There is a substantial association, and because these are experimental RILs, it's plausible that pollinators are attracted to larger petals — not low leaf water content.", "**There is no relevant information here** — correlation does not imply causation" ))`  
 

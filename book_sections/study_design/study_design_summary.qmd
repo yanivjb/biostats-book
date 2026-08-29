@@ -222,6 +222,8 @@ This is the distinguishing prediction, not just a justification after the fact. 
 
 - [Power and Sample Size Calculator](https://www.stat.ubc.ca/~rollin/stats/ssize/n2.html) -- UBC. A quick, no-install way to get a sample size or power estimate without writing any R.
 
+[**Power Explorer:** Statistical power as a thing you can watch: simulate a test under the truth you fear missing, count the rejections, and check the count against the exact answer](https://tpavlic.github.io/asu-simulating-stochastic-systems/power_analysis/power_explorer.html). 
+
 **Podcast:**
 
 - [Placebo](https://radiolab.org/podcast/91539-placebo) -- Radiolab (2009). The full-length episode behind the short clip already excerpted in Experimental Design -- an hour on the neuroscience of belief, from the symbolic power of a doctor's coat to a visit with a faith healer.
@@ -297,5 +299,5 @@ This is the shows-vs-suggests distinction in its natural habitat: the original r
 `r unhide()`
 
 
-All six checked against what I found rather than assumed — the Group 1/2A classifications, the 18% figure, the 1991→2016 coffee reversal, and the smoking-confound explanation for the original bladder cancer finding are all as reported in IARC's own materials and the secondary coverage I pulled.
+
 ```

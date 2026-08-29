@@ -328,13 +328,13 @@ image_write(combined, "../../figs/summarizing_data/univariate_summaries/3-column
 
 ```{r}
 #| echo: false
-#| label: fig-ss
+#| label: fig-ssgif
 #| fig-cap: "**Understanding the squared deviation.** The \"Sum of Squared Deviations\" is critical to understanding standard summaries of variability. The animation above aims to explain a \"squared deviation.\" *Left panel:* Each individual's deviation from the mean petal area is visualized as a vertical line, with the iᵗʰ value highlighted in pink. *Middle panel:* The same individual is plotted in a 2D space -- the squared deviation is shown as the area of a pink rectangle. *Right panel:* The squared deviation is shown for all individuals, with the same focal individual highlighted."
 #| fig-alt: "Animated figure with three panels demonstrating deviation and squared deviation in petal area measurements for Clarkia xantiana. *Left:* A bar plot shows each individual's deviation from the mean, with one pink-highlighted bar labeled with its value. *Middle:* A pink rectangle visualizes the squared deviation as area, connecting a data point to the mean. *Right:* A bar plot shows squared deviations for all individuals, again highlighting the same individual in pink."
 include_graphics("../../figs/intro_to_r/univariate_summaries/3-column-animation_ss.gif")
 ```
 
-To make these ideas clear, let's revisit the distribution of petal area  in *parviflora* RILs planted in GC. @fig-ss shows how we calculate the Squared Deviation for each data point.   
+To make these ideas clear, let's revisit the distribution of petal area  in *parviflora* RILs planted in GC. @fig-ssgif shows how we calculate the Squared Deviation for each data point.   
 
 - *The left panel* shows the difference between each observed value and its mean.   
 - *The middle panel* shows this as a box (or square) away from the overall, "grand" mean.   

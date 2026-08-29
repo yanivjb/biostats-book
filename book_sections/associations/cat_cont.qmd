@@ -180,6 +180,22 @@ gc_rils |>
   kable(digits = 3)
 ```
 
+---
+
+::: {.callout-note collapse="true"}       
+## A visual explanation of group_by() + summarize() from [R for the rest of us](https://rfortherestofus.com/2024/07/dplyr-functions-animated)
+
+```{r}
+#| echo: false
+##| fig-cap: "A visual explanation of group_by() + summarize() from [R for the rest of us](https://rfortherestofus.com/2024/07/dplyr-functions-animated)." 
+include_graphics("https://rfortherestofus.com/images/group_by_summarize.gif")
+```
+
+:::
+
+###  Ratio of conditional means
+
+
 Common summaries of the association between a categorical explanatory variable and a numerical response are the difference in conditional means and the ratio of conditional means across groups. In this case, plants that we saw visited by a pollinator had 0.29 more hybrid seeds than plants we did not observe pollinators visiting. This is nearly a five-fold difference!
 
 
@@ -203,12 +219,12 @@ pivot_wider() in the tidyr package makes data "wide". You don't need to know how
 
 ```{r}
 # Difference in conditional means 
-0.361 - 0.074 
+0.375 - 0.074 
 ```
 
 ```{r}
 # Ratio of conditional means 
-0.361 / 0.074 
+0.375 / 0.076 
 ```
 
 But, as your R skills improve, it is best to avoid "hard coding" things. That is, deal with R objects rather than specific values
@@ -298,7 +314,7 @@ each_var |>
 
 ---
 
-**Interpreting Cohen's D:** There aren't hard and fast rules for interpreting Cohen's D — this varies by field —  but the rough guidelines are presented below. Our observed Cohen's D of 1.4 is very large. 
+**Interpreting Cohen's D:** There aren't hard and fast rules for interpreting Cohen's D, as this varies by field, question, etc etc..,  but the rough guidelines are presented below. Our observed Cohen's D of $\approx$ 1.5 is very large. 
 
 | Size              | Range of Cohen's D     |
 |------------------|------------------------|

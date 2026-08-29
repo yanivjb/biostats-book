@@ -32,7 +32,7 @@ ril_data <- read_csv(path)
 
 1. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) to get a sense of our data.  
 2. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`select()`](https://dplyr.tidyverse.org/reference/select.html) function to limit our data to a few variables of interest.  
-3. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`rename`()`](https://dplyr.tidyverse.org/reference/rename.html) function to change the names of specific columns.    
+3. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function to change the names of specific columns.    
 
 **NOTE:** This is largely a review and consolidation of material from the previous chapter. 
 :::     
@@ -111,9 +111,9 @@ ril_data |>
 ```
 
 
-## [`rename`()`](https://dplyr.tidyverse.org/reference/rename.html)ing columns of interest   
+## [`rename()`](https://dplyr.tidyverse.org/reference/rename.html)ing columns of interest   
 
-Recall that we can change column names to be more descriptive or less elaborate with [`dplyr`](https://dplyr.tidyverse.org/)'s  [`rename`()`](https://dplyr.tidyverse.org/reference/rename.html) function: 
+Recall that we can change column names to be more descriptive or less elaborate with [`dplyr`](https://dplyr.tidyverse.org/)'s  [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function: 
 
 ```{r}
 ril_data |> 
@@ -154,7 +154,7 @@ library(dplyr)
 library(readr)
 library(tidyr)
 library(conflicted)
-conflict_prefer(name = "select", winner = "dplyr")
+conflicts_prefer(dplyr::select)
 
 
 path <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"

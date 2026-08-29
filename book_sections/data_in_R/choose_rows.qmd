@@ -131,7 +131,7 @@ ril_data_no_missing_visits |>
 
 ```{r}
 library(conflicted)
-conflict_prefer("filter", winner = "dplyr")
+conflicts_prefer(dplyr::filter)
 ```
  
 - **I did not overwrite ril_data.** When I add, rename, or change columns with `mutate()`, I usually overwrite the original object to avoid cluttering my workspace with multiple slightly different versions of the same tibble. However, when filtering, I often assign the result to a new object because I don't want to lose observations that were removed by the filter.  

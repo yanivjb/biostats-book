@@ -67,19 +67,19 @@ If you don’t specify them all, R will either tell you to provide them, or assu
 log(1000, base = 10)  
 ```  
 
-:::protip
+
 
 ### Tips for using functions in R
 
 #### **Use named arguments in functions**. 
 
-For example, typing *log(1000, base = 10)* makes what each value represents obvious (improving code readability), and allows flexibility in argument order (e.g. *log(base = 10, 1000)* gives the same value as *log(1000, base = 10)*). Thus, using named arguments makes your code readable and robust. 
+For example, typing `log(1000, base = 10)` makes what each value represents obvious (improving code readability), and allows flexibility in argument order (e.g. `log(base = 10, 1000)` gives the same value as `log(1000, base = 10)`). Thus, using named arguments makes your code readable and robust. 
 
 
   
 #### **Use = to assign arguments in functions**   
 
-When specifying arguments inside a function, always use *=* (e.g., *log(1000, base = 10)*). Do not use *<-*, which is for assigning values to variables. Otherwise, R might mistakenly store the argument as a variable, leading to unexpected results.  
+When specifying arguments inside a function, always use `=` (e.g., log(1000, base = 10)`). Do not use `<-`, which is for assigning values to variables. Otherwise, R might mistakenly store the argument as a variable, leading to unexpected results.  
 
 
 
@@ -94,8 +94,15 @@ log(1000, base = 10)   |>
 ```
 
 Notice that we did not explicitly provide an argument to [`sqrt()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html) — it simply used the output of `log(1000, base = 10)`. Similarly, the [`round()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Round.html) function then rounded the square root of 3 to two decimal places.  
-:::  
 
+---
 
+::: fyi
+## The native pipe, `|>`, and other pipes 
 
+In this book, I use the "native pipe," `|>`. This was added to base R in May of 2021, after [various pipes](https://magrittr.tidyverse.org/reference/pipe.html) introduced in  tidyverse's [`magrittr`](https://magrittr.tidyverse.org/) package have proved massively useful. 
+
+You will likely frequently see the [`magrittr`](https://magrittr.tidyverse.org/)'s [`%>%`](https://magrittr.tidyverse.org/reference/pipe.html) pipe, especially in older R code. This behaves similarly, but not identically to the native pipe. 
+
+:::
 

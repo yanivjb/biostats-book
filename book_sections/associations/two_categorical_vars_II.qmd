@@ -69,7 +69,7 @@ gc_rils <- readr::read_csv(ril_link) |>
 
 ## Unconditional & conditional proportions  
 
-In the previous section we calculated UNCONDITIONAL (also known as marginal) proportions (n_case / n_total) of two binary categorical variables. Let;s call these proportions: 
+In the previous section we calculated UNCONDITIONAL (also known as marginal) proportions (n_case / n_total) of two binary categorical variables. Let';'s call these proportions: 
 
 - $P_\text{pink}= n_\text{pink} / n_\text{plants}$
 
@@ -188,7 +188,7 @@ gc_rils |>
 
 
 :::fyi
-Our answer differ slightly from one another. We used a denominator of $n$ (which calcualtes the population covariance), while the sample covariance has a denominator of $n-1$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). We will soon see that although the later is more appropriate --  their difference is negligible when n is large. We can convert the populaiton covariance to the sample covaraiance by multiplying by $\frac{n}{n-1}$. See the next section for a discussion of the difference between populaiton parameters and sample estimates.
+Our answers differ slightly from one another. We used a denominator of $n$ (which calculates the population covariance), while the sample covariance has a denominator of $n-1$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). We will soon see that although the later is more appropriate --  their difference is negligible when n is large. We can convert the population covariance to the sample covariance by multiplying by $\frac{n}{n-1}$. See the next section for a discussion of the difference between population parameters and sample estimates.
 :::
 
 
@@ -256,27 +256,27 @@ gc_rils |>
 
 :::fyi
 ## Applications to population genetics:
-Two population genetic summaries tend to confuse genetics students -- deviations from Hardwy-Weinberg Equilibrium, and Linkage disequilibrium. Both can be naturally considered as covarances between two binary variables.   
+Two population genetic summaries tend to confuse genetics students -- deviations from Hardy-Weinberg Equilibrium, and Linkage Disequilibrium. Both can be naturally considered as covariances between two binary variables.   
 
 ---
 
-**Hardy-Weinberg Equilbrium (HWE)**    
+**Hardy-Weinberg Equilibrium (HWE)**    
 
-According to the [Hardy-Weinberg Equilbrium principle](https://cooplab.github.io/popgen-notes/#hardyweinberg-proportions), states that under anumerous assumptions -- which essentially ensure that an individual's two alleles at a locus are chosen indepednently -- geneotypes at a locus are simply two random samples of alleles from a population,   
+According to the [Hardy-Weinberg Equilbrium principle](https://cooplab.github.io/popgen-notes/#hardyweinberg-proportions), states that under numerous assumptions -- which essentially ensure that an individual's two alleles at a locus are chosen independently -- genotypes at a locus are simply two random samples of alleles from a population,   
 
    - Genotype frequencies should be $p^2$, $2p(1-p)$, and $(1-p)^2$ 
-   - Where $p$ is the freuqncy of one allele, A, at a locus.   
+   - Where $p$ is the frequency of one allele, A, at a locus.   
 
 We can think of this as a covariance between alleles inherited from mom and dad at the same locus.   
 
    - So $p^2$ is actually $p_\text{A maternal} \times p_\text{A paternal}$.  
-   - The deviation from HWE, $F$, is simplythe difference between the observed frequency of homozygotes ($p_\text{AA} = p_\text{A maternal,A paternal}$) and their expected frequency, $p^2$. So $F = p_\text{AA}- p_A^2$.    
+   - The deviation from HWE, $F$, is simply the difference between the observed frequency of homozygotes ($p_\text{AA} = p_\text{A maternal,A paternal}$) and their expected frequency, $p^2$. So $F = p_\text{AA}- p_A^2$.    
 
 ---
 
 **Linkage Disequilibrium (LD)**   
 
-[Linkage disquilibrium](https://cooplab.github.io/popgen-notes/#correlations-between-loci-linkage-disequilibrium-and-recombination) quantifies the statistical asscoiation between alleles at different loci. The most standard quantification of linkage disequilbrium is $D = Cov(A,B) = p_{AB} - p_A p_B$. Where A and B asre alleles at two different loci. Although usually quantified as a covariance, other measures of LD include a correlation in allele frequencies between loci.
+[Linkage disequilibrium](https://cooplab.github.io/popgen-notes/#correlations-between-loci-linkage-disequilibrium-and-recombination) quantifies the statistical association between alleles at different loci. The most standard quantification of linkage disequilbrium is $D = Cov(A,B) = p_{AB} - p_A p_B$. Where A and B are alleles at two different loci. Although usually quantified as a covariance, other measures of LD include a correlation in allele frequencies between loci.
 
 
 
