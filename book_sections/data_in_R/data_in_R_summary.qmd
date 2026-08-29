@@ -206,7 +206,7 @@ iris |>
 #| context: setup
 library(dplyr)
 library(conflicted)
-conflicts_prefer(dplyr::filter)
+conflicts_prefer(stats::filter)
 iris$Species <- as.character(iris$Species) 
 iris <- tibble(iris)
 ```  
@@ -215,7 +215,7 @@ iris <- tibble(iris)
 #| autorun: true
 library(conflicted)
 library(dplyr)
-conflicts_prefer(dplyr::filter)
+
 iris |>  
   filter(Species == "setosa")
 ```  

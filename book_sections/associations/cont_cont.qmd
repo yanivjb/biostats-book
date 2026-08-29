@@ -119,7 +119,7 @@ gc_rils |>
   summarise(mean_product        = mean(log10_petal_area_mm * prop_hybrid),
             product_of_mean     = mean(log10_petal_area_mm) * mean(prop_hybrid),
             approx_covariance   = mean_product - product_of_mean,
-            sample_covariance   = approx_covariance * n() / (n()-1) ))
+            sample_covariance   = approx_covariance * n() / (n()-1) )
 ```
 
 
@@ -198,7 +198,7 @@ gc_rils                                                        |>
 
 
 :::note
-The equation for the covariance should remind you of the equation for the variance. This is because the  the variance is simply the covariance of a variable  with itself. (i.e $cov_{X,X} = \frac{\sum(X_i - \bar{X})(X_i - \bar{X}) }{n-1}$ = $\frac{\sum(X_i - \bar{X})^2 }{n-1}$ = $var_X$). You can also see this similarity by comparing @fig-cov, above, to  the earlier  [gif depicting variance calculations](#fig-ssgif), from our section on [summarizing variability for a refresher](#summarizing_variability).
+The equation for the covariance should remind you of the equation for the variance. This is because the  the variance is simply the covariance of a variable  with itself. (i.e $cov_{X,X} = \frac{\sum(X_i - \bar{X})(X_i - \bar{X}) }{n-1}$ = $\frac{\sum(X_i - \bar{X})^2 }{n-1}$ = $var_X$). You can also see this similarity by comparing @fig-cov, above, to  the earlier  [gif depicting variance calculations](../univariate_summaries/summarizing_variability.qmd#fig-ssgif), from our section on [summarizing variability for a refresher](../univariate_summaries/summarizing_variability.qmd#summarizing_variability).
 :::
 
 

@@ -79,7 +79,7 @@ For example, typing `log(1000, base = 10)` makes what each value represents obvi
   
 #### **Use = to assign arguments in functions**   
 
-When specifying arguments inside a function, always use `=` (e.g., log(1000, base = 10)`). Do not use `<-`, which is for assigning values to variables. Otherwise, R might mistakenly store the argument as a variable, leading to unexpected results.  
+When specifying arguments inside a function, always use `=` (e.g., `log(1000, base = 10)`). Do not use `<-`, which is for assigning values to variables. Otherwise, R might mistakenly store the argument as a variable, leading to unexpected results.  
 
 
 

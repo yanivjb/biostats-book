@@ -228,10 +228,14 @@ ggplot(ril_data, aes(x = asd_mm, ))+
 - **[`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Jitters points to reduce overplotting.  
 - **[`geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Creates bar plots from raw data.  
 - **[`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_col.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Creates bar plots from summarized data.  
+- **[`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Bins a continuous variable and shows counts per bin.  
+- **[`geom_density()`](https://ggplot2.tidyverse.org/reference/geom_density.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Shows a smoothed distribution of a continuous variable.  
+- **[`geom_boxplot()`](https://ggplot2.tidyverse.org/reference/geom_boxplot.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Summarizes a continuous variable's distribution with a box-and-whisker plot.  
+- **[`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Adds a trendline (e.g., linear or loess) to a plot.  
 - **[`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Creates multiple panels for categorical variables.  
 - **[`facet_grid()`](https://ggplot2.tidyverse.org/reference/facet_grid.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Creates a grid layout for multiple faceting variables.  
 - **[`scale_x_continuous()`](https://ggplot2.tidyverse.org/reference/scale_continuous.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Modifies x-axis scales (e.g., log transformation).  
-
+- **[`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)** *([ggplot2](https://ggplot2.tidyverse.org/))*: Saves the most recent (or a specified) ggplot to a file.  
 :::
 
 ---
@@ -246,6 +250,7 @@ ggplot(ril_data, aes(x = asd_mm, ))+
 
 - **[`ggplot2`](https://ggplot2.tidyverse.org/)**: The core package for data visualization in the `tidyverse`.
 
+- **[`plotly`](https://plotly.com/r/)**: Turns a ggplot into an interactive, hoverable/zoomable plot via [`ggplotly()`](https://plotly.com/ggplot2/).
 :::
 
 
