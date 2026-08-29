@@ -1,4 +1,4 @@
-# X_5. Probability and Likelihood {.unnumbered probability_and_likelihood}
+# X5. Probability and Likelihood {.unnumbered probability_and_likelihood}
 
 
 
