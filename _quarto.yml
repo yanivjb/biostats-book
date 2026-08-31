@@ -225,6 +225,12 @@ book:
     - book_sections/model_evaluation.qmd
     - book_sections/causal_inference.qmd
     - book_sections/probability_and_likelihood.qmd
+    - part: book_sections/chi2.qmd
+      chapters:         
+        - book_sections/chi2/expectations_and_differences.qmd
+        - book_sections/chi2/associations_between_catvars.qmd
+        - book_sections/chi2/chi2_dist.qmd
+        - book_sections/chi2/chi2_summary.qmd   
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
     - part: book_sections/supps.qmd
