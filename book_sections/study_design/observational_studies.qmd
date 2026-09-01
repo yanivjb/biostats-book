@@ -21,7 +21,7 @@ You cannot do an experiment, but you really want to rigorously learn from observ
 
 - Explain why observational studies need to (and can) be designed just as carefully as experiments.  
 - Make meaningful comparisons in an observational study.
-- Explain how to triangulating multiple lines of evidence to dig into a claim from an observational study.
+- Explain how triangulating multiple lines of evidence can be used to dig into a claim from an observational study.
 - Report observational findings honestly.
 
 :::
@@ -235,7 +235,7 @@ Formal observational studies can be inspired by informal observations. But when 
 - Define your target population first 
 - Sample from the population randomly or systematically, rather than reaching for whatever is easiest to find. 
 
-Please revisit the section in [Chapter 8](#sampling) about [smapling bias](#sampling_bias) for a refresher on what can go wrong with sampling.
+Please revisit the section in [Chapter 8](#sampling) about [sampling bias](#sampling_bias) for a refresher on what can go wrong with sampling.
 
 ::: fyi
 If you can't tell, I love this stuff! I hope this wasn't too much. We will dig deeper into this material later in the book when we discuss formal causal inference methods in more detail.

@@ -128,7 +128,7 @@ lapply(1:5,function(X){gc_rils|>
 
 ### Bootstrapping is unreliable  when n is small 
 
-Bootstraping works by approximating the sampling distribution by resampling your data with replacement. Thus it inherently assumes your sample is a good representation of the population. A very small sample is unlikely to  capture the true shape of the population's distribution. 
+Bootstrapping works by approximating the sampling distribution by resampling your data with replacement. Thus it inherently assumes your sample is a good representation of the population. A very small sample is unlikely to  capture the true shape of the population's distribution. 
 
 To think about this, consider an extremely small sample of two. Here bootstrapping will provide three estimates:    
 
@@ -136,7 +136,11 @@ To think about this, consider an extremely small sample of two. Here bootstrappi
 
 2. Half the time we will sample both individuals so the mean of these two will be our estimate of the mean.  
 
-3. A quarter of the time we will sample individual two twice and their value will be the estimate of the mean. None of these are good estimates.  
+3. A quarter of the time we will sample individual two twice and their value will be the estimate of the mean. 
+
+These three possibilities do not accurately capture the extent of our uncertainty.  
+
+---
 
 The bootstrap distribution is similarly limited for somewhat larger sample sizes. For example, @fig-smallboot shows the data and associated bootstrap distributions for three different samples of size five. The first consists of moms making zero or few hybrid seeds, the second has a mix of moms with few and many hybrid seeds, and the third consists of moms with many hybrid seeds. For the first and third samples, the 95% CI (purple dashed line in @fig-smallboot) fails to capture the actual estimated mean from our original sample (red line in @fig-smallboot).
 

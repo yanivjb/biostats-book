@@ -18,7 +18,7 @@ library(knitr)
 
 **Motivating Scenario:**
 
-You're designing a study and need to decide how big to makes it.  Too few samples, and a real effect could hide in the noise, but too many samples represent an unnecessary  waste of time, money, and effort. Here we will think about design strategies to get the most information from your study, and how to decide how many samples you need
+You're designing a study and need to decide how big to make it.  Too few samples, and a real effect could hide in the noise, but too many samples represent an unnecessary  waste of time, money, and effort. Here we will think about design strategies to get the most information from your study, and how to decide how many samples you need
 
 **Learning Goals: By the end of this chapter, you should be able to:**
 
@@ -416,12 +416,12 @@ Because estimates are influenced by chance, our ability to correctly reject a fa
 
 1. The "**effect size**" -- that is the difference between the true parameter and the null, and    
  
-2. The precision of our estimate. This itself influenced by the nature of the world (which we cannot control) by choices in experiment design (see above), including sample size (see below).
+2. The precision of our estimate. This itself is influenced by the nature of the world (which we cannot control) by choices in experiment design (see above), including sample size (see below).
 
 
 #### Estimating an appropriate sample size
 
-**The power to reject the null:** We know that reject the null hypothesis is not the goal of . Still, if we are spending time and effort on a study, it is worth considering if that study would be able to identify biologically meaningful differences between treatments if they exist. We use power analyses to find the sample size needed for a study to have a good chance of rejecting a false null hypothesis. A power analysis basically finds the sample size necessary so that the sampling distribution of your experiment has:
+**The power to reject the null:** We know that rejecting the null hypothesis is not the goal of statistics. Still, if we are spending time and effort on a study, it is worth considering if that study would be able to identify biologically meaningful differences between treatments if they exist. We use power analyses to find the sample size needed for a study to have a good chance of rejecting a false null hypothesis. A power analysis basically finds the sample size necessary so that the sampling distribution of your experiment has:
 
 - Some specified power to differentiate between the null model and the smallest effect size you'd like to be able to identify, and/or  
 - Some specified probability of being as precise, or more precise, than you want.
@@ -432,9 +432,9 @@ The traditional target power researchers shoot for is 80%, but in my opinion tha
 
 The sample size needed to reject the null for some desired level of power, scales roughly as $n \propto \frac{\sigma^2}{\text{effect}^2}$. So
 
-- **Finding a small effect requires a huge sample.** The required sample size grows as the square of one over the effect size. This means that it takes a hundredfold increase in n to find an effect that is ten times smaller. So  if you really want to find a small effect you will need to invest a lot of time energy and money. 
+- **Finding a small effect requires a huge sample.** The required sample size grows as the square of one over the effect size. This means that it takes a hundredfold increase in n to find an effect that is ten times smaller. So  if you really want to find a small effect you will need to invest a lot of time, energy, and money. 
 
-- **Reducing noise is as good as adding data.** Variance ($\sigma^2$), enters the formula linearly. So using the techniques above to decrease variance provide the same  gain in power as doubling your sample size, and can often come with less expense and effort. 
+- **Reducing noise is as good as adding data.** Variance ($\sigma^2$), enters the formula linearly. So using the techniques above to decrease variance provides the same  gain in power as doubling your sample size, and can often come with less expense and effort. 
 
 ##### Computational approaches 
 

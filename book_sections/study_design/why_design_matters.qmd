@@ -48,7 +48,7 @@ You have a scientific idea that you want to turn into something that can be eval
 
 - Distinguish a scientific model from a statistical model.
 - Transform a  scientific question into a study to answer it.
-- Consider  your statistcal model and its relationship to the biological model while making decisions about tyour study design.
+- Consider  your statistical model and its relationship to the biological model while making decisions about your study design.
 
 :::
 ---  

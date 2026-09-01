@@ -60,7 +60,7 @@ include_graphics("https://imgs.xkcd.com/comics/selection_effect.png")
 #| echo: FALSE
 #| label: fig-volunteer
 #| out-width: "100%"
-#| fig-cap: 'A [cartoon]((https://sketchplanations.com/sampling-bias)) by Jono Hey from [sketchplanations](https://sketchplanations.com/) illustrating sampling bias (response bias). The survey results show that people overwhelmingly love responding to surveys, but the sample only includes those who were willing to respond in the first place. Licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.'
+#| fig-cap: 'A [cartoon](https://sketchplanations.com/sampling-bias) by Jono Hey from [sketchplanations](https://sketchplanations.com/) illustrating sampling bias (response bias). The survey results show that people overwhelmingly love responding to surveys, but the sample only includes those who were willing to respond in the first place. Licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.'
 #| fig-alt: "A cartoon titled \"Sampling Bias.\" A presenter points to a bar chart showing survey results: 99.8% responded \"Yes, I love responding to surveys,\" while 0.2% responded \"No, I toss them in the bin.\" The presenter says, \"We received 500 responses and found that people love responding to surveys,\" while the audience looks on, puzzled."
 include_graphics("https://images.prismic.io/sketchplanations/f2fdb7cb-f126-4897-ad78-4fd11c743172_SP+723+-+Sampling+bias.png?auto=compress%2Cformat&fit=max&w=1920")
 ```
@@ -89,7 +89,7 @@ include_graphics("../../figs/stats_foundations/sampling/gc_hz2.png")
 
 
 
-Imagine we were driving along the main road and stopped when we saw a large patch of *Clarkia* plants, roughly in the "zoomed in" region of @fig-gcmap. If we collected all of those plants, we would mistakenly conclude that the population was roughly 1/4 hybrid, 1/4 *xantiana*, and 1/2 *parviflora*. In fact, the population is roughly 85% *xantiana*, 10% *parviflora*, and 5% hybrid. It's not clear if this bias is due to luck (the hybrids and *parviflora*) just happen to be near the road, or something more predictable (e.g. hybrids and *parviflora*) do better in roadsides, it is clear that limiting our sample to the roadside would skew our view of the population. 
+Imagine we were driving along the main road and stopped when we saw a large patch of *Clarkia* plants, roughly in the "zoomed in" region of @fig-gcmap. If we collected all of those plants, we would mistakenly conclude that the population was roughly 1/4 hybrid, 1/4 *xantiana*, and 1/2 *parviflora*. In fact, the population is roughly 85% *xantiana*, 10% *parviflora*, and 5% hybrid. While it's not clear if this bias is due to luck (e.g. the hybrids and *parviflora* just happen to be near the road), or something more predictable (e.g. hybrids and *parviflora* do better in roadsides), it is clear that limiting our sample to the roadside would skew our view of the population. 
 
 
 
@@ -97,7 +97,7 @@ Imagine we were driving along the main road and stopped when we saw a large patc
 
 Say that instead of sampling by the roadside, we walked around the entire hillside looking for *Clarkia* plants. Because *xantiana* flowers are larger, brighter, and more conspicuous, we might subconsciously sample them more often, biasing our sample towards *xantiana*.
 
-This is a form of **"volunteer" bias**. As shown in @fig-volunteer, this problem is especially common in surveys where the people who choose to respond are rarely representative of the entire population. The same principle applies in other contexts: it's likely easier to catch a slow, docile mouse than a fast, skittish one, which would lead to a biased sample of animal behavior. et etc etc.
+This is a form of **"volunteer" bias**. As shown in @fig-volunteer, this problem is especially common in surveys where the people who choose to respond are rarely representative of the entire population. The same principle applies in other contexts: e.g. it's likely easier to catch a slow mouse than a fast one, which would lead to a biased sample of animal behavior. 
 
 
 ### A Bias in Timing
@@ -134,7 +134,7 @@ The classic example of survivorship bias comes from the location of bullet holes
 :::note
 Sometimes, you can address sampling bias by carefully reframing your research question to match what you actually sampled. For example, if we said, we were estimating the proportion of flowering *Clarkia* that were hybrids our bias would go away. However, this is not always the best solution -- we want our statistics to answer biological questions of interest. 
 
-Changing the question so it is statistically valid may help us feel better, but leaves the inital question unanswered. For example, we want to know how likely planes are to get hit in th cockpit, making the question about wings does not solve this.
+Changing the question so it is statistically valid may help us feel better, but leaves the initial question unanswered. For example, we want to know how likely planes are to get hit in the cockpit, making the question about wings does not solve this.
 :::
 
 

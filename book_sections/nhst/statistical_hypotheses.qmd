@@ -67,7 +67,7 @@ The **Null Hypothesis ($H_0$)** is the ultimate skeptic. It argues that any patt
 knitr::include_graphics("https://tenor.com/view/ok-csb-cool-story-bro-tired-yawn-gif-5625279.gif")
 ```
 
-The **Alternative Hypothesis ($H_A$ or $H_1$)** is the claim that the null hypothesis is not true.  It claims that something other than random sampling error is responsible for the observed pattern.    This is a vague, so the alternative hypothesis is not making a specific claim -- rather  it's a grab bag for all ways the null could be wrong. 
+The **Alternative Hypothesis ($H_A$ or $H_1$)** is the claim that the null hypothesis is not true.  It claims that something other than random sampling error is responsible for the observed pattern.    This is a vague statement, so the alternative hypothesis is not making a specific claim -- rather  it's a grab bag for all ways the null could be wrong. 
 
 
 For our flower example, the null and alternative hypotheses are:
@@ -89,7 +89,7 @@ For our flower example, the null and alternative hypotheses are:
 Notice that we chose to compare proportions, not the raw counts of plants with hybrids. This is a crucial feature of a good hypothesis test: it must make a fair comparison. Because our sample sizes for pink (56) and white (58) flowers were unequal, comparing raw counts would be misleading and biologically uninteresting. More generally, because the null hypothesis is a skeptic that doesn't understand biology, it's our job to design studies where its rejection is both interesting and informative. 
 
 
-- **Good nulls are non-trivial:** Testing the null that white flowers have zero hybrids is lame. If we see at least one hybrid then we couldn't have gotten such a result by sampling error from a  population with no hybrids. Similarly, the null hypothesis that mean petal length is zero mm squared should not be tested!  
+- **Good nulls are non-trivial:** Testing the null that white flowers have zero hybrids is lame. If we see at least one hybrid then we couldn't have gotten such a result by sampling error from a  population with no hybrids. Similarly, the null hypothesis that mean petal area is zero mm squared should not be tested!  
 
 - **Good nulls represent a fair comparison:** As stated above, we compared the proportion of white and pink flowered plants with at least one hybrid seed, not the raw counts to avoid bias. When you design your studies make sure the comparison is fair! 
 
@@ -169,11 +169,10 @@ p_one <- ggplot(curve_df, aes(x, y)) +
     ) +
     coord_cartesian(xlim = c(-4, 4), ylim = c(0, .46)) +
     theme_minimal(base_size = 16) +
-    theme(
-        axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.x = element_blank(),
-    )
+    theme(axis.text.y = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.text.x = element_blank()
+          )
 
 p_two + p_one
 ```

@@ -355,7 +355,7 @@ We cannot eliminate sampling error, but we can do things to decrease it. Here ar
   
 
 
-[Return to our web exercise](#sampling_error_unavoidable) to explore how sample size ($n$)  influences the extent of sampling error. To do so, simply change `sample_size` to a small (e.g. 3) and large (e.g. 30) number and compare the difference between estimates and parameters.You will need to rerun all three R bits, in sequential order, and its probably best to do so a small handful of times.  
+[Return to our web exercise](#sampling_error_unavoidable) to explore how sample size ($n$)  influences the extent of sampling error. To do so, simply change `sample_size` to a small (e.g. 3) and large (e.g. 30) number and compare the difference between estimates and parameters. You will need to rerun all three R bits, in sequential order, and it's probably best to do so a small handful of times.  
 
 
 

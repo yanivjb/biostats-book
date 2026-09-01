@@ -218,6 +218,6 @@ For some reason, many scientists seem to want one answer to a question or one ca
 
 Experiments can reveal causation -- but only if we actually do them well. Random assignment handles the confounds we never thought to measure. Controls and blinding rule out the ones baked into the manipulation itself. And even a well-executed experiment doesn't automatically tell you the effect size that matters in the real world, generalize beyond the population and context it was run in, or rule out other causes acting alongside the one we found -- ecological validity, comparable effect sizes, WEIRD contexts, and multiple causation are all needed to connect experimental results to the real world. 
 
-We did a bunch of this right in our RIL. We placed RILs in the field randomly, replicated across sites etc.. . But because meioisis let us down, petal area was not randomly assigned to plants, but rather remained associated with numerous floral phenotypes, limiting our ability to make causal claims. 
+We did a bunch of this right in our RIL. We placed RILs in the field randomly, replicated across sites etc...,  but because meiosis let us down, petal area was not randomly assigned to plants, but rather remained associated with numerous floral phenotypes, limiting our ability to make causal claims. 
 
 Luckily, there are some statistical paths forward as we will see later in this and in forthcoming chapters. 

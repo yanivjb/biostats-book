@@ -86,7 +86,7 @@ include_url("https://www.youtube.com/embed/yDEvXB6ApWc")
 ## Calculating Bootstrap Confidence Intervals
 
 
-Calculating a bootstrap confidence interval from the bootstrap distribution is pretty straightforward. We first decide on our desired confidence level (0.95 is standard), and we will call one minus the confidence level $\alpha$ (so for a .95 confidence level, $\alpha$ = 0.05$). We then find the values on the border of the $\frac{\alpha}{2}$ and $1-\frac{\alpha}{2}$ by combining the **[`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html)** and **[`quantile()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html)** functions:
+Calculating a bootstrap confidence interval from the bootstrap distribution is pretty straightforward. We first decide on our desired confidence level (0.95 is standard), and we will call one minus the confidence level $\alpha$ (so for a .95 confidence level, $\alpha = 0.05$). We then find the values on the border of the $\frac{\alpha}{2}$ and $1-\frac{\alpha}{2}$ by combining the **[`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html)** and **[`quantile()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html)** functions:
 
 
 ```{r}

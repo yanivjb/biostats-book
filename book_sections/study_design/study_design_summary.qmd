@@ -43,9 +43,6 @@ The ultimate success or failure of a statistical analysis is often shaped more b
 ### Chatbot tutor {#study_design_summary_chatbot_tutor}
 
 :::tutor
-
-*(Add your ChatGPT and Gemini chatbot links here, matching the pattern from earlier chapters -- I don't have real links to provide, so I've left this as a placeholder rather than invent one.)*
-
 Please interact with this custom chatbot (**ChatGPT has stopped supporting this :/**, [**Gemini version here**](https://gemini.google.com/gem/19vacSXk8F0ng6KWpagTGccOmPzGAxVjW?usp=sharing)). I suggest interacting with at least ten back-and-forths to ramp up, and then stopping when you feel like you got what you needed from it.
 
 :::
@@ -57,7 +54,7 @@ Try these questions!
 
 :::exercises
 
-**Q1)** Random assignment describes the a key feature of experimental design in which the experimenter `r longmcq(c(answer = "Randomly assigns individuals in a study to a treatment","Randomly assigns individuals to study.", "Gives participants random homework assignments to ensure they can appropriately complete the experiment"))`
+**Q1)** Random assignment describes the key feature of experimental design in which the experimenter `r longmcq(c(answer = "Randomly assigns individuals in a study to a treatment","Randomly assigns individuals to study.", "Gives participants random homework assignments to ensure they can appropriately complete the experiment"))`
 
 `r hide("btw")`
 That second option describes **random selection** (or random sampling). Random selection is about randomly choosing who gets into the study, from the broader population you care about. 
@@ -80,10 +77,10 @@ Because we often apply the term "effect size" to observational studies, which do
 
 ---
 
-**Q4)** Two techniques in study design -- blocking and matching -- have a similar purpose.  In "blocking," we randomly assign treatments in our experiment within "blocks" (e.g. fields, schools, etc) so that the all treatments are well-represented in all blocks. In a "matching" experimental design we create pairs that are as similar as possible to each other, and then randomly apply the treatment to one member of the pair. Compared to other experimental approaches, what underlying problem are both of these techniques trying to solve? `r longmcq(c("Both aim to remove confounds.", "Both improve how well results generalize to new populations.", "Both remove the need for random assignment.", answer = "Both aim to increase power and precision by decreasing variability unrelated to the treamtment."))`
+**Q4)** Two techniques in study design -- blocking and matching -- have a similar purpose.  In "blocking," we randomly assign treatments in our experiment within "blocks" (e.g. fields, schools, etc) so that the all treatments are well-represented in all blocks. In a "matching" experimental design we create pairs that are as similar as possible to each other, and then randomly apply the treatment to one member of the pair. Compared to other experimental approaches, what underlying problem are both of these techniques trying to solve? `r longmcq(c("Both aim to remove confounds.", "Both improve how well results generalize to new populations.", "Both remove the need for random assignment.", answer = "Both aim to increase power and precision by decreasing variability unrelated to the treatment."))`
 
 `r hide("btw")`
-If you answered "Both aim to remove confounds confounding variables are eliminated," you're close. Random assignment already protects experiments against systematic confounding by treatment. Blocking and matching go a step further, they try to balance known sources of variation across treatments.
+If you answered "Both aim to remove confounds," you're close. Random assignment already protects experiments against systematic confounding by treatment. Blocking and matching go a step further, they try to balance known sources of variation across treatments.
 `r unhide()`
 
 ---
@@ -114,7 +111,7 @@ Random assignment does not model covariates. It works through study design. Trea
 
 :::exercises
 
-**Q7)** Agricultural workers exposed to glyphosate were often apply several other pesticides, so it can be hard to isolate glyphosate's effect from the others. Why is this is a threat to *internal validity* `r longmcq(c("Because farmers are a small, unrepresentative slice of the population.", answer = "Because it's unclear if glyphosate itself, the other pesticides applied alongside it, or some combination is/are responsible for the elevated cancer rate.", "Because self-reported pesticide use is not a reliable measurement.", "Because the sample size of farmers studied was too small to trust."))`
+**Q7)** Agricultural workers exposed to glyphosate were often applied with several other pesticides, so it can be hard to isolate glyphosate's effect from the others. Why is this a threat to *internal validity* `r longmcq(c("Because farmers are a small, unrepresentative slice of the population.", answer = "Because it's unclear if glyphosate itself, the other pesticides applied alongside it, or some combination is/are responsible for the elevated cancer rate.", "Because self-reported pesticide use is not a reliable measurement.", "Because the sample size of farmers studied was too small to trust."))`
 
 `r hide("Explanation")`
 Co-exposure is a classic confound: workers weren't randomly assigned their glyphosate exposure, they were farmers doing normal farm work -- which came bundled with exposure to other chemicals too. A study can find a real, non-random association between glyphosate and cancer risk without being able to say glyphosate itself is the cause, because glyphosate use and other-pesticide use move together.
@@ -122,7 +119,7 @@ Co-exposure is a classic confound: workers weren't randomly assigned their glyph
 
 ---
 
-**Q8)** The strongest  evidence connecting glyphosate to human cancer risk comes from studies of licensed agricultural applicators -- people with heavy, often decades-long occupational exposure. But the lawsuits about glyphosate include plaintiffs like Hardeman, whose exposure was residential. Why does this gap raises a question of *external validity*? `r longmcq(c("Because home gardeners weren't randomly assigned to use Roundup.", "Because occupational and residential users measure their exposure differently.", answer = "Because it's unclear whether a result from decades of heavy occupational exposure generalizes to occasional home use.", "Because agricultural applicators are a larger sample than home gardeners."))`
+**Q8)** The strongest  evidence connecting glyphosate to human cancer risk comes from studies of licensed agricultural applicators -- people with heavy, often decades-long occupational exposure. But the lawsuits about glyphosate include plaintiffs like Hardeman, whose exposure was residential. Why does this gap raise a question of *external validity*? `r longmcq(c("Because home gardeners weren't randomly assigned to use Roundup.", "Because occupational and residential users measure their exposure differently.", answer = "Because it's unclear whether a result from decades of heavy occupational exposure generalizes to occasional home use.", "Because agricultural applicators are a larger sample than home gardeners."))`
 
 `r hide("Explanation")`
 This is a real, live tension, not a hypothetical one: the core evidence base is heaviest for people like licensed applicators, but the plaintiff population is much broader. Whether findings from one population extend to the other is exactly what external validity asks -- and it's a genuine point of dispute in how this evidence has been applied in court and by regulators.

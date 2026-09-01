@@ -73,7 +73,7 @@ include_graphics("https://media.giphy.com/media/pRHkn0CC08Wn6/giphy.gif")
 
 *Step 4: Permute the data by shuffling values of the explanatory variables across observations.*   
 
-Now we permute the data by randomly shuffling the `treatment` onto our observed response variable, `hatched.eggs`. We can again use the [`infer` package](https://infer.netlify.app/r) to do this! But now when we [`generate()`](https://infer.netlify.app/reference/generate.html) we set `type = "permute"` instead of `type = "bootstrap"` We also `specify()` the model! 
+Now we permute the data by randomly shuffling the `treatment` onto our observed response variable, `hatched.eggs`. We can again use the [`infer` package](https://infer.netlify.app/r) to do this! But now when we [`generate()`](https://infer.netlify.app/reference/generate.html) we set `type = "permute"` instead of `type = "bootstrap"`. We also [`specify()`](https://infer.tidymodels.org/reference/specify.html) the model! 
 
 ```{r}
 one_perm <- frogs |>
@@ -131,7 +131,7 @@ We generate the permuted distribution (to approximate the null sampling distribu
 
 
 :::aside
-**How many permutations?** There's no strict rule for the number of permutations. It's a trade-off between computational time and the precision of your p-value.A good starting point is five thousand permutations, but one thousand permutations are usually enough if the permuation is taking a while.
+**How many permutations?** There's no strict rule for the number of permutations. It's a trade-off between computational time and the precision of your p-value. A good starting point is five thousand permutations, but one thousand permutations are usually enough if the permutation is taking a while.
 :::
 
 ```{r}

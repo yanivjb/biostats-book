@@ -33,7 +33,7 @@ ril_data <- readr::read_csv(ril_link) |>
                 growth_rate = as.numeric(growth_rate),
                 visited = mean_visits > 0)
 gc_rils <- ril_data |>
-  filter(location == "GC", !is.na(prop_hybrid), ! is.na(mean_visits))|>
+  dplyr::filter(location == "GC", !is.na(prop_hybrid), ! is.na(mean_visits))|>
   select(petal_color, petal_area_mm, num_hybrid, offspring_genotyped, prop_hybrid, mean_visits , asd_mm )|>
   mutate(id = factor(1:n()))
 ```
@@ -41,18 +41,18 @@ gc_rils <- ril_data |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:** We understand the importance of quantifying uncertainty, and can build a bootstrap distribution. We now want to put a reasonable range on our estimate.  Here, we will learn how a confidence interval solves this problem, and what it does and does not mean.
+**Motivating Scenario:** You can  bootstrap yourself with [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html), but it's tedious. You would rather use a simple R package that works for man different estimates and does the hard bits for you.
 
 **Learning Goals: By the end of this subsection, you should be able to:**
-    
-1.  **Explain what a confidence interval means**
-    
-2. **Calculate a bootstrap confidence interval from the bootstrap distribution**   
-    
-3. **Visualize uncertainty by adding confidence intervals to your plots**  
 
+1. **Use  [`infer`](https://infer.netlify.app/)'s  [`specify()`](https://infer.netlify.app/reference/specify) → [`generate()`](https://infer.netlify.app/reference/generate) → [`calculate()`](https://infer.netlify.app/reference/calculate) pipeline** to build a bootstrap distribution for a statistic.
 
-**NOTE:** IMO The code introduced in this section is super helpful but need not be memorized. I suggest bookmarking this page so you know where to find these helpful functions, but do not waste time committing them to memory.
+2. **Use the [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) and [`infer::get_ci()`](https://infer.tidymodels.org/reference/get_confidence_interval.html?q=get_ci#aliases) functions** to find a bootstrap standard error and confidence interval from that distribution.
+
+3. **Apply this procedure to numerous summary statistics** including a mean, a difference in means, a correlation etc... to empower yourself to quantify uncertainty in many types of summaries.
+
+**NOTE:** IMO the code introduced in this section is super helpful but need not be memorized. I suggest bookmarking this page so you know where to find these helpful functions, but do not waste time committing them to memory.
+
 :::
 
 
@@ -264,29 +264,28 @@ boot_diffs |>
 
 Thus, we conclude that a reasonable estimate of the difference in the proportion of hybrid seed lies between  `r ((boot_diffs |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`. Importantly, this confidence  interval excludes zero so  we are pretty sure that pink RILs do set more hybrid seed than white ones.
 
-### Slope   
+### Correlation   
 
 
-We can similarly use infer to find the bootstrap distribution of the slope. For example, we can  quantify the uncertainty in our estimate of a 0.00566 increase in proportion hybrid seed with every additional squared mm in petal area (@fig-slope) as shown in the code below. 
+We can similarly use infer to find the bootstrap distribution of the association between two continuous variables.  For example, we can  quantify the uncertainty in our estimated correlation of `r gc_rils|> dplyr::filter(!is.na(prop_hybrid) & ! is.na(petal_area_mm))|> summarise(cor = cor(prop_hybrid, petal_area_mm)) |>pull() |> round(digits = 3)` between proportion hybrid seed and petal area in $mm^2$ (@fig-slope) as shown in the code below. 
 
 ```{r}
 #| column: margin
-# Estimate the slope
-# As covariance / variance
+# Estimate the correlation
 gc_rils |>
-  filter(!is.na(petal_area_mm)) |>
-  summarise(slope = cov(petal_area_mm, prop_hybrid) / var(petal_area_mm))
+  dplyr::filter(!is.na(petal_area_mm)) |>
+  summarise(correlation = cor(petal_area_mm, prop_hybrid) )
 ```
 
 ```{r}
-boot_slopes <- gc_rils                      |>
-  filter(!is.na(petal_area_mm))             |>
-  specify(prop_hybrid ~ petal_area_mm)      |>        # The linear model we're looking into
+boot_cors <- gc_rils                      |>
+  dplyr::filter(!is.na(petal_area_mm))             |>
+  specify(prop_hybrid ~ petal_area_mm)      |>        # The relationship we're looking into
   generate(reps = 5000, type = "bootstrap") |>        # Bootstrapping
-  calculate(stat = "slope")                           # Summarizing the bootstrap replicate
+  calculate(stat = "correlation")                     # Summarizing the bootstrap replicate
 
-summarise(boot_slopes , se = sd(stat))                # find SE
-get_ci(boot_slopes,level = 0.95, type = "percentile") # 95% CI
+summarise(boot_cors , se = sd(stat))                # find SE
+get_ci(boot_cors,level = 0.95, type = "percentile") # 95% CI
 ```
 
 
@@ -309,7 +308,8 @@ ggplot( gc_rils, aes(x = petal_area_mm, y = prop_hybrid))+
         axis.title = element_text(size = 30))
 ```
 
-Here we conclude that a reasonable estimate of the increase in proportion hybrid seed for each unit increase in square mm of petal area  lies between  `r ((boot_slopes |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`. Importantly, this confidence  interval excludes zero, so  we are pretty sure that the proportion of hybrid seed increase with petal area as seen in @fig-slope. For me this is super helpful, because without reflection, we could wrongly conclude that a slope of 0.00566 is unimpressive.
+So our estimated correlation lies between  `r ((boot_cors |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`.  This is super helpful, because without quantifying uncertainty this correlation may reflect noise rather than signal. That is, the correlation could disappear in another sample. But because our entire 95% confidence interval excludes zero, we can be confident this association reflects a true correlation greater than zero, rather than a weird sample.
+
 
 ### ... and more! 
 

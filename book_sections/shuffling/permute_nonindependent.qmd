@@ -99,7 +99,7 @@ To address this non-independence, we need to shuffle treatment labels **within e
 
 
 
-To do this, we will split our data into different years, permute within each year, and then combine the permuted data to build a null sampling distribution reflecting the structure in the data. Unfortunately `infer` can only get us so far. So instead I'll take matters into our own hands!
+To do this, we will split our data into different years, permute within each year, and then combine the permuted data to build a null sampling distribution reflecting the structure in the data. Unfortunately `infer` can only get us so far. So instead, we'll take matters into our own hands!
 
 
 ```{r}

@@ -58,7 +58,7 @@ Effective data visualization begins with curiosity and clear biological question
 ### Chatbot tutor  {#ggplot_summaryChatbot} 
 
 :::tutor
-Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-681d8901c5bc819195bfa3ad35a99030-intro-to-ggplot-tutor), (**Gemini link here**)[https://gemini.google.com/gem/1EY7xo6SLM90pfx2yeYFQGy_DI-bb2Hq1?usp=sharing]) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-681d8901c5bc819195bfa3ad35a99030-intro-to-ggplot-tutor), [**Gemini link here**](https://gemini.google.com/gem/1EY7xo6SLM90pfx2yeYFQGy_DI-bb2Hq1?usp=sharing)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 :::
 
 ### Practice Questions  {#ggplot_summaryPractice_questions} 

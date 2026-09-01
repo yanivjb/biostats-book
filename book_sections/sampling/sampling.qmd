@@ -49,7 +49,7 @@ For example, in an experiment we interfere with a system and see how this interv
 :::
 
 
-As such, being able to imagine the process of sampling -- how we sample, what can go wrong in sampling is perhaps the most important  part of being good at statistics. I recommend walking around and imagining sampling in your free time.
+As such, being able to imagine the process of sampling -- including how we sample and what can go wrong in sampling -- is perhaps the most important  part of being good at statistics. I recommend walking around and imagining sampling in your free time.
 
 
 
