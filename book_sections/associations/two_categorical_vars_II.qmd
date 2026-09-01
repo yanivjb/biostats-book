@@ -267,6 +267,7 @@ gc_rils |>
 ```
 
 
+
 :::fyi
 Our answers differ slightly from one another. We used a denominator of $n$ (which calculates the population covariance), while the sample covariance has a denominator of $n-1$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). We will soon see that although the later is more appropriate --  their difference is negligible when n is large. We can convert the population covariance to the sample covariance by multiplying by $\frac{n}{n-1}$. See the next section for a discussion of the difference between population parameters and sample estimates.
 :::
@@ -275,11 +276,16 @@ Our answers differ slightly from one another. We used a denominator of $n$ (whic
 
 ## From covariance to correlation 
 
-Covariance gives us a numerical measure of how far our data deviate from what we’d expect under independence. In this case, the value is 0.10 — but is that meaningful? It turns out a covariance is difficult to interpret as strong or weak. 
-The correlation, *r*, describes both the sign and strength of the association between variables. An absolute value  of *r* close to 1 means that x almost perfectly predicts y, while a value close to zero means x has no information about y. The sign of *r* describes if x and y  increase ($r > 0$), or  decrease ($r <0$) with one another. 
+Covariance gives us a numerical measure of how far our data deviate from what we'd expect under independence. In this case, the value is 0.10. But is a covariance of 0.10 big or small? A covariance on it's own provide no clue of its strength. 
 
+We can convert a covariance to an effect size, known as a correlation (or *r*). *r* describes both the strength and sign of the association between variables: 
 
-We can convert a covariance to an effect size, known as a correlation (or *r*), by dividing the covariance by the product of standard deviations.
+- An absolute value  of *r* close to 1 means that x almost perfectly predicts y, while a value close to zero means x has no information about y. 
+
+- The sign of *r* describes if x and y  increase ($r > 0$), or  decrease ($r <0$) with one another.  
+
+We can find *r* by dividing the covariance by the product of standard deviations: 
+
 
 
 
