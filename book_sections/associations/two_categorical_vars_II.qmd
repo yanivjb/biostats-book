@@ -111,7 +111,7 @@ tmp_pink |> kable(digits = 3)
 ---
 
 
-We can similarly calculate the UNCONDITIONAL proportion of white-petaled RILs and the joint probability of being both white AND visited (note, I also recalcualte the proportion of visited plants):    
+We can similarly calculate the UNCONDITIONAL proportion of white-petaled RILs and the joint probability of being both white AND visited (note, I also recalculate the proportion of visited plants):    
 
 
 ```{r}
@@ -145,7 +145,7 @@ tmp_white|> kable(digits = 3)
 ## Conditional proportions  
 
 
-We can also calculate the proportions of one outcome depending depend on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
+We can also calculate the proportions of one outcome depend on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
 
 
 - $$P_\text{some visits | pink}= \frac{n_\text{some visits  | pink}}{ n_\text{pink plants}} = \frac{`r pull(tmp_pink, n_pink_AND_visited)`}{`r pull(tmp_pink, n_pink)`}=`r (pull(tmp_pink, n_pink_AND_visited) / pull(tmp_pink, n_pink))|>round(digits = 3)`$$
@@ -269,14 +269,14 @@ gc_rils |>
 
 
 :::fyi
-Our answers differ slightly from one another. We used a denominator of $n$ (which calculates the population covariance), while the sample covariance has a denominator of $n-1$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). We will soon see that although the later is more appropriate --  their difference is negligible when n is large. We can convert the population covariance to the sample covariance by multiplying by $\frac{n}{n-1}$. See the next section for a discussion of the difference between population parameters and sample estimates.
+Our answers differ slightly from one another. We used a denominator of $n$ (which calculates the population covariance), while the sample covariance has a denominator of $n-1$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). We will soon see that although the latter is more appropriate --  their difference is negligible when n is large. We can convert the population covariance to the sample covariance by multiplying by $\frac{n}{n-1}$. See the next section for a discussion of the difference between population parameters and sample estimates.
 :::
 
 
 
 ## From covariance to correlation 
 
-Covariance gives us a numerical measure of how far our data deviate from what we'd expect under independence. In this case, the value is 0.10. But is a covariance of 0.10 big or small? A covariance on it's own provide no clue of its strength. 
+Covariance gives us a numerical measure of how far our data deviate from what we'd expect under independence. In this case, the value is 0.10. But is a covariance of 0.10 big or small? A covariance on its own provides no clue of its strength. 
 
 We can convert a covariance to an effect size, known as a correlation (or *r*). *r* describes both the strength and sign of the association between variables: 
 
@@ -387,7 +387,7 @@ Two population genetic summaries tend to confuse genetics students -- deviations
 
 **Hardy-Weinberg Equilibrium (HWE)**    
 
-According to the [Hardy-Weinberg Equilbrium principle](https://cooplab.github.io/popgen-notes/#hardyweinberg-proportions), states that under numerous assumptions -- which essentially ensure that an individual's two alleles at a locus are chosen independently -- genotypes at a locus are simply two random samples of alleles from a population,   
+The [Hardy-Weinberg Equilibrium principle](https://cooplab.github.io/popgen-notes/#hardyweinberg-proportions) states that  under numerous assumptions -- which essentially ensure that an individual's two alleles at a locus are chosen independently -- genotypes at a locus are simply two random samples of alleles from a population,   
 
    - Genotype frequencies should be $p^2$, $2p(1-p)$, and $(1-p)^2$ 
    - Where $p$ is the frequency of one allele, A, at a locus.   
