@@ -66,7 +66,7 @@ gc_rils <- readr::read_csv(ril_link) |>
 ---  
 
 
-## Unconditional & conditional proportions  
+## Unconditional & joint proportions  
 
 In the previous section we calculated UNCONDITIONAL (also known as marginal) proportions (n_case / n_total) of two binary categorical variables. Let's call these proportions: 
 
@@ -74,7 +74,7 @@ In the previous section we calculated UNCONDITIONAL (also known as marginal) pro
 
 - $P_\text{some visits}= n_\text{some visits} / n_\text{plants}$
 
-
+The R code below calculates both these UNCONDITIONAL proportions, and the joint probability of being both pink AND visited:    
 
 
 
@@ -84,24 +84,73 @@ In the previous section we calculated UNCONDITIONAL (also known as marginal) pro
 #| eval: false
 #| column: page-right
 gc_rils |>
-  summarise(prop_pink    = mean(petal_color == "pink"),
-            prop_visited = mean(visited == "some_visits")) 
+  summarise(n_pink             = sum(petal_color == "pink"),
+            n_visited          = sum(visited == "some_visits"),
+            n_pink_visited     = sum(petal_color == "pink" & visited == "some_visits"),
+            n_total            = n(),                           #assuming no NAs
+            prop_pink          = n_pink / n_total,
+            prop_visited       = n_visited / n_total,
+            p_pink_AND_visited = n_pink_visited / n_total) 
 ```
 
 ```{r}
 #| echo: false
-gc_rils |>
-  summarise(prop_pink    = mean(petal_color == "pink"),
-            prop_visited = mean(visited == "some_visits"))  |>
-  kable(digits = 3)
+#| column: page-right
+tmp_pink <- gc_rils |>
+  summarise(n_pink             = sum(petal_color == "pink"),
+            n_visited          = sum(visited == "some_visits"),
+            n_pink_AND_visited = sum(petal_color == "pink" & visited == "some_visits"),
+            n_total            = n(),                           #assuming no NAs
+            prop_pink          = n_pink / n_total,
+            prop_visited       = n_visited / n_total,
+            p_pink_AND_visited = n_pink_AND_visited / n_total) 
+tmp_pink |> kable(digits = 3)
 ```
 
-We also saw that proportions of one outcome can depend on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
+
+---
 
 
-- $P_\text{some visits | pink}= n_\text{some visits  | pink} / n_\text{pink plants}$
+We can similarly calculate the UNCONDITIONAL proportion of white-petaled RILs and the joint probability of being both white AND visited (note, I also recalcualte the proportion of visited plants):    
 
-- $P_\text{some visits | white}= n_\text{some visits  | white} / n_\text{white plants}$
+
+```{r}
+#| eval: false
+#| column: page-right
+gc_rils |>
+  summarise(n_white             = sum(petal_color == "white"),
+            n_visited           = sum(visited == "some_visits"),
+            n_white_AND_visited = sum(petal_color == "white" & visited == "some_visits"),
+            n_total             = n(),                           #assuming no NAs
+            prop_white          = n_white / n_total,
+            prop_visited        = n_visited / n_total,
+            p_white_AND_visited = n_white_AND_visited / n_total) 
+```
+
+```{r}
+#| echo: false
+#| column: page-right
+tmp_white <- gc_rils |>
+  summarise(n_white       = sum(petal_color == "white"),
+            n_visited    = sum(visited == "some_visits"),
+            n_white_AND_visited = sum(petal_color == "white" & visited == "some_visits"),
+            n_total      = n(),                           #assuming no NAs
+            prop_white    = n_white / n_total,
+            prop_visited         = n_visited / n_total,
+            p_white_AND_visited = n_white_AND_visited / n_total) 
+tmp_white|> kable(digits = 3)
+```
+
+
+## Conditional proportions  
+
+
+We can also calculate the proportions of one outcome depending depend on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
+
+
+- $$P_\text{some visits | pink}= \frac{n_\text{some visits  | pink}}{ n_\text{pink plants}} = \frac{`r pull(tmp_pink, n_pink_AND_visited)`}{`r pull(tmp_pink, n_pink)`}=`r (pull(tmp_pink, n_pink_AND_visited) / pull(tmp_pink, n_pink))|>round(digits = 3)`$$
+
+- $$P_\text{some visits | white}= \frac{n_\text{some visits  | white}}{ n_\text{white plants}} = \frac{`r pull(tmp_white, n_white_AND_visited)`}{`r pull(tmp_white, n_white)`}=`r (pull(tmp_white, n_white_AND_visited) / pull(tmp_white, n_white))|>round(digits = 3)`$$
 
 These differed substantially. Pink plants were way more likely to be visited than white plants.
 
@@ -140,10 +189,42 @@ So for the association between petal color and  being visited, the covariance is
 
 $$COV_{\text{visited, pink}} =P_{\text{visited and pink}} - P_{\text{visited}}  \times P_{\text{pink}}$$
 
+We can find this from our work above: 
+
+$$
+\begin{aligned}
+\operatorname{Cov}_{\text{visited, pink}}
+&=
+\frac{`r pull(tmp_pink, n_pink_AND_visited)`}
+     {`r pull(tmp_pink, n_total)`}
+-
+\frac{`r pull(tmp_pink, n_visited)`}
+     {`r pull(tmp_pink, n_total)`}
+\times
+\frac{`r pull(tmp_pink, n_pink)`}
+     {`r pull(tmp_pink, n_total)`}
+\\[6pt]
+&=
+`r (pull(tmp_pink, n_pink_AND_visited) / pull(tmp_pink, n_total)) |> round(3)`
+-
+\left(
+`r (pull(tmp_pink, n_visited) / pull(tmp_pink, n_total)) |> round(3)`
+\times
+`r (pull(tmp_pink, n_pink) / pull(tmp_pink, n_total)) |> round(3)`
+\right)
+\\[6pt]
+&=
+`r (pull(tmp_pink, n_pink_AND_visited) / pull(tmp_pink, n_total)) |> round(3)`
+-
+`r ((pull(tmp_pink, n_visited) / pull(tmp_pink, n_total)) * (pull(tmp_pink, n_pink) / pull(tmp_pink, n_total))) |> round(3)`
+\\[6pt]
+&=
+`r ((pull(tmp_pink, n_pink_AND_visited) / pull(tmp_pink, n_total)) - (pull(tmp_pink, n_visited) / pull(tmp_pink, n_total)) * (pull(tmp_pink, n_pink) / pull(tmp_pink, n_total))) |> round(4)`.
+\end{aligned}
+$$
 
 
-
-We can find this in R:
+Or we can find this in R:
 
 ```{r}
 #| eval: false
@@ -204,14 +285,52 @@ We can convert a covariance to an effect size, known as a correlation (or *r*), 
 
 $$r_{x,y}= \frac{cov_{x,y}}{s_x s_y}$$
 
-We have previously seen the equation for a standard deviation: $$s_x = \sqrt{\frac{\sum{(x_i-\bar{x})^2 }}{n-1}}$$.
+We have previously seen the equation for a standard deviation: $$s_x = \sqrt{\frac{\sum{(x_i-\bar{x})^2 }}{n-1}}$$. For a binary variable, this equation is approximately $s_x=\sqrt{p_x (1-p_x)}$ (ignoring Bessel's correction).
 
-:::aside
-Again this simplification arises when we ignore Bessel’s correction and divide by n instead of n − 1. 
-:::
+So in our case: 
 
+$$
+\begin{aligned}
+r_{\text{pink, visited}}
+&=
+\frac{
+    \operatorname{Cov}_{\text{pink, visited}}
+}{
+    \sqrt{
+        p_{\text{pink}}(1-p_{\text{pink}})
+        \,
+        p_{\text{visited}}(1-p_{\text{visited}})
+    }
+}
+\\[6pt]
+&=
+\frac{0.1}{
+    \sqrt{
+        `r pull(tmp_pink, prop_pink) |> round(3)`
+        \times
+        `r (1 - pull(tmp_pink, prop_pink)) |> round(3)`
+        \times
+        `r pull(tmp_pink, prop_visited) |> round(3)`
+        \times
+        `r (1 - pull(tmp_pink, prop_visited)) |> round(3)`
+    }
+}
+\\[6pt]
+&=
+\frac{0.1}{
+    \sqrt{
+        `r (pull(tmp_pink, prop_pink) * (1 - pull(tmp_pink, prop_pink)) * pull(tmp_pink, prop_visited) * (1 - pull(tmp_pink, prop_visited))) |> round(3)`
+    }
+}
+\\[6pt]
+&=
+\frac{0.1}{\sqrt{0.048}}
+\\[6pt]
+&\approx 0.456.
+\end{aligned}
+$$
 
-For a binary variable, this equation equals $p_x (1-p_x)$. So in R: 
+Or in R:
 
 
 ```{r}
@@ -226,6 +345,7 @@ gc_rils |>
 
 ```{r}
 #| echo: false
+#| column: page-right
 gc_rils |>
   summarise(var_pink = mean(petal_color == "pink") * (1 - mean(petal_color == "pink")),
             var_visited = mean(visited == "some_visits") * (1 -  mean(visited == "some_visits")),
@@ -281,4 +401,8 @@ We can think of this as a covariance between alleles inherited from mom and dad 
 
 
 
+:::
+
+::: aside
+.
 :::
