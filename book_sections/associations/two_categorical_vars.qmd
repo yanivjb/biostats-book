@@ -39,11 +39,7 @@ ril_data <- readr::read_csv(ril_link) |>
 
 1. **Calculate and explain conditional proportion:**   You should be able to do this with basic math and with R code. 
 
-2. **Explain the intuition of the multiplication rule** to calculate the conditional probabilities of independent events.   
-
-3. **Calculate and explain the deviation from expectations under independence.** With both basic math and with R code. 
-
-4. **Visualize associations between two categorical variables.**   With pen and paper and R code. 
+2. **Visualize associations between two categorical variables.**   With pen and paper and R code. 
 
 
 
@@ -379,67 +375,4 @@ c <- ggplot(gc_rils,aes(x = petal_color, fill = visited))+
 a+b+c+  plot_layout(guides = 'collect')& theme(legend.position = "bottom")
 ```
 
-
----
-
-### Covariance
-
-A common quantification of the association between two binary variables is the covariance. This quantification follows some simple mathematical logic:  
-
-- If two categorical variables, A & B are independent, the probability of observing both A and B  (aka, $P_{AB}$) should equal the product of their unconditional probabilities:
-$$P_{AB \mid \text{independence}} = P_A \times P_B$$
-
-- The covariance is the deviation from this expectation: $$COV_{AB} = P_{AB} - P_A \times P_B$$
-
-So for the association between petal color and  being visited, the covariance is:
-
-$$COV_{\text{visited, pink}} =P_{\text{visited and pink}} - P_{\text{visited}}  \times P_{\text{pink}}$$
-
-
-
-
-We can find this in R:
-
-```{r}
-#| eval: false
-#| column: page-right
-gc_rils |>
-  summarise(p_pink_and_visited   = mean(petal_color == "pink" & visited  == "some_visits"),
-            p_pink               = mean(petal_color == "pink"),
-            p_visited            = mean(visited  == "some_visits"),
-            cov_pink_and_visited = p_pink_and_visited - p_pink  * p_visited)
-```
-
-
-
-:::aside
-Our answer and formula are slightly off. We used a denominator of $n$, while the sample covariance has a denominator of $n-1$. To get the precise covariance -- as R calculates -- multiply this by $\frac{n}{n-1}$ (this is known as [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)). But when $n$ is big, this is close enough.
-:::
-
-```{r}
-#| echo: false
-gc_rils |>
-  summarise(p_pink_and_visited   = mean(petal_color == "pink" & visited  == "some_visits"),
-            p_pink               = mean(petal_color == "pink"),
-            p_visited            = mean(visited  == "some_visits"),
-            cov_pink_and_visited = p_pink_and_visited - p_pink  * p_visited) |>
-  kable(digits = 4)
-```
-
-
-Alternatively, R can calculate the covariance with the [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) function. This only works if the values are numbers or boolean (TRUE [1] / FALSE [0]). Note the slight mismatch between our calculation due to "Bessel's correction (see margin)
-
-
-```{r}
-#| column: page-right
-gc_rils |>
-  summarise(cov_pink_visited = cov(petal_color == "pink", visited  == "some_visits"))
-```
-
-
---- 
-
-Covariance gives us a numerical measure of how far our data deviate from what we’d expect under independence. In this case, the value is 0.10 — but is that meaningful? We’ll build up more intuition for interpreting covariances as we shift to continuous variables in the next chapter.
-
----
 
