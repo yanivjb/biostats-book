@@ -89,7 +89,7 @@ ggplot(ril_data, aes(x = petal_area_mm ,
   geom_point()
 ```
 
-`r unhide()`. 
+`r unhide()` 
 
 ---  
 
@@ -104,7 +104,7 @@ ggplot(ril_data, aes(x = petal_area_mm , y = asd_mm))+
   geom_smooth(method = "lm")
 ```
 
-`r unhide()`. 
+`r unhide()` 
 
 ---  
 
@@ -113,7 +113,7 @@ ggplot(ril_data, aes(x = petal_area_mm , y = asd_mm))+
 
 `r hide("Click here for code and explanation")`
 
-The slopes may be a bit different, but its more obvious that the red line is higher than the turquoise. 
+The slopes may be a bit different, but it is more obvious that the red line is higher than the turquoise. 
 
 ```{r}
 ggplot(ril_data, aes(x = petal_area_mm , 
@@ -123,7 +123,7 @@ ggplot(ril_data, aes(x = petal_area_mm ,
   geom_smooth(method = "lm")
 ```
 
-`r unhide()`. 
+`r unhide()` 
 
 --- 
 
@@ -139,7 +139,7 @@ ggplot(ril_data, aes(x = asd_mm))+
   geom_histogram(binwidth = .25, color = "white")
 ```
 
-`r unhide()`. 
+`r unhide()` 
 
 
 --- 
@@ -184,11 +184,11 @@ ggplot(ril_data, aes(x = asd_mm, fill = "green"))+
     geom_histogram()
 
 #B
-ggplot(ril_data, aes(x = asd_mm, ))+
+ggplot(ril_data, aes(x = asd_mm))+
     geom_histogram(color = "green")
 
 #C
-ggplot(ril_data, aes(x = asd_mm, ))+
+ggplot(ril_data, aes(x = asd_mm))+
     geom_histogram(fill = "green")
 ```
 ---  
@@ -264,10 +264,10 @@ ggplot(ril_data, aes(x = asd_mm, ))+
 **R Recipes:**    
 
 - [Visualize Two Vectors Using a Scatterplot](https://posit.cloud/learn/recipes/visualize/VisualizeA1A):  Learn how to create a scatterplot to visualize the relationship between two continuous variables.   
-- [Visualize Counts with a Bar Chart](https://posit.cloud/learn/recipes/visualize/VisualizeA4)Discover how to use bar charts to represent the counts of categorical data.        
+- [Visualize Counts with a Bar Chart](https://posit.cloud/learn/recipes/visualize/VisualizeA4): Discover how to use bar charts to represent the counts of categorical data.        
 - [Visualize Grouped Counts with a Stacked Bar Chart](https://posit.cloud/learn/recipes/visualize/VisualizeA4a):  Understand how to create stacked bar charts to display counts of one categorical variable grouped by another.  
-- [Visualize a Distribution with a Histogram](https://posit.cloud/learn/recipes/visualize/VisualizeA5):  Learn to plot histograms to visualize the distribution of a continuous variable.  
-[Visualize a Distribution with a Density Plot](https://posit.cloud/learn/recipes/visualize/VisualizeA6):  Explore how to use density plots as an alternative to histograms for visualizing data distributions.  
+- [Visualize a Distribution with a Histogram](https://posit.cloud/learn/recipes/visualize/VisualizeA5):  Learn to plot histograms to visualize the distribution of a continuous variable.    
+- [Visualize a Distribution with a Density Plot](https://posit.cloud/learn/recipes/visualize/VisualizeA6):  Explore how to use density plots as an alternative to histograms for visualizing data distributions.   
 - [Visualize a Boxplot](https://posit.cloud/learn/recipes/visualize/VisualizeA7):  Find out how to create boxplots to summarize the distribution of a continuous variable and identify potential outliers.  
 
 

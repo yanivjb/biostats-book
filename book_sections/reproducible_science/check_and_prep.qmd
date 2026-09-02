@@ -69,8 +69,7 @@ library(praise)
 library(readr)
 
 # loading data
-path     <-  "../../data/clarkia_rils.csv"
-#path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
 ril_data <- read_csv(path)
 ```
 

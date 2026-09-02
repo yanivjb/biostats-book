@@ -56,8 +56,7 @@ include_graphics("../../figs/intro_to_r/getting_started/functions_arguments.png"
 ---
 
 ### Functions can take multiple arguments:  
-If you don’t specify them all, R will either tell you to provide them, or assumes default values. For example, the `log` function defaults to the natural log (base *e*), so  `log(1000)` returns `r log(1000) |> round(digits = 3)`. If you want the logarithm with base 10, you need to specify it explicitly as `log(1000, 10)`, which returns `r log(1000, 10)` (@fig-args **A**). Note that argument order matters: `log(10, 1000)` returns `r log(10, 1000)`, while `log(1000, 10)` returns `r log(1000, 10)` (@fig-args **B**). 
-
+If you don’t specify them all, R will either tell you to provide them, or assumes default values. For example, the `log` function defaults to the natural log (base *e*), so  `log(1000)` returns `r log(1000) |> round(digits = 3)`. If you want the logarithm with base 10, you need to specify it explicitly as `log(1000, 10)`, which returns `r log(1000, 10)` (@fig-args **B**). Note that argument order matters: `log(10, 1000)` returns `r log(10, 1000)`, while `log(1000, 10)` returns `r log(1000, 10)`.
 
 ```{r}
 #| column: margin

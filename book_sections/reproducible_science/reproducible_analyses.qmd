@@ -51,7 +51,7 @@ As a guide, I provide the principles from the scientific journal [The American N
 
 -  **Use relative paths** to files and folders (e.g. avoid `setwd()` with an absolute path in R), so other users can replicate your data input steps on their own computers.    
 
-- **Make sure your code works.** Shut down your R. (or type `rm(list=ls())` into the console and run the code again. You should get the same results. If not, go back and fix your mistakes.   
+- **Make sure your code works.** Shut down your R (or type `rm(list=ls())` into the console) and run the code again. You should get the same results. If not, go back and fix your mistakes.   
 
 - **Annotate your code with comments** indicating what the purpose of each set of commands is (i.e., "why?"). If the functioning of the code (i.e., "how") is unclear, strongly consider re-writing it to be clearer/simpler.  In-line comments can provide specific details about a particular command.      
 
@@ -59,7 +59,7 @@ As a guide, I provide the principles from the scientific journal [The American N
 
 - Annotate code to indicate how commands correspond to figure numbers, table numbers, or subheadings of results within the manuscript.   
 
--  If you are adapting other researcher’s published code for your own purposes, acknowledge and cite the sources you are using. Likewise, cite the authors of packages that you use in your published article.  
+-  If you are adapting other researchers' published code for your own purposes, acknowledge and cite the sources you are using. Likewise, cite the authors of packages that you use in your published article.  
 
 **RECOMMENDED:**
 

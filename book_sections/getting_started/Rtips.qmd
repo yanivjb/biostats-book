@@ -36,7 +36,7 @@ library(knitr)
 include_graphics("https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1920.png?h=2b72c110cfcf02f5cf1f74b558461c06")
 ```
 
-Learning to code can be frustrating. You might feel like you  don't know what you're doing. Like you're dumb, or coding simply isn't for you. These feelings are common in early days, because 
+Learning to code can be frustrating. You might feel like you don't know what you're doing. Like you're dumb, or coding simply isn't for you. These feelings are common in early days, because 
 
 1. Coding requires learning a new way of thinking. 
 2. Coding requires learning a new language.  
@@ -110,12 +110,12 @@ There are many ways to get help in coding.
 
 - **When friends can't help, we can** Ask a professor or TA etc. They know what they are doing and can often help. 
 
-- **Use the internet and books etc** People (who know the answer) are not always around books and the internet are. I suggest finding resources that you get to know well. I love [R for data Science](https://r4ds.hadley.nz/), [Data visualization: A practical introduction](https://socviz.co/), [The R graphic cookbook](https://r-graphics.org/), and [Stat545](https://stat545.com/).  Getting to know R's help files, and how to work through the trenches of stack overflow is also worthwhile. 
+- **Use the internet and books etc** People (who know the answer) are not always around, but books and the internet are. I suggest finding resources that you get to know well. I love [R for data Science](https://r4ds.hadley.nz/), [Data visualization: A practical introduction](https://socviz.co/), [The R graphic cookbook](https://r-graphics.org/), and [Stat545](https://stat545.com/).  Getting to know R's help files, and how to work through the trenches of stack overflow is also worthwhile. 
 
 - **Reach out to a chatbot** Chatbots are good at coding. But they might do things in weird ways. They also can be too wordy, or solve problems without helping you understand (or you might just skip their long text). So, I suggest spending extra effort understanding how a chatbot's guidance did or did not work.  For your convenience, I have developed a [Gemini "Gem" R tutor](https://gemini.google.com/gem/1lAxXB79bKH6CPmMrGqqNUwxAjVmMvc-6?usp=sharing) which is meant to follow my pedagogical views and be consistent with the style and focus of this book. In my experience chatbots are most useful once I know stuff - so I recommend to do as much as you can without a bot as you are learning. 
 
 ::: aside 
-If you are interested, here are [my instructions](https://docs.google.com/document/d/1-_P6F1iRZ548w9hSlJ9wApVTgGmcvqbKaav0fWcZtHQ/edit?usp=sharing). Feel free to change/use this as a starting place if you want to build your own helper.) 
+If you are interested, here are [my instructions](https://docs.google.com/document/d/1-_P6F1iRZ548w9hSlJ9wApVTgGmcvqbKaav0fWcZtHQ/edit?usp=sharing). Feel free to change/use this as a starting place if you want to build your own helper. 
 :::
 
 :::protip

@@ -42,7 +42,7 @@ include_graphics("../../figs/intro_to_r/data_in_R/pretty_stressed_clarkia.png")
 ```
 
 
-By keeping data "tidy" (i.e. in a rectangle where each column represents a variable and each row represents an observation),  we can make use of the powerful tools of R's  [**tidyverse**](https://www.tidyverse.org/) approach. The [`dplyr`](https://dplyr.tidyverse.org/) package is our first step into the tidyverse. [`dplyr`](https://dplyr.tidyverse.org/)  offers a numerous usefull functions for transforming and analyzing data, including:   
+By keeping data "tidy" (i.e. in a rectangle where each column represents a variable and each row represents an observation),  we can make use of the powerful tools of R's  [**tidyverse**](https://www.tidyverse.org/) approach. The [`dplyr`](https://dplyr.tidyverse.org/) package is our first step into the tidyverse. [`dplyr`](https://dplyr.tidyverse.org/)  offers numerous useful functions for transforming and analyzing data, including:   
 
 - [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) for adding or modifying columns.      
  
@@ -50,7 +50,7 @@ By keeping data "tidy" (i.e. in a rectangle where each column represents a varia
 - [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) for subsetting rows,   and    
 - [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) for changing column names.  
 
-Together (and when combined with the pipe operator, `|>`) these tools allow us to get a lot done in R. In the next three chapters we learn how to use R to summarize single variable, and associations between variables in R. Thus we are well on our way, to being able to (1) load (2) visualize (3) work with, and (4) summarize data reprodicbly in R. WOohooHOO!.
+Together (and when combined with the pipe operator, `|>`) these tools allow us to get a lot done in R. In the next three chapters we learn how to use R to summarize single variable, and associations between variables in R. Thus we are well on our way, to being able to (1) load (2) visualize (3) work with, and (4) summarize data reproducibly in R. WOohooHOO! 
 
 
 ### Chatbot tutor   {#data_in_R_summaryChatbot}
@@ -247,7 +247,7 @@ Try typing `glimpse(iris)`
 
 **Debugger’s note:** In a hidden setup chunk I wrote: `conflicts_prefer(stats::filter)` to tell R to prefer `stats::filter()` over `dplyr::filter()`.  Because of this, `filter()` no longer understands column names inside a data frame. So I forced this error on you.
 
-In real workflows, it can be hard to predict which version of a function R will use.  This issue arises even when I don't trick you. So always tell R which version of filter() you want to use. `filter()` may on your computer today without `dplyr::filter()` or `conflicts_prefer(dplyr::filter)`, but it might not work on someone else computer (it might even fail on your computer next week).
+In real workflows, it can be hard to predict which version of a function R will use.  This issue arises even when I don't trick you. So always tell R which version of filter() you want to use. `filter()` may on your computer today without `dplyr::filter()` or `conflicts_prefer(dplyr::filter)`, but it might not work on someone else's computer (it might even fail on your computer next week).
 
 `r unhide()`
 :::
@@ -298,7 +298,7 @@ In real workflows, it can be hard to predict which version of a function R will 
 - **[`dplyr::filter()`](https://dplyr.tidyverse.org/reference/filter.html)** *([dplyr](https://dplyr.tidyverse.org/). Because there is a different filter in a different package, always specify which filter you want r to use.)*: Only retains rows which meet some logical criteria.   
 
 
-- **[`rename()`](https://dplyr.tidyverse.org/reference/rename.html)** *([dplyr](https://dplyr.tidyverse.org/)*: Allows you to manually changes column names.   
+- **[`rename()`](https://dplyr.tidyverse.org/reference/rename.html)** *([dplyr](https://dplyr.tidyverse.org/))*: Allows you to manually change column names.   
 
 - **[`as.numeric()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/numeric.html)**: Converts a vector to a numeric data type.  
 

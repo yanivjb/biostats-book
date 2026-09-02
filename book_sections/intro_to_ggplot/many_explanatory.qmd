@@ -53,7 +53,7 @@ There is usually more than one thing going on in a scientific study, and we may 
 
 ### Multiple aesthetic mappings  
 
-We saw that the number of pollinators increased with petal size and was greater for pink than white flowers. However,  visualizing a response variable as a function of its multiple explanatory variables  together can help us home in on the patterns.  
+We saw that the number of pollinator visits increased with petal size and was greater for pink than white flowers. However,  visualizing a response variable as a function of its multiple explanatory variables  together can help us home in on the patterns.  
 
 - To do so we can make a scatterplot and map petal color onto the color aesthetic.    
 - We can even use size and color as extra aesthetics to map onto. I show you how to do this,  but use it sparingly, because too many extra aesthetics may provide more distraction than insight. 
@@ -121,7 +121,7 @@ ril_data |>
 :::::: 
 
 
-**Interpretation:**     Returning to the motivating question, we see that visitation increases with both  petal area (positive slope) and pink petals. The proportion of seeds that are hybrids appears to increase with pollinator visitation. Later in the term we will address this question more rigorously.     
+**Interpretation:**     Returning to the motivating question, we see that visitation increases with both  petal area (positive slope) and pink petals (the red line is higher than the blue line). Later in the term, we will address this question more rigorously.     
 
 ### Small multiples  
 

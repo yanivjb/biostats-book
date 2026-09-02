@@ -42,7 +42,7 @@ ril_data <- read_csv(path)
 The good news is that `R` has many functions to help us deal with data. The bad news is that this means that there are a lot of `R` functions to keep in mind when dealing with data. So we begin this section with a review of three skills we learned in the previous chapter: 
 
 - **Peeking at our data** with [`dplyr`](https://dplyr.tidyverse.org)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function to know the names of each column and the type of data in each.  
-- **Choosing columns of interest**  with [`dplyr`](https://dplyr.tidyverse.org)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function. This let's us focus on a few columns of interest.   
+- **Choosing columns of interest**  with [`dplyr`](https://dplyr.tidyverse.org)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function. This lets us focus on a few columns of interest.   
 - **Changing the names of a few columns** with  [`dplyr`](https://dplyr.tidyverse.org)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function to make the data easier to wrangle.  
 
 To set up this work we load libraries and data: 
@@ -99,7 +99,7 @@ The dataset above is not tiny -- seventeen columns accompany the 593 rows of dat
 - `location`: The plant's location. The pollinator visitation experiment was limited to two locations  (either `SR` or `GC`), while the hybrid seed formation study was replicated at four locations (`SR`, `GC`, `LB` or `US`).  This should be a `<chr>` (character), and it is!
 - `prop_hybrid`: The proportion of genotyped seeds that were hybrids.   
 - `mean_visits`: The mean number of pollinator visits recorded (per fifteen minute pollinator observation) for that RIL genotype at that site.  This should be a number `<dbl>` (double), and it is.
-- `petal_area_mm`: The area of the petals (in mm).  This should be a number `<dbl>` (double), and it is!       
+- `petal_area_mm`: The area of the petals (in $mm^2$).  This should be a number `<dbl>` (double), and it is!       
 - `asd_mm`: The distance between anther (the place where pollen comes from) and stigma (the place that pollen goes to) on a flower. The smaller this number, the easier it is for a plant to pollinated itself. This should be a number `<dbl>` (double), and it is.  
 - `growth_rate`: This should be a number but is a <`chr`> character.  We will address why this is a problem and how to fix it in the next sub-section.  
 
