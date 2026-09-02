@@ -196,7 +196,7 @@ include_graphics("https://rfortherestofus.com/images/group_by_summarize.gif")
 ###  Ratio of conditional means
 
 
-Common summaries of the association between a categorical explanatory variable and a numerical response are the difference in conditional means and the ratio of conditional means across groups. In this case, plants that we saw visited by a pollinator had 0.29 more hybrid seeds than plants we did not observe pollinators visiting. This is nearly a five-fold difference!
+Common summaries of the association between a categorical explanatory variable and a numerical response are the difference in conditional means and the ratio of conditional means across groups. In this case, plants that we saw visited by a pollinator had a 0.29 greater proportion of hybrid seeds than plants we did not observe pollinators visiting. This is nearly a five-fold difference!
 
 
 

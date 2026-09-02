@@ -211,7 +211,7 @@ ggplot(tibble(LakeHuron), aes(x =LakeHuron))+
 
 **Q6b)** The median is roughly   `r longmcq(c("Six",  "One and three quarters", answer =  "Five hundred and seventy nine" , "We cannot estimate the median from this plot."))`
 
-**Q6c)** The mode is roughly   `r longmcq(c("Six", answer = "One and three quarters",  "Five hundred and seventy nine" ,  answer =  "We cannot estimate the mode from this plot."))`
+**Q6c)** The mode is roughly   `r longmcq(c("Six","One and three quarters",  "Five hundred and seventy nine" ,  answer =  "We cannot estimate the mode from this plot."))`
 
 
 

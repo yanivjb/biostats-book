@@ -26,13 +26,13 @@ include_graphics("https://www.r-project.org/Rlogo.png")
 
 Here I provide simple R code to generate the most common univariate data summaries.  Note the steps:
 
-1. **Load packages.** See the [section loading data](#loading_data) from chapter three.  
-2. **Load data.**   See the [section on packages](#packages) from chapter one.  
+1. **Load packages.** See the [section on packages](#packages) from chapter one.  
+2. **Load data.**   See the [section loading data](#loading_data) from chapter three.  
 3. **Format data.** See the [chapter four](#data_in_R) for more info.    
    - Here I removed all `NA` data before analyzing. If you do not remove NA data before summarizing, be sure to include `na.rm=TRUE`. e.g. `mean(x, na.rm = TRUE)`.  
 4. **Visualize data.** See the [section on visualizing a continuous variable](#one_continuous) from chapter two, and the sections on [summarizing shape](#summarizing_shape), and [summarizing variability](#summarizing_variability), from this chapter.  
 5. **Summarize data**
-   - Appropriate summaries depend on the [shape of the data](#summarizing_shape). Here I present all standard summaries of the ["average"](#summarizing_center) and the [variability](#summarizing_variability), but note that the left skew makes these somewhat difficult to interpret. 
+   - Appropriate summaries depend on the [shape of the data](#summarizing_shape). Here I present all standard summaries of the ["average"](#summarizing_center) and the [variability](#summarizing_variability), but note that the right skew makes these somewhat difficult to interpret. 
 
 ---
 

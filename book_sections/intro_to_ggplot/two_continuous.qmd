@@ -107,7 +107,7 @@ ggplot(ril_data, aes(x = mean_visits, y  = prop_hybrid))+
 
 :::fyi
 
-**Take care not to lose data when transforming:** The log of any number less than or equal to zero is undefined. To avoid losing these data points, I transformed the data as `log(x+1)` with the `"log1p"` transformation. If the data were all greater than one, I could have used the `log` `log10` or `sqrt` transform.
+**Take care not to lose data when transforming:** The log of any number less than or equal to zero is undefined. To avoid losing these data points, I transformed the data as `log(x+1)` with the `"log1p"` transformation. If the data were all greater than zero, I could have used the `log` `log10` or `sqrt` transform.
 
 :::
 
