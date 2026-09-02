@@ -50,7 +50,7 @@ include_graphics("https://imgs.xkcd.com/comics/null_hypothesis.png")
 
 
 
-Scientific hypotheses are exciting. As scientists, we ask interesting questions. For example, throughout this book, we are asking if *parviflora* flowers have evolved in ways to make them less likely to make hybrids with their close relative, *xantiana*. Other scientific questions include: Do vaccines cause autism? Does a novel drug have its claimed effect? These are examples of scientific hypotheses. These are our scientific hypotheses. They are meaningful, and grounded in our  understanding of the biological world. They are the reason we do science.  
+Scientific hypotheses are exciting. As scientists, we ask interesting questions. For example, throughout this book, we are asking if *parviflora* flowers have evolved in ways to make them less likely to make hybrids with their close relative, *xantiana*. Other scientific questions include: Do vaccines cause autism? Does a novel drug have its claimed effect?  These are our scientific hypotheses. They are meaningful, and grounded in our  understanding of the biological world. They are the reason we do science.  
 
 As scientists, we’re usually trying to evaluate support for a scientific hypothesis. But in the null hypothesis significance testing framework of frequentist statistics (which we follow for most of this book), we do this in a somewhat backwards way. We evaluate the plausibility of a boring statistical hypothesis, known as the null hypothesis. If our observations are inconsistent with the null, we conclude that there is likely something else going on.
 

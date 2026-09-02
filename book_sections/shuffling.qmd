@@ -56,7 +56,7 @@ Answering questions like these is fundamental to scientific research, and Null H
 include_graphics("https://i.imgur.com/TD6Hc06.gif")
 ```
 
-But how do we find the null sampling distribution? One way, known as **permutation**, generates a null distribution directly from the data by randomly shuffling the explanatory variable labels across observations. By breaking the link between variables and reshuffling many times, permutation simulates the null distribution because any observed differences or associations in the permuted data must be due to random chance because the relationship between variables has been broken. We can then generate a p-value by comparing our test statistic to this empirically generated (permuted) null distribution.
+But how do we find the null sampling distribution? One way, known as **permutation**, generates a null distribution directly from the data by randomly shuffling the explanatory variable labels across observations. Because this breaks any true relationship between variables, the resulting sampling distribution of permutations characterizes expectations under chance alone. We can then generate a p-value by comparing our test statistic to this empirically generated (permuted) null distribution.
 
 Unlike mathematical tricks we will cover later, permutation makes very few assumptions. The most critical assumptions are that samples are random, independent, collected without bias, and that the null hypothesis assumes no association.  What's more, fancier permutation methods can accommodate some assumption violations (as we will see in the [Structured Permutation section](#permute_nonindependent)). But more advanced permutations require more advanced thinking and coding so that we can shuffle appropriately. 
 

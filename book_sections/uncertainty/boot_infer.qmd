@@ -41,7 +41,7 @@ gc_rils <- ril_data |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:** You can  bootstrap yourself with [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html), but it's tedious. You would rather use a simple R package that works for man different estimates and does the hard bits for you.
+**Motivating Scenario:** You can  bootstrap yourself with [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html), but it's tedious. You would rather use a simple R package that works for many different estimates and does the hard bits for you.
 
 **Learning Goals: By the end of this subsection, you should be able to:**
 
@@ -61,7 +61,7 @@ gc_rils <- ril_data |>
 We previously generated a bootstrap distribution with [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html). But this required some work on our part. As with much in R there are specialized packages that bootstrap for us. I like these packages because they make it easier to use, harder to mess up, and often coded more efficiently. 
 
 
-Here, I show you how to bootstrap with the [`infer` package](https://infer.netlify.app/) package. While our first example of bootstrapping a single mean will look similar to our manual approach, you will quickly see how the [`infer`](https://infer.netlify.app/) package's consistent grammar makes bootstrapping more complex statistics (e.g.  a difference in means or a regression slope) surprisingly straightforward.
+Here, I show you how to bootstrap with the [`infer`](https://infer.netlify.app/) package. While our first example of bootstrapping a single mean will look similar to our manual approach, you will quickly see how the [`infer`](https://infer.netlify.app/) package's consistent grammar makes bootstrapping more complex statistics (e.g.  a difference in means or a regression slope) surprisingly straightforward.
 
 ## Bootstrapping the mean with `infer`
 
@@ -190,7 +190,7 @@ gc_rils                           |>
 4.  Repeat this a bunch of times to find the bootstrap distribution.
 5.  Quantify uncertainty, for example, as the bootstrap standard error and the bootstrap 95% confidence interval.
 
-I could code this myself, but it's tedious. [`infer`](https://infer.netlify.app/) makes it straightforward. The code below uses the formula syntax `prop_hybrid ~ petal_color` (We will see more of this when we dive into [#linear_models](#linear_models)) inside [`specify()`](https://infer.netlify.app/reference/specify) to indicate our interest in this relationship. We then tell R to [`generate()`](https://infer.netlify.app/reference/generate) the bootstrap distribution and [`calculate()`](https://infer.netlify.app/reference/calculate) to find the `"diff in means"` for each bootstrap replicate:
+I could code this myself, but it's tedious. [`infer`](https://infer.netlify.app/) makes it straightforward. The code below uses the formula syntax `prop_hybrid ~ petal_color` (We will see more of this when we dive into [linear_models](#linear_models)) inside [`specify()`](https://infer.netlify.app/reference/specify) to indicate our interest in this relationship. We then tell R to [`generate()`](https://infer.netlify.app/reference/generate) the bootstrap distribution and [`calculate()`](https://infer.netlify.app/reference/calculate) to find the `"diff in means"` for each bootstrap replicate:
 
 ```{r}
 library(infer)

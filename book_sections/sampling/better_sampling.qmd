@@ -48,7 +48,7 @@ Later, we will spend time considering experimental design, but given that we jus
 According to the **law of large numbers** the average of a large random sample converges to the true population parameter.
 :::
 
-- **A random sample prevents non-independence and bias** If you can, use a random number generator (e.g. the [`sample()`](https://stat.ethz.ch/R-manual//R-patched/library/base/html/sample.html) or [`runif()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Uniform.html)  functions in R) to select coordinates, individuals from a numbered list, or experimental plots to ensure that every individual has an equal and independent chance of being chosen. 
+- **A random sample prevents non-independence and bias.** If you can, use a random number generator (e.g. the [`sample()`](https://stat.ethz.ch/R-manual//R-patched/library/base/html/sample.html) or [`runif()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Uniform.html)  functions in R) to select coordinates, individuals from a numbered list, or experimental plots to ensure that every individual has an equal and independent chance of being chosen. 
 
 
 ```{r}

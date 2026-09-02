@@ -105,7 +105,7 @@ This result shows that although our estimated hybridization rate is 15%, values 
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Code for making a very involved histogram of the bootstrap distribution and the 95% condidence interval."
+#| code-summary: "Code for making a very involved histogram of the bootstrap distribution and the 95% confidence interval."
 #| eval: true
 #| message: false
 #| warning: false

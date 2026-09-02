@@ -71,7 +71,7 @@ gc_rils <- ril_data |>
 
 A major question in evolution is how often two recently diverged species hybridize. If they almost never hybridize we don't need to consider how gene flow impacts the process of speciation. If hybridization is frequent, we must ask how populations maintain divergence despite ongoing gene flow. 
 
-How frequent is hybridization? It differs by species-pair, field site, individual phenotypes etc. For example $\approx 15\%$ of seeds on *Clarkia xantiana ssp parviflora* RILs plants at site GC were actually hybrids. This estimate comes from averaging across all individuals in our sample. We know by now that we could have sampled other individuals from the population, and we must quantify uncertainty in this estimate.
+How frequent is hybridization? It differs by species-pair, field site, individual phenotypes etc. For example $\approx 15\%$ of seeds on *Clarkia xantiana ssp parviflora* RILs planted at site GC were actually hybrids. This estimate comes from averaging across all individuals in our sample. We know by now that we could have sampled other individuals from the population, and we must quantify uncertainty in this estimate.
 
 ```{r}
 #| column: margin
@@ -120,7 +120,7 @@ include_graphics("../../figs/stats_foundations/uncertainty/hernandez_tweet.png")
 
 ```
 
-When we take a statistical  sample from a population, we do so **without replacement.** That, is we do not select the same individual twice -- rather we sample n distinct individuals. This is how we get our sample.  Conceptually we build sampling distributions by repeating this many times (but of course in the real world we usually only have one sample).
+When we take a statistical  sample from a population, we do so **without replacement.** That is, we do not select the same individual twice -- rather we sample n distinct individuals. This is how we get our sample.  Conceptually we build sampling distributions by repeating this many times (but of course in the real world we usually only have one sample).
 
 Bootstrapping allows us to approximate the sampling distribution by choosing n individuals from our sample **with replacement** (i.e. we might pick the same sample more than once) as follows: 
 

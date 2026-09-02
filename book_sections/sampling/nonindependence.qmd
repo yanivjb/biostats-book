@@ -84,7 +84,7 @@ Let's switch from our hybrid zone study to our RIL experiment. Recall that some 
 
 Crucially we planted all RILs at all sites, but assume we didn't. What would have happened if we planted pink-flowered plants at one site and white flowered plants at another? 
 
-**Let's imagine  that we planted pink flowered-plants only at "US" and white-flowered plants only at "LB"**.  As  @fig-pseudorep shows, in that case we would incorrectly and confidently conclude that white-flowered plants are more likely to set hybrid seed than are pink-flowered plants. This is why it is best to put spread treatments evenly across some background environment when possible. 
+**Let's imagine  that we planted pink flowered-plants only at "US" and white-flowered plants only at "LB"**.  As  @fig-pseudorep shows, in that case we would incorrectly and confidently conclude that white-flowered plants are more likely to set hybrid seed than are pink-flowered plants. This is why it is best to  spread treatments evenly across some background environment when possible. 
 
 ```{r}
 #| code-fold: true
@@ -145,7 +145,7 @@ include_graphics("../../figs/stats_foundations/sampling/shelly_lauren_clarkia.pn
 Returning to our survey of the natural hybrid zone at "GC" say that rather than conveniently sampling near the main road (as we did in the [sampling bias section](#sampling_bias)) you decide to do something that you hope will generate a random sample. You decide to use your computer to randomly select a location in the field site. You center a 1x1 meter quadrat and then sample every single plant inside it. You do this repeatedly (making minor adjustments in the case that the quadrat overlaps a previously sampled region to avoid double counting). Unfortunately, you are still sampling non-independently. 
 
 
-* **The Issue:** This is a form of cluster sampling. As above, the plants within that one quadrat are not independent. They share the same microhabitat and are more likely to be the same subspecies or hybrid status than to plants 100 meters away.<br>  
+* **The Issue:** This is a form of cluster sampling. As above, the plants within that one quadrat are not independent. They BOTH share the same microhabitat AND are more likely to be the same subspecies (or hybrid status) than are  two plants 100 meters away.<br>  
 
 
 * **The consequence:** We would be more certain in our conclusions than we deserve.  <br>     

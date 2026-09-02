@@ -39,7 +39,7 @@ The key "workhorse" functions I will use are:
 
 - [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) from base R. We'll use this to get the standard deviation of the bootstrap distribution - aka the "bootstrap standard error."    
 
-- [`quantile()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html) from base R. We'll use this to get the upper and lower tails of the bootstrap distirbution to find the  "bootstrap confidence interval." 
+- [`quantile()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html) from base R. We'll use this to get the upper and lower tails of the bootstrap distribution to find the  "bootstrap confidence interval." 
 
 ### Reproducible script   
 

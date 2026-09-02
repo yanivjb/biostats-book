@@ -50,7 +50,7 @@ us_rils <- ril_data |>
 3. **Correctly present, explain, and interpret p-values**.
     * And know how to compute them from a test statistic and a null sampling distribution. 
 
-**NOTE:** We will not learn how to generate the null sampling distribution yet. But as with bootstrapping, we can use brute-force computation (the [next chapter](@shuffling)), math tricks (Section III of the book), or simulation. 
+**NOTE:** We will not learn how to generate the null sampling distribution yet. But as with bootstrapping, we can use brute-force computation (the [next chapter](#shuffling)), math tricks (Section III of the book), or simulation. 
 
 :::
 
@@ -150,7 +150,7 @@ Next, we compare our actual test statistic to its sampling distribution under th
 
 
 
-The observed test statistic shown in figure \@fig-null2 is a bit right of the mode of the null sampling distribution -- it's not the most common value the null would generate, but it is not shocking -- at least not to my eye. 
+The observed test statistic shown in  @fig-null2 is a bit right of the mode of the null sampling distribution -- it's not the most common value the null would generate, but it is not shocking -- at least not to my eye. 
 
 
 

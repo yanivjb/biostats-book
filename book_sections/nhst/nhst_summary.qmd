@@ -47,7 +47,7 @@ Null Hypothesis Significance Testing is a tool to judge if we should interpret a
 :::tutor
 
 
-Please interact with this custom chatbot ([**ChatGPT version here**](https://chatgpt.com/g/g-688846360e2c81918951a31b10cbebf6-nhst-tutor), [**Gemini version here**](https://gemini.google.com/gem/1IYa-ZsknpQDQApiuRKd3lbGzeQhujIKy?usp=sharing)). I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up and then stop when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT version here**](https://chatgpt.com/g/g-688846360e2c81918951a31b10cbebf6-nhst-tutor), [**Gemini version here**](https://gemini.google.com/gem/1IYa-ZsknpQDQApiuRKd3lbGzeQhujIKy?usp=sharing)) I  made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up and then stop when you feel like you got what you needed from it. 
 
 :::
 

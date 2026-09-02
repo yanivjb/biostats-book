@@ -37,7 +37,7 @@ You're designing a study and need to decide how big to make it.  Too few samples
 > -- Adapted from [Dan Patrick](https://en.wikipedia.org/wiki/Dan_Patrick_(sportscaster)) [catchphrase](https://www.espn.com/media/2000/q2/dan_000723contain.wav). 
 
 
-There is no stopping [sampling error](#sampling_error), the chance deviation between the true population parameter and our estimate from a sample.  But, this does not mean that we are stuck wandering around with hopeless uncertainty. There are proven ways to minimize sampling error, which can be broken up into two types of strategies. We can aim to decrease variability, and/or increase the number of independent samples. I note that I introduced some of these ideas in our section on [Sampling Better](#sampling_better).
+There is no stopping [sampling error](#sampling_error), the chance deviation between the true population parameter and our estimate from a sample.  But, this does not mean that we are stuck wandering around with hopeless uncertainty. There are proven ways to minimize sampling error, which can be broken up into two types of strategies. We can aim to decrease variability, and/or increase the number of independent samples. I note that I introduced some of these ideas in our section on [Sampling Better](#better_sampling).
 
 ### Decreasing variability
 One simple way to increase the precision of an estimate is to decrease variability. We only have so much control over this, since some variability is natural -- but there are things we can do to increase the precision of our estimated effect and minimize extraneous variation.
@@ -396,7 +396,7 @@ The careful reader might notice an apparent contradiction. I just said that bloc
 
 
 
-We all know how to make estimates match true parameters -- measure the entire population. But this is impracticable, and a huge waste of time and energy. So in all studies trade-off precision of an estimate and. time/money/effort.  While we know that "failing to reject the null" doesn't make it false, failing to reject a false null with a relevant effect size is a bummer. So a key question when you plan your experiment is, how much certainty do you want in your estimate / how much "power" to reject the null do you want?
+We all know how to make estimates match true parameters -- measure the entire population. But this is impracticable, and a huge waste of time and energy. So in all studies trade-off precision of an estimate and time/money/effort.  While we know that "failing to reject the null" doesn't make it false, failing to reject a false null with a relevant effect size is a bummer. So a key question when you plan your experiment is, how much certainty do you want in your estimate / how much "power" to reject the null do you want?
 
 
 

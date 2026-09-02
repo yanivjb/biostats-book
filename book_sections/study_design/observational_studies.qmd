@@ -127,7 +127,7 @@ clarkia_hz |>
 
 In an observational study, we cannot randomly assign petal area to flowers, but (as noted above) we can choose the comparisons to make. One useful strategy is to match pairs of individuals who are the same in every possible way except the thing we want to know about. 
 
-For example, let's return to the question of whether *parviflora* RILs with larger petals have more hybrid seeds. If you recall, we found that they did, but these plants also had great anther stigma distance, so we couldn't know if the observation was attributable to petal area or anther stigma distance. The plot below tries to answer this question by implementing the following matching technique: 
+For example, let's return to the question of whether *parviflora* RILs with larger petals have more hybrid seeds. If you recall, we found that they did, but these plants also had greater anther stigma distance, so we couldn't know if the observation was attributable to petal area or anther stigma distance. The plot below tries to answer this question by implementing the following matching technique: 
 
 - I matched RILs by petal color (white or pink).   
 - I then matched RILs on anther-stigma distance. That is: for each petal color, I found pairs of RILs with the closest value of anther stigma distance.  
@@ -230,7 +230,7 @@ library(knitr)
 include_graphics("https://imgs.xkcd.com/comics/selection_bias_2x.png")
 ```
 
-Formal observational studies can be inspired by informal observations. But when conducting an observational study we must ensure that we are systematically investigating, not "noticing." Thus be sure to follow best practices in sampling presented in the [sampling better](#sampling_better) of  [Chapter 8](#sampling):  
+Formal observational studies can be inspired by informal observations. But when conducting an observational study we must ensure that we are systematically investigating, not "noticing." Thus be sure to follow best practices in sampling presented in the [sampling better](#better_sampling) of  [Chapter 8](#sampling):  
 
 - Define your target population first 
 - Sample from the population randomly or systematically, rather than reaching for whatever is easiest to find. 
