@@ -40,7 +40,7 @@ Recall the steps in a permutation test:
    - $H_0$: The number of hatched eggs does not differ between preferred and non-preferred matings.    
    - $H_A$: The number of hatched eggs differs between preferred and non-preferred matings.    
 2. Decide on a test statistic.  
-   - The test statistic for a permutation test can be whatever best captures our biological hypothesis. In this case, we'll use the difference in the mean number of eggs hatched between non-preferred and preferred matings.    
+   - The test statistic for a permutation test can be whatever best captures our biological hypothesis. In this case, we'll use the difference in the mean number of eggs hatched between preferred and non-preferred matings.    
 
 3. Calculate the test statistic for the actual data.   
    - We found 345.11 eggs hatching  for preferred matings and 413.93 for non-preferred matings. So our test statistic is: 345.11 - 413.93 = -68.82. That is we summarize our data as a difference of -68.82 eggs hatched between preferred and non-preferred matings.   

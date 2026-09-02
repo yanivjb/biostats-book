@@ -259,6 +259,8 @@ This issue isn’t just theoretical — I’m currently grappling with a real ca
 I do not yet know the answer. 
 
 ```{r}
+#| echo: false
+#| eval: false
 # YANIV ADD FIGURE FROM SHELLEY
 ```
 
@@ -291,7 +293,7 @@ The following sections introduce how to summarize associations between variables
 
 
 
-Then we [summarize the chapter](#summarizing_associations), present [practice questions](#summarizing_associations_practice-questions), a [glossary](#summarizing_associations_glossary-of-terms), a review of [R functions](#summarizing_associations_key-r-functions) and [R packages](#summarizing_associations_r-packages-introduced) introduced, and [present additional resources](#summarizing_associations_additional-resources).  
+Then we [summarize the chapter](#summarizing_associations_I), present [practice questions](#summarizing_associations_practice-questions_I), a [glossary](#summarizing_associations_glossary-of-terms_I), a review of [R functions](#summarizing_associations_key-r-functions_I) and [R packages](#summarizing_associations_r-packages-introduced_I) introduced, and [present additional resources](#summarizing_associations_additional-resources_I).  
 
 
 In the next chapter we will continue our study of associations as we will investigate relationships between continuous variables!

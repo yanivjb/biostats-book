@@ -176,7 +176,7 @@ gc_rils |>
 
 ---
 
-### Covariance
+### Covariance {#two_categorical_vars_deviations-from-independence-the-covariance}
 
 A common quantification of the association between two binary variables is the covariance. This quantification follows some simple mathematical logic:  
 

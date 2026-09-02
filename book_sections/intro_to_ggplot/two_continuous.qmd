@@ -138,7 +138,7 @@ ggplot(ril_data, aes(x = mean_visits, y  = prop_hybrid))+
 ::: {style="background-color: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-Sometimes a simple line does not do a great job of highlighting patterns. Specifying  `method = loess` presents a smoothed moving average. 
+Sometimes a simple line does not do a great job of highlighting patterns. Specifying  `method = "loess"` presents a smoothed moving average. 
 
 In addition to showing that moving average, I show you how to suppress that grey area with `se = FALSE`. I tend to like to include the uncertainty in our estimated trend so I usually don't do this, but sometimes showing the uncertainty hides other features of the data, so I wanted to empower you.  
 

@@ -115,7 +115,7 @@ When the underlying biological process results in nonlinear data with asymmetric
 In addition to letting biology guide your decisions, there are some actual rules that determine when a transformation is legitimate:
 
 - **Transformed values must have a one-to-one correspondence with the original values.** For example, don’t square values if some are negative and others positive — you’ll lose information.  
-- **Transformed values must maintain a monotonic relationship with the original values.** This means that the order of values should be preserved — larger values in the original data should remain larger after transformation.  
+- **Transformed values must maintain a monotonic relationship with the original values.** This means that the order of values should be consistent — larger values in the original data should remain larger after transformation (it's also ok if large become small and small become large, so long as you interpret this correctly, and everyone stays in line).  
 - **Transformations must not bias results by inadvertently dropping data.** For example, this can happen when a log transformation fails on zero or negative values, or if extreme values are removed during transformation.
 
 

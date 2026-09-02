@@ -96,13 +96,14 @@ One key aspect of a dataset’s shape is skewness, i.e. if the data is symmetric
 - The number of offspring we genotyped (@fig-shape B) is strongly **left-skewed**. That is, most values are large, but some are very small. Left-skewed data is also common in real-world settings. For example, age at death follows a left-skewed distribution: most people live long lives (often between 70 and 90), but some individuals die at much younger ages due to childhood mortality, diseases, accidents, or suicide. <br> <br>     
 
 
-- The distributions in @fig-shape A and B represent extreme cases of skewness, where most values are either very small or very large. In contrast, @fig-shape C shows that on a $\text{log}_{10}$ scale, petal area is nearly symmetric, with an even distribution of large and small values and most observations concentrated in the middle.  <br>
+- The distributions in @fig-shape A and B represent extreme cases of skewness, where most values are either very small (A) or very large (B). In contrast, @fig-shape C shows that on a $\text{log}_{10}$ scale, petal area is nearly symmetric, with an even distribution of large and small values and most observations concentrated in the middle.  <br>
 
 ```{r, fig.height=2.75}
 #| label: fig-shape
 #| echo: false
 #| message: false
 #| warning: false
+#| column: page-right
 #| fig-cap: "*Examples of three distribution shapes:* **(A)** The proportion of hybrid offspring is right-skewed, **(B)** The number of offspring genotyped is left-skewed, and **(C)** log-transformed petal area is approximately symmetric."
 #| fig-alt: "Three histograms illustrating distribution shapes. A: prop_hybrid is strongly right-skewed, with most observations near zero and progressively fewer observations toward one. B: offspring_genotyped is strongly left-skewed, with nearly all observations at eight and a few lower values between three and seven. C: log10_petal_area_mm is approximately symmetric and bell-shaped, centered near 1.8."
 library(patchwork)

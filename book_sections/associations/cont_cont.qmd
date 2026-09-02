@@ -86,7 +86,7 @@ ggplot(gc_rils, aes(x = log10_petal_area_mm,
 ```
 
 
-In the previous section we used covariance to describe associations between two binary variables. We saw that -- for two binary variables -- the covariance measures how much the observed combination of values ($p_{A,B}$) differed from  expectations under independence ($p_A-p_B$). 
+In the previous section we used covariance to describe associations between two binary variables. We saw that -- for two binary variables -- the covariance measures how much the observed combination of values ($p_{A,B}$) differed from  expectations under independence ($p_A \times p_B$). 
 
 Here, we extend this idea to numeric variables. Instead of asking whether two categories occur together more often than expected, we ask whether large values of one variable tend to occur with large (or small) values of another. For example, in our *Clarkia* RIL data, we could describe the association between $\text{log}_{10}$ petal area and the proportion of hybrid seeds using a covariance. 
 

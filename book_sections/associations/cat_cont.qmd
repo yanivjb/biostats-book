@@ -246,7 +246,7 @@ gc_rils                                                          |>
 
 ## Summarizing associations: Cohen's D  {#cat_cont_summarizing-associations-cohens-d}  
 
-Above, we found that on average, visited plants produced 0.299 more hybrids than not visited ones. That might seem like a big difference, but raw differences can be hard to interpret on their own. Is 0.299 a lot? A little? To better understand how meaningful that difference is, we can compare it to the variability in hybrid seed production. 
+Above, we found that on average, visited plants had a 0.299 higher proportion of hybrid seeds than not visited ones. That might seem like a big difference, but raw differences can be hard to interpret on their own. Is 0.299 a lot? A little? To better understand how meaningful that difference is, we can compare it to the variability in hybrid seed production. 
 
 Cohen’s D is a summary that addresses this question by standardizing the difference in means by the variability within groups (the pooled standard deviation), allowing for more intuitive comparisons across studies and systems.  For this dataset, that gives us a D of 1.47 (see calculation below) — a very large effect size (see guide in margin). This suggests that being visited (during our observation window) is strongly associated with producing more hybrid seeds.
 

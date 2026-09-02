@@ -373,7 +373,14 @@ gc_rils |>
 ```
 
 
-Or we can skip the formulae and just use standard R functions, [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) and [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html). We can even find the mean absolute difference with the [`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html) function: 
+:::aside
+R's built in. [`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html) function actually measures the median absolute difference.
+:::
+
+Or we can skip the formulae and just use standard R functions, [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) and [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html). We can even find the mean absolute difference with as  
+`mean(abs(x - mean(x)))`, and the median absolute difference with the  [`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html) function.
+
+
 
 
 

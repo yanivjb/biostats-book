@@ -96,7 +96,7 @@ ggplot(data = ril_data, aes(x = mean_visits))
 
 But now we want to show the data. To do so we need to add our `geom`. In this case we show the data as a histogram. 
 
-The resulting plot shows that most plants get zero visits, but some get up to five visits. 
+The resulting plot shows that most plants get zero visits, but some get more than seven visits! 
 
 ```{r}
 #| message: false

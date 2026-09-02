@@ -206,10 +206,10 @@ ggplot(tibble(LakeHuron), aes(x =LakeHuron))+
 
 
 
-**Q6a)** The mean is roughly   `r longmcq(c("Six", answer = "One and three quarters", "Five hundred and seventy nine" , answer =  "We cannot estimate the mean from this plot."))`
+**Q6a)** The mean is roughly   `r longmcq(c("Six",  "One and three quarters", "Five hundred and seventy nine" , answer =  "We cannot estimate the mean from this plot."))`
 
 
-**Q6b)** The median is roughly   `r longmcq(c("Six", answer = "One and three quarters", answer =  "Five hundred and seventy nine" , "We cannot estimate the median from this plot."))`
+**Q6b)** The median is roughly   `r longmcq(c("Six",  "One and three quarters", answer =  "Five hundred and seventy nine" , "We cannot estimate the median from this plot."))`
 
 **Q6c)** The mode is roughly   `r longmcq(c("Six", answer = "One and three quarters",  "Five hundred and seventy nine" ,  answer =  "We cannot estimate the mode from this plot."))`
 
@@ -414,7 +414,7 @@ iris <- iris |>
 
 - **Interquartile Range (IQR) (`IQR()`):** Middle 50% of data. Robust and often paired with the median.
 
-- **Mean Absolute Deviation (MAD) (`mad()`):** The average absolute deviation from the mean or median. Robust and intuitive.  
+- **Mean Absolute Deviation (MAD):** The average absolute deviation from the mean or median. Robust and intuitive.  
   - $\text{MAD} = \frac{1}{n} \sum |x_i - \bar{x}|$
 
 - **Sum of Squares (SS)**: Total squared deviation from the mean.  
@@ -468,7 +468,7 @@ iris <- iris |>
 
 - **[`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)** *([base R])*: Computes variance.  
 - **[`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html)** *([base R])*: Computes standard deviation.  
-- **[`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html)** *([base R])*: Computes the median absolute deviation — a robust summary of variability.  
+- **[`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html)** *([base R])*: Computes the **median absolute deviation** (not the mean) — a robust summary of variability.  
 - **[`IQR()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/IQR.html)** *([base R])*: Computes the interquartile range. 
 - **[`quantile()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html)** *([base R])*: Returns sample quantiles. Useful for computing percentiles and quartiles.  
 - **[`sum()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/sum.html)** *([base R])*: Used in calculating the sum of squared deviations (`sum((x - mean(x))^2)`).  

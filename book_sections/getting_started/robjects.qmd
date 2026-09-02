@@ -117,7 +117,7 @@ c(3, 0.5, 1, 1) * c(1, 2, 3, 2)
 
 ### Other types of vectors 
 
-**R handles different types of data in specific ways**. Understanding these data types is crucial because what you can do with your data depends on how R interprets it. For example, although you know that `1 + "two"` equals `3`, R cannot add a number and a word.  Understanding this will help you understand `R`'s error messages and confusing results when things don't work as expected. 
+**R handles different types of data in specific ways**. Understanding these data types is crucial because what you can do with your data depends on how R interprets it. For example, although you know that `1 + "two"` should equal three, R cannot add a number and a word.  Understanding this will help you understand `R`'s error messages and confusing results when things don't work as expected. 
 
 Other common types of vectors are:  
 

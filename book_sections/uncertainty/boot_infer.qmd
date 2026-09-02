@@ -190,7 +190,7 @@ gc_rils                           |>
 4.  Repeat this a bunch of times to find the bootstrap distribution.
 5.  Quantify uncertainty, for example, as the bootstrap standard error and the bootstrap 95% confidence interval.
 
-I could code this myself, but it's tedious. [`infer`](https://infer.netlify.app/) makes it straightforward. The code below uses the formula syntax `prop_hybrid ~ petal_color` (We will see more of this when we dive into [linear_models](#linear_models)) inside [`specify()`](https://infer.netlify.app/reference/specify) to indicate our interest in this relationship. We then tell R to [`generate()`](https://infer.netlify.app/reference/generate) the bootstrap distribution and [`calculate()`](https://infer.netlify.app/reference/calculate) to find the `"diff in means"` for each bootstrap replicate:
+I could code this myself, but it's tedious. [`infer`](https://infer.netlify.app/) makes it straightforward. The code below uses the formula syntax `prop_hybrid ~ petal_color` (We will see more of this when we dive into [linear models](#linear_models)) inside [`specify()`](https://infer.netlify.app/reference/specify) to indicate our interest in this relationship. We then tell R to [`generate()`](https://infer.netlify.app/reference/generate) the bootstrap distribution and [`calculate()`](https://infer.netlify.app/reference/calculate) to find the `"diff in means"` for each bootstrap replicate:
 
 ```{r}
 library(infer)
