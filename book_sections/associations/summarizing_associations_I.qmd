@@ -121,7 +121,7 @@ Use the web R environment above to answer the following questions about the `tit
 
 :::exercises
 
-**Q4)**  In the `titanic_males` dataset (adult males in "1st" class or the "Crew"), what proportion::    
+**Q4)**  In the `titanic_males` dataset (adult males in "1st" class or the "Crew"), what proportion:
 
 
  
@@ -283,7 +283,7 @@ library(ggplot2)
 
 :::
 
-## 📊 Glossary of Terms   {#summarizing_associations_glossary-of-terms}  
+## 📊 Glossary of Terms   {#summarizing_associations_glossary-of-terms_I}  
 
 :::glossary
 
@@ -300,7 +300,7 @@ library(ggplot2)
 :::  
 
 
-## Key R Functions {#summarizing_associations_key-r-functions}  
+## Key R Functions {#summarizing_associations_key-r-functions_I}  
 
 :::functions
 
@@ -335,7 +335,7 @@ We often combine these below with the following chain of operations.
 :::
 
 
-## R Packages Introduced     {#summarizing_associations_r-packages-introduced_1}    
+## R Packages Introduced     {#summarizing_associations_r-packages-introduced_I}    
 
 :::packages
 [`effectsize`](https://easystats.github.io/effectsize/): Calculates standard measures of effect size, including Cohen's D.  

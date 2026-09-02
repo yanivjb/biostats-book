@@ -9,7 +9,7 @@ webr:
 ---
 
 
-Links to: [Summary](#summarizing_associations_chapter-summary_II). [Chatbot tutor](#summarizing_associations_chatbot_tutor_II).  [Questions](#summarizing_associations_practice-questions_II). [Glossary](#summarizing_associations_glossary-of-terms_II). [R functions](#summarizing_associations_key-r-functions_II). [R packages](#summarizing_associations_r-packages-introduced_II). [More resources](#summarizing_associations_additional-resources_II).
+Links to: [Summary](#summarizing_associations_chapter-summary_II). [Chatbot tutor](#summarizing_associations_chatbot_tutor_II).  [Questions](#summarizing_associations_practice-questions_II). [Glossary](#summarizing_associations_glossary-of-terms_II). [R functions](#summarizing_associations_key-r-functions_II).  [More resources](#summarizing_associations_additional-resources_II).
 
 
 

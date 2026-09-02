@@ -1,11 +1,9 @@
 ## • 5. Changing shape {.unnumbered #changing_shape}
 
-
 ```{r}
-#| code-fold: true
 #| message: false
 #| warning: false
-#| code-summary: "Code for selecting data from a few columns from RILs planted at GC"
+#| echo: false
 library(knitr)
 library(dplyr)
 library(readr)
@@ -15,7 +13,13 @@ library(webexercises)
 library(ggplot2)
 library(tidyr)
 source("../../_common.R") 
-ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+```
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| code-summary: "Code for selecting data from a few columns from RILs planted at GC"
 ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
 ril_data <- readr::read_csv(ril_link) |>
   dplyr::mutate(growth_rate = case_when(growth_rate =="1.8O" ~ "1.80",

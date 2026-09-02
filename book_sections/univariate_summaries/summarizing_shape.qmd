@@ -87,13 +87,13 @@ include_graphics("../../figs/intro_to_r/univariate_summaries/1969.png")
 
 ### Skew     {#summarizing_shape_skew}  
 
-One key aspect of a dataset’s shape is skewness—whether the data is symmetrical or leans heavily toward smaller or larger values.  
+One key aspect of a dataset’s shape is skewness, i.e. if the data is symmetrical or if it has an excess of smaller or larger values.  
 
 
-- The proportion of hybrid seeds per RIL mom (@fig-prop_hyb_hist, and shown again in @fig-shape A) is strongly **right-skewed**—most values are small, but some are very large. Right-skewed data is common in biology and everyday life. For example, income is right-skewed: most people earn relatively little money, but some make loads of ca$h. <br> <br>       
+- The proportion of hybrid seeds per RIL mom (@fig-prop_hyb_hist, and shown again in @fig-shape A) is strongly **right-skewed**. That is, most values are small, but some are very large. Right-skewed data is common in biology and everyday life. For example, income is right-skewed: most people earn relatively little money, but some make loads of ca$h. <br> <br>       
 
 
-- The number of offspring we genotyped (@fig-shape B) is strongly **left-skewed**—most values are large, but some are very small. Left-skewed data is also common in real-world settings. For example, age at death follows a left-skewed distribution: most people live long lives (often between 70 and 90), but some individuals die at much younger ages due to childhood mortality, diseases, accidents, or suicide. <br> <br>     
+- The number of offspring we genotyped (@fig-shape B) is strongly **left-skewed**. That is, most values are large, but some are very small. Left-skewed data is also common in real-world settings. For example, age at death follows a left-skewed distribution: most people live long lives (often between 70 and 90), but some individuals die at much younger ages due to childhood mortality, diseases, accidents, or suicide. <br> <br>     
 
 
 - The distributions in @fig-shape A and B represent extreme cases of skewness, where most values are either very small or very large. In contrast, @fig-shape C shows that on a $\text{log}_{10}$ scale, petal area is nearly symmetric, with an even distribution of large and small values and most observations concentrated in the middle.  <br>
@@ -103,7 +103,8 @@ One key aspect of a dataset’s shape is skewness—whether the data is symmetri
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-cap: "A bar plot showing the number of genotyped seeds of each mom shown to be hybrid."
+#| fig-cap: "*Examples of three distribution shapes:* **(A)** The proportion of hybrid offspring is right-skewed, **(B)** The number of offspring genotyped is left-skewed, and **(C)** log-transformed petal area is approximately symmetric."
+#| fig-alt: "Three histograms illustrating distribution shapes. A: prop_hybrid is strongly right-skewed, with most observations near zero and progressively fewer observations toward one. B: offspring_genotyped is strongly left-skewed, with nearly all observations at eight and a few lower values between three and seven. C: log10_petal_area_mm is approximately symmetric and bell-shaped, centered near 1.8."
 library(patchwork)
 
 a <- gc_rils |> 
@@ -141,7 +142,7 @@ a+b +c
 ```
 
 :::fyi
-**Data transformations and skew:**  @fig-shape showed that $\text{log}_{10}$ petal area was roughly symmetric. The careful might be suspicious and wonder why I transformed the data. The answer is that area is usually right skewed and log transforming often removes such skew. 
+**Data transformations and skew:**  @fig-shape showed that $\text{log}_{10}$ petal area was roughly symmetric. The careful reader might be suspicious and wonder why I transformed the data. The answer is that area is usually right skewed and log transforming often removes such skew. 
 
 We discuss changing the shape of distributions by transformation in the [next section](#changing_shape). Later we will see that symmetric data are often easier for statistical models than skewed data so such transformations are common.
 
@@ -160,7 +161,7 @@ gc_rils|>
 
 
 
-One of the first things to notice when visualizing a dataset is whether the values cluster around a single peak or multiple peaks—this **number of modes** can reveal important patterns, such as distinct subgroups or natural variation in biological traits.    
+One of the first things to notice when visualizing a dataset is the **number of modes**. Unimodal data cluster around a single peak, while multimodal data contains numerous peaks. The number of modes can point to interesting biology (e.g.  distinct subgroups).    
 
 
 ```{r,fig.height=15}
@@ -197,7 +198,7 @@ The number of modes is particularly important in the study of speciation, especi
 
 
 
-We were particularly interested in examining the distribution of phenotypes in seeds collected from *parviflora* / *xantiana* hybrid zones. @fig-hz shows that—unlike petal area in our RILs-most phenotypes from natural hybrid zones are largely bimodal. However, @fig-hzsite suggests that these distributions may themselves be a blend of different underlying distributions. While petal area appears bimodal in most populations, it may be unimodal at site S6. @fig-hz and @fig-hzsite highlight the benefit of digging into the data visually. We must visualize the distribution of values of a variable before we can provide a meaningful and interpretable summary statistic.   
+We were particularly interested in examining the distribution of phenotypes in seeds collected from *parviflora* / *xantiana* hybrid zones. @fig-hz shows that, unlike petal area in our RILs, most phenotypes from natural hybrid zones are bimodal. However, @fig-hzsite suggests that these distributions may themselves be a blend of different underlying distributions. While petal area appears bimodal in most populations, it may be unimodal at site S6. @fig-hz and @fig-hzsite highlight the benefit of digging into the data visually. We must visualize the distribution of values of a variable before we can provide a meaningful and interpretable summary statistic.   
 
 
 

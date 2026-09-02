@@ -112,7 +112,7 @@ a / b + plot_annotation(tag_levels = 'A')
 
 ```{r}
 #| eval: false
-#| fig-cap: "Two displays of the number of visitors per RIL platn at GC. (A) A boxplot  showing the number of visits recorded per observation at the GC site. Most observations are zero (that's why the box is so small), with a few higher values. (B) Histogram of visits at the GC site, illustrating a strongly right-skewed distribution with a large spike at zero and a long tail of rare higher counts."
+#| fig-cap: "Two displays of the number of visitors per RIL plant at GC. (A) A boxplot  showing the number of visits recorded per observation at the GC site. Most observations are zero (that's why the box is so small), with a few higher values. (B) Histogram of visits at the GC site, illustrating a strongly right-skewed distribution with a large spike at zero and a long tail of rare higher counts."
 #| fig-alt: "Two-panel figure labeled A and B. Panel A shows a box plot of visits at the GC location, with most points at zero and a few scattered up to about two visits. Panel B shows a histogram of visits with a very tall bar at zero and progressively smaller bars toward higher visit values, indicating a highly right-skewed distribution."
 #| label: fig-pic
 # The plots show highly right skewed data - most plants 

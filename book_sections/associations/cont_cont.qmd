@@ -265,7 +265,7 @@ As in Cohen's D, what is a "large" or "small" correlation coefficient depends on
 
 
 
-| Size              | Range of $|r|$    |
+| Size              | Range of $\lvert r \rvert$    |
 |------------------|------------------------|
 | Not worth reporting | < 0.005               |
 | Tiny              | 0.005 – 0.10           |
@@ -286,9 +286,9 @@ As in Cohen's D, what is a "large" or "small" correlation coefficient depends on
 
 ## Visualizing associations between continuous variables  
 
-We visualize associations between numeric variables with a scatterplot. In [`ggplot2`](https://ggplot2.tidyverse.org/) we do so with [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html). The  [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) function highlights trends in the data, and specifying `method = "lm"` adds the linear trend implied by the correlation.
+We visualize associations between numeric variables with a scatterplot. In [`ggplot2`](https://ggplot2.tidyverse.org/) we do so with [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html). 
 
-The [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) function highlights trends in the data, and specifying `method = "lm"` adds a straight line summarizing the overall linear pattern in the points. This line helps guide our interpretation of the correlation: the closer  the points fall close to the line, the stronger the correlation.
+The [`geom_smooth()`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) function highlights trends in the data, and specifying `method = "lm"` adds a straight line summarizing the overall linear pattern in the points. This line helps guide our interpretation of the correlation: the closer to the line the points are, the stronger the correlation.
 
 For now, I am setting `se = FALSE` to highlight the trend, and not the uncertainty about it. As we introduce the ideas of uncertainty and its quantification through the standard error, you will have the tools to decide when it is useful to show the standard error around this line.
 
