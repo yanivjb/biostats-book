@@ -98,7 +98,7 @@ So, our observed Cohen's D of 1.28 means that this effect is quite strong!
 
 ## Data visualization   
 
-We will develop a few visualizations of our data. For now, I present a simple histogram.  @fig-histele, clearly shows that most species have moved uphill. It also allows us to evaluate if the data are  normalish, as assumed by the t distribution. We spend the next section thinking harder about assumptions of the t distribution, and if our data meet these assumptions.  
+We will develop a few visualizations of our data. For now, I present a simple histogram.  @fig-histele clearly shows that most species have moved uphill. It also allows us to evaluate if the data are  normalish, as assumed by the t distribution. We spend the next section thinking harder about assumptions of the t distribution, and if our data meet these assumptions.  
 
 ```{r}
 #| eval: false

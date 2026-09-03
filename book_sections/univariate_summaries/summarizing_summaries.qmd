@@ -223,7 +223,7 @@ ggplot(tibble(LakeHuron), aes(x =LakeHuron))+
 
 ---  
 
-**Brooke planted RILs at four different locations,  and found tremendous variation in the proportion of hybrid seed across locations.** The first step in quantifying this variation is to calculate the sum of squares, so let's do it. Use the image below (@fig-ss) to calculates sum of squares for proportion hybrid seeds across plants planted at four different locations.
+**Brooke planted RILs at four different locations,  and found tremendous variation in the proportion of hybrid seed across locations.** The first step in quantifying this variation is to calculate the sum of squares, so let's do it. Use the image below (@fig-ss) to calculate sum of squares for proportion hybrid seeds across plants planted at four different locations.
 
 ```{r}
 #| echo: false

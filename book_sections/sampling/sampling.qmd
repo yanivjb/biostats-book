@@ -86,7 +86,7 @@ If you cannot sample randomly, be explicit about your method. For example, our t
 
 In the real world, taking a random sample from a population can be a challenge (see above). But in R this is very easy. I work through an example to better wrap our heads around sampling.
 
-**For this example, let us pretend that our hybrid zone data from SAW is a population (i.e. that we sampled every individual).** I note this is for demonstration purposes only -- if we had information for an entire population we would not sample. But this  should help us think about sampling! We use the [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html) function, with the arguments being the tibble of interest, `n` the size of our sample. The output are the individuals we sampled! 
+**For this example, let us pretend that our hybrid zone data from SAW is a population (i.e. that we sampled every individual).** I note this is for demonstration purposes only -- if we had information for an entire population we would not sample. But this  should help us think about sampling! We use the [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html) function, with the arguments being the tibble of interest, `n` the size of our sample. The output is the individuals we sampled! 
 
 
 

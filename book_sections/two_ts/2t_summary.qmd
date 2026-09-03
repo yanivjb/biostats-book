@@ -59,9 +59,9 @@ Try these questions! By using the R environment you can work without leaving thi
 :::exercises
 
 
-**SETUP:** *There are plenty of reasons to choose your partner carefully. In much of the biological world a key reason is "evolutionary fitness" - presumably organisms evolve to choose mates that will help them make more (or healthier) children. This could, for example explain Kermit’s resistance in one of the more complex love stories of our time, as frogs and pigs are unlikely to make healthy children.*. 
+**SETUP:** *There are plenty of reasons to choose your partner carefully. In much of the biological world a key reason is "evolutionary fitness" - presumably organisms evolve to choose mates that will help them make more (or healthier) children. This could, for example explain Kermit’s resistance in one of the more complex love stories of our time, as frogs and pigs are unlikely to make healthy children.*  
 
-*To evaluate this idea @swierk2019, identified a male's top choice out of two female wood frogs and then had them mate with the preferred or unpreferred female and counted the number of hatched eggs.*
+*To evaluate this idea @swierk2019, identified a male's top choice out of two female wood frogs and then had them mate with the preferred or unpreferred female, and counted the number of hatched eggs.*
 
 The R code below loads the data. It is meant to be loaded onto this console below too, but if something goes wrong, just paste this into your R console outside of this book
 :::
@@ -416,7 +416,7 @@ wilcox.test(y ~ group, data = df, exact = FALSE)
 
 - [Crash Course Statistics #27 T test](https://www.youtube.com/watch?v=AGh66ZPpOSQ).
 
-- [Kahn Academy: Two sample t-test](https://www.khanacademy.org/math/ap-statistics/xfb5d8e68:inference-quantitative-means/two-sample-t-test-means/v/two-sample-t-test-for-difference-of-means).    
+- [Khan Academy: Two sample t-test](https://www.khanacademy.org/math/ap-statistics/xfb5d8e68:inference-quantitative-means/two-sample-t-test-means/v/two-sample-t-test-for-difference-of-means).    
 
 **Other resources:**    
 

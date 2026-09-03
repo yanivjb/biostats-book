@@ -175,7 +175,7 @@ include_graphics("../../figs/intro_to_r/getting_started/wrongpraise.png")
 
 :::exercises
 
-**Q4)** How will running the script in @fig-praise (above) make you feel?   `r mcq(c("Amazing, I love being praised", answer = "Not good it wont work :("))`
+**Q4)** How will running the script in @fig-praise (above) make you feel?   `r mcq(c("Amazing, I love being praised", answer = "Not good, it won't work :("))`
 
 :::
 

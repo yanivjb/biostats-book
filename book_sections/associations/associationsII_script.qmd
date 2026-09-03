@@ -68,7 +68,7 @@ titanic_first_class_adults <- Titanic["1st",,,]  |>
 
 ```
 
-@fig-ne shows the pattern we previously quantified and the conditional probability -- survival was lower for males than females. The code below quantifies this as a both a covariance and a correlation. We'll do so with  R's built in `cov()` and `cor()` functions because they are clean and easy.   
+@fig-ne shows the pattern we previously quantified and the conditional probability -- survival was lower for males than females. The code below quantifies this, both as a covariance and as a correlation. We'll do so with  R's built in [`cov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) and [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) functions because they are clean and easy.   
 
 
 ```{r}

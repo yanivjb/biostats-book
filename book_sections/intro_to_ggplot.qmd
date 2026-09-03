@@ -139,7 +139,7 @@ We primarily want to know which (if any) phenotypes influence the amount of poll
 
 - Our response variables are hybrid seed production and pollinator visitation (and perhaps we would like to know the extent to which pollinator visitation predicts the proportion of hybrid seed).   
 - Our explanatory variables that we care a lot about include: petal area, petal color, herkogamy, protandry etc... We also want to account for differences in the location of the experiment, even though this is not motivating our study.  
-- We also may want to evaluate the extent to which correlation between traits were broken up  as we made the RILs. If trait correlations persists in the RILs it means that we cannot fully dissect the contribution of each trait to the outcome we care about, and that the genetic and/or physiological linkage between traits may have prevented evolution from acting independently on these traits.    
+- We also may want to evaluate the extent to which the correlation between traits were broken up  as we made the RILs. If trait correlations persisted in the RILs, it means that we cannot fully dissect the contribution of each trait to the outcome we care about, and that the genetic and/or physiological linkage between traits may have prevented evolution from acting independently on these traits.    
 - In this case there is not a natural order to our categorical variables, so we do not need to think too hard about that. 
 
 

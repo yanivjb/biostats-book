@@ -193,7 +193,7 @@ Because the t statistic measures how many standard errors our estimate is from t
 1. Finding the critical t value, $t_{\alpha/2,\text{ df = }30}$ that captures the middle $1-\alpha$ of the t distribution.   
 2. Bringing this CI to the scale of our data by multiplying it by our estimate of the standard error, $s_\bar{x}$,   
 3. Reporting the $(1-\alpha)\%\text{ CI }$ as $\overline{x} \pm t_{\alpha/2} \times s_\bar{x}$, where   $t_{\alpha/2}$ is the critical two-tailed t value for a specified $\alpha$ level, which we can find in R using the [`qt()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/TDist.html) function.    
-    - Critical values for a 95% confidence interval with two to twenty-five degrees of freedom are shown in @fig-tcrit. Note that this approaches 1.96 (the Z-critical value) $df \to\infty$.
+    - Critical values for a 95% confidence interval with two to twenty-five degrees of freedom are shown in @fig-tcrit. Note that this approaches 1.96 (the Z-critical value) as $df \to\infty$.
 
 
 :::aside
@@ -246,7 +246,7 @@ range_shift_summary|>
 
 *qt()* takes the arguments, *p* and *df*, and finds the critical value that separates the lower *p* tail from the rest of the t distribution with *df* degrees of freedom. The optional argument *lower.tail* tells R if we're coming in from the upper or lower tail. Because the t-distribution is symmetric this simply changes the sign of *qt()*'s output. 
 
-The *q_()* function is available for many common distributions. For example *qnorm(.025, lower.tail = FALSE)*, returns `r qnorm(.025, lower.tail = FALSE) |> round(digits = 4)`, the Z value that marks the upper 2.5% of the Z distribution.
+The *q_()* family of functions are available for many common distributions. For example *qnorm(.025, lower.tail = FALSE)*, returns `r qnorm(.025, lower.tail = FALSE) |> round(digits = 4)`, the Z value that marks the upper 2.5% of the Z distribution.
 :::
 
 ## Comparison to the bootstrap CI  

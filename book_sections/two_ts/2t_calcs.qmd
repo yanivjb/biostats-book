@@ -119,7 +119,7 @@ $$
 
 - **The difference in means:** To find this, simply subtract one mean from the other: $\text{mean}\_\text{diff}=  1.76 - 0.733 =  1.03$. <br><br>
 
-- **Cohen's D** as the difference in means standardized by the pooled standard deviation (i.e. the square root to the pooled variance). Cohen's D $=\frac{\text{mean diff}}{s_p}$ $=\frac{1.03}{\sqrt{1.834}}$ $=\frac{1.027}{1.35}$   $= 0.76$.  This is considered a medium (borderline large) effect, so it likely matters (if true). 
+- **Cohen's D** as the difference in means standardized by the pooled standard deviation (i.e. the square root of the pooled variance). Cohen's D $=\frac{\text{mean diff}}{s_p}$ $=\frac{1.03}{\sqrt{1.834}}$ $=\frac{1.027}{1.35}$   $= 0.76$.  This is considered a medium (borderline large) effect, so it likely matters (if true). 
 
 
 

@@ -51,7 +51,7 @@ include_graphics("../clarkia_pics/white_pink_xan.png")
 <article class="drop-cap">The $F$ distribution is often introduced after the t-distribution to clear a path to comparing means of more than two groups. This makes sense, as the $F$ distribution lends itself to this application. But, in my view at least, that introduction to the $F$ does it a disservice. More than simply offering a way to compare more than two groups, the $F$ provides a new way to think about variability in data. Specifically, the $F$ allows us to "partition variance" into components associated with predictors in our model and "residual" variance that is not in our model. </article><br>
 
 
-In this chapter, we focus on the simplest case, comparing two groups, to better understand what the F statistic represents (or What the $F$ is going on!) We’ll connect this to concepts you already know (t-tests, sampling distributions), work through the math of partitioning variance, learn how to run ANOVA in R, and end by showing how these methods are all part of a unified linear model framework. 
+In this chapter, we focus on the simplest case, comparing two groups, to better understand what the F statistic represents (or What the $F$ is going on!). We’ll connect this to concepts you already know (t-tests, sampling distributions), work through the math of partitioning variance, learn how to run ANOVA in R, and end by showing how these methods are all part of a unified linear model framework. 
 
 
 

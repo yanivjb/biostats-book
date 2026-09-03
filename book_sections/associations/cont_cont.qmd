@@ -69,7 +69,7 @@ You are continuing your exploration of a new dataset. After checking its shape a
 #| warning: false
 #| fig-height: 5
 #| fig-cap: "**Association between petal size and hybrid seed production in Clarkia RILs.** Each point represents an individual recombinant inbred line planted at the GC site. The blue line is the line of best fit (more on that later)."
-#| fig-alt: "Scatterplot showing the relationship between log₁₀ petal area (mm²) and the proportion of hybrid seeds produced by individual plants. Points represent individual plants and are widely scattered, with many observations near zero hybrid proportion. A blue fitted line slopes upward, indicatiting a positive association between larger petal area and higher hybrid seed proportion."
+#| fig-alt: "Scatterplot showing the relationship between log₁₀ petal area (mm²) and the proportion of hybrid seeds produced by individual plants. Points represent individual plants and are widely scattered, with many observations near zero hybrid proportion. A blue fitted line slopes upward, indicating a positive association between larger petal area and higher hybrid seed proportion."
 #| column: margin
 #| label: fig-dists
 
@@ -198,7 +198,7 @@ gc_rils                                                        |>
 
 
 :::note
-The equation for the covariance should remind you of the equation for the variance. This is because the  the variance is simply the covariance of a variable  with itself. (i.e $cov_{X,X} = \frac{\sum(X_i - \bar{X})(X_i - \bar{X}) }{n-1}$ = $\frac{\sum(X_i - \bar{X})^2 }{n-1}$ = $var_X$). You can also see this similarity by comparing @fig-cov, above, to  the earlier  [gif depicting variance calculations](../univariate_summaries/summarizing_variability.qmd#fig-ssgif), from our section on [summarizing variability for a refresher](../univariate_summaries/summarizing_variability.qmd#summarizing_variability).
+The equation for the covariance should remind you of the equation for the variance. This is because the variance is simply the covariance of a variable  with itself. (i.e $cov_{X,X} = \frac{\sum(X_i - \bar{X})(X_i - \bar{X}) }{n-1}$ = $\frac{\sum(X_i - \bar{X})^2 }{n-1}$ = $var_X$). You can also see this similarity by comparing @fig-cov, above, to  the earlier  [gif depicting variance calculations](../univariate_summaries/summarizing_variability.qmd#fig-ssgif), from our section on [summarizing variability for a refresher](../univariate_summaries/summarizing_variability.qmd#summarizing_variability).
 :::
 
 

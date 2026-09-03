@@ -152,7 +152,7 @@ There are different kinds of predictions we might want to make.
 
 - We may want to predict what we would expect for individuals from a different population than what we are describing. In this case, a statistical association might help, but need some care.
 
-- We may want to predict what we would expect if we experimentally changed one of the value of an explanatory variable (e.g. if "I experimentally decreased anther-stigma distance, would plants set more hybrid seed?") This is a causal prediction! 
+- We may want to predict what we would expect if we experimentally changed one value of an explanatory variable in an individual (e.g. if "I experimentally decreased anther-stigma distance, would plants set more hybrid seed?") This is a causal prediction! 
 
 Misalignment between expectations and the reality is a common trope in comedy and drama. For example, hilarity may ensue when an exotic dancer in a firefighter or police costume is mistaken for a true firefighter or policeman (See the scene from [Arrested Development](https://en.wikipedia.org/wiki/Arrested_Development) below ([youtube link](https://www.youtube.com/watch?v=2iiw4Z95pgE))). Such jokes show that we have an intuitive understanding that predictions can be wrong, and that the context plays a key role in our ability to make good predictions. 
 

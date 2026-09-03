@@ -137,7 +137,7 @@ There are three basic reasons why and when we can have a correlation without a c
 #| echo: false
 #| message: false
 #| warning: false
-#| fg-alt: "Three scatterplots labeled A, B, and C, showing pairwise relationships among traits in parviflora recombinant inbred lines. Plot A shows a positive relationship between anther–stigma distance and proportion hybrid. Plot B shows a positive association between petal area and anther–stigma distance. Plot C shows a positive association between petal area and proportion hybrid. Each plot includes a fitted regression line. Together, these plots suggest that petal area might confound the relationship between anther–stigma distance and hybridization rate."
+#| fig-alt: "Three scatterplots labeled A, B, and C, showing pairwise relationships among traits in parviflora recombinant inbred lines. Plot A shows a positive relationship between anther–stigma distance and proportion hybrid. Plot B shows a positive association between petal area and anther–stigma distance. Plot C shows a positive association between petal area and proportion hybrid. Each plot includes a fitted regression line. Together, these plots suggest that petal area might confound the relationship between anther–stigma distance and hybridization rate."
 #| label: fig-confound
 #| fig-cap: "**Potential confounding** in parviflora RILs. The observed association between proportion hybrid seed and anther–stigma distance (**A**), might be due to the fact that both anther–stigma distance (**B**), and proportion hybrid  seed increases with petal area (**C**), rather than a causal effect of anther–stigma distance itself.<br><br><br>"
 #| fig-height: 6.5

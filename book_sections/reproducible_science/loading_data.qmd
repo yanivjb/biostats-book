@@ -4,7 +4,7 @@
 
 
 
-**Motivating scenario:** You have data and you want to get it into R so you can start analyzing them.    
+**Motivating scenario:** You want to load your data into R so that you can begin your analyses! 
 
 **Learning goals: By the end of this chapter you should be able to**  
 

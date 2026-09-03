@@ -234,7 +234,7 @@ gc_rils |>
 ::::::
 
 
-It helps to remember that in contrast to a bar plot, where the value on the x axis is the value of all the observations in that bar, in a histogram this value is the center of the range of values in the bin. So in @fig-prop_hyb_hist the first bin corresponds to values between -0.0625 and 0.0625, and the second bin (centered on 1/8th) corresponds to proportions between 0.0625 and 0.1875, etc... .  The x-axis of @fig-prop_hyb_hist2 shows this more explicitly, but it is too busy, and complex for standard presentation. 
+It helps to remember that in contrast to a bar plot, where the value on the x axis is the value of all the observations in that bar, in a histogram this value is the center of the range of values in the bin. So in @fig-prop_hyb_hist the first bin corresponds to values between -0.0625 and 0.0625, and the second bin (centered on 1/8th) corresponds to proportions between 0.0625 and 0.1875, etc...  The x-axis of @fig-prop_hyb_hist2 shows this more explicitly, but it is too busy, and complex for standard presentation. 
 
 ```{r}
 #| echo: false

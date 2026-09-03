@@ -396,7 +396,7 @@ The careful reader might notice an apparent contradiction. I just said that bloc
 
 
 
-We all know how to make estimates match true parameters -- measure the entire population. But this is impracticable, and a huge waste of time and energy. So in all studies trade-off precision of an estimate and time/money/effort.  While we know that "failing to reject the null" doesn't make it false, failing to reject a false null with a relevant effect size is a bummer. So a key question when you plan your experiment is, how much certainty do you want in your estimate / how much "power" to reject the null do you want?
+We all know how to make estimates match true parameters -- measure the entire population. But this neither practical, nor smart (it's a huge waste of time and energy). So a key question when you plan your experiment is, "how much certainty do you want in your estimate / how much power to reject the null do you want?"  
 
 
 
@@ -412,7 +412,7 @@ Once you have a sense of the answers to these questions, we can use the tools be
 
 #### Power: A brief review
 
-Because estimates are influenced by chance, our ability to correctly reject a false null hypothesis (or not) is probabilistic. **Power** -- that probability that we correctly reject a false null hypothesis is influence by two factors:  
+Because estimates are influenced by chance, our ability to correctly reject a false null hypothesis (or not) is probabilistic. **Power**, the probability that we correctly reject a false null hypothesis is influenced by two factors:  
 
 1. The "**effect size**" -- that is the difference between the true parameter and the null, and    
  
@@ -440,7 +440,7 @@ The sample size needed to reject the null for some desired level of power, scale
 
 There are both  online tools (e.g., [this one from UBC](https://www.stat.ubc.ca/~rollin/stats/ssize/n2.html)) and R packages (the [`pwr`](https://cran.r-project.org/web/packages/pwr/index.html) package is most popular) to find the power you need for a study. Similarly, the  `presize` [R package](https://dcr-unibe-ch.github.io/presize/) and [webapp](https://shiny.ctu.unibe.ch/presize/) provide a way for you to base study sizes on how certain you want to be in your estimate rather than the power you have to reject the null.
 
-Throughout the book, I will try to highlight these power analysis when possible.   However, I note that the tools above are built around relatively simple studies. When your analysis is more complex, you may need to simulate your study to estimate power.
+Throughout the book, I will try to highlight these power analyses when possible.   However, I note that the tools above are built around relatively simple studies. When your analysis is more complex, you may need to simulate your study to estimate power.
 
 
 

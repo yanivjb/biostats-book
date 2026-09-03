@@ -401,7 +401,7 @@ We can think of this as a covariance between alleles inherited from mom and dad 
 
 **Linkage Disequilibrium (LD)**   
 
-[Linkage disequilibrium](https://cooplab.github.io/popgen-notes/#correlations-between-loci-linkage-disequilibrium-and-recombination) quantifies the statistical association between alleles at different loci. The most standard quantification of linkage disequilbrium is $D = Cov(A,B) = p_{AB} - p_A p_B$. Where A and B are alleles at two different loci. Although usually quantified as a covariance, other measures of LD include a correlation in allele frequencies between loci.
+[Linkage disequilibrium](https://cooplab.github.io/popgen-notes/#correlations-between-loci-linkage-disequilibrium-and-recombination) quantifies the statistical association between alleles at different loci. The most standard quantification of linkage disequilibrium is $D = Cov(A,B) = p_{AB} - p_A p_B$. Where A and B are alleles at two different loci. Although usually quantified as a covariance, other measures of LD include a correlation in allele frequencies between loci.
 
 
 

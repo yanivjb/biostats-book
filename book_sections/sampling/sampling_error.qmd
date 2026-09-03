@@ -224,7 +224,7 @@ makeTable2 <- function(saw_hz_sample,parameters){
 
 ####  Step 1: Sample from a population
 
-Let's take a sample of from our population.  How big should this sample be? It should be the same size as the sample in your study. Remember we are simulating the process of sampling by taking a sample from our population. This is what we do in statistics! 
+To consider the process of sampling, let's take a sample from our population.  How big should this sample be? It should be the same size as the sample in your study. Remember we are simulating the process of sampling by taking a sample from our population. This is what we do in statistics! 
 
 **The code below takes a random sample of ten plants from our population.** 
 

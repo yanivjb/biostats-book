@@ -247,7 +247,7 @@ Try typing `glimpse(iris)`
 
 **Debugger’s note:** In a hidden setup chunk I wrote: `conflicts_prefer(stats::filter)` to tell R to prefer `stats::filter()` over `dplyr::filter()`.  Because of this, `filter()` no longer understands column names inside a data frame. So I forced this error on you.
 
-In real workflows, it can be hard to predict which version of a function R will use.  This issue arises even when I don't trick you. So always tell R which version of filter() you want to use. `filter()` may on your computer today without `dplyr::filter()` or `conflicts_prefer(dplyr::filter)`, but it might not work on someone else's computer (it might even fail on your computer next week).
+In real workflows, it can be hard to predict which version of a function R will use.  This issue arises even when I don't trick you. So always tell R which version of filter() you want to use. `filter()` may work on your computer today without `dplyr::filter()` or `conflicts_prefer(dplyr::filter)`, but it might not work on someone else's computer (it might even fail on your computer next week).
 
 `r unhide()`
 :::
