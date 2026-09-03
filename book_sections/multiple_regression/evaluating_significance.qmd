@@ -215,7 +215,7 @@ In practice, I think it's best to always use Type II sums of squares for additiv
 ### Post-hoc tests
 
 :::aside
-In the [ANOVA](#post_hoc) section, we used [`multcomp`](https://cran.r-project.org/web/packages/multcomp/index.html)'s [`glht()`](https://search.r-project.org/CRAN/refmans/multcomp/html/glht.html) function for a post hoc test. We can also do this for a multiple regression (but be sure to convert location to a factor) if you use this function. 
+In the [ANOVA](#post_hoc) section, we used [`multcomp`](https://cran.r-project.org/web/packages/multcomp/index.html)'s [`glht()`](https://search.r-project.org/CRAN/refmans/multcomp/html/glht.html) function for a post hoc test. We can also do this for a multiple regression (but be sure to convert location to a factor) if you use the [`glht()`](https://search.r-project.org/CRAN/refmans/multcomp/html/glht.html) function. 
 
 Here I chose to use the [`emmeans`](https://rvlenth.github.io/emmeans/) package, because we will also use it in the next section to quantify uncertainty. 
 :::

@@ -216,7 +216,7 @@ As seen previously, predictions of a linear model do not perfectly match the dat
 #| message: false
 #| warning: false
 #| code-fold: true
-#| fig-cap: "A scatterplot showing the relationship between petal area and proportion hybrd seeds. The highlighted point in turquoise marks plant 3, used as an example in the residual calculation. This point’s vertical distance from the regression line represents its residual"
+#| fig-cap: "A scatterplot showing the relationship between petal area and proportion hybrid seeds. The highlighted point in turquoise marks plant 3, used as an example in the residual calculation. This point’s vertical distance from the regression line represents its residual"
 #| fig-alt: "Scatterplot of proportion of hybrid seed (y-axis) against petal area in mm² (x-axis) for Clarkia plants. Black dots represent individual plants, and a blue line indicates the fitted linear regression. The green dot represents individual three, that you will investigate in more detail below."
 ggplot(gc_rils|> mutate(i = 1:n()), 
        aes(x = petal_area_mm, y = prop_hybrid))+

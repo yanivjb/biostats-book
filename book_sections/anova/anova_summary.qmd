@@ -445,8 +445,10 @@ Let’s hone in on the comparisons with `p.adj` $< 0.05$ (i.e., where we reject 
 * **One-way ANOVA**: A comparison of means across more than two groups.
 * **Residual**: The difference between an observation and its value predicted by the linear model. 
 * **Homoscedasticity**: Equal variance across groups.  
-* **Between-Group Variation ($\text{SS}_\text{model}$)**: Variation explained by differences among group means. $\text{SS}_\text{model} = \Sigma{(\hat{Y_i} - \bar{Y})^2}$. We can also find $\text{MS}_\text{model}$ by dividing $\text{SS}_\text{model}$ by $df_\text{model}$, where $df_\text{model}$ is the number of terms in our linear model. 
-* **Within-Group Variation ($\text{SS}_\text{error}$)**: Variation among observations within each group.  $\text{SS}_\text{error} = \Sigma{(Y_i-\hat{Y_i})^2}$. We can also find $\text{MS}_\text{error}$ by dividing $\text{SS}_\text{error}$ by $df_\text{error}$, where $df_\text{error}$ is the number of observations minus the number of terms in our linear model. 
+* **$df_\text{model}$**: Degrees of freedom model, which equals the number of terms in our linear model.
+* **$df_\text{error}$**: Degrees of freedom error, which equals $n-df_\text{error}$.   
+* **Between-Group Variation ($\text{SS}_\text{model}$)**: Variation explained by differences among group means. $\text{SS}_\text{model} = \Sigma{(\hat{Y_i} - \bar{Y})^2}$. We can also find $\text{MS}_\text{model}$ by dividing $\text{SS}_\text{model}$ by $df_\text{model}$. 
+* **Within-Group Variation ($\text{SS}_\text{error}$)**: Variation among observations within each group.  $\text{SS}_\text{error} = \Sigma{(Y_i-\hat{Y_i})^2}$. We can also find $\text{MS}_\text{error}$ by dividing $\text{SS}_\text{error}$ by $df_\text{error}$.
 * **F Statistic**: Ratio of between-group to within-group variance: $F = \frac{\text{MS}_\text{model}}{\text{MS}_\text{error}}$.   
 * **$R^2$**: Proportion of total variance explained by the model. $R^2 = \frac{SS_\text{model}}{SS_\text{total}}$.  
 * **Post-hoc Test**: A follow-up test conducted after rejecting ANOVA’s null hypothesis to determine which specific groups differ.

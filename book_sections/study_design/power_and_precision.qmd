@@ -396,7 +396,7 @@ The careful reader might notice an apparent contradiction. I just said that bloc
 
 
 
-We all know how to make estimates match true parameters -- measure the entire population. But this neither practical, nor smart (it's a huge waste of time and energy). So a key question when you plan your experiment is, "how much certainty do you want in your estimate / how much power to reject the null do you want?"  
+We all know how to make estimates match true parameters -- measure the entire population. But this is neither practical, nor smart (it's a huge waste of time and energy). So a key question when you plan your experiment is, "how much certainty do you want in your estimate / how much power to reject the null do you want?"  
 
 
 

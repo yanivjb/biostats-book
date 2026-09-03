@@ -377,7 +377,7 @@ gc_rils |>
 R's built in [`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html) function actually measures the median absolute difference.
 :::
 
-Or we can skip the formulae. and just use standard R functions. For example, [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) and [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) calulate the sample variance and standard deviation, respectively. We can even find the median absolute difference as [`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html) function (note, there is no shortcut to get the mean absolute difference, you must type: `mean(abs(x - mean(x)))`).
+Or we can skip the formulae and just use standard R functions. For example, [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html) and [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) calculate the sample variance and standard deviation, respectively. We can even find the median absolute difference with the [`mad()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/mad.html) function (note, there is no shortcut to get the mean absolute difference, you must type: `mean(abs(x - mean(x)))`).
 
 
 

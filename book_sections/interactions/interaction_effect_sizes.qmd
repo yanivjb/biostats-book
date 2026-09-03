@@ -355,7 +355,7 @@ The two confidence intervals describe uncertainty in each slope. Note that they 
 
 Let's try to synthesize these results into a brief "results" paragraph: 
 
-*We tested the contribution of petal color, petal area and their interaction to the proportion of hybrid seeds on a RIL. Using Type II sums of squares, we found significant associations between the proportion of hybrid seeds and petal color ($F_{1,398} = 80.23, p < 2.2e-16), petal area ($F_{1,398} = 28.2$, p < 2 e-7), and their interaction ($F_{1,398} = 24.4$, p < 2 e-6). This interaction reflects the sharp increase in the proportion of hybrid seed with petal area in pink-, but not white-petaled RILs (compare slopes of 0.0075 -- 95% CI: {0.0054 : 0.0095}  and 0.0007 -- 95% CI: {-0.0010 : 0.0025}, respectively).*
+*We tested the contribution of petal color, petal area and their interaction to the proportion of hybrid seeds on a RIL. Using Type II sums of squares, we found significant associations between the proportion of hybrid seeds and petal color ($F_{1,398}$ = 80.23, p < 2.2e-16), petal area ($F_{1,398}$ = 28.2, p < 2 e-7), and their interaction ($F_{1,398}$ = 24.4, p < 2 e-6). This interaction reflects the sharp increase in the proportion of hybrid seed with petal area in pink-, but not white-petaled RILs (compare slopes of 0.0075 -- 95% CI: {0.0054 : 0.0095}  and 0.0007 -- 95% CI: {-0.0010 : 0.0025}, respectively).*
 
 
 

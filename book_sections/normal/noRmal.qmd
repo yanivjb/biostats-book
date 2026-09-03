@@ -37,7 +37,7 @@ library(tidyr)
 
 ## Simulating from Normal Distributions in R
 
-In the previous section, we used a web app to calculate probabilities from a normal distribution. Here, I introduce R's [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to generate random data from the normal distribution. The simple [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) simulation below will give us the same answer as our calculations above. I teach simulation because I think its randomness builds intuition, and because simulation also works in more complex cases where there isn't a mathematical answer.
+Earlier, I showed you how to use a web app or R's [`pnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function  to calculate probabilities from a normal distribution. Here, I introduce R's [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to generate random data from the normal distribution. The simple [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) simulation below will give us the same answer as our calculations above. I teach simulation because I think its randomness builds intuition, and because simulation also works in more complex cases where there isn't a mathematical answer.
 
 
 ## Simple Simulation with [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html)   

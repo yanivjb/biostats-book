@@ -68,14 +68,12 @@ Recall that "linear models" are "linear" because we find an individual's predict
 
 $$\hat{Y}_i = a + b_1 x_{1,i} + b_2 x_{2,i} + \dots{}$$
 
-Just like a one- or two-sample t-test, the ANOVA is a linear model. As such, it models group means as a function of group membership. This works by: 
-
-picking one group as the  "reference level" and having that group's mean represented as the intercept. Then each "slope" $b$ is the difference between that group's mean and the reference group's mean, and the corresponding $x_i$s are one if the  individual is in that group and zero otherwise.   
+Just like a one- or two-sample t-test, the ANOVA is a linear model. As such, it models group means as a function of group membership. This works by picking one group as the  "reference level" and having that group's mean represented as the intercept. Then each "slope" $b$ is the difference between that group's mean and the reference group's mean, and the corresponding $x_i$s are one if the  individual is in that group and zero otherwise. 
  
 :::aside
 By default R chooses the reference levels as the alphabetically first one. We often don't want that (e.g. you may want the control to be first). The [`fct_relevel()` function](https://forcats.tidyverse.org/reference/fct_relevel.html) in the [`forcats` package](https://forcats.tidyverse.org/) can help (see fyi below)!
 
-In this sections below, I typed: `mutate(site = fct_reorder(site, mean_petal_area_sq_cm)` to  order `site's factor levels by their mean admixture proportion. This is a standard practice for nominal categorical variables.
+In this section, I typed: `mutate(site = fct_reorder(site, mean_petal_area_sq_cm)` to  order `site`'s factor levels by their mean admixture proportion. This is a standard practice for nominal categorical variables.
 
 :::
 

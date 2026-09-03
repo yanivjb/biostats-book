@@ -69,14 +69,14 @@ include_graphics("../clarkia_pics/xan_greenhouse.png")
 We will see that testing for a difference between each group mean in a pairwise manner introduces a "multiple testing problem." The multiple testing problem simply means that the probability of rejecting one or more true null hypotheses increases as you test more null hypotheses.
 
 
-I show thatthe ANOVA approach allows us to overcome this multiple testing problem by testing a single null hypothesis -- that the true group means are identical (i.e. there is no among-group variance in the population). I then introduce the "post-hoc" testing framework to adjust your p-values (or other means to appropriately calibrate the $\alpha$ thresholds) to incorporate the fact that you are  testing multiple hypotheses after finding that not all group means are equal.
+I show that the ANOVA approach allows us to overcome this multiple testing problem by testing a single null hypothesis -- that the true group means are identical (i.e. there is no among-group variance in the population). I then introduce the "post-hoc" testing framework to adjust your p-values (or other means to appropriately calibrate the $\alpha$ thresholds) to incorporate the fact that you are  testing multiple hypotheses after finding that not all group means are equal.
 
 
 ## Example data
 
 
 
-We will revisit the data from parviflora plants in natural hybrid zones introduced in the previous chapter. This time, we will look at the variability in admixture proportion among parviflora populations. This is potentially interesting because ecological features  differ across sites, and it's worth noting whether this Variability modulates the extent of gene flowin nature!  The data are plotted below:
+We will revisit the data from parviflora plants in natural hybrid zones introduced in the previous chapter. This time, we will look at the variability in admixture proportion among parviflora populations. This is potentially interesting because ecological features  differ across sites, and it's worth noting whether this variability modulates the extent of gene flow in nature!  The data are plotted below:
 
 
 ```{r}

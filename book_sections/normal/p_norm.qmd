@@ -42,11 +42,11 @@ library(tidyr)
 
 ## Finding probabilities of a range with `pnorm()`  
 
-I introduced a webapp that integrates the area under the standard normal curve for you, and have shown that you can use `rnorm()` to simulate a normal distribution. Here, I introduce how to use `pnorm()` to have R, rather than my webapp, calculate this area. 
+I introduced a webapp that integrates the area under the standard normal curve for you. Here, I introduce the [`pnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function, and show you how to use it to have R, rather than a webapp, calculate this area. [Later](#noRmal), I will introduce how to use [`rnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) to simulate this process.
 
 This is useful because we often want to calculate a p-value, which amounts to asking "*How much of the null sampling distribution is more extreme than my observed test statistic?*"
 
-### Intro to `pnorm()`
+### Intro to [`pnorm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html)
 
 ```{r}
 #| echo: false

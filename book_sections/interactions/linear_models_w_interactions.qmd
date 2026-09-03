@@ -299,7 +299,7 @@ enframe(ab)|>
 
 
 
-As in the previous example, this might make you initially misinterpret these coefficients. For example, you may think that this combination was awesome for proportion hybrid seed. But it does not. Rather, this means that their predicted value is higher than the negative 10%  of hybrid seeds we would predict  by simply subtracting these coefficients from the intercept. 
+As in the previous example, this might make you initially misinterpret these coefficients. For example, you may think that this combination was awesome for proportion hybrid seed. But it does not. Rather, this means that their predicted value is higher than the negative 20%  of hybrid seeds we would predict  by simply subtracting these coefficients from the intercept. 
 
 We can use these coefficients to find $\hat{Y}_i$ for all combinations of petal color and planting location. I present a few of these below: 
 

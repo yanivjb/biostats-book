@@ -263,7 +263,7 @@ library(palmerpenguins)
 - **Observed value (`yᵢ`)**: The actual value of the response variable: $y_i = \hat{y}_i +e_i$.     
 - **Residual (`eᵢ`)**: The difference between an observed value and its model-predicted value, $e_i = y_i-\hat{y}_i$.  
 - **Residual Sum of Squares**: $\sum e_i^2$
-- **Residual Standard Deviation**: A measure of typical residual size — how far off predictions tend to be $\sqrt{\frac{\sum e_i^2}{n-2}}$.
+- **Residual Standard Deviation**: A measure of typical residual size — how far off predictions tend to be $\sqrt{\frac{\sum e_i^2}{n-k}}$, where $k$ is the number of parameters estimated in our model. For a simple linear regression $k=2$, as we estimate the slope slope and the intercept.
 
 
 

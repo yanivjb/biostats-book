@@ -51,8 +51,8 @@ clarkia_hz <- read_csv(hz_link)|>
 
 ```{r}
 #| echo: false
-#| fig-cap: "All six pairwise comparisons of mean admixture proportion area among four *Clarkia xantiana parviflora* hybrid zone populations. This presentation implicitly sets up six separate null hypotheses to test. Compare this to the figure in the first section, which showed data from all four sites together in one plot."
-#| fig-alt: "Six panels show pairwise comparisons of mean admixture proportion among four Clarkia populations (SR, S22, S6, SM). Each panel contains two colored violins with overlaid points and black 95% confidence intervals. Some pairs appear different, others overlap, but all share the same vertical scale (0–0.7 square centimeters)."
+#| fig-cap: "All six pairwise comparisons of mean admixture proportion among four *Clarkia xantiana parviflora* hybrid zone populations. This presentation implicitly sets up six separate null hypotheses to test. Compare this to the figure in the first section, which showed data from all four sites together in one plot."
+#| fig-alt: "Six panels show pairwise comparisons of mean admixture proportion among four Clarkia populations (SR, S22, S6, SM). Each panel contains two colored violins with overlaid points and black 95 percent confidence intervals. Some pairs appear different, others overlap, but all share the same vertical scale (ranging from zero to one tenth)."
 #| label: fig-sixcomps
 #| fig-height: 2.5
 library(patchwork)
@@ -142,7 +142,7 @@ f <- clarkia_hz |>
 
 ## Multiple tests make a liar of your p-value
 
-There are  ${4 \choose 2} = 6$ possible pairwise comparisons of  mean admicture proportions among the four  *Clarkia xantiana parviflora* hybrid zone populations we studied (@fig-sixcomps).   Even when all six nulls are true, there’s roughly a one in four chance that at least one test will falsely appear ‘significant.’ That’s because the probability all six avoid a false positive is $0.95^6 =  0.735$. 
+There are  ${4 \choose 2} = 6$ possible pairwise comparisons of  mean admixture proportions among the four  *Clarkia xantiana parviflora* hybrid zone populations we studied (@fig-sixcomps).   Even when all six nulls are true, there’s roughly a one in four chance that at least one test will falsely appear ‘significant.’ That’s because the probability all six avoid a false positive is $0.95^6 =  0.735$. 
 
 Thus for this study, the probability of at least one false positive is  $1 - 0.735 = 0.265$, a  value much larger than the $\alpha = 0.05$ that was advertised.  This problem gets pretty bad pretty quick (@fig-mutltest). As such, conducting many t-tests on the same data makes your p-values misleading—they no longer represent the 5% false-positive rate we usually assume. When you run multiple tests, the chance of seeing at least one ‘significant’ result just by luck is much higher, so the reported p-values give a false sense of confidence
 
