@@ -67,7 +67,7 @@ Try these questions! By using the R environment you can work without leaving thi
 
 ### Part 1: Reflecting on this chapter 
 
-*In this chapter we used the ANOVA to test the null hypothesis that pink and white parviflora flowers have the same admixture proportion at Sawmill Road.*  
+*In this chapter we used the ANOVA to test the null hypothesis that pink and white parviflora flowers have the same admixture proportion at Squirrel Mountain.*  
 
 :::exercises
 

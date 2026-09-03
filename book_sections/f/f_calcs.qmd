@@ -53,7 +53,7 @@ clarkia_hz <- read_csv(hz_link)|>
 ---
 
 
-Let's look at the association between petal color and admixture proportion of natural *parviflora* plants in the SR hybrid zone. The motivating idea is: if  white petals do not attract pollinators (as seen in the previous chapter), white plants will have had less admixture (because they would not receive *xantiana* pollen). 
+Let's look at the association between petal color and admixture proportion of natural *parviflora* plants in the SM hybrid zone. The motivating idea is: if  white petals do not attract pollinators (as seen in the previous chapter), white plants will have had less admixture (because they would not receive *xantiana* pollen). 
 
 
 

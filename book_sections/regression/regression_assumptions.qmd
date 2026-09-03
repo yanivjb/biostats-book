@@ -257,7 +257,7 @@ ggplot(augmented_hybrid_lm,  aes(x = .fitted, y = sqrt(abs(.std.resid)))) +
 #| column: margin
 #| fig-cap: "A Q-Q plot from the model. If residuals were normally distributed data points would roughly land along the one-to-one line."
 #| fig-alt: "Q-Q plot comparing model residuals to theoretical normal quantiles. The points deviate from the diagonal reference line, especially in the upper right tail, where several points rise far above the line. The lower and middle residuals also show curvature rather than following a straight line. This indicates that the residuals are not approximately normally distributed." 
-#| label: fig-qq
+#| label: fig-qq-y
 
 augmented_hybrid_lm |>
   ggplot( aes(sample = .resid)) +
@@ -268,7 +268,7 @@ augmented_hybrid_lm |>
 ```
 
 
-As seen in our [introduction to the normal distribution](#quantile-quantile-plots-and-the-eye-test), the assumption of normality is better assessed visually, by, for example, a Q-Q plot, rather than by a formal statistical test. When evaluating the normality of residuals in a linear model, we again use a QQ plot, now plotting residuals from our model rather than raw data. As a reminder, if residuals were normally distributed, the QQ plot would be nearly a straight line. The  curving away from the expected one-to-one line in  @fig-qq shows that the residuals are not normally distributed. This deviation from the  assumption of normality is real, but we know that linear models are often robust to such violations. What to do now? 
+As seen in our [introduction to the normal distribution](#quantile-quantile-plots-and-the-eye-test), the assumption of normality is better assessed visually, by, for example, a Q-Q plot, rather than by a formal statistical test. When evaluating the normality of residuals in a linear model, we again use a QQ plot, now plotting residuals from our model rather than raw data. As a reminder, if residuals were normally distributed, the QQ plot would be nearly a straight line. The  curving away from the expected one-to-one line in  @fig-qq-y shows that the residuals are not normally distributed. This deviation from the  assumption of normality is real, but we know that linear models are often robust to such violations. What to do now? 
 
 ```{r}
 #| message: false
