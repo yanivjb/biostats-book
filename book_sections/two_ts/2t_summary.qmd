@@ -249,7 +249,7 @@ frogs |>
 
 
 
-**Q9.** Which values are NOT IN the 95% confidence interval or the difference (i.e. nonpreferred - preferred) select all that apply:
+**Q9.** Which values are NOT IN the 95% confidence interval of the difference (i.e. nonpreferred - preferred) select all that apply:
 `r longmcq(c(answer = "-92", "-42","2","52","102","152",answer ="202",answer = "252"))`
 
 

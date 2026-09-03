@@ -211,7 +211,7 @@ At n=25, the QQ plot is reasonably straight, showing the CLT has taken effect. F
 
 ---
 
-**Q2.**  What is the minimum sample size for the **proportion pink** data?
+**Q2.**  What is the minimum sample size that allows us to reasonably approximate the **proportion hybrid** data with a normal distribution?
 `r mcq(c("2", "5", "10", answer = "25"))`
 
 `r hide("Explanation")`

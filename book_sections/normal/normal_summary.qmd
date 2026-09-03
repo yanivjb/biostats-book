@@ -86,10 +86,10 @@ The Z-transform is the procedure of taking a value, subtracting the mean, and di
 
 **Q3.** Use the appropriate `_norm()` function to find the probability density that a baby is 5 kg.
 
-`r fitb(0.0105,tol = 0.001,num = TRUE)`
+`r fitb(0.0104,tol = 0.001,num = TRUE)`
 
 `r hide("Explanation")`
-We use the `dnorm()` function for probability **d**ensity: `dnorm(x = 5, mean = 3.339, sd = 0.573)`, which equals 0.0105.
+We use the `dnorm()` function for probability **d**ensity: `dnorm(x = 5, mean = 3.339, sd = 0.573)`, which equals 0.0104.
 `r unhide()`
 
 ---
@@ -105,10 +105,10 @@ False. Probability **density** is not a direct probability or proportion. For a 
 ---
 
 **Q5.** Use the appropriate [`_norm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to find the probability that a baby is greater than 5 kg.
-`r fitb( 0.0018, tol = 0.0009,num = TRUE)`
+`r fitb( 0.0019, tol = 0.0009,num = TRUE)`
 
 `r hide("Explanation")`
-We use the `pnorm()` function for cumulative **p**robability. To find the area in the upper tail (greater than), we set `lower.tail = FALSE`: `pnorm(q = 5, mean = 3.339, sd = 0.573, lower.tail = FALSE)`, which equals 0.0018.
+We use the `pnorm()` function for cumulative **p**robability. To find the area in the upper tail (greater than), we set `lower.tail = FALSE`: `pnorm(q = 5, mean = 3.339, sd = 0.573, lower.tail = FALSE)`, which equals 0.0019.
 `r unhide()`
 
 ---
@@ -118,7 +118,7 @@ We use the `pnorm()` function for cumulative **p**robability. To find the area i
 `r mcq(c("40%", "50%", answer = "60%", "70%"))`
 
 `r hide("Explanation")`
-We find the area below 4 kg and subtract the area below 3 kg: `pnorm(4, 3.339, 0.573) - pnorm(3, 3.339, 0.573) = 0.875 - 0.277 = 0.598`, or about 60%.
+We find the area below 4 kg and subtract the area below 3 kg: `pnorm(4, 3.339, 0.573) - pnorm(3, 3.339, 0.573) = 0.876 - 0.277 = 0.599`, or about 60%.
 `r unhide()`
 
 ---

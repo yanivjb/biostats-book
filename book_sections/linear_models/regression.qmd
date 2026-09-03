@@ -216,7 +216,7 @@ As seen previously, predictions of a linear model do not perfectly match the dat
 #| message: false
 #| warning: false
 #| code-fold: true
-#| fig-cap: "The same scatterplot showing the relationship between petal area as in @fig-regression. The highlighted point in turquoise marks plant 3, used as an example in the residual calculation. This point’s vertical distance from the regression line represents its residual"
+#| fig-cap: "A scatterplot showing the relationship between petal area and proportion hybrd seeds. The highlighted point in turquoise marks plant 3, used as an example in the residual calculation. This point’s vertical distance from the regression line represents its residual"
 #| fig-alt: "Scatterplot of proportion of hybrid seed (y-axis) against petal area in mm² (x-axis) for Clarkia plants. Black dots represent individual plants, and a blue line indicates the fitted linear regression. The green dot represents individual three, that you will investigate in more detail below."
 ggplot(gc_rils|> mutate(i = 1:n()), 
        aes(x = petal_area_mm, y = prop_hybrid))+
@@ -238,7 +238,7 @@ ggplot(gc_rils|> mutate(i = 1:n()),
 `r hide("Math to get us closer")`
 **Math Approach:** As above, let's visually approximate the petal area of observation 3 as 51 mm. Plugging this visual estimate into our equation (with coefficients from our linear model):
 
--0.200077       0.005659  
+
 $$\hat{y}_{\text{petal area} \approx 50 mm} =-0.200077 + 0.005659 \times 51 = 0.088532$$
 $$e_3 = y_3 -  \hat{y} = 0.250 - 0.088532 = 0.161$$
 
@@ -295,7 +295,7 @@ lm(prop_hybrid ~ petal_area_mm, data = gc_rils)       |>
 
 
 :::aside
-For technical reasons we will see later, we calculate the residual standard deviation as  $SS_\text{resid}$ divided  by n - # parameters estimated in our linear model. For the case with a mean only this was n-1.  For the case with a binary predictor it's n-2, as the two parameters are the slope and intercept (as in the previous section). 
+We calculate the residual standard deviation as  $SS_\text{resid}$ divided  by n - # parameters estimated in our linear model.  In a linear regression, we estimate two parameters (the slope and intercept), so we have `n-2` degrees of freedom. 
 :::
 
 

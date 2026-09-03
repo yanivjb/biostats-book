@@ -132,7 +132,7 @@ So, what do we make of "$\text{Effect of petal color} \times \text{value of peta
 
 $$\text{Predicted prop hybrid | Pink flower} = 0.2598  - 0.2277 \times 0 = 0.2598$$
 
-$$\text{Predicted prop hybrid | White flower} = 0.2598  - 0.2277 \times 1 = 0.0321$$
+$$\text{Predicted prop hybrid | White flower} = 0.2598  - 0.2277 \times 1 = 0.0322$$
   
 ## Predicted values are simply conditional means! 
 

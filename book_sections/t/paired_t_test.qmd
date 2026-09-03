@@ -122,7 +122,7 @@ plot_b <- ggplot(wide_lb_sr, aes(x = location, y = prop_hybrid)) +
      guides(color = guide_legend(override.aes = list(linewidth =2)))+
   labs(title = "Paired")
 
-plot_c <- wide_lb_sr |>
+plot_c <- wide_LB_SR |>
   ggplot(aes(x = diffs))+
   geom_histogram(bins = 10, color = "white",alpha = .4)+
   labs(x = "Difference (SR - LB)", title = "Difference in hybridization",y="count")+
@@ -156,7 +156,7 @@ But we're not looking for a perfect normal distribution. We want the data to be 
 #| fig-cap: "QQ-plot of differences in hybridization (Sawmill Road – Lower Breckenridge)."
 #| fig-alt: "A quantile-quantile plot with theoretical quantiles on the x-axis and observed quantiles of within-RIL hybridization differences on the y-axis. Most points fall close to the straight reference line, suggesting that the differences are approximately normal."
 
-ggplot(wide_lb_sr, aes(sample = diffs))+
+ggplot(wide_LB_SR, aes(sample = diffs))+
   geom_qq(size = 4)+
   geom_qq_line()+
   theme(axis.text = element_text(size = 24),title  = element_text(size = 24),

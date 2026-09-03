@@ -54,7 +54,7 @@ color_visit_summaries <- SR_visits |>
 
 ## Testing the null of equal means  
 
-In the previous section, we calculated a difference between pink- and white- petaled RILs at site SR of $1.76 - 0.733 = 1.027$.  We also quantified uncertainty about this estimate as a standard error of 0.262. Recalling the equation for the t-statistic:
+In the previous section, we calculated a difference between pink- and white- petaled RILs at site SR of $1.76 - 0.733 \approx 1.03$.  We also quantified uncertainty about this estimate as a standard error of 0.262. Recalling the equation for the t-statistic:
 
 $$t = \frac{\bar{x}-\mu_0}{s_\bar{x}}  = \frac{(\bar{x_1}-\bar{x_2})-0}{s_\overline{x_1-x_2}}$$ 
 In this case 
@@ -229,5 +229,5 @@ Now we can write up our results. Note this takes some thinking because we had to
 Note that I chose to report values from Welch's t-test (which does not assume equal variance) on untransformed data. To me, this strikes a balance between interpretability and statistical correctness. Although the result is essentially the same as above, the conservatism of Welch's t-test may help build readers' trust. 
 :::
 
-*At the Sawmill Road site, pink-flowered Clarkia xantiana ssp. parviflora RILs received, on average, more pollinators during a 15-minute observation than white-flowered RILs (mean pink = 1.76, mean white = 0.73). The mean difference of 1.03 visits was statistically significant (Welch's t = 4.05, df = 89.6, p = 0.00011) and associated with a moderate-to-large effect size (Cohen’s D = 0.75). Results were robust to the right-skew in the data -- bootstrap confidence intervals closely matched analytic ones, and a permutation-based p-value was similarly much smaller than 0.0001. We reject the null and conclude that pink-flowered plants attract more pollinators than white-flowered plants at this site.*
+*At the Sawmill Road site, pink-flowered Clarkia xantiana ssp. parviflora RILs received, on average, more pollinators during a 15-minute observation than white-flowered RILs (mean pink = 1.76, mean white = 0.73). The mean difference of 1.03 visits was statistically significant (Welch's t = 4.05, df = 89.6, p = 0.00011) and associated with a moderate-to-large effect size (Cohen’s D = 0.65). Results were robust to the right-skew in the data -- bootstrap confidence intervals closely matched analytic ones, and a permutation-based p-value was similarly much smaller than 0.0001. We reject the null and conclude that pink-flowered plants attract more pollinators than white-flowered plants at this site.*
 
