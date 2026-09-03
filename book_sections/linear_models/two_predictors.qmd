@@ -173,7 +173,7 @@ augmented_data |>
 ## Conditional means from General linear Models   
 
 
-With the estimates above, we can  return to our general linear model equation to find conditional means:  $$\widehat{\text{Prop hybrids}}_i = b_0 + b_1   \times  \text{PETAL AREA}_i +  b_2 \times \text{WHITE}_i$$ $$\widehat{\text{Prop hybrids}}_i =  -0.0894 + 0.00576  \times  \text{PETAL AREA}_i - 0.244192   \times \text{WHITE}_i$$
+With the estimates above, we can  return to our general linear model equation to find conditional means:  $$\widehat{\text{Prop hybrids}}_i = b_0 + b_1   \times  \text{PETAL AREA}_i +  b_2 \times \text{WHITE}_i$$ $$\widehat{\text{Prop hybrids}}_i =  -0.0914 + 0.00576  \times  \text{PETAL AREA}_i - 0.2392   \times \text{WHITE}_i$$
 
 
 ```{r}
@@ -199,7 +199,7 @@ gc_rils <- readr::read_csv(ril_link) |>
 #| column: page-right
 # prediction for i = 1
 # prediction = intercept + slope * petal area + effect of white * white (1) or pink(0)
-y_1_pred <- -0.0894 + 5.76e-3 * 44 - 0.244 * 1       
+y_1_pred <- -0.0914 + 0.00576 * 44 - 0.2392 * 1       
 
 ### The prediction for individual 1 is
 y_1_pred
@@ -211,9 +211,9 @@ y_1_pred
 
 In the webR session below: 
 
-- Find the predicted proportion of hybrid seed for individual $i=3$ `r fitb(num = TRUE, 0.208392, tol = 0.002)`.  
+- Find the predicted proportion of hybrid seed for individual $i=3$ `r fitb(num = TRUE, 0.206, tol = 0.002)`.  
 
-- Find the residual of  for individual $i=3$ `r fitb(num = TRUE, 0.04160, tol = 0.01)`.
+- Find the residual of  for individual $i=3$ `r fitb(num = TRUE, -0.044, tol = 0.003)`.
 
 
 
@@ -230,10 +230,10 @@ In the webR session below:
 ```{r}
 # Prediction for i = 3
 # b0   + b1 * petal area + b2 * white
--0.0894 + 5.76e-3 * 51.7 #   no b2 because its pink  
+-0.0914 + 5.76e-3 * 51.7 #   no b2 because its pink  
 
 # Residual for ind i = 3
-0.25  - (-0.0894 + 5.76e-3 * 51.7)
+(-0.0914 + 5.76e-3 * 51.7) - 0.25  
 ```
 `r unhide()`
 

@@ -52,7 +52,7 @@ We have previously considered standard [summaries of univariate data](#univariat
 
 
 ::: aside
-We introduced Cohen's D in the [associations section](#associations), but can be used for a single numeric variable as well!      
+We introduced Cohen's D in the [associations section](#associations), but is can be used for a single numeric variable as well!      
 :::
 
 I calculate these below:   
@@ -116,7 +116,7 @@ range_shift |>
 #| echo: false
 #| label: fig-histele
 #| fig-height: 4
-#| fig-cap: "A histogram showing the distribution of observed elevational range shifts (in meters per decade) for 30 taxonomic groups. The vertical red line indicates a shift of zero, the value specified by the null hypothesis. [Data](https://whitlockschluter3e.zoology.ubc.ca/Data/chapter11/chap11q01RangeShiftsWithClimateChange.csv) from @Chen2011."
+#| fig-cap: "A histogram showing the distribution of observed elevational range shifts (in meters per decade) for 31 taxonomic groups. The vertical red line indicates a shift of zero, the value specified by the null hypothesis. [Data](https://whitlockschluter3e.zoology.ubc.ca/Data/chapter11/chap11q01RangeShiftsWithClimateChange.csv) from @Chen2011."
 #| fig-alt: "A histogram of elevational range shifts. The x-axis ranges from roughly -20 to 100, and the y-axis (count) goes up to 7. Most of the bars are to the right of a vertical red line at x=0, indicating that most species groups shifted to higher elevations."
 range_shift |>
  ggplot(aes(x = elevationalRangeShift ))+

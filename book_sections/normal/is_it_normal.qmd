@@ -87,10 +87,10 @@ A [QQ (aka "quantile-quantile") plot](https://en.wikipedia.org/wiki/Q%E2%80%93Q_
 
 
 
-The QQ-plot of petal area in *parviflora* RILs planted at site GC  (@fig-qq) reveals that the points are fairly close to the predicted line, although both the smallest and largest values are slightly larger than expected. Is this a big deal? Is this deviation surprising? To answer that, we need to understand the variability we expect from a normal distribution.
+The QQ-plot of petal area in *parviflora* RILs planted at site GC  (@fig-qq-p) reveals that the points are fairly close to the predicted line, although both the smallest and largest values are slightly larger than expected. Is this a big deal? Is this deviation surprising? To answer that, we need to understand the variability we expect from a normal distribution.
 
 ```{r}
-#| label: fig-qq
+#| label: fig-qq-p
 #| fig-cap: "A quantile-quantile plot of petal area in *parviflora* RILs."
 #| fig-alt: "The image shows a quantile-quantile (QQ) plot of petal areas in *Clarkia xantiana ssp. parviflora* RILs. The x-axis represents the theoretical quantiles (z-transformed expectations), and the y-axis represents the observed petal area data. A straight line is drawn to indicate the expected values if the data were normally distributed. The plotted points fall near the line, though slight deviations can be observed at both the lower and upper ends, where the observed values are larger than expected." 
 #| warning: false

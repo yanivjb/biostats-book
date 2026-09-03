@@ -9,7 +9,7 @@ webr:
 ---
 
 
-Links to: [Summary](#f_summary_chapter-summary). [Chatbot tutor](#f_summary_chatbot_tutor).  [Questions](#f_summary_practice-questions). [Glossary](#f_summary_glossary-of-terms). [R packages](#f_summaryR_packages_introduced). [R functions](#f_summary_key-r-functions). [More resources](#f_summary_additional-resources).
+Links to: [Summary](#f_summary_chapter-summary). [Chatbot tutor](#f_summary_chatbot_tutor).  [Questions](#f_summary_practice-questions). [Glossary](#f_summary_glossary-of-terms). [R packages](#f_summaryR_packages-introduced). [R functions](#f_summary_key-r-functions). [More resources](#f_summary_additional-resources).
 
 
 ```{r}
@@ -81,7 +81,7 @@ Try these questions! By using the R environment you can work without leaving thi
 **Q3)** If $F$ is less than the expected value under the null, *(select all correct)* `r longmcq(c("The null is false", "The null is true","We reject the null", answer = "We fail to reject the null" ,  "We may or may not reject the null depending on the degrees of freedom."))`.
 
 
-**Q4)** Our p-value was very small (much less than the traditional (\alpha = 0.05) threshold). This means... *(select all correct)*: `r longmcq(c(answer = "It would be incredibly unlikely to observe such an extreme F statistic if the null hypothesis were true", "Pollinators avoid white flowers", "The pink petal color has introgressed from xantiana" ))`. 
+**Q4)** Our p-value was very small (much less than the traditional ($\alpha = 0.05$) threshold). This means... *(select all correct)*: `r longmcq(c(answer = "It would be incredibly unlikely to observe such an extreme F statistic if the null hypothesis were true", "Pollinators avoid white flowers", "The pink petal color has introgressed from xantiana" ))`. 
 
 
 :::

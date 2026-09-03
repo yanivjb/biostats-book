@@ -67,7 +67,7 @@ Let's look at the association between petal color and admixture proportion of na
 #| fig-height: 4
 #| fig-width: 12
 #| column: page-right
-#| label: fig-devs 
+#| label: fig-devs-a 
 #| fig-cap: "Partitioning the contribution of petal color and error to admixture proportion of pink and white parviflora plants in the Squirrel Mountain hybrid zone. **(A)** Model deviation: Lines show the distance between each sample's predicted value (i.e., the group mean) and the grand mean (black line). **(B)** Error (residual) deviation: Lines show the distance between each observation and its predicted value (i.e. group means). **(C)** Total deviation: Lines show the distance between each observation and the grand mean."
 #| fig-alt: "Three side-by-side scatterplots show how variation is partitioned in ANOVA. Each panel shows admixture proportions (y-axis) for plants with either pink (red) or white (blue) petals. A horizontal black line marks the grand mean; horizontal red and blue bars mark group means. Vertical black lines connect points to their reference mean. **A** Model deviation: Shows vertical lines from group means to the grand mean, representing between-group variation. **B** Error (residual) deviation: Shows vertical lines from individual points to their group mean, representing within-group (aka error, aka residual) variation. **C** Total deviation: Shows vertical lines from individual points to the grand mean, representing overall variation."
 library(broom)
@@ -196,7 +196,7 @@ b <- ggplot(plot_dat,
 **$Y_i$:** The actual value of $Y$ in the $i^{th}$ individual.    
 :::
 
-Before calculating these sums of squares and mean squares, it's worth visualizing the data and where these deviations come from. @fig-devs shows:     
+Before calculating these sums of squares and mean squares, it's worth visualizing the data and where these deviations come from. @fig-devs-a shows:     
 
 
 
@@ -207,12 +207,12 @@ Before calculating these sums of squares and mean squares, it's worth visualizin
 - C. **"Total  deviation":** The difference between each observed value, $Y_i$, and the grand mean. Note that this is the sum of the model and error (residual) deviation. Squaring and summing each such deviation  provides the $\text{SS}_\text{Total} = \sum{({Y}_i-\bar{Y})^2}$.    <br>  <br>  
 
 
-## Calculating SS and MS from @fig-devs
+## Calculating SS and MS from @fig-devs-a
 
 
-In each panel of @fig-devs, we can square the length of each line and add them up to find each of the relevant sums of squares! But first we need to find the lengths of these lines. In R we can do this by:   
+In each panel of @fig-devs-a, we can square the length of each line and add them up to find each of the relevant sums of squares! But first we need to find the lengths of these lines. In R we can do this by:   
 
-- Building a linear model (See [Chapter 12](#linear_models)),     
+- Building a linear model (See [Chapter 13](#linear_models)),     
 - Finding predicted values (with the [`augment()`](https://generics.r-lib.org/reference/augment.html) function in the [`broom`](https://broom.tidymodels.org/) package).    
 - Using basic [`dplyr`](https://dplyr.tidyverse.org/) manipulations like [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) and [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) to do our calculations.   
 
@@ -251,7 +251,7 @@ $\hat{Y}_\text{white}$ = $`r sm_lm$coefficients[["(Intercept)"]] |> round(digits
 
 ### SS  Calculations
 
-Now that we have our model, we can use `broom`'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function to extract key information about each RIL.  Specifically, we focus on    
+Now that we have our model, we can use `broom`'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function to extract key information about each plant.  Specifically, we focus on    
 
 - `admix_proportion`: The observed value of the response variable, $Y_i$,   
 - `.fitted`: The predicted value of the response variable, $\hat{Y}_i$,    
@@ -408,7 +408,7 @@ To test the null hypothesis that $F$ has an expected value of one, we find the p
 
 P = `pf(q = 76.5, df1 = 1, df2=44,lower.tail = FALSE)` =  $3.51 \times 10^{-11}$.
 
-Because the p-value is much smaller than our traditional $\alpha$ of 0.05. We resoundingly reject the null hypothesis. In fact, if we generated one sample from the F distribution every second, we would need to wait for more than 3,000 years until a random sample was this extreme. 
+Because the p-value is much smaller than our traditional $\alpha$ of 0.05. We resoundingly reject the null hypothesis. In fact, if we generated one sample from the F distribution every second, we would need to wait for more than 900 years until a random sample was this extreme. 
 
 
 

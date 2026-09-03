@@ -58,7 +58,7 @@ gc_rils <- ril_data |>
 
 ## The Dilemma
 
-<article class="drop-cap">We  [previously](#normal) explored samples drawn from a normal distribution. A key takeaway was the Z-transformation: .</article><br>     
+<article class="drop-cap">We  [previously](#normal) explored samples drawn from a normal distribution. A key takeaway was the Z-transformation: </article><br>     
 
 - For a single observation, $z = \frac{x - \mu}{\sigma}$.    
 - For the mean of a sample of size $n$, $Z = \frac{\overline{x} - \mu_0}{\sigma / \sqrt{n}}$.     
@@ -149,7 +149,7 @@ Since most sampling distributions are normal, but we rarely know the true popula
 
 
 :::fyi
-**You may see Z-tests in the literature.** With samples, a Z tests are not 100% correct, because we never have a population. But, Z-tests are often "right-ish". As sample sizes get large, the t- and Z- distributions converge. This is good enough for me. My view is that we should be worried quite worried about big problems that will mislead us, and less worried about modest approximations that are close to but not exactly right.
+**You may see Z-tests in the literature.** With a sample, a Z test is not 100% correct. But, Z-tests are often "right-ish". As sample sizes get large, the t- and Z- distributions converge. This is good enough for me. My view is that you should worry about big problems that will mislead you, not modest approximations that are close to, but not exactly right.
 
 :::
 

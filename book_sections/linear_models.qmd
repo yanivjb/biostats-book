@@ -99,7 +99,7 @@ To make this more concrete, we may aim to predict the number of pollinator visit
 
 In this section, we focus on building and interpreting linear models as descriptions of data. 
 
-But It should leave us well positioned to evaluate the uncertainty in estimates from linear models, test null hypotheses and the like. Because we're just introducing linear models here, we will save the important questions about what makes a linear model reasonable, and how to see if it meets its assumptions until for a bit. I will introduce assmuptions and diagnosing if data meet assumptions as we build bigger models, and introduce model evaluation after we get familiar with standard linear models. 
+But, it should leave us well positioned to evaluate the uncertainty in estimates from linear models, test null hypotheses and the like. Because we're just introducing linear models here, we will save the important questions about what makes a linear model reasonable, and evaluate if a model meets its assumptions until later in the book. 
 
 
 

@@ -22,7 +22,7 @@ library(ggplot2)
 
 
 
-Links to: [Summary](#normal_summary_chapter-summary). [Chatbot tutor](#normal_summary_chatbot_tutor).  [Questions](#normal_summary_practice-questions). [Glossary](#normal_summary_glossary-of-terms). [R packages](#normal_summaryR_packages_introduced). [R functions](#normal_summary_key-r-functions). [More resources](#normal_summary_additional-resources).
+Links to: [Summary](#normal_summary_chapter-summary). [Chatbot tutor](#normal_summary_chatbot_tutor).  [Questions](#normal_summary_practice-questions). [Glossary](#normal_summary_glossary-of-terms).  [R functions](#normal_summary_key-r-functions). [More resources](#normal_summary_additional-resources).
 
 
 
@@ -104,8 +104,8 @@ False. Probability **density** is not a direct probability or proportion. For a 
 
 ---
 
-**Q5.** Use the appropriate `_norm()` function to find the probability that a baby is greater than 5 kg.
-`r fitb( 0.0018, tol = 0.0009)`
+**Q5.** Use the appropriate [`_norm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Normal.html) function to find the probability that a baby is greater than 5 kg.
+`r fitb( 0.0018, tol = 0.0009,num = TRUE)`
 
 `r hide("Explanation")`
 We use the `pnorm()` function for cumulative **p**robability. To find the area in the upper tail (greater than), we set `lower.tail = FALSE`: `pnorm(q = 5, mean = 3.339, sd = 0.573, lower.tail = FALSE)`, which equals 0.0018.

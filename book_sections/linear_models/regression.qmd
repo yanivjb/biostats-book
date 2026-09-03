@@ -201,7 +201,7 @@ $$\hat{y_i} = -0.200 + 0.005659 \times 100 = 0.3659$$
 :::warning
 ## Don't predict outside the data's range
 
-Predictions from a linear model are only valid within the range of our observed data. For example, while our model estimates an intercept of –0.208, we certainly don’t expect a microscopic flower to receive less than zero percent  hybrid seed. Similarly, we shouldn’t expect a plant with a petal area of $300 \text{ mm}^2$ to produce more than 150% hybrid seeds. 
+Predictions from a linear model are only valid within the range of our observed data. For example, while our model estimates an intercept of –0.2, we certainly don’t expect a microscopic flower to receive less than zero percent  hybrid seed. Similarly, we shouldn’t expect a plant with a petal area of $300 \text{ mm}^2$ to produce more than 150% hybrid seeds. 
 
 More broadly, we cannot trust model predictions beyond the range of data we collected, even if predictions are not biologically implausible.
 :::

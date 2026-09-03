@@ -166,9 +166,9 @@ As we found in this case, the t can be quite robust to violations of assumptions
 ```{r}
 #| column: margin
 #| echo: false
-#| fig-cap: "Bootstrap sampling distribution of the difference in mean visits (pink − white). The histogram shows 50,000 bootstrapped estimates of the mean difference; the red vertical lines mark the 95% percentile CI (here ≈ 0.50 to 1.52)."
-#| fig-alt: "A histogram of 50,000 bootstrap estimates of the difference in mean pollinator visits between pink and white RILs (pink − white). The distribution is centered near 1.0, with most mass between roughly 0.5 and 1.5. Two red vertical lines indicate the 2.5th and 97.5th percentile cutoffs (about 0.50 and 1.52). A dashed vertical line can mark the observed sample difference."
-#| label: fig-boot
+#| fig-cap: "Bootstrap sampling distribution of the difference in mean visits (pink − white). The histogram shows 50,000 bootstrapped estimates of the mean difference; the red vertical lines mark the 95% percentile CI (here ≈ 0.5 to 1.5)."
+#| fig-alt: "A histogram of 50,000 bootstrap estimates of the difference in mean pollinator visits between pink and white RILs (pink - white). The distribution is centered near 1.0, with most mass between roughly 0.5 and 1.5. A dashed vertical line can mark the observed sample difference."
+#| label: fig-boot_x
 library(infer)
 library(tidyr)
 raw_diff <- SR_visits %>%

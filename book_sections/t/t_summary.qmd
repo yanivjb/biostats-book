@@ -261,7 +261,7 @@ hyenas |>
 
 
 
-**Q6.** The difference in laughter between subordinate and dominant hyenas is ___ **standard errors** away from the zero. `r fitb(2.85,tol = 0.051,num = TRUE)`.
+**Q6.** The difference in laughter between subordinate and dominant hyenas is ___ **standard errors** away from zero. `r fitb(2.85,tol = 0.051,num = TRUE)`.
 
 
 `r hide("Explanation")`
@@ -359,20 +359,20 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
  
 :::functions
 
-- `pt():` Finds cumulative probabilities for a t-distribution (area under the curve up to a value).   
+- [`pt():`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/TDist.html) Finds cumulative probabilities for a t-distribution (area under the curve up to a value).   
 
-- `qt():` Finds critical values (quantiles) for a t-distribution, e.g. for confidence intervals.   
+- [`qt():`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/TDist.html) Finds critical values (quantiles) for a t-distribution, e.g. for confidence intervals.   
 
-- `t.test():` Performs one-sample, two-sample, or paired t-tests in R.    
-    - *One sample"* `t.test(x = your_vector, mu = mu0)`. 
+- [`t.test():`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) Performs one-sample, two-sample, or paired t-tests in R.    
+    - *One sample* `t.test(x = your_vector, mu = mu0)`. 
         - You may need to `pull()` your vector from a column in a tibble.   
         - $\mu_0$ is the value of $\mu$ under the null hypothesis
     - *Paired:* `t.test(x = your_vector_of_diffs, mu = 0)`.  OR    `t.test(x = vector_treat_a,y = vector_treat_b, paired = TRUE)`.  
 
 
-- `lm():` Fits linear models; an intercept-only model (`lm(y ~ 1)`) is equivalent to a one-sample t-test.   
+- [`lm():`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) Fits linear models; an intercept-only model (`lm(y ~ 1)`) is equivalent to a one-sample t-test.   
 
-`geom_qq()` and `geom_qq_line()`: Create QQ plots to visually check whether data are close enough to normal. 
+- [`geom_qq()`](https://ggplot2.tidyverse.org/reference/geom_qq.html) and [`geom_qq_line()`](https://ggplot2.tidyverse.org/reference/geom_qq.html): Create QQ plots to visually check whether data are close enough to normal. 
     - Remember to set `aes(sample = THING)` instead of `aes(x = THING)`. 
 
 

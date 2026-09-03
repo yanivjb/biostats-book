@@ -112,7 +112,7 @@ Positive residuals mean the observation is above the model prediction, while neg
 
 **Worked example**.   
 
-Take, for example, individual 14 ($i = 14$, green point in the plot above), where five of eight (0.625) of its seeds are hybrids:  
+Take, for example, individual 14 ($i = 14$, green point in the plot below), where five of eight (0.625) of its seeds are hybrids:  
 
 - **Its observed value, $y_i$,** is the proportion of its seeds that are hybrids, which is 0.625.   
 - **Its predicted value, $\hat{y}_i$,** is the proportion of all seeds that are hybrids (dashed red line), which is `r mean(gc_rils$prop_hybrid , na.rm = TRUE)|> round(digits = 3)`.  
@@ -256,7 +256,7 @@ STOP HERE UNLESS YOU REALLY WANT MORE
 
 You already know the formula for the mean. But let's imagine you didn’t. What properties would you want a good summary of the center of the data to have? What criteria would you use to say one summary was the best? We have already [discussed this at length](#summarizing_center), and concluded it depends on the shape of the data etc... 
 
-While you should consider the shape of our data when summarizing it, a common criterion for the "best" estimate is the one that minimizes the sum of squared residuals. @fig-minimize_ss shows that of all proposed means for the proportion of hybrid seeds set at GC, the arithmetic mean minimizes the sum of squared residuals. This is always the case!
+While you should consider the shape of our data when summarizing it, a common criterion for the "best" estimate is the one that minimizes the sum of squared residuals. @fig-minimize_ss_a shows that of all proposed means for the proportion of hybrid seeds set at GC, the arithmetic mean minimizes the sum of squared residuals. This is always the case!
 
 
 **By looping over many proposed means ($0$ to $0.3$), the plot below illustrates that the arithmetic mean minimizes the sum of squared residuals:** The sum of squared residuals for a given proposed mean is shown:  *In color* on all three plots (yellow is a large sum of squared residuals, red is intermediate, and purple is low);  *Geometrically* as the size of the square  in the center plot; *On the y-axis* of the right plot.  
@@ -421,7 +421,7 @@ image_write(combined, "figs/summarizing_data/linear_models/mean_combined.gif")
 
 ```{r}
 #| echo: false
-#| label: fig-minimize_ss
+#| label: fig-minimize_ss_a
 #| fig-cap: "**The mean minimizes the sum of squared residuals:** The *left panel* shows the observed data points connected to proposed means (shown as a horizontal line), with colors indicating how much the sum of squared residuals differs from the minimum  sum of squared residuals. The *center panel* visualizes the total squared error geometrically. The *right panel* shows the sum of squared residuals as a function of proposed mean values, with the current proposed mean highlighted with a point. The proposed value that minimizes the sum of squared residuals equals the arithmetic mean."
 #| fig-alt: "The animation shows three panels. In the left panel, observed data points are connected to a horizontal line representing the proposed mean, colored by the difference in the  sum of squared residuals from the minimum. The center panel shows a square whose area reflects the total sum of squared residuals. The right panel plots the sum of squared residuals against proposed mean values, with a moving point indicating the current proposed mean. The animation illustrates that the mean is the value that minimizes the sum of squared residuals."
 include_graphics("../../figs/summarizing_data/linear_models/mean_combined.gif")

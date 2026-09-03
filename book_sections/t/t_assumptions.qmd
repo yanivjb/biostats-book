@@ -58,7 +58,9 @@ Modeling uncertainty and testing null hypotheses requires an appropriate samplin
 
 If our data meet assumptions, we can trust our inference. If data do not meet assumptions, the validity of our inferences is no longer guaranteed. Rather we must think hard about our data and what we know about our distribution to evaluate whether we can trust our inference (i.e. if our inferences are robust to violations of assumptions) or not. 
 
-The robustness of our inference depends on which assumptions are broken, and how severe any such violations are. For example, because the central limit theorem states any sampling distribution approaches a normal distribution as sample sizes get large the t-distribution is robust to modest deviations from normality.  Here's  what to do if our data violate different assumptions:   
+The robustness of our inference depends on which assumptions are broken, and how severe these violations are. For example, because the central limit theorem states that any sampling distribution approaches a normal distribution as sample sizes get large, the t-distribution is robust to modest deviations from normality.  
+
+But, of course, we cannot ignore all violations of model assumptions. Here's  what to do if our data violate different assumptions:   
 
   
 

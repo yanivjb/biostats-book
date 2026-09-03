@@ -131,7 +131,7 @@ For the rest of this section we will deal with a population with a mean $\mu$ of
 #| fig-height: 3.5
 #| out-width: "70%"
 #| fig-alt: "A line graph showing a red, bell-shaped curve representing the probability density of a normal distribution. The horizontal x-axis is labeled \"log<sub>10</sub> petal area (mm)\" and ranges from approximately 1.5 to 2.1. The vertical y-axis is labeled \"probability density\" and ranges from 0 to 4. The curve peaks around an x-value of 1.78."
-#| fig-cap: "The normal distribution that fits the log-10 transformed petal area data. The curve shows the probability density for any given value, pretending our sample means and standard deviations were actually parameters in a normal distribution. This raw probability density is proportional to the line in Figure 1, above, but is not scaled to match our sample size or the bin width of the histogram."
+#| fig-cap: "The normal distribution that fits the log-10 transformed petal area data. The curve shows the probability density for any given value, pretending our sample means and standard deviations were actually parameters in a normal distribution. This raw probability density is proportional to the line in the first figure in this subsection, but is not scaled to match our sample size or the bin width of the histogram."
 ggplot(gc_rils, aes(x = log10_petal_area_mm))+
 
     stat_function(fun = function(x) { 

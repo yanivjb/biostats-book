@@ -79,7 +79,7 @@ What  this means is that we can summarize a histogram by an equation. This also 
 This is remarkably powerful because we can then effectively summarize hundreds of data points with a few numbers, and because we can apply a whole bunch of mathematical machinery to generate sampling distributions and do statistics!!  
 
 :::fyi
-This section focusses on the normal distribution. Other common statistical distributions include:   
+This section focuses on the normal distribution. Other common statistical distributions include:   
 
 - **Binomial:**  The number of "successes" in *n* trials. This is a natural distribution for e.g. the number of hybrid seeds out of *n* genotyped offspring.  
 

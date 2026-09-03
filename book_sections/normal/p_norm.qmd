@@ -50,7 +50,7 @@ This is useful because we often want to calculate a p-value, which amounts to as
 
 ```{r}
 #| echo: false
-#| label: fig-tails 
+#| label: fig-tails-c 
 #| fig-cap: "A normal distribution with a mean of 1.78 and a variance of 0.01. The shaded blue areas in the tails represent the probabilities of observing a value more than 1.5 standard deviations away from the mean. The left tail corresponds to `pnorm(lower.tail = TRUE)`, while the right tail corresponds to `pnorm(lower.tail = FALSE)`."
 #| fig-alt: "A bell-shaped normal distribution with mean 1.78 and standard deviation 0.1. The curve peaks at the mean and tapers symmetrically on both sides. The regions more than 1.5 standard deviations from the mean are shaded in blue: values less than 1.63 on the left and greater than 1.93 on the right. The left shaded region is labeled lower.tail = TRUE, and the right shaded region is labeled lower.tail = FALSE, illustrating how pnorm() calculates probabilities in the lower or upper tail."
 mu           <- 1.78
@@ -87,7 +87,7 @@ We can find the probability that a sample from a normal is greater than or less 
 - `q`: The value of interest.   
 - `mean`: The population mean, $\mu$.      
 - `sd`: The population standard deviation, $\sigma$.   
-- `lower.tail`: Whether we want the upper or lower tail (see @fig-tails).      
+- `lower.tail`: Whether we want the upper or lower tail (see @fig-tails-c).      
     - Set `lower.tail = TRUE` for the lower tail.  
     - Set `lower.tail = FALSE` for the upper tail.   
     

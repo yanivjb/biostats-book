@@ -220,7 +220,7 @@ frogs |>
 
 **Q5.** Given the answers above, characterize this effect size. 
 
-`r longmcq(c(answer = "Not worth reporting (Cohen's D is less than 0.01)", "Tiny	(Cohen's D is between 0.01 and 0.20)", "Small	(Cohen's D is between 0.20 and 0.50)", "Medium	(Cohen's D is between 0.50 and 0.80)", "Large	(Cohen's D is between 0.80 and 1.20)", "Very large	(Cohen's D is between 1.20 and 2.00)", "Huge	(Cohen's D is greater than 2.00)"))`
+`r longmcq(c("Not worth reporting (Cohen's D is less than 0.01)", "Tiny	(Cohen's D is between 0.01 and 0.20)",answer =  "Small	(Cohen's D is between 0.20 and 0.50)", "Medium	(Cohen's D is between 0.50 and 0.80)", "Large	(Cohen's D is between 0.80 and 1.20)", "Very large	(Cohen's D is between 1.20 and 2.00)", "Huge	(Cohen's D is greater than 2.00)"))`
 
 
 ---
@@ -249,7 +249,7 @@ frogs |>
 
 
 
-**Q9.** Which values are NOT IN the 95% confidence interval or the difference (i.e. preferred - nonpreferred) select all that apply:
+**Q9.** Which values are NOT IN the 95% confidence interval or the difference (i.e. nonpreferred - preferred) select all that apply:
 `r longmcq(c(answer = "-92", "-42","2","52","102","152",answer ="202",answer = "252"))`
 
 

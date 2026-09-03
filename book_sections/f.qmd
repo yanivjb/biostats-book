@@ -30,7 +30,7 @@ source("../_common.R")
    - The F statistic as the ratio of model to error mean squares.       
    - $R^2$ as a measure of effect size in one-way models.
 3. Recognize the connection between the two sample t test and the F test when comparing two groups.    
-4. Recognize the assumptions of ANOVA and interpret correlations with care. 
+
 
 
 :::     
@@ -93,5 +93,4 @@ In this section
 
 - We then show how to use this partitioning of variance to test the null hypothesis that all groups represent samples from the same population. 
 
-- Before the chapter summary, we reflect a bit on correlation, causation and artifacts that may influence the patterns that we observe. 
 
