@@ -204,9 +204,9 @@ anova(linear_model)|> kable(digits = 4, caption = "Table 4) Anova table for line
 
 In this chapter, we will consider linear regression. A linear regression is a model to describe how the expected value of a numeric response variable changes with a numeric explanatory variable.
 
-* We begin by reviewing three related [summaries of association between two numeric variables](#regression_summaries): covariance, correlation, and slope.     
+* We begin by reviewing three related [summaries of association between two numeric variables](#regression_summaries_ch): covariance, correlation, and slope.     
 
-* Next, we treat linear regression as a [linear model](#regression_linear_model). Just like the models with categorical an explanatory variable and a numeric response, a regression model generates predicted values and residuals. The difference is that regression uses a numeric explanatory variable directly, rather than first sorting observations into groups. We will see how the intercept and slope define the regression line, how to use this line to make predictions, and how to calculate residuals.  
+* Next, we treat linear regression as a [linear model](#regression_linear_model). Just like the models with a categorical explanatory variable and a numeric response, a regression model generates predicted values and residuals. We will see how to use the intercept and slope to make predictions, what such "predictions" mean, and how to use the data and these predictions to find residuals.  
 
 * Before we get too excited about our model, we will [pause to consider assumptions of linear regression](#regression_assumptions). We will also discuss what to do when these assumptions are imperfect, because real biological data rarely behave perfectly.
 
@@ -216,7 +216,7 @@ In this chapter, we will consider linear regression. A linear regression is a mo
 
 * After that, we will step back and [consider caveats in making predictions from linear models](#regression_caveats). We will see that predictions from linear regression are only trustworthy when they stay close to the range and context of the data used to fit the model.  
 
-* Finally, we will end with a [practical workflow regression in R](#regression_R). 
+* Finally, we will end with a [practical workflow for regression in R](#regression_R). 
 
 
 This chapter lays the foundation for the more complex linear models  in the remainder of this section. 

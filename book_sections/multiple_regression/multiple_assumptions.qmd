@@ -137,7 +137,7 @@ We have a few options here:
 
 - **We could average each RIL across locations**. Such averaging would remove non-independence as we would only have one data point per RIL, While this approach is sometimes reasonable, at best it also throws away information about location. In this case, it's got another issue - because not all RILs were planted at all locations, the unmodeled influence of location could influence our results.  
 
-- **We could include RIL in the model.** When we come to "[mixed effect models](https://en.wikipedia.org/wiki/Mixed_model)" we will see the proper way to do this. However, this is an advanced technique that goes beyond our current knowledge, and putting the 100 RILs in our model as a "fixed effect" is a bad idea. This is because RILS come with petal color, petal area, and ASD, so including a separate coefficient for every RIL would eat up all the among RIL variation needed to estimate the effects of the explanatory variables we care about.
+- **We could include RIL in the model.** When we come to "[mixed effect models](https://en.wikipedia.org/wiki/Mixed_model)" we will see the proper way to do this. However, this is an advanced technique that goes beyond our current knowledge, and putting the 100+ RILs in our model as a "fixed effect" is a bad idea. This is because RILS come with petal color, petal area, and ASD, so including a separate coefficient for every RIL would eat up all the among RIL variation needed to estimate the effects of the explanatory variables we care about.
 
 So, for now, we will:
 

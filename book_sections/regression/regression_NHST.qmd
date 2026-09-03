@@ -215,7 +215,7 @@ $SS_\text{model} = \sum(\widehat{Y_i} - \bar{Y})^2$.
 
 - **SS_error** is the sum of squared residuals:   $SS_\text{error} = \sum e_i^2 = \sum(Y_i - \widehat{Y_i})^2$.
 
-The code below uses the output of broom's `augment()` function to conduct an ANOVA-based test ot the null model. To do so it calculates:
+The code below uses the output of [`broom`](https://broom.tidymodels.org/)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function to conduct an ANOVA-based test of the null model. To do so, it calculates:
 
 - `SS_model` as $SS_\text{model} = \sum{(\hat{y_i} - \bar{y})^2 }$. 
 - `SS_error` as $SS_\text{error} = \sum e_i^2 = \sum(Y_i - \widehat{Y_i})^2$.   

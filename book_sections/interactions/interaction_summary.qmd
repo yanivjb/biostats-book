@@ -485,7 +485,7 @@ Links to: [Summary](#interaction_summary_chapter-summary). [Questions](#interact
 
 ## Chapter summary {#interaction_summary_chapter-summary}
 
-Sometimes the impact of changing one variable depends on the value of another. Such statistical interactions can both illuminate biological processes and complicate stiatical analyses and interpretation. This chapter explains the best practices when modelling statistical interactions. I then show how we can think of an interaction of a variable with itself as a polynomial regression. This section serves to show that "linear models" can fit curved data.
+Sometimes the impact of changing one variable depends on the value of another. Such statistical interactions can both illuminate biological processes and complicate statistical analyses and interpretation. This chapter explains the best practices when modelling statistical interactions. I then show how we can think of an interaction of a variable with itself as a polynomial regression. This section serves to show that "linear models" can fit curved data.
 
 ## Practice Questions {#interaction_summary_practice-questions}
 
@@ -697,9 +697,9 @@ emmeans(penguin_interaction_model, pairwise ~ species)$contrasts
 
 **Q13)** The *female - male* contrast from *emmeans(penguin_interaction_model, pairwise ~ sex)* estimates `r longmcq(c("The sex difference for reference group (Adelie penguins) only.", answer = "The sex difference averaged over species.", "The sex:species interaction term."))`
 
-**Q16)** Why does the non-significant *Adelie - Chinstrap* contrast from *emmeans(..., pairwise ~ species)* differ from the significant *speciesChinstrap* p-value in *summary(penguin_interaction_model)*? (**NOTE:** *Find the two correct answers*) `r longmcq(c(  answer = "The emmeans() contrast compares Adelie and Chinstrap averaged over sex, while speciesChinstrap compares female Chinstrap to female Adelie.",  "The emmeans() contrast tests sex, while speciesChinstrap tests body mass.", answer = "The emmeans() p-value is adjusted by Tukey's method, while the speciesChinstrap p-value is not.", "They are the same test, so one of them must be wrong.", "Sampling error - these values are influence by chance."))`
+**Q14)** Why does the non-significant *Adelie - Chinstrap* contrast from *emmeans(..., pairwise ~ species)* differ from the significant *speciesChinstrap* p-value in *summary(penguin_interaction_model)*? (**NOTE:** *Find the two correct answers*) `r longmcq(c(  answer = "The emmeans() contrast compares Adelie and Chinstrap averaged over sex, while speciesChinstrap compares female Chinstrap to female Adelie.",  "The emmeans() contrast tests sex, while speciesChinstrap tests body mass.", answer = "The emmeans() p-value is adjusted by Tukey's method, while the speciesChinstrap p-value is not.", "They are the same test, so one of them must be wrong.", "Sampling error - these values are influenced by chance."))`
 
-**Q17)** **Q)** Which of the following are linear models? `r longmcq(c("Modeling blood glucose in lizards kept at warm vs. cool temperatures.",  "Modeling algal growth as a function of nutrient concentration allowing for a hump or trough in this relationship.", "Modeling tadpole growth as a function of pond after adjusting for initial body size.", "Modelling the didferent effect of fertilizer on plant height in wet and dry soil.", "Modeling (log-transformed) metabolic rate as a function of (log-transformed) body mass.", answer = "All of the above."))`
+**Q15)**  Which of the following are linear models? `r longmcq(c("Modeling blood glucose in lizards kept at warm vs. cool temperatures.",  "Modeling algal growth as a function of nutrient concentration allowing for a hump or trough in this relationship.", "Modeling tadpole growth as a function of pond after adjusting for initial body size.", "Modelling the different effect of fertilizer on plant height in wet and dry soil.", "Modeling (log-transformed) metabolic rate as a function of (log-transformed) body mass.", answer = "All of the above."))`
 
 :::
 
@@ -780,7 +780,7 @@ emmeans(penguin_interaction_model, pairwise ~ species)$contrasts
 ## Additional resources {#interaction_summary_additional-resources}
 
 :::learnmore
-- [Interactions in factorial designs](https://www.carlislerainey.com/powerrules/articles/interactions.html), by Carlisle Rainey.Describes why interactions are hard to estimate and why studies often have less power for interactions than for main effects, and has an accompanying R packge.
+- [Interactions in factorial designs](https://www.carlislerainey.com/powerrules/articles/interactions.html), by Carlisle Rainey. Describes why interactions are hard to estimate and why studies often have less power for interactions than for main effects, and has an accompanying R package.
 
 - [You need 16 times the sample size to estimate an interaction than to estimate a main effect, explained](https://statmodeling.stat.columbia.edu/2023/11/09/you-need-16-times-the-sample-size-to-estimate-an-interaction-than-to-estimate-a-main-effect-explained/), by Andrew Gelman.
 

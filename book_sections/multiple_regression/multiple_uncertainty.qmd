@@ -113,7 +113,7 @@ col_est
 
 ### Visualizing uncertainty in estimates
 
-Sometimes it is easier to interpret pictures than tables. So, in multiple regression you may want to visualize your estimates our uncertainty in them. The [`modelbased`](https://easystats.github.io/modelbased/) package can do this for us!
+Sometimes it is easier to interpret pictures than tables. So, in multiple regression you may want to visualize your estimates  and/or your uncertainty in them. The [`modelbased`](https://easystats.github.io/modelbased/) package can do this for us!
 
 
 ```{r}
@@ -133,7 +133,7 @@ For example, to visualize uncertainty in the association between the proportion 
 ```{r}
 #| fig-height: 3.5
 #| fig-width: 6
-#| label: fig-cont
+#| label: fig-cont_r
 #| fig-cap: "Model-based predictions for the association between petal area and proportion of hybrid seeds. The line shows predicted values from the multiple regression model, adjusted for the other explanatory variables, and the shaded region shows uncertainty around those predictions."
 #| fig-alt: "Plot showing predicted proportion of hybrid seeds across values of petal area. A fitted line shows the model-based prediction, with a shaded confidence band around the line."
 estimate_means(full_model, by = "petal_area_mm") |>
@@ -149,7 +149,7 @@ To visualize uncertainty in the estimated marginal mean proportion of hybrid see
 ```{r}
 #| fig-height: 3.5
 #| fig-width: 6
-#| label: fig-cat
+#| label: fig-cat-r
 #| fig-cap: "Estimated marginal mean proportion of hybrid seeds by location. Points show model-based means from the multiple regression model, adjusted for the other explanatory variables, with intervals showing uncertainty."
 #| fig-alt: "Plot showing model-adjusted mean proportion of hybrid seeds for each location. Each location has an estimated mean and an interval showing uncertainty."
 estimate_means(full_model, by = "location") |>

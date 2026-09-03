@@ -129,11 +129,11 @@ qq_clarkia_hz / hist_clarkia_hz + plot_annotation( tag_levels = "A" )
 
 ### ANOVA assumes independence within groups   
 
-Ugh the news gets even worse. These samples are taken from a reasonable proportion of the extant plants and have a spatial structure to them (@fig-map). My sense is that they are siblings or even genetically identical "clones". The appropriate statistical procedure is not clear,  but we will hold our nose, do our best, and acknowledge the potential non-independence. 
+Ugh the news gets even worse. These samples are taken from a reasonable proportion of the extant plants and have a spatial structure to them (@fig-map-x). My sense is that they are siblings or even genetically identical "clones". The appropriate statistical procedure is not clear,  but we will hold our nose, do our best, and acknowledge the potential non-independence. 
 
 ```{r}
 #| echo: false
-#| label: fig-map
+#| label: fig-map-x
 #| fig-cap: "A map of the plants collected from each field site. Subspecies *parviflora* plants in purple diamonds. Subspecies *xantiana* plants in green circles. Color intensity shows the admixture proportion."    
 #| fig-alt: "Maps of sampling locations for all Clarkia xantiana plants at Sites 6, 22, SAW, and SM. Each point represents an individual plant positioned by latitude and longitude. Diamonds indicate subspecies parviflora and circles indicate subspecies xantiana. Point color ranges from light to dark (green or purple), showing increasing admixture proportion. Plants cluster spatially within each site, with variation in both subspecies identity and admixture across locations."
 include_graphics("../../figs/linear_models/anova/map.png")

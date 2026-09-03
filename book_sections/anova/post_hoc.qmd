@@ -101,8 +101,8 @@ The estimate and standard error are usually interesting and meaningful. However,
 
 - The t- and p-values test whether each category differs from the reference level. While these hypotheses may be interesting, these summaries should still be ignored because:    
 
-   - The t-value is wrong because it uses the total error degrees of freedom. This is wrong because in ANOVA, we partition variance among groups, so the residual degrees of freedom used here are inappropriate for multiple comparisons. 
-   - The p-value is wrong because it comes from a wrong t-value, and because it does not acknowledge the multiple comparisons or the fact that we already rejected the null from the ANOVA.
+   - Because this t value tells you whether this one group differs from the reference group, it doesn't account for the fact that you're implicitly making several such comparisons at once — one for every non-reference group — which inflates your overall false-positive rate. Post-hoc methods like Tukey's fix this by comparing the test statistic to a distribution built for multiple simultaneous comparisons rather than a plain t-distribution, which is what corrects the p-value.
+   - The p-value is wrong because it comes from the wrong t-value, and because it does not acknowledge the multiple comparisons or the fact that we already rejected the null from the ANOVA.
 
 Additionally, this output does not allow us to test differences between two non-reference categories.
 

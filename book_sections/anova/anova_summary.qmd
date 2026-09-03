@@ -9,7 +9,7 @@ webr:
 ---
 
 
-Links to: [Summary](#anova_summary_chapter-summary). [Chatbot tutor](#anova_summary_chatbot_tutor).  [Questions](#anova_summary_practice-questions). [Glossary](#anova_summary_glossary-of-terms). [R packages](#anova_summaryR_packages_introduced). [R functions](#anova_summary_key-r-function). [More resources](#anova_summary_additional-resources).
+Links to: [Summary](#anova_summary_chapter-summary). [Chatbot tutor](#anova_summary_chatbot_tutor).  [Questions](#anova_summary_practice-questions). [Glossary](#anova_summary_glossary-of-terms). [R packages](#anova_summaryR_packages_introduced). [R functions](#anova_summary_key-r-functions). [More resources](#anova_summary_additional-resources).
 
 
 ```{r}
@@ -380,7 +380,7 @@ crabs <- mutate(crabs , crabType=factor(crabType))
 **Q9)**  Run an ANOVA on the data. What do we do to the null hypothesis? `r mcq(c(answer = "Reject it","Fail to reject it","Accept it","Fail to accept it"))`   
 
 
-**Q10)** According to the post-hoc test, if `female` is in significance group, "a", which group(s) is `intact male major` in? `r mcq(c("a only", "b only", "c only", "a,b", "a,c",answer = "b,c","a,b,bc"))`
+**Q10)** According to the post-hoc test, if `female` is in significance group, "a", which group(s) is `intact male` in? `r mcq(c("a only", "b only", "c only", "a,b", "a,c",answer = "b,c", "a,b,c"))`
 
 `r hide("Explanation")`
 

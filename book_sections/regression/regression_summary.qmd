@@ -170,9 +170,9 @@ data_1_lm |>
 
 ::: exercises 
 
-**Q7)** We find the intercept of `r tidy(data_1_lm )|> slice(1)|> pull(estimate)|>round(digits = 3)`. The associated p-value is very small (`r tidy(data_1_lm)|> slice(1)|> pull(p.value)|>round(digits = 5)`). Why do not we care about this p-value?   `r longmcq(c("Because this p-value is so small, that it is probably wrong.",answer = "Because we cannot have negative visits, the fact that we have some RILs with no visits and some hybrids already destroys the implied biological null hypothesis."," Because p-values are the probability of the data given a model, and we want to know about the probability of the model given the data.", "Tricked you, we do care."))`
+**Q7)** We find the intercept of `r tidy(data_1_lm )|> slice(1)|> pull(estimate)|>round(digits = 3)`. The associated p-value is very small (`r tidy(data_1_lm)|> slice(1)|> pull(p.value)|>round(digits = 5)`). Why don't we care about this p-value?   `r longmcq(c("Because this p-value is so small, that it is probably wrong.",answer = "Because we cannot have negative visits, the fact that we have some RILs with no visits and some hybrids already destroys the implied biological null hypothesis."," Because p-values are the probability of the data given a model, and we want to know about the probability of the model given the data.", "Tricked you, we do care."))`
 
-**Q8)** Imagine we observed a RIL that received half a visit (on average) per an observation session. Predict its proportion hybrid seeds (include four places past the decimal, or type NO if you are not comfortable making a prediction). `r fitb(0.33887, num = TRUE, tol = .00021)`
+**Q8)** Imagine we observed a RIL that received half a visit (on average) per an observation session. Predict its proportion hybrid seeds (include three places past the decimal, or type NO if you are not comfortable making a prediction). `r fitb(0.339, num = TRUE, tol = .001)`
 
 `r hide()`
 
@@ -183,7 +183,7 @@ data_1_lm |>
 
 `r unhide()`
 
-**Q9)** Imagine we observed a RIL that three visits (on average) per an observation session. Predict its proportion hybrid seeds (include four places past the decimal, or type NO if you are not comfortable making a prediction). `r fitb("NO")`
+**Q9)** Imagine we observed a RIL that received three visits (on average) per an observation session. Predict its proportion hybrid seeds (include four places past the decimal, or type NO if you are not comfortable making a prediction). `r fitb("NO")`
 
 `r hide()`
 
@@ -198,7 +198,7 @@ Do not predict out of range!
 
 ```{r}
 #| echo: false
-#| label: fig-diag
+#| label: fig-diagnos
 #| message: false
 #| warning: false
 #| fig-cap: "Diagnostic plots for the linear model of proportion hybrid seed as a function of pollinator visits."
@@ -210,13 +210,13 @@ autoplot(data_1_lm, label.size = 5, alpha = .6, label.repel = TRUE)
 
 ::: exercises 
 
-**Q10)** Consider @fig-diag. Which assumption(s) of linear regression seems like the biggest problem here?   `r longmcq(c(  answer =  "Normality of residuals and equal variance", "Perfect independence, because the diagnostic plots directly prove that nearby plants influenced each other.",  "The existence of an intercept, because the intercept p-value is small.",  "Random sampling of X, because linear regression requires visits to be normally distributed."))`
+**Q10)** Consider @fig-diagnos. Which assumption(s) of linear regression seems like the biggest problem here?   `r longmcq(c(  answer =  "Normality of residuals and equal variance", "Perfect independence, because the diagnostic plots directly prove that nearby plants influenced each other.",  "The existence of an intercept, because the intercept p-value is small.",  "Random sampling of X, because linear regression requires visits to be normally distributed."))`
 
 **Q11)** How would you move forward?  `r longmcq(c(  "Delete extreme data points.",  "Ignore the diagnostic plots because the result makes sense.",  "Only report the intercept, because the slope is now invalid.",  answer = "Treat the linear model as a useful first summary, but check whether the conclusion is robust with bootstrap/permutation and by refitting the model without influential points."))`
 
-**Q12)** Consider @fig-diag. Which data point is the greatest outlier? Refer to it by its number.   `r fitb("34")`
+**Q12)** Consider @fig-diagnos. Which data point is the greatest outlier? Refer to it by its number.   `r fitb("34")`
 
-**Q13)** Consider @fig-diag. Which data point has the most influence? Refer to it by its number.  `r fitb("13")`
+**Q13)** Consider @fig-diagnos. Which data point has the most influence? Refer to it by its number.  `r fitb("13")`
 
 **Q14)** How would you see if influential points are undermining your conclusions?   `r longmcq(c( "Remove every point with a large residual and keep only points close to the regression line.",  "Check whether the intercept p-value is still small.",  "Use only the plot with the nicest-looking regression line.",  answer = "Refit the model after removing the influential point or points, then compare the slope, confidence interval, and biological conclusion to the original model."))`
 

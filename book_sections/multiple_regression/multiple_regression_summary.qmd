@@ -216,7 +216,7 @@ emmeans::contrast(species_means, method = "pairwise", adjust = "tukey")
 
 **Q14)** Why is it hard to compare the raw coefficient for `Sepal.Length` to the raw coefficient for `Speciesversicolor`? `r longmcq(c(answer = "Because they describe different kinds of comparisons.", "Because one is a response variable and the other is not.", "Because categorical variables cannot be included in regression.", "Because coefficients are always unitless."))`
 
-**Q15)**  What information is conveyed by partial $R^2$ that we cannot get from looking at model coefficients? `r longmcq(c(  "The direction of the association between a predictor and the response.",  "The expected change in the response for a one-unit change in a predictor.",  answer = "How much variation in the response is associated with a term after accounting for the others.","Which variable causes the resposne."))`
+**Q15)**  What information is conveyed by partial $R^2$ that we cannot get from looking at model coefficients? `r longmcq(c(  "The direction of the association between a predictor and the response.",  "The expected change in the response for a one-unit change in a predictor.",  answer = "How much variation in the response is associated with a term after accounting for the others.","Which variable causes the response."))`
 
 
 :::
@@ -304,7 +304,7 @@ emmeans::contrast(species_means, method = "pairwise", adjust = "tukey")
 
 - [How to break regression](https://www.pewresearch.org/decoded/2018/07/18/how-to-break-regression/). A nice explanation with r based simulation code about how what you put in your model matters.  
 
-- [Why Adjusted Regression Coefficients Are Less Descriptive Than They Look](https://rpsychologist.com/descriptive-adjustment/). I nice blogpost with interactive apps which highlight how coeffcieints from a multiple regression depend on other variables in the model. 
+- [Why Adjusted Regression Coefficients Are Less Descriptive Than They Look](https://rpsychologist.com/descriptive-adjustment/). A nice blogpost with interactive apps which highlight how coefficients from a multiple regression depend on other variables in the model. 
 
 **Videos**   
 

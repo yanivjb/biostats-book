@@ -74,6 +74,9 @@ picking one group as the  "reference level" and having that group's mean represe
  
 :::aside
 By default R chooses the reference levels as the alphabetically first one. We often don't want that (e.g. you may want the control to be first). The [`fct_relevel()` function](https://forcats.tidyverse.org/reference/fct_relevel.html) in the [`forcats` package](https://forcats.tidyverse.org/) can help (see fyi below)!
+
+In this sections below, I typed: `mutate(site = fct_reorder(site, mean_petal_area_sq_cm)` to  order `site's factor levels by their mean admixture proportion. This is a standard practice for nominal categorical variables.
+
 :::
 
 

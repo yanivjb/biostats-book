@@ -22,12 +22,12 @@ hz_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/mas
 
 clarkia_hz <- read_csv(hz_link)|> 
   select(-weighted)|>
-  rename(admix_proportion = `cutoff0.9`) |>
-  filter(!is.na(admix_proportion))|>
+  rename(admix_proportion = cutoff0.9) |>
+  dplyr::filter(!is.na(admix_proportion))|>
   clean_names() |>
   mutate(site = if_else(site == "SAW", "SR", site)) |>
-  filter(subsp=="P")|>
-  mutate(site = fct_reorder(site, mean_petal_area_sq_cm))
+  dplyr::filter(subsp=="P")|>
+  mutate(site = fct_reorder(site, admix_proportion))
 
 ```
 
@@ -58,6 +58,8 @@ clarkia_hz <- read_csv(hz_link)|>
 ```{r}
 #| echo: false
 #| column: margin
+#| fig-cap: "Some beutiful pink-flowered Clarkia plants in the greenhouse."
+#| fig-alt: "A greenhouse interior featuring multiple rows of tall, potted Clarkia plants with pink flowers growing on elevated metal benches under artificial lighting."
 include_graphics("../clarkia_pics/xan_greenhouse.png")   
 ```
 
@@ -67,14 +69,14 @@ include_graphics("../clarkia_pics/xan_greenhouse.png")
 We will see that testing for a difference between each group mean in a pairwise manner introduces a "multiple testing problem." The multiple testing problem simply means that the probability of rejecting one or more true null hypotheses increases as you test more null hypotheses.
 
 
-We show that the ANOVA approach allows us to overcome this multiple testing problem by testing a single null hypothesis -- that the true group means are identical (i.e. there is no among-group variance in the population). We then show how you can use the "post-hoc" testing framework to adjust your p-values (or other means to appropriate calibrate the $\alpha$ thresholds) to incorporate the fact that you are  testing multiple hypotheses after finding that not all group means are equal.
+I show thatthe ANOVA approach allows us to overcome this multiple testing problem by testing a single null hypothesis -- that the true group means are identical (i.e. there is no among-group variance in the population). I then introduce the "post-hoc" testing framework to adjust your p-values (or other means to appropriately calibrate the $\alpha$ thresholds) to incorporate the fact that you are  testing multiple hypotheses after finding that not all group means are equal.
 
 
 ## Example data
 
 
 
-We will revisit the data from parviflora plants in natural hybrid zones introduced in the previous chapter. This time, we will look at the variability in petal area among parviflora populations. This is potentially interesting because ecological features and the admixture proportion differ across sites, and it's worth noting whether this is associated with any differences in key phenotypes in the field!  The data are plotted below:
+We will revisit the data from parviflora plants in natural hybrid zones introduced in the previous chapter. This time, we will look at the variability in admixture proportion among parviflora populations. This is potentially interesting because ecological features  differ across sites, and it's worth noting whether this Variability modulates the extent of gene flowin nature!  The data are plotted below:
 
 
 ```{r}
@@ -83,12 +85,12 @@ We will revisit the data from parviflora plants in natural hybrid zones introduc
 #| code-fold: true
 #| fig-height: 4
 #| code-summary: "Code for plotting"
-library(ggforce)
-ggplot(clarkia_hz , aes(x = site, y =mean_petal_area_sq_cm, color = site))+
-    geom_violin()+
-    geom_sina(alpha = .4, size = 2)+
+#| fig-cap: "Variability in admixture proportion among Clarkia parviflora populations across four natural hybrid zone sites. Boxplots show the median and interquartile ranges, overlaid with individual data points (colored by site) and the mean with 95% confidence intervals (black error bars)."
+#| fig-alt: "Variability in admixture proportion among Clarkia parviflora populations across four natural hybrid zone sites. Boxplots show the median and interquartile ranges, overlaid with individual data points (colored by site) and the mean with 95% confidence intervals (black error bars)."
+ggplot(clarkia_hz , aes(x = site, y =admix_proportion, color = site))+
+    geom_boxplot(outliers = FALSE)+
+    geom_jitter(alpha = .8, size = 2, width = .2)+
     stat_summary(fun.data = "mean_cl_normal",geom = "errorbar", color = "black",width = .15)+
-    labs(y = expression(Mean~petal~area~(cm^2)))+
     theme(legend.position = "none", 
           axis.text = element_text(size = 12), 
           axis.title = element_text(size = 12))

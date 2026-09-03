@@ -66,7 +66,7 @@ a <- lm(prop_hybrid ~ petal_color + petal_area_mm + petal_color:petal_area_mm, d
 #| fig-height: 4
 #| column: page-right
 #| fig-width: 12
-#| fig-cap: "Observed and model-predicted relationships between petal area and the proportion of hybrid seed for pink- and white-petaled RILs. Panel A shows the data and the fitted model. Panel B extends the fitted lines to a petal area of zero to show what the model parameters are descibing and how they can mislead us."
+#| fig-cap: "Observed and model-predicted relationships between petal area and the proportion of hybrid seed for pink- and white-petaled RILs. Panel A shows the data and the fitted model. Panel B extends the fitted lines to a petal area of zero to show what the model parameters are describing and how they can mislead us."
 #| fig-alt: "Two side-by-side plots compare observed and extrapolated interaction-model predictions. Panel A shows individual RILs and separate fitted lines for pink- and white-petaled flowers across the observed range of petal area; the pink line rises strongly while the white line is nearly flat. Panel B shows only the fitted lines extended to petal area zero, where the white line begins above the pink line before the lines cross outside or near the edge of the biologically relevant range."
 library(patchwork)
 a <- lm(prop_hybrid ~ petal_color + petal_area_mm + petal_color:petal_area_mm, data = rils)$coef|> round(digits = 4)
@@ -131,7 +131,7 @@ plot_a + plot_b +plot_annotation(tag_levels = "A")+
 
 We modelled the proportion of hybrid seeds on a RIL as a function of petal area, petal color, and their interaction. If you recall there was some weirdness - the model returned a large and positive coefficient for `petal_colorwhite`, even though we found no region of our data in which the model predicted that white-petaled RILs would have a higher proportion of hybrid seeds than pink-petaled RILs (@fig-interactioncombo A). 
 
-We realized that this was because the coefficient of `0.2373` for `petal_colorwhite` describes the difference between its expected value at the intercept (i.e. `petal_area_mm` = 0, @fig-interactioncombo B) and that of the pink-petled RIls. This prediction with no biological application as no plants have petals of size zero $mm^2$. 
+We realized that this was because the coefficient of `0.2373` for `petal_colorwhite` describes the difference between its expected value at the intercept (i.e. `petal_area_mm` = 0, @fig-interactioncombo B) and that of the pink-petaled RILs. This prediction has no biological application, as no plants have petals of size zero $mm^2$. 
 
 
 
@@ -296,7 +296,7 @@ After adjusting for these main effects, the interaction between petal area and p
 
 ### Describing uncertainty   
 
-Of course, no quick statistical descriptions is complete without a measure of uncertainty. Again we can accomplish this with the [`emmeans`](https://rvlenth.github.io/emmeans/) or `modelbased` packages. Here I use [`estimate_means()`](https://easystats.github.io/modelbased/reference/estimate_means.html) function in the [`modelbased`](https://easystats.github.io/modelbased/) package, because I find it easier to code. 
+Of course, no statistical description is complete without a measure of uncertainty. Again we can accomplish this with the [`emmeans`](https://rvlenth.github.io/emmeans/) or `modelbased` packages. Here I use [`estimate_means()`](https://easystats.github.io/modelbased/reference/estimate_means.html) function in the [`modelbased`](https://easystats.github.io/modelbased/) package, because I find it easier to code. 
 
 
 So to find uncertainty about the point estimates of the proportion of hybrid seeds for pink- and white-petaled RILs with petal aread of 45 and 85 $mm^2$, we type: 
@@ -355,7 +355,7 @@ The two confidence intervals describe uncertainty in each slope. Note that they 
 
 Let's try to synthesize these results into a brief "results" paragraph: 
 
-*We tested the contribution of petal color, petal area and their interaction to the proportion of hybrid seeds on a RIL. Using Type II sums of squares, we found significant associations between the proportion of hybrid seeds and petal color ($F_{1,398} = 80.2$, p < 2.2e-16), petal area ($F_{1,398} = 28.1$, p < 2 e-7), and their interaction ($F_{1,398} = 24.5$, p < 2 e-6). This interaction reflects the sharp increase in the proportion of hybrid seed with petal area in pink-, but not white-petaled RILs (compare slopes of 0.0075 -- 95% CI: {0.0054 : 0.0095}  and 0.0007 -- 95% CI: {-0.0010 : 0.0025}, respectively).*
+*We tested the contribution of petal color, petal area and their interaction to the proportion of hybrid seeds on a RIL. Using Type II sums of squares, we found significant associations between the proportion of hybrid seeds and petal color ($F_{1,398} = 80.23, p < 2.2e-16), petal area ($F_{1,398} = 28.2$, p < 2 e-7), and their interaction ($F_{1,398} = 24.4$, p < 2 e-6). This interaction reflects the sharp increase in the proportion of hybrid seed with petal area in pink-, but not white-petaled RILs (compare slopes of 0.0075 -- 95% CI: {0.0054 : 0.0095}  and 0.0007 -- 95% CI: {-0.0010 : 0.0025}, respectively).*
 
 
 

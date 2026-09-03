@@ -16,7 +16,7 @@ library(broom)
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 **Motivating scenario:** 
-A straight-line model assumes that each additional unit of $x$ has the same expected effect on $y$. But linear models need be limitted to straight lines. E.g. with interactions, the effect of increasing $x_1$ can depend on the value of $x_2$. In polynomial regression, we allow the effect of $x$ on $y$ to depend on the value of $x$ itself. This allows us to describe curved relationships. Although this approach can add biological realism, it can also complicate interpretation and increase the risk of overfitting.
+A straight-line model assumes that each additional unit of $x$ has the same expected effect on $y$. But linear models need not be limited to straight lines. E.g. with interactions, the effect of increasing $x_1$ can depend on the value of $x_2$. In polynomial regression, we allow the effect of $x$ on $y$ to depend on the value of $x$ itself. This allows us to describe curved relationships. Although this approach can add biological realism, it can also complicate interpretation and increase the risk of overfitting.
 
 
 **Learning goals: By the end of this section, you should be able to:**  
@@ -31,7 +31,7 @@ A straight-line model assumes that each additional unit of $x$ has the same expe
 
 ---
 
-We have seen that linear models can include more than one term, and even "interactions" between thee terms. So,  the "linear" part of a linear model is not that it makes a clean, straight line, but rather, that we find $\hat{Y_i}$ by adding up all the components of the linear model equation. 
+We have seen that linear models can include more than one term, and even "interactions" between these terms. So,  the "linear" part of a linear model is not that it makes a clean, straight line, but rather, that we find $\hat{Y_i}$ by adding up all the components of the linear model equation. 
 
 Here, I introduce polynomial regression, another classic tool we can use to better capture biological reality by adding curvature to our linear model.  The most common polynomial regression includes an explanatory variable and its square (below). You can include cubic, quartic, or still higher-order terms. But as, always, think about what you're putting in your model and why.
 
@@ -124,7 +124,7 @@ lm(n.species ~ Biomass + taxon, bmass) |> Anova() |> tidy()|> rename("F value"  
 
 ### Polynomial regression example 
 
-While @fig-bmass did not show a linear relationship, there does appear to be a hump shaped relationship. If true, this would imply that with low productivity, additional biomass allows more species to persist, but whith more biomass,  a few species to dominate. The linear model looks like this: 
+While @fig-bmass did not show a linear relationship, there does appear to be a hump shaped relationship. If true, this would imply that with low productivity, additional biomass allows more species to persist, but with more biomass,  a few species to dominate. The linear model looks like this: 
 
 $$\text{N.SPECIES = CONSTANT + TAXON + PRODUCTIVITY + PRODUCTIVITY}^2$$
 We can write this in R as: 
@@ -225,7 +225,7 @@ bmass |>
 
 You can fit separate polynomial models with `geom_smooth(method = "lm", formula = y ~ x + I(x^2))` or with `geom_lm_smooth(method = "lm", formula = y ~ x + I(x^2), interaction = FALSE)`. Here, I show what happens with geom_smooth(). 
 
-If you look closely at @fig-bmass-separate-quadratics, you can see different curve shapes for plants in animals, while these shapes are idenitical in @fig-bmass-quadratic. 
+If you look closely at @fig-bmass-separate-quadratics, you can see different curve shapes for plants in animals, while these shapes are identical in @fig-bmass-quadratic. 
 
 ```{r}
 #| fig-height: 3
@@ -260,7 +260,7 @@ We evaluate significance with Type II sums of squares, adjusting for the others 
 
 A small p-value for `I(Biomass^2)` provides evidence that the relationship is curved rather than adequately described by a straight line. 
 
-- *QUESTION: What's the deal with the low p-value for `Biomass`?* Our sums of squares for `Biomass` in the "straight line" model was approximately twelve, and our F value was less than one. Why does adding the squared term make our linear term significant (SS = 233, $F_\text{1,55} = 20.8$) and what does this mean?   </br></br>
+- *QUESTION: What's the deal with the low p-value for `Biomass`?* Our sums of squares for `Biomass` in the "straight line" model were approximately twelve, and our F value was less than one. Why does adding the squared term make our linear term significant (SS = 233, $F_\text{1,55} = 20.8$) and what does this mean?   </br></br>
 
 - *ANSWER: The linear and squared terms work together to describe the curve.* So, this means that having a linear term (representing the "instantaneously slope" at zero productivity) improves the model, not that there is a linear increase. For this reason, I sometimes prefer to evaluate the significance of both linear and squared terms at once with the [`poly()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/poly.html) function. Here, the 2 means we want the linear and 2nd order (i.e. squared) term, and the `raw = TRUE` means that it will give us coefficients in the scale of our linear model (if we ask for them).   
 

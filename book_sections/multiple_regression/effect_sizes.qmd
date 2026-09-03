@@ -51,7 +51,7 @@ rils <- readr::read_csv(ril_link) |>
 ## Model coefficients  
 
 
-We care not just to model the world, and not just to test the null hypothesis that two variables are unassociated. Rather we want to know if an explanatory variable matters for our response. Ultimately, deciding the strength that "matters" is up to the decision maker -- for example, a government might decide how much increase in cancer risk is acceptable when putting in a new power plant or whatever, or in the context of our Clarkia data, an evolutionary theorist might know the maximum amount of gene flow two populations can experience before they merge into one species. 
+We usually care about more than describing the world and testing the null hypothesis. Often, the more pressing question is: "Would changining the value of an explanatory variable matter to us?" Ultimately, deciding the strength that "matters" is up to the decision maker -- for example, a government might decide how much increase in cancer risk is acceptable when putting in a new power plant or whatever, or in the context of our Clarkia data, an evolutionary theorist might know the maximum amount of gene flow two populations can experience before they merge into one species. 
 
 For both the examples above, the key measure of effect was simply the coefficient in the multiple regression model. This measure of effect is very handy -- especially in the hands (or brains) of experts, who can make use of this information. 
 
@@ -197,7 +197,7 @@ drop1(full_model)|>
 ```
 
 
-This result makes it clear that, after adjusting for other variables in the model, petal color and planting location explain most of the variation in the proportion of hybrid seeds on a RIL (15% and 11%, respectively), with petal area explaining another 5% of this variation. By contrast ASD explains less 0.3% of the variation in the proportion of hybrid seed. 
+This result makes it clear that, after adjusting for other variables in the model, petal color and planting location explain most of the variation in the proportion of hybrid seeds on a RIL (15% and 11%, respectively), with petal area explaining another 5% of this variation. By contrast, ASD explains less than 0.3% of the variation in the proportion of hybrid seed. 
 
 ---
 

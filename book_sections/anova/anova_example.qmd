@@ -40,7 +40,7 @@ clarkia_hz <- read_csv(hz_link)|>
 
 - Calculate sums of squares, mean squares, the F statistic, and the associated p-value by hand.    
 
-- Generate and interpret ANOVA output in R with th  [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) or [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) pipelines) and relate it to the  variance partitioning.
+- Generate and interpret ANOVA output in R with the  [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) or [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) pipelines, and relate the anova output to the idea of variance partitioning.
 
 
 :::
@@ -180,7 +180,7 @@ b <- ggplot(plot_dat,
 We can use the logic illustrated in @fig-devs to calculate the relevant sums of squares, and the proportion of variance explained by the model, $r^2$: 
 
 :::aside
-We often see $SS_\text{model}$ and $SS_\text{error}$ calculated as means or variances within groups weighted by the  size of each group. Those definitions are nice for rapid calculation of an ANOVA from summary statistics, but I prefer this observation-centered approach. Of course, becasue both approaches give the same answer, do what you feel.
+We often see $SS_\text{model}$ and $SS_\text{error}$ calculated as means or variances within groups weighted by the  size of each group. Those definitions are nice for rapid calculation of an ANOVA from summary statistics, but I prefer this observation-centered approach. Of course, because both approaches give the same answer, do what you feel.
 :::
 
 ```{r}
@@ -233,7 +233,7 @@ anova_results |>
 
 ## ANOVA in R
 
-Of course R can do these calculations for us, with either the [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.aov.html) pipeline, or the [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) pipeline. Both approaches yield the same result as our manual calculation, above.
+Of course R can do these calculations for us, with either the [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.aov.html) pipeline, or the [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) pipelines. Both approaches yield the same result as our manual calculation, above.
 
 
 

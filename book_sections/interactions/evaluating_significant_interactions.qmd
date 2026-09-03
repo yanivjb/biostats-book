@@ -38,7 +38,7 @@ source("../../_common.R")
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-**Motivating scenario:** We fit a model with an interaction, and this interaction seems to influence our predictions. Now we want to test the nul that the interaction (and main effects) reflect smapling error away from a "boring" hypothesis.
+**Motivating scenario:** We fit a model with an interaction, and this interaction seems to influence our predictions. Now we want to test the null hypothesis that the interaction (and main effects)  relect only sampling error rather than a real effect.
 
 
 **Learning goals: By the end of this section, you should be able to:**    

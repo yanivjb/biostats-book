@@ -730,7 +730,7 @@ Now we are ready to evaluate assumptions.
 vif(full_model)
 ```
 
-While we see some association among predictors, I don't think we're in the danger zone yet.  
+While we see some association among predictors, these are just on the edge at which we start to take notice. I don't think we're fully in the danger zone yet.  
 
 - Next we evaluate assumptions of linearity, normality of residuals, and homoscedasticity with diagnostic plots:
 

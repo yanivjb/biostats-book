@@ -90,7 +90,7 @@ rils <- readr::read_csv(ril_link) |>
 > `r tufte::quote_footer("— You (probably)")`
 
 
-In statistical terms, an interaction occurs when the association between one explanatory variable and the reponse depends on the value of another explanatory variable.  
+In statistical terms, an interaction occurs when the association between one explanatory variable and the response depends on the value of another explanatory variable.  
 
 
 ### Interactions and the Origin of Species
@@ -109,7 +109,7 @@ In the context of our Clarkia floral phenotypes, we might want to know whether t
 #| label: fig-DMI
 #| cap-location: margin
 #| fig-alt: "A diagram of the Bateson–Dobzhansky–Muller model. An ancestral AABB genotype splits into two isolated populations. One evolves allele a and the other evolves allele b. When the populations hybridize, alleles a and b occur together for the first time and may be incompatible."
-#| fig-cap: "*In the ancestral population the genotype is AABB. When two populations become isolated from each other, new mutations can arise. In one population A evolves into a, and in the other B evolves into b. When the two populations hybridise it is the first time a and b interact with each other. When these alleles are incompatible, we speak of DMIs.*</br></br> Both the figure and caption are adapted from User:OrientationEB’s contribution to [Wikipemedia commons](https://en.wikipedia.org/wiki/Bateson%E2%80%93Dobzhansky%E2%80%93Muller_model#/media/File:Bateson-Dobzhansky-Muller_model._.jpg) and are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) attribution."
+#| fig-cap: "*In the ancestral population the genotype is AABB. When two populations become isolated from each other, new mutations can arise. In one population A evolves into a, and in the other B evolves into b. When the two populations hybridise it is the first time a and b interact with each other. When these alleles are incompatible, we speak of DMIs.*</br></br> Both the figure and caption are adapted from User:OrientationEB’s contribution to [Wikipedia commons](https://en.wikipedia.org/wiki/Bateson%E2%80%93Dobzhansky%E2%80%93Muller_model#/media/File:Bateson-Dobzhansky-Muller_model._.jpg) and are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) attribution."
 include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bateson-Dobzhansky-Muller_model._.jpg/960px-Bateson-Dobzhansky-Muller_model._.jpg")
 
 ```
@@ -119,7 +119,7 @@ include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bate
 
 
 :::fyi
-Although biological interactions like DMIs underlie the statistical interactions we study in this chapter, detecting a statistical interaction does not by itself reveal the underlying biological mechanism. Neither does the absence or a statistical interaction imply the absence of an interaction -- for example we see no evidence of an interaction if only one allele is found at one locus. Reda more on statistical vs physiological epistasis [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC2845349/).
+Although biological interactions like DMIs underlie the statistical interactions we study in this chapter, detecting a statistical interaction does not by itself reveal the underlying biological mechanism. Neither does the absence of a statistical interaction imply the absence of an interaction -- for example we see no evidence of an interaction if only one allele is found at one locus. Read more on statistical vs physiological epistasis [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC2845349/).
 :::
 
 ---
@@ -303,4 +303,4 @@ Let's go from these hypothetical plots to our actual data to see how main effect
 
 This question could influence our interpretation of and expectations for floral phenotype evolving "to prevent hybridization." For example, if white petals only decrease hybridization risk of large-petaled flowers we may see relatively weak selection favoring white flowers if petals are already small. 
 
-I am particularly interested in the interactions between petal color and petal area. But, I will also examine the interaction between petal color and location to provide an example of an interaction between two categorical variables. I will also explore the interaction between petal area and anther-stigma distance -- but I  honestly think anther stigma distance does not matter causally, and this is just a noisy stand in for petal color (see previous chapter).
+I am particularly interested in the interactions between petal color and petal area. But, I will also examine the interaction between petal color and location to provide an example of an interaction between two categorical variables. I will also explore the interaction between petal area and anther-stigma distance -- but I  honestly think anther stigma distance does not matter causally, and this is just a noisy stand-in for petal color (see previous chapter).

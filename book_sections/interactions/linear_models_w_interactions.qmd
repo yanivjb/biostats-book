@@ -206,7 +206,7 @@ $$\hat{Y}_\text{i|pink} =  `r a[[1]]` + \text{PETAL AREA} \times `r a[[3]]`$$
 $$\hat{Y}_\text{i|white} =  `r a[[1]]` + `r a[[2]]` + \text{PETAL AREA} \times (`r a[[3]]` - `r abs(a[[4]])`)$$
 From a quick glance at this model, you may be confused to see that the coefficient for white petals is large and positive. This should strike you as weird, as everything else we have seen shows that white-petaled RILs have a lower proportion of hybrid seed. To resolve this confusion, remember that the `petal_colorwhite` term refers to the deviation from the "(Intercept)" at  zero petal area (Bottom left corner of @fig-interactionmodel).
 
-So the model predicts a 0.0017 proportion of hybrid seeds on white-petaled RILS with a petal area of zero, compared to a -0.236  proportion of hybrid seeds on pink-petaled RILS with a petal area of zero. 
+So the model predicts a 0.0017 proportion of hybrid seeds on white-petaled RILs with a petal area of zero, compared to a -0.236  proportion of hybrid seeds on pink-petaled RILs with a petal area of zero. 
 
 **But these "predictions" are meaningless, as we know not to extrapolate beyond the range of the data.** This does not mean that we should ignore the negative intercept or the large positive coefficient for white-petaled RILs (See more on marginal effects soon), it just means we should think of these as cogs to make the model go, not biologically meaningful information. The biologically meaningful information is the prediction within the range of our data.
 

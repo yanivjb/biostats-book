@@ -90,9 +90,7 @@ include_graphics("../figs/linear_models/multiple_regression/asd.png")
 ```
 
 
-To introduce work through these ideas, I model hybrid seed set as a function of (some combination of) petal area, petal color, anther-stigma distance (ASD), and planting location. 
-
-ASD, the (new to us) variable quantifies the distance between the pollen-producing anther and the ovule-bearing stigma parts of a flower (@fig-asd). The logic of this hypothesis is that having male and female parts close to one another can encourage self-fertilization before there is an opportunity for hybridization. 
+To work through these ideas, I model hybrid seed set as a function of (some combination of) petal area, petal color, anther-stigma distance (ASD), and planting location.  The (new to us) variable, ASD, quantifies the distance between the pollen-producing anther and the ovule-bearing stigma parts of a flower (@fig-asd). The logic of this hypothesis is that having male and female parts close to one another can encourage self-fertilization before there is an opportunity for hybridization. 
 
 
 ### Pairwise associations
@@ -254,6 +252,6 @@ We are now ready to begin our tour of more complex linear models. To understand 
 
 ---
 
-Multiple regression is lots of fun! When first learning about it, it's easy to get carried away and put every variable in the data set into the model. **BUT PLEASE DONT**. In the best case modeling $y$ as a function of a grab bag of all explanatory variables that come to mind, generates results that are hard to interpret, and that are statistically under-powered. Whats worse, is that a kitchen sink n of explanatory variables can yield surprising or unstable regression coefficients, and may mistakenly attribute patterns to the wrong variable.  
+Multiple regression is lots of fun! When first learning about it, it's easy to get carried away and put every variable in the data set into the model. **BUT PLEASE DON'T**. In the best case modeling $y$ as a function of a grab bag of all explanatory variables that come to mind, generates results that are hard to interpret, and that are statistically under-powered. What's worse, is that a kitchen sink of explanatory variables can yield surprising or unstable regression coefficients, and may mistakenly attribute patterns to the wrong variable.  
 
 There is an art to building an informative multivariate model. For now, err on the side of "less is more." We will revisit these ideas later in this chapter and in future chapters.

@@ -47,8 +47,8 @@ pm <- function(x) {
 * Describe the logic of Type II sums of squares.
 * Explain why Type I sums of squares can depend on the order of predictors in the model.
 * Use [`car::Anova()`](https://search.r-project.org/CRAN/refmans/car/html/Anova.html) to test model terms in a multiple regression.
-* Avoid the mistake of using `anova()`,to find p-values for terms in a multiple regression, and explain why these are wrong. 
-* Avoid the mistake of using coefficient p-values from `summary()` and `tidy()` as term-level tests, and explain why these can be misleading.
+* Avoid the mistake of using [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) to find p-values for terms in a multiple regression, and explain why these are wrong. 
+* Avoid the mistake of using coefficient p-values from [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) and [`tidy()`](https://generics.r-lib.org/reference/tidy.html) as term-level tests, and explain why these can be misleading.
 :::
 
 ---
@@ -215,7 +215,7 @@ In practice, I think it's best to always use Type II sums of squares for additiv
 ### Post-hoc tests
 
 :::aside
-In the [ANOVA](#post_hoc) section, we used [`multcomp`](https://cran.r-project.org/web/packages/multcomp/index.html)'s [`glht()`](https://search.r-project.org/CRAN/refmans/multcomp/html/glht.html) function for a post hoc test. We can also do this for a multiple regression (but be sure to convert location to a factor). 
+In the [ANOVA](#post_hoc) section, we used [`multcomp`](https://cran.r-project.org/web/packages/multcomp/index.html)'s [`glht()`](https://search.r-project.org/CRAN/refmans/multcomp/html/glht.html) function for a post hoc test. We can also do this for a multiple regression (but be sure to convert location to a factor) if you use this function. 
 
 Here I chose to use the [`emmeans`](https://rvlenth.github.io/emmeans/) package, because we will also use it in the next section to quantify uncertainty. 
 :::
@@ -237,5 +237,9 @@ emmeans(full_model, ~ location) |>
 
 From this post-hoc test, we conclude that, after adjusting for the other explanatory variables in the model, plants at location US (Upper Sawmill) have a significantly smaller proportion of hybrid seeds than plants at each other location. No other pairs of locations significantly differ from one another.
 
-xxxx
-https://019b2da8-edfb-a262-61be-7973c056d9ae.share.connect.posit.cloud/intro.html
+```{r}
+#| echo: false
+#| eval: false
+# xxxx
+# https://019b2da8-edfb-a262-61be-7973c056d9ae.share.connect.posit.cloud/intro.html
+```

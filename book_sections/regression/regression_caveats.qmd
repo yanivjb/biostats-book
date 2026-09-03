@@ -120,7 +120,7 @@ include_graphics("https://imgs.xkcd.com/comics/extrapolating.png")
 
 Just like we should not trust prediction for values outside the range in which we collected our data, we should be skeptical of predictions in conditions that differ from the context of our data.
 
-For example, in our study we examined RILs planted in four different field sites. Predictions from site GC may not apply to other sites. Why? Because they are different! They could have different numbers and types of pollinators, or different weather etc.  @fig-ass shows that the predictions from the model built from GC data (red line) happen to fit the Sawmill Road (SR) data relatively well, but makes terrible predictions at the Upper Sawmill (US) location.
+For example, in our study we examined RILs planted in four different field sites. Predictions from site GC may not apply to other sites. Why? Because they are different! They could have different numbers and types of pollinators, or different weather etc.  @fig-ass shows that the predictions from the model built from GC data (red line) happen to fit the Sawmill Road (SR) data relatively well, but are way off when applied to the Upper Sawmill (US) location.
 
 The problem in porting predictions is not that the regression equation stopped working mathematically. The problem is that we asked it a biological question that the GC data alone could not answer.
 
@@ -247,7 +247,7 @@ extreme_example |>
 We could peruse all of [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html)'s output for each data point, or use our [`dplyr`](https://dplyr.tidyverse.org/) skills to find potentially concerning data points using thresholds in @tbl-influential-points.   However, these approaches are tedious.   
 
 ::: aside 
-In `R` we can make "Residuals vs Leverage" plots by providing the linear model to either the [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) function in Base R, or the [`autoplot()`](https://cran.r-project.org/web/packages/ggfortify/refman/ggfortify.html#autoplot.lm) function in the [`ggfortify`](https://cran.r-project.org/web/packages/ggfortify/index.html) package.  These are the same functions we [previously used to generate "diagnostic plots"](@regression_assumptions).
+In `R` we can make "Residuals vs Leverage" plots by providing the linear model to either the [`plot()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/plot.lm.html) function in Base R, or the [`autoplot()`](https://cran.r-project.org/web/packages/ggfortify/refman/ggfortify.html#autoplot.lm) function in the [`ggfortify`](https://cran.r-project.org/web/packages/ggfortify/index.html) package.  These are the same functions we [previously used to generate "diagnostic plots"](#regression_assumptions).
 :::
 
 
@@ -352,7 +352,7 @@ I will  first make a simple x-y scatter plot -- with X as foot length and y as h
 
 - First put the data through a simple linear model and give the model output to [`broom`](https://broom.tidymodels.org/)'s [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function.  **This will not change the data I plot at all.**  
 - But I can now attach additional information to each data point (including `id = 1:n())`.  
-- Then I can make a plot and then make it interactive with the [`ggplotly()`]()  function in the [`plotly`](https://github.com/plotly/plotly.R) package. 
+- Then I can make a plot and then make it interactive with the [`ggplotly()`](https://plotly.com/ggplot2/)  function in the [`plotly`](https://github.com/plotly/plotly.R) package. 
 
 You don't need to do this - but I am to give you a more thorough view: 
 
@@ -392,8 +392,8 @@ ggplotly(shoe_plot)
 #| warning: false
 #| echo: false
 #| label: fig-shoe-outlier
-#| fig-cap: "Height and foot length for 33 male college students. Each point is one student. The fitted line shows the linear relationship between foot length and height. One point has an unusually low height for its foot length and is highlighted by the diagnostic summaries available when hovering over the interactive plot."
-#| fig-alt: "Interactive scatterplot of height versus foot length. Most students follow a positive relationship: students with larger feet tend to be taller. One point falls far below this pattern, indicating a student with much lower height than expected from foot length. Hover text gives each point's row ID, leverage, standardized residual, and Cook's distance."
+#| fig-cap: "Height and foot length for 33 male college students. Each point is one student. The fitted line shows the linear relationship between foot length and height. One individual is unusually tall for their foot length. Hover over this data point in this  interactive plot to learn more!"
+#| fig-alt: "Interactive scatterplot of height versus foot length. Most students follow a positive relationship: students with larger feet tend to be taller. One point falls far above this pattern, indicating a student with much taller than expected from their foot length. Hover text gives each point's row ID, leverage, standardized residual, and Cook's distance."
 # Loading the data and libraries
 
 # Loading the data and libraries
@@ -425,7 +425,7 @@ Looking at @fig-shoe-outlier, we clearly see one extreme outlier. Rolling our mo
 - Has relatively little leverage, 
 - Might be somewhat influential. That is, while Cook's distance is way less than one, it is greater than four divided by n = 33).  
 
-The residuals vs leverage plot (@fig-residlevshoe) tells the same story. 
+The residuals vs leverage plot (@fig-residlevshoe) tells the same story -- individual 28 has an extremely large residual value. 
 
 ```{r}
 #| label: fig-residlevshoe
@@ -437,7 +437,7 @@ plot(shoe_lm , which = 5)
 
 ---
 
-This all looks fine to me! But to be sure, let's compare model parameters with and without this outlier:
+So, despite this large residual value, the leverage of this point is not super  extreme. To be sure, let's compare model parameters with and without this outlier:
 
 ```{r}
 # Full data set

@@ -1,4 +1,4 @@
-## • 19. Regression summaries {.unnumbered #regression_summaries}
+## • 19. Regression summaries {.unnumbered #regression_summaries_ch}
  
 ```{r}
 #| message: false
