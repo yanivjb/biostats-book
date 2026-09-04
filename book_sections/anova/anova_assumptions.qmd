@@ -66,7 +66,7 @@ Like the two-sample t-test (and all linear models), ANOVA assumes:
 - Equal variance among groups (homoscedasticity)  
 - Normality of residuals. As in the two-sample t-test, this requires approximate normality within groups.  
  
-Here we use the *parviflora* admixture data  to look into these assumptions
+Here we use the *parviflora* admixture data  to look into these assumptions.
 
 ## ANOVA assumes...
 
@@ -153,7 +153,7 @@ We’ll continue using these data to learn how ANOVA works. But when the assumpt
 
 **Most importantly, think about what you’re doing and why.** While you should not run a statistical test that gives meaningless results, there’s usually  a trade-off between statistical purity and clear communication of your results. Don’t rush to the most statistically pure approach, if it means your results are difficult to interpret. 
 
-If you're interested in NHST, breaking assumptions means that your p-values aren’t properly calibrated, so you cannot literally interpret your p-value. But how often do you  care about the exact p-value? If you're  worried about misleading confidence intervals, consider the trade-offs between having these perfectly calibrated, and loss of information that may occur when presenting results on a scale that is difficult to interpret. Let clarity about your goals and the meaning of your results take precedence over strict rule following.
+If you're interested in NHST, breaking assumptions means that your p-values aren’t properly calibrated, so you cannot literally interpret your p-value. But how often do you  care about the exact p-value? If you're worried about misleading confidence intervals, consider the trade-offs between having these perfectly calibrated, and loss of information that may occur when presenting results on a scale that is difficult to interpret. Let clarity about your goals and the meaning of your results take precedence over strict rule following.
 
 
 

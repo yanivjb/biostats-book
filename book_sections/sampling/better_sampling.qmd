@@ -25,7 +25,7 @@ library(tidyr)
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 **Motivating Scenario:**
-Because chance is inherent in sampling, some sampling error is unavoidable. We've also seen that in the real world sampling bias  and non-independence, can further complicate our aims of estimation and hypothesis testing. In this section I go over sampling strategies to generate precise and accurate estimates.
+Because chance is inherent in sampling, some sampling error is unavoidable. We've also seen that in the real world sampling bias  and non-independence can further complicate our aims of estimation and hypothesis testing. In this section I go over sampling strategies to generate precise and accurate estimates.
 
 **Learning Goals: By the end of this chapter, you should be able to:**
 
@@ -72,4 +72,4 @@ Of course, while getting a random sample is ideal, it's not always plausible. Yo
 
 There are also things we can do to minimize bias and non-independence in experiments. As stated previously, when conducting human trials a double blind study is best. Similarly, when working in non-humans (plants, animals, bacteria etc) it's best if the observer is "blind" to the treatment.  However, in some cases "blinding" is impossible or impractical -- e.g. how can you watch pollinators and not see petal color? (see also @fig-xkcd_sex).
 
-Finally, it is best to avoid pseudoreplication by spreading treatments across conditions however this is not always possible. For example, because pesticides often  "drift" we usually need to put distance between a pesticide and no pesticide treatment. Later in the term we will learn how to model such non-independence with random effect models. 
+Finally, it is best to avoid pseudoreplication by spreading treatments across conditions, however, this is not always possible. For example, because pesticides often  "drift" we usually need to put distance between a pesticide and no pesticide treatment. Later in the term we will learn how to model such non-independence with random effect models. 

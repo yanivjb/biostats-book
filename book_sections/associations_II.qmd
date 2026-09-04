@@ -60,7 +60,7 @@ You're curious to know the extent to which two variables are associated and need
 
 
 
-<article class="drop-cap">In the previous chapter we saw that quantifying the associations between variables can illuminate our biological understanding. We also, however realized that we must carefully interpret such associations, as observed associations do not necessarily imply causation. Here I introduce two additional standard measures of association -- covariance and correlation.</article>  </br>      
+<article class="drop-cap">In the previous chapter we saw that quantifying the associations between variables can illuminate our biological understanding. We also, however, realized that we must carefully interpret such associations, as observed associations do not necessarily imply causation. Here I introduce two additional standard measures of association -- covariance and correlation.</article>  </br>      
 
 ## Correlation is still not causation
 
@@ -71,7 +71,7 @@ You're curious to know the extent to which two variables are associated and need
 
 - Causation means that changing one variable produces a change in the other.    
 
-We discussed that process including coincidence, confounding and reverse causation, can generate correlations without the causation we wish to imply. So we cannot make causal claims or even good predictions from correlations alone. Let's push a bit more on this below.
+We discussed that processes including coincidence, confounding and reverse causation, can generate correlations without the causation we wish to imply. So we cannot make causal claims or even good predictions from correlations alone. Let's push a bit more on this below.
 
 
 --- 
@@ -97,7 +97,7 @@ include_graphics("https://imgs.xkcd.com/comics/cell_phones.png")
 **Not only does correlation not imply causation, but causation doesn't always generate an association.**   
 
 
-For example, no one will doubt that height gives a basketball player an advantage. Yet if we look across all NBA players, we see no relationship between height and standard measures of player success (e.g. salary, or "Value over Replacement Player" etc @fig-VORP), How can this be? The answer is that to make it to the NBA you have to be very good or very tall (and usually both) -- so (6 foot 4, Shai Gilgeous-Alexander) has a value just a bit higher than  (6 foot 11) Giannis Antetokounmpo.
+For example, no one will doubt that height gives a basketball player an advantage. Yet if we look across all NBA players, we see no relationship between height and standard measures of player success (e.g. salary, or "Value over Replacement Player" etc @fig-VORP). How can this be? The answer is that to make it to the NBA you have to be very good or very tall (and usually both) -- so ( (6 foot 4) Shai Gilgeous-Alexander has a value just a bit higher than  (6 foot 11) Giannis Antetokounmpo.
 
 ---
 

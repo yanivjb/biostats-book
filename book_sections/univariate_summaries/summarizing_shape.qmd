@@ -87,7 +87,7 @@ include_graphics("../../figs/intro_to_r/univariate_summaries/1969.png")
 
 ### Skew     {#summarizing_shape_skew}  
 
-One key aspect of a dataset’s shape is skewness, i.e. if the data is symmetrical or if it has an excess of smaller or larger values.  
+One key aspect of a dataset’s shape is skewness, i.e. if the data are symmetrical or has an excess of smaller or larger values.  
 
 
 - The proportion of hybrid seeds per RIL mom (@fig-prop_hyb_hist, and shown again in @fig-shape A) is strongly **right-skewed**. That is, most values are small, but some are very large. Right-skewed data is common in biology and everyday life. For example, income is right-skewed: most people earn relatively little money, but some make loads of ca$h. <br> <br>       
@@ -172,7 +172,7 @@ One of the first things to notice when visualizing a dataset is the **number of 
 #| warning: false
 #| label: fig-hzsite
 #| fig-cap: "The distribution of petal area across four *xantiana* / *parviflora* hybrid zones. Data are available [here](https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/cz_cluster_assignments_2024july17.csv)."
-#| fig-alt: "The image presents a faceted histogram showing the distribution of log10-transformed average petal area (sq. cm) across five populations of Clarkia xantiana (GC, S22, S6, SAW, SM), with each population represented in a separate panel labeled at the top. The y-axis indicates count (frequency of observations), while the x-axis represents log10-transformed petal area. The distribution varies across populations, with GC, S22, SAW and SM exhibiting a bimodal pattern, featuring peaks around -0.5 and 0.25. By contrast S6 is right-skewed, with most values concentrated near 0 and a tail extending toward smaller values. This visualization highlights population-level variation in petal size distributions, suggesting potential genetic or environmental influences on floral trait differentiation."
+#| fig-alt: "The image presents a faceted histogram showing the distribution of log10-transformed average petal area (sq. cm) across five populations of Clarkia xantiana (GC, S22, S6, SAW, SM), with each population represented in a separate panel labeled at the top. The y-axis indicates count (frequency of observations), while the x-axis represents log10-transformed petal area. The distribution varies across populations, with GC, S22, SAW and SM exhibiting a bimodal pattern, featuring peaks around -0.5 and 0.25. By contrast, S6 is left-skewed, with most values concentrated near 0 and a tail extending toward smaller values. This visualization highlights population-level variation in petal size distributions, suggesting potential genetic or environmental influences on floral trait differentiation."
 hz_data <- read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/cz_cluster_assignments_2024july17.csv")|>
   mutate(log10_avg_petal_area_sq_cm = log10(mean_petal_area_sq_cm))
 ggplot(hz_data, aes(x = log10_avg_petal_area_sq_cm))+

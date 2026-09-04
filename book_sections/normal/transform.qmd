@@ -62,7 +62,7 @@ Because the normal distribution is so common, and because the Central Limit Theo
 3. We can use or develop tools to model the data based on their actual distribution.  
 4. We can use robust and/or nonparametric approaches.  
 
-We have already discussed option 1 at length, and will return to options 3 and 4 later in the term. Here we visit option 2, transformation, in which we change the shape of our data (We already covered this some [earlier in the book](#changing_shape)).
+We have already discussed option 1 at length, and will return to options 3 and 4 later in the term. Here we visit option 2, transformation, in which we change the shape of our data. This builds on our earlier [introduction to transformation](#changing_shape).
 
 ### Rules for Legitimate Transformations   
 

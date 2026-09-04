@@ -59,7 +59,7 @@ Try these questions! By using the R environment you can work without leaving thi
 :::exercises
 
 
-**SETUP:** *There are plenty of reasons to choose your partner carefully. In much of the biological world a key reason is "evolutionary fitness" - presumably organisms evolve to choose mates that will help them make more (or healthier) children. This could, for example explain Kermit’s resistance in one of the more complex love stories of our time, as frogs and pigs are unlikely to make healthy children.*  
+**SETUP:** *There are plenty of reasons to choose your partner carefully. In much of the biological world a key reason is "evolutionary fitness" - presumably organisms evolve to choose mates that will help them make more (or healthier) children. This could, for example, explain Kermit’s resistance in one of the more complex love stories of our time, as frogs and pigs are unlikely to make healthy children.*  
 
 *To evaluate this idea @swierk2019, identified a male's top choice out of two female wood frogs and then had them mate with the preferred or unpreferred female, and counted the number of hatched eggs.*
 

@@ -69,7 +69,7 @@ The subscript in $\mu_0$ indicates that this is the hypothesized mean under the 
 
 This allowed us to summarize the distance between an estimated mean ($\bar{x}$) and its null value, ($\mu_0$) in standardized units (standard errors of the mean), regardless of the scale of the original data.  This is super useful, because we can conduct null hypothesis significance testing and similar analyses. 
 
-*However, there’s a problem:* We usually have only a sample and not the whole population (that's why we're doing statistics after all!). So we have an **estimate** of the standard deviation ($s$), and not its true parameter value ($\sigma$). This means our standard error is also an estimate and therefore uncertain.  Unfortunately, the Z-distribution does not account for this additional uncertainty.
+*However, there’s a problem:* We usually have only a sample and not the whole population (that's why we're doing statistics after all!). So we have an **estimate** of the standard deviation ($s$) and not its true parameter value ($\sigma$). This means our standard error is also an estimate and therefore uncertain.  Unfortunately, the Z-distribution does not account for this additional uncertainty.
 
 
 ## The Solution
@@ -136,7 +136,7 @@ Now you might be wondering:
 
 The answers to these questions depend on which t-distribution we're talking about. There are many, each associated with a different number of degrees of freedom. 
 
-The degrees of freedom reflect the number of observations that can vary before all values are determined, which is related to the uncertainty in our estimate. So, the more degrees of freedom, the more certainty! As such, tails become less "fat," and the t-distribution looks more and more like the standard normal (Z) distribution as the degrees of freedom increase (@fig-tvz).
+Degrees of freedom reflect the number of values free to vary, which relates to the uncertainty in our estimate. So, the more degrees of freedom, the more certainty! As such, tails become less "fat," and the t-distribution looks more and more like the standard normal (Z) distribution as the degrees of freedom increase (@fig-tvz).
 
 
 
@@ -162,7 +162,7 @@ In this chapter we introduce the *t*-distribution.
 
 * We begin by [introducing a non-*Clarkia* dataset](#t_example) to motivate our discussion.
 * Next, we [review standard summaries of single continuous variables](#summaries_4_t), and consider the [assumptions required to justify using the *t*-distribution](#t_assumptions) to model such data.
-* We then [calculate 95% confidence intervals for data modeled by the *t*-distribution](#t_CI), and show how the ["one sample" *t*-test](#one_sample_t_test) can be used to evaluate the null hypothesis that a sample comes from a population with mean \$\mu\_0\$. After working through the math and logic of this "one-sample *t*-test," we see how [R can do most of this heavy lifting for us](#one_sample_t_test_in_R).
+* We then [calculate 95% confidence intervals for data modeled by the *t*-distribution](#t_CI), and show how the ["one sample" *t*-test](#one_sample_t_test) can be used to evaluate the null hypothesis that a sample comes from a population with mean $\mu_0$. After working through the math and logic of this "one-sample *t*-test," we see how [R can do most of this heavy lifting for us](#one_sample_t_test_in_R).
 * Finally, we work through the ["paired" *t*-test](#paired_t_test), a particularly useful version of the one-sample test that asks whether the mean difference between paired observations under different treatments differs from zero (i.e., no difference).
 * As always, we conclude with a [chapter summary](#t_summary).
 

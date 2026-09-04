@@ -324,7 +324,7 @@ We can compare the variability of traits measured on different scales by dividin
 
 ```
 
-**Q9** What is wrong with the code below (pick the most egregious issue). 
+**Q9)** What is wrong with the code below? (Pick the most egregious issue).  
 
 ```{r}
 iris <- iris |> 

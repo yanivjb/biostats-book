@@ -28,7 +28,7 @@ library(tidyr)
 
 1. You want to understand the standard by which scientists take results seriously versus chalking them up to sampling error.
 
-2. You are told results are "statistically significant" or they have some given p-value, and we want to know what that means.
+2. You are told results are "statistically significant" or they have some given p-value, and you want to know what that means.
 
 3. You have done a statistical analysis and want to guard against the possibility that your seemingly exceptional results are merely attributable to sampling error.
 
@@ -67,7 +67,7 @@ To get started, let's return to the foundational challenge in estimation. **That
 
 ## NHST Example 
 
-Let's work through an example: We planted pink and white-petaled *parviflora* RILs at the Upper Sawmill (US) location. Of the 114 assayed plants with known petal color: 
+Let's work through an example: We planted pink- and white-petaled *parviflora* RILs at the Upper Sawmill (US) location. Of the 114 assayed plants with known petal color: 
 
 - 9 of the 56 pink-petaled RILs (aka 16.1%) set at least one hybrid seed.  
 - 4 of the 58 white-petaled RILs (aka 6.9%) set at least one hybrid seed.    
@@ -184,7 +184,7 @@ In principle, in addition to a real effect, sampling bias, non-independent sampl
 
 
 ```{r}
-#| fig-cap: "Dont take it from me. Here's a TikTok  from professor [Christina Knudson](https://cknudson.com/) at St. Thomas."
+#| fig-cap: "Don't take it from me. Here's a TikTok  from professor [Christina Knudson](https://cknudson.com/) at St. Thomas."
 #| echo: FALSE
 #| column: margin
 #| out-width: "100%"

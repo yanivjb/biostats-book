@@ -148,7 +148,7 @@ $$\text{Covariance }_{X,Y} = \frac{\Sigma{(X_i-\overline{X})(Y_i-\overline{Y})}}
 In this formulation, 
 
 1. Find the deviation of X and Y from their means for each individual --  $(X_i-\overline{X})$, and $(Y_i-\overline{Y})$, respectively (@fig-cov, left).    
-2. Multiply these deviations to get a cross-product. In the left side of  @fig-cov, this corresponds to the area of the rectangle formed by the two deviations.
+2. Multiply these deviations to get a cross-product. On the left side of  @fig-cov, this corresponds to the area of the rectangle formed by the two deviations.
 3. Sum them to find the sum of cross products (@fig-cov, right, top).  
 4. Divide by the sample size minus one (@fig-cov, right, bottom).   
 
@@ -239,7 +239,7 @@ gc_rils |>
   dplyr::filter(!is.na(log10_petal_area_mm))  |>
   dplyr::filter(!is.na(prop_hybrid))          |>
   summarise(r = cov(log10_petal_area_mm, prop_hybrid) /
-                   ## -- Divide by produce of standard devs -- ##
+                   ## -- Divide by product of standard deviations -- ##
                    (sd(log10_petal_area_mm) * sd(prop_hybrid)))
 ```
 

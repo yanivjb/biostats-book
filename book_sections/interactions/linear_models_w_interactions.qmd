@@ -106,7 +106,14 @@ lm(prop_hybrid ~ petal_color + petal_area_mm, data = rils)$coef|> round(digits =
 
 ---
 
-So, for example, to find the predicted proportion of hybrid seeds for a pink-flowered RIL with a petal area of $100\ \text{mm}^2$ we started with the intercept (0.0070), we added one hundred times the coefficient for petal area ($100 \times 0.0036$) equals 0.367. *Note:* We did not include a petal color coefficient because pink was the reference level. To find the predicted proportion of hybrid seeds for a white-flowered RIL with a petal area of $100mm^2$  we would simply add the coefficient for `petal_colorwhite` (-0.18) to our previous prediction for a predicted proportion of 0.187. 
+So, for example, to find the predicted proportion of hybrid seeds for a pink-flowered RIL with a petal area of $100\ \text{mm}^2$:  
+
+- We start with the intercept (0.0070).     
+- We add one hundred times the coefficient for petal area ($100 \times 0.0036$) equals 0.367.   
+- We do not include a petal color coefficient because pink was the reference level.  
+To find the predicted proportion of hybrid seeds for a white-flowered RIL with a petal area of $100mm^2$, 
+
+- We  add the coefficient for `petal_colorwhite` to our previous prediction for a predicted proportion of $0.367 - 0.180 =  0.187$. 
 
 ### Building models with interactions with `lm()`
 
@@ -612,7 +619,7 @@ For example, we find the expected proportion of hybrid seeds for a RIL with a pe
 
 It is very hard to visualize more than two continuous variables. It is even harder to spot nonlinear trends in such cases. Rather than forcing all three variables into one plot, let's try making the problem easier.
 
-I usually turn one of the continuous predictors into an ordinal variable, and then visually compare slopes. For example, in @fig-quantint, I break anther stigma into quartiles. I then compare the relationship between petal area and the proportion of hybrid seed across asd quartiles. @fig-quantint shows a slope near zero for the bottom two quartiles, but a sharp slope for larger values of ASD. Thus, while this does not perfectly reproduce  our model, it is giving interaction. 
+I usually turn one of the continuous predictors into an ordinal variable, and then visually compare slopes. For example, in @fig-quantint, I break anther stigma into quartiles. I then compare the relationship between petal area and the proportion of hybrid seed across ASD quartiles. @fig-quantint shows a slope near zero for the bottom two quartiles, but a sharp slope for larger values of ASD. Thus, while this does not perfectly reproduce  our model, it is giving interaction. 
 
 
 

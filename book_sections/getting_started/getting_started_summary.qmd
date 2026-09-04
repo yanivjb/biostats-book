@@ -124,7 +124,7 @@ $$\text{leaf area } = 0.851 \times \text{ leaf length } \times \text{ leaf width
 
 
 
-The mean leaf area is `r fitb(16.8916, tol = .15)`
+The mean leaf area is `r fitb(16.89916, tol = .15)`
 
 
 

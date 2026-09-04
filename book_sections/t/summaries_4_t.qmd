@@ -52,7 +52,7 @@ We have previously considered standard [summaries of univariate data](#univariat
 
 
 ::: aside
-We introduced Cohen's D in the [associations section](#associations), but is can be used for a single numeric variable as well!      
+We introduced Cohen's D in the [associations section](#associations), but it can be used for a single numeric variable as well!      
 :::
 
 I calculate these below:   

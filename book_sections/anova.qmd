@@ -58,7 +58,7 @@ clarkia_hz <- read_csv(hz_link)|>
 ```{r}
 #| echo: false
 #| column: margin
-#| fig-cap: "Some beutiful pink-flowered Clarkia plants in the greenhouse."
+#| fig-cap: "Some beautiful pink-flowered Clarkia plants in the greenhouse."
 #| fig-alt: "A greenhouse interior featuring multiple rows of tall, potted Clarkia plants with pink flowers growing on elevated metal benches under artificial lighting."
 include_graphics("../clarkia_pics/xan_greenhouse.png")   
 ```

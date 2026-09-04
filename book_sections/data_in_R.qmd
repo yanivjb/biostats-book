@@ -123,7 +123,7 @@ The following sections introduce the very basics of R including:
 - [Looking at our data structure + Selecting and renaming columns](#select_vars).   
 - [Adding columns with mutate](#add_vars).    
 - [Choosing rows](#choose_rows).
-- [Example R code](#dealing_w_data_script) to implement these ideas in a realsitic scenario.
+- [Example R code](#dealing_w_data_script) to implement these ideas in a realistic scenario.
 
 Then we  [summarize the chapter](#data_in_R_summarySummary), present  a [chatbot tutor](#data_in_R_summaryChatbot), [practice questions](#data_in_R_summaryPractice_questions), a [glossary](#data_in_R_summaryGlossary_of_terms),  a review of [R functions](#data_in_R_summaryNew_r_functions) and [R packages](#data_in_R_summaryR_packages_introduced) introduced, and [provide links to additional resources](#data_in_R_summaryAdditional_resources).    
 

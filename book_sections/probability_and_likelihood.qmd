@@ -313,7 +313,7 @@ Above I just said the standard deviation was one. But more often we find it from
 **The standard deviation in our likelihood calculations** is a bit different than we are used to.   
 
 - First, we consider our  sums of squares as deviations away from the proposed mean, rather than the estimated mean.  
-- Second we divide by n, not not n-1 (because we state the mean and do not estimate it)
+- Second we divide by n, not n-1 (because we state the mean and do not estimate it)
 :::
 
 

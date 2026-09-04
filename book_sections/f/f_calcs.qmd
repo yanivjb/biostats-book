@@ -233,7 +233,7 @@ sm_lm
 
 ---
 
-As crash course in how to read this:  
+As a crash course in how to read this:  
 
 - **The output `(Intercept)`:** The value, `r sm_lm$coefficients[["(Intercept)"]] |> round(digits = 4)`, is the admixture proportion for plants with the "reference level" petal color. Here, the reference level is "pink flowers". We know this because pink does not appear in the linear model output.    $\text{(Intercept)} =\hat{Y}_\text{pink}$
 

@@ -54,7 +54,7 @@ Try these questions!
 
 :::exercises
 
-**Q1)** Random assignment describes the key feature of experimental design in which the experimenter `r longmcq(c(answer = "Randomly assigns individuals in a study to a treatment","Randomly assigns individuals to study.", "Gives participants random homework assignments to ensure they can appropriately complete the experiment"))`
+**Q1)** Random assignment describes the key feature of experimental design in which the experimenter `r longmcq(c(answer = "Randomly assigns individuals in a study to a treatment","Randomly assigns individuals to a study.", "Gives participants random homework assignments to ensure they can appropriately complete the experiment"))`
 
 `r hide("btw")`
 That second option describes **random selection** (or random sampling). Random selection is about randomly choosing who gets into the study, from the broader population you care about. 

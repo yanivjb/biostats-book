@@ -51,7 +51,7 @@ rils <- readr::read_csv(ril_link) |>
 ## Model coefficients  
 
 
-We usually care about more than describing the world and testing the null hypothesis. Often, the more pressing question is: "Would changining the value of an explanatory variable matter to us?" Ultimately, deciding the strength that "matters" is up to the decision maker -- for example, a government might decide how much increase in cancer risk is acceptable when putting in a new power plant or whatever, or in the context of our Clarkia data, an evolutionary theorist might know the maximum amount of gene flow two populations can experience before they merge into one species. 
+We usually care about more than describing the world and testing the null hypothesis. Often, the more pressing question is: "Would changing the value of an explanatory variable matter to us?" Ultimately, deciding the strength that "matters" is up to the decision maker -- for example, a government might decide how much increase in cancer risk is acceptable when putting in a new power plant or whatever, or in the context of our Clarkia data, an evolutionary theorist might know the maximum amount of gene flow two populations can experience before they merge into one species. 
 
 For both the examples above, the key measure of effect was simply the coefficient in the multiple regression model. This measure of effect is very handy -- especially in the hands (or brains) of experts, who can make use of this information. 
 

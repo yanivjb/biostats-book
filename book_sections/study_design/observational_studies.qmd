@@ -256,7 +256,7 @@ After reflecting on these questions, you are ready to take the next steps.
 
 #### Triangulate evidence to make strong claims
 
-Contrary to what you see in movies, scientific discovery rarely comes from one heroic experiment or observation. Rather, we make scientific progress by synthesizing different forms of evidence. So observational studies can complement experimental results, and generate novel predictions, so that we can triangulate towards the right answer.
+Contrary to what you see in movies, scientific discovery rarely comes from one heroic experiment or observation. Rather, we make scientific progress by synthesizing different forms of evidence. So, observational studies can complement experimental results, and generate novel predictions, so that we can triangulate towards the right answer.
 
 Below, I work through how we can triangulate lines of evidence to try to learn the direction of causation. Of course, we can combine evidence to differentiate between other types of competing causal models.  
 

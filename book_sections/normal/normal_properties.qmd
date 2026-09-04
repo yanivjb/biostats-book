@@ -46,7 +46,7 @@ gc_rils <- ril_data |>
 
 Now that we have the basics of the normal distribution down, let's consider some of its properties. While I don't believe in "making" students memorize anything, these are basic facts that anyone who deals with statistics should be pretty comfortable with:    
 
-- **The normal distribution is symmetric about its mean.** This means that if you folded a paper with the normal distribution printed on it, and folded it in half (with the fold centered on the mean), one side would lay perfectly atop the other.  
+- **The normal distribution is symmetric about its mean.** This means that if you  printed the normal distribution on a piece of paper, and folded it in half at the mean, one side would lay perfectly atop the other.  
 
 - **$50\%$ of the normal distribution is less than its mean.**  
 
@@ -141,9 +141,9 @@ The web app is a great tool for understanding the standard normal distribution. 
 
 The answer is the **Z-transformation**, a simple formula that allows us to convert any value from any normal distribution into an equivalent value on the standard normal distribution. This means we can solve any normal distribution problem by converting it to the standard normal first.
 
-We z-transform data by taking each value, subtracting the mean, and dividing by the standard deviation. So, if the $i^{th}$ observation has a value of $x_i$, its z-value is:
+We Z-transform by taking each value, subtracting the mean, and dividing the result by the standard deviation.  So, if the $i^{th}$ observation has a value of $x_i$, its Z-value is:
 
-$$z_i=\frac{x_i-\mu}{\sigma}$$
+$$Z_i=\frac{x_i-\mu}{\sigma}$$
 
 So, although we just worked through the results thinking about the standard normal, they apply to any normal distribution!
 

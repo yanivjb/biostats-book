@@ -14,7 +14,7 @@ webr:
 #| warning: false
 #| column: margin
 #| fig-alt: "A cartoon graph showing the number of T. rex limbs over time. 150 million years ago, T. rex had 4 limbs. By the time of extinction (~65 million years ago), it had \"barely more than 2\" limbs. A dashed line extrapolates this trend to today, humorously predicting a limbless, snake-like T. rex. Caption reads: \"If T. rex hadn't gone extinct (Linear Extrapolation).\""
-#| fig-cap: "If you keep extrapolating from data T. rex will into an absurd modern-day, snake-like dinosaur. [This cartoon is adapted from xkcd](https://xkcd.com/3042/). The original rollover text says: \"Unfortunately, body size and bite force continue to increase\". See [this link](https://www.explainxkcd.com/wiki/index.php/3042:_T._Rex_Evolution) for a more detailed explanation."
+#| fig-cap: "If you keep extrapolating from data T. rex will evolve into an absurd modern-day, snake-like dinosaur. [This cartoon is adapted from xkcd](https://xkcd.com/3042/). The original rollover text says: \"Unfortunately, body size and bite force continue to increase\". See [this link](https://www.explainxkcd.com/wiki/index.php/3042:_T._Rex_Evolution) for a more detailed explanation."
 #| label: fig-trex 
 library(webexercises)
 library(dplyr)
@@ -96,7 +96,7 @@ lm(bill_length_mm~species, penguins)
 
 **Q5)** What is the mean bill length of Chinstrap penguins in the dataset? `r mcq(c("38.791","10.042",answer = "48.833","not enough information"))`
 
-**Q6)** How many mm longer Chinstrap bills as compared to Gentoo bills in this dataset?  `r mcq(c("10.042","8.713",answer = "1.329","not enough information"))`
+**Q6)** How many mm longer are Chinstrap bills as compared to Gentoo bills in this dataset?  `r mcq(c("10.042","8.713",answer = "1.329","not enough information"))`
 
 **Q7)** What is the mean bill length of all penguins in this dataset?  `r mcq(c("38.791","19.182","45.04267","43.92",answer = "not enough information"))`
 
@@ -137,7 +137,13 @@ filter(penguins,sex == "female",species == "Chinstrap")|>
 # Use this are for calculations
 # This is about understanding concepts
 # So do not run linear models here.
+# Calculate correlation, r, as: r = cov(x,y) / (sd(x)*sd(y))
 
+# Calculate slope as: b = cov(x,y) / var(x)
+
+# Calculate intercept as: a = mean(y) - b * mean(x)
+
+# Other calcs below
 
 ```
 
@@ -150,11 +156,11 @@ filter(penguins,sex == "female",species == "Chinstrap")|>
 
 **Q10)** The intercept in this model is `r fitb(14.58863, tol =0.6)`.
 
-**Q11)** According to the model, what is the predicted bill depth (in mm) for a penguin with a 50 mm long bill  `r fitb(17.80913, tol =0.35)`.
+**Q11)** According to the model, what is the predicted bill depth (in mm) for a penguin with a 50 mm long bill?  `r fitb(17.80913, tol =0.35)`.
 
 **Q12)** A penguin with a 20 mm deep and 50 mm long bill will have a residual of  `r fitb(2.19, tol =0.2)` mm.
 
-**Q13)**  According to the model, what is the predicted bill depth for a penguin with a 500 mm long bill  `r fitb(-10000000000000)` mm deep bill.
+**Q13)**  According to the model, what is the predicted bill depth for a penguin with a 500 mm long bill? `r fitb(-10000000000000)`
 
 `r hide("Haven't gotten it yet?")`
 
@@ -205,13 +211,13 @@ library(dplyr)
 library(broom)
 library(ggplot2)
 library(palmerpenguins)
-# work here! You will buils a linear model
+# Work here! You will build a linear model
 
 ```
 
 :::exercises
 
-**Q14)** In @fig-penguin there is a male penguin with a bill that is about 56 mm long (the second most extreme right point). Approximate, by eye its residual. `r fitb(.6,tol=.15)`
+**Q14)** In @fig-penguin there is a male penguin with a bill that is about 56 mm long (the second most extreme right point). Visually approximate its residual.`r fitb(.6,tol=.15)`
 
 **Q15)** Based on @fig-penguin, which of the following are nearly identical for male and female Gentoo penguins? (Select all that apply.) `r longmcq(c("Mean bill lengths", "Mean bill depths", answer = "Slopes", "Intercepts","This plot shows that nearly nothing is nearly identical between male and female Gentoo penguins"))`.
 
@@ -263,7 +269,7 @@ library(palmerpenguins)
 - **Observed value (`yᵢ`)**: The actual value of the response variable: $y_i = \hat{y}_i +e_i$.     
 - **Residual (`eᵢ`)**: The difference between an observed value and its model-predicted value, $e_i = y_i-\hat{y}_i$.  
 - **Residual Sum of Squares**: $\sum e_i^2$
-- **Residual Standard Deviation**: A measure of typical residual size — how far off predictions tend to be $\sqrt{\frac{\sum e_i^2}{n-k}}$, where $k$ is the number of parameters estimated in our model. For a simple linear regression $k=2$, as we estimate the slope slope and the intercept.
+- **Residual Standard Deviation**: A measure of typical residual size — how far off predictions tend to be $\sqrt{\frac{\sum e_i^2}{n-k}}$, where $k$ is the number of parameters estimated in our model. For a simple linear regression $k=2$, as we estimate the slope and the intercept.
 
 
 

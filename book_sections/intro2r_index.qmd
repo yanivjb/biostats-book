@@ -58,7 +58,7 @@ Years of learning and teaching have taught me the following key points about lea
 ```{r}
 #| echo: false
 #| label: "fig-r_mindset"
-#| fig-cap: "Video of Yaniv\\'s hints for succesful R coding."
+#| fig-cap: "Video of Yaniv\\'s hints for successful R coding."
 include_url("https://player.vimeo.com/video/745985537")
 ```
 

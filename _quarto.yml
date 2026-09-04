@@ -11,6 +11,7 @@ book:
   # New: without these, sharing the book link (Slack/email/Discord) previews
   # as a bare URL with no title/image. favicon/image reuse the existing logo
   # so no new asset is needed. Swap the description/site-url if you'd like.
+  google-analytics: "G-JB99Z9SHHJ"
   favicon: "figs/fun_figs/stamp.png"
   site-url: "https://yanivjb.github.io/biostats-book/"
   image: "figs/fun_figs/stamp.png"

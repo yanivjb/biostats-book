@@ -6,7 +6,7 @@
 
 - Your script should not simply include all the code that you wrote along your journey. Rather, your script is what is needed for someone else to generate your results and understand how you got there. For example, I used the `glimpse()` function to look into the data. I also had numerous versions of wrong code and false starts etc. While it is useful for you (as learners) to understand that such additional code and false starts are common, it is not needed to recreate my final product.  
 
-- Reproducibility requires a reliable file structure. I cheated by reading data from the web. If your data reside on your computer be sure to include a .zip file with the R script, the data and an R project that will work on a naive computer
+- Reproducibility requires a reliable file structure. I cheated by reading data from the web. If your data reside on your computer be sure to include a .zip file with the R script, the data and an R project that will work on a naive computer.
 
 ### Functions
 
@@ -69,7 +69,7 @@ ril_data <- ril_data |>
          !is.na(has_hyb))
 
 ###--------------------------
-### Plot the association between receiving a visits and having a hybrid by location
+### Plot the association between receiving a visit and having a hybrid by location
 final_plot <- ggplot(ril_data, aes(x = has_hyb, fill = visited))+
   geom_bar()+
   facet_wrap(~location, labeller = "label_both")+

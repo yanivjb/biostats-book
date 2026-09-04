@@ -37,7 +37,7 @@ us_rils <- ril_data |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:** You understand the null hypothesis and the sampling distribution, and you've heard of a p-value. Now you're ready to understand what a p-value means (and what is does not mean)!
+**Motivating Scenario:** You understand the null hypothesis and the sampling distribution, and you've heard of a p-value. Now you're ready to understand what a p-value means (and what it does not mean)!
 
 **Learning Goals: By the end of this section, you should be able to:**
 
@@ -253,4 +253,4 @@ ggplot(gc_rils_perm|> mutate(as_extreme = abs(stat) >= 0.5666 ),
   scale_fill_manual(values = c("darkgrey","red"))
 ```
 
-Let's contrast this observation with what we see at site GC where 35 of 50 pink-flowered plants and 6 of 45 white flowered plants  set at least one hybrid seed. Our test statistic equals $\frac{35}{50} - \frac{6}{45} = 0.567$. @fig-null4 shows that the null model almost never generates a test statistic as extreme as we see in our data. This p-value would therefore be pretty close to zero (p < 0.001).  This means we would be quite shocked to see such a result come from the null model of no association between petal color and a plant setting at least one hybrid seed. 
+Let's contrast this observation with what we see at site GC where 35 of 50 pink-flowered plants and 6 of 45 white-petaled plants  set at least one hybrid seed. Our test statistic equals $\frac{35}{50} - \frac{6}{45} = 0.567$. @fig-null4 shows that the null model almost never generates a test statistic as extreme as we see in our data. This p-value would therefore be pretty close to zero (p < 0.001).  This means we would be quite shocked to see such a result come from the null model of no association between petal color and a plant setting at least one hybrid seed. 

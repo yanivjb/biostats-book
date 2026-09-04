@@ -120,13 +120,13 @@ include_graphics("../../figs/stats_foundations/study_design/explanations.jpeg")
 
 ### Experiments Can Reveal Causation
 
-Our RIL study was highly controlled and well designed but not a completely randomized experiment. In contrast to our observational study (@sianta2026) using RILs randomly planted within and between field sites allowed us to conclude that the association between petal area and hybrid formation cannot be attributed to field site, location in the field, or by more hybridization causing larger petals. However, as stated above, we could not conclude that larger petals themselves caused more hybridization -- this would require randomly assigning petal area to different plants.
+Our RIL study was highly controlled and well designed but not a completely randomized experiment. In contrast to our observational study (@sianta2026), using RILs randomly planted within and between field sites allowed us to conclude that the association between petal area and hybrid formation cannot be attributed to field site, location in the field, or by more hybridization causing larger petals. However, as stated above, we could not conclude that larger petals themselves caused more hybridization -- this would require randomly assigning petal area to different plants.
 
 ::: aside
 Our RILs were an attempt to randomize traits across backgrounds. But the linkage and pleiotropy between traits prevented complete randomization.
 :::
 
-Experiments are magical because they can allow us to learn about causation. In an experiment we assign a treatment randomly to each experimental unit in the study. Because treatment is assigned at random, any confound is due to chance rather than to the design itself. So if we could magically alter petal area (e.g. by hormone treatment or cutting and pasting petal bits, or genetic engineering) and then randomly assign petal area to plants we could establish causation. 
+Experiments are magical because they can allow us to learn about causation. In an experiment we assign a treatment randomly to each experimental unit in the study. Because treatment is assigned at random, any confounding is due to chance rather than to the design itself. So if we could magically alter petal area (e.g. by hormone treatment or cutting and pasting petal bits, or genetic engineering) and then randomly assign petal area to plants we could establish causation. 
 
 But experiments can only reveal causation when they are designed correctly. So, we must think about common challenges in experimental design, and make sure we don't fall into one of these classic traps. 
 

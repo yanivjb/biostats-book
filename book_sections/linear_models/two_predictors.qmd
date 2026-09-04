@@ -213,7 +213,7 @@ In the webR session below:
 
 - Find the predicted proportion of hybrid seed for individual $i=3$ `r fitb(num = TRUE, 0.206, tol = 0.002)`.  
 
-- Find the residual of  for individual $i=3$ `r fitb(num = TRUE, -0.044, tol = 0.003)`.
+- Find the residual proportion of hybrid seed for individual $i=3$ `r fitb(num = TRUE, 0.044, tol = 0.003)`.
 
 
 
@@ -233,7 +233,7 @@ In the webR session below:
 -0.0914 + 5.76e-3 * 51.7 #   no b2 because its pink  
 
 # Residual for ind i = 3
-(-0.0914 + 5.76e-3 * 51.7) - 0.25  
+0.25 - (-0.0914 + 5.76e-3 * 51.7)
 ```
 `r unhide()`
 

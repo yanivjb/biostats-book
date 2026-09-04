@@ -42,7 +42,7 @@ Learning to code can be frustrating. You might feel like you don't know what you
 2. Coding requires learning a new language.  
 3. Coding provides real feedback and evaluation - it's hard to bullshit and clear to know when you're wrong. 
 
-The good news is that as we conquer these challenges they become valuable skills. The even better news is that with persistence all of you can conquer these skills. I've noticed that some people pick up coding faster and some pick up coding more slowly, but the key to success is not how quick you learn, but rather  your persistence through challenges and frustration. You all have the potential to be way better at programming than you need to be to do well in this course. 
+The good news is that as we conquer these challenges they become valuable skills. The even better news is that with persistence all of you can conquer these skills. I've noticed that some people pick up coding faster and some pick up coding more slowly. But the actual key to success is not how quickly you learn, but rather your persistence through challenges and frustration. You all have the potential to be way better at programming than you need to be to do well in this course. 
 
 
 
@@ -81,7 +81,7 @@ include_graphics("https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a
 - **Step away from the computer often.** The computer screen is hard on our brains and eyes. It helps me to close my computer and make a plan on paper with a pencil. I often do this while either talking to myself, a pet, a toy, or best another human.     
 
 
-- **Reflect on what worked/didn’t** When you figure something out or find an answer reflect on what went right or wrong. This is a learning opportunity. Simply moving on  will mean you did not learn anything. 
+- **Reflect on what worked and what didn’t.** When you figure something out or find an answer reflect on what went right or wrong. This is a learning opportunity. Simply moving on  will mean you did not learn anything. 
 
 - **Be patient & understanding.** With both yourself, and others. You are doing your best, and you are learning. This all takes time and does not happen by magic. 
 
@@ -95,7 +95,7 @@ include_graphics("https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a
 :::warning
 **Knowing R and knowing statistics are two different things.** 
 
-This class is about statistics, not R. But R is the way we interact with statistics nowadays. So, it is fully possible to be good at R and bad at statistics, and fully possible to be good at stats and bad at R, my goal is to get you ok with R so that you can do better stats
+This class is about statistics, not R. But R is the way we interact with statistics nowadays. So, it is fully possible to be good at R and bad at statistics, and fully possible to be good at stats and bad at R. My goal is to get you good enough with R to do good stats.
 :::
 
 
@@ -106,7 +106,7 @@ This class is about statistics, not R. But R is the way we interact with statist
 
 There are many ways to get help in coding. 
 
-- **In my view the best way to get help is to ask a friend / peer.** Unlike old professors, they learned this stuff more recently, and might better understand your challenges better than an out of touch old fogey. Plus, by helping you they are actually increasing their mastery so you're actually doing your friend a favor by asking for help. 
+- **In my view the best way to get help is to ask a friend / peer.** Unlike old professors, they learned this stuff more recently, and understand your challenges better than an out-of-touch old fogey. Plus, by helping you they are actually increasing their mastery so you're actually doing your friend a favor by asking for help. 
 
 - **When friends can't help, we can** Ask a professor or TA etc. They know what they are doing and can often help. 
 

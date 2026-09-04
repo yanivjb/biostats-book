@@ -60,7 +60,7 @@ This chapter was a bit long. As a quick reference for doing a linear regression 
 
 ## Step 1: Plot the data
 
-Remember ABP - Always Be Plotting. The first step in any analysis is to look at your data. The code below generates a simple plot with a regression line, like @fig-regression-workflow-plot.
+Remember ABP - Always Be Plotting. The first step in any analysis is to look at your data. The code below generates a simple plot with a regression line like @fig-regression-workflow-plot.
 
 ```{r}
 #| label: fig-regression-workflow-plot
@@ -144,7 +144,7 @@ par(mfrow = c(1, 1))
 
 ## When data violate assumptions   
 
-If data violate assumptions you can: 
+If data violate assumptions, you have some options:   
 
 1. Build a more appropriate model (we will discuss this later).  
 2. Use a nonparametric test (e.g. [Spearman's rho](https://psyteachr.github.io/handyworkbook/spearman-correlation.html))

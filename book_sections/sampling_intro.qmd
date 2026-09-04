@@ -70,7 +70,7 @@ Rather than collecting and measuring each flower, we take a sample -- *a subset 
 
 :::note 
 
-Sometimes we think of a population as a process generating our data. For example, when we compare binomial outcomes to the flip of a fair coin, we do not think about all coins flipped in the world. Rather we think about what we would expect to observe from the process of flipping a fair coin. Similarly, when we think about the parameter of the proportion hybrid seed set for a given plant we think about what would happen if that plant kept making an infinite number of offspring. 
+Sometimes we think of a population as a process generating our data. For example, when we compare binomial outcomes to the flip of a fair coin, we do not think about all coins flipped in the world. Rather, we think about what we would expect to observe from the process of flipping a fair coin. Similarly, when we think about the parameter of the proportion hybrid seed set for a given plant we think about what would happen if that plant kept making an infinite number of offspring. 
 :::
 
 

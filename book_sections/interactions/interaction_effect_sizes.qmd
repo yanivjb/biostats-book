@@ -299,7 +299,7 @@ After adjusting for these main effects, the interaction between petal area and p
 Of course, no statistical description is complete without a measure of uncertainty. Again we can accomplish this with the [`emmeans`](https://rvlenth.github.io/emmeans/) or `modelbased` packages. Here I use [`estimate_means()`](https://easystats.github.io/modelbased/reference/estimate_means.html) function in the [`modelbased`](https://easystats.github.io/modelbased/) package, because I find it easier to code. 
 
 
-So to find uncertainty about the point estimates of the proportion of hybrid seeds for pink- and white-petaled RILs with petal aread of 45 and 85 $mm^2$, we type: 
+So to find uncertainty about the point estimates of the proportion of hybrid seeds for pink- and white-petaled RILs with petal area of 45 and 85 $mm^2$, we type: 
 
 ```{r}
 #| eval: false

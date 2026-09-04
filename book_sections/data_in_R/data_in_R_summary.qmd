@@ -238,7 +238,7 @@ Try typing `glimpse(iris)`
 
 ---
 
-**Q10)** How to fix the error  \"Error: object 'Species' not found.\"? Find both correct answers `
+**Q10)** How to fix the error  \"Error: object 'Species' not found.\"? Find both correct answers: 
 `r longmcq(c("Convert iris to a tibble first:</br><code>as_tibble(iris) |> filter(Species == \"setosa\")</code></br></br>",  answer = "Tell R to use dplyr's filter:</br><code>iris|>dplyr::filter(Species == \"setosa\")</code></br></br>", "Rename species to Species:</br><code> iris|>rename(Species=species)|>filter(Species==\"setosa\")</code></br></br>", "Filter on species, not Species:</br><code>iris|>filter(species == \"setosa\")</code></br></br>",answer = "Tell R to use dplyr's filter. After library(dplyr), type:</br><code>conflicts_prefer(dplyr::filter)</code></br></br> "))`
 
 

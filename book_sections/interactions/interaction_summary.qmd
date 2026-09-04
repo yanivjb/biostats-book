@@ -508,7 +508,7 @@ data(penguins, package = "datasets")
 penguins <- penguins |>
   filter(!is.na(sex),!is.na(body_mass),!is.na(flipper_len), !is.na(species))
 
-penguin_model <- lm(body_mass ~ sex + species + sex : species, data = penguins)
+penguin_model <- lm(body_mass ~ sex + species + sex:species, data = penguins)
 ```
 
 ```{r}
@@ -666,7 +666,7 @@ All but the final answer are correct.
 
 ### emmeans output
 
-Consider the following output from `emmeans()` (I know we used model based but i like the warnings emmeans provides). 
+Consider the following output from [`emmeans()`](https://rvlenth.github.io/emmeans/) (I know we used [modelbased](https://easystats.github.io/modelbased/), but I like the warnings emmeans provides). 
 
 ```{r}
 #| eval: false
@@ -780,9 +780,9 @@ emmeans(penguin_interaction_model, pairwise ~ species)$contrasts
 ## Additional resources {#interaction_summary_additional-resources}
 
 :::learnmore
-- [Interactions in factorial designs](https://www.carlislerainey.com/powerrules/articles/interactions.html), by Carlisle Rainey. Describes why interactions are hard to estimate and why studies often have less power for interactions than for main effects, and has an accompanying R package.
+- [Interactions in factorial designs](https://www.carlislerainey.com/powerrules/articles/interactions.html), by [Carlisle Rainey](https://www.carlislerainey.com/) describes why interactions are hard to estimate and why studies often have less power for interactions than for main effects, and has an accompanying R package.
 
-- [You need 16 times the sample size to estimate an interaction than to estimate a main effect, explained](https://statmodeling.stat.columbia.edu/2023/11/09/you-need-16-times-the-sample-size-to-estimate-an-interaction-than-to-estimate-a-main-effect-explained/), by Andrew Gelman.
+- [You need 16 times the sample size to estimate an interaction than to estimate a main effect, explained](https://statmodeling.stat.columbia.edu/2023/11/09/you-need-16-times-the-sample-size-to-estimate-an-interaction-than-to-estimate-a-main-effect-explained/), by [Andrew Gelman](https://en.wikipedia.org/wiki/Andrew_Gelman).
 
 - [Interaction Effects](https://online.stat.psu.edu/stat462/node/165/): A brief introduction from Penn State's Stat462 site. I like these guys.
 

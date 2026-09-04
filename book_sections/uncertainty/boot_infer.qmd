@@ -153,7 +153,7 @@ gc_rils                   |>
            mean(prop_hybrid))
 ```
 
-Nearly 26% of seeds on pink-petaled *parviflora* RILS at GC are hybrids, while only 3.22% of seeds on white-petaled *parviflora* RILS at GC are hybrids. So, we estimate a 22.78% difference (or 0.2278) in the proportion of hybrid seeds by petal color morph. However, we know that the estimates going into this are associated with uncertainty. We can even quantify uncertainty in the mean of each group as before (see @fig-hybbypetal). But how do we estimate our uncertainty in the *difference* between these means?
+Nearly 26% of seeds on pink-petaled *parviflora* RILs at GC are hybrids, while only 3.22% of seeds on white-petaled *parviflora* RILs at GC are hybrids. So, we estimate a 22.78% difference (or 0.2278) in the proportion of hybrid seeds by petal color morph. However, we know that the estimates going into this are associated with uncertainty. We can even quantify uncertainty in the mean of each group as before (see @fig-hybbypetal). But how do we estimate our uncertainty in the *difference* between these means?
 
 To do this, we must:
 
@@ -308,7 +308,7 @@ ggplot( gc_rils, aes(x = petal_area_mm, y = prop_hybrid))+
         axis.title = element_text(size = 30))
 ```
 
-So our estimated correlation lies between  `r ((boot_cors |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`.  This is super helpful, because without quantifying uncertainty this correlation may reflect noise rather than signal. That is, the correlation could disappear in another sample. But because our entire 95% confidence interval excludes zero, we can be confident this association reflects a true correlation greater than zero, rather than a weird sample.
+So our estimated correlation lies between  `r ((boot_cors |>get_ci(level = 0.95, type = "percentile"))|>unlist() |> round(digits =3)) |> paste(collapse = " and ")`.  This is super helpful, because without quantifying uncertainty this correlation may reflect noise rather than signal. That is, the correlation could disappear in another sample. Finding that the 95% confidence interval excludes zero, the data provide evidence that the population correlation is greater than zero.
 
 
 ### ... and more! 

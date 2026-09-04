@@ -27,7 +27,7 @@ Links to: [Summary](#multiple_regression_summary_chapter-summary). [Chatbot tuto
 
 ## Chapter summary {#multiple_regression_summary_chapter-summary}
 
-Multiple regression lets us model a response variable as a function of several explanatory variables at once. In additive models - like those in this chapter - we make predictions by adding up the contribution of each explanatory variable. With multiple regression, we ask if an explanatory variable is associated with the response after adjusting for other variables in the model. But don't be fooled  this adjustment is just that, an adjustment, and not a proper scientific control.
+Multiple regression lets us model a response variable as a function of several explanatory variables at once. In additive models - like those in this chapter - we make predictions by adding up the contribution of each explanatory variable. With multiple regression, we ask if an explanatory variable is associated with the response after adjusting for other variables in the model. But don't be fooled,  this adjustment is just that, an adjustment, and not a proper scientific control.
 
 
 ### Chatbot tutor {#multiple_regression_summary_chatbot-tutor}
@@ -204,7 +204,7 @@ emmeans::contrast(species_means, method = "pairwise", adjust = "tukey")
 
 **Q12)** The estimated means above are `r longmcq(c("Raw species means.", answer = "Model-adjusted means.", "Residuals.", "Variance inflation factors."))`
 
-**Q13)** The pairwise contrasts above ask which `r longmcq(c(  answer = "Species differ from one another after adjusting for sepal length.","Individual iris plants are outliers after adjusting for sepal length..","Variables are normally distributed.","Terms should be entered first in the model."))`
+**Q13)** The pairwise contrasts above ask which `r longmcq(c(  answer = "Species differ from one another after adjusting for sepal length.","Individual iris plants are outliers after adjusting for sepal length.","Variables are normally distributed.","Terms should be entered first in the model."))`
 
 :::
 

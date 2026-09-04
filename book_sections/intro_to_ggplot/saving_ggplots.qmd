@@ -74,8 +74,26 @@ ggplot(ril_data, aes(x = mean_visits))+
 ggsave("ril_visit_hist.pdf", width = 6, height = 4)
 ```
 
+---
+
+The code, above, relied on [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html)'s default behavior of saving the most recently made plot. It is safer  to explicitly assign the plot to an object, and ggsave the object: 
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: false
+my_plot <- ggplot(ril_data, aes(x = mean_visits))+
+  geom_histogram(binwidth = .2, color = "white", fill = "pink")
+
+ggsave("ril_visit_hist.pdf", plot = my_plot,  width = 6, height = 4)
+```
+
+---
+
 ::: {.callout-warning}
 
-**When using either `ggsave()` or RStudio's built-in tools** always check that your saved plot looks as expected, as it is often slightly different than what you saw in your R session.  
+**When using either [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html) or RStudio's built-in tools** always check that your saved plot looks as expected, as it is often slightly different than what you saw in your R session.  
 
 :::

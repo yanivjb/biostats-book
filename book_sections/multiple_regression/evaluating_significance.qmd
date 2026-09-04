@@ -181,11 +181,11 @@ Base R's [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/an
 
 In sequential sums of squares, sums of squares for the first term are calculated as if it were the only term in the model. Then sums of squares for the second term are calculated adjusting for the first term. The sums of squares for the third term adjust for the first two terms, etc etc.  
 
-This means that if we accidentally use Type I sums of squares (which R does when we use the [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html),  the p-value for a term can literally depend on the order it is entered into the lm() function.
+This means that if we accidentally use Type I sums of squares the p-value for a term can literally depend on the order it is entered into the lm() function. Because R's [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) function uses Type I sums of squares, we should be really careful about this. 
 
+To see why this matters, consider the following tests for an association between anther-stigma distance (`asd_mm`) and the proportion of hybrid seeds (`prop_hybrid`) in a model accounting for numerous additional covariates:   
 
-
-So, for example, with Type I sums of squares we can wrongly conclude that anther-stigma distance is associated with proportion of hybrid seeds (if it is entered first)
+- With Type I sums of squares, I wrongly conclude that anther-stigma distance is associated with `prop_hybrid` if  `asd_mm` entered first. This is because the p-value is computed before acounting for the other terms.   
 
 ```{r}
 #| column: page-right
@@ -193,7 +193,7 @@ lm(prop_hybrid ~  asd_mm + petal_color + petal_area_mm + location, data = rils )
     anova()
 ```
 
-Or not (if it is entered later)
+- Or correctly conclude that there is no such association if `asd_mm` is entered last:  
 
 ```{r}
 #| column: page-right

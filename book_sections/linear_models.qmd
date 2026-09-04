@@ -87,7 +87,7 @@ Linear models are among the most common types of statistical model. Linear model
 
 
 
-These models are "linear" because we get this estimate of the conditional mean, $\hat{Y}_i$, by adding up all components of the model. That is, value of the $j^{th}$ explanatory variable in the $i^{th}$ individual  $x_{j,i}$ is multiplied by its effect size $b_j$.   So, for example, $\hat{Y}_i$ equals the parameter estimate for the "intercept", $a$ plus its value for the first explanatory variable, $x_{1,i}$, times the effect of this variable, $b_1$, plus its value for the second explanatory variable, $x_{2,i}$ times the effect of this variable, $b_2$, and so on for all included predictors.
+These models are "linear" because we get this estimate of the conditional mean, $\hat{Y}_i$, by adding up all components of the model. That is, the value of the $j^{th}$ explanatory variable in the $i^{th}$ individual  $x_{j,i}$ is multiplied by its effect size $b_j$.   So, for example, $\hat{Y}_i$ equals the parameter estimate for the "intercept", $a$ plus its value for the first explanatory variable, $x_{1,i}$, times the effect of this variable, $b_1$, plus its value for the second explanatory variable, $x_{2,i}$ times the effect of this variable, $b_2$, and so on for all included predictors.
 
 \begin{equation} 
 \hat{Y}_i = a + b_1  x_{1,i} + b_2 x_{2,i} + \dots{}
@@ -113,7 +113,7 @@ Throughout this chapter we will model a single response variable -- the proporti
    - **`R`'s [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) function** that builds a linear model, and    
    - **Residuals** -- The difference between an individual data point, $Y_i$, and its value predicted from a linear model, $\hat{Y_i}$. In this section we will also learn how to   
       - Identify residuals on a plot, and 
-      - Use the [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function from the [`broom`](https://broom.tidymodels.org/reference/augment.lm.html) package find residuals in R.  
+      - Use the [`augment()`](https://broom.tidymodels.org/reference/augment.lm.html) function from the [`broom`](https://broom.tidymodels.org/reference/augment.lm.html) package to find residuals in R.  
 
 - We will then briefly introduce a few more involved linear models -- including one to model two groups, one  to model a continuous explanatory variable, and a third with a continuous and categorical predictor. The point of these models is to get you ready for what is to come in the following chapters! 
 
@@ -131,10 +131,10 @@ The first matrix below is known as the  *design matrix*. Each row corresponds to
 
 \begin{equation} 
 \begin{pmatrix}
-    1 & y_{1,1} & y_{2,1} & \dots  & y_{k,1} \\
-    1 & y_{1,2} & y_{2,2} & \dots  & y_{k,2} \\
+    1 & x_{1,1} & x_{2,1} & \dots  & x_{k,1} \\
+    1 & x_{1,2} & x_{2,2} & \dots  & x_{k,2} \\
     \vdots & \vdots & \vdots & \ddots & \vdots \\
-    1 & y_{1,n} & y_{2,n} & \dots  & y_{k,n}
+    1 & x_{1,n} & x_{2,n} & \dots  & x_{k,n}
 \end{pmatrix}
 \cdot 
 \begin{pmatrix}

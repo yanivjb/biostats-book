@@ -74,7 +74,7 @@ Treating these separate models as our final analysis is awkward and potentially 
 
 3. *Lots of separate tests create a multiple-comparisons problem.* If we keep asking many related questions one at a time, some small p-values will appear by chance. Thus, we are risking a false positive at a level greater than our advertised  $\alpha$.</br>  
 
-Multiple regression -- the focus of this section -- addresses these shortcomings by considering simultaneously multiple explanatory variables in one model.
+Multiple regression -- the focus of this section -- addresses these shortcomings by simultaneously considering multiple explanatory variables in one model.
 
 ### Focal traits for this section
 

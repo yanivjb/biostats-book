@@ -106,13 +106,13 @@ ggplot(rils ,aes(x = petal_color, y = petal_area_mm, color = petal_color))+
 ```
 
 
-**The one new consideration is that we should be sure that the model actually has the data it needs to solidly infer interactions.** So check to see that there is enough data across all combinations of explanatory variables. @fig-pcpa shows that pink- and white-petaled RILs span roughly similar values of petal area. So this is ok. We'd be more worried if eg all very large petals were white. 
+**The one new consideration is that we should be sure that the model actually has the data it needs to solidly infer interactions.** So check to see that there is enough data across all combinations of explanatory variables. @fig-pcpa shows that pink- and white-petaled RILs span roughly similar values of petal area. So this is ok. We'd be more worried if e.g., all very large petals were white. 
 
 While this assumption is somewhat distinct from the assumption of no strong multicollinearity, we can see from @fig-pcpa that the data are not strongly multicollinear. 
 
 ```{r}
 #| eval: false
-ggplot(rils ,aes(x = petal_color, y = petal_area_mm))+ 
+ggplot(rils, aes(x = petal_color, y = petal_area_mm))+ 
   geom_jitter(width = .1, height = 0)
 ```
 

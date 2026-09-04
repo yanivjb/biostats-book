@@ -145,7 +145,7 @@ tmp_white|> kable(digits = 3)
 ## Conditional proportions  
 
 
-We can also calculate the proportions of one outcome depend on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
+We can also calculate the proportions of one outcome, depending on the value of another variable. We quantified this as a CONDITIONAL PROPORTION:  
 
 
 - $$P_\text{some visits | pink}= \frac{n_\text{some visits  | pink}}{ n_\text{pink plants}} = \frac{`r pull(tmp_pink, n_pink_AND_visited)`}{`r pull(tmp_pink, n_pink)`}=`r (pull(tmp_pink, n_pink_AND_visited) / pull(tmp_pink, n_pink))|>round(digits = 3)`$$

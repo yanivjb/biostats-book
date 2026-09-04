@@ -32,7 +32,7 @@ clarkia_hz <- read_csv(hz_link)|>
 
 ---
 
-Here's a brief review of how to complete all the bits of an ANOVA in `R`. To do so, we will look into `Sepal.Width` by `Species` in the `iris` dataset.  
+Here's a brief review of how to complete all the bits of an ANOVA in `R`. To do so, let's examine differences in `Sepal.Width` by `Species` in the `iris` dataset.  
 
 
 ## ANOVA calculations by hand

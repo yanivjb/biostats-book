@@ -106,7 +106,7 @@ ggplot(tidy_anscombe,aes(x = x, y=y))+
 ```
 
 
-Therefore before diving into formal analysis, we always generate **exploratory plots** to uncover key patterns, detect data quality issues, and reveal the underlying structure of the data. One quick exploratory plot is rarely enough though, as you get to know and model your data, you will develop additional visualizations to dig deeper into the story. 
+Therefore before diving into formal analysis, we always generate **exploratory plots** to uncover key patterns, detect data quality issues, and reveal the underlying structure of the data. One quick exploratory plot is rarely enough. As you get to know and model your data, you will develop additional visualizations to dig deeper into the story. 
 
 
 

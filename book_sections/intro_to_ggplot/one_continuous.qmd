@@ -147,5 +147,5 @@ ggplot(ril_data, aes(x = mean_visits))+
 ::::::
 
 
-**Interpretation:**     Returning to our motivating questions, we see that  most plants receive no visits, but this distribution is skewed with some plants getting lots of visits.  
+**Interpretation:**     Returning to our motivating questions, we see that many plants receive no visits, but this distribution is skewed with some plants getting lots of visits.  
 

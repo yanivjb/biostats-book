@@ -35,7 +35,7 @@ clarkia_hz <- read_csv(hz_link)|>
   clean_names() |>
   mutate(site = if_else(site == "SAW", "SR", site)) |>
   filter(subsp=="P")|>
-  mutate(site = fct_reorder(site, mean_petal_area_sq_cm))
+  mutate(site = fct_reorder(site, admix_proportion))
 ```
 
 
@@ -73,7 +73,7 @@ Just like a one- or two-sample t-test, the ANOVA is a linear model. As such, it 
 :::aside
 By default R chooses the reference levels as the alphabetically first one. We often don't want that (e.g. you may want the control to be first). The [`fct_relevel()` function](https://forcats.tidyverse.org/reference/fct_relevel.html) in the [`forcats` package](https://forcats.tidyverse.org/) can help (see fyi below)!
 
-In this section, I typed: `mutate(site = fct_reorder(site, mean_petal_area_sq_cm)` to  order `site`'s factor levels by their mean admixture proportion. This is a standard practice for nominal categorical variables.
+In this section, I typed: `mutate(site = fct_reorder(site, admix_proportion))` to  order `site`'s factor levels by their mean admixture proportion. This is a standard practice for nominal categorical variables.
 
 :::
 

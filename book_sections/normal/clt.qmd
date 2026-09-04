@@ -73,7 +73,7 @@ One amazing thing about the world is just how frequently normal distributions oc
 **A [Galton board](https://en.wikipedia.org/wiki/Galton_board)!** At every peg, a bead has a 50/50 chance of bouncing left or right. The final position of the bead in a bin at the bottom is the sum of all these random left and right steps. Most often paths right and left even out and the bead lands in the center, but not always! This ultimately generates a normal distribution. 
 :::
 
-An important consequence of this is that the sampling distribution of means tends to be normally distributed, provided the sample size is not too small. This principle, known as the **Central Limit Theorem**, is very useful. It implies that e.g. models of sample means that assume normality will work reasonably well even if the data aren't perfectly normal.
+An important consequence of this is that the sampling distribution of means tends to be normally distributed, provided the sample size is not too small. This principle, known as the **Central Limit Theorem**, is very useful. It implies that e.g., models of sample means that assume normality will work reasonably well even if the data aren't perfectly normal.
 
 :::fyi
 The Central Limit Theorem is crucial for statistics because many of the statistical analyses we perform, which assume normality, are still valid even if the underlying data are not perfectly normal. **This central limit theorem is remarkably useful because it means we can use statistical tests that assume normality (like the t-test) to make inferences about the mean, even if our raw data aren't quite normally distributed.** 
@@ -89,7 +89,7 @@ The webapp below is a simulation of the sampling distribution to help you build 
 - The top row of plots always shows the shape of the original data. 
 - The bottom row shows the sampling distribution of the mean, which is built from the averages of 1000 different samples.
 
-Use the *Sample Size (n)* slider for each variable, and evaluate how large `n` needs to before the QQ plot points form a straight line, signaling that the sampling distribution has become approximately normal.
+Use the *Sample Size (n)* slider for each variable, and evaluate how large `n` needs to be before the QQ plot points form a straight line, signaling that the sampling distribution has become approximately normal.
 
 
 
@@ -206,7 +206,7 @@ For each of the populations below, use the app to find the smallest sample size 
 `r mcq(c("2", "5", answer = "25", "100"))`
 
 `r hide("Explanation")`
-At n=25, the QQ plot is reasonably straight, showing the CLT has taken effect. For smaller sample sizes, the QQ plot still shows some curvature. I couldn't tell if the right answer was 10, 25 or 50, so I split the difference. Smaller sample sizes still show noticeable curvature.
+At n=25, the QQ plot is reasonably straight, showing the CLT has taken effect.
 `r unhide()`
 
 ---

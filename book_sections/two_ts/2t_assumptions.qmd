@@ -82,7 +82,7 @@ These data are independent (we use only one value per RIL -- the mean across pla
 
 ### 4. Data are not normal, but transformation helps.
 
-A look at the raw data shows that pollinator visits are not normal for RILs with either petal color. As seen in the [previous section](#2groupviz) -- many RILs have nearly no visits, while some have many visits (@fig-colohist A). The data become closer to normal after log-transformation $^*$ (@fig-colohist B).  Still the many white flowers receiving no pollinator visits **$^\$$** remain, so the skew is not fully removed.  
+A look at the raw data shows that pollinator visits are not normal for RILs with either petal color. As seen in the [previous section](#2groupviz) -- many RILs have nearly no visits, while some have many visits (@fig-colohist A). The data become closer to normal after log-transformation $^*$ (@fig-colohist B).  Still, the many white flowers receiving no pollinator visits **$^\$$** remain, so the skew is not fully removed.  
 
 :::aside
 **$^*$ or more specifically** log(x+0.2) transformation. <br><br>

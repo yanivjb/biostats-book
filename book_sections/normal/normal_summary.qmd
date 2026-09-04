@@ -188,7 +188,7 @@ The standard deviation of the sampling distribution is the standard error, calcu
 * **Data Transformation**: The process of applying a mathematical function to each point in a dataset (e.g., taking the logarithm or square root) to change the mean, variance and/or shape of the data's distribution.
 * **Z-score**: A value that indicates how many standard deviations an observation is from the mean of its distribution. It is calculated using the Z-transformation.
 * **Z-transformation**: Converting a value, $x_i$, from any normal distribution (with mean = $\mu$  and variance = $\sigma^2$) into a Z-score, $z_i$  from  the "standard normal distribution" (with $\mu=0$ and $\sigma^2 = 1$): $z_i = (x_i - \mu) / \sigma$.
-* **Z-test**: A test of the null hypothesis that a population's true mean equals its proposed null value, $\mu_0$. To do we find the distance (in standard errors) between our estimate, $\bar{x}$, and its null value $\mu_0$, as $Z=\frac{\bar{x}-\mu_0}{\sigma_\bar{x}}$, where $\sigma_\bar{x}$ is the standard error. We then find the two-tailed p-value as `2 * pnorm(q=abs(Z), sd =1, lower.tail = FALSE)`.
+* **Z-test**: A test of the null hypothesis that a population's true mean equals its proposed null value, $\mu_0$. To do so, we find the distance (in standard errors) between our estimate, $\bar{x}$, and its null value $\mu_0$, as $Z=\frac{\bar{x}-\mu_0}{\sigma_\bar{x}}$, where $\sigma_\bar{x}$ is the standard error. We then find the two-tailed p-value as `2 * pnorm(q=abs(Z), sd =1, lower.tail = FALSE)`.
 
 
 :::

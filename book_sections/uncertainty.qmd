@@ -64,7 +64,7 @@ In the real world we usually have just one sample and we want to learn about the
 
 ### Review: Populations have parameters    
 
-We conceptualize populations as truth with true parameters that are  "out there in the world".
+We conceptualize populations as truth, with true parameters that are  "out there in the world."
 
 **Sampling involves chance:**     Because a good sample is taken from a population at random, a sample estimate is influenced by chance (aka sampling error).
 

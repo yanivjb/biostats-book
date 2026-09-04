@@ -73,7 +73,7 @@ The [`t.test()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test
 
 
 ```{r}
- # **Note:** Because `x` must be a vector, I the column out of its tibble.
+ # **Note:** Because `x` must be a vector, I pull the column out of its tibble.
 t.test(x = pull(range_shift,elevationalRangeShift) , mu = 0)
 ```
 

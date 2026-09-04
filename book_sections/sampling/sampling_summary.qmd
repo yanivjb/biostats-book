@@ -64,7 +64,7 @@ Try these questions! By using the R environment you can work without leaving thi
 #| warning: false
 #| label: fig-genes
 #| fig-cap: "A histogram showing the distribution of lengths for all human genes. Most are very small, the median is less than 3kb!" 
-#| fig-alt: "A histogram showing the distribution of lengths for all human genes. The figure shouws that the most human genes are relatively short (median around 3kb), with a few genes being exceptionally long."
+#| fig-alt: "A histogram showing the distribution of lengths for all human genes. The figure shows that most human genes are relatively short (median around 3kb), with a few genes being exceptionally long."
 library(ggplot2)
 library(readr)
 gene_lengths <- read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/geneLengths.csv")
@@ -122,7 +122,7 @@ write_csv(samp_dist_e, "data/samp_dist_e.csv")
 #| warning: false
 #| label: fig-genes-2
 #| fig-cap: "The distribution of the estimated mean length of human genes. Here is how I sampled to get this distribution: (1) A base pair is randomly selected from the human genome. (2) If it falls within a gene, that gene's length is recorded. If not, another base pair is chosen at random. (3) This process continues until 50 genes have been sampled."
-#| fig-alt: "The distribution of estimated mean human gene length from 1000 replicates of fifty genes. The x-axis is gene length (kb) from 0 to 10. The data is concentrated between 3 and 6 kb, with the tallest peak centered around 4 kb, and a second smaller peak near 5.5 kb. A vertical dashed red line showing the actual population mean is shown at approximately 2.8 kb, to the left of the main cluster of data."
+#| fig-alt: "The distribution of estimated mean human gene length from 1000 replicates of fifty genes. The x-axis is gene length (kb) from 0 to 10. The data is concentrated between 3 and 6 kb, with the tallest peak centered around 4 kb, and a second smaller peak near 5.5 kb. A vertical dashed red line showing the actual population mean is shown at approximately 2.6 kb, to the left of the main cluster of data."
 
 library(readr)
 samp_dist_a <-  read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/samp_dist_a.csv")
@@ -193,17 +193,17 @@ samp_dist_e |>
 **Q9)** Which sample size is associated with the smallest standard error?  `r longmcq(c( "5", "30", answer = "500","They all have approximately the same standard error"))`
 
 
-**Q10)** For the sampling distribution for samples of size n in @fig-genes-3, approximately what proportion samples have a mean greater than the population mean? 
+**Q10)** For the sampling distribution for samples of size n in @fig-genes-3, approximately what proportion of samples have a mean greater than the population mean? 
 
-- **n = 5:** `r mcq(c( "Way less than 0.01", "about 0.02", "about 0.25", answer = "about 0.50"))`.  
-- **n = 500:** `r mcq(c( "Way less than 0.01", "about 0.02", "about 0.25", answer = "about 0.50"))`.
+- **n = 5:** `r mcq(c( "Way less than 0.01", "about 0.01", "about 0.10", "about 0.25", answer = "about 0.50"))`.  
+- **n = 500:** `r mcq(c( "Way less than 0.01", "about 0.01", "about 0.10", "about 0.25", answer = "about 0.50"))`.
 
 
 
 **Q11)** For the sampling distribution for samples of size n in @fig-genes-3, approximately what proportion samples have a mean greater than 3.8 kb? 
 
-- **n = 30:** `r mcq(c( "Way less than 0.01",answer =  "about 0.02", "about 0.25", "about 0.50"))`.  
-- **n = 500:** `r mcq(c(answer =  "Way less than 0.01", "about 0.02", "about 0.25",  "about 0.50"))`.
+- **n = 5:** `r mcq(c( "Way less than 0.01",  "about 0.01", answer = "about 0.10", "about 0.25", "about 0.50"))`.  
+- **n = 500:** `r mcq(c(answer =  "Way less than 0.01", "about 0.01", "about 0.10", "about 0.25",  "about 0.50"))`.
 
 
 
@@ -230,7 +230,7 @@ gene_lengths <- read_csv(link)
 
 `r hide("Click for answer")`
 
-This is the entire populations. We have a parameter known without sampling error, so there is not standard error.
+This is the entire population. We have a parameter known without sampling error, so there is not a standard error.
 
 `r unhide()`
 

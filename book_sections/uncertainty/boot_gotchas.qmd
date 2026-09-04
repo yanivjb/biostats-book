@@ -74,7 +74,7 @@ gc_rils <- ril_data |>
 include_graphics("https://imgs.xkcd.com/comics/error_bars_2x.png")
 ```
 
-Bootstrapping uses sampling to approximate the sampling distribution. This means that every time we bootstrap we will get a different estimate of uncertainty - even if we have the same data going into the bootstrap. As with other forms of sampling, the more bootstrap replicates you make, the more stable your estimate of uncertainty is. However there is a trade-off between computational effort and  the precision of bootstrap estimates of uncertainty.
+Bootstrapping uses sampling to approximate the sampling distribution. This means that every time we bootstrap, we will get a different estimate of uncertainty - even if we have the same data going into the bootstrap. As with other forms of sampling, the more bootstrap replicates you make, the more stable your estimate of uncertainty is. However there is a trade-off between computational effort and  the precision of bootstrap estimates of uncertainty.
 
 **How many bootstrap replicates are enough?** I don't know, and it depends on your data. I usually start with 1000 bootstrap replicates and calculate the bootstrap standard error and confidence intervals. I repeat this a few times and see if my estimates are stable.   
 
@@ -213,7 +213,7 @@ plot1 / plot2
 
 More generally, resampling a poor sample will only give you a precise but wrong answer. 
 
-- **If data are non-independent, a simple bootstrap will not properly estimate uncertainty.** Say we happened to sample intensely in a few sections of GC rather than sampling randomly across space. Within each section plants are likely to be more closely related genetically or to experience similar environmental influences etc which will make them more similar to one another. As such, our sample will not represent the variability of this population appropriately and we will be overconfident in our estimates.
+- **If data are non-independent, a simple bootstrap will not properly estimate uncertainty.** Say we happened to sample intensely in a few sections of GC rather than sampling randomly across space. Within each section, plants are likely to be more closely related genetically or to experience similar environmental influences, etc., which will make them more similar to one another. As such, our sample will not represent the variability of this population appropriately and we will be overconfident in our estimates.
 
 - **If a sample is biased, a simple bootstrap will not properly estimate uncertainty.**  For instance, if you tended to sample more pink than white flowers because they were easier to see, the bootstrap would give you a precise estimate of a sample tilted toward more pink flowers than we see in the  population.  This will inflate our estimated probability of hybridization.
 

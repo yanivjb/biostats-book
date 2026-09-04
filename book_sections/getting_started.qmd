@@ -118,7 +118,7 @@ R did not do anything in @fig-RSTUDIO11 because we did not tell R to add `1 + 1`
 #| echo: false
 #| fig-cap: "The RStudio interface with 1 + 1 entered."
 #| label: "fig-RSTUDIO11enter"
-#| fig-alt: "Another screenshot of the RStudio interface. Now 1 + 1 is entered at the bottom of the console pane. The pane displays the answer, 2, and the top right pane recordd the history of what we asked R (it now shows 1+1)."
+#| fig-alt: "Another screenshot of the RStudio interface. Now 1 + 1 is entered at the bottom of the console pane. The pane displays the answer, 2, and the top right pane records the history of what we asked R (it now shows 1+1)."
 include_graphics("../figs/intro_to_r/getting_started/RStudio_11enter.png")
 ```
  

@@ -116,7 +116,7 @@ Take, for example, individual 14 ($i = 14$, green point in the plot below), wher
 
 - **Its observed value, $y_i$,** is the proportion of its seeds that are hybrids, which is 0.625.   
 - **Its predicted value, $\hat{y}_i$,** is the proportion of all seeds that are hybrids (dashed red line), which is `r mean(gc_rils$prop_hybrid , na.rm = TRUE)|> round(digits = 3)`.  
-- **Its residual value, $e_i = y_i - \hat{y}_i$,** is the difference between the proportion of its seeds that are hybrids and proportion of all seeds that are hybrids, which is $0.625 -`r mean(gc_rils$prop_hybrid , na.rm = TRUE)|> round(digits = 3)` = `r 0.625 - mean(gc_rils$prop_hybrid , na.rm = TRUE)|> round(digits = 3)`$. Scroll over the fourteenth data point in @fig-plotly to verify this. 
+- **Its residual value, $e_i = y_i - \hat{y}_i$,** is the difference between the proportion of its seeds that are hybrids and the proportion of all seeds that are hybrids, which is $0.625 -`r mean(gc_rils$prop_hybrid , na.rm = TRUE)|> round(digits = 3)` = `r 0.625 - mean(gc_rils$prop_hybrid , na.rm = TRUE)|> round(digits = 3)`$. Scroll over the fourteenth data point in @fig-plotly to verify this. 
 
 
 

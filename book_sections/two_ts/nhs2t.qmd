@@ -63,7 +63,7 @@ $$t = \frac{1.76 - 0.733}{0.262}= 3.91$$
 
 
 
-Since we had  105 degrees of freedom, our critical t-value will be just a hair greater than 1.96. Because our observed t-value of $\approx 4$ is way bigger than our critical t-value of $\approx 2$, we strongly reject the null hypothesis that pink and white-flowered *Clarkia xantiana subspecies parviflora* RILs at site SR are visited equally by pollinators.  
+Since we had  105 degrees of freedom, the critical t-value will be just a hair greater than 1.96. So, the observed t-value of $\approx 4$ is way bigger than our critical t-value of $\approx 2$. As such, we strongly reject the null hypothesis that pink- and white-flowered *Clarkia xantiana subspecies parviflora* RILs at site SR are visited equally by pollinators.  
 
 :::aside
 More precisely, *crit-t* = `qt(0.025, df= 105,lower.tail = F)` = $1.983$.

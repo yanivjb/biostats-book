@@ -86,7 +86,7 @@ include_graphics("../../figs/summarizing_data/data_viz/sneak1.png")
 **Q3)**  Which plot in @fig-sneak1 is better?  `r mcq(c("A",answer = "B","It depends...", "Don\'t judge plots" ))`  
 
 
-**Q4)**  Your chose your answer, above, because the better plot `r mcq(c("Shows all the data",answer="Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accesssible" ,"I told you we dont judge plots, jeez"))`  
+**Q4)**  Your chose your answer, above, because the better plot `r mcq(c("Shows all the data",answer="Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accessible" ,"I told you we dont judge plots, jeez"))`  
 
 :::
 
@@ -104,16 +104,16 @@ include_graphics("../../figs/summarizing_data/data_viz/sneak2.png")
 
 :::exercises
 
-**Q5)** Which feature of  @fig-sneak2 is better than @fig-sneak1?  `r mcq(c(answer="Shows all the data","Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accesssible"))`  
+**Q5)** Which feature of  @fig-sneak2 is better than @fig-sneak1?  `r mcq(c(answer="Shows all the data","Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accessible"))`  
 
-**Q6)** Which feature of  @fig-sneak1 is better than @fig-sneak2?  `r mcq(c("Shows all the data", answer = "Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accesssible"))` 
+**Q6)** Which feature of  @fig-sneak1 is better than @fig-sneak2?  `r mcq(c("Shows all the data", answer = "Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accessible"))` 
 
 :::
 
 ```{r}
 #| echo: false
 #| label: fig-sneak3
-#| fig-cap: "Canabalistic dads, revisited (again)."
+#| fig-cap: "Cannibalistic dads, revisited (again)."
 #| fig-alt: "A bar plot titled \"D) More males acting as the only father cannibalize their brood than do males with sneakers.\" The x-axis shows three mating conditions: \"one father,\" \"one sneaker,\" and \"multiple sneakers.\" The y-axis shows the count of males who cannibalized their brood. The tallest bar corresponds to \"one father\" (~60 males), while the other two bars (\"one sneaker\" and \"multiple sneakers\") are much shorter (~18 males each). However, this plot shows only the absolute number of cannibalism cases and does not account for differing total group sizes or proportions."
 #| out-width: "60%"
 library(knitr)

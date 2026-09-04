@@ -40,8 +40,7 @@ gc_rils <- ril_data |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:**   
-Your data are not symmetric, you are wondering about potentially changing the shape of your data to make it easier to deal with. Here I introduce some thoughts and guidance about common data transformations and when to use them. 
+**Motivating Scenario:**    Your data are not symmetric, and you are considering changing its shape. Here I introduce some thoughts and guidance about common data transformations and when to use them. 
 
 **Learning Goals: By the end of this subchapter, you should be able to:**  
 
@@ -191,6 +190,6 @@ table td:nth-child(6), table th:nth-child(6) {
 | Exponential           | $e^x$             | Increases spread, emphasizes large values            | Left-skewed data                          |                  | `exp(x)`                                                   | Makes values more extreme           |
 | Cube              | $x^3$             | Further increases spread                             | Left-skewed data                          | Tree volume, growth rates                      | `x^3`                                                     | Strongly affects scale              |
 | Inverse               | $1/x$            | Emphasizes small values, compresses large ones       | Right-skewed data                         | Reaction times, waiting times                  | `1/x`                                                 | Values = 0 cause errors             |
-| Arcsin Square Root| $arcsin(\sqrt{x})$    | Normalizes proportions                               | Proportions (e.g., survival, germination rates)| Allele frequencies, % cover | [`asin(sqrt())`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Trig.html)                                            | Works poorly near 0 and 1           |
+| Arcsin Square Root| $\arcsin(\sqrt{x})$    | Normalizes proportions                               | Proportions (e.g., survival, germination rates)| Allele frequencies, % cover | [`asin(sqrt())`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Trig.html)                                            | Works poorly near 0 and 1           |
 
 :::

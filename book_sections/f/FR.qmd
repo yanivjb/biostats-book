@@ -38,12 +38,12 @@ clarkia_hz <- read_csv(hz_link)|>
 
 **Learning Goals: By the end of this subchapter, you should be able to:**     
 
-- Run a one-way ANOVA in R using both [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) and [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html)` pipelines.  
+- Run a one-way ANOVA in R using both [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html) and [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) pipelines.  
 
 - Interpret the ANOVA table, which includes sums of squares, mean squares, F statistic, and p-value.
 
 
-- Use the [`broom`](https://broom.tidymodels.org/) package to:    
+- Use the [`broom`](https://broom.tidymodels.org/) package to:       
     - [`tidy()`](https://broom.tidymodels.org/reference/tidy.lm.html) ANOVA results and 
     - [`glance()`](https://broom.tidymodels.org/reference/glance.lm.html) at  model-level summaries (like $R^2$).
 
@@ -80,7 +80,7 @@ summary(admix_anova)
 ---
 
 
-[`broom`](https://broom.tidymodels.org/)'s [`tidy()`](https://broom.tidymodels.org/reference/tidy.lm.html) function provides this output in a "tidy" format, its [`glance()`](https://broom.tidymodels.org/reference/glance.lm.html)  function shows some relevant summaries of the model (including $R^2$).
+[`broom`](https://broom.tidymodels.org/)'s [`tidy()`](https://broom.tidymodels.org/reference/tidy.lm.html) function provides this output in a "tidy" format, and   [`broom`](https://broom.tidymodels.org/)'s [`glance()`](https://broom.tidymodels.org/reference/glance.lm.html)  function shows some relevant summaries of the model (including $R^2$).
 
 ```{r}
 library(broom)
@@ -89,7 +89,7 @@ glance(admix_anova)
 ```
 
 
-## The [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) pipeline
+## The [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html) `|>` [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html) pipeline.
 
 Alternatively, we can fit a linear model and then hand it to [`anova()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/anova.html)
  to create the ANOVA table. This produces the same output as [`aov()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/aov.html) `|>` [`summary()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/summary.lm.html), but the intermediate object is an lm object rather than an aov object. Sometimes one format is just easier to work with than the other, but your results will be the same.

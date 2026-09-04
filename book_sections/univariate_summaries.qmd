@@ -126,7 +126,7 @@ gc_rils |>
 
 ## [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html)ing data
 
-The section above  shows the utility of simple summaries -- instead of looking at a datasheet with "pink", "white", and `NA` strewn above 49, 42, and 10 times, respectively, we'd rather see a simple summary (i.e.  proportion white). More broadly, we rarely want to look at entire datasets, we want to [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) them (e.g. finding the mean, variance, etc..). 
+The section, above  shows the utility of simple summaries -- instead of looking at a datasheet with "pink", "white", and `NA` strewn about 49, 42, and 10 times, respectively, we'd rather see a simple summary (i.e.  proportion white). More broadly, we rarely want to look at entire datasets, we want to [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) them (e.g. finding the mean, variance, etc..). 
 
 We [previously used the mean function](#robjects) to find the mean of a vector. When we want to summarize a variable in a tibble we use the function inside of [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html), as used in the example, above.  
 

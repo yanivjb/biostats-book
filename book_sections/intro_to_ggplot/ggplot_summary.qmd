@@ -52,7 +52,7 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/ggplo2_logo.png")
 ### Chapter Summary {#ggplot_summarySummary}
 
   
-Effective data visualization begins with curiosity and clear biological questions. Before writing a single line of code, it's worth thinking about what you want to learn from your data and how best to visualize that information. Once we have developed some starting ideas and sketches, we are ready to use ggplot2's flexible framework to bring these ideas to life. Data visualization with ggplot2 is built around the idea that plots are constructed by layering components: you begin by mapping variables to aesthetic properties like position, color, or size, and then choose how to display those mapped variables using geometric elements like histograms, barplots, or points. With this approach you can iteratively build visualizations that reflect your questions and highlight meaningful patterns. 
+Effective data visualization begins with curiosity and clear biological questions. Before writing a single line of code, it's worth thinking about what you want to learn from your data and how best to visualize that information. Once we have developed some starting ideas and sketches, we are ready to use ggplot2's flexible framework to bring these ideas to life. Data visualization with ggplot2 is built around the idea that plots are constructed by layering components: you begin by mapping variables to aesthetic properties like position, color, or size, and then choose how to display those mapped variables using geometric elements like histograms, barplots, or points. With this approach, you can iteratively build visualizations that reflect your questions and highlight meaningful patterns. 
 
 
 ### Chatbot tutor  {#ggplot_summaryChatbot} 
@@ -294,7 +294,7 @@ ggplot(ril_data, aes(x = asd_mm))+
 
 ## Bonus content: Interactive plots with ggplotly {#ggplot_summaryGgploty}
  
-Often data have strange outliers, or patterns you think you see but aren't sure about, or simply interesting data points. When I run into these issues during exploratory data analysis I often want to know more about individual data points. To do so, I make interactive graphs with the [`ggplotly()`](https://plotly.com/ggplot2/) function in the [`plotly`](https://plotly.com/r/) package. 
+Data often contain strange outliers, ambiguous patterns, or otherwise interesting individual points. When I run into these issues during exploratory data analysis I often want to know more about individual data points. To do so, I make interactive graphs with the [`ggplotly()`](https://plotly.com/ggplot2/) function in the [`plotly`](https://plotly.com/r/) package. 
 
 *The example below shows how to do this.* Note that you can make up random aesthetics that you never use and they show up when you hover over points -- this helps with understanding outliers. You can also zoom in! 
 

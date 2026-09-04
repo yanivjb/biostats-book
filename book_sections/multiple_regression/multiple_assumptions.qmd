@@ -62,11 +62,11 @@ Multiple regression includes the same general assumptions as other standard line
 OK back to the standard linear model assumptions, with a few details about their application / detection in multiple regression: 
 
 
-- **Unbiased data collection** The data were collected in a way that lets us answer the biological question without systematic bias. </br></br>
+- **Unbiased data collection:** The data were collected in a way that lets us answer the biological question without systematic bias. </br></br>
 
 - **Independence**: Observations, and therefore residuals, are independent of one another after accounting for the predictors in the model.</br></br>
 
-- **Linearity**: The model describes the expected value of the response by adding up components of the model. For a multiple regression this means that we assume we can make reasonable predictions by adding the contributions of each explanatory variable in our model </br></br>
+- **Linearity**: The model describes the expected value of the response by adding up components of the model. For a multiple regression this means that we assume we can make reasonable predictions by adding the contributions of each explanatory variable in our model. </br></br>
 
 - **Normality of residuals**: The residuals are approximately normally distributed.  As in linear regression, we evaluate the normality of residuals $e_i$ with diagnostic plots.</br></br>
 
@@ -75,7 +75,7 @@ OK back to the standard linear model assumptions, with a few details about their
 
 ### Multiple regression assumes no multicollinearity
 
-This does not mean that explanatory variables must be completely uncorrelated. In fact, a major strength of multiple regression is that it allows us to "adjust" for associations among explanatory variables. The problem arises when the association between variables is so strong that it becomes difficult to estimate their separate contributions. If two explanatory variables are super strongly associated, the model has relatively little information about what happens when one changes while the other stays constant. As a result, coefficients can become unstable, standard errors get big, and interpreting what 'adjustment' means gets tricky
+This does not mean that explanatory variables must be completely uncorrelated. In fact, a major strength of multiple regression is that it allows us to "adjust" for associations among explanatory variables. The problem arises when the association between variables is so strong that it becomes difficult to estimate their separate contributions. If two explanatory variables are super strongly associated, the model has relatively little information about what happens when one changes while the other stays constant. As a result, coefficients can become unstable, standard errors get big, and interpreting what 'adjustment' means gets tricky. 
 
 As a rough rule of thumb, we don't worry much about associations  between explanatory variables with a correlation coefficient less than 0.8. A more formal diagnostic is the "variance inflation factor" (VIF).  A VIF asks how much the uncertainty in a coefficient is inflated because that predictor is correlated with the other predictors in the model. When VIFs get to about five we might worry a bit. When they get above ten, this becomes even more concerning. 
 
@@ -119,7 +119,7 @@ You can see that we need not worry at all about multicollinearity in our model. 
 #| column: margin
 #| echo: false
 #| label: fig-rilcounts
-#| fig-cap: "Number of locations represented for each RIL. Most RILs were measured at three or four locations, meaning rows in the data set are not fully independent,"
+#| fig-cap: "Number of locations represented for each RIL. Most RILs were measured at three or four locations, meaning rows in the data set are not fully independent."
 #| fig-alt: "Histogram showing the number of locations per Clarkia RIL. Most RILs occur in three or four locations, illustrating that multiple rows can come from the same RIL."
  rils |> 
      group_by(ril) |> 

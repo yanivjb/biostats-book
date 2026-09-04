@@ -82,7 +82,7 @@ Alt text should help readers who can't see your figure still grasp its message. 
 
 | 😞Bad alt text for @fig-legend B😞 |☺️Good alt text for @fig-legend B☺️ |
 | -------- | ------- |
-| "Stacked bar plot showing the the COVID vaccine works." | "Stacked bar plot showing COVID cases by severity for placebo and mRNA-1273 groups. The placebo group has many more cases, including severe ones (dark blue), while the vaccinated group has only a few mild cases (light blue)." |
+| "Stacked bar plot showing the COVID vaccine works." | "Stacked bar plot showing COVID cases by severity for placebo and mRNA-1273 groups. The placebo group has many more cases, including severe ones (dark blue), while the vaccinated group has only a few mild cases (light blue)." |
 
 
 

@@ -191,7 +191,7 @@ Rather than counting the observations in a bin, we can fit a mathematical functi
 
 
 
-#### Specifying the "kernel density" (smoothing) in  R  
+#### Specifying the "kernel density" (smoothing) in  R   
 
 As in a histogram, we can control the smoothness of a density plot, and again we have the same trade-off between smoothing over noise (raising  geom_density's `adjust` argument above one), and revealing subtle patterns (lowering geom_density's `adjust` argument below one). 
  

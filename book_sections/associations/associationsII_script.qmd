@@ -44,7 +44,7 @@ titanic_first_class_adults |>
 ```
 
 
-Here's a brief run down of the key functions and pipelines used in this chapter. 
+Here's a brief rundown of the key functions and pipelines used in this chapter. 
 
 ## Two categorical variables 
 

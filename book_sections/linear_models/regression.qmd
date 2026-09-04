@@ -97,7 +97,7 @@ gc_rils <- readr::read_csv(ril_link) |>
 
 We have previously quantified the association between two numeric variables as:  
 
-- **A covariance:** describe how $x$ and $y$ jointly deviate from their means in an individual. 
+- **A covariance:** describes how $x$ and $y$ jointly deviate from their means in an individual. 
 
 :::aside
 $\text{cov}_{x,y}=  \frac{\sum (x_i-\bar{x})\times(y_i-\bar{y})}{n-1}$.  
@@ -121,7 +121,7 @@ The variables in this  model are interpreted as follows:
 - **$\hat{y}_i$ is the conditional mean of the response variable** for an individual with a value of $x_i$.  Note this is a guess at what the mean would be if we had many such observations - but we usually have one or fewer observations of y at a specific value of x.   
 - **$b_0$ is the intercept** -- the value of the response variable if we follow it to $x = 0$.   
 - **$b_1$ is the slope** -- the expected change in $y$, for every unit increase  in $x$.   
--  **$x_i$ is the value of the explanatory variable **, $x$ in individual $i$.
+-  **$x_i$ is the value of the explanatory variable**, $x$, in individual $i$.
 
 :::note
 ## Connection to a categorical predictor 

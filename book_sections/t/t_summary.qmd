@@ -224,7 +224,7 @@ hyenas<-read_csv(link) |>
 ```
 
 
-**Q5.** Make a qq-plot. Then evaluate it in relation to the normality assumption. `r longmcq(c("The data are perfectly normal", answer = "The data likely deviate somewhat from normality, but a t-test is probably ok","The data deviate strongly from normality and any test assuming normality cannot be trusted"))`
+**Q5.** Make a qq-plot. Then evaluate it in relation to the normality assumption. `r longmcq(c("The data are perfectly normal", answer = "The data likely deviate somewhat from normality, but a t-test is probably ok","The data deviate strongly from normality and any test assuming normality cannot be trusted."))`
 
 
 
@@ -307,11 +307,11 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
 
 ---
 
-**Q9.** Given the answers to *Q7* and *Q8* do you think the difference between subordinates and dominants is "statistically significant" (i.e. would you reject the null) at the $\alpha = 0.05$ level? `r longmcq(c(answer = "yes because t is greater than the critical value", "no because t is greater than the critical value","we can't know this until we find our p-value"))`
+**Q9.** Given the answers to *Q7* and *Q8* do you think the difference between subordinates and dominants is "statistically significant" (i.e. would you reject the null) at the $\alpha = 0.05$ level? `r longmcq(c(answer = "Yes, because t is greater than the critical value.", "No, because t is greater than the critical value","we can't know this until we find our p-value."))`
 
 ---
 
-**Q10.** Therefore, according to traditional statistical practice, we `r longmcq(c(answer = "Proceed as if the null is false (interpret results accordingly), while recognizing that there is a real chance we're wrong","Proceed as if the null is true (interpret results accordingly), while recognizing that there is a real chance we're wrong","Reserve all judgement until we prove that the null is true (or false)" ))`
+**Q10.** Therefore, according to traditional statistical practice, we `r longmcq(c(answer = "Proceed as if the null is false (interpret results accordingly), while recognizing that there is a real chance we're wrong.","Proceed as if the null is true (interpret results accordingly), while recognizing that there is a real chance we're wrong.","Reserve all judgement until we prove that the null is true (or false)." ))`
 
 
 

@@ -83,7 +83,7 @@ include_graphics("../clarkia_pics/1970.jpeg")
 
 ## Our Path  
 
-We will return to our *Clarkia* RILs and compare pollinator visitation to pink and white flowered RILs at site Sawmill Road. We might think that pink flowers attract more pollinator visits than white flowers (our scientific hypothesis). Recasting this idea as a null hypothesis and a (two-tailed) alternative statistical hypothesis:   
+We will return to our *Clarkia* RILs and compare pollinator visitation to pink and white flowered RILs at site Sawmill Road. We might think that pink flowers attract more pollinator visits than white flowers (our scientific hypothesis). We can recast this idea as a null hypothesis and a (two-tailed) alternative statistical hypothesis as follows:   
 
 - **Null hypothesis:** The mean number of pollinator visits to pink and white flowered *parviflora* RILs is the same.   
 - **Alternative hypothesis:** The mean number of pollinator visits to pink and white flowered *parviflora* RILs  differ.   

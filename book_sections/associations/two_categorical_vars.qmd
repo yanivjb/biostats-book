@@ -75,7 +75,7 @@ gc_rils <- readr::read_csv(ril_link) |>
 
 
 
-Even the most complex analysis  should begin with clear summaries and visualizations on our data. So, before describing associations between categorical variables, let us revisit our univariate summaries and consider how to summarize categorical variables. 
+Even the most complex analysis  should begin with clear summaries and visualizations of our data. So, before describing associations between categorical variables, let us revisit our univariate summaries and consider how to summarize categorical variables. 
 
 
 ```{r}

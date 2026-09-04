@@ -72,7 +72,7 @@ Weirdly, the success of your scripting session is often influenced by what you d
 - **What is the goal of this script?** How can it be broken down into smaller bits? 
 - **What data will you use?** What format are the data in? Where are the data?
 - **What packages might you need?** Are they already installed? 
-- **Where should this file live?** If this script is part of a larger project, save it in that project folder? If not, create a new folder to house it.   
+- **Where should this file live?** If this script is part of a larger project, save it in that project folder. If not, create a new folder to house it.   
 
 
 :::protip
@@ -99,7 +99,7 @@ To see this in action, check out my example, below:
 #| eval: false
 #| column: page-right
 # Yaniv Brandvain
-# Feb 8 2026 (last updated march 1 2026)
+# Feb 8 2026 (last updated March 1 2026)
 # The goal of the script is to record, and show-off our intro to R learning
 
 # NOTE: I need to come back and verify:
@@ -130,7 +130,7 @@ praise(template = "This script is ${adjective}!")
 
 
 
-Like all things in life -- writing a computer script is best when broken into small manageable bits. So we, almost never write a script start-to-finish without pause or evaluation. Rather, we usually
+Like all things in life -- writing a computer script is best when broken into small manageable bits. So, wou will almost never write a script start-to-finish in one go. Rather, you will usually:  
 
 1. **Write a few lines of code** On a piece of paper, break the project into small sequential tasks. Set about to solve one of them, and note that immediate goal in a "comment" in R. 
 

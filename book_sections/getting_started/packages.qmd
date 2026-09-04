@@ -58,7 +58,7 @@ Today we will install and load both packages, but only directly use  [`praise`](
 
 ### Installing packages 
 
-To install a package type,   `install.packages("<NAME OF PACKAGE>")`. So to install these packages go to the console and  type:     
+To install a package, type `install.packages("<NAME OF PACKAGE>")`. So to install these packages go to the console and  type:     
 
 `install.packages("conflicted")`    
 `install.packages("praise")`    

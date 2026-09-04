@@ -77,14 +77,14 @@ We aimed to measure three kids per mom, but in some cases only one or two surviv
 
 
 
-### Pseudo replication in Experimental Design
+### Pseudoreplication in Experimental Design
 
 
 Let's switch from our hybrid zone study to our RIL experiment. Recall that some RILs were pink-flowered and some were white-flowered. We planted the RILs at  four field sites, and watched pollinator visitation and genotyped seeds to estimate the proportion of seeds on a flower that were hybrids. 
 
 Crucially we planted all RILs at all sites, but assume we didn't. What would have happened if we planted pink-flowered plants at one site and white flowered plants at another? 
 
-**Let's imagine  that we planted pink flowered-plants only at "US" and white-flowered plants only at "LB"**.  As  @fig-pseudorep shows, in that case we would incorrectly and confidently conclude that white-flowered plants are more likely to set hybrid seed than are pink-flowered plants. This is why it is best to  spread treatments evenly across some background environment when possible. 
+**Let's imagine  that we planted pink-flowered plants only at "US" and white-flowered plants only at "LB"**.  As  @fig-pseudorep shows, in that case we would incorrectly and confidently conclude that white-flowered plants are more likely to set hybrid seed than are pink-flowered plants. This is why it is best to  spread treatments evenly across some background environment when possible. 
 
 ```{r}
 #| code-fold: true

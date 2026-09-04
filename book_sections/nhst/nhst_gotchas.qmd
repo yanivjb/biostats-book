@@ -52,7 +52,7 @@ include_graphics("../../figs/stats_foundations/nhst/skinnerpvals.jpeg")
 Students often struggle to understand p-values, and for good reason. The NHST framework is built with backwards logic on a shaky foundation. We want to know the probability that our biological hypothesis is correct, but the p-value tells us nothing about it. Instead, a p-value tells us the probability of observing our data (or something more extreme) assuming the null hypothesis is true.  We then make an indirect inference: if our data are unusual under the null, we tentatively conclude the alternative is correct, even though we never actually tested the alternative model. This flawed premise, combined with scientific customs that can feel arbitrary, is the source of much confusion. 
 
 
-The common misinterpretations of a p-value I believe, reflect people wishing that a p-value reported something useful or logical. But it is not. A p-value is none of the following things:     
+I believe that the common misinterpretations of p-values reflect people wishing that a p-value reported something useful or logical. But it is not. A p-value is none of the following things:     
 
 - **A P-VALUE IS NOT** "the probability that the null hypothesis is true" **NOR IS IT** "the probability that what we observed is due to chance." These are both incorrect because the p-value is simply the probability that we would observe our data, or something more extreme, assuming the null hypothesis is true. 
 

@@ -46,14 +46,14 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_multexpla
 
 ### The challenge of many explanatory variables   
 
-There is usually more than one thing going on in a scientific study, and we may want to see how different combinations of explanatory variables are associated with a response. This can be a challenge over the term, you will encounter many tips and tricks to help in this task. For now we will look at two useful approaches:   
+There is usually more than one thing going on in a scientific study, and we may want to see how different combinations of explanatory variables are associated with a response. This can be a challenge. Over the term you will encounter many tips and tricks to help in this task. For now we will look at two useful approaches:   
 
 - Mapping different explanatory variables to different aesthetics.   
 - The use of "small multiples".
 
 ### Multiple aesthetic mappings  
 
-We saw that the number of pollinator visits increased with petal size and was greater for pink than white flowers. However,  visualizing a response variable as a function of its multiple explanatory variables  together can help us home in on the patterns.  
+We saw that the number of pollinator visits increased with petal size and was greater for pink than white flowers. However, visualizing a response variable as a function of its multiple explanatory variables  together can clarify the patterns.  
 
 - To do so we can make a scatterplot and map petal color onto the color aesthetic.    
 - We can even use size and color as extra aesthetics to map onto. I show you how to do this,  but use it sparingly, because too many extra aesthetics may provide more distraction than insight. 
@@ -141,7 +141,7 @@ include_graphics("https://miro.medium.com/v2/resize:fit:1204/format:webp/0*TYxvP
 
 :::
 
-Edward Tufte, a major figure in the field of data visualization - popularized the concept of "small multiples" -- showing data with the same structure across various comparisons. He argued that such visualizations can help our eyes make powerful comparisons (See quote above). For example,  the lunar phase can be well visualized by using small multiples (@fig-themoon).  
+[Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte), a major figure in the field of data visualization, popularized the concept of [small multiples](https://en.wikipedia.org/wiki/Small_multiple). Small multiples show data with the same structure across various comparisons. Tufte argued that such visualizations can help our eyes make powerful comparisons (see quote above). For example,  the lunar phase can be well visualized by using small multiples (@fig-themoon).  
 
 For our analyses, we may find that adding location as a variable helps us better see and understand patterns. Additionally, small multiples are sometimes preferable to mapping different categorical variables onto different aesthetics. I show these examples below:  
 
