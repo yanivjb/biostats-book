@@ -87,7 +87,7 @@ include_graphics("../../figs/intro_to_r/univariate_summaries/1969.png")
 
 ### Skew     {#summarizing_shape_skew}  
 
-One key aspect of a dataset’s shape is skewness, i.e. if the data are symmetrical or has an excess of smaller or larger values.  
+One key aspect of a dataset’s shape is skewness, i.e. if the data are symmetrical or have an excess of smaller or larger values.  
 
 
 - The proportion of hybrid seeds per RIL mom (@fig-prop_hyb_hist, and shown again in @fig-shape A) is strongly **right-skewed**. That is, most values are small, but some are very large. Right-skewed data is common in biology and everyday life. For example, income is right-skewed: most people earn relatively little money, but some make loads of ca$h. <br> <br>       

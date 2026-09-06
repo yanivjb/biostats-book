@@ -141,7 +141,7 @@ gc_rils |>
 
 ### Parametric summaries of variability  {#summarizing_variability_parametric-summaries-of-variability}      
 
-Mathematical summaries of variability aim to describe how far we expect an observation to deviate from the mean. Such summaries start by finding the sum of squared deviations, $SS_X$ (i.e. the sum of squared differences between each observation and the mean). We square deviations rather than taking their absolute value because squared deviations (1) are mathematically tractable, (2) emphasize large deviations, and (3) allow the mean to be the value that minimizes them — which ties directly into least squares methods we’ll use later in regression. We find $SS_X$, knowm as "the sum of squares" as:  
+Mathematical summaries of variability aim to describe how far we expect an observation to deviate from the mean. Such summaries start by finding the sum of squared deviations, $SS_X$ (i.e. the sum of squared differences between each observation and the mean). We square deviations rather than taking their absolute value because squared deviations (1) are mathematically tractable, (2) emphasize large deviations, and (3) allow the mean to be the value that minimizes them — which ties directly into least squares methods we’ll use later in regression. We find $SS_X$, known as "the sum of squares" as:  
 $$\text{Sum of Squares} = SS_X = \Sigma{(X_i-\overline{X})^2}$$
 
 From the sum of squares we can easily find three common summaries of variability:  

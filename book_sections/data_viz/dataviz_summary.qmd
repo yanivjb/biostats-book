@@ -86,7 +86,7 @@ include_graphics("../../figs/summarizing_data/data_viz/sneak1.png")
 **Q3)**  Which plot in @fig-sneak1 is better?  `r mcq(c("A",answer = "B","It depends...", "Don\'t judge plots" ))`  
 
 
-**Q4)**  Your chose your answer, above, because the better plot `r mcq(c("Shows all the data",answer="Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accessible" ,"I told you we dont judge plots, jeez"))`  
+**Q4)**  You chose your answer, above, because the better plot `r mcq(c("Shows all the data",answer="Makes patterns easy to see","Presents data honestly", "Draws graphics clearly","Is accessible" ,"I told you we dont judge plots, jeez"))`  
 
 :::
 

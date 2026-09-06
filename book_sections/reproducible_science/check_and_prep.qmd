@@ -12,7 +12,7 @@
 
 - Describe why you should never edit your data sheet.  
 - Use [`dplyr`](https://dplyr.tidyverse.org/index.html)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function to get a sense of your data sheet.  
-- Be able to see your data in `R` the  [`View()`](https://tibble.tidyverse.org/reference/view.html) function.  
+- Be able to see your data in `R` using the  [`View()`](https://tibble.tidyverse.org/reference/view.html) function.  
 - Clean all column names with [`janitor`](https://sfirke.github.io/janitor/index.html)'s [`clean_names()`](https://sfirke.github.io/janitor/articles/janitor.html) function.  
 - Explicitly rename specific columns with [`dplyr`](https://dplyr.tidyverse.org/index.html)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function.    
   

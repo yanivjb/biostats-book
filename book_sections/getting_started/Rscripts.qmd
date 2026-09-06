@@ -130,7 +130,7 @@ praise(template = "This script is ${adjective}!")
 
 
 
-Like all things in life -- writing a computer script is best when broken into small manageable bits. So, wou will almost never write a script start-to-finish in one go. Rather, you will usually:  
+Like all things in life -- writing a computer script is best when broken into small manageable bits. So, you will almost never write a script start-to-finish in one go. Rather, you will usually:  
 
 1. **Write a few lines of code** On a piece of paper, break the project into small sequential tasks. Set about to solve one of them, and note that immediate goal in a "comment" in R. 
 

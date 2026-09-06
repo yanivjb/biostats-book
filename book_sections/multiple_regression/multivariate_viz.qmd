@@ -158,7 +158,7 @@ asd_petal_color_plot <- rils |>
 In the next chapter I introduce the idea of statistical interactions. In models with interactions, we ask if e.g. the association between petal area and proportion of hybrid seed differs for white- and pink- petaled RILS (i.e. is the slope difference for white and pink).
 :::
 
-The difference between [`geom_smooth(method = "lm")`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) and [`geom_lm_smooth()`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) is easier to see  if we switch from ASD to petal area. Here the separate fitted slopes by petal color differ more visually. That might be interesting! But it is not the model we are fitting yet. In this chapter, we build models in which explanatory variables additively contribution to the response. That is, we ask  what is the relationship between petal area and hybrid seed proportion after accounting for petal color, without allowing that relationship to differ by petal color?
+The difference between [`geom_smooth(method = "lm")`](https://ggplot2.tidyverse.org/reference/geom_smooth.html) and [`geom_lm_smooth()`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) is easier to see  if we switch from ASD to petal area. Here the separate fitted slopes by petal color differ more visually. That might be interesting! But it is not the model we are fitting yet. In this chapter, we build models in which explanatory variables contribute additively to the response. That is, we ask  what is the relationship between petal area and hybrid seed proportion after accounting for petal color, without allowing that relationship to differ by petal color?
 
 
 ```{r}

@@ -127,7 +127,7 @@ lm(n.species ~ Biomass + taxon, bmass) |> Anova() |> tidy()|> rename("F value"  
 While @fig-bmass did not show a linear relationship, there does appear to be a hump shaped relationship. If true, this would imply two countervailing factors: 
 
 1. With low productivity, additional biomass allows more species to persist.  
-2. Once there is sifficient biomass,  a few species can take over. 
+2. Once there is sufficient biomass,  a few species can take over. 
 
 The linear model looks like this: 
 

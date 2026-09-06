@@ -86,7 +86,7 @@ ril_data |>
 
 **Q1)** Extend the analysis above to examine the association between leaf water content (*lwc*) and the proportion of hybrid seeds (*prop_hybrid*). The correlation between lwc and prop_hybrid is: `r mcq(c(answer ="-0.202","-0.000877", "-0.000914", "-0.000403" ))`  
 `r hide("I don\'t see my answer")`
-If ogt -0.195, have a look at what you [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)ed...   
+If you got -0.195, have a look at what you [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)ed...   
 
 **You likely typed:**  
 
