@@ -219,7 +219,7 @@ So the model predicts a 0.0017 proportion of hybrid seeds on white-petaled RILs 
 
 ### Visualizing a linear model with an interaction 
 
-To look into this more, lets view our data and the model in the range of our data. Because we are considering a statistical interaction, the default behavior of `geom_smooth(method = 'lm')` is appropriate: 
+To look into this more, let's view our data and the model in the range of our data. Because we are considering a statistical interaction, the default behavior of `geom_smooth(method = 'lm')` is appropriate: 
 
 ::: aside
 Although you could use [`geom_lm_smooth(interaction = TRUE)`](https://yanivjb.github.io/honestlm/reference/geom_lm_smooth.html) from my [`honestlm`](https://yanivjb.github.io/honestlm/index.html) package, if you prefer.

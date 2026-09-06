@@ -55,7 +55,7 @@ According to the **law of large numbers** the average of a large random sample c
 #| label: fig-xkcd_sex 
 #| column: margin  
 #| echo: false
-#| fig-cap: "In some cases especially behavioral ones, creating a believable placebo is impossible, highlighting a key limitation of this experimental design principle. from [xkcd](https://xkcd.com/1462/)."
+#| fig-cap: "Rollover text: *In some cases especially behavioral ones, creating a believable placebo is impossible, highlighting a key limitation of this experimental design principle.* From [xkcd](https://xkcd.com/1462/). See explanation at [explain xkcd](https://www.explainxkcd.com/wiki/index.php/1462:_Blind_Trials)."
 #| fig-alt: "An xkcd comic titled 'The Limitations of Blind Trials.' A presenter on a stage says, 'We've designed a double-blind trial to test the effect of sexual activity on cardiovascular health. Both groups will think they're having lots of sex, but one group will actually be getting sugar pills.'"
 
 include_graphics("https://imgs.xkcd.com/comics/blind_trials_2x.png")

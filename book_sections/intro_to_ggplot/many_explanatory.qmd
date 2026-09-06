@@ -129,7 +129,7 @@ ril_data |>
 ```{r}
 #| echo: false
 #| label: "fig-themoon"
-#| fig-cap: "Using *small multiples* to show the lunar phase moon over a month. From [this link](https://medium.com/@blakewilliford/information-design-9-29-ee995efb584e)"
+#| fig-cap: "Using *small multiples* to show the phases of the moon over a month. From [this link](https://medium.com/@blakewilliford/information-design-9-29-ee995efb584e)"
 include_graphics("https://miro.medium.com/v2/resize:fit:1204/format:webp/0*TYxvPE_R0PYPLtYY.jpg")
 ```
 
