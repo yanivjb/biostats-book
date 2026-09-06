@@ -41,7 +41,7 @@ glimpse(titanic_first_class_adults)
 #| column: margin
 #| fig-height: 6.5
 #| label: figo-ne
-#| fig-cap: "Survival counts for adult first-class passengers on the Titanic by sex. Stacked bars show the number of adult first-class passengers who did or did not survived, separated by sex."
+#| fig-cap: "Survival counts for adult first-class passengers on the Titanic by sex. Stacked bars show the number of adult first-class passengers who did or did not survive, separated by sex."
 #| fig-alt: "Stacked bar chart showing counts of adult first-class Titanic passengers by sex and survival status. For males, the majority did not survive, with a smaller portion surviving. For females, most survived, with very few deaths. The y-axis shows counts, the x-axis shows sex, and colors distinguish survival status (teal = survived, coral = did not survive)."
 titanic_first_class_adults |>
   ggplot(aes(x = Sex, fill = Survived))+

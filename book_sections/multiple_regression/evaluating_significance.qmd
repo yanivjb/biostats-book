@@ -185,7 +185,7 @@ This means that if we accidentally use Type I sums of squares the p-value for a 
 
 To see why this matters, consider the following tests for an association between anther-stigma distance (`asd_mm`) and the proportion of hybrid seeds (`prop_hybrid`) in a model accounting for numerous additional covariates:   
 
-- With Type I sums of squares, I wrongly conclude that anther-stigma distance is associated with `prop_hybrid` if  `asd_mm` is entered first. This is because the p-value is computed before accounting for the other terms.   
+- With Type I sums of squares, I wrongly conclude that anther-stigma distance is associated with `prop_hybrid` if `asd_mm` is entered first. This is because the p-value is computed before accounting for the other terms.   
 
 ```{r}
 #| column: page-right

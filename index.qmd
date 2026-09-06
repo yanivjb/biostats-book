@@ -52,7 +52,7 @@ tweet_embed("https://twitter.com/LucyStats/status/1086757516674039813")
 
 My motivating goal for this course is to empower you to produce, present, and critically evaluate statistical evidence — especially as applied to biological topics. You should know that statistical models are only models and that models are imperfect abstractions of reality. You should be able to think about how a biological question could be formulated as a statistical question, present graphs which show how data speak to this question, be aware of any shortcomings of that model, and how statistical analysis of a data set can be brought back into our biological discussion.
 
-### "By the end of this course...
+### "By the end of this course..."  
 
 #### <mark>Students should be statistical thinkers. </mark>
 
@@ -112,7 +112,7 @@ If you want a walk through, see [Roger Peng](https://rdpeng.org/)'s tutorial on 
 ### Mac install guide
 
 ::: {.instalmac style="background-color: #FDEFB5; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
-If you want a walk through, see [Roger Peng's](https://rdpeng.org/) tutorial on installing `R` [on a mac](https://youtu.be/uxuuWXU-7UQ)].
+If you want a walk through, see [Roger Peng's](https://rdpeng.org/) tutorial on installing `R` [on a mac](https://youtu.be/uxuuWXU-7UQ).
 
 "To install R on a Mac, click the [*Download R for macOS* link](https://cloud.r-project.org/bin/macosx/). Next, click on the \[newest package link compatible with your computer\]. An installer will download to guide you through the installation process, which is very easy. The installer lets you customize your installation, but the defaults will be suitable for most users. I've never found a reason to change them. If your computer requires a password before installing new programs, you’ll need it here."
 
@@ -249,7 +249,7 @@ This book is not done. I  need to
 
 
 
-- Add "design" notes in every linear model chapater.  
+- Add "design" notes in every linear model chapter.  
 - Add power and precision to each linear models chapter. 
 - Write chapter on model evaluation
 - Write chapter on Causal Inference 

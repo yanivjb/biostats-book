@@ -164,7 +164,7 @@ ril_data      |>
 :::
 
 ::: {.callout-note collapse="true"}       
-## "A visual explanation of the summarize() function from [R for the rest of us](https://rfortherestofus.com/2024/07/dplyr-functions-animated).  
+## A visual explanation of the summarize() function from [R for the rest of us](https://rfortherestofus.com/2024/07/dplyr-functions-animated).  
 
 ```{r}
 #| echo: false

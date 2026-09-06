@@ -121,15 +121,15 @@ This section gets into linear models, the workhorse for data analysis.
 
 - [Chapter 14](#normal) introduces key features of  the normal distribution, to prepare us for modelling normally distributed residuals.  
 
-- [Chapter 15](#t) address a challenge of linear models. Linear models assume normally distributed residuals, but because we estimate model parameters from data, don't know the parameter value of the population standard deviation. So, we introduce the t-distribution -- a distribution which is like the normal but incorporates the uncertainty in our estimate of the standard deviation. This allows us to both test null hypotheses and estimate uncertainty using standard linear modelling tools. 
+- [Chapter 15](#t) addresses a challenge of linear models. Linear models assume normally distributed residuals, but because we estimate model parameters from data, we don't know the parameter value of the population standard deviation. So, we introduce the t-distribution -- a distribution which is like the normal but incorporates the uncertainty in our estimate of the standard deviation. This allows us to both test null hypotheses and estimate uncertainty using standard linear modelling tools. 
 
 - [Chapter 16](#two_ts), we build on this by modelling means as a function of a binary explanatory variable. In this chapter, we estimate uncertainty in the difference of group means, and test the null that group means do not differ.
 
 - [Chapter 17](#f) presents the final key component of linear modelling - partitioning variation into that explained by the model and the residual variation. We show that the ratio of these variance components provides another critical tool for evaluating null hypotheses posed by linear models.  
 
-- [Chapter 18](#anova) shows how we can use the variance partitioning approach to evaluate caes in which there are more than two levels in the ordinal predictor. 
+- [Chapter 18](#anova) shows how we can use the variance partitioning approach to evaluate cases in which there are more than two levels in the ordinal predictor. 
 
-- With these tools in place we can now build models with a numeric explanatory variable ([Chapter 19](#regression)), multiple explanatory variables ([Chapter 20](#multiple_regression)),  and cases in which the repsonse is influenced by interactions between explanatory variables ([Chapter 21](#interactions))! 
+- With these tools in place we can now build models with a numeric explanatory variable ([Chapter 19](#regression)), multiple explanatory variables ([Chapter 20](#multiple_regression)),  and cases in which the response is influenced by interactions between explanatory variables ([Chapter 21](#interactions))! 
 
 
 

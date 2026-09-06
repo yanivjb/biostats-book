@@ -527,7 +527,7 @@ pf(7.1,1,47,lower.tail = FALSE)
 
 ```{r}
 #| echo: false
-#| fig-cap: "Anoter [xkcd comic](https://xkcd.com/3260/) about extrapolating. rollover text: \"Commentators agree that this will probably be the last World Cup in which Messi faces serious competition.\""
+#| fig-cap: "Another [xkcd comic](https://xkcd.com/3260/) about extrapolating. rollover text: \"Commentators agree that this will probably be the last World Cup in which Messi faces serious competition.\""
 #| fig-alt: "[A graph is shown, with 1 axis having the numbers 1, 2, & 3 going up it, and the other having 24 unlabelled marks. There are 6 points on the graph itself, with them being labelled 2006 (.33), 2010 (0), 2014 (.57), 2018 (.25), 2022 (1), and 2026 (3), the latter having '(so far)' under it. There is a grey dotted curve going up exponentially.] [Title of graph]: Lionel Messi World Cup goals per game [Caption below text:] At this rate, by 2040 Lionel Messi will be scoring hundreds of goals per game."
 include_graphics("https://imgs.xkcd.com/comics/messi.png")
 ```

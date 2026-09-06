@@ -135,7 +135,7 @@ Numeric variables can be categorized into two main types:
 :::fyi
 **Subtle Distinctions and Blurry Boundaries.** The two cases above represent pretty clear distinctions between discrete and continuous variables, but sometimes such distinctions are more subtle.  
 
-Consider the number of pollinators—these cannot be fractional, but the number of pollinators per minute can be fractional. There are other similarly blurry cases. For example, *time to first flower* is inherently continuous, but we often check on flowers only once per day, so it is measured as discrete. Similarly, in human studies, age is usually reported in whole months or years (discrete), rather than on the more continuous scale of fractional seconds. In such cases, the appropriate question is not "is my data discrete or continuous?" but rather "what process generated my data? and what statistical distribution do the data follow?
+Consider the number of pollinators. Of course, a number of visitors cannot be fractional, but the number of pollinators per minute can be fractional. There are other similarly blurry cases. For example, *time to first flower* is inherently continuous, but we often check on flowers only once per day, so it is measured as discrete. Similarly, in human studies, age is usually reported in whole months or years (discrete), rather than on the more continuous scale of fractional seconds. In such cases, the appropriate question is not "is my data discrete or continuous?" but rather "what process generated my data? and what statistical distribution do the data follow?"  
 ::::
 
 
