@@ -1,6 +1,17 @@
 ## 3. Reproducible Science {#reproducible_science}
 
-**This section includes background on:** 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| out-width: "80%"
+#| fig-alt: "A four-panel comic. In panel one, a bearded professor in a green sweater vest reassures an unseen student: \"Don't worry, you don't have to start your code from scratch.\" In panel two, he adds that the student can reuse software the previous person on the project wrote several years ago, while a skeptical-looking student with messy hair and round glasses listens, holding a stack of papers. In panel three, the two trade rapid-fire questions and answers: \"Are there instructions for how to use it?\" \"I doubt it.\" \"Is the code commented?\" \"Not likely.\" \"Where are the files?\" \"Who knows.\" In panel four, the student asks, \"This is going to be painful, isn't it?\" and the professor replies, \"Just a scratch.\""
+#| fig-cap: "[PHD Comics: 'Scratch'](https://phdcomics.com/comics/archive.php?comicid=1689), by Jorge Cham (2014)."
+#| column: margin
+library(knitr)
+include_graphics("../figs/intro_to_r/reproducible_science/repro.png") 
+```
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
@@ -20,6 +31,8 @@
 
 :::
 
+
+
 ---   
 
 <article class="drop-cap">Since January 2022, [The American Naturalist](https://www.journals.uchicago.edu/journals/an/about) has required authors to include all data and code underlying their conclusions. This policy reflects a broader shift in the scientific community—researchers now expect data to be shared and analyses to be reproducible. This push for reproducibility has tremendous benefits for everyone involved:</article>  
@@ -32,7 +45,6 @@ In my roles as a biostatistics professor and Data Editor at [The American Natura
 
 
 >*The best time to make your research reproducible is while planning your project. The second best time is now.*<br><br>
-
 
 
 ## Making science reproducible    

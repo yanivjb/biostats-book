@@ -32,6 +32,12 @@ source("../../_common.R")
 
 ---
 
+```{r}
+#| echo: false
+#| fig-alt: "A four-panel black-and-white comic titled 'The Four Stages of Data Loss: Dealing with accidental deletion of months of hard-earned data.' In Stage 1, Denial, a student sits at a computer thinking, 'I did not just erase all my data. I surely made a backup somewhere...' In Stage 2, Anger, the same student grabs and shakes the computer monitor, shouting, 'You stupid piece of crap! Where's my data!?' In Stage 3, Depression, the student sits with his head in his hands, saying, 'Why...? Why me??' In Stage 4, Acceptance, the student sits blankly at the computer, saying, 'I'm never going to graduate...'"
+#| fig-cap: "[PHD Comics: 'The Four Stages of Data Loss'](https://phdcomics.com/comics/archive.php?comicid=382), by Jorge Cham (2003)."
+include_graphics("https://www.phdcomics.com/comics/archive/phd103003s.gif")
+```
 
 ## Storing data
 
