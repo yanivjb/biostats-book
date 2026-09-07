@@ -1,4 +1,4 @@
-# X5. Probability and Likelihood {.unnumbered probability_and_likelihood}
+# X5. Probability and Likelihood {.unnumbered #probability_and_likelihood}
 
 
 
@@ -52,10 +52,21 @@ html_tag_audio <- function(file, type = c("mp3")) {
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:**  
+**Motivating Scenario:**  So far, we've used p-values, confidence intervals, and model coefficients as standard tools without thinking too hard about them. Probability and likelihood are the machinery underneath nearly every method in this book, from a t-test to a linear model. In this chapter we open the hood, build up probability and likelihood from scratch, and use them to fit and evaluate a simple model by hand. Along the way we'll also see that there's more than one coherent way to reason about uncertainty: the frequentist approach we've used so far, and the Bayesian approach, which asks a different question.
 
 **Learning Goals:** By the end of this chapter, you should be able to:
 
+1. Calculate and combine probabilities using the addition rule (OR) and multiplication rule (AND), and use Bayes' theorem to flip a conditional probability.
+
+2. Distinguish a probability from a likelihood, and explain why we typically work with log-likelihoods rather than likelihoods directly.
+
+3. Find a maximum likelihood estimate (MLE) by evaluating a likelihood profile across candidate parameter values.
+
+4. Use likelihood-based methods to quantify uncertainty in an estimate and test a null hypothesis.
+
+5. Apply these tools end to end on a real example, from raw data to a hypothesis test.
+
+6. Contrast frequentist and Bayesian inference, and explain how a prior distribution combines with the likelihood to produce a posterior — including how sensitive that posterior is to the choice of prior.
 
 
 :::
@@ -281,7 +292,7 @@ dnorm(x = c(0.01, 0.07, 2.20), mean = 0, sd = 1, log = TRUE) |>
   sum()
 ```
 
-Reassuringly, $ln(0.00563186) =$  `r log(0.00563186)`, and similarly $e^{5.179316} =$ `r exp(-5.179316)` 
+Reassuringly, $ln(0.00563186) =$  `r log(0.00563186)`, and similarly $e^{-5.179316} =$ `r exp(-5.179316)` 
 
 
 
@@ -409,7 +420,8 @@ p_val  <- pchisq(q = D, df = 1, lower.tail = FALSE)
 ```{r, echo=FALSE}
 c(D = D, p_val = p_val) |> round(digits = 3) |> data.frame() |> t() |> data.frame() |> gt()
 ```
-Unfortunately, the LRT test give poorly calibrated p-values -- especially when we have a small sample size. 
+
+Unfortunately, the LRT test gives poorly calibrated p-values -- especially when we have a small sample size. 
 
 Compare our LRT p-value of 0.188 to that's from a one sample t-test
 
@@ -419,7 +431,7 @@ t.test(obs,mu=0)   |>
   pull(p.value)
 ```
 
-A simple solution is applying  "Bartlett’s Correction for Small Samples" correction, here $D_\text{corrected} = \frac{D}{1+\frac{1}{2\times n}}$. This gets us  closer, but we still must recognize that the LRT is a very rough approximtation 
+A simple solution is applying  "Bartlett’s Correction for Small Samples" correction, here $D_\text{corrected} = \frac{D}{1+\frac{1}{2\times n}}$. This gets us  closer, but we still must recognize that the LRT is a very rough approximation 
 
 
 ::: aside
@@ -490,7 +502,7 @@ We then go on to make a likelihood surface by.
 
 4. Sum the log likelihoods of each observation for a given proposed mean to find the log likelihood of that parameter estimate given the data. 
 
-Just for fun well arrange them with the MLE on top!
+Just for fun, we'll arrange them with the MLE on top!
 
 ```{r}
 log_lik_uphill <- tibble(mu = proposed_means)%>%      # Step 1 
@@ -507,10 +519,11 @@ log_lik_uphill <- tibble(mu = proposed_means)%>%      # Step 1
 
 
 
-```{r logliks1B, fig.cap = "Log likelihoods of for 100 proposed means (a subst of those investigated above), sorted from highest to lowest log likelihood." , echo=FALSE}
+```{r logliks1B, fig.cap = "Log likelihoods for 100 proposed means (a subset of those investigated above), sorted from highest to lowest log likelihood." , echo=FALSE}
 DT::datatable(log_lik_uphill %>% filter( mu %%1==0)%>% arrange(desc(log_lik))%>% mutate_at(2:3, round, digits = 3),
               options = list(autoWidth = TRUE,pageLength = 3, lengthMenu = c(3, 10,25, 50)))
 ```
+
 #### MLE
 
 This sorted list shows that our maximum likelihood estimate is about 39 meters. The actual MLE is about
@@ -556,7 +569,7 @@ ggplot(log_lik_uphill)+
 
 #### Null hypothesis significance testing. 
 
-As above we find the p-value by comparing two times the difference in log likelihoods under the MLE and the null model ($D$), to the  $\chi^2$ distribution with one degress of freedom. This value is in the same ballpart as what we got from the one sample t-test  ($6.06 \times 10^{-8}$)
+As above we find the p-value by comparing two times the difference in log likelihoods under the MLE and the null model ($D$), to the  $\chi^2$ distribution with one degrees of freedom. This value is in the same ballpart as what we got from the one sample t-test  ($6.06 \times 10^{-8}$)
 
 ```{r}
 log_lik_MLE <- pull(MLE, log_lik)
@@ -572,7 +585,7 @@ tibble(log_lik_MLE = log_lik_MLE, log_lik_H0 =log_lik_H0, D = D, p_val=p_val) %>
 ```
 ### R tricks
 
-You can grag the log likelihoods of a model with the `logLik`function.   
+You can grab the log likelihoods of a model with the `logLik` function.   
 
 ```{r}
 MLE_model <- lm(elevationalRangeShift ~ 1, data = range_shift) # Estimate the intercept
@@ -635,7 +648,7 @@ bayes_uphill |>
   labs(title = 'Comparing prior and posterior')
 ```
 
-**We can grab interesting thing from the posterior distribution.** 
+**We can grab interesting things from the posterior distribution.** 
 
 - For example we can find the maximum a posteriori (MAP) estimate as  
 
@@ -663,7 +676,7 @@ bayes_uphill                                  |>
 In a good world  our priors are well calibrated.  
 In a better world, the evidence in the data is so strong, that our priors don't matter. 
 
-A good thing to do is to compare our posterior distributions across different prior models. The plot below shows that if our prior is very tight, we have trouble moving the posterior away from it.  Another way to say this, is that if your prior believe is strong, it would take loads of evidence to gr you to change it.
+A good thing to do is to compare our posterior distributions across different prior models. The plot below shows that if our prior is very tight, we have trouble moving the posterior away from it.  Another way to say this, is that if your prior belief is strong, it would take loads of evidence to get you to change it.
 
 
 
@@ -683,7 +696,7 @@ bayes_uphill1 <- log_lik_uphill %>%
          prior = prior/ sum(prior),
          evidence  = sum(lik * prior),
          posterior =  (lik *  prior) / evidence,
-         prior_model  = "N(30, 1^2)") ,
+         prior_model  = "N(30, 5^2)") ,
  log_lik_uphill %>%
   mutate(lik   = exp(log_lik),
          prior = dunif(x = mu, min = -100, max = 200),
@@ -705,7 +718,7 @@ bayes_uphill1 <- log_lik_uphill %>%
 
 With more complex models, we usually can't use the math above to solve Bayesian problems. Rather we use computer ticks -- most notably the Markov Chain Monte Carlo [MCMC](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) to approximate the posterior distribution. 
 
-The programming here can be tedious so there are many programs -- notable [WINBUGS](https://www.mrc-bsu.cam.ac.uk/software/bugs/the-bugs-project-winbugs/), [JAGS](https://mcmc-jags.sourceforge.io/) and [STAN](https://mc-stan.org/) -- that make the computation easier. But even those can be a lot of work. **Here I use the R package [brms](https://paul-buerkner.github.io/brms/), which runs stan for us, to do an MCMC and do Bayesian stats.**  I suggest [looking into this](https://paul-buerkner.github.io/brms/) if you want to get stared, and learning STAN for more serious analyses
+The programming here can be tedious so there are many programs -- notable [WINBUGS](https://www.mrc-bsu.cam.ac.uk/software/bugs/the-bugs-project-winbugs/), [JAGS](https://mcmc-jags.sourceforge.io/) and [STAN](https://mc-stan.org/) -- that make the computation easier. But even those can be a lot of work. **Here I use the R package [brms](https://paul-buerkner.github.io/brms/), which runs stan for us, to do an MCMC and do Bayesian stats.**  I suggest [looking into this](https://paul-buerkner.github.io/brms/) if you want to get started, and learning STAN for more serious analyses
 
 
 ```{r, echo=FALSE, eval=FALSE,message=FALSE, warning=FALSE}

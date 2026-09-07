@@ -64,7 +64,7 @@ gg_color_hue <- function(n) {
 
 - **Use cross-validation** (LOOCV and k-fold) to assess predictive performance and avoid overfitting.   
 
-- **Reflect** on when a more complex model is worth it vs when a simpler one is perferable.  
+- **Reflect** on when a more complex model is worth it vs when a simpler one is preferable.  
 
 :::
 
@@ -206,7 +206,7 @@ lm(Petal.Length ~ Species + Sepal.Width, data = iris) %>%
 
 ### Multivariate visualizations     
 
-The visualizations above can be pretty helpful, but we are most often worried about the fit and performance of more complex models with numerous predictors. What to do then? One approach is to use residual plots to check for patterns in the unexplained variation. For example, you can create residual plots (i.e. residuals are on the y and a focal predictor is on the x) for each predictor in your model tocheck for non-linear trends and/or. 
+The visualizations above can be pretty helpful, but we are most often worried about the fit and performance of more complex models with numerous predictors. What to do then? One approach is to use residual plots to check for patterns in the unexplained variation. For example, you can create residual plots (i.e. residuals are on the y and a focal predictor is on the x) for each predictor in your model to check for non-linear trends and/or unequal variance across levels of that predictor. 
 
 For example @fig-residplot clearly shows the difference in variance across species in our residuals from model predictions of petal length as a function of sepal width and species.
 
@@ -377,7 +377,7 @@ glance(species_and_SW_model)                                                    
 
 We can see here that there is statistical evidence to prefer  the model with Sepal Width and Species over the model with just species -- the adjusted $R^2$ has increased and the AIC went down by more than twenty units!
 
-**Note** this does not mean we should necessarily choose the model with Sepal Length in addition to species. We should think about our goals and priorities when making a model. In this case  adding  this additional parameter explains and additional one percent of  the variation in Petal Length. Another way to say this is that an overwhelming proportion of the variance in petal length is attributable to variation between species. So if you are looking for a short petal  getting one from *Iris setosa* would be a pretty safe bet. But if you want your predictions to be even more accurate, knowing sepal width would help. 
+**Note** this does not mean we should necessarily choose the model with Sepal Length in addition to species. We should think about our goals and priorities when making a model. In this case  adding  this additional parameter explains an additional one percent of  the variation in Petal Length. Another way to say this is that an overwhelming proportion of the variance in petal length is attributable to variation between species. So if you are looking for a short petal  getting one from *Iris setosa* would be a pretty safe bet. But if you want your predictions to be even more accurate, knowing sepal width would help. 
 
 :::warning 
 Just because metrics like AIC or adjusted $R^2$ favor one model does not mean it is universally "better." Choosing a model depends on many factors: does it reflect the biological process? Does it fit assumptions? Is it simpler or easier to interpret? Does it predict future data more accurately? Better should refer to "better for what." Always consider the specific goals of your analysis.
@@ -399,7 +399,7 @@ Rather than relying solely on simple measures of significant model improvement (
 
 ### Leave one out cross validation
 
-I am interested in the features that mediate how much gene flow can occur during the process of speciation. With my collaborators we estimated the admixture proportion in *Clarkia xantiana xantiana* (i.e. the proportion of a populations' genome which is derived from recent hybridization with its sister subspecies, *Clarkia xantiana parviflora*). The data were hard to get -- and we only have so many populations to choose from.  We ultimately estimated the admixture proportion across six populations for which we had complementary data (geography an temperature). 
+I am interested in the features that mediate how much gene flow can occur during the process of speciation. With my collaborators we estimated the admixture proportion in *Clarkia xantiana xantiana* (i.e. the proportion of a populations' genome which is derived from recent hybridization with its sister subspecies, *Clarkia xantiana parviflora*). The data were hard to get -- and we only have so many populations to choose from.  We ultimately estimated the admixture proportion across six populations for which we had complementary data (geography and temperature). 
 
 We honed in on two promising predictors -- the variation in spring precipitation, and how far north a population was. Individually each term was significant, but together neither was likely because of multicollinearity (@fig-admix). 
 
@@ -489,7 +489,7 @@ tibble(predictor = c("intercept","precip_spring_var","northing","precip_spring_v
 ```
 
 
-We observe that a model using only `precip_spring_var` predicts the missing data effectively, suggesting it captures meaningful variation in the response variable. In contrast, a model using only `northing` performs no better than an intercept-only model, indicating that `northing` provides little to no predictive value on its own. Surprisingly, when both `northing` and `precip_spring_var` are included in the model, the prediction of held-out data **worsens** compared to the model using only `precip_spring_var` (@fig-rmse). This  highlightsan important conclusion -- a simpler model can make better  predictions than a more complex one.
+We observe that a model using only `precip_spring_var` predicts the missing data effectively, suggesting it captures meaningful variation in the response variable. In contrast, a model using only `northing` performs no better than an intercept-only model, indicating that `northing` provides little to no predictive value on its own. Surprisingly, when both `northing` and `precip_spring_var` are included in the model, the prediction of held-out data **worsens** compared to the model using only `precip_spring_var` (@fig-rmse). This  highlights an important conclusion -- a simpler model can make better  predictions than a more complex one.
 
 
 

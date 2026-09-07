@@ -90,7 +90,7 @@ $$e_i = Y_i -\hat{Y_i}$$
 
 ### Linear models assume normality
 
-Not only do linear models assume independence of residuals, also  the errors (residuals) are assumed to follow a normal distribution. A normal distribution is a symmetric, bell-shaped curve that occurs frequently in nature and has many convenient mathematical properties. We will introduce the normal distribution in [Chapter 13](#normal).  
+Not only do linear models assume independence of residuals, but the also assume that  residuals follow a normal distribution. A normal distribution is a symmetric, bell-shaped curve that occurs frequently in nature and has many convenient mathematical properties. We will introduce the normal distribution in [Chapter 13](#normal).  
 
 ### Linear models assume constant variance
 

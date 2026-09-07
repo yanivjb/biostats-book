@@ -78,7 +78,7 @@ Good plots do more than "show the data." They help your reader see what matters,
 
 #### **Bring Out Key Comparisons** {-}
 
-Because data cannot speak, we can't just "present the data." Good plots are designed to help readers see and evaluate the patterns central to the story you're telling. Just like in storytelling, emphasizing the wrong details can distract and mislead.  This is important becase the same dataset can tell very different stories depending on how it is plotted. This often means guiding your reader’s eye with color, layout, or label placement.  
+Because data cannot speak, we can't just "present the data." Good plots are designed to help readers see and evaluate the patterns central to the story you're telling. Just like in storytelling, emphasizing the wrong details can distract and mislead.  This is important because the same dataset can tell very different stories depending on how it is plotted. This often means guiding your reader’s eye with color, layout, or label placement.  
 
 @fig-modernaplots shows one such example:  
 
@@ -142,7 +142,7 @@ include_graphics("../../figs/summarizing_data/data_viz/broman2.png")
 Beyond comparisons, clarity often breaks down when readers can't read axis labels. Often labels for categorical variables are quite long, potentially running over each other and making them difficult to read. Poor plots like @fig-xlab A, pollute the literature, and arise when authors don’t check how their plot labels render.  @fig-xlab b-d show alternatives:  
 
 - **b** Abbreviates to prevent labels from jumbling into each other. This definitely helps, but now the reader must think for a bit to connect the label to the actual variable.   
-- **c** Rotates the labels 90 degrees. This too is helpfull, but we rarely read at this angle.   
+- **c** Rotates the labels 90 degrees. This too is helpful, but we rarely read at this angle.   
 - **d** Flips the axes. The last option is my favorite because it is the most natural to read.   
 
 
@@ -173,7 +173,7 @@ include_graphics("../../figs/summarizing_data/data_viz/consistent.png")
 ```
 
 :::fyi
-Maintaining consistency in color mapping, as shown in Figure \@ref(fig-consistent)c, and sorting labels sensibly makes plots even easier to process.
+Maintaining consistency in color mapping, as shown in @fig-consistent c, and sorting labels sensibly makes plots even easier to process.
 :::
 
 

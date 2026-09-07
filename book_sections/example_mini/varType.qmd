@@ -78,7 +78,7 @@ Understanding the distinction between explanatory and response variables is cruc
 
 ```{r}
 #| label: fig-clarkia_color_var_type
-#| fig-cap: "**Which type of variable is color?** Some variables (like color) can be treated as either categorical or continuous depending on the question. Because most *parviflora* plants are either pink or white, we treat color as a binary categorical variable. But, as shown above, color can be measured and analyzed quantiatively as well."
+#| fig-cap: "**Which type of variable is color?** Some variables (like color) can be treated as either categorical or continuous depending on the question. Because most *parviflora* plants are either pink or white, we treat color as a binary categorical variable. But, as shown above, color can be measured and analyzed quantitatively as well."
 #| fig-alt: "Two vertically stacked panels show reflectance spectra for two Clarkia xantiana Recombinant Inbred Lines (RILs) differing in petal color.  --- The top panel is labeled 'A109 (\"white\")' with white text on a black background. Several reflectance curves (percent reflectance vs. wavelength, 400–1000 nm) are plotted, generally showing higher reflectance across all wavelengths. An inset photo shows a flower with white petals and small purple markings --- The bottom panel is labeled 'A114 (\"pink\")' with pink text on a black background. Reflectance curves are shown, with lower reflectance overall and a pronounced dip around 550 nm, corresponding to stronger absorption in the green wavelengths. An inset photo shows a flower with bright pink petals and purple spots. Axes are labeled 'Reflectance (%)' (y-axis) and 'Wavelength (nm)' (x-axis), common across both panels."
 #| column: margin
 #| message: false

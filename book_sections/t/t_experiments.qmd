@@ -243,12 +243,13 @@ pairedPower <- function(n_pairs, diff, sd, n_reps = 1000){
 
 ---
 
-Now we can make run the simulation 
+Now, we can make  the simulation:  
 
 ```{r}
 #| column: page-right
 power_sim <- pairedPower(n_pairs = 270, diff = 0.2, sd = 1)
 ```
+
 ```{r}
 #| echo: false
 #| column: page-right

@@ -90,7 +90,7 @@ Below is the RIL dataset. You can learn about the columns (in the *Data dictiona
 ```{r}
 #| label: fig-rilcollage
 #| echo: false
-#| fig-cap: "An illustration o the variabiltiy in the recombinant inbred lines. Pictures by [Taz Mueller](https://www.bellmuseum.umn.edu/grad-awards/2022-graduate-award-and-fellowship-recipients/taz-mueller/) and arranged by [Brooke Kern](https://www.bellmuseum.umn.edu/grad-awards/2021-graduate-award-and-fellowship-recipients/brooke-kern/)."
+#| fig-cap: "An illustration of the variability in the recombinant inbred lines. Pictures by [Taz Mueller](https://www.bellmuseum.umn.edu/grad-awards/2022-graduate-award-and-fellowship-recipients/taz-mueller/) and arranged by [Brooke Kern](https://www.bellmuseum.umn.edu/grad-awards/2021-graduate-award-and-fellowship-recipients/brooke-kern/)."
 include_graphics("../../figs/clarkia_and_its_data/ril_collage3.png")
 ```
 
@@ -133,8 +133,8 @@ data_dict <- data.frame(
     "Degree of protandry (e.g., time difference between male and female phase) measured in days. More protandry means more outcrossing.",
     "Stem diameter measured in millimeters (mm).",
     "Leaf water content (LWC).",
-    "Cross direction" , 
-    "The number ofseeds that where hybrid.",
+    "Cross direction." , 
+    "The number of seeds that were hybrid.",
     "The number of seeds genotyped."
   )
 )

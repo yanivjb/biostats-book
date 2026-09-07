@@ -43,12 +43,12 @@ You're making a plot to share with the world (or you are reading someone else's 
 
 1. **Recognize how visual choices can mislead viewers**  by asking the following questions: 
    - Is the  y-axis truncated, and when and y does this matter?
-   - Is there enough context to appropriately interpret the y-correctly?  
+   - Is there enough context to appropriately interpret the y-axis correctly?  
    - Is the order of the x-axis or the color palette appropriate? 
    - Does bin size (or other smoothing decisions) allow for an accurate interpretation of the data?  
 
 
-2. **Improve misleading plots** by making suggestions about how  make choices that promote clarity.
+2. **Improve misleading plots** by making suggestions about how to make decisions promoting clarity.
 
 3. **Evaluate plots for potential misinterpretation** by 
    - Going over the ways figures can accidentally mislead, and making sure you avoided those common pitfalls. 
@@ -138,7 +138,7 @@ Truncating the y-axis is most misleading for filled plots, but it’s not always
 
 **DishonestY: sneaky scales**  
 
-We have previously discussed how common data transformations that can aid in modeling and visualizing our data. For example, log-transformation can be helpful for variables that grow exponentially. When such transformations are necessary be sure to clearly communicate the transformed scale.  For example, if you use a log scale, but your readers don't notice it,  they will misinterpret the plot -- a straight line on a log-log plot suggests a power-law relationship, while a straight line on a semi-log plot suggests exponential growth. A straight line on a log scale means exponential growth, not a steady increase.
+I previously introduced data transformations that aid in modeling and data presentation. For example, log-transformation can be helpful for variables that grow exponentially. When such transformations are necessary be sure to clearly communicate the transformed scale.  For example, if you use a log scale, but your readers don't notice it,  they will misinterpret the plot -- a straight line on a log-log plot suggests a power-law relationship, while a straight line on a semi-log plot suggests exponential growth. A straight line on a log scale means exponential growth, not a steady increase.
 
 **If you’re displaying your data on a log scale, be loud about it:** label the axes clearly. I particularly like the [`annotation_logticks()`](https://ggplot2.tidyverse.org/reference/annotation_logticks.html) function to in the ggplot2 package to communicate the scale (as in @fig-logscale B)
 
@@ -367,7 +367,7 @@ include_graphics("../../figs/summarizing_data/data_viz/date1-1.png")
 ```   
 
 - **Because it does not provide sufficient context @fig-date1** misleads readers into thinking  that the airline industry was crashing in late 1960.   
-   - **Fix this** by providing sufficient context -- i.e. the  year-over-year data in @fig-date2 shows that @fig-date1 is a predictable seasonal decline, not a not a sustained decline.
+   - **Fix this** by providing sufficient context -- i.e. the  year-over-year data in @fig-date2 shows that @fig-date1 is a predictable seasonal decline, not a sustained decline.
 
 
 ```{r} 
@@ -402,7 +402,7 @@ The video above explains how bin sizes can mislead. This issue comes up when usi
 
 
 
-To get a better sense for this, play with the bin number in the interactive salmon body size example above. Watch how the story changes as you try all values from 3 to 10, then try a few larger values.  As you explore, ask yourself: *Which bin size gives a clear picture without hiding or exaggerating the structure in the data?* while recognizing there not always a single "right" answer.
+To get a better sense for this, play with the bin number in the interactive salmon body size example above. Watch how the story changes as you try all values from 3 to 10, then try a few larger values.  As you explore, ask yourself: *Which bin size gives a clear picture without hiding or exaggerating the structure in the data?* while recognizing there is not always a single "correct" answer.
 
 
 ```{shinylive-r}

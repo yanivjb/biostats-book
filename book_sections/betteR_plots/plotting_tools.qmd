@@ -37,12 +37,12 @@ You've successfully created a basic `ggplot`, but now you want to make it *look 
     * Quickly finding relevant examples in books and blogs.
     * Reading R's built-in `help()` files.
 
-4.  **Leverage modern tools to accelerate your workflow** by:
+3.  **Leverage modern tools to accelerate your workflow** by:
     * Using graphical tools like the `ggThemeAssist` RStudio add-in to generate theme code automatically.
     * Knowing how and when to effectively google for help. 
     * Using Generative AI (e.g., ChatGPT) responsibly to explain concepts, debug code, and suggest solutions.
 
-5.  **Know how and when to ask people for help** by preparing a clear, concise question with a minimal reproducible example.
+4.  **Know how and when to ask people for help** by preparing a clear, concise question with a minimal reproducible example.
 
 :::
 
@@ -213,7 +213,7 @@ By contrast, I know next to nothing about JavaScript. If I ask ChatGPT a JavaScr
 
 ---
 
-**Don't trust generative AI to be correct** These things are bullshitters. They don't understand thing. They are written to please us. I could go on about the limitations of LLM's - but I love them for making plots because it is so easy to see if they worked (does the plot look how I wanted it too) or not.
+**Don't trust generative AI to be correct** These things are bullshitters. They don't understand things. They are written to please us. I could go on about the limitations of LLM's - but I love them for making plots because it is so easy to see if they worked (does the plot look how I wanted it to) or not.
 
 ---
 

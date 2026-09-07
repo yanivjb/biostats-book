@@ -39,8 +39,8 @@ We want more practice with the idea of permuting and hope to connect null distri
 
 
 - **Know that computational tools like can be used to  generate null distributions.**  Specifically, we can   
-   - Simulate (with `sample()` to generate the null distribution of expected counts to evaluate the "goodness of fit".   
-   - Permute, (with `infer`) to generate the null distribution for associations between categorical variables.  
+   - Simulate, with [`sample()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/sample.html), to generate the null distribution of expected counts to evaluate the "goodness of fit".   
+   - Permute, (with the [`infer`](https://infer.netlify.app/) package) to generate the null distribution for associations between categorical variables.  
 - Describe how these computationally generated nulls  match the theoretical $\chi^2$  distribution, and why that’s useful.  
 - Use R to perform and interpret $\chi^2$ tests.   
 
@@ -60,7 +60,7 @@ In the previous chapter, we generated a null sampling distribution by shuffling 
 
 We begin by introducing the $\chi^2$ statistic itself — a test statistic that quantifies the difference between expected and observed counts. We will work through this concept with a "goodness of fit" example, in which we see if data in categories are consistent with their null distribution. We then use the familiar permutation approach from the previous chapter to explore the distribution of this test statistic under the null.
 
-We then show that these computationally-derived distribution match the mathematical $\chi^2$ distribution. We can therefore use this distribution to test whether count data are truly “unexpected” under the null hypothesis without simulating or permuting the data! This section bridges our permutation-based intuition for a null distribution to analytical shortcuts used to generate null distributions with less computational effort.
+We then show that this computationally-derived distribution matches the mathematical $\chi^2$ distribution. We can therefore use this distribution to test whether count data are truly “unexpected” under the null hypothesis without simulating or permuting the data! This section bridges our permutation-based intuition for a null distribution to analytical shortcuts used to generate null distributions with less computational effort.
 
 We’ll use this test to see if we can reject the idea that students in class picked numbers at random, and to evaluate whether pink and white flowers are equally likely to receive zero pollinator visits. This statistical model gets at the motivating biological question: does petal color influence pollinator visitation (and perhaps hybridization rates)?
 

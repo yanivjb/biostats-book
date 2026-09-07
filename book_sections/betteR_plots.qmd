@@ -71,8 +71,7 @@ You've already been introduced to the basics of [ggplot](https://bookdown.org/yb
 1. **Start with the right plot for your data.** For most exploratory plots—which will make up about 95% of what you create—this is key. Often, a well-chosen plot paired with a couple of quick R tricks can make your visuals clear and informative.    
 
 
-
-** ADD THIS https://mjskay.github.io/ggblend/**
+ 
 2. **This chapter is here to guide you through the rest.** For more advanced plotting and customization, take a look at these excellent resources: [The R Graphics Cookbook](https://r-graphics.org/) [@chang2020], [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) [@wickham2016], [Data Visualization: A Practical Introduction](https://socviz.co/) [@healy2018], and [Modern Data Visualization with R](https://rkabacoff.github.io/datavis/) [@kabacoff2024].    
 
 
@@ -127,4 +126,4 @@ In this chapter, we'll tackle the challenge of creating great plots by breaking 
 
 - Finally, in [Plots for the Medium](#plots_foR_medium), we'll learn how to adapt our visualizations for specific contexts like scientific papers, talks, and posters, because a great plot is always tailored to its audience. 
 
-Ass usual, we conclude with a [chapter summary](#better_plots_summary).
+As usual, we conclude with a [chapter summary](#better_plots_summary).

@@ -72,7 +72,7 @@ include_graphics("../../figs/summarizing_data/data_viz/hemo.png")
 ```{r}
 #| echo: false
 #| label: fig-sneak1
-#| fig-cap: "Canabalistic dads."
+#| fig-cap: "Cannibalistic dads."
 #| fig-alt: "Two bar plots compare the proportion of offspring cannibalized by dominant male fish across three mating scenarios: \"one father,\" \"one sneaker,\" and \"multiple sneakers.\" *Panel A* displays the bars in the order: multiple sneakers, one father, one sneaker. *Panel B* displays the same data but reorders the x-axis categories to: one father, one sneaker, multiple sneakers — aligning the categories with increasing risk of cuckoldry and making the pattern easier to interpret. In both panels, the proportion cannibalized increases with more sneaker males."
 #| column: page-right
 #| out-width: "80%"
@@ -223,8 +223,8 @@ include_graphics("../../figs/summarizing_data/data_viz/dataviz_test.png")
 **Other web resources:**  
 
 - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) (@wilke2019): A free online book about best practices in data viz. Also available in [physical form](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089).     
-- [Storytelling with Data](https://www.storytellingwithdata.com/): The work of Cole Nussbaumer Knaflic. This website links to her [books](https://www.storytellingwithdata.com/books), a usefull [chart guide](https://www.storytellingwithdata.com/chart-guide) and more (see links to her most relevant podcast episodes below).    
-- Thoughts on poster presentations: [NPR article on a brief trend in minimal poster design](https://www.forbes.com/sites/evaamsen/2019/06/18/a-graphic-design-revolution-for-scientific-conference-posters/). [A critique of this ide in Forbes](https://www.forbes.com/sites/evaamsen/2019/06/18/a-graphic-design-revolution-for-scientific-conference-posters/).
+- [Storytelling with Data](https://www.storytellingwithdata.com/): The work of Cole Nussbaumer Knaflic. This website links to her [books](https://www.storytellingwithdata.com/books), a useful [chart guide](https://www.storytellingwithdata.com/chart-guide) and more (see links to her most relevant podcast episodes below).    
+- Thoughts on poster presentations: [NPR article on a brief trend in minimal poster design](https://www.forbes.com/sites/evaamsen/2019/06/18/a-graphic-design-revolution-for-scientific-conference-posters/). [A critique of this idea in Forbes](https://www.forbes.com/sites/evaamsen/2019/06/18/a-graphic-design-revolution-for-scientific-conference-posters/).
 - [Axes of evil: How to lie with graphs](https://medium.com/@hypsypops/axes-of-evil-how-to-lie-with-graphs-389c1656d538): This short blogpost goes over some classic dishonest graphs.    
 
 
@@ -237,13 +237,13 @@ include_graphics("../../figs/summarizing_data/data_viz/dataviz_test.png")
    - [Correlation and Causation](https://www.youtube.com/watch?v=YAAHJm1pi1E): "Correlations are often used to make claims about causation. Be careful about the direction in which causality goes. For example: do food stamps cause poverty?"    
    - [What are Correlations?](https://www.youtube.com/watch?v=BKQqKKjAwqM) :"Jevin providers an informal introduction to linear correlations."  
    - [Spurious Correlations?](https://www.youtube.com/watch?v=WNsLcg2GQMY): "We look at [Tyler Vigen’s silly examples of quantities appear to be correlated over time](https://www.tylervigen.com/spurious-correlations)), and note that scientific studies may accidentally pick up on similarly meaningless relationships."  
-   - [Correlation Exercise](https://www.youtube.com/watch?v=SijyVCYWzjQ)" "When is correlation all you need, and causation is beside the point? Can you figure out which way causality goes for each of several correlations?"
+   - [Correlation Exercise](https://www.youtube.com/watch?v=SijyVCYWzjQ) "When is correlation all you need, and causation is beside the point? Can you figure out which way causality goes for each of several correlations?"
    - [Common Causes](https://callingbullshit.org/videos.html): "We explain how common causes can generate correlations between otherwise unrelated variables, and look at the correlational evidence that storks bring babies. We look at the need to think about multiple contributing causes. The fallacy of post hoc propter ergo hoc: the mistaken belief that if two events happen sequentially, the first must have caused the second."  
-   - [Manipulative Experiments](https://www.youtube.com/watch?v=-p7_HFJLA_k): "We look at how manipulative experiments can be used to work out the direction of causation in correlated variables, and sum up the questions one should ask when presented with a correlation.
+   - [Manipulative Experiments](https://www.youtube.com/watch?v=-p7_HFJLA_k): "We look at how manipulative experiments can be used to work out the direction of causation in correlated variables, and sum up the questions one should ask when presented with a correlation." 
    
 **Podcasts:**
 
-- **[Storytelling with data:](https://www.storytellingwithdata.com/podcast)** Here are some episodes that I think best complement this chapter [#4 it depends....](https://open.spotify.com/episode/6rmRxXTkAwSZbGEZjPIGqp?si=CkpbTry9T8mt8h1gp2K6qw&nd=1&dlsi=4e9bd8567e034a57),  [#4 it depends....](https://open.spotify.com/episode/6rmRxXTkAwSZbGEZjPIGqp?si=CkpbTry9T8mt8h1gp2K6qw&nd=1&dlsi=4e9bd8567e034a57), [#8 the many myths of data visualization](https://open.spotify.com/episode/4OcvSE3MKh7Ekz1XCf3II3?si=PNEvmA5-S_aHOCvp-u0aBw&nd=1&dlsi=5ea7016ad9334c9c), [#10 right place, right graph](https://open.spotify.com/episode/39LVP1ZcvC4KCtR16Mvwwk?si=IoAwhZoVQyaUWBv7nAQ_Yw&nd=1&dlsi=d4d38ef5bdc3406d), [#17 which graph should I use?](https://www.storytellingwithdata.com/podcast/which-graph), [#43 misleading graphs]( https://open.spotify.com/episode/2gTaxRiNtpH0yfiOyzeHqx?si=lU32lKU-QUeNr0W7WJiSTA&nd=1&dlsi=28ef2bf5fde6455b), [#64 Beginner mistakes in data viz](https://open.spotify.com/episode/0SlsooO8CVj15TeR6UDFtW?si=L2RHegT7TjiOeFOU_3x7Qw&nd=1&dlsi=efe8b4640ede46fd). 
+- **[Storytelling with data:](https://www.storytellingwithdata.com/podcast)** Here are some episodes that I think best complement this chapter [#4 it depends....](https://open.spotify.com/episode/6rmRxXTkAwSZbGEZjPIGqp?si=CkpbTry9T8mt8h1gp2K6qw&nd=1&dlsi=4e9bd8567e034a57),   [#8 the many myths of data visualization](https://open.spotify.com/episode/4OcvSE3MKh7Ekz1XCf3II3?si=PNEvmA5-S_aHOCvp-u0aBw&nd=1&dlsi=5ea7016ad9334c9c), [#10 right place, right graph](https://open.spotify.com/episode/39LVP1ZcvC4KCtR16Mvwwk?si=IoAwhZoVQyaUWBv7nAQ_Yw&nd=1&dlsi=d4d38ef5bdc3406d), [#17 which graph should I use?](https://www.storytellingwithdata.com/podcast/which-graph), [#43 misleading graphs]( https://open.spotify.com/episode/2gTaxRiNtpH0yfiOyzeHqx?si=lU32lKU-QUeNr0W7WJiSTA&nd=1&dlsi=28ef2bf5fde6455b), [#64 Beginner mistakes in data viz](https://open.spotify.com/episode/0SlsooO8CVj15TeR6UDFtW?si=L2RHegT7TjiOeFOU_3x7Qw&nd=1&dlsi=efe8b4640ede46fd). 
 
 **Social:**
 

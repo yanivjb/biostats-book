@@ -72,9 +72,9 @@ ggplot(SR_visits, aes(x  = petal_color,
 
 Here's a brief refresher of our [previously](#cat_cont) introduced standard summaries of associations between a categorical explanatory variable and a continuous response.
 
-
-Remember that even though data do not fully meet assumptions (we can even see the right skew in the sina plot - @fig-visits). Recall that if data meet assumptions of our parametric model, we can reasonably trust the results of our analysis. If data do not  meet assumptions of the parametric model, results may or may not be valid, depending on how robust the test is. We will therefore conduct a permutation test and a bootstrap later to see if our t-test was trustworthy. 
-
+::: {.callout-note}
+Recall that even though these data don't fully meet assumptions, that doesn't automatically mean we can't trust the results. Whether a violation matters depends on how robust the test is to it, and the t-test is generally super robust to modest violations like those in these data. But to be safe, I'll also conduct NHST with a permutation test, and estimate uncertainty with a bootstrap later. 
+:::
 
 ### Estimating summaries of each group:  
 

@@ -353,6 +353,6 @@ These optional resources reinforce or go beyond what we have learned.
 - [RStudio orientation](https://vimeo.com/746907243) (Yaniv Talking).   
 - [R functions](https://vimeo.com/999280671)  (Yaniv Talking).   
 - [R packages](https://vimeo.com/746968343) (Yaniv Talking).   
-- [Data types](https://vimeo.com/747009618) (Yaniv Talking).  Uses [compression data](https://raw.githubusercontent.com/ybrandvain/datasets/master/compensation.csv) as an example.     
+- [Data types](https://vimeo.com/747009618) (Yaniv Talking).  Uses [compensation data](https://raw.githubusercontent.com/ybrandvain/datasets/master/compensation.csv) as an example.     
 
 ::: 

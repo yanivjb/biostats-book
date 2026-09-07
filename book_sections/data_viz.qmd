@@ -50,7 +50,7 @@ webr:
 
 <article class="drop-cap">Data is the currency of science. But data cannot speak -- they have no voice. Scientists imbue data with meaning by contextualizing it and building a compelling narrative. This view of empirical science is much like our experience of the  everyday world --- we observe things that are real and true, but only get meaning from these observations as we put them together in a story.</article><br>  
 
-To make these abstract ideas concrete, lets return to our *parviflora* RILs. A quick glance suggests that the probability of setting hybrid seed goes up as leaf water content goes down. While this observation is true, it is not the real story -- the real story is that *parviflora* RILs  with smaller petals make fewer hybrids. The initial observation is a red herring that arises because of the negative assocaition between leaf water content and petal area.
+To make these abstract ideas concrete, lets return to our *parviflora* RILs. A quick glance suggests that the probability of setting hybrid seed goes up as leaf water content goes down. While this observation is true, it is not the real story -- the real story is that *parviflora* RILs  with smaller petals make fewer hybrids. The initial observation is a red herring that arises because of the negative association between leaf water content and petal area.
 
 
 
@@ -210,7 +210,7 @@ include_graphics("../figs/summarizing_data/data_viz/threes.jpeg")
 
 
 
-@fig-nbathrees) is not perfect. For example, the team names are too small to read. But fixing this would be unnecessary—the team names don’t significantly contribute to the story we’re telling. 
+@fig-nbathrees is not perfect. For example, the team names are too small to read. But fixing this would be unnecessary—the team names don’t significantly contribute to the story we’re telling. 
 
 After you create your plot, take a moment to reflect. How well does your figure make its intended point? How could it detract from your message? Then brainstorm ways to improve your plot to more clearly and honestly convey your point.
 
@@ -233,7 +233,7 @@ Creating a good plot is an iterative process. You will likely go back and forth 
 
 ## Let’s jump into key concepts in data viz!  
 
-While bad plots can be bad in various ways, all good plots share certain characteristics.  Specifically, all good plots are: [Honest](#honest_plots), [Transparent](#transparent_plots), [Clear](#clear_plots), [Accessible](#accessible_plots), and [avoid distractions](#avoid_distractions). This chapter provide  specific practices you can use to make such good plots, and then introduces the idea of [understanding your audience and mode of presentation](#audience_delivery), and [how to write about plots](#avoid_distractions).  As always, I conclude with a [chapter summary](#dataviz_summary). 
+While bad plots can be bad in various ways, all good plots share certain characteristics.  Specifically, all good plots are: [Honest](#honest_plots), [Transparent](#transparent_plots), [Clear](#clear_plots), [Accessible](#accessible_plots), and [avoid distractions](#avoid_distractions). This chapter provide  specific practices you can use to make such good plots, and then introduces the idea of [understanding your audience and mode of presentation](#audience_delivery), and [how to write about plots](#writing_about_figures).  As always, I conclude with a [chapter summary](#dataviz_summary). 
 
 But before moving along, let's take a break from *Clarkia* and focus on the distribution of student-to-teacher ratios across continents. We will use @fig-verybad to exemplify how we can make good plots. 
 
@@ -258,7 +258,7 @@ include_graphics("https://cedricscherer.netlify.app/img/evol-ggplot/evol-ggplot-
 
 ## Looking ahead
 
-There are two distinct challenges to making a good plot goal:    
+There are two distinct challenges to making a good plot:       
 
 1. Understanding the ideas behind making a good plot ([this chapter](#dataviz)).  
 2. The technical process of creating the plot in R ([next chapter](#betteR_plots)).  

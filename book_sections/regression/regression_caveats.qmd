@@ -354,7 +354,7 @@ I will  first make a simple x-y scatter plot -- with X as foot length and y as h
 - But I can now attach additional information to each data point (including `id = 1:n())`.  
 - Then I can make a plot and then make it interactive with the [`ggplotly()`](https://plotly.com/ggplot2/)  function in the [`plotly`](https://github.com/plotly/plotly.R) package. 
 
-You don't need to do this - but I am to give you a more thorough view: 
+You don't need to do this, but I am trying to give you a more thorough view: 
 
 
 

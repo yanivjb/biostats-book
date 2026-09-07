@@ -66,7 +66,7 @@ include_graphics("https://media.giphy.com/media/mCClSS6xbi8us/giphy.gif")
 ```
 
 
-[Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller) aimed to be "invisible," letting his ideas, not his appearance, speak. This principle, which underlies the name of my favorite podcast on design, [99% Invisible](https://99percentinvisible.org/). The same principle applies to figures **A good figure calls attention to patterns in the data, not to itself.**  
+[Buckminster Fuller](https://en.wikipedia.org/wiki/Buckminster_Fuller) aimed to be "invisible," letting his ideas, not his appearance, speak. This principle, which underlies the name of my favorite podcast on design, [99% Invisible](https://99percentinvisible.org/), also applies to scientific figures **A good figure calls attention to patterns in the data, not to itself.**  
 
 Just because you found an R package to make a [Sankey diagram](https://github.com/davidsjoberg/ggsankey) or a [3D bar chart](https://github.com/tylermorganwall/rayshader) doesn’t mean you should use it.  Good data viz starts with a question and ends with a design that answers it, not the other way around.  Before (or more realistically, halfway through) making an overly complex plot think, WWIMS ("*What Would Ian Malcolm Say?*" @fig-goldbloom), and ask yourself:  
 
@@ -123,7 +123,7 @@ include_graphics("https://media.springernature.com/full/springer-static/image/ar
 include_graphics("../../figs/summarizing_data/data_viz/3D.gif")
 ```
 
-3D and animation are only helpful for specific purposes, like showing protein structures or time-lapse data. Unless the data our the audience calls for it, resist the urge to use them otherwise. More often than not, these flashy formats distract from your message and confuse your reader. They make your plot harder to read, harder to interpret, and much easier to ignore(as demonstrated in @fig-3d). 
+3D and animation are only helpful for specific purposes, like showing protein structures or time-lapse data. Unless the data or the audience calls for it, resist the urge to use them otherwise. More often than not, these flashy formats distract from your message and confuse your reader. They make your plot harder to read, harder to interpret, and much easier to ignore (as demonstrated in @fig-3d). 
 
 
 

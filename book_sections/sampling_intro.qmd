@@ -122,3 +122,7 @@ In this section, we work through fundamental ideas of sampling.
 - We then consider what goes wrong in sampling -- [sampling error](#sampling_error), [sampling bias]( #sampling_bias), and [non-independent sampling](#nonindependence).   
 - We then consider how to [sample better](#better_sampling)  before concluding  with a [summary](#sampling_summary), a [chatbot tutor](#sampling_summary_chatbot_tutor), [practice questions](#sampling_summary_practice-questions), a [glossary](#sampling_summary_glossary-of-terms), and [additional resources](#sampling_summary_additional-resources).
 
+
+::: aside
+.
+:::

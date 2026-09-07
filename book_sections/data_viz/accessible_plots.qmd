@@ -57,7 +57,7 @@ You’re making a plot for your paper or presentation and you want to make sure 
 #| column: margin
 #| fig-cap: "See [Section 508 of Amendment to the Rehabilitation Act](https://en.wikipedia.org/wiki/Section_508_Amendment_to_the_Rehabilitation_Act_of_1973)."
 #| echo: FALSE 
-#| fig-alt: "A faux-vintage sign reading 'ACCESSIBILITY: It’s not just a good idea. It’s the law."
+#| fig-alt: "A faux-vintage sign reading 'ACCESSIBILITY: It’s not just a good idea. It’s the law.'"
 include_graphics("../../figs/summarizing_data/data_viz/accessibility.png")
 ```
 
@@ -77,7 +77,7 @@ We have already highlighted several good practices. For example, describing the 
 include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ishihara_9.svg/460px-Ishihara_9.svg.png")
 ```
 
-Choosing effective colors is a challenge. Ensure that your color choices are easy to distinguish, particularly if printed in grayscale or viewed by colorblind individuals. Many R tools can help with this, including the [colorspace package](http://colorspace.r-forge.r-project.org/index.html).  Toensure that your plots are accessible, I recommend:   
+Choosing effective colors is a challenge. Ensure that your color choices are easy to distinguish, particularly if printed in grayscale or viewed by colorblind individuals. Many R tools can help with this, including the [colorspace package](http://colorspace.r-forge.r-project.org/index.html).  To ensure that your plots are accessible, I recommend:   
 
 - Testing your figures through a color vision deficiency emulator (like [this one](http://hclwizard.org/cvdemulator/)) to see how your plots appear to readers with color vision deficiencies.    
 - Printing your plots in black and white, to see how it looks in that format.   

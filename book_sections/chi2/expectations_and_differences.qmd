@@ -42,7 +42,7 @@ gc_rils <- ril_data |>
 
 - Explain what a $\chi^2$  statistic measures conceptually.  
 
-- Calculate a $\chi^2$ value as a test statistic to quantify  deviations between  observations deviate and expectations.
+- Calculate a $\chi^2$ value as a test statistic to quantify  deviations between observations and expectations.
 
 - Compare an observed $\chi^2$ value to its null sampling distribution to  find a p-value and conduct NHST.  
 
@@ -127,7 +127,7 @@ Fortunately, our friend Cohen came up with a measure of the "effect size" for th
 $\text{Cohen’s }w = \sqrt{\frac{\chi^2}{n}}$
 
 
-So for our case, $\text{Cohen's w} = \frac{10.462}{41} = \sqrt{\frac{1}{4}}=\frac{1}{2}$. This is a borderline large effect! 
+So for our case, $\text{Cohen's w} = \sqrt{\frac{10.462}{41}} = \sqrt{\frac{1}{4}}=\frac{1}{2}$. This is a borderline large effect!  
 
 :::aside
 **Interpreting the "effect size" of Cohen's w.** 

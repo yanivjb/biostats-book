@@ -84,7 +84,7 @@ Multiple regression -- the focus of this section -- addresses these shortcomings
 #| message: false
 #| warning: false
 #| label: fig-asd
-#| fig-cap: "An image of a Clarkia flower to illustrate what \"anther stigma distance\" means. This is image of a Clarkia xantiana subspecies xantiana flower, as the large anther stigma distance of this species makes this trait easier to see. Figure adapted from and [Moeller and Geber 2005](https://pubmed.ncbi.nlm.nih.gov/15926689/)." 
+#| fig-cap: "An image of a Clarkia flower to illustrate what \"anther stigma distance\" means. This is an image of a Clarkia xantiana subspecies xantiana flower, as the large anther stigma distance of this species makes this trait easier to see. Figure adapted from and [Moeller and Geber 2005](https://pubmed.ncbi.nlm.nih.gov/15926689/)." 
 library(knitr)
 include_graphics("../figs/linear_models/multiple_regression/asd.png")
 ```

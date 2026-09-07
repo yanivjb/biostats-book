@@ -21,16 +21,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-**Motivating Scenario:**  
-You have figured out the story you plan to tell with your data.But before you dive too deep, pause for a moment: Who’s going to see this plot? And how are they going to see it? And how can we use this information to make our plot most impact. 
+**Motivating Scenario:** You have figured out the story you plan to tell with your data. But before getting carried away in ggplot minutia, you must step back, and consider the following. Who’s going to see this plot? And how are they going to see it? And how can you use this information to maximize the impact of your plot. 
 
 **Learning Goals: By the end of this subchapter, you should be able to:**   
 
 
-1. Identify key types of audiences for scientific figures, and recognize what each needs from a plot.   
-2. Describe how figures function differently in talks, posters, papers, and online formats.  
-3. Make thoughtful tradeoffs between detail, clarity, and interpretability depending on audience and format.  
-4 **Build a workflow** that separates early exploratory plotting from later communication-focused refinement.  
+1. **Identify key types of audiences** for scientific figures, and recognize what each needs from a plot.   
+2. **Describe how figures function** differently in talks, posters, papers, and online formats.  
+3. **Make thoughtful trade-offs** between detail, clarity, and interpretability depending on audience and format.  
+4. **Build a workflow** that separates early exploratory plotting from later communication-focused refinement.  
    - Know that "*premature optimization is the root of all evil.*"
 
 :::
@@ -48,7 +47,7 @@ Labeling something as a "good plot" or a "bad plot" is overly simplistic. Sure, 
 #| echo: false
 #| label: fig-audience
 #| column: margin
-#| fig-cap: "An audience at a sceintific meeting (The 20204 EU Drones Conference to be precise). [Photo posted to wikimedia commons](https://commons.wikimedia.org/wiki/File:-_EU_DRONES_CONFERENCE-20240410-LR-485_(53649174575).jpg) and shared under Creative Commons Attribution 2.0 Generic License by the Belgian Presidency of the Council of the EU 2024."
+#| fig-cap: "An audience at a scientific meeting (The 2024 EU Drones Conference to be precise). [Photo posted to wikimedia commons](https://commons.wikimedia.org/wiki/File:-_EU_DRONES_CONFERENCE-20240410-LR-485_(53649174575).jpg) and shared under Creative Commons Attribution 2.0 Generic License by the Belgian Presidency of the Council of the EU 2024."
 #| fig-alt: "An audience of people attentively tuned to the front of the room."
 include_graphics("https://upload.wikimedia.org/wikipedia/commons/b/be/-_EU_DRONES_CONFERENCE-20240410-LR-485_%2853649174575%29.jpg")
 ```
@@ -110,10 +109,10 @@ Science is communicated in many formats. Here’s how to tailor your plots to di
 
 :::protip
 **Plots as "Brown M&Ms"**     
-The American hard rock band Van Halen had a strange issue in their "rider" - they insisted on having a bowl of M&Ms but no brown M&Ms @fig-mandm. While they did have a very rock bad diva response to this being broke (see the quote o the right), this request was more than a rock-diva thing. As [explained by vocalist David Lee Roth](https://www.youtube.com/watch?v=_IxqdAgNJck) this request was a way to ensure that the  venue had closely read the requirements for the show to ensure safety (as aluded to at the end of the Wikipedia quote).
+The hard rock band Van Halen had a strange issue in their "rider." They insisted on having a bowl of M&Ms but no brown M&Ms (@fig-mandm). Although they had a very rock-band diva response when this contractual obligation was not fulfilled (see the quote o the right), this request served a real purpose. As [explained by vocalist David Lee Roth](https://www.youtube.com/watch?v=_IxqdAgNJck) this request was a way to ensure that the  venue had closely read the requirements for the show to ensure safety (as alluded to at the end of the Wikipedia quote).
 
 
-In the same way, scientists use visual cues to make rapid judgments about the quality and trustworthiness of research. A sloppy, unpolished plot acts like a brown M&M in the candy bowl; it's a red flag that signals a potential lack of care that could extend to the data analysis itself (evenif the analysis is fine). A polished, professional plot does the opposite: it signals that the author is careful and trustworthy. It tells the reader they are in good hands.
+In the same way, scientists use visual cues to make rapid judgments about the quality and trustworthiness of research. A sloppy, unpolished plot acts like a brown M&M in the candy bowl; it's a red flag that signals a potential lack of care that could extend to the data analysis itself (even if the analysis is fine). A polished, professional plot does the opposite: it signals that the author is careful and trustworthy. It tells the reader they are in good hands.
 :::
 
 ---
@@ -141,7 +140,7 @@ include_url("https://ybrandvain.github.io/flipbooks/talk_plot_flipbook.html")
 * **🖼️ Posters:**. Because your poster will be presented alongside tens or  hundreds of others in a big room (@fig-postersesh A), your poster and its figures should be designed to draw viewers in and encourage them to engage. Posters are arguably the most difficult format in science communication, so here are some tips:
 
 
-  * *Make it stand out:* You’re often in a room with tens to hundreds of posters, and people are circulating casually, often with a coffee or drink in hand. Catch their eye. **There is a time and place for charjunk and that time and place is a poster session.**   
+  * *Make it stand out:* You’re often in a room with tens to hundreds of posters, and people are circulating casually, often with a coffee or drink in hand. Catch their eye. **There is a time and place for chartjunk and that time and place is a poster session.**   
   * *Use as little text as possible:* Once you've removed unnecessary text, go back and remove even more.
   * *Make all graphical elements big:* Text, points, labels—all of it.
 

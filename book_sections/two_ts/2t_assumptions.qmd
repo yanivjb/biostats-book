@@ -204,7 +204,7 @@ Let's start by looking at each residual value separately for each petal color:
 
 ```{r}
 #| code-fold: true
-#| fig-height: 3.5
+#| fig-height: 2.5
 #| label: fig-resids
 #| code-summary: "Click to reveal the code for plotting the residuals."
 #| fig-cap: "Residual values for each pink- (left facet) and white- (right facet) petaled parviflora RIL. The red horizontal line at zero, and the black lines connecting each data point to zero are meant to guide the eye. The data are ordered within each petal color from lowest  to greatest residual value within each petal color (again to guide the eye)."
@@ -217,8 +217,10 @@ petal_color_details  |>
     facet_wrap(~petal_color, scales = "free_x", labeller = "label_both")+
     geom_hline(aes(yintercept = 0), color = "red")+
     geom_segment(aes(y = .resid, yend =0, x = n, xend = n))+
-    labs(x = "Rank within color morph. This makes results easier to visualize.")+
-    theme(axis.text.x = element_blank())
+    labs(x = "Rank within color morph (this makes results easier to visualize.)")+
+    theme(axis.text.x = element_blank(), 
+          axis.title = element_text(size = 12),
+          axis.text.y = element_text(size = 10))
 ```
 
 @fig-resids reveals wider variation in residuals for pink- than for white- flowered RILs. It also shows that many residuals for white-petaled RILs have an identical value  (-0.73), corresponding to zero pollinator visits. 
@@ -229,6 +231,7 @@ While @fig-resids suggests slight differences in the variance between petal colo
 #| label: fig-density
 #| fig-cap: "Distribution of residuals for pink and white RILs. Density curves show that both groups are right-skewed."
 #| fig-alt: "Overlaid density plots of residuals for pink and white flowers. Both distributions are right-skewed -- but the white petalled RILs have a stronger right skew than the pink-flowered RILs."
+#| fig-height: 2.5
 petal_color_details  |>
     ggplot(aes( x = .resid, fill = petal_color))+
     geom_density(alpha = .85, adjust = 1.5)+
@@ -288,3 +291,7 @@ Thus in my view we have two obligations:
 
 So let the weight of these competing obligations guide your decisions about transformation.  
 
+
+### What I would do  
+
+The violations here are relatively minor. If it were my analysis, I would do a Welch's t-test (i.e. not assume equal variance), because this test is almost always better than the standard t-test. I would not transform the data, because that makes things harder to interpret. But, to ensure that the violations of assumptions aren't misleading me (and to gain the trust of my readers), I would follow up with a permutation and bootstrap.

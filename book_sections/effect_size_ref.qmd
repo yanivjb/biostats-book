@@ -68,7 +68,7 @@ $$r = \frac{\text{Covariance}_{X,Y}}{s_X \times s_Y}$$
 |------------------|------------------------|
 | Not worth reporting | < 0.005               |
 | Tiny              | 0.005 – 0.10           |
-| Small             | 0.01 – 0.20         |
+| Small             | 0.10 – 0.20         |
 | **Medium**            | **0.2 – 0.35**           |
 | Large             | 0.35 – 0.50           |
 | Very large        | 0.50 – 0.75          |

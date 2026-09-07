@@ -82,12 +82,12 @@ You're proud of yourself for successfully creating a plot with `ggplot2`. But lo
 
 2.  **Ensure labels are clear and informative** by:
     * Flipping coordinates to handle long category names.
-    * Using `labs()` to provide descriptive axis and legend titles.
-    * Using `scale_*_manual()` to rename shorthand categories in a legend.  
+    * Using [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html?q=labs#null) to provide descriptive axis and legend titles.
+    * Using [`scale_*_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html) to rename shorthand categories in a legend.  
  
 3.  **Represent data points honestly and guide the reader's eye** with:
-    * Controlled `geom_jitter()` to avoid overplotting without distorting the data's meaning.
-    * `stat_summary()` to add visual summaries like means and error bars.     
+    * Controlled [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) to avoid overplotting without distorting the data's meaning.
+    * [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) to add visual summaries like means and error bars.     
     
 
 4.  **Arrange plot elements to reveal patterns** by using functions from the `forcats` package to order categorical data meaningfully (e.g., by value or in a specific manual order).   
@@ -261,7 +261,7 @@ ggplot(hz_phenos, aes(x = area, y = site_ssp)) +
 
 ```{r}
 #| label: fig-clearlabs1
-#| fig-cap: "Our starting plot - now with flipped axesand better labels. The legend labels are unclear, data points are all over the place, but now we can read the categories and know what X and Y mean, so that's something."
+#| fig-cap: "Our starting plot - now with flipped axes and better labels. The legend labels are unclear, data points are all over the place, but now we can read the categories and know what X and Y mean, so that's something."
 #| fig-alt: "A scatter plot with 'area' on the x-axis and 'site_ssp' on the y-axis. Black data points are scattered vertically for numerous categories. The text labels for the categories on the y-axis can now be read, and the meaning of X and Y are now clear! But patters are still unclear."
 #| message: false
 #| warning: false
@@ -373,7 +373,7 @@ There are two solutions:
 #| message: false
 #| warning: false
 #| label: fig-close
-#| fig-cap: "This plot improves on previous figures by using color to show which data point came from which subspecies. Colors are chosen intentionally and default category names are replaced with legible names. We can now see the true petal area, and unambiguously determine which category a datpoint came from (while avoiding overplotting)"
+#| fig-cap: "This plot improves on previous figures by using color to show which data point came from which subspecies. Colors are chosen intentionally and default category names are replaced with legible names. We can now see the true petal area, and unambiguously determine which category a data point came from (while avoiding overplotting)"
 #| fig-alt: "A scatter plot with 'area' on the x-axis and 'site_ssp' on the y-axis. Data points are scattered and colored by subspecies. The text labels for the categories on the y-axis can now be read, and the meaning of X and Y are now clear! Points are now pretty good!"
 ggplot(hz_phenos, aes(x = area, y = site_ssp, color = ssp)) +
   geom_jitter(width = 0, height =.25, size=3, slpha = .7)+
@@ -403,7 +403,7 @@ The [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html
 
 Bars allow for effective and rapid estimation of group means, and differences among groups. But adding bars to a plot without care can cover up our raw data. Three tricks to avoid this are: 
 
-- Add the stat_summary() layer before geom_jitter(). to ensures the raw data points are plotted on top of the bars. 
+- Add the [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) layer before [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html) to ensure the raw data points are plotted on top of the bars. 
 - Making bars semi-transparent (via the `alpha` argument).   
 - Making the bars a different color than the data points (e.g. `fill = "black"`). 
 
@@ -432,7 +432,7 @@ An alternative to bars is to show the mean and its uncertainty with a point and 
 
 
 - *What the bars should show* I usually choose 95% Confidence intervals (more on that in a later chapter) with`fun.data = "mean_cl_normal"`.   
-   - **NOTE:** Standard errors,standard deviations, 95% confidence intervals and the like all different, and can be shown with bars. So you must communicate what the bars represent. I usually do this in the figure legend.        
+   - **NOTE:** Standard errors, standard deviations, 95% confidence intervals and the like are all different things. But all can be shown with bars. So you must communicate what the bars represent. I usually do this in the figure legend.        
 - *How to display the uncertainty* I usually choose error bars `geom = "errorbar"` of modest width (`width = 0.25`), but `geom = pointrange` can work too.   
    
    
@@ -675,7 +675,7 @@ We can order by more than one thing with `fct_reorder2()`. Below I order, first 
 
 
 
-**Challenge:** Change the code order first by subspecies and then by longitude..
+**Challenge:** Change the code so that `site_ssp` is ordered first by subspecies and then by longitude.
  
  
 ```{webr-r}

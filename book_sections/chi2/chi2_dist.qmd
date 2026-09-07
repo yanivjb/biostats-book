@@ -44,7 +44,7 @@ sr_rils <- ril_data |>
 
 -  Use `chisq.test()` to run chi-square goodness-of-fit and contingency  tests in R.
 
-- **Understand the mathematical $\chi^2$ distribution relates to a permutation based approach, and when you can (or cannot) use this distribution for a $|chi^2$ test.
+- **Understand how the mathematical $\chi^2$ distribution relates to a permutation-based approach**, and when you can (or cannot) use this distribution for a $\chi^2$ test.
 
 :::
 
@@ -116,7 +116,7 @@ We previously evaluated the null hypothesis that students choose an integer betw
 #| warning: false
 #| label: fig-gofsim
 #| fig-cap: "Simulation-derived null distribution of χ² distribution for our example. The red vertical line shows the observed χ² = 10.46, which falls well within the main body of the simulated distribution. Roughly 29% of simulated χ² values were as large or larger than this observed value, yielding a one-tailed p-value ≈ 0.29."
-#| ig-alt: "A histogram showing the null distribution of χ² statistics based on 100,000 simulated random draws of 41 choices between 1 and 10. The x-axis represents χ² values (ranging from 0 to about 45), and the y-axis shows the proportion of simulations at each value. A thick red vertical line near χ² = 10 marks the observed statistic, labeled \"observed χ²,\" lying well within the center of the simulated distribution."
+#| fig-alt: "A histogram showing the null distribution of χ² statistics based on 100,000 simulated random draws of 41 choices between 1 and 10. The x-axis represents χ² values (ranging from 0 to about 45), and the y-axis shows the proportion of simulations at each value. A thick red vertical line near χ² = 10 marks the observed statistic, labeled \"observed χ²,\" lying well within the center of the simulated distribution."
 chi2_per_sample<- read_csv( "../../data/chi2_for_sim.csv")
 ggplot(chi2_per_sample, aes(x = chi2))+ 
 geom_histogram(color = "black", bins = 25, aes(y = ..density..), fill = "azure1")+
@@ -136,7 +136,7 @@ labs(x = expression(chi^2), y ="proportion of simulations", title = "Simulation-
 
 3. **Simulated the null distribution** by repeatedly generating random choices and calculating the resulting $\chi^2$ values (@fig-gofsim)
 
-4. **Compared our observed $\chi^2$** to this simulated null distribution to obtain a p-value and conduct a null hypothesis significance test (NHST). Approximately 29.4%  of our null simulation-based $\chi^2$ values were greater than or equal to our observed value of 10.46. Because the $\chi^2$ encompasses all types of deviations from null expectations, this is one-tailed test. Our p-value is 0.294, and we fail to reject the null hypothesis.
+4. **Compared our observed $\chi^2$** to this simulated null distribution to obtain a p-value and conduct a null hypothesis significance test (NHST). Approximately 29.4%  of our null simulation-based $\chi^2$ values were greater than or equal to our observed value of 10.46. Because the $\chi^2$ encompasses all types of deviations from null expectations, this is a one-tailed test. Our p-value is 0.294, and we fail to reject the null hypothesis.
 
 ```{r}
 library(dplyr)
@@ -231,7 +231,7 @@ We also used a simulation approach (in this case a permutation) to test the null
 As above, we skip permutation and just compare our observed $\chi^2$ value directly to the theoretical $\chi^2$ distribution (we just need to know the degrees of freedom). A 2×2 contingency table has just one degree of freedom because, once we know the overall proportions of pink flowers and of those receiving visits (needed to calculate expectations), we just need to know the value in one cell to correctly guess the rest. 
 
 :::aside
-While the $\chi^2$ example provided here considered binary outcomes, the $\chi^2$ contingency tests can be applied to categories with any number of levels. More broadly, the degrees of freedom for a $chi^2$ contingency test equals (the number  of rows - 1) $\times$ (the number  of columns - 1).
+While the $\chi^2$ example provided here considered binary outcomes, the $\chi^2$ contingency tests can be applied to categories with any number of levels. More broadly, the degrees of freedom for a $\chi^2$ contingency test equals (the number  of rows - 1) $\times$ (the number  of columns - 1).
 :::
 
 So we can again use the `pchisq()` function to find the p value, being sure to set `lower.tail = FALSE`. Reassuringly, the permutation-based and analytically derived p-values align closely.
@@ -292,7 +292,7 @@ geom_line(data = tibble(chi2 = seq(0,11,.01), pval = pchisq(chi2,1,lower.tail = 
 
     
 :::note
-**THINK":** Both our $\chi2$ values were approximately 10. Why did we comfortably reject the null in this case and fail to reject it in the other? 
+**THINK:** Both our $\chi^2$ values were approximately 10. Why did we comfortably reject the null in this case and fail to reject it in the other? 
 
 `r hide("Explanation")`
 The answer is because they have different degrees of freedom!

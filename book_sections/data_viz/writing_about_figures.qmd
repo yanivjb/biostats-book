@@ -23,8 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
-**Motivating Scenario:**     
-You (think you've) just made a get figure. Now it's time to write about it. What do we do now? 
+**Motivating Scenario:** You (think you've) just made a great figure. Now it's time to write about it. What do you do now? 
 
 **Learning Goals: By the end of this subchapter, you should be able to:**    
 

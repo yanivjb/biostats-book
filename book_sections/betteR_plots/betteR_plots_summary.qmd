@@ -38,7 +38,7 @@ Polishing a `ggplot` plot is not about running a single command, but is an itera
 
 We do this by layering components. We start with a basic plot and add functions to clarify labels (with the [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html) function and the [`ggtext` package](https://github.com/wilkelab/ggtext)) and control aesthetics like color and shape (with [`scale_*_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)). We then adjust non-data elements with the [`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) function, arrange categories logically with the [`forcats`](https://forcats.tidyverse.org/) package, and combine plots into larger narratives with [`patchwork`](https://patchwork.data-imaginist.com/articles/patchwork.html).
 
-Throughout this process, we also make sure to consider the presentation format, tailoring our choices for each specific medium. A working understaing of ggplot is essential, but luckily you don't need to have all this memorized—knowing how to use books, friends, chatbots, GUIs like [`ggThemeAssist`](https://github.com/calligross/ggthemeassist), and other resources can help!
+Throughout this process, we also make sure to consider the presentation format, tailoring our choices for each specific medium. A working understanding of ggplot is essential, but luckily you don't need to have all this memorized—knowing how to use books, friends, chatbots, GUIs like [`ggThemeAssist`](https://github.com/calligross/ggthemeassist), and other resources can help!
 
 
 
@@ -105,7 +105,7 @@ After running the corrected code, what is the best description of the resulting 
 
 
 `r hide("Hint")`
-In the `geom_*_` Set  the `height` argument to 0 and providing a small `width` (e.g., `0.2`)
+In the `geom_*_` Set  the `height` argument to zero and provide a small `width` (e.g., `0.2`)
 `r unhide()`
 
 
@@ -189,7 +189,7 @@ Inside `theme()`, the `element_text()` function has many arguments besides `size
 -----
 
 
-**Q7)** Now you want the species names (e.g. Gentoo, Chinstrap, etc) but not flipper lengths (e.g. 170, 210, etc.) to be italicized. What would you add to the theme to do this? (*NOTE* we did this a different ay in the chapter)  `r longmcq(c("element_text(size = 16, face = 'italic')", answer = "axis.text.x = element_text(size = 16, face = 'italis'), axis.text.y = element_text(size = 16)"))`
+**Q7)** Now you want the species names (e.g. Gentoo, Chinstrap, etc) but not flipper lengths (e.g. 170, 210, etc.) to be italicized. What would you add to the theme to do this? (*NOTE* we did this a different way in the chapter)  `r longmcq(c("element_text(size = 16, face = 'italic')", answer = "axis.text.x = element_text(size = 16, face = 'italis'), axis.text.y = element_text(size = 16)"))`
 
 
 
@@ -270,7 +270,7 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 ### Key R Functions   {#better_plots_summary_key-r-functions}    
 
-*All functions are in the `ggplot2` package unless otherwise stated. 
+*All functions are in the `ggplot2` package unless otherwise stated.*  
 
 :::functions
 
@@ -290,7 +290,7 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 #### 🧮 **2. Summaries & Ordering**
 
-- **[`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html)**: Calculates summary statistics (like means or confidence intervals) on the fly and adds them to the plot as a new layer (e.g., as bars or errorbars). This in gplot2, but required the [`Hmisc`](https://hbiostat.org/r/hmisc/) package.      
+- **[`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html)**: Calculates summary statistics (like means or confidence intervals) on the fly and adds them to the plot as a new layer (e.g., as bars or errorbars). This function is in the [`ggplot2`](https://ggplot2.tidyverse.org/) package, but requires the [`Hmisc`](https://hbiostat.org/r/hmisc/) package.      
    
 - **[`fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html)** *In the [`forcats`](https://forcats.tidyverse.org/) package:* Reorders the levels of a categorical variable (a factor) based on a summary of another variable (e.g., order sites by their mean petal area).   
    
@@ -312,9 +312,9 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 - **[`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)**: Creates "small multiples" by splitting a plot into a series of panels based on the levels of a categorical variable.  
 
-- **[`plot_annotation()`](https://www.google.com/search?q=%5Bhttps://patchwork.data-imaginist.com/reference/plot_annotation.html%5D\(https://patchwork.data-imaginist.com/reference/plot_annotation.html\))** *In the [`forcats`](https://forcats.tidyverse.org/) package:* Adds overall titles and panel tags (e.g., A, B, C) to a combined figure.  
+- **[`plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html)** In the [`forcats`](https://forcats.tidyverse.org/) package: Adds overall titles and panel tags (e.g., A, B, C) to a combined figure.  
 
-- **[`plot_layout()`](https://patchwork.data-imaginist.com/reference/plot_layout.html)** *In the [`forcats`](https://forcats.tidyverse.org/) package:* Controls the layout of a combined figure, such as collecting all legends into a single area.
+- **[`plot_layout()`](https://patchwork.data-imaginist.com/reference/plot_layout.html)** *In the [`patchwork`](https://patchwork.data-imaginist.com/) package:* Controls the layout of a combined figure, such as collecting all legends into a single area.
 
 -----
 
@@ -358,7 +358,7 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 -----
 
-#### ✨ **AFlair (Images, Animations & Themes)**   
+#### ✨ **Flair (Images, Animations & Themes)**   
 
 - **[`ggimage`](https://github.com/GuangchuangYu/ggimage)**: Used to add images as data points or layers in your plots.   
 
@@ -366,7 +366,7 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 - **[`gganimate`](https://gganimate.com/index.html)**: Brings your static ggplots to life by creating animations.     
   
-- **[`ggthemes`]https://github.com/jrnold/ggthemes)**: Provides a collection of additional plot themes, including styles from publications like The Economist and The Wall Street Journal.  
+- **[`ggthemes`](https://github.com/jrnold/ggthemes)**: Provides a collection of additional plot themes, including styles from publications like The Economist and The Wall Street Journal.  
 
 -----
 
@@ -406,13 +406,17 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 :::learnmore
 
+**Packages:**  
+
+**[`ggblend`](https://mjskay.github.io/ggblend/)**: A ggplot extension for blending and composing overlapping layers. This is useful when default there are a lot of overlapping points in different categories. 
+
 **Interactive Cookbooks & Galleries:**  
 
 - **[The R Graph Gallery](https://r-graph-gallery.com/)**: An extensive, searchable gallery of almost every chart type imaginable, created with `ggplot2` and other R tools. Each example comes with the full, reproducible R code.  
 
 - **[From Data to Viz](https://www.data-to-viz.com/)**: A fantastic tool that helps you choose the right type of plot for your data. It provides a decision tree that leads to `ggplot2` code for each chart.     
 
-- **[The `ggplot2` Extensions Gallery](https://exts.ggplot2.tidyverse.org/gallery/)**: The official showcase of packages that extend the power of `ggplot2` with new geoms, themes, and capabilities. A goodt place to discover new visualization tools in the R ecosystem.   
+- **[The `ggplot2` Extensions Gallery](https://exts.ggplot2.tidyverse.org/gallery/)**: The official showcase of packages that extend the power of `ggplot2` with new geoms, themes, and capabilities. A good place to discover new visualization tools in the ggplot family.   
 
 - **[A ggplot2 Tutorial for Beautiful Plotting in R](https://cedricscherer.netlify.app/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)** Many fantastic examples. This is great! Have  a look!
 

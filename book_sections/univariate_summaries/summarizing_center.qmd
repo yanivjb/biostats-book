@@ -323,7 +323,7 @@ kable(tmp, digits = 3) |>
 
 - **Medians** are most appropriate when data are skewed. A classic example is income data—if Bill Gates walks into a room, the mean wealth increases dramatically, but the typical person in the room does not become wealthier. The median, which is less affected by extreme values, provides a more representative summary in such cases.  
 
-- **Modal peaks** are most appropriate when data have multiple peaks (modes). Alternatively, if there is a dominant peak, the mode can be a relevant measure of central tendency. For example, in our investigation of petal area in a Clarkia hybrid zone, the mean and median of log₁₀ petal area (cm²) were both close to zero (which corresponds to 1 cm²). However, this value falls in the trough between two peaks in the histogram—one corresponding to *Clarkia xantiana xantiana* and another to *Clarkia xantiana  parviflora*. This means that neither the mean nor the median represents an actual plant particularly well, and the modal peaks give a clearer picture of what values are most typical.  
+- **Modal peaks** are most appropriate when data have multiple peaks (modes). Alternatively, if there is a dominant peak, the mode can be a relevant measure of central tendency. For example, in our investigation of petal area in a Clarkia hybrid zone, the mean and median of log₁₀ petal area (cm²) were both close to zero (which corresponds to 1 cm²). However, this value falls in the trough between two peaks in the histogram—one corresponding to *Clarkia xantiana xantiana* and another to *Clarkia xantiana parviflora*. This means that neither the mean nor the median represents an actual plant particularly well, and the modal peaks give a clearer picture of what values are most typical.  
 
 
 

@@ -1,4 +1,4 @@
-## • X2. Plots for the medium {.unnumbered #plots_foR_medium)}
+## • X2. Plots for the medium {.unnumbered #plots_foR_medium}
 
 ---
 format: html
@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **Motivating Scenario:**
 
-You've just completed a big analysis and created a clear, honest `ggplot` figure that perfectly shows your main result. Now you realize you have to give a talk, write a paper, and present a poster. You're thinking about just using the same plot for each case, but realize that, forexample, no one will be able to read your axes labels if you present your plots in a talk. So now you want to customize your plot for the medium of presentation.\
+You've just completed a big analysis and created a clear, honest `ggplot` figure that perfectly shows your main result. Now you realize you have to give a talk, write a paper, and present a poster. You're thinking about just using the same plot for each case, but realize that, for example, no one will be able to read your axes labels if you present your plots in a talk. So now you want to customize your plot for the medium of presentation.\
 
 **Learning Goals: By the end of this subchapter, you should be able to:**
 
@@ -44,7 +44,7 @@ You've just completed a big analysis and created a clear, honest `ggplot` figure
 2.  **Prepare publication-quality figures for scientific papers** by:
     * Combining multiple plots into a single, cohesive multi-panel figure using `patchwork`.
     * Applying clean, professional themes like `theme_bw()` or `theme_classic()`.
-    * Formatting labels with mathematical symbols or italics using `expression()` and/or `ggtext`.
+    * Formatting labels with mathematical symbols or italics using [`expression()`](https://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/plotmath.html) and/or [`ggtext`](https://wilkelab.org/ggtext/articles/introduction.html).
 
 3.  **Design effective plots for live presentations** like talks and posters by:
     * Dramatically increasing text size for readability from a distance using `theme()`.
@@ -72,7 +72,7 @@ Here, we'll go over how to customize your plots in R for a few of these common f
 :::protip
 **Make your life easier by knowing when you can skip doing it in R.**
 
-R is great because it is reproducible and dependable.  What's more,  once you can do something in R, it's pretty straightforward to apply that skill to a new dataset. This comes in handy  when you'll be doing the same task a bunch. But figuring out how to do a very specific, one-off tweak in R can be a huge time sink, and sometimes it makes more sense to make final touches in powerpoint, illustrator, or photoshop than to figure it our in R. Before you spend hours on a minor customization, ask yourself a few questions. Here is the guidance I use when making this decision:
+R is great because it is reproducible and dependable.  What's more,  once you can do something in R, it's pretty straightforward to apply that skill to a new dataset. This comes in handy  when you'll be doing the same task a bunch. But figuring out how to do a very specific, one-off tweak in R can be a huge time sink, and sometimes it makes more sense to make final touches in powerpoint, illustrator, or photoshop than to figure it out in R. Before you spend hours on a minor customization, ask yourself a few questions. Here is the guidance I use when making this decision:
 
 * **Frequency:** Will I do this sort of thing more than a handful of times? If so, I try to figure it out in R. If it's a one-off task, I often don't.  
 * **Time Investment:** How long will this take to figure out in R versus doing it "by hand" in e.g. PowerPoint? If a manual edit in  PowerPoint takes five minutes, that's often smarter than spending two hours wrestling with code for a minor annotation.
@@ -166,16 +166,16 @@ initial_plot <- hz_phenos |>
 ```
 
 
-**Plots in scientific talks require large text!** We achieve this largely through the `theme()` function where we use `element_text()` to customize a specific feature of our plot. 
+**Plots in scientific talks require large text!** We achieve this largely through the [`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) function where we use `element_text()` to customize a specific feature of our plot. 
 
 
 Below is an interactive R session to get you started on this!    
 
 - First, run the code as is to see the `initial_plot` with its default text sizes.    
 
-- Next, copy and paste the code from the margin on the right into the session to see how `theme()` can change the text size.     
+- Next, copy and paste the code from the margin on the right into the session to see how [`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) can change the text size.     
 
-- *Challenge:* You will notice the y-axis tick mark labels are still small. Add a line of code inside `theme()` to make the axis.text.y larger as well.      
+- *Challenge:* You will notice the y-axis tick mark labels are still small. Add a line of code inside [`theme()`](https://ggplot2.tidyverse.org/reference/theme.html) to make the axis.text.y larger as well.      
 
 - Finally, feel free to add any other elaborations / explorations.  
 
@@ -385,7 +385,7 @@ p3 <- ggplot(hz_phenos, aes(x = prot, y = herk, color = ssp)) +
 Scientific papers require precision in labels. This can mean adding mathematical symbols for units (like mm²) or using italics for species names, as is standard in biology. These goals can be reached in more than one way. Two standard approaches are: 
 
 - Using the [`ggtext`](https://wilkelab.org/ggtext/) package which allows you to write in html.  OR     
-- Using the [`expression()`]()  function, which is more "classic R" but a bit of a pain. 
+- Using the [`expression()`](https://stat.ethz.ch/R-manual/R-devel/library/grDevices/html/plotmath.html)  function, which is more "classic R" but a bit of a pain. 
 
 :::aside
 **html help** I don't know how to write greek letter or whatever in html. Luckily you can consult these resources (for html [math symbols](https://www.toptal.com/designers/htmlarrows/math/) and html for [Greek letters](https://www.htmlhelp.com/reference/html40/entities/symbols.html) ) or ask a chatbot to help!

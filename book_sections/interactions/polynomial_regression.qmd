@@ -230,7 +230,7 @@ bmass |>
 
 You can fit separate polynomial models with `geom_smooth(method = "lm", formula = y ~ x + I(x^2))` or with `geom_lm_smooth(method = "lm", formula = y ~ x + I(x^2), interaction = FALSE)`. Here, I show what happens with geom_smooth(). 
 
-If you look closely at @fig-bmass-separate-quadratics, you can see different curve shapes for plants in animals, while these shapes are identical in @fig-bmass-quadratic. 
+If you look closely at @fig-bmass-separate-quadratics, you can see different curve shapes for plants and animals, while these shapes are identical in @fig-bmass-quadratic. 
 
 ```{r}
 #| fig-height: 3

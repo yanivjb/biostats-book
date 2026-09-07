@@ -1,4 +1,4 @@
-# X4. Cause {.unnumbered #casual_inference}
+# X4. Cause {.unnumbered #causal_inference}
 
 
 
@@ -57,6 +57,17 @@ html_tag_audio <- function(file, type = c("mp3")) {
 **Learning Goals:** By the end of this chapter, you should be able to:
 
 
+1. Explain why $p < 0.05$  does not establish causation.
+
+2. Draw and interpret simple DAGs representing confounds, pipes, and colliders.
+
+3. Distinguish a confound from a mediator from a collider.
+
+4. Explain why statistically adjusting for a confound can recover a causal estimate, while adjusting for a collider can create a spurious one.
+
+5. Use a hypothesized causal structure to decide which variables belong inand out of a multiple regression model.
+
+6. Recognize that randomized controlled experiments remain our strongest tool for establishing cause, and understand what careful reasoning about observational data can and cannot offer in their absence.
 
 :::
 
@@ -70,7 +81,7 @@ html_tag_audio <- function(file, type = c("mp3")) {
 
 # What is a Cause?
 
-**Like much of statistics, understanding causation requires a healthy dose of imagination.**  Imagine (as we did in the [Crash Course Statistics video](https://www.youtube.com/embed/kkBDa-ICvyY) laste chapter) a series of parallel worlds: in one, a specific treatment is applied (e.g., drinking coffee, receiving a vaccine, raising taxes), and in another, it is not. By observing how an outcome of interest responds in each world, we can start to see whether the treatment influences that outcome. We say that a treatment causes the outcome if changing it would alter the outcome, on average. 
+**Like much of statistics, understanding causation requires a healthy dose of imagination.**  Imagine (as we did in the [Crash Course Statistics video](https://www.youtube.com/embed/kkBDa-ICvyY) previously) a series of parallel worlds: in one, a specific treatment is applied (e.g., drinking coffee, receiving a vaccine, raising taxes), and in another, it is not. By observing how an outcome of interest responds in each world, we can start to see whether the treatment influences that outcome. We say that a treatment causes the outcome if changing it would alter the outcome, on average. 
 
 :::aside
 For quantitative treatments, we can envision multiple worlds where the treatment level varies by degree, observing how each variation impacts the outcome.
@@ -110,7 +121,7 @@ This chapter provides us with the tools to bring causal thinking into statistica
 include_graphics("../figs/old/fisherSMOKE.png")
 ```
 
-It is now well established that cigarette smoking causes cancer—but this wasn’t always the consensus. One of the most prominent statisticians in history, R.A. Fisher, famously argued that the observed relationship between smoking and cancer was spurious, insisting that smoking did not cause cancer. The extent to which his flawed logic was influenced by his own fondness for smoking, financial ties to the tobacco industry, or simple skepticism is unclear ([@geniuserrs](https://academic.oup.com/aje/article-abstract/133/5/416/60062)). What is clear, however, is that Fisher raised a plausible argument (which was ultimately wquite wrong).  
+It is now well established that cigarette smoking causes cancer—but this wasn’t always the consensus. One of the most prominent statisticians in history, R.A. Fisher, famously argued that the observed relationship between smoking and cancer was spurious, insisting that smoking did not cause cancer. The extent to which his flawed logic was influenced by his own fondness for smoking, financial ties to the tobacco industry, or simple skepticism is unclear ([@geniuserrs](https://academic.oup.com/aje/article-abstract/133/5/416/60062)). What is clear, however, is that Fisher raised a plausible argument (which was ultimately quite wrong).  
 
 
 ::: note
@@ -135,7 +146,7 @@ The Directed Acyclic Graph (hereafter DAG) is a key tool to guide this careful r
 * **Directed** means arrows point in the direction of cause and effect.
 * **Acyclic** means no arrow loops back to its origin—nothing causes itself.
 
-By forcing us to carefully laying out our casual story, DAGs can show us where potential biases or confounding might exist. As such DAGs can guide us in deciding which variables we need to include or exclude in an analysis. For example, by looking at a DAG, you should be able to decide which variables to include (or exclude) in a regression model.
+By forcing us to carefully lay out our causal story, DAGs can show us where potential biases or confounding might exist. As such DAGs can guide us in deciding which variables we need to include or exclude in an analysis. For example, by looking at a DAG, you should be able to decide which variables to include (or exclude) in a regression model.
 
 ### Smoking, Cancer, and Competing Causal Stories
     
@@ -165,7 +176,7 @@ DAGs make these structures explicit so we can decide which variables belong—an
 ```{r} 
 #| label: fig-cancerDAGs
 #| fig.cap: "Five DAGs illustrating potential causal structures for the lung cancer example To make this easier to read, I colored the focal outcome (cancer) in red.  <br> <br>**(A)** Direct causation: smoking directly influences  cancer risk.  <br> <br>**(B)** A confounder. Here, genetic factors influence both smoking behavior and cancer but smoking does not cause cancer. This would create a spurious association if not controlled.  <br> <br>**(C)** A mediator (pipe). Here genes affect smoking, which then affects cancer, meaning smoking lies on the causal pathway.  <br> <br>**(D)** A collider. Both genes and smoking independently influence cancer; conditioning on cancer would introduce a false association between genes and smoking. <br> <br>**(E)** Complex reality, with genes, environment, and smoking all contributing to cancer risk through multiple pathways."
-#| fig-alt: "DAGs showig potential causal relationships among Genes, Smoke, Environment, and Cancer, with Cancer shown in red. Panel A shows Smoke → Cancer. Panel B shows Genes → Smoke and Genes → Cancer (a confounder). Panel C shows Genes → Smoke → Cancer (a mediator). Panel D shows Genes → Cancer and Smoke → Cancer (a collider). Panel E shows a more complex network: Genes → Smoke, Environment → Smoke, Genes → Cancer, Environment → Cancer, and Smoke → Cancer."
+#| fig-alt: "DAGs showing potential causal relationships among Genes, Smoke, Environment, and Cancer, with Cancer shown in red. Panel A shows Smoke → Cancer. Panel B shows Genes → Smoke and Genes → Cancer (a confounder). Panel C shows Genes → Smoke → Cancer (a mediator). Panel D shows Genes → Cancer and Smoke → Cancer (a collider). Panel E shows a more complex network: Genes → Smoke, Environment → Smoke, Genes → Cancer, Environment → Cancer, and Smoke → Cancer."
 #| cap-location: margin
 #| echo: false
 dag.1 <- dagitty("dag{smoke -> cancer}")
@@ -184,7 +195,7 @@ dag.3 <- ggdag_canonical(dag.3, layout = "circle",node_size = 12,label_size = 22
 
 dag.4 <- dagitty("dag{cancer <- smoke <- genes -> cancer}")
 dag.4<-ggdag_canonical(dag.4, layout = "circle",node_size = 12,label_size = 22,text_size = 2.5)+theme_tufte()+
-  theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank(), axis.line = element_line(color = "lightgrey"), axis.line.x.top = element_line(color = "lightgrey"), axis.line.y.right =  element_line(color = "lightgrey"))+ labs(title = "D) A colider")
+  theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank(), axis.line = element_line(color = "lightgrey"), axis.line.x.top = element_line(color = "lightgrey"), axis.line.y.right =  element_line(color = "lightgrey"))+ labs(title = "D) A collider")
 
 
 
@@ -542,7 +553,7 @@ A collider is something caused by two variables. Say in our example both fish le
 
 - One thousand fish 
 - Environmental quality for each fish (normally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$)
-- Fish length is independent of quality  (ormally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$)
+- Fish length is independent of quality  (normally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$)
 - Egg count based on fish length and environmental quality (predicted egg count = (Fish length + Environmental quality) /4, standard deviation 8, rounded to the nearest integer)
 
 ```{r}
@@ -577,7 +588,7 @@ collider_plotC <- ggplot(collider_fish, aes(x = env_quality, y = fish_length)) +
 collider_plotA  + collider_plotB  + collider_plotC  + plot_annotation(tag_levels = "A")
 ```
 
-We see everyhting that is expected, and our stats back this up. 
+We see everything that is expected, and our stats back this up. 
 
 ```{r, eval = FALSE}
 library(emmeans)
@@ -610,7 +621,7 @@ bind_rows(
 
 ```
 
-Here the correct model is to include both causes. exliding one will likely lead to unbiased estimates of the effect of the other, but it will reduce power and increase uncertainty. 
+Here the correct model is to include both causes, excluding one will likely lead to unbiased estimates of the effect of the other, but it will reduce power and increase uncertainty. 
 
 
 #### Beware of Collider Bias
@@ -643,9 +654,9 @@ lm(fish_length ~ env_quality , collider_fish %>% filter(fish_eggs>=30))  %>% tid
 ## What to do?
 
 
-The examples above show the complexity in deciphering causes without experiments. But they also show us the light about how we can infer causation, because causal diagrams can point to testable hypotheses. If we cannot do experiments, causal diagrams offer us a glimpse into how we can infer causation. Perhaps the best way to do this is by matching – if we can match subjects that are identical for all causal paths except the one we are testing, we can then test for a statistical association, ad make a causal claim we can believe in.
+The examples above show the complexity in deciphering causes without experiments. But they also show us the light about how we can infer causation, because causal diagrams can point to testable hypotheses. If we cannot do experiments, causal diagrams offer us a glimpse into how we can infer causation. Perhaps the best way to do this is by matching – if we can match subjects that are identical for all causal paths except the one we are testing, we can then test for a statistical association, and make a causal claim we can believe in.
 
-The field of causal inference is developing rapidly. If you want to hear more, the popular book, The Book of Why (Pearl and Mackenzie 2018) is a good place to start. The field of causal inference offers many exciting techniques for deciphering cause. For now we will just say that a good biological intuition and carefull thinking about your model and causation is a great starting place. 
+The field of causal inference is developing rapidly. If you want to hear more, the popular book, The Book of Why (Pearl and Mackenzie 2018) is a good place to start. The field of causal inference offers many exciting techniques for deciphering cause. For now we will just say that a good biological intuition and careful thinking about your model and causation is a great starting place. 
 
 
 
