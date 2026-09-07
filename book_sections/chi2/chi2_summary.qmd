@@ -124,7 +124,7 @@ wide_spider <- pivot_wider(long_spider,names_from = second_male, values_from = c
 
 `r hide("Explanation")`
 - $P_\text{first male eaten}$ =9/32. 
-- $P_\text{second male accepeted}$ =25/32. 
+- $P_\text{second male accepted}$ =25/32. 
 
 $\frac{9}{32} \times \frac{25}{32} \times 32 = 7.03$
 

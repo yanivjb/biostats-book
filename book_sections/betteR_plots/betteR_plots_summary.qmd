@@ -312,7 +312,7 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 - **[`facet_wrap()`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)**: Creates "small multiples" by splitting a plot into a series of panels based on the levels of a categorical variable.  
 
-- **[`plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html)** In the [`forcats`](https://forcats.tidyverse.org/) package: Adds overall titles and panel tags (e.g., A, B, C) to a combined figure.  
+- **[`plot_annotation()`](https://patchwork.data-imaginist.com/reference/plot_annotation.html)** In the [`patchwork`](https://patchwork.data-imaginist.com/) package: Adds overall titles and panel tags (e.g., A, B, C) to a combined figure.  
 
 - **[`plot_layout()`](https://patchwork.data-imaginist.com/reference/plot_layout.html)** *In the [`patchwork`](https://patchwork.data-imaginist.com/) package:* Controls the layout of a combined figure, such as collecting all legends into a single area.
 
@@ -408,7 +408,7 @@ After adding the facet layer correctly, which Islands have Chinstrap penguins? (
 
 **Packages:**  
 
-**[`ggblend`](https://mjskay.github.io/ggblend/)**: A ggplot extension for blending and composing overlapping layers. This is useful when default there are a lot of overlapping points in different categories. 
+**[`ggblend`](https://mjskay.github.io/ggblend/)**: A ggplot extension for blending and composing overlapping layers. This is useful when there are a lot of overlapping points in different categories. 
 
 **Interactive Cookbooks & Galleries:**  
 

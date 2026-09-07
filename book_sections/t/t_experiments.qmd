@@ -243,7 +243,7 @@ pairedPower <- function(n_pairs, diff, sd, n_reps = 1000){
 
 ---
 
-Now, we can make  the simulation:  
+Now, we can run the simulation:  
 
 ```{r}
 #| column: page-right

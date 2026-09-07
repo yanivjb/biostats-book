@@ -109,7 +109,7 @@ Science is communicated in many formats. Here’s how to tailor your plots to di
 
 :::protip
 **Plots as "Brown M&Ms"**     
-The hard rock band Van Halen had a strange issue in their "rider." They insisted on having a bowl of M&Ms but no brown M&Ms (@fig-mandm). Although they had a very rock-band diva response when this contractual obligation was not fulfilled (see the quote o the right), this request served a real purpose. As [explained by vocalist David Lee Roth](https://www.youtube.com/watch?v=_IxqdAgNJck) this request was a way to ensure that the  venue had closely read the requirements for the show to ensure safety (as alluded to at the end of the Wikipedia quote).
+The hard rock band Van Halen had a strange issue in their "rider." They insisted on having a bowl of M&Ms but no brown M&Ms (@fig-mandm). Although they had a very rock-band diva response when this contractual obligation was not fulfilled (see the quote on the right), this request served a real purpose. As [explained by vocalist David Lee Roth](https://www.youtube.com/watch?v=_IxqdAgNJck) this request was a way to ensure that the  venue had closely read the requirements for the show to ensure safety (as alluded to at the end of the Wikipedia quote).
 
 
 In the same way, scientists use visual cues to make rapid judgments about the quality and trustworthiness of research. A sloppy, unpolished plot acts like a brown M&M in the candy bowl; it's a red flag that signals a potential lack of care that could extend to the data analysis itself (even if the analysis is fine). A polished, professional plot does the opposite: it signals that the author is careful and trustworthy. It tells the reader they are in good hands.

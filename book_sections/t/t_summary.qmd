@@ -271,7 +271,7 @@ This is the t-value!
 ---
 
 
-**Q7*.** The 95% CI is calculated as the mean ± the critical t-value at 𝛼= 0.05 times ___ . `r mcq(c("Cohen's d", "The standard deviation", "The variance", "t", answer = "The standard error", "1.96"))`
+**Q7.** The 95% CI is calculated as the mean ± the critical t-value at 𝛼= 0.05 times ___ . `r mcq(c("Cohen's d", "The standard deviation", "The variance", "t", answer = "The standard error", "1.96"))`
 
 ---
 
