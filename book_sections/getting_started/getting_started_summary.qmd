@@ -29,6 +29,10 @@ include_graphics("../../figs/intro_to_r/getting_started/Rgif.gif")
 
 Links to: [Summary](#getting_started_summarySummary). [Chatbot tutor](#getting_started_summaryChatbot). [Questions](#getting_started_summaryPractice_questions). [Glossary](#getting_started_summaryGlossary_of_terms). [R functions](#getting_started_summaryNew_r_functions). [R packages](#getting_started_summaryR_packages_introduced). [Additional resources](#getting_started_summaryAdditional_resources).
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1XfdD5I9jngjN_vWDaIErRaQHNk0QQs0f/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/getting_started/1_Getting_Started_Summary.mp3)
+:::
 
 
 

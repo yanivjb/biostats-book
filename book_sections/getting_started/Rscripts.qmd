@@ -15,7 +15,13 @@
 
 :::     
 
----  
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/open?id=1hAmZI0bk64RZ5nd3dThvvzlVerC7qXtG&usp=drive_copy) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/getting_started/1_R_Scripts.mp3)
+:::
+
 
 ```{r}
 #| echo: false

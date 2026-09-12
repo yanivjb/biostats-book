@@ -1,4 +1,10 @@
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1TtCulwRAn3CTKZ6Rnx6WdzSNCNELcEuz/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../audio/intro_to_r/Intro2R.mp3)
+:::
+
+
 # SECTION I: Intro to R   {.unnumbered #intro2r}
 
 ```{r}

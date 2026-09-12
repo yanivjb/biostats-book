@@ -19,6 +19,14 @@
 :::     
 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/open?id=1WAd16bRs5Gqy3CyYApVeBc-kMKv4z3kx&usp=drive_copy) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/getting_started/1_R_packages.mp3)
+:::
+
+
+
+
 
 ```{r}
 #| message: false

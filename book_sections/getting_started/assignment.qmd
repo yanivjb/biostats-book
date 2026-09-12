@@ -29,6 +29,15 @@ library(webexercises)
 4. Diagnose simple errors caused by using variables before they are defined.  
 :::     
 
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/open?id=1tWiFujixLDNoR0CymbfQh4b5IRWdu-qK&usp=drive_copy) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/getting_started/1_Variable_Assignment.mp3)
+:::
+
+
+
 ---
 
 ## Variable assignment 

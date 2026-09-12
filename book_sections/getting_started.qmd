@@ -4,6 +4,9 @@ webr:
   autoload-packages: false
 ---
 
+
+
+
 # 1. Getting started with R {#getting_started}
 
 
@@ -33,6 +36,13 @@ webr:
 4. **Add comments to code** using `#` to leave notes that R will not interpret. 
 
 :::     
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/open?id=1XfdD5I9jngjN_vWDaIErRaQHNk0QQs0f&usp=drive_copy) &nbsp;·&nbsp; 🎧 [Listen](../audio/intro_to_r/getting_started/1_Getting_Started_with_R.mp3)
+:::
+
 
 ---
 
