@@ -237,6 +237,7 @@ book:
     - part: book_sections/supps.qmd
       chapters: 
         - book_sections/effect_size_ref.qmd
+    - book_sections/installing_R.qmd
     - references.qmd
 
 
