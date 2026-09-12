@@ -1,7 +1,7 @@
 ### Installing R & RStudio {.unnumbered #R-install}
 
 ::: aside 
-[$^*$ **This is not strictly true.** You can use `R` online via [posit cloud](https://posit.cloud/). This is a "freemium" service and the free plan is unlikely to meet your needs.
+$^*$ **This is not strictly true.** You can use `R` online via [posit cloud](https://posit.cloud/). This is a "freemium" service and the free plan is unlikely to meet your needs.
 :::
 
 Before you can use `R` you must download and install it.$^*$ So, to get started, **download `R` from [CRAN](https://www.r-project.org/)**, and follow the associated installation instructions (see below for detailed instructions for your system).
@@ -39,9 +39,7 @@ R comes pre-installed on many Linux systems, but you’ll want the newest versio
 
 ### Installing RStudio
 
-After installing `R` download/update the RStudio IDE from [Posit's download site](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
-
-After downloading R, and then RStudio, open RStudio. It should look like this:
+After installing `R` download/update the RStudio IDE from [Posit's download site](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads). After downloading R, and then RStudio, open RStudio. It should look like this:
 
 ```{r}
 #| echo: false

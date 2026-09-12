@@ -90,7 +90,9 @@ include_graphics("../figs/summarizing_data/many_xan_1.png")
 
 **RStudio is a user-friendly interface that makes it easier to get the most out of `R`.** "More precisely, R is a programming language that runs computations, while RStudio... provides an interface by adding many convenient features and tools." @ismay2019.  
 
-
+::: {.callout-important}
+Now is probably a good time to download R and RStudio or get setup using RStudio on the cloud. Check the resource about [Installing R & RStudio](#R-install) in the back of the book for help.
+:::
 
 
 ## The Shortest Introduction to R  

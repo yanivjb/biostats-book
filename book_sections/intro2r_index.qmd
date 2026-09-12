@@ -16,7 +16,7 @@ library(knitr)
 
 
 
-<article class="drop-cap">To effectively and efficiently analyze and visualize data you need a computer. To make your work readily reproducible, a scripting language like R helps a lot. While there are "point and click" programs that you can use to conduct some statistical analyses, these are often expensive and/or limited. So our goal in this section is to get everyone onboard with using R for stats.</article><br>
+<article class="drop-cap">Modern data analysis and visualization usually requires a computer a computer. To make such analyses reproducible, a scripting language like R helps a lot. While there are "point and click" programs that you can use for stats, these are often expensive and/or limited. So our goal in this section is to get everyone on board with using R for stats.</article>
 
 ```{r}
 #| echo: false
@@ -33,11 +33,13 @@ hist(c(1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 5, 5, 5, 5, 7, 8),
 axis(1, at = 1:10, labels = 1:10, cex.axis = 1.75)
 ```
 
-- **Get everyone up to speed on reading, writing, and debugging code in `R`:** Students in this course typically have a wide range of prior programming experience (@fig-experience). I aim to quickly get beginners up to speed, and hope that advanced users will discover new techniques and have opportunities to support their peers.
+Of course, there is a lot covered under "getting on board with using R for stats." So in the next six sections our immediate goals are:   
 
-- **Focus on understanding `R`'s philosophy and solving programming problems:** We are not here to write fancy code. We are here to do stats. Make sure your code works and is readable. Do not aim for perfection.
+- **Get everyone up to speed on reading, writing, and debugging code in `R`:** Students in this course typically have a wide range of prior programming experience (@fig-experience). I aim to quickly get beginners up to speed, and hope that advanced users will discover new techniques and have opportunities to support their peers.   
 
-- **Prepare for standard usage of R in statistics:** Later the stats get tough. By that point R should be routine.
+- **Focus on understanding `R`'s philosophy and solving programming problems:** We are not here to write fancy code. We are here to do stats. Make sure your code works and is readable. Do not aim for perfection.   
+
+- **Prepare for standard usage of R in statistics:** Later the stats get tough. By that point R should be routine.    
 
 ## A "tidyverse" Approach {.unnumbered #intro2rTidy}
 
