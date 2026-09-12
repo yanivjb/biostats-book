@@ -39,7 +39,7 @@ R comes pre-installed on many Linux systems, but you’ll want the newest versio
 
 ### Installing RStudio
 
-After installing `R` download/update the RStudio IDE from [Posit's download site(https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
+After installing `R` download/update the RStudio IDE from [Posit's download site](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
 
 After downloading R, and then RStudio, open RStudio. It should look like this:
 
