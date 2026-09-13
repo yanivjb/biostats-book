@@ -26,6 +26,10 @@ ril_data <- readr::read_csv(ril_link)|>
 include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_multexplain.png")
 ```
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1XfIfyobC3x5x89HHdj6LEXOyPR7aav9E/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/intro_to_ggplot/many_explanatory.mp3)
+:::
 
 
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
@@ -61,7 +65,7 @@ We saw that the number of pollinator visits increased with petal size and was gr
 ```{r}
 #| echo: false
 #| column: margin
-include_graphics("../../figs/intro_to_r/intro_to_ggplot/jitter_sketch.png")
+include_graphics("../../figs/intro_to_r/intro_to_ggplot/multexplain.png")
 ```
 
 

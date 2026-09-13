@@ -46,6 +46,12 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_hist.png"
 
 :::     
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1MIKsbWPntU_B4NgK2DW6oHp4JvgsE_hc/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/intro_to_ggplot/one_continuous.mp3)
+:::
+
 --- 
 
 ### Visualizing Distributions 

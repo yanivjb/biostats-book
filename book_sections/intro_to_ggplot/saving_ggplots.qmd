@@ -39,6 +39,13 @@ ril_data <- readr::read_csv(ril_link)|>
 
 :::     
 
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1e9eSr52VgXDJJju4XaY9zYFF0EYJwpJA/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/intro_to_ggplot/saving_a_plot.mp3)
+:::
+
 --- 
 
 ### Saving Your ggplot.  
