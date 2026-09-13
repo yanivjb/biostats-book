@@ -51,7 +51,9 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_multexpla
 
 
 ```{r}
-# Be sure the readt, dplyr, and ggplot2 packages are installed
+#| message: false
+#| warning: false
+# Be sure the readr, dplyr, and ggplot2 packages are installed
 library(readr)
 library(dplyr)
 library(ggplot2)

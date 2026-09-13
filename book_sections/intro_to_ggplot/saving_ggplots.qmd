@@ -52,7 +52,9 @@ ril_data <- readr::read_csv(ril_link)|>
 
 
 ```{r}
-# Be sure the readt, dplyr, and ggplot2 packages are installed
+#| message: false
+#| warning: false
+# Be sure the readr, dplyr, and ggplot2 packages are installed
 library(readr)
 library(dplyr)
 library(ggplot2)

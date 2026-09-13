@@ -54,7 +54,9 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_twocat.pn
 ## Unscroll for code to access the `ril_data` & `ril_data_binary` datasets for this section
 
 ```{r}
-# Be sure the readt, dplyr, and ggplot2 packages are installed
+#| message: false
+#| warning: false
+# Be sure the readr, dplyr, and ggplot2 packages are installed
 library(readr)
 library(dplyr)
 library(ggplot2)
