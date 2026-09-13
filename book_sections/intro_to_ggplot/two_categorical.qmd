@@ -45,9 +45,29 @@ include_graphics("../../figs/intro_to_r/intro_to_ggplot/clarkia_sketch_twocat.pn
 
 
 
-::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 1.2em;"}
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
 
 **Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1MrrRMKjQub6nJepAGPSIslkzDcuuCbY0/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/intro_to_ggplot/two_categorical.mp3)
+:::
+
+::: {.callout-note collapse="true"}
+## Unscroll for code to access the `ril_data` & `ril_data_binary` datasets for this section
+
+```{r}
+# Be sure the readt, dplyr, and ggplot2 packages are installed
+library(readr)
+library(dplyr)
+library(ggplot2)
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+ril_data <- readr::read_csv(ril_link)|>
+  dplyr::select(location,  ril, prop_hybrid,  mean_visits,  
+                petal_color, petal_area_mm,  asd_mm)|>
+  dplyr::mutate(visited = mean_visits > 0)
+
+ril_data_binary <- ril_data |> 
+    filter(!is.na(petal_color), !is.na(mean_visits))|>
+    mutate(visited = mean_visits >0)
+```
 :::
 
 --- 

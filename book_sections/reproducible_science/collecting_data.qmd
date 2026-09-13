@@ -33,6 +33,14 @@ source("../../_common.R")
 
 ---
 
+>*On two occasions I have been asked, "Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?" ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.*<br><br>
+>
+>Page 64 of "Passages from the Life of a Philosopher" @babbage1864. 
+
+
+
+---
+
 ```{r}
 #| echo: false
 #| label: fig-data_collection
@@ -43,15 +51,11 @@ include_graphics("../../figs/intro_to_r/reproducible_science/more_xan.png")
 
 --- 
 
-Sometimes, data come from running a sample through a machine, resulting in a computer readout of our data (e.g., genotypes, gene expression, mass spectrometer, spectrophotometer, etc.). Other times, we collect data through counting, observing, and similar methods, and we enter our data by hand. Either way, there is likely some key data or metadata for which we are responsible (e.g., information about our sample). Below, we focus on how we collect and store our data, assuming that our study and sampling scheme have already been designed. Issues in study design and sampling will be discussed in later chapters.
 
 
-:::aside
->*On two occasions I have been asked, "Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?" ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.*<br><br>
->
->Page 64 of "Passages from the Life of a Philosopher" @babbage1864. 
+Sometimes, data come from running a sample through a machine, resulting in a computer readout of our data (e.g., genotypes, gene expression, mass spectrometer, spectrophotometer, etc.). Other times, we collect data through counting, observing, weighing etc., and we enter our data by hand. Either way, there is likely some key data or metadata for which we are responsible (e.g., information about our sample). Below, we focus on how we collect and store our data, assuming that our study and sampling scheme have already been designed. Issues in study design and sampling will be discussed in later chapters.
 
-:::
+
 
 ## Making rules for data collection  {#making-rules-for-data-collection}
 
@@ -63,7 +67,15 @@ Before we collect data, we need to decide what data to collect. Even in a well-d
 
 Some of these questions have answers that are more correct, while for others, it's crucial to agree on a consistent approach and ensure each team member uses the same method.  
 
-Similarly, it's important to have consistent and unique names -- for example, my collaborators and I study *Clarkia* plants at numerous sites -- include **S**quirrel **M**ountain and **S**aw**M**ill -- which one should we call SM (there is a similar issue in state abbreviation -- we live in **M**i**N**nesota (MN), not **MI**nnesota, to differentiate our state from **MI**chigan (MI)).  These questions highlight the need for thoughtful data planning, ensuring that every variable is measured consistently.
+
+
+
+Similarly, it's important to have consistent and unique names. For example, my collaborators and I study *Clarkia* plants at numerous sites, including **S**quirrel **M**ountain and **S**aw**M**ill. Which one should we call SM? These questions highlight the need for thoughtful data planning, ensuring that every variable is measured consistently.
+
+:::aside
+
+There is a similar issue in state abbreviation -- we live in **M**i**N**nesota (MN), not **MI**nnesota, to differentiate our state from **MI**chigan (MI). See [Gary Gulman's description of the history behind this challenge.](https://www.youtube.com/watch?v=dLECCmKnrys).  
+:::
 
 Once you have figured out what you want to measure, how you will measure and report it, and other useful info (e.g., date, time, collector), you are ready to make a data sheet for field collection, a database for analysis, and a README or data dictionary.
 
@@ -71,7 +83,7 @@ Once you have figured out what you want to measure, how you will measure and rep
 
 ## Making a spreadsheet for data entry  {#making-a-spreadsheet-for-data-entry}
 
-After deciding on consistent rules for data collection, we need a standardized format to enter the data. This is especially important when numerous people and/or teams are collecting data at different sites or years. Spreadsheets for data entry should be structured similarly to field sheets (described below) so that it is easy to enter data without needing too much thought.
+After deciding on data collection rules, we need a standardized format to enter the data. This is especially important when numerous people and/or teams are collecting data at different sites or years. Spreadsheets for data entry should be structured similarly to field sheets (described below) so that it is easy to enter data without needing too much thought.
 
 Some information (e.g., year, person, field site) might be the same for an entire field sheet, so it can either be written once at the top or  explicitly added to each observation in the spreadsheet (copy-pasting can help here).
 
@@ -97,7 +109,7 @@ include_graphics("../../figs/intro_to_r/reproducible_science/sample_datasheet.pn
 
 ### Data collection and data entry checklist:  {#data-collection-and-data-entry-checklist}
 
--  *Be consistent and deliberate:* You should refer to a thing in the same thoughtful way throughout a column. Take, for example, gender as a nominal variable. Data validation  approaches, above, can help.
+-  *Be consistent and deliberate:* You should refer to a thing in the same thoughtful way throughout a column. Take, for example, gender as a nominal variable. As shown in the margin, we should ensure that each level (male, female, and non-binary) is entered in one way. Data validation approaches (described below), can help you enforce the convention you land on.
 
 :::aside
 <span style="color: red;">A bad organization would be:</span> male, female, Male, M, Non-binary, Female.    
@@ -127,7 +139,7 @@ knitr::include_graphics("../../figs/intro_to_r/reproducible_science/goodNames4Th
 
 - **Do Not Use Font Color or Highlighting as Data.** You may be tempted to encode information with bolded text, highlighting, or text color. Don’t do this! Be sure that all information is in a readable column. These extra markings will either be lost or add an extra degree of difficulty to your analysis. Reserve such markings for the presentation of data.       </br></br>     
 
-- **No values should be implied.** Never leave an entry blank as "shorthand for same as above". Similarly, never denote the first replicate (or treatment, or whatever) by its order in a spreadsheet, but rather make this explicit with a value in a column. Data order could get jumbled and besides it would take quite a bit of effort to go from implied order to a statistical analysis. It is ok to skip this while taking data in the field, but make sure no values are implied when entering data into a computer.       </br></br>     
+- **No values should be implied.** Never leave an entry blank as "shorthand for same as above". Similarly, never denote the first replicate (or treatment, or whatever) by its order in a spreadsheet, but rather make this explicit with a value in a column. Data order could get jumbled, and it would take real effort to go from implied order to a statistical analysis. It is ok to skip this while taking data in the field, but make sure no values are implied when entering data into a computer.       </br></br>     
 
 
 
@@ -135,7 +147,7 @@ knitr::include_graphics("../../figs/intro_to_r/reproducible_science/goodNames4Th
     - Both Excel and Google Sheets (and likely most spreadsheet programs) have a simple solution: use the "Data validation" feature in the "Data" drop-down menu to limit the potential categorical values or set a range for continuous values that users can enter into your spreadsheet. This helps ensure the data are correct.        </br> 
 
 
-- **Data should be tidy  (aka rectangular).** Ideally data should be entered as tidy (Each variable must have its own column. Each observation must have its own row.  Each value must have its own cell. See the [next chapter](#data_in_R) for more explanation). However, you must balance two practical considerations -- "*What is the best/easiest/fastest way to collect and enter data?*" vs "*What is the easiest way to analyze data?*"
+- **Data should be tidy  (aka rectangular).** Ideally data should be entered in tidy format. This means that each variable must have its own column, each observation must have its own row, and  each value must have its own cell. See the [next chapter](#data_in_R) for more explanation). However, you must balance two practical considerations -- "*What is the best/easiest/fastest way to collect and enter data?*" vs "*What is the easiest way to analyze data?*"
 
 
 ### Making a README and/or "data dictionary" {#making-a-readme-andor-data-dictionary}
