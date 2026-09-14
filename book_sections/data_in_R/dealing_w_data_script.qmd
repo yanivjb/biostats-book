@@ -1,5 +1,10 @@
 ### • 4. Data in R: Code {.unnumbered #dealing_w_data_script}
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1IGSlt_SA5Kh_2EyAkEzSEnINF8QL9ybc/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/data_in_R/data_in_R_code.mp3)
+:::
+
 ### Overview
 
 **The past two chapters have introduced the basic function and workflow for preparing to analyze your data in R.** Below I provide an example script for this process. Remember that:

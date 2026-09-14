@@ -10,7 +10,7 @@
 **Learning goals: By the end of this sub-chapter you should be able to**  
 
 1. Use the [`filter`](https://dplyr.tidyverse.org/reference/filter.html) function to choose the rows you want to work with.  
-2. Display care so that you do not get the wrong answer when filtering your data.   
+2. Take care to ensure that you do not get the wrong answer when filtering your data.   
 
 :::     
 
@@ -30,6 +30,14 @@ library(tidyr)
 source("../../_common.R") 
 
 ```
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1jse46PuTj3KWdcn9EmT7tBks6QZS8-bI/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/data_in_R/choose_rows.mp3)
+:::
+
+
+---
 
 ```{r}
 #| code-fold: true
@@ -52,10 +60,7 @@ ril_data <- ril_data |>
          relative_asd = asd / petal_area) 
 ```
 
-
----   
-
-@fig-bad is not good. Most of the space is wasted on `NA` values. This waste also obscured the true pattern. We can fix this by removing cases in which we did not record pollinator visits (i.e. when `visits` are `NA`).  Below, I show how to use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`filter`](https://dplyr.tidyverse.org/reference/filter.html)  function to do this!
+---
 
 ```{r}
 #| fig-height: 4
@@ -64,7 +69,8 @@ ril_data <- ril_data |>
 #| column: page-right
 #| fig-cap: "Counts of pink and white Clarkia RILs by location, including cases with missing pollinator visit data."
 #| fig-alt: "Bar charts faceted by location (GC and SR) showing counts of pink, white, and missing (NA) petal colors, filled by whether a pollinator visit occurred. Many observations include missing visit data, causing large NA bars that dominate the plots and make patterns difficult to see."
-
+#| code-fold: true
+#| code-summary: "Code to make the plot below."
 
 ril_data |>
     ggplot(aes(x = petal_color, fill = visited))+
@@ -73,7 +79,12 @@ ril_data |>
   theme(legend.position = "bottom")
 ```
 
-## Remove rows with filter() 
+---   
+
+@fig-bad is not good. Most of the space is wasted on `NA` values. This waste also obscures the true pattern. We can fix this by removing cases in which we did not record pollinator visits (i.e. when `visits` are `NA`).  Below, I show how to use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)  function to do this!
+
+
+## Remove rows with `filter()` 
 
 
 ```{r}
@@ -107,7 +118,7 @@ ril_data_no_missing_visits <- ril_data |>
 ```
 
 
-Now that we have removed the missing data, @fig-better clearly reveals that a higher proportion of Clarkia RILs planted at SR receive a pollinator visit than those planted at GC. @fig-better also clearly shows that at both locations a larger share of pink plants appear to receive visits as compared to white plants. Note that because we filtered on visits and not petal_color, the NA category still appears on the x-axis. 
+Now that we have removed the missing data, @fig-better clearly reveals that a higher proportion of Clarkia RILs planted at SR receive a pollinator visit than those planted at GC. @fig-better also clearly shows that at both locations a larger share of pink-petalled plants appear to receive visits than white-petalled plants. Note that because we filtered on `visits` and not p`etal_color`, the NA category still appears on the x-axis. 
 
 ```{r}
 #| fig-height: 3.2
@@ -127,7 +138,7 @@ ril_data_no_missing_visits |>
 :::fyi
 ### Pay attention to two choices I made above. 
    
-- **Above, I used the `dplyr::filter()` syntax.** I did this because  the stats package that loads automatically with R contains a different function called `filter()`. Without explicit direction, R might use the wrong filter function and give us weird errors. I therefore always specify which function I want by typing dplyr::filter() or by using [`conflicts_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) from the [`conflicted`](https://conflicted.r-lib.org/) package:  
+- **Above, I used the `dplyr::filter()` syntax.** I did this because  the [`stats`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/stats-package.html) package that loads automatically with R contains a different function called `filter()`. Without explicit direction, R might use the wrong filter function and give us weird errors. I therefore always specify which function I want by typing `dplyr::filter()` or by using [`conflicts_prefer()`](https://conflicted.r-lib.org/reference/conflicts_prefer.html) from the [`conflicted`](https://conflicted.r-lib.org/) package:  
 
 ```{r}
 library(conflicted)

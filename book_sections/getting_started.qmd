@@ -22,8 +22,8 @@ webr:
 2. Create vectors, perform calculations, ask logical questions, and assign variables in R.  
 3. Use R functions, and understand what a function is.   
 4. Install R packages.  
-5. Load data into R, view it, and find the types of variables in each column.  
-6. Know your way around RStudio.
+5. Write an R Script & recognize best practices in writing scripts.
+5. Know your way around RStudio.
 
 ---
 

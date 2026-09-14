@@ -30,7 +30,7 @@ ril_data <- read_csv(path)
 
 
 
-1. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) to get a sense of our data.  
+1. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function to get a sense of our data.  
 2. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`select()`](https://dplyr.tidyverse.org/reference/select.html) function to limit our data to a few variables of interest.  
 3. Use [`dplyr`](https://dplyr.tidyverse.org/)'s  [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function to change the names of specific columns.    
 
@@ -41,7 +41,7 @@ ril_data <- read_csv(path)
 
 The good news is that `R` has many functions to help us deal with data. The bad news is that this means that there are a lot of `R` functions to keep in mind when dealing with data. So we begin this section with a review of three skills we learned in the previous chapter: 
 
-- **Peeking at our data** with [`dplyr`](https://dplyr.tidyverse.org)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function to know the names of each column and the type of data in each.  
+- **Peeking at our data** with [`dplyr`](https://dplyr.tidyverse.org)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function reveals the name of each column and the type of data in each.  
 - **Choosing columns of interest**  with [`dplyr`](https://dplyr.tidyverse.org)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function. This lets us focus on a few columns of interest.   
 - **Changing the names of a few columns** with  [`dplyr`](https://dplyr.tidyverse.org)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function to make the data easier to wrangle.  
 
@@ -61,11 +61,17 @@ path <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master
 ril_data <- read_csv(path)
 ```
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1jse46PuTj3KWdcn9EmT7tBks6QZS8-bI/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/data_in_R/prepping_data.mp3)
+:::
+
+
 --- 
 
 ## A [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) at our data. 
 
-To deal with data you must know how to refer to it and what type of data it is. The [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function provides information on both accounts: 
+To deal with data you must know how to refer to it and what type of data it is. The [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) function provides both the names of columns in a dataset, and the  type of vector in each column (plus the first few values for each):
 
 ```{r}
 glimpse(ril_data)
@@ -96,11 +102,12 @@ include_graphics("../../figs/intro_to_r/data_in_R/select.png")
 The dataset above is not tiny -- seventeen columns accompany the 593 rows of data. To simplify your life, use [`dplyr`](https://dplyr.tidyverse.org/)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function to limit the variables of interest:  
 
 
-- `location`: The plant's location. The pollinator visitation experiment was limited to two locations  (either `SR` or `GC`), while the hybrid seed formation study was replicated at four locations (`SR`, `GC`, `LB` or `US`).  This should be a `<chr>` (character), and it is!
+- `location`: The plant's location. The pollinator visitation experiment was limited to two locations  (either `SR` or `GC`), while the hybrid seed formation study was replicated at four locations (`SR`, `GC`, `LB` or `US`).  This should be stored as a `<chr>` (character), and it is!
 - `prop_hybrid`: The proportion of genotyped seeds that were hybrids.   
 - `mean_visits`: The mean number of pollinator visits recorded (per fifteen minute pollinator observation) for that RIL genotype at that site.  This should be a number `<dbl>` (double), and it is.
-- `petal_area_mm`: The area of the petals (in $mm^2$).  This should be a number `<dbl>` (double), and it is!       
-- `asd_mm`: The distance between anther (the place where pollen comes from) and stigma (the place that pollen goes to) on a flower. The smaller this number, the easier it is for a plant to pollinated itself. This should be a number `<dbl>` (double), and it is.  
+- `petal_color`: The color of the petal (pink or white).  
+- `petal_area_mm`: The petal area (in $mm^2$).  This should be a number `<dbl>` (double), and it is!       
+- `asd_mm`: The distance between anther (the place where pollen comes from) and stigma (the place that pollen goes to) on a flower. The smaller this number, the easier it is for a plant to pollinate itself. This should be a number `<dbl>` (double), and it is.  
 - `growth_rate`: This should be a number but is a <`chr`> character.  We will address why this is a problem and how to fix it in the next sub-section.  
 
 ```{r}
@@ -129,7 +136,7 @@ ril_data |>
 
 ### Warning: R doesn't remember changes until you assign them.   
 
-I like to test my code before overwriting the old data with the new. So, now that we see that our code worked as expected, enter the following. Otherwise `ril_data` is unchanged
+I like to test my code before overwriting the old data with the new. The code above was the "testing." Now that we see that our code worked as expected, enter the following. If we fail to do this assignment, `ril_data` is unchanged.
 
 
 ```{r}
@@ -144,7 +151,7 @@ ril_data <- ril_data |>
 
 ### Warning: Consider order  
 
-Remember: once you rename a column, the old name no longer exists in the pipeline. With this in mind consider the code below. Which code will work? `r mcq(c("A" , "B", "C", "A and B", answer = "A and C", "B and C", "It all works", "none of it works"))`
+Remember: once you rename a column, the old name no longer exists in the pipeline. With this in mind, consider the code below. Which code will work? `r mcq(c("A" , "B", "C", "A and B", answer = "A and C", "B and C", "It all works", "none of it works"))`
 
 Feel free to mess around in the webR environment below (data and packages are loaded for you) to see for yourself.
 

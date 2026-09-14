@@ -52,6 +52,16 @@ By keeping data "tidy" (i.e. in a rectangle where each column represents a varia
 
 Together (and when combined with the pipe operator, `|>`) these tools allow us to get a lot done in R. In the next three chapters we learn how to use R to summarize single variable, and associations between variables in R. Thus we are well on our way, to being able to (1) load (2) visualize (3) work with, and (4) summarize data reproducibly in R. WOohooHOO! 
 
+---
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1KYcCpZUh9--CqyfGA3LB32xBpF_u2InE/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/data_in_R/data_in_R_summary.mp3)
+:::
+
+
+---
+
 
 ### Chatbot tutor   {#data_in_R_summaryChatbot}
 

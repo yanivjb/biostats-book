@@ -59,6 +59,11 @@ ril_data <- ril_data |>
          visits     = mean_visits)
 ```
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/14tsrZWigKaxBEySPGD3sZ9nryp6BcQ8j/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/data_in_R/modifying_columns.mp3)
+:::
+
 --- 
 
 ### Why clean a column?
