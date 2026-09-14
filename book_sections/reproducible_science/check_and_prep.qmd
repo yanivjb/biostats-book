@@ -19,6 +19,10 @@
 
 :::
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1FDjrUeuBtO7e963_uW2XN3pXl022EmLO/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/reproducible_science/chech_and_prep.mp3)
+:::
 --- 
 
 ```{r}
@@ -93,7 +97,7 @@ glimpse(ril_data)
 :::
 
 
-**[`View()`](https://tibble.tidyverse.org/reference/view.html) function** opens up a new window in `R` (as a tab in the pane with your script) showing the complete data sheet. Again, I use this regularly  but you should never include it in a saved R script. If someone wants to View the data they can - they don't need to know that you did.
+**[`View()`](https://tibble.tidyverse.org/reference/view.html) function** opens up a new window in `R` (as a tab in the pane with your script) showing the complete data sheet. Again, I use this regularly  but you should never include it in a saved R script. If someone wants to [`View()`](https://tibble.tidyverse.org/reference/view.html) the data they can - they don't need to know that you did.
 
 ::: {.callout-note collapse="true"}
 ## Expand to see output of `View(ril_data)`
@@ -118,7 +122,6 @@ R makes it very hard to work with column names that start with a number or inclu
 We will try this out on the `iris` data set built into `R`. Note that I reassigned the output of `clean_names(iris)` to `iris` to make the new names stick. Remember that the [`janitor`](https://sfirke.github.io/janitor/index.html) package must be installed and loaded.
 
 ```{r}
-#| echo: false
 library(janitor)
 library(dplyr)
 
@@ -131,7 +134,7 @@ glimpse(iris)
 ```
 :::
 
-As discussed earlier, it's best to have descriptive column names that are not too long. `clean_names()` cannot do this for us. But we can manually reassign names with [`dplyr`](https://dplyr.tidyverse.org)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function. The code below renames the `petal_area_mm` column in `ril_data` to `petal_area`.
+[As discussed earlier](#collecting_data), it's best to have descriptive column names that are not too long. [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html) cannot do this for us. But we can manually reassign names with [`dplyr`](https://dplyr.tidyverse.org)'s [`rename()`](https://dplyr.tidyverse.org/reference/rename.html) function. The code below renames the `petal_area_mm` column in `ril_data` to `petal_area`.
 
 
 
@@ -154,7 +157,7 @@ ril_data <- read_csv(path) |>        #pipe data
 :::fyi
 
 
-We have previously seen that it's easiest to analyze tidy data, but not all data are tidy. While there are many ways for data to be untidy, one common untidy data format is the "wide format."  You can use the `pivot_longer()` function in the [`tidyr`](https://tidyr.tidyverse.org/) package, to tidy such data (@fig-pivot). 
+[We will soon see](#data_in_R) that it's easiest to analyze [tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html) (i.e. rectangular data where each column is a variable, each row is an observation, and each cell is a singular value), but not all data are tidy. While there are many ways for data to be untidy, one common untidy data format is the "wide format."  You can use the [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) function in the [`tidyr`](https://tidyr.tidyverse.org/) package, to tidy such data (@fig-pivot). 
 
 
 
@@ -178,7 +181,7 @@ See [this webpage](https://dcl-wrangle.stanford.edu/pivot-basic.html) for more i
 
 :::fyi
 
-Sometimes we want to pare down a dataset with many columns to only look at a few columns of interest. Say we only wanted the `location` `prop_hybrid` `mean_visits` and `petal_color` columns from `ril_data`. We can accomplish this with  [`dplyr`](https://dplyr.tidyverse.org)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function (see @fig-select):   
+Sometimes we want to pare down a dataset with many columns to only look at a few columns of interest. Say we only wanted the `location` `prop_hybrid` `mean_visits` and `petal_color` columns from `ril_data`. We can accomplish this with  [`dplyr`](https://dplyr.tidyverse.org)'s [`select()`](https://dplyr.tidyverse.org/reference/select.html) function (see @fig-select-a):   
 
 
 
@@ -208,7 +211,7 @@ glimpse(ril_data)
 #| echo: false
 #| fig-cap: "The idea of selecting columns."
 #| fig-alt: "dplyr's select function allows you to choose the columns you want to deal with."
-#| label: fig-select
+#| label: fig-select-a
 include_graphics("https://learn.r-journalism.com/wrangling/dplyr/images/select.png?classes=shadow")
 ```
 

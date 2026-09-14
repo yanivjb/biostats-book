@@ -31,6 +31,12 @@ library(tidyr)
 source("../../_common.R") 
 ```
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1MmhcJY7tQcsQaueTrQEO9Ok4Z--ivWxJ/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/reproducible_science/collecting_data.mp3)
+:::
+
 ---
 
 >*On two occasions I have been asked, "Pray, Mr. Babbage, if you put into the machine wrong figures, will the right answers come out?" ... I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question.*<br><br>

@@ -30,6 +30,12 @@ library(tidyr)
 source("../../_common.R") 
 ```
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1uWmgjQnfDSMf9ChoP7qHpz6c03pUFMxz/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/reproducible_science/storing_data.mp3)
+:::
+
 ---
 
 ```{r}

@@ -1,3 +1,10 @@
+---
+format: html
+webr:
+  packages: ['dplyr', 'readr' ,'ggplot2', 'janitor']
+  autoload-packages: true
+---
+
 ## • 3. Reproducibility summary {.unnumbered}
 
 **Links to:** [Summary](#reproducible_summarySummary),  [Chatbot Tutor](#reproducible_summaryChatbot), [Practice Questions](#reproducible_summaryPractice_questions),  [Glossary](#reproducible_summaryGlossary_of_terms), [R functions](#reproducible_summaryNew_r_functions) and [R packages](#reproducible_summaryR_packages_introduced), and [Additional resources](#reproducible_summaryAdditional_resources).    
@@ -22,7 +29,10 @@ library(dplyr)
 
 Science is hard. But, you can make it less painful by taking good care of your data, and saving your code which you make easy-to-understand and re-run.
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
 
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/10sMFR4W5xG6NApk-4tKcl69r2r6TxdIg/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/reproducible_science/reproducible_summary.mp3)
+:::
 
 ### Chatbot tutor  {#reproducible_summaryChatbot}
 
@@ -38,11 +48,10 @@ Try these questions!
 
 
 
-:::exercises
+---
 
+Use this table to answer the first two questions: 
 
-
-**Q1)** What is the biggest mistake in the table below? (find both correct answers)  `r longmcq(c("ID should be lower case","Its perfect, change nothing", answer = "the column name, *weight* is not sufficiently descriptive, it should include the units.", "date_collected_empty_means_same_as_above is too wordy, replace with *date*", answer = "Values for date_collected_empty_means_same_as_above are implied.","date is in Year-Month-Day format, while Month-Day-Year format is preferred."))`  
 
 ```{r}
 #| echo: false
@@ -55,6 +64,13 @@ tibble(
   date_collected_empty_means_same_as_above = c("2024-03-01", "","" , "2024-03-15","" ))|>
   kable()
 ```
+
+:::exercises
+
+
+
+**Q1)** What is the biggest mistake in the table above? (find both correct answers)  `r longmcq(c("ID should be lower case","Its perfect, change nothing", answer = "the column name, *weight* is not sufficiently descriptive, it should include the units.", "date_collected_empty_means_same_as_above is too wordy, replace with *date*", answer = "Values for date_collected_empty_means_same_as_above are implied.","date is in Year-Month-Day format, while Month-Day-Year format is preferred."))`  
+
 `r hide("Click here for explanation")`
 
 While some of these (like the long name for date) are clearly shortcomings, spreadsheets should never leave values implied. 
@@ -66,20 +82,32 @@ While some of these (like the long name for date) are clearly shortcomings, spre
 
 **Q2)** What would you expect in a data dictionary accompanying the table above? (select all correct) `r longmcq(c(answer = "The units for weight.",answer = "A statement that date is in Year-Month-Day format", answer = "A statement explaining that in the  date collected column, empty means same as above."))`  
 
+:::
+---  
+
+:::exercises
+**Q3)** How do you read data from a Excel sheet, called *raw_data* in an Excel filed named *bird_data.xlsx* located  inside the R project  you are working in? `r longmcq(c( "You cannot load excel files into R. You must save it as a csv, and read it in with <code>read_csv()</code>.",answer = "Assuming the readxl package is installed and loaded, type <code>read_xlsx(path = \"bird_data.xlsx\", sheet = \"raw_data\")</code>.",  "While you can read excel into R, you cannot specify the sheet."))`  
 
 ---  
 
+**Q4)** What should you do to make code reproducible?  (pick the best answer) `r longmcq(c("Specify the working directory with <code>setwd()</code>","Show the packages installed with <code>install.packages()</code>", answer = "Restart R once your done, and rerun your script to see if it works"))`
 
-**Q3)** How do you read data from a Excel sheet, called *raw_data* in an Excel filed named *bird_data.xlsx* located  inside the R project  you are working in? `r longmcq(c( "You cannot load excel files into R. You must save it as a csv, and read it in with read_csv().",answer = "Assuming the readxl package is installed and loaded, type read_xlsx(path = \"bird_data.xlsx\", sheet = \"raw_data\").",  "While you can read excel into R, you cannot specify the sheet."))`  
+:::
 
----  
+```{webr-r}
+# feel free to work in R here
 
-**Q4)** What should you do to make code reproducible?  (pick the best answer) `r longmcq(c("Specify the working directory with setwd()","Show the packages installed with install.packages()", answer = "Restart R once your done, and rerun your script to see if it works"))`
+```  
+
 
 ---
 
 
-**Q5)** As we saw in this chapter, R has a built-in dataset called *iris*. You can look at it or give it to functions by typing *iris*. Which variable type is the *Species* in the *iris* dataset? `r longmcq(c("numeric", "logical", "character", answer = "factor"))` 
+:::exercises
+
+
+
+**Q5)** As we saw in this chapter, R has a built-in dataset called *iris*. You can look at it or give it to functions by typing *iris*. Which variable type is the *Species* in the *iris* dataset? `r longmcq(c("numeric <code>&lt;dbl&gt;</code>", "logical <code>&lt;lgl&gt;</code>", "character <code>&lt;chr&gt;</code>", answer = "factor <code>&lt;fct&gt;</code>"))`
 
 ---
 
@@ -88,6 +116,15 @@ While some of these (like the long name for date) are clearly shortcomings, spre
 :::
 
 **For the following question consider the** ***diabetes dataset*** available at: https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/diabetes.csv 
+
+
+```{webr-r}
+# feel free to work in R here
+library(dplyr)
+library(readr)
+library(janitor)
+```  
+
 
 :::exercises
 
@@ -117,15 +154,15 @@ ggplot(silphium_data, aes(x = location, y = yield))+
 ```
 
 :::exercises
-**Q8)** The script above worked fine on my computer yesterday, but today I opened up a new R session on the very same computer and it failed. What went wrong? `r mcq(c("I set my working directory", "I used an absolute path, not a relative path",answer = "I did not load the libraries in my script", "I used the View function"))`
+**Q8)** The script above worked fine on my computer yesterday, but today I opened up a new R session on the very same computer and it failed. What went wrong? `r mcq(c("I set my working directory", "I loaded data from an absolute path, not a relative path",answer = "I did not load the libraries in my script", "I used the View function"))`
 
 ---
 
-**Q9)** what about the script would make it work on my computer (once the thing above is fixed) but not on another computer? `r mcq(c(answer = "I set my working directory", "I used an absolute path, not a relative path", "I did not load the libraries in my script", "I used the View function"))`
+**Q9)** What about this script would prevent it from working on someone else's computer but allow it to work on mine?  `r mcq(c(answer = "Setting this working directory.", "Loading data from an absolute path, not a relative path.", "Neglecting to load libraies.", "Using the View function"))`
 
 ---
 
-**Q10)** What about the script is annoying for someone using this code (once it works) and should be removed, but doesn't stop our code from working? `r mcq(c( "I set my working directory", "I used an absolute path, not a relative path", "I did not load the libraries in my script",answer = "I used the View function"))`
+**Q10)** What about the script is annoying for someone using this code (once it works) and should be removed, but doesn't stop our code from working? `r mcq(c( "I set my working directory", "I loaded data from an absolute path, not a relative path", "I did not load the libraries in my script",answer = "I used the View function"))`
 ::: 
 
 

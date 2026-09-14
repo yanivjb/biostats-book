@@ -14,6 +14,11 @@
 
 :::
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1Yj_Nhqx_DvAKtDPF_-wKJNlz8edafKk1/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/reproducible_science/load_data.mp3)
+:::
+
 --- 
 
 A tough part of `R` is that the first thing you need to do is not necessarily the easiest thing to do. This is clear with loading data. Getting data from a spreadsheet into `R` requires a bunch of `R` and computer skills. To load data into R, you must understand a few topics from the [first chapter of our intro to R](#getting_started) - specifically  the idea of [variable assignment](#assignment), and [using functions](#functions) from [packages](#packages). 
