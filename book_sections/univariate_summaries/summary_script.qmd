@@ -1,7 +1,10 @@
 ### • 5. Summarizing Data: Code {.unnumbered #summarizing_data_script}
 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
 
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1L8idpgiZdKZnE92cFbcN52Me0-ZOe80D/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/univariate_summaries/summarizing_data_code.mov)
+:::
 
 ### Overview
 

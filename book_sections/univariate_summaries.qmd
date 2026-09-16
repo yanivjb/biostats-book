@@ -60,6 +60,16 @@ You have a fresh new dataset and want to check it out. How do you go about under
 :::     
 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1K4cWgblSdxlXcdtfJs6y1hn_jaLZwOoY/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../audio/intro_to_r/simple_summaries.mp3)
+
+:::
+
+
+
+
+
 ---  
 
 

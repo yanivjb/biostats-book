@@ -56,6 +56,11 @@ gc_rils <- ril_data |>
 :::     
 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/13D0x9aa8yfiqg_-xIP0j0HZVuxSJaGJh/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/univariate_summaries/shanging_shape.mp3)
+:::
+
 --- 
 
 ### Statistical approaches should follow biology   
@@ -91,21 +96,23 @@ a/b
 ```
 
 
+*There is nothing inherently "natural" about the linear scale.* In fact, [some research (review by @asmuth2018)](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12615) suggests that humans naturally think in log scale, and only begin thinking in linear scale with more formal schooling. That is, kids tend to think that the difference between seventy-five and eighty is smaller than the difference between five and ten.    
 
-There is nothing inherently “natural” about the linear scale — in fact, [some research (review by @asmuth2018)](https://onlinelibrary.wiley.com/doi/10.1111/cogs.12615) suggests that humans naturally think in log scale, and only begin thinking in linear scale with more formal schooling. That is, kids tend to think that the difference between seventy-five and eighty is smaller than the difference between five and ten. In a sense, they’re right — ten is double five, while eighty is only $\frac{16}{15}$ of seventy-five. Of course, in another sense, they’re wrong — the difference is five in both cases.
+- In a sense, the kids are right. Ten is double five, while eighty is only $\frac{16}{15}$ of seventy-five.    
+- Of course, in another sense, they’re wrong. The difference is five in both cases.   
 
-It turns out that different variables naturally vary on different scales. For example, growth rate, area, volume, and other such processes often generate right-skewed data (growth is exponential — at least initially — area scales with the square of length, volume scales with the cube, etc.). It’s therefore not surprising that *Clarkia* stem diameter in the RILs has a fairly symmetric distribution, while petal area is right-skewed (@fig-diamVarea).  
+It turns out that different variables naturally vary on different scales. For example, growth rate, area, volume, and other such processes often generate right-skewed data (growth is exponential... at least initially, area scales with the square of length, volume scales with the cube, etc.). It’s therefore not surprising that *Clarkia* stem diameter in the RILs has a fairly symmetric distribution, while petal area is right-skewed (@fig-diamVarea).  
 
-By contrast, variables that exhibit diminishing returns or are constrained by hard limits often result in left-skewed distributions (as we saw in our genotyping efforts, where we aimed to genotype eight seeds per mom — and no more — but sometimes ended up with fewer).
+By contrast, variables that exhibit diminishing returns or are constrained by hard limits often result in left-skewed distributions. We saw this in our genotyping efforts, where we aimed to genotype eight seeds per mom, and stopped once we got eight. But we sometimes had fewer than eight seeds as some moms only had e.g. six seeds.
 
 ---
 
 ### To transform or not to transform? That is the question {#changing_shape_to-transform-or-not-to-transform-that-is-the-question}    
 
-When the underlying biological process results in nonlinear data with asymmetric distributions, transforming the data is often appropriate — even if you don’t know the specific biological mechanism. So: transforming your data is often OK, but is it a good idea?
+When the underlying biological process results in nonlinear data with asymmetric distributions, transforming the data is often appropriate (even if you don't know the mechanism underlying this nonlinearity). But being statistically valid is one thing; being a good idea is another thing. 
 
 - **Why transform?** Because linear and symmetric data are often easier to interpret and typically better suited for statistical modeling.  
-- **Why not transform?** Truth and clear understanding of data is more important than having symmetric distributions. So while transforming is perfectly legitimate, it can make your results harder to communicate (I, for one, find thinking on the log scale difficult — even if four-year-olds do not), since most people are accustomed to a linear world. You may also worry that knee-jerk transformation might hide the very biological processes that we are aiming to understand. Finally, some data can’t be made symmetric or unimodal no matter what transformation you apply. For example, it’s rare for transformations to make multimodal data unimodal. So take this all into consideration before jumping to transform your data to make it have an appealing shape. 
+- **Why not transform?** Conveying a truw and clear understanding of data is more important than having symmetric distributions. So while transforming is perfectly legitimate, it can make your results harder to communicate (I, for one, find thinking on the log scale difficult,  even if four-year-olds do not), since most people are accustomed to a linear world. You may also worry that knee-jerk transformation might hide the very biological processes that we are aiming to understand. Finally, some data can’t be made symmetric or unimodal no matter what transformation you apply. For example, it’s rare for transformations to make multimodal data unimodal. So take this all into consideration before jumping to transform your data to make it have an appealing shape. 
 
 ---
 
@@ -113,8 +120,8 @@ When the underlying biological process results in nonlinear data with asymmetric
 
 In addition to letting biology guide your decisions, there are some actual rules that determine when a transformation is legitimate:
 
-- **Transformed values must have a one-to-one correspondence with the original values.** For example, don’t square values if some are negative and others positive — you’ll lose information.  
-- **Transformed values must maintain a monotonic relationship with the original values.** This means that the order of values should be consistent — larger values in the original data should remain larger after transformation (it's also ok if large become small and small become large, so long as you interpret this correctly, and everyone stays in line).  
+- **Transformed values must have a one-to-one correspondence with the original values.** For example, don’t square values if some are negative and others positive, as you'll lose information about the sign of the data.  
+- **Transformed values must maintain a monotonic relationship with the original values.** This means that the order of values should be consistent i.e. larger values in the original data should remain larger after transformation (it's also ok if large become small and small become large, so long as you interpret this correctly, and everyone stays in line).  
 - **Transformations must not bias results by inadvertently dropping data.** For example, this can happen when a log transformation fails on zero or negative values, or if extreme values are removed during transformation.
 
 
@@ -150,7 +157,7 @@ b <- ggplot(gc_rils , aes(x = log10_petal_area))+
 a/b
 ```
 
-Transformation in R is remarkably straightforward. Simply use [`dplyr's`](https://dplyr.tidyverse.org/) [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) function to add a transformed variable. Below, I show a log base 10 transformation — one of the most common and useful approaches for right-skewed data.  @fig-log10 shows that this $log_{10}$ transformation changes the shape of the petal area distribution from right-skewed to roughly symmetric.
+Transformation in R is remarkably straightforward. Simply use [`dplyr`](https://dplyr.tidyverse.org/)'s [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html) function to add a transformed variable. Below, I show a log base 10 transformation, which is one of the most common and useful approaches for right-skewed data.  @fig-log10 shows that this $log_{10}$ transformation changes the shape of the petal area distribution from right-skewed to roughly symmetric.
 
 
 

@@ -12,6 +12,11 @@ webr:
 Links to: [Summary](#summarizing_summaries_chapter-summary). [Chatbot tutor](#summarizing_summaries_summaryChatbot) [Questions](#summarizing_summaries_practice-questions). [Glossary](#summarizing_summaries_glossary-of-terms). [R functions](#summarizing_summaries_key-r-functions). [R packages](#summarizing_summaries_r-packages-introduced). [More resources](#summarizing_summaries_additional-resources).  
 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1BUHpJHt1k4CtKhaBuuLhhX495PHaCmop/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/univariate_summaries/summarizing_summaries.mp3)
+
+:::
   
 
 ## Chapter Summary  

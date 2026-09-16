@@ -71,6 +71,12 @@ You are continuing your exploration of a fresh new dataset. You have figured out
 
 :::     
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1b2hzAKze6gpLTtd8vTeXEX2h8m1MqNob/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/univariate_summaries/summarizing_center.mov)
+:::
+
 ---  
 
 
