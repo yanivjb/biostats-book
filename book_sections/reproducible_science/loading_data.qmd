@@ -83,7 +83,7 @@ Use the code below as an example of how to load a `.xlsx`. Make sure the [`readx
 library(conflicted)
 library(readxl)
 
-path     <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.xlsx"
+path     <- "https://github.com/yanivjb/biostats-book-data/raw/refs/heads/main/clarkia_rils.xlsx"
 
 
 ril_data <- read_excel(path)
