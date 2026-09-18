@@ -143,11 +143,31 @@ Swap from `read_csv()`  to  `read_excel()`  if you have a .xlsx file.
 :::fyi
 **Use relative paths.** 
 
-**A relative path** means we have a very short path to the data, and that path is relative to the `.Rproj` file. Importantly a relative path  will work on anyone's computer that has this folder. 
+
+A **relative path** describes the location of a file relative to your `.Rproj` file. For example:
+
+```{r}
+#| eval: false
+read_csv("data/clarkia_rils.csv")
+```
+Relative paths make your work easier to share: the code will work on anyone’s computer as long as they have the same project folder and file structure.
+
+In contrast, an **absolute path** gives the file’s full location on one computer. For example:
+
+```{r}
+#| eval: false
+read_csv("/Users/ybrandvain/Desktop/clarkia_reinforcement/data/clarkia_rils.csv")
+```
 
 
-You may see people use an absolute path (e.g., "~/Users/ybrandvain/Desktop/clarkia_reinforcement/clarkia_rils.csv"). This will work on my computer but not yours. So it makes sharing difficult.
+That path will work on my computer but probably not on yours.
 
-You may also run into code using the `setwd()` function. This is a way to navigate paths on your computer, but it can behave unpredictably on someone else’s machine. By contrast, the `.Rproj` framework essentially sets this path for you without the potentially bad side effects.
+
+---
+
+### Avoid `setwd()`
+
+**If you have never encountered `setwd()`,** congratulations—you can stop reading! If you have used it to change your working directory, avoid it here. It can behave unpredictably on someone else’s computer, making your work less reproducible. I would also hate for [Jenny Bryan to set your computer on fire](https://tidyverse.org/blog/2017/12/workflow-vs-script/).
+
 
 :::
