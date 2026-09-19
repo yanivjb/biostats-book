@@ -69,7 +69,7 @@ tibble(
 
 
 
-**Q1)** What is the biggest mistake in the table above?  `r longmcq(c("ID should be lower case","Its perfect, change nothing", "the column name, *weight* is not sufficiently descriptive, it should include the units.", answer = "date_collected_empty_means_same_as_above is too wordy, replace with *date*", answer = "Values for date_collected_empty_means_same_as_above are implied.","date is in Year-Month-Day format, while Month-Day-Year format is preferred."))`  
+**Q1)** What is the biggest mistake in the table above?  `r longmcq(c("ID should be lower case","Its perfect, change nothing", "the column name, *weight* is not sufficiently descriptive, it should include the units.", "date_collected_empty_means_same_as_above is too wordy, replace with *date*", answer = "Values for date_collected_empty_means_same_as_above are implied.","date is in Year-Month-Day format, while Month-Day-Year format is preferred."))`  
 
 `r hide("Click here for explanation")`
 

@@ -31,7 +31,7 @@ ril_data <- readr::read_csv(ril_link) |>
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 
-**Motivating Scenario:**   You are continuing your exploration of a fresh new dataset. You have figured out the shape, made the transformations you thought appropriate, and now want to summarize associations between two categorical variables.
+**Motivating Scenario:**   You are continuing your exploration of a fresh new dataset. You've gotten to know each variable on its own, and now want to summarize associations between two categorical variables.
 
 **Learning Goals: By the end of this subchapter, you should be able to:**  
 
@@ -75,23 +75,19 @@ gc_rils <- readr::read_csv(ril_link) |>
 
 
 
-Even the most complex analysis  should begin with clear summaries and visualizations of our data. So, before describing associations between categorical variables, let us revisit our univariate summaries and consider how to summarize categorical variables. 
-
-
 ```{r}
 #| column: margin
 #| echo: false
 #| message: false
 #| label: fig-visit
 #| warning: false
-#| fig-cap: "The number of plants that did (light grey) or did not (black) receive a visit from a pollinator."
+#| fig-cap: "The number of plants that did (light grey) or did not (black) receive a visit from a pollinator, shown as a stacked bar plot."
 #| fig-alt: "A stacked bar plot showing the number of plants that did (about one quarter) or did not (about three quarters) receive a visit from a pollinator."
 #| fig-height: 6
 
 ggplot(gc_rils,aes(x = 1, fill = visited))+
   geom_bar(color = "white")+
   scale_fill_manual(values = c("black","lightgrey") ) +
-  scale_y_continuous(expand = c(0,0)) + 
   theme_light()+
   labs( title = "Unconditional data")+
   theme(axis.text.y = element_text(size= 28),
@@ -110,10 +106,41 @@ ggplot(gc_rils,aes(x = 1, fill = visited))+
 ```
 
 
-- **First, we visualize!** @fig-visit shows that only a quarter of flowers were visited by a pollinator under our watch. We learn how to do this [below](#viz_two_categorical_vars).   But for now, consider the choices available to you. I report the data as counts, and as a "stacked" barplot. But these could be presented side-by-side and/or as proportions. I will pepper in some guiding data visualization  principles as we go, and dive deeper into data visualization later in the book. But for now, let these principles guide you: 
+
+
+```{r}
+#| column: margin
+#| echo: false
+#| message: false
+#| label: fig-visitb
+#| warning: false
+#| fig-cap: "The percentage of plants that  did not (black) or did (light grey) receive a visit from a pollinator, shown as a grouped bar plot."
+#| fig-alt: "A grouped bar plot showing the percentage of plants that did not (about three quarters) or did (about one quarter) receive a visit from a pollinator."
+#| fig-height: 6
+library(scales)
+ggplot(gc_rils, aes(x = visited, fill = visited)) +
+  geom_bar(aes(y = after_stat(prop), group = 1), 
+             fill =  c("black","lightgrey"), color = "black") +
+  scale_y_continuous(labels = percent_format(),
+                     breaks = seq(0,1,.25), limits = c(0,1)) +
+  theme(axis.text.y = element_text(size= 28,angle = 90),
+        axis.text.x = element_text(size= 28),
+        axis.title.y = element_text(size= 28),
+        axis.title.x = element_text(size= 28),
+        legend.text = element_text(size= 28),
+        legend.title = element_text(size= 28),
+        plot.title = element_text(size=34),
+        legend.position ="none")
+```
+
+
+Even the most complex analysis should begin with clear summaries and visualizations of our data. So, before describing associations between categorical variables, let us revisit our univariate summaries and consider how to summarize categorical variables. 
+
+
+- **First, we visualize!** @fig-visit and @fig-visitb show that roughly three quarter of flowers at GC were not visited by a pollinator under our watch. I will show you how to make plots like these [below](#viz_two_categorical_vars).  But for now, I want you to consider the visualization choices available to you, and consider the different strengths and weaknesses of @fig-visit and @fig-visitb compared to one another and to other potential visualizations.  I will pepper in some guiding data visualization  principles as we go, before we address these topics in greater depth at the end of the book. But for now, let these principles guide you: 
    - Show all the data. 
    - Show the data honestly.  
-   - Make patterns easy to see. </br></br>      
+   - Make patterns easy to see.      
 
 - **Next, we summarize!** A proportion (e.g., the proportion of pink flowers) is a special kind  of mean where one outcome (e.g., pink flowers) is set to 1 and the other (e.g., white flowers) is set to 0. So we can calculate a proportion as the number of pink flowers divided by the total number of plants with known petal color.   
     - **We summarize categorical variables in R** by taking advantage of the fact that R considers `TRUE` to equal one and `FALSE` to equal zero. Within dplyr's [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html), we find counts with [`sum()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/sum.html)  and proportions  with  [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html):
@@ -186,7 +213,7 @@ ggplot(tmp,aes(fill = visited, x = petal_color))+
 
 
 
-We found that about one quarter of the RILs planted at GC received no pollinator visits under our watch. But this overall average obscures the key fact -- that not all plants are the same. We may believe, and  @fig-pinkvisit   shows, that the proportion of plants receiving visits differs conditional on the petal color! While nearly half of pink-flowered plants received a visit from a  pollinator under our watch, only about five percent of white-flowered plants did.
+We found that about three quarters of the RILs planted at GC received no pollinator visits under our watch. But this overall average obscures the key fact -- that not all plants are the same. We may believe, and  @fig-pinkvisit   shows, that the proportion of plants receiving visits differs conditional on the petal color! While nearly half of pink-flowered plants received a visit from a  pollinator under our watch, only about five percent of white-flowered plants did.
 
 Using the notation of probability theory, $P_{A \mid B}$ or P(A|B), meaning the "probability of A conditional on B," or alternatively, "The probability of A given B"
 

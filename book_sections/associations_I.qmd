@@ -68,7 +68,6 @@ ggpairs(gc_rils)
 #| message: false
 #| label: fig-allcor
 #| warning: false
-#| cap-location: margin
 #| fig-height: 9
 #| fig-width: 9
 #| fig-cap: "A matrix of plots showing associations among several variables in the RIL dataset. It includes combinations of categorical and continuous variables related to floral traits, pollinator visitation, and hybrid seed formation. The diagonals show distributions of individual variables, while the upper triangle displays correlation coefficients, and the lower triangle shows scatterplots or boxplots depending on the variable type."
@@ -88,12 +87,12 @@ gc_rils|> dplyr::filter(!is.na(petal_color))|>mutate(log_petal_area = log10(peta
 
 
 
-Of course, it’s not just the association between variables we care about — it’s what such associations imply. We want to:      
+Of course, our ultimate ambition is to do more than just characterize the association between variables. Rather, we ultimately aim to know what such associations imply. We want to:      
 
 - Predict one variable from another.   
 - Anticipate what some intervention will do to a biological system. 
 
-In future chapters we will see when and how we can achieve these higher goals. But for now, know that while such goals are noble, 
+In future chapters we will see when and how we can achieve these higher goals. But for now, know that a correlation is just a description. That is: 
 
 > We cannot make causal claims or even good predictions from correlations alone. 
 
@@ -107,14 +106,19 @@ include_graphics("../figs/summarizing_data/associations/corneqcaus.png")
 
 ```
 
-**“Correlation is not causation.”**  You've probably heard that before — but what does it actually mean? Let’s start by unpacking the two key concepts in that statement:
+**"Correlation is not causation."** While you've heard this before, let's break it down to internalize this idea. Let's look at the two key concepts in  that statement:
 
-- **Correlation** means that two variables are associated.   
-    - A positive association means that when one variable is large (or small) the other is often big (or large).  
+::: aside
+I am using the concept of "correlation" broadly for all types of associations. So this is not limited to the strict quantification  of correlation as $r = \frac{Cov_{x,y}}{s_x \times s_y}$ which we will learn soon.
+:::
+
+
+- Broadly, a **Correlation** means that two variables are associated. 
+    - A positive association means that when one variable is large (or small) the other is often large (or small).  
     - A negative association means that when one variable is large (or small) the other is often small (or large).
 
 
-- **Causation** means that changing one variable produces a change in the other. (For a deeper dive, see [Wikipedia](https://en.wikipedia.org/wiki/Causality).)
+- **Causation** means that changing one variable produces a change in the other (see [Wikipedia](https://en.wikipedia.org/wiki/Causality) for more discussion of "causation".)
 
 
 ```{r}
@@ -126,9 +130,9 @@ include_graphics("../figs/summarizing_data/associations/AmeetRKini - 11864912859
 ```
 
 
-Correlation is often confused for causation because it's easy to assume that if two things are associated, one must be causing the other — especially when the association feels intuitive or lines up with our expectations, but this is wrong. While correlation may hint at causation, a direct cause is neither necessary nor sufficient to generate a correlation.  Take the video in @fig-train  -- an alien might think this man is starting and stopping the train, but clearly he has nothing to do with the train starting or stopping. 
+Correlation is often confused for causation because it's easy to assume that if two things are associated, one must be causing the other. This is especially tempting when the association makes sense to us. But of course, this is wrong. While correlation may hint at causation, a direct cause is neither necessary nor sufficient to generate a correlation.  Take the video in @fig-train  -- an alien might think this man is starting and stopping the train, but clearly he has nothing to do with the train starting or stopping. 
 
-There are three basic reasons why and when we can have a correlation without a causal relationship-- Coincidence, Confound, and Reverse causation.   
+Three mechanisms may underlie a correlation without a causal relationship: Coincidence, Confound, and Reverse causation.   
 
 - **Coincidence:**    Chance is surprisingly powerful. In a world full of many possible combinations between variables, some strong associations will arise purely by luck. Later sections of the book will show how to evaluate the "NULL" hypothesis that an observed association arose by chance.   
 
@@ -179,7 +183,7 @@ c <- ggplot(gc_rils , aes(x = petal_area_mm, y = prop_hybrid))+
 
 - **Confounding:** An association between two variables may reflect not a causal connection between them -- but rather the fact that both are caused by a third variable (known as a confound).  Such confounding may be at play in our RIL data -- we observe that anther–stigma distance is associated with the proportion hybrid seed, but anther–stigma distance is also associated with petal area (presumably because both are caused by flower growth), which itself is associated with the proportion of hybrids (@fig-confound). So, does petal area or anther stigma distance (or both or neither) cause an increase in proportion of hybrid seed? The answer awaits better data, or at least better analyses (see section on causal inference), but I suspect that petal area, not anther stigma distance "causes" proportion hybrid. Unfortunately, we rarely know the confound, let alone its value. So, interpreting any association as causation requires exceptional caution.     
 
--  **Reverse causation:** @fig-switchx shows that pink flowers are more likely to receive a pollinator than are white flowers. We assume this means that pink attracts pollinators-- and with the caveat that we must watch out for coincidence and confounds, this conclusion makes sense. However, an association alone cannot tell if pink flowers attracted pollinators or if pollinator visitation turned plants pink. In this case the answer is clear -- petal color was measured for RILs in the greenhouse, and there’s no biological mechanism by which a pollinator could change petal color. However, these answers require us to bring in biological knowledge --  the data alone can’t tell us which way the effect goes. 
+-  **Reverse causation:** @fig-switchx shows that pink flowers are more likely to receive a pollinator than are white flowers. We assume this means that pink attracts pollinators, and with the caveat that we must watch out for coincidence and confounds, this conclusion makes sense. However, an association alone cannot tell if pink flowers attracted pollinators or if pollinator visitation turned plants pink. In this case the answer is clear -- petal color was measured for RILs in the greenhouse, and there’s no biological mechanism by which a pollinator could change petal color. However, these answers require us to bring in biological knowledge --  the data alone can’t tell us which way the effect goes. 
  
  
 ```{r}
@@ -250,11 +254,11 @@ a+b
 ```
 
 
-This issue isn’t just theoretical — I’m currently grappling with a real case in which the direction of causation is unclear. In natural hybrid zones, white-flowered *parviflora* plants tend to carry less genetic ancestry from *xantiana* (their sister taxon)  than do pink-flowered *parviflora* plants. There are two potential explanations for this observation:   
+I'm dealing with this issue right now! In natural hybrid zones, white-flowered *parviflora* plants tend to carry less genetic ancestry from *xantiana* (their sister taxon)  than do pink-flowered *parviflora* plants. There are two potential explanations for this observation:   
 
-1. Perhaps, as the  RIL data suggests, white-flowered *parviflora* plants are less likely to hybridize with *xantiana* than are pink-flowered *parviflora*, so white-flowered plants have less *xantiana* ancestry (pink flowers cause more gene flow).       
+1. Perhaps, as the  RIL data suggests, white-flowered *parviflora* plants are less likely to hybridize with *xantiana* than are pink-flowered *parviflora*. Thus, white parviflora came from a lineage of white-petalled plants whose petal color helped prevent introgressive hybridization. As such white-flowered plants have less *xantiana* ancestry (pink flowers cause more gene flow).       
 
-2. Alternatively, all *xantiana* are pink-flowered, white-flowered *parviflora* can be white or pink. So maybe the pink flowers are actually caused by ancestry inherited from *xantiana* (more gene flow causes pink flowers). 
+2. Alternatively, because all *xantiana* are pink-flowered, while  *parviflora* can be white or pink, it's possible that pink-flowered parviflora plants acquired their pink color from introgressive hybridization with *xantiana* (more gene flow causes pink flowers). 
 
 I do not yet know the answer. 
 
