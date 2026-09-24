@@ -13,6 +13,12 @@ library(knitr)
 
 Here's a brief run down of the key functions and pipelines used in this chapter. 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1dEU5IKr3w-oCK3y6Z9inzkkVoeieuGV4/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_I/associations1_script.mp3)
+:::
+
+
 ## Two categorical variables 
 
 Let's look at a new (classic) data set - the survival of adults sitting first class on the Titanic. The code below takes the data from old-R style into the tidyverse framework we're used to. The data now look like this:

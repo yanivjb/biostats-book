@@ -48,6 +48,14 @@ ril_data <- readr::read_csv(ril_link) |>
 
 :::     
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1LyEVDQ56eG7jdmwNOpWfxNlRpjpYkxIi/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_I/association2cats.mp3)
+:::
+
+
+
 ---
 
 
@@ -140,9 +148,9 @@ Even the most complex analysis should begin with clear summaries and visualizati
 - **First, we visualize!** @fig-visit and @fig-visitb show that roughly three quarter of flowers at GC were not visited by a pollinator under our watch. I will show you how to make plots like these [below](#viz_two_categorical_vars).  But for now, I want you to consider the visualization choices available to you, and consider the different strengths and weaknesses of @fig-visit and @fig-visitb compared to one another and to other potential visualizations.  I will pepper in some guiding data visualization  principles as we go, before we address these topics in greater depth at the end of the book. But for now, let these principles guide you: 
    - Show all the data. 
    - Show the data honestly.  
-   - Make patterns easy to see.      
+   - Make patterns easy to see. </br></br>       
 
-- **Next, we summarize!** A proportion (e.g., the proportion of pink flowers) is a special kind  of mean where one outcome (e.g., pink flowers) is set to 1 and the other (e.g., white flowers) is set to 0. So we can calculate a proportion as the number of pink flowers divided by the total number of plants with known petal color.   
+- **Next, we summarize!** A proportion (e.g., the proportion of flowers receiving a pollinator visit) is a special kind  of mean where one outcome (e.g., receiving a pollinator visit) is set to 1 and the other (e.g., not receiving a pollinator visit) is set to 0. So we can calculate a proportion as the number of number of flowers receiving a pollinator visit divided by the total number of flowers with pollinator observations.     
     - **We summarize categorical variables in R** by taking advantage of the fact that R considers `TRUE` to equal one and `FALSE` to equal zero. Within dplyr's [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html), we find counts with [`sum()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/sum.html)  and proportions  with  [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html):
 
 ```{r}
@@ -215,7 +223,7 @@ ggplot(tmp,aes(fill = visited, x = petal_color))+
 
 We found that about three quarters of the RILs planted at GC received no pollinator visits under our watch. But this overall average obscures the key fact -- that not all plants are the same. We may believe, and  @fig-pinkvisit   shows, that the proportion of plants receiving visits differs conditional on the petal color! While nearly half of pink-flowered plants received a visit from a  pollinator under our watch, only about five percent of white-flowered plants did.
 
-Using the notation of probability theory, $P_{A \mid B}$ or P(A|B), meaning the "probability of A conditional on B," or alternatively, "The probability of A given B"
+We can represent this in the notation of probability theory as $P_{A \mid B}$ or P(A|B), meaning the "probability of A conditional on B," or alternatively, "The probability of A given B".
 
 - P(Visit | Pink) $\approx$ 0.50.     
 - P(Visit | White) $\approx$ 0.05. 

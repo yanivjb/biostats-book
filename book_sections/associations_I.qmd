@@ -55,6 +55,12 @@ You're curious to know the extent to which two variables are associated and need
 
 :::     
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/19eLAMqdmEFaXqCrxhfmbsJiYQCoBgaYA/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../audio/intro_to_r/associationsI.mp3)
+:::
+
+
 ---
 
 ```{r}
@@ -113,7 +119,7 @@ I am using the concept of "correlation" broadly for all types of associations. S
 :::
 
 
-- Broadly, a **Correlation** means that two variables are associated. 
+- **Correlation** means that two variables are statistically associated. 
     - A positive association means that when one variable is large (or small) the other is often large (or small).  
     - A negative association means that when one variable is large (or small) the other is often small (or large).
 

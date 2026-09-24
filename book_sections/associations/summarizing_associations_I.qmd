@@ -31,6 +31,14 @@ include_graphics("../../figs/summarizing_data/associations/xkcd_correlation.png"
 
 Associations reveal how variables relate to one another - e.g. if they tend to increase together, differ across groups, or cluster. Differences in conditional means (or proportions) describe how a numeric (or categorical) response variable varies across levels of a categorical explanatory variable. While these summaries can highlight patterns, interpretation requires care: strong associations don’t necessarily imply causation, and predictions may not hold across contexts or datasets.
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1JuGyjlicU3dXFIyWKjnfKJTuKWgtk4Zh/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_I/associations_I_summary.mp3)
+:::
+
+
+
 ### Chatbot tutor  {#summarizing_associations_chatbot_tutor_I}
 
 

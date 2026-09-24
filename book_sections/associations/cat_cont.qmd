@@ -81,13 +81,21 @@ You are continuing your exploration of a fresh new dataset. You have figured out
 
 ::: 
 
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1ShzDEfpBxyl39PT3i9-t_6hDPpTjifSL/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_I/associations_I_cat_numer.mp3)
+:::
+
+
 ---  
 
 
 
 We might expect that *parviflora* plants known to have attracted a pollinator would produce more hybrid seeds than those that were not. After all, pollen must be transferred for hybridization to occur, and visits from pollinators are the main way this happens. That seems biologically reasonable. Of course, in statistics, such expectations must be tested with actual data.
 
-In this section, we explore how to visualize and quantify associations between a categorical explanatory variable (e.g., whether a plant was visited by a pollinator) and a numeric response variable (e.g., the proportion of that plant’s seeds that are hybrids). We'll see how group means and other summaries can reveal patterns in the data — and how to interpret what those patterns might mean biologically.  
+In this section, we explore how to visualize and quantify associations between a categorical explanatory variable (e.g., whether a plant was visited by a pollinator) and a numeric response variable (e.g., the proportion of that plant’s seeds that are hybrids). We'll see how group means and other summaries can reveal patterns in the data, and how to interpret what those patterns might mean biologically.  
 
 ## Summarizing associations: 
 
@@ -248,7 +256,7 @@ gc_rils                                                          |>
 
 Above, we found that on average, visited plants had a 0.299 higher proportion of hybrid seeds than not visited ones. That might seem like a big difference, but raw differences can be hard to interpret on their own. Is 0.299 a lot? A little? To better understand how meaningful that difference is, we can compare it to the variability in hybrid seed production. 
 
-Cohen’s D is a summary that addresses this question by standardizing the difference in means by the variability within groups (the pooled standard deviation), allowing for more intuitive comparisons across studies and systems.  For this dataset, that gives us a D of 1.47 (see calculation below) — a very large effect size (see guide in margin). This suggests that being visited (during our observation window) is strongly associated with producing more hybrid seeds.
+Cohen’s D is a summary that addresses this question by standardizing the difference in means by the variability within groups (the pooled standard deviation), allowing for more intuitive comparisons across studies and systems.  For this dataset, that gives us a D of 1.47 (see calculation below). This is considered a very large effect size (see guide in margin), abd suggests that being visited (during our observation window) is strongly associated with producing more hybrid seeds.
 
 $$\text{Cohen's D} = \frac{\text{Difference in means}}{\text{pooled sd}}$$
 
@@ -352,7 +360,7 @@ This shows both Cohen's D and a 95% confidence interval about this estimate. We 
 
 ## Visualizing a categorical x and numeric y  {#cat_cont_visualizing-a-categorical-x-and-numeric-y}   
 
-Visualizing the difference between means is surprisingly difficult. One particular concern is overplotting — because categorical variables have only a few possible values on the x-axis, data points can stack or overlap, which can obscure patterns in the data. Below I show some ways to best visualize such data. As in the previous section, our focus is on the clarity and honesty of presentation. We will make the plots prettier later.
+Visualizing the difference between means is surprisingly difficult. A common challenge is "overplotting," that is, because categorical variables have only a few possible values on the x-axis, data points can stack or overlap, which can obscure patterns in the data. Below I show some ways to best visualize such data. As in the previous section, our focus is on the clarity and honesty of presentation. We will make the plots prettier later.
 
 
 ### Visualizing two distributions 
@@ -410,10 +418,10 @@ ggplot(gc_rils, aes(x = visited, y = prop_hybrid))+
 ggplot(gc_rils, aes(x = visited, y = prop_hybrid))+
     geom_jitter(height = 0, width = .2, alpha = .5, size = 2)
 
-#plot b) Bells and whistles
+#plot c) Bells and whistles
 ggplot(gc_rils, aes(x = visited, y = prop_hybrid))+
     geom_jitter(height = 0, width = .2, alpha = .5, size = 2)+
-    stat_summary(fun = "mean",color = "red", ,alpha = .5)+
+    stat_summary(fun = "mean",color = "red", alpha = .5)+
     stat_summary(aes(group =  1), fun= "mean", geom = "line", linetype = 2)
 ```
 
