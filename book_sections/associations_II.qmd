@@ -54,6 +54,13 @@ You're curious to know the extent to which two variables are associated and need
 
 ---
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1nseVoKYDyBLw-GcYKChCKCC3Ek1J4WzQ/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../audio/intro_to_r/associationsII.mp3)
+:::
+
+---
+
 ```{r}
 #| eval: false
 ```

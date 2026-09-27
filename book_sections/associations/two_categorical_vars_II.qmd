@@ -43,6 +43,14 @@ ril_data <- readr::read_csv(ril_link) |>
 
 :::     
 
+
+---
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/12A615uOcp7beJUmj1nARr4gNiM8C2tKt/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_II/2catsII.mp3)
+:::
+
 ---
 
 
@@ -291,7 +299,9 @@ We can find *r* by dividing the covariance by the product of standard deviations
 
 $$r_{x,y}= \frac{cov_{x,y}}{s_x s_y}$$
 
-We have previously seen the equation for a standard deviation: $$s_x = \sqrt{\frac{\sum{(x_i-\bar{x})^2 }}{n-1}}$$. For a binary variable, this equation is approximately $s_x=\sqrt{p_x (1-p_x)}$ (ignoring Bessel's correction).
+We have previously seen the equation for a standard deviation: $$s_x = \sqrt{\frac{\sum{(x_i-\bar{x})^2 }}{n-1}}$$ 
+
+For a binary variable, this equation is approximately $s_x=\sqrt{p_x (1-p_x)}$ (ignoring Bessel's correction).
 
 So in our case: 
 
@@ -330,7 +340,7 @@ r_{\text{pink, visited}}
 }
 \\[6pt]
 &=
-\frac{0.1}{\sqrt{0.048}}
+\frac{0.1}{0.219}}
 \\[6pt]
 &\approx 0.456.
 \end{aligned}
@@ -376,6 +386,30 @@ gc_rils |>
 gc_rils |>
   summarise(cor_pink_visited = cor(petal_color == "pink", visited  == "some_visits")) |> kable(digits = 4)
 ```
+
+---
+
+### $r$: effect size guide
+
+As in Cohen's D, what is a "large" or "small" correlation coefficient depends on the study, the question and the  field of study, but there are rough guides (see below). So our observed correlation between petal color and being visited by a pollinat 0.45  is large. 
+
+
+
+| Size              | Range of $\lvert r \rvert$    |
+|------------------|------------------------|
+| Not worth reporting | < 0.005               |
+| Tiny              | 0.005 – 0.10           |
+| Small             | 0.10 – 0.20         |
+| Medium            | 0.2 – 0.35           |
+| **Large**             | **0.35 – 0.50**           |
+| Very large        | 0.50 – 0.75          |
+| Huge              | $> 0.75$                |
+
+
+
+
+
+
 
 ---
 

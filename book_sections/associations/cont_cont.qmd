@@ -58,6 +58,14 @@ You are continuing your exploration of a new dataset. After checking its shape a
 
 :::     
 
+
+---
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/19BDzfi7_8cPYs-OSNeURk4ShZX0kIGUw/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_II/2conts.mp3)
+:::
+
 ---
 
 ## The covariance  {#cont_cont_the-covariance}   

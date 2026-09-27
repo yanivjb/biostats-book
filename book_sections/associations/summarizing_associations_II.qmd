@@ -30,6 +30,14 @@ include_graphics("https://imgs.xkcd.com/comics/cohort_and_age_effects_2x.png")
 
 Associations describe how variables relate to one another. Here we introduced covariance as a quantitative summary of how two variables vary together relative to what we would expect if they were unrelated. The covariance can be quantified as the mean of the products minus the product of the means ($\overline{XY} - \bar{X}\bar{Y}$) or the mean of the shared deviation from each mean ($\overline{(X_i-\bar{X})(Y_i-\bar{Y})}$). The correlation standardizes this to a unitless scale between -1 and 1. The strength of an association is just that, and in itself does not imply causation.
 
+---
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/18eOAVodGoTNGFQDfIPljchdVqMAjMF08/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_II/associationsIIsummary.mp3)
+:::
+
+
 ### Chatbot tutor  {#summarizing_associations_chatbot_tutor_II}
 
 
@@ -165,7 +173,7 @@ prop_xanANDxanChloro
  
 
 **Q4)**
- If having a *xantiana* chloroplast and being a *xantiana* plant were independent, what proportion of plants would you *expect* to be xantiana and have a *xantiana* chloroplast? `r fitb(0.16275, tol = 0.00076)`  
+ If having a *xantiana* chloroplast and being a *xantiana* plant were independent, what proportion of plants would you *expect* to be xantiana and have a *xantiana* chloroplast? `r fitb(0.16275, tol = 0.00076)`  (Include three digits past the decimal).
 
 `r hide("Refresher on the multiplication rule for independent events")`
 
@@ -175,10 +183,10 @@ $$ P(A \text{ and } B) = P(A) \times P(B) $$
 
 `r unhide()`
 
-**Q5)** Quantify the difference between the proportion of plants that are *xantiana* and have *xantiana* chloroplasts vs. what we expect if these two binary variables were independent. `r fitb( 0.2112958, tol = 0.0005)`  
+**Q5)** Quantify the difference between the proportion of plants that are *xantiana* and have *xantiana* chloroplasts vs. what we expect if these two binary variables were independent. `r fitb( 0.2112958, tol = 0.0005)`  (Include three digits past the decimal).
 
 **Q6)**
-What is the covariance between being a *xantiana* plant and having a *xantiana* chloroplast?  **Hint:** remember [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). `r fitb(0.2129184, tol = 0.001)`
+What is the covariance between being a *xantiana* plant and having a *xantiana* chloroplast?  **Hint:** remember [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction). `r fitb(0.2129184, tol = 0.001)` (Include three digits past the decimal).
 :::
 
 ---

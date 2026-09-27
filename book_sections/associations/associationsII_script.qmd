@@ -46,6 +46,15 @@ titanic_first_class_adults |>
 
 Here's a brief rundown of the key functions and pipelines used in this chapter. 
 
+
+
+---
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1yO0FyUKt-Si0w8bxp6mrIhuiONWBoCtW/view?usp=drive_link) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_r/associations_II/associationsIIscript.mp3)
+:::
+
 ## Two categorical variables 
 
 Let's return to the survival of adults sitting first class on the Titanic from the previous chapter. Again, the code below takes the data from old-R style into the tidyverse framework we're used to. 
