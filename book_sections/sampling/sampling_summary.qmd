@@ -33,6 +33,19 @@ Links to:   [Summary](#sampling_summary_chapter-summary). [Chatbot tutor](#sampl
 
 We almost never know the truth (the population parameter), but we estimate it from a sample. Random chance (aka sampling error) ensures that our estimate will deviate from the true parameter. If sampling error is our only issue we can envision the "sampling distribution" -- a histogram of what we would see if we repeated our study many times to characterize uncertainty. We quantify uncertainty as the "*standard error*" i.e. the standard deviation of the sampling distribution. We can decrease sampling error by increasing sample size. When samples are non-independent, we tend to underestimate our sampling error. When samples are not chosen at random, "*sampling bias*" can generate a systematic deviation between estimates and true population parameters. Random sampling is our best protection against non-independence and sampling bias.
 
+
+
+---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1cEC1bglfVKhL_uWtvEJuCGk7sGUFJ4I1/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/sampling/sampling_summary.mp3)
+
+:::
+
+--- 
+
 ### Chatbot tutor   {#sampling_summary_chatbot_tutor}
 
 :::tutor

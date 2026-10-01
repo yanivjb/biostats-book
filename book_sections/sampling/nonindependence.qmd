@@ -36,7 +36,17 @@ You are designing your study or critically evaluating someone else's research. Y
 
 :::
 
+
 ---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1VjOlFfglzSgkX66Dbt20co7wsbzFkvXe/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/sampling/nonindep.mp3)
+
+:::
+
+--- 
 
 
 ### Non-independence and a False Sense of Confidence

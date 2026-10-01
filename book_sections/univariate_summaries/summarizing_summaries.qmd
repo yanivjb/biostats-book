@@ -508,6 +508,12 @@ iris <- iris |>
 
 :::learnmore 
 
+**Web resources:**. 
+
+- [Mean, Median, and Mode from teacups giraffes](https://tinystats.github.io/teacups-giraffes-and-statistics/03_mean.html): This is awesome. I love this book I wish they wrote more of it.  
+
+- [Spread of the data from teacups giraffes](https://tinystats.github.io/teacups-giraffes-and-statistics/04_mean.html): This is awesome. I love this book I wish they wrote more of it.  
+
 **R Recipes:**    
 
 - [Compute summary statistics for a table](https://posit.cloud/learn/recipes/transform/TransformH):  Learn how to find summary stats within a [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html) call.   

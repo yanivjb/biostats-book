@@ -19,6 +19,17 @@ You are designing your study or critically evaluating someone else's research. Y
 :::
 
 
+---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/16hk04S4O87U_-Jfbh71s_nKb77vhujPu/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/sampling/sampling_bias.mp3)
+
+:::
+
+--- 
+
 ```{r}
 #| echo: false
 #| message: false

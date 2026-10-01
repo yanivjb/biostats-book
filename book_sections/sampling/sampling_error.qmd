@@ -27,6 +27,18 @@ You've collected data and have a sample estimate, and avoided sampling bias, but
 
 :::
 
+
+---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1flSBFQDXNo7xd1-_UcOU39iaHN613tsG/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/sampling/sampling_error.mp3)
+
+:::
+
+--- 
+
 ```{r}
 #| echo: false
 #| message: false

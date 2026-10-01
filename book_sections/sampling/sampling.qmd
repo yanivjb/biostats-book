@@ -19,6 +19,19 @@ We need to know about sampling to do statistics!
 4.  Explain what to do when you cannot sample randomly, and how to be cautious about interpreting data from a non-random sample.
 :::
 
+
+
+---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1FhO5QETSoKQla_CteWg0bs9At00v96R1/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/sampling/sampling.mp3)
+
+:::
+
+--- 
+
 ```{r}
 #| echo: false
 #| message: false
