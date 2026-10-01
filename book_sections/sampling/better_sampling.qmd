@@ -38,6 +38,15 @@ Because chance is inherent in sampling, some sampling error is unavoidable. We'v
 
 ---
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1pdO4-sB-DSf-Om-HAgoMdWlxYM-U1GoS/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/sampling/sampling_better.mp3)
+
+:::
+  
+---
+
 Later, we will spend time considering experimental design, but given that we just worked through how sampling can go wrong, let's consider how sampling and experimental design can go right. 
 
 **The ideal sample is a large random sample.**   

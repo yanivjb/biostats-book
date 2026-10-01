@@ -47,6 +47,16 @@ library(tidyr)
 
 :::
 
+
+---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1mcoQyf99KERpnO9gH7vMQcv355bUMjNx/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../audio/intro_to_stats/sampling/sampling_intro.mp3)
+
+:::
+  
 ---
 
 
