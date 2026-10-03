@@ -58,6 +58,16 @@ gc_rils <- ril_data |>
 
 ---
 
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1U8QrFUAoC4rj9fYIPQkSXT840nWPaMvP/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/uncertainty/infer.mp3)
+
+:::
+
+--- 
+
 We previously generated a bootstrap distribution with [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html). But this required some work on our part. As with much in R there are specialized packages that bootstrap for us. I like these packages because they make it easier to use, harder to mess up, and often coded more efficiently. 
 
 
@@ -78,7 +88,7 @@ The code below shows how to conduct the first two steps -- it makes a **HUGE** t
 
 ```{r}
 library(infer)
-boot_phyb <-  gc_rils %>%
+boot_phyb <-  gc_rils |>
   specify(response = prop_hybrid)    |>     # Specify variable of interest
   generate(reps = 5000, type = "bootstrap") # Generate 5000 bootstrap resamples
 ```

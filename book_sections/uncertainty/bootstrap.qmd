@@ -69,6 +69,15 @@ gc_rils <- ril_data |>
 ---
 
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/15Hu2qhFU_PiXJJgW3ZeDUIrNsTf4-9Cl/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/uncertainty/bootstrap.mp3)
+
+:::
+
+---
+
+
 A major question in evolution is how often two recently diverged species hybridize. If they almost never hybridize we don't need to consider how gene flow impacts the process of speciation. If hybridization is frequent, we must ask how populations maintain divergence despite ongoing gene flow. 
 
 How frequent is hybridization? It differs by species-pair, field site, individual phenotypes etc. For example $\approx 15\%$ of seeds on *Clarkia xantiana ssp parviflora* RILs planted at site GC were actually hybrids. This estimate comes from averaging across all individuals in our sample. We know by now that we could have sampled other individuals from the population, and we must quantify uncertainty in this estimate.

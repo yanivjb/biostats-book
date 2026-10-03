@@ -25,6 +25,15 @@ library(ggplot2)
 Links to: [Summary](#uncertainty_summary_chapter-summary). [Chatbot tutor](#uncertainty_summary_chatbot_tutor).  [Questions](#uncertainty_summary_practice-questions). [Glossary](#uncertainty_summary_glossary-of-terms). [R packages](#uncertainty_summaryR_packages_introduced). [R functions](#uncertainty_summary_key-r-functions). [More resources](#uncertainty_summary_additional-resources).
 ---
 
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1ZiEvGJdGu9W-AxBOKKb0SfEnqMf3Jd5i/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/uncertainty/boot_summary.mp3)
+
+:::
+
+--- 
+
 ## Chapter summary {#uncertainty_summary_chapter-summary}  
 
 In the previous chapter, we saw that knowing the sampling distribution is the key to quantifying sampling error. However, we never have access to the true sampling distribution because that would require knowing the entire population—at which point we wouldn't need to estimate uncertainty at all. Bootstrapping solves this problem by allowing us to approximate the sampling distribution using only our own sample. Bootstrapping works by repeatedly resampling our data with replacement to create many new samples. The resulting bootstrap distribution of estimates can then be used to quantify uncertainty, for example by calculating the bootstrap standard error (the standard deviation of the bootstrap distribution) or by finding the X% confidence interval to provide a range of plausible values for the true population parameter.
@@ -82,11 +91,11 @@ Come on. What are you even thinking.
 
 ---
     
-**Q2)** For real data, we can use the ___, which we make by sampling __ replacement to estimate with uncertainty.  `r mcq(c(answer = "Bootstrap distribution, with","Bootstrap distribution, without", "Sampling distribution, without","Sampling distribution, with"))`
+**Q2)** For real data, we can use the ________, which we make by sampling ________ replacement to estimate uncertainty.  `r mcq(c(answer = "Bootstrap distribution, with","Bootstrap distribution, without", "Sampling distribution, without","Sampling distribution, with"))`
 
 ---
     
-**Q3)** Which of these estimates tend to get bigger as sample sizes got smaller? (there is more than one right answer. find them all). **HINT:** playing with [this webapp](https://www.zoology.ubc.ca/~whitlock/Kingfisher/CIMean.htm) can help. `r mcq(c(answer = "Standard error", "Standard deviation","Mean", answer = "Confidence interval"))`
+**Q3)** Which of these estimates tend to get bigger as sample sizes got smaller? (there is more than one right answer. find them all). **HINT:** playing with [this webapp](https://www.zoology.ubc.ca/~whitlock/Kingfisher/CIMean.htm) can help. `r mcq(c(answer = "Standard error", "Standard deviation","Mean", answer = "The width of the 95% confidence interval"))`
 
 `r hide("Explanation of Q3")`   
 
@@ -162,7 +171,7 @@ ggplot(___, aes(___)) +
 `r hide("R code")`
 
 ```{r}
-wait_dist <-  faithful %>%
+wait_dist <-  faithful |>
     specify(response = waiting)           |>
     generate(reps = 5000, type = "bootstrap") |> 
     calculate(stat = "mean")

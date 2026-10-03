@@ -13,6 +13,17 @@ library(knitr)
 Here I provide streamlined versions of R scripts to estimate uncertainty by a bootstrap.
 
 
+---
+
+
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1YfhOD3PPokuyA1uBHdg7S19sad6VmoW8/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/uncertainty/boot_script.mp3)
+
+:::
+
+---
+
 ```{r}
 #| code-fold: true
 #| message: false
@@ -75,7 +86,7 @@ n_boots <- 5000
 #| eval: false
 library(dplyr)
 library(infer)
-gc_rils %>%
+gc_rils |>
     specify(response = prop_hybrid)               |> 
     generate(reps = n_boots, type = "bootstrap")  |> 
     calculate(stat = "mean")|>

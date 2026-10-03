@@ -59,6 +59,14 @@ gc_rils <- ril_data |>
 
 ---
 
+::: {style="font-size: 0.85em; color: #6b7280; margin-top: 0.8em; margin-bottom: 0em;"}
+
+**Alternative formats:** 🎥 [Watch](https://drive.google.com/file/d/1iSYw_OVu0dzmzufWRFZKvTsij4eVEnBu/view?usp=sharing) &nbsp;·&nbsp; 🎧 [Listen](../../audio/intro_to_stats/uncertainty/gotchas.mp3)
+
+:::
+
+---
+
 ## Bootstrap gone wrong  
 
 **Bootstrapping is great!** By bootstrapping, we can estimate uncertainty without relying on formulas or assumptions about the distribution of the data. But, as with all stats tools, there are limits to the use of bootstrapping. So before moving onto the next section, I present these limits and how to deal with them.
