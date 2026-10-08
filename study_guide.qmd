@@ -6,9 +6,8 @@ This [practice exam](https://github.com/yanivjb/biostats-book-data/raw/refs/head
 
 ### Practice app
 
-Practice for Exam 1 (chapters 0–12): pick random questions or focus on chapters and concepts, check your answers, and explain ideas in your own words. The questions come from my homework, quizzes, Chime Ins and the book. Each one also has AI-written versions that test the same idea in a new way (click **Different version**).
+Practice for Exam 1 (chapters 0–12): pick random questions or focus on chapters and concepts, check your answers, and explain ideas in your own words. The questions come from my homework, quizzes, Chime Ins and the book. Each one also has AI-written versions that test the same idea in a new way (click **Different version**). Like the exam, there's no code to write or run. Some questions are about R, but they ask about ideas, plots, and what code does.
 
-Like the exam, there's no code to write or run. Some questions are about R, but they ask about ideas, plots, and what code does.
 ---
 
 #### Non-AI version
