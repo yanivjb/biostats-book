@@ -1,6 +1,5 @@
----
-title: "Exam 1 study guide"
----
+# Review for exam 1.  {.unnumbered}
+
 
 Practice for Exam 1 (chapters 0–12). Pick random questions, or focus on chapters and concepts. Check your answers, and explain ideas in your own words. No R needed: like the exam, these questions are about ideas, plots and reasoning.
 

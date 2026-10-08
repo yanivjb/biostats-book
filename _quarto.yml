@@ -120,6 +120,7 @@ book:
         - book_sections/study_design/power_and_precision.qmd
         - book_sections/study_design/observational_studies.qmd
         - book_sections/study_design/study_design_summary.qmd
+    - study_guide.qmd
     - book_sections/filler.qmd
     - book_sections/stats_4_linear_models_index.qmd
     - part: book_sections/linear_models.qmd
@@ -284,7 +285,7 @@ filters:
 resources:
   - widget.html
   - widget-script.js 
-  
+  - study_guide/**
 
 # bootstraping  https://acclab.github.io/dabestr/articles/tutorial_basics.html
 # causal inference https://ngreifer.github.io/software/ causal
