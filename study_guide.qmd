@@ -1,0 +1,14 @@
+---
+title: "Exam 1 study guide"
+---
+
+Practice for Exam 1 (chapters 0–12). Pick random questions, or focus on chapters and concepts. Check your answers, and explain ideas in your own words. No R needed: like the exam, these questions are about ideas, plots and reasoning.
+
+[Open the study guide full screen ↗](study_guide/index.html){target="_blank"}
+
+```{=html}
+<iframe src="study_guide/index.html" title="Exam 1 study guide"
+        style="width:100%; height:85vh; border:1px solid #d5dccb; border-radius:10px;"></iframe>
+```
+
+Your progress is saved only in your own browser.
