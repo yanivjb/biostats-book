@@ -9,7 +9,7 @@ This is a knowledge base for the tutor bot's discussion mode (Mode 4). Each entr
 - **Hints**: escalating nudges, used one at a time and only after the student has tried.
 - **Related**: IDs in `question_bank.csv` that cover the same idea as multiple choice.
 
-Images are in `bank_images/`. Chapter numbers follow the bank: 0 types of variables, 1 getting started, 2 ggplot, 3 reproducible science, 4 data in R, 5 univariate summaries, 6 associations I, 7 associations II, 8 sampling, 9 uncertainty, 10 NHST, 11 shuffling, 12 study design.
+Figures are linked to their public copies on the course site; give students the link. Chapter numbers follow the bank: 0 types of variables, 1 getting started, 2 ggplot, 3 reproducible science, 4 data in R, 5 univariate summaries, 6 associations I, 7 associations II, 8 sampling, 9 uncertainty, 10 NHST, 11 shuffling, 12 study design.
 
 ---
 
@@ -181,7 +181,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-02-02 · Which plot do you prefer, and why?
 - **Source:** Chime In (ggplot); originally a preference poll
-- **Prompt:** Show `ch02-chimein-02.png` (small multiples, layouts A and B). Which layout do you prefer for comparing the groups, and why?
+- **Prompt:** Show [ch02-chimein-02.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch02-chimein-02.png) (small multiples, layouts A and B). Which layout do you prefer for comparing the groups, and why?
 - **Key ideas:**
   - There's no single right answer. A strong answer ties the choice to the **comparison the reader needs to make**.
   - Panels that share an axis let you compare positions directly.
@@ -284,7 +284,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-05-01 · Can you estimate the mean from a boxplot?
 - **Source:** discussion arising from Canvas quiz, group quiz and book Q6 (Lake Huron)
-- **Prompt:** Show `ch05-quiz-boxplot.png` (or `ch05-gquiz-boxplot.png`). Can you estimate the mean from this boxplot? What can and can't a boxplot tell you?
+- **Prompt:** Show [ch05-quiz-boxplot.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch05-quiz-boxplot.png) (or [ch05-gquiz-boxplot.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch05-gquiz-boxplot.png)). Can you estimate the mean from this boxplot? What can and can't a boxplot tell you?
 - **Key ideas:**
   - A boxplot shows five numbers (min, Q1, median, Q3, max) plus outliers. It does **not** show the mean, mode or variance.
   - Skew tells you the mean's likely *direction*: a long upper tail or high outliers pull the mean above the median, and a long lower tail pulls it below.
@@ -499,7 +499,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-07-06 · Chocolate and Nobel prizes: what's going on?
 - **Source:** discussion built from the Associations I and II homework (Nobel data)
-- **Prompt:** Across 27 countries, chocolate consumption and number of Nobel laureates have r ≈ 0.36. Without the USA, UK and Germany, r ≈ −0.06. Show `ch07-hw-choc-nobel-scatter.png`. Does chocolate make people smarter? What else could explain this pattern?
+- **Prompt:** Across 27 countries, chocolate consumption and number of Nobel laureates have r ≈ 0.36. Without the USA, UK and Germany, r ≈ −0.06. Show [ch07-hw-choc-nobel-scatter.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch07-hw-choc-nobel-scatter.png). Does chocolate make people smarter? What else could explain this pattern?
 - **Key ideas:**
   - **Correlation ≠ causation.** This is observational, country-level data.
   - **Confounding:** wealth and population size plausibly drive both chocolate buying and Nobel counts.
@@ -536,7 +536,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-07-07 · What correlation does and doesn't tell you
 - **Source:** new (concept gap; ties to the four-panel plots)
-- **Prompt:** Show `ch07-hw-fourpanels.png`. In panel b, y is a perfect wave-shaped function of x, yet r ≈ 0. Explain how that's possible. What does a correlation coefficient tell you, and what doesn't it tell you?
+- **Prompt:** Show [ch07-hw-fourpanels.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch07-hw-fourpanels.png). In panel b, y is a perfect wave-shaped function of x, yet r ≈ 0. Explain how that's possible. What does a correlation coefficient tell you, and what doesn't it tell you?
 - **Key ideas:**
   - **r measures only *linear* association** (direction and tightness around a straight line).
   - r ≈ 0 does not mean "no relationship": curved relationships can have r ≈ 0.
@@ -575,7 +575,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-08-02 · Gene lengths: how did I get it so wrong?
 - **Source:** Book, Sampling summary Q6 (originally had a dedicated chatbot)
-- **Prompt:** I estimated mean human gene length by picking random nucleotides from the genome and recording the length of the gene each one landed in, until I had 50 genes. I repeated this 1000 times. Show `ch08-book-biased-sampdist.png`: every estimate is far above the true mean (2.62 kb). Explain why, and how you would fix it.
+- **Prompt:** I estimated mean human gene length by picking random nucleotides from the genome and recording the length of the gene each one landed in, until I had 50 genes. I repeated this 1000 times. Show [ch08-book-biased-sampdist.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch08-book-biased-sampdist.png): every estimate is far above the true mean (2.62 kb). Explain why, and how you would fix it.
 - **Key ideas:**
   - **Size-biased sampling:** long genes contain more nucleotides, so they're more likely to be hit. A 20 kb gene is ten times as likely to be picked as a 2 kb gene.
   - That's **sampling bias**, not sampling error: all 1000 estimates are off in the same direction.
@@ -788,7 +788,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-09-06 · Which plot do you prefer: error bars or boxplots?
 - **Source:** Uncertainty group quiz, Q6b
-- **Prompt:** Show `ch09-gquiz-astrology-plots.png`. Plot A shows means with error bars over the raw points; Plot B shows boxplots over the raw points. Which do you prefer, and why?
+- **Prompt:** Show [ch09-gquiz-astrology-plots.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch09-gquiz-astrology-plots.png). Plot A shows means with error bars over the raw points; Plot B shows boxplots over the raw points. Which do you prefer, and why?
 - **Key ideas:**
   - There's no single right answer.
   - **Plot A** highlights uncertainty in the means, which suits the question "do the groups differ on average?"
@@ -804,7 +804,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-09-07 · Why isn't a 95% CI a "95% chance"? Is it worth policing?
 - **Source:** Uncertainty group quiz, Q7 (optional) and Chime In free response
-- **Prompt:** People often say a 95% CI has "a 95% chance of capturing the true parameter." Statisticians prefer: "95% of confidence intervals from samples of a population will include the true parameter." What's the difference? Does it matter? Is it worth policing? Show `ch09-gquiz-ringtoss.png` (archery vs ring toss, by Ellie Murray, @epiellie).
+- **Prompt:** People often say a 95% CI has "a 95% chance of capturing the true parameter." Statisticians prefer: "95% of confidence intervals from samples of a population will include the true parameter." What's the difference? Does it matter? Is it worth policing? Show [ch09-gquiz-ringtoss.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch09-gquiz-ringtoss.png) (archery vs ring toss, by Ellie Murray, @epiellie).
 - **Key ideas:**
   - The parameter is fixed; it's the interval that varies from sample to sample (ring toss, not archery).
   - Before sampling, the method has a 95% chance of producing an interval that catches the parameter. After sampling, your interval either caught it or didn't.
@@ -931,7 +931,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-10-05 · Can mothers smell their children? What does "fail to reject" mean?
 - **Source:** built from the NHST homework and book (Porter and Moore T-shirt study)
-- **Prompt:** Show `ch10-smell-null-dist.png`. In the real study, 8 of 9 mothers picked their own child's shirt (p ≈ 0.04). In the homework version, 7 of 9 did (p ≈ 0.18). For each version: what do you conclude about the null, and what can't you conclude? If 7 of 9 is "not significant," does that mean mothers can't identify their children by smell?
+- **Prompt:** Show [ch10-smell-null-dist.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch10-smell-null-dist.png). In the real study, 8 of 9 mothers picked their own child's shirt (p ≈ 0.04). In the homework version, 7 of 9 did (p ≈ 0.18). For each version: what do you conclude about the null, and what can't you conclude? If 7 of 9 is "not significant," does that mean mothers can't identify their children by smell?
 - **Key ideas:**
   - **8/9:** reject the null at α = 0.05. This doesn't prove the null is false, and it doesn't mean there's a 4% chance mothers are guessing.
   - **7/9:** fail to reject. That is NOT evidence that mothers are just guessing: 7/9 is well above 50%, but with only 9 mothers the test has little power. Never "accept" the null.
@@ -1013,7 +1013,7 @@ Students won't run R on the exam. Some entries ask them to write short code by h
 
 ### O-11-02 · The line-up: why does picking the real data tell us about p?
 - **Source:** permutation Chime In (line-up, "guesstimate the p-value")
-- **Prompt:** Show `ch11-chime-lineup.png`. One panel is real and 19 are shuffled. If you can reliably pick out the real one, what does that say about the p-value? What would it mean if you couldn't?
+- **Prompt:** Show [ch11-chime-lineup.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch11-chime-lineup.png). One panel is real and 19 are shuffled. If you can reliably pick out the real one, what does that say about the p-value? What would it mean if you couldn't?
 - **Key ideas:**
   - Under the null (no association), the real data are just another shuffle, so you'd pick them only 1 time in 20 by luck.
   - Reliably picking them means data like ours are rare under the null: p ≲ 1/20 = 0.05.

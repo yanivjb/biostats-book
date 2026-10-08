@@ -1,7 +1,16 @@
 # Review for exam 1.  {.unnumbered}
 
+### Practice exam
 
-Practice for Exam 1 (chapters 0–12). Pick random questions, or focus on chapters and concepts. Check your answers, and explain ideas in your own words. No R needed: like the exam, these questions are about ideas, plots and reasoning.
+This [practice exam](ttps://github.com/yanivjb/biostats-book-data/raw/refs/heads/main/Exam1_practice.pdf) was adapted from Yaniv's Applied Biostats exam in 2025. 
+
+### Practice App
+
+Practice for Exam 1 (chapters 0–12). Pick random questions, or focus on chapters and concepts. Check your answers, and explain ideas in your own words. This is built off of every question Yaniv has used in his class. You can also access AI generated questions Yaniv uilt to get at the same concept (click different version). These are meant to be exam-like questions, so there is no `R` coding but there are R questions. R  questions are about ideas, plots and reasoning.
+
+
+
+[**AI integrated version:**↗] (https://claude.ai/artifact/ANMj6BpXNkn1EmezZWqNsT){target="_blank"}: I have made a version of this for Claude. It has the same questions but allows for interactive feedback an AI generated review of your stregnths and weeknesses, and it offers feedback on your written response. 
 
 [Open the study guide full screen ↗](study_guide/index.html){target="_blank"}
 

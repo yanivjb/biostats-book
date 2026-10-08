@@ -181,7 +181,7 @@ STUDENT_PROMPT = {
                 "What would it mean if you couldn't?", ['ch11-chime-lineup.png']),
 }
 
-MIN_WORDS = {'O-07-01': 25, 'O-07-02': 25, 'O-07-03': 25, 'O-10-07': 30, 'O-02-01': 25}
+MIN_WORDS = {}  # every prompt uses the default minimum
 
 
 def scramble(s):
@@ -286,7 +286,7 @@ def build_open():
         item = {'id': oid, 'chapters': [ch], 'title': title,
                 'concepts': OPEN_CONCEPTS.get(oid, []),
                 'source': fields.get('Source', ''), 'prompt': prompt, 'images': imgs,
-                'hints': hints, 'min_words': MIN_WORDS.get(oid, 40)}
+                'hints': hints, 'min_words': MIN_WORDS.get(oid, 15)}
         secret = {'key': fields.get('Key ideas', ''), 'good': fields.get('Good enough when', ''),
                   'pitfalls': fields.get('What could go wrong', '')}
         item['secret'] = scramble(json.dumps(secret, ensure_ascii=False))

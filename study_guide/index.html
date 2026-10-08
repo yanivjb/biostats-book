@@ -182,6 +182,22 @@ details summary { cursor: pointer; color: var(--brand); font-weight: 600; }
 .zoom { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 16px; cursor: zoom-out; }
 .zoom img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 6px; }
 .selfrate { margin-top: 10px; }
+.tutor { margin-top: 14px; border: 1.5px solid var(--brand); border-radius: 12px; padding: 12px 14px; background: var(--surface); }
+.thead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.tclose { padding: 4px 10px; font-size: .85rem; }
+.tlog { display: grid; gap: 8px; max-height: 420px; overflow-y: auto; }
+.msg { padding: 8px 12px; border-radius: 10px; max-width: 92%; }
+.msg.me { justify-self: end; background: var(--brand-soft); white-space: pre-wrap; }
+.msg.ai { justify-self: start; background: var(--surface-2); }
+.msg.ai .md p:last-child, .msg.ai .md ul:last-child { margin-bottom: 0; }
+.msg.pending { color: var(--muted); font-style: italic; }
+.tchips { margin: 8px 0 0; }
+.tchips .chip { padding: 5px 12px; font-size: .88rem; }
+.trow { display: flex; gap: 8px; align-items: flex-end; margin-top: 8px; }
+.trow textarea { flex: 1 1 auto; min-width: 0; padding: 8px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); resize: vertical; }
+.tnote { margin: 6px 0 0; }
+.aistrip { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin: 10px 0 0; }
+[hidden] { display: none !important; }
 .rate { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: .92rem; color: var(--muted); }
 .rate .thumb { font-size: 1.05rem; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface); cursor: pointer; }
 .rate .thumb[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-soft); }
@@ -202,6 +218,7 @@ details summary { cursor: pointer; color: var(--brand); font-weight: 600; }
   <nav aria-label="Main">
     <button data-nav="setup">Quiz me</button>
     <button data-nav="progress">My progress</button>
+    <button data-nav="report" hidden>Study report</button>
     <button data-nav="about">How to use this</button>
   </nav>
 </header>
@@ -214,6 +231,10 @@ details summary { cursor: pointer; color: var(--brand); font-weight: 600; }
 // for explain-it answers and to collect question ratings (thumbs up/down).
 // Leave it empty and nothing is ever sent anywhere.
 const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbygLFG8LzP3uq1yXq0G-1zAf12rbseMTkqJuOzBMRAxqS5ByVpEDYe92RlraqaB3Y5wtg/exec";
+
+// Paste the link to the course tutor bot (a ChatGPT GPT or Gemini Gem) here. "Ask the tutor"
+// buttons then copy the question and open the bot in a new tab. Leave it empty to just copy.
+const TUTOR_URL = "";
 
 const DATA = window.STUDY_DATA;
 const META = DATA.meta.chapters;
@@ -245,6 +266,14 @@ function reveal(secret) {
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
+function askTutor(text) {
+  // Copy before opening the new tab: browsers refuse clipboard writes from a page that has lost focus.
+  const done = () => toast(TUTOR_URL ? "Copied. Paste it into the tutor (Ctrl/Cmd+V)." : "Copied. Paste it into the course tutor bot.");
+  const fail = () => toast("Couldn't copy automatically. Select the question text and copy it.");
+  try { (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(done, fail); } catch (e) { fail(); }
+  if (TUTOR_URL) window.open(TUTOR_URL, "_blank", "noopener");
+}
+
 function sendAnswer(row) {
   if (!SUBMIT_URL) return Promise.resolve();
   try {
@@ -260,7 +289,7 @@ function sendAnswer(row) {
 const RATE_REASONS = ["Confusing wording", "Answer key looks wrong", "Figure unclear", "Too easy", "Too hard"];
 function rateBox(q, outcome) {
   const prior = store.ratings[q.id];
-  const base = { kind: "rating", question_id: q.id, original_id: q.variant_of || q.id, version: q.variant_of ? "AI version" : "original",
+  const base = { kind: "rating", question_id: q.id, original_id: q.variant_of || q.id, version: q.generated ? "Claude-written" : q.variant_of ? "AI version" : "original",
     chapter: q.chapters.join(","), outcome: outcome || "" };
   const box = el("div", { class: "rate" });
   function save(r) { store.ratings[q.id] = r; saveStore(); }
@@ -365,7 +394,7 @@ function renderMd(md) {
   const indents = md.split("\n").filter(l => /^\s*([-*]|\d+\.)\s+/.test(l)).map(l => l.match(/^\s*/)[0].length);
   const base = indents.length ? Math.min(...indents) : 0;
   const lines = md.split("\n").map(l => l.slice(0, base).trim() === "" ? l.slice(base) : l.trimStart());
-  let html = "", stack = [], inCode = false, code = [], para = [], fence = 0;
+  let html = "", stack = [], inCode = false, code = [], para = [], fence = 0, blank = false;
   const closeLists = (depth) => { while (stack.length > depth) html += "</li></" + stack.pop().type + ">"; };
   const flushPara = () => { if (para.length) { html += "<p>" + inline(para.join(" ")) + "</p>"; para = []; } };
   for (const raw of lines) {
@@ -376,6 +405,9 @@ function renderMd(md) {
     }
     if (inCode) { code.push(raw.slice(0, fence).trim() === "" ? raw.slice(fence) : raw.trimStart()); continue; }
     const m = raw.match(/^(\s*)([-*]|\d+\.)\s+(.*)$/);
+    // A blank line followed by unindented text ends any open list.
+    if (!m && blank && raw.trim() !== "" && !/^\s/.test(raw)) closeLists(0);
+    blank = raw.trim() === "";
     if (m) {
       flushPara();
       const depth = Math.floor(m[1].length / 2) + 1;
@@ -417,6 +449,7 @@ function setNav(view) {
 document.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.nav === "setup") showSetup();
   if (b.dataset.nav === "progress") showProgress();
+  if (b.dataset.nav === "report") showReport();
   if (b.dataset.nav === "about") showAbout();
 }));
 
@@ -565,7 +598,8 @@ function header(item) {
     el("div", { class: "qmeta" },
       el("span", { text: "Question " + (session.i + 1) + " of " + session.list.length }),
       item.similar ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "Similar question" })
-        : item.alt ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "New version" }) : null,
+        : item.alt ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "New version" })
+        : q.generated ? el("span", { class: "tag", style: "background:var(--warn-soft);font-weight:600", title: "Not reviewed by the instructor. If something looks off, flag it with 👎.", text: "Written by Claude" }) : null,
       el("span", { class: "tag", text: q.chapters.map(c => c + " · " + chapterName(c)).join(", ") }),
       q.concepts.map(c => el("span", { class: "tag", text: c })))
   ];
@@ -588,16 +622,44 @@ function record(id, outcome, extra) {
 }
 
 function showCheck(item) {
-  const q = item.q, s = reveal(q.secret);
+  const q = item.q, s = q.plain || reveal(q.secret);
   const st = { attempts: 0, firstChoice: null, usedHint: false, done: false, revealed: false, struck: new Set(), locked: {} };
   const card = el("section", { class: "card" }, header(item), renderText(q.question), figures(q.images));
   const answerBox = el("div");
   const fb = el("div");
   const actions = el("div", { class: "row" });
-  card.append(answerBox, fb, actions);
+  const aiBox = el("div");
+  card.append(answerBox, fb, actions, aiBox);
   app.append(card);
+  aiRefresh = () => drawActions();
 
   let selected = new Set(), matchSel = {}, numInputs = [], shortBox = null;
+
+  function correctText() {
+    if (q.type === "numeric" || q.type === "short") return s.shown;
+    if (q.type === "match") return q.items.map(n => n + "-" + s.answer[n]).join(", ");
+    return s.answer.join(", ");
+  }
+  function aiContext() {
+    const opts = (q.options || []).map(o => o.key + ") " + o.text).join("\n");
+    const why = s.why ? Object.keys(s.why).map(k => k + ") " + s.why[k].join(" ")).join("\n") : "";
+    const key = "Correct answer: " + correctText() + "\nExplanation: " + s.explanation +
+      (why ? "\nWhy the wrong options are wrong:\n" + why : "") + ((s.general || []).length ? "\nCommon mistakes: " + s.general.join(" ") : "");
+    return AI_RULES + "\n\nTHE QUESTION the student is working on (" + q.chapters.map(c => "chapter " + c).join(", ") + "; concepts: " + q.concepts.join(", ") + "):\n" +
+      q.question.trim() + (opts ? "\nOptions:\n" + opts : "") + (q.type === "match" ? "\nItems to match: " + q.items.join(", ") : "") +
+      (q.images && q.images.length ? (figureBlobs(q).length ? "\n(The question's figure is attached as an image.)" : "\n(The question has a figure you can't see; ask the student to describe it if needed.)") : "") +
+      "\n\nThe student's first answer: " + (st.firstChoice || "(none yet)") + "; attempts so far: " + st.attempts + "." +
+      (st.done
+        ? "\nThe student has FINISHED this question and has seen the answer and explanation.\n" + key
+        : "\nThe student is STILL WORKING on it and has NOT seen the answer. Do not reveal the correct answer or say which option is right, unless they explicitly ask you to reveal it. Guide them with questions.\nTUTOR-ONLY KEY:\n" + key);
+  }
+  function openTutor(firstAsk) {
+    const right = st.done && st.outcome === "first";
+    tutorPanel(aiBox, { title: "Tutor", q, context: aiContext, tier: "quick", firstAsk,
+      chips: st.done
+        ? (right ? ["Check that I really understand this", "Give me a harder example"] : ["Why was my answer wrong?", "Explain the right answer simply", "Give me a similar example to try"])
+        : ["Give me a nudge (no answer)", "What is this question really asking?"] });
+  }
 
   function drawAnswer() {
     answerBox.innerHTML = "";
@@ -669,13 +731,30 @@ function showCheck(item) {
         if (item.similar) { nxt.similar = true; nxt.root = item.root; nxt.alt = false; }
         session.list[session.i] = nxt; session.used.add(other.id); showQuestion();
       } }, "Different version"));
+      if (SAMPLE && st.attempts > 0) actions.append(el("button", { class: "btn ghost", onclick: () => openTutor() }, "Ask the tutor"));
       actions.append(el("button", { class: "btn ghost", onclick: () => finish("skipped") }, "Skip"));
     } else {
       const sim = st.outcome !== "first" && q.type !== "short" ? similarFor(q) : null;
+      if (SAMPLE) {
+        const gen = el("button", { class: "btn ghost", title: "Claude writes a fresh question on the same idea", onclick: async () => {
+          gen.disabled = true; gen.textContent = "Writing a question…";
+          try {
+            const nq = await generateQuestion(q, s);
+            session.list.splice(session.i + 1, 0, { kind: "check", q: nq, generated: true });
+            nextQuestion();
+          } catch (e) {
+            gen.disabled = false; gen.textContent = "New question like this";
+            toast(e && e.code === "invalid_json" || e === "bad" ? "That one came out garbled. Try again." : (AI_ERRORS[e && e.code] || "Couldn't write a question right now."));
+          }
+        } }, "New question like this");
+        actions.append(gen);
+      }
       if (sim) actions.append(el("button", { class: "btn secondary", onclick: () => {
         session.list.splice(session.i + 1, 0, { kind: "check", q: sim, similar: true, root: q.variant_of || q.id });
         session.used.add(sim.id); nextQuestion();
       } }, "Try a similar question"));
+      if (SAMPLE) actions.append(el("button", { class: "btn ghost", onclick: () => openTutor() }, "Ask the tutor"));
+      else if (TUTOR_URL) actions.append(el("button", { class: "btn ghost", title: "Copy this question, your answer and the explanation for the course tutor bot", onclick: () => askTutor(tutorText()) }, "Ask the tutor ↗"));
       actions.append(el("span", { class: "spacer" }));
       actions.append(el("button", { class: sim ? "btn ghost" : "btn", onclick: nextQuestion }, session.i + 1 < session.list.length ? "Next question →" : "See my summary"));
     }
@@ -780,6 +859,26 @@ function showCheck(item) {
     drawAnswer(); markOptions(); drawActions();
   }
 
+  function figureNote() {
+    if (!q.images || !q.images.length) return "";
+    // On the published site the figures are public files, so the tutor can open the same image.
+    const links = window.STUDY_IMAGES ? [] : q.images.map(n => new URL("images/" + n, location.href).href);
+    return links.length ? "\nFigure: " + links.join(" , ") : "\n(This question has a figure; I can paste a screenshot.)";
+  }
+
+  function tutorText() {
+    const opts = (q.options || []).map(o => o.key + ") " + o.text).join("\n");
+    const items = q.type === "match" ? "\nItems to match: " + q.items.join(", ") : "";
+    const correct = q.type === "numeric" || q.type === "short" ? s.shown : q.type === "match" ? q.items.map(n => n + "-" + s.answer[n]).join(", ") : s.answer.join(", ");
+    const ask = st.outcome === "first" ? "I got this right, but can you check I really understand it? Ask me one follow-up question."
+      : "I didn't get this right at first. Help me understand why my answer was wrong, then give me a similar question to check I get it.";
+    return "I'm working on study guide question " + q.id + " (" + q.concepts.join(", ") + ").\n\nQuestion: " + q.question.trim() +
+      figureNote() +
+      (opts ? "\n\nOptions:\n" + opts : "") + items +
+      "\n\nMy first answer: " + (st.firstChoice || "(none)") + "\nCorrect answer: " + correct +
+      "\nExplanation from the study guide: " + s.explanation + "\n\n" + ask;
+  }
+
   function answerLine() {
     if (q.type === "mc" || q.type === "tf" || q.type === "multi") return el("p", {}, el("strong", { text: "Answer: " }), s.answer.join(", "));
     if (q.type === "match") return el("p", {}, el("strong", { text: "Answer: " }), q.items.map(n => n + " → " + s.answer[n]).join(", "));
@@ -813,8 +912,9 @@ function showCheck(item) {
   }
 
   function finish(outcome, keepView) {
-    if (outcome !== "self") record(q.id, outcome, {});
-    if (outcome !== "self" && item.alt && !item.similar) record(item.root, outcome, {});
+    const extra = st.firstChoice ? { first: String(st.firstChoice).slice(0, 200) } : {};
+    if (outcome !== "self") record(q.id, outcome, extra);
+    if (outcome !== "self" && item.alt && !item.similar) record(item.root, outcome, extra);
     if (outcome === "first") session.tally.first++;
     else if (outcome === "retry") session.tally.retry++;
     else if (outcome === "revealed") session.tally.revealed++;
@@ -837,8 +937,25 @@ function showOpen(item) {
   const hintsBox = el("div");
   const keyBox = el("div");
   const actions = el("div", { class: "row", style: "margin-top:10px" });
-  card.append(ta, counter, hintsBox, actions, keyBox);
+  const aiBox = el("div"), aiStrip = el("div");
+  card.append(ta, counter, aiStrip, hintsBox, actions, aiBox, keyBox);
   app.append(card);
+  aiRefresh = () => update();
+
+  function aiContext() {
+    const s = reveal(q.secret);
+    return AI_RULES + "\n\nThe student is answering an open-ended prompt (" + q.chapters.map(c => "chapter " + c).join(", ") + "; concepts: " + q.concepts.join(", ") + ").\nPROMPT:\n" + q.prompt.trim() +
+      (q.images && q.images.length ? (figureBlobs(q).length ? "\n(The prompt's figure is attached as an image.)" : "\n(The prompt has a figure you can't see.)") : "") +
+      "\n\nTHE STUDENT'S CURRENT WRITTEN ANSWER:\n" + (ta.value.trim() || "(empty)") +
+      "\n\nTUTOR-ONLY notes" + (st.revealed ? " (the student has now seen the key ideas)" : " (the student has NOT seen these; never paste them)") + ":\nKey ideas:\n" + s.key + "\nGood enough when:\n" + s.good + "\nCommon mistakes:\n" + s.pitfalls +
+      "\n\nWhen asked for feedback on the answer: (1) one specific sentence on what's right; (2) the single most important gap or misconception, as a nudge or question, without giving the full answer; " +
+      "(3) if the answer meets the 'good enough' bar, say: \"Great job, this is good enough. I'm here if you want to refine it further.\" Under about 120 words. For later messages, keep tutoring the same way.";
+  }
+  function openFeedback() {
+    const api = tutorPanel(aiBox, { title: "Feedback on your answer", q, context: aiContext, tier: "default",
+      chips: ["I revised my answer: check it again", "I'm stuck: give me a hint"] });
+    if (api && !aiBox.querySelector(".msg")) api.ask("Please give me feedback on my answer.");
+  }
 
   function secondsLeft() { return Math.max(0, OPEN_MIN_SECONDS - Math.floor((Date.now() - started) / 1000)); }
   function update() {
@@ -848,8 +965,13 @@ function showOpen(item) {
     counter.className = "counter" + (okWords && !left ? " ok" : "");
     counter.textContent = w + " / " + q.min_words + " words" + (left && okWords ? " · key ideas unlock in " + left + "s" : "");
     actions.innerHTML = "";
+    aiStrip.innerHTML = "";
+    if (SAMPLE && !st.revealed && !aiBox.firstChild) aiStrip.append(el("div", { class: "feedback info aistrip" },
+      el("div", {}, el("strong", { text: "AI tutor feedback" }),
+        el("div", { class: "small muted", text: okWords ? "Get Claude's comments on what you've written so far, before you look at the key ideas." : "Write at least " + q.min_words + " words, then get Claude's comments on your answer." })),
+      el("button", { class: "btn secondary", disabled: okWords ? null : true, onclick: () => { openFeedback(); update(); } }, "Get tutor feedback")));
     if (!st.revealed) {
-      const nextHintAt = [15, 25][st.hintsShown];
+      const nextHintAt = [5, 10][st.hintsShown];
       if (st.hintsShown < q.hints.length) {
         const ready = nextHintAt === undefined || w >= nextHintAt;
         actions.append(el("button", { class: "btn ghost", disabled: ready ? null : true, onclick: () => {
@@ -893,19 +1015,24 @@ function showOpen(item) {
         el("p", { class: "small", text: "Submit this answer to the instructor. Add your name for individual feedback, or leave it blank to stay anonymous (your answer then helps with class-wide feedback)." }),
         el("div", { class: "row" }, nameIn, sendBtn));
     }
-    const tutorBtn = el("button", { class: "btn ghost", onclick: () => {
+    const tutorBtn = !TUTOR_URL ? null : el("button", { class: "btn ghost", onclick: () => {
       const text = "I'm working on study guide prompt " + q.id + " (" + q.title + ").\n\nPrompt: " + q.prompt.replace(/\n+/g, " ") + "\n\nMy answer: " + ta.value.trim() + "\n\nCan you help me improve it?";
-      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("Copied. Paste it into the course tutor bot."), () => toast("Couldn't copy. Select your answer and copy it manually."));
-    } }, "Copy for the tutor bot");
-    keyBox.append(
+      askTutor(text);
+    } }, "Discuss with the tutor ↗");
+    keyBox.append(...[
       el("div", { class: "feedback info" }, el("h3", { text: "Key ideas" }), renderMd(s.key)),
       el("div", { class: "feedback good" }, el("h3", { text: "The tutor's checklist: an answer is good enough when…" }), renderMd(s.good)),
       el("details", {}, el("summary", { text: "Common mistakes the tutor watches for" }), renderMd(s.pitfalls)),
+      SAMPLE ? el("div", { class: "feedback info", style: "margin-top:12px" },
+        el("h3", { text: "Want the tutor's take on your answer?" }),
+        el("p", { class: "small", text: "Claude compares what you wrote with the key ideas, says what's right and nudges you on what's missing. Uses your own Claude usage." }),
+        el("button", { class: "btn secondary", onclick: openFeedback }, "Get tutor feedback")) : null,
       checks,
       rateBox(q, "open"),
       submitBox,
       el("div", { class: "row", style: "margin-top:10px" }, tutorBtn, el("span", { class: "spacer" }),
-        el("button", { class: "btn", onclick: nextQuestion }, session.i + 1 < session.list.length ? "Next question →" : "See my summary")));
+        el("button", { class: "btn", onclick: nextQuestion }, session.i + 1 < session.list.length ? "Next question →" : "See my summary"))
+    ].filter(Boolean));
     update();
   }
   update();
@@ -986,17 +1113,252 @@ function showAbout() {
       "- **Quiz me:** choose random questions from everything, or pick chapters (and concepts within them).",
       "- **Check my answer:** multiple choice, matching and number questions. A wrong answer shows why *that* choice is wrong. Then try again, ask for a hint, or reveal the answer. After a miss, **Try a similar question** checks whether it's clicked.",
       "- **Original or new versions:** every checked question has the course original plus AI-written versions that test the same idea. Choose originals, new versions or a mix when you set up a round, or click **Different version** on any question before you answer it.",
-      "- **Explain it:** write your answer in your own words first. The key ideas unlock after " + "40 words (fewer for a few short prompts) and a minute of thinking. Then compare and rate yourself honestly.",
-      "- **Stuck on an explain-it question?** Use **Copy for the tutor bot** and paste it into the course ChatGPT or Gemini tutor." + (SUBMIT_URL ? " Or click **Submit for feedback** to send your answer to the instructor." : ""),
+      "- **Explain it:** write your answer in your own words first. The key ideas unlock after 15 words and a minute of thinking. Then compare and rate yourself honestly.",
       "- **My progress** shows how you're doing by concept, and lets you retry everything you've missed.",
+      TUTOR_URL ? "- **Want to talk it through?** After any question, **Ask the tutor** copies the question, your answer and the explanation and opens the course AI tutor." : "",
+      SUBMIT_URL ? "- **Want instructor feedback?** On explain-it questions, click **Submit for feedback** to send your answer to the instructor." : "",
       "",
       "**No R needed.** Like the exam, these questions are about ideas, plots and reasoning, not running code."
-    ].join("\n")),
+    ].filter((l, k) => l || k === 7).join("\n")),
+    SAMPLE ? el("h3", { text: "Claude features" }) : null,
+    SAMPLE ? renderMd([
+      "These are only in this Claude version of the study guide; the copy in the course book doesn't have them. They run on your own Claude account, only when you click. Claude can make mistakes; the answer key wins.",
+      "",
+      "- **Ask the tutor:** after you try a question, opens a short chat about it. It nudges you toward the idea instead of handing you the answer.",
+      "- **Get tutor feedback:** on explain-it questions, Claude comments on what you wrote: what's right, what's missing, and when it's good enough.",
+      "- **New question like this:** after any question, Claude writes a fresh one on the same idea. These are marked *Written by Claude* and haven't been checked by the instructor, so flag anything odd with 👎.",
+      "- **Study report** (top bar): once you've answered at least 5 questions, Claude reads your record in this browser and tells you what you know well, where you seem confused, and what to do next. Then you can practice your weak spots or talk them through with the tutor."
+    ].join("\n")) : null,
     el("h3", { text: "Privacy" }),
-    renderMd(SUBMIT_URL
-      ? "Your progress and drafts are saved only in this browser. Nothing is sent anywhere unless you choose to: clicking 👍 or 👎 on a question sends that rating (anonymously) so bad questions get fixed, and **Submit for feedback** on an explain-it answer sends that answer, and your name if you add one, to the instructor."
-      : "Your progress and drafts are saved only in this browser. Nothing is sent anywhere."),
+    renderMd("Your progress and drafts are saved only in this browser." +
+      (SAMPLE ? " When you use a Claude feature, the question, your answers and (for the study report) your practice record are sent to Claude on your own account." : "") +
+      (SUBMIT_URL ? " Clicking 👍 or 👎 sends that rating (anonymously) so bad questions get fixed, and **Submit for feedback** sends that answer, and your name if you add one, to the instructor."
+        : (SAMPLE ? "" : " Nothing is sent anywhere."))),
     el("p", { class: "muted small", text: BANK.length + " checked questions (+ " + (DATA.bank.length - BANK.length) + " similar-question variants) · " + DATA.open.length + " explain-it prompts · chapters 0–12" })));
+}
+
+// ---------- AI tutor (only inside a Claude artifact that allows it) ----------
+// Every call runs on the viewer's own Claude account and only when they click.
+let SAMPLE = null, AI_IMAGES = 0, aiRefresh = null;
+const AI_RULES = [
+  "You are a study tutor for an intro biostatistics course (Applied Biostatistics, Exam 1, chapters 0-12). How to tutor:",
+  "- The student does the thinking. Ask the question that gets them to the next step; don't lecture.",
+  "- Short: usually 1-4 sentences and under about 100 words, unless they ask for a fuller explanation.",
+  "- End most replies with ONE question for the student. Never stack several questions.",
+  "- One idea per reply: fix the biggest misunderstanding first.",
+  "- Build on their words: say what's right in their thinking, then nudge.",
+  "- The exam has no R. Never ask them to run code (talking about what code does is fine).",
+  "- Correct misconceptions clearly and kindly (e.g. '95% chance the true value is in my CI', 'p is the probability the null is true').",
+  "- The answer key and explanations below are the course's own; trust them. If one looks wrong, say it may be an error and suggest the student flag it with the thumbs-down button.",
+  "- Plain language; light Markdown only (bold, short lists). No headings."
+].join("\n");
+const AI_ERRORS = {
+  rate_limited: "You've hit your Claude usage limit for now. Try again later (the quiz itself still works).",
+  session_expired: "Your Claude session expired. Sign in again, then retry.",
+  refused: "Claude couldn't answer that. Try rephrasing.",
+  empty_completion: "No reply came back. Try rephrasing or asking for less.",
+  image_rejected: "The figure couldn't be sent, so try again without it.",
+  prompt_too_large: "That conversation got too long. Close the tutor and start again.",
+  upstream_error: "The connection dropped. Try again."
+};
+const AI_GONE = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+
+(async () => {
+  try {
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    const s = await window.claude.use("sample");
+    if (!s) return;
+    SAMPLE = s;
+    const rb = document.querySelector('[data-nav="report"]'); if (rb) rb.hidden = false;
+    if (aiRefresh) aiRefresh();
+    try { const lim = await s.limits(); AI_IMAGES = lim.images ? lim.images.maxCount : 0; } catch (e) { AI_IMAGES = 0; }
+  } catch (e) { /* no tutor in this view */ }
+})();
+
+function figureBlobs(q) {
+  if (!AI_IMAGES || !q.images || !q.images.length || !window.STUDY_IMAGES) return [];
+  return q.images.slice(0, AI_IMAGES).map(n => {
+    const uri = window.STUDY_IMAGES[n];
+    if (!uri) return null;
+    const [head, b64] = uri.split(",");
+    const bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new Blob([bytes], { type: (head.match(/data:([^;]+)/) || [])[1] || "image/png" });
+  }).filter(Boolean);
+}
+
+// A small chat panel. context() returns the standing instructions + question details for every call.
+function tutorPanel(host, { title, context, q, chips, tier, firstAsk }) {
+  if (host.firstChild) { const i = host.querySelector("textarea"); if (i) i.focus(); return host.firstChild.api; }
+  const turns = [];
+  let ctl = null;
+  const log = el("div", { class: "tlog", "aria-live": "polite" });
+  const input = el("textarea", { class: "tinput", rows: "2", placeholder: "Ask the tutor, or explain your thinking…", "aria-label": "Message to the tutor" });
+  const send = el("button", { class: "btn", onclick: () => ask(input.value) }, "Send");
+  const stop = el("button", { class: "btn ghost", hidden: true, onclick: () => ctl && ctl.abort() }, "Stop");
+  const note = el("p", { class: "muted small tnote" });
+  const chipRow = el("div", { class: "choices tchips" }, (chips || []).map(c => el("button", { class: "chip", onclick: () => ask(c) }, c)));
+  input.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input.value); } });
+  const panel = el("div", { class: "tutor" },
+    el("div", { class: "thead" }, el("strong", { text: title }), el("span", { class: "muted small", text: "Uses your own Claude usage, only when you send" }),
+      el("span", { class: "spacer" }), el("button", { class: "btn ghost tclose", "aria-label": "Close the tutor", onclick: () => { if (ctl) ctl.abort(); host.innerHTML = ""; } }, "Close")),
+    log, chipRow, el("div", { class: "trow" }, input, send, stop), note);
+  host.append(panel);
+
+  function bubble(role, text) {
+    const b = el("div", { class: "msg " + role });
+    if (role === "ai") b.append(renderMd(text)); else b.textContent = text;
+    log.append(b); b.scrollIntoView({ block: "nearest" });
+    return b;
+  }
+  async function ask(text) {
+    text = String(text || "").trim();
+    if (!text || ctl || !SAMPLE) return;
+    input.value = ""; note.textContent = "";
+    bubble("me", text);
+    turns.push({ role: "user", content: text });
+    const out = bubble("ai", "Thinking…");
+    out.classList.add("pending");
+    ctl = new AbortController(); send.disabled = true; stop.hidden = false;
+    const recent = turns.slice(-8);
+    if (recent[0].role !== "user") recent.shift();
+    try {
+      const imgs = figureBlobs(q);
+      const { text: reply, truncated } = await SAMPLE([{ role: "user", content: context() }, ...recent], {
+        cache: false, signal: ctl.signal, modelTier: tier || "quick", ...(imgs.length ? { images: imgs } : {}),
+        onText: ({ text: t }) => { out.classList.remove("pending"); out.innerHTML = ""; out.append(renderMd(t)); }
+      });
+      out.classList.remove("pending"); out.innerHTML = ""; out.append(renderMd(reply));
+      turns.push({ role: "assistant", content: reply });
+      if (truncated) note.textContent = "That reply was cut short. Ask for less at a time.";
+    } catch (e) {
+      const code = e && e.code;
+      out.classList.remove("pending");
+      if (e && e.text) { out.innerHTML = ""; out.append(renderMd(e.text)); turns.push({ role: "assistant", content: e.text }); } else out.remove();
+      if (code === "images_unavailable") AI_IMAGES = 0;
+      if (AI_GONE.includes(code)) {
+        note.textContent = "The tutor isn't available here (Claude access wasn't allowed). The rest of the study guide works as usual.";
+        SAMPLE = null; send.disabled = true; input.disabled = true;
+      } else if (code !== "cancelled") note.textContent = AI_ERRORS[code] || AI_ERRORS.upstream_error;
+    } finally {
+      ctl = null; stop.hidden = true; if (SAMPLE) send.disabled = false;
+    }
+  }
+  panel.api = { ask };
+  if (firstAsk) ask(firstAsk); else input.focus();
+  return panel.api;
+}
+
+
+// Claude writes a fresh multiple-choice question on the same idea as q (shown with its key so it can copy the trap).
+let genCount = 0;
+async function generateQuestion(q, s) {
+  const opts = (q.options || []).map(o => o.key + ") " + o.text).join("\n");
+  const key = q.type === "numeric" || q.type === "short" ? s.shown : q.type === "match" ? q.items.map(n => n + "-" + s.answer[n]).join(", ") : s.answer.join(", ");
+  const prompt = "Write ONE new multiple-choice practice question for an intro biostatistics course (Exam 1). It must test the same idea, and the same common mistake, as the original below, but with a different scenario and different numbers.\n\n" +
+    "ORIGINAL (" + q.concepts.join(", ") + "):\n" + q.question.trim() + (opts ? "\nOptions:\n" + opts : "") + "\nAnswer: " + key + "\nExplanation: " + s.explanation + "\n\n" +
+    "Rules:\n- Conceptual; no R needed to answer (reading or reasoning about short code is fine).\n- Self-contained: no figure. If the idea needs data, give it in the text (a short table is fine) without giving the answer away.\n" +
+    "- Exactly 4 options, A-D, exactly ONE correct. Wrong options should be tempting mistakes students really make.\n" +
+    "- If there are numbers, work the answer out yourself first and make sure every number is consistent and the key is right.\n- Plain language, at most about 90 words for the question.\n\n" +
+    'Reply with only JSON: {"question": "...", "options": {"A": "...", "B": "...", "C": "...", "D": "..."}, "answer": "B", ' +
+    '"explanation": "1-3 sentences on why the answer is right", "why_wrong": {"A": "why A is wrong", "C": "...", "D": "..."}, "hint": "a nudge that does not give the answer"}';
+  const j = await SAMPLE.json(prompt, { modelTier: "default", cache: false });
+  const keys = j && j.options && typeof j.options === "object" ? Object.keys(j.options).filter(k => /^[A-F]$/.test(k)).sort() : [];
+  const ans = String(j && j.answer || "").trim().toUpperCase().slice(0, 1);
+  if (keys.length < 3 || !keys.includes(ans) || !j.question) throw "bad";
+  const why = {};
+  keys.filter(k => k !== ans).forEach(k => { const w = j.why_wrong && j.why_wrong[k]; if (w) why[k] = [String(w)]; });
+  genCount += 1;
+  return {
+    id: "gen-" + Date.now() + "-" + genCount, type: "mc", generated: true,
+    question: String(j.question), options: keys.map(k => ({ key: k, text: String(j.options[k]) })),
+    chapters: q.chapters, concepts: q.concepts, images: [], hint: j.hint ? String(j.hint) : "",
+    plain: { answer: [ans], explanation: String(j.explanation || ""), why, general: [] }
+  };
+}
+
+// ---------- study report (Claude reads the student's own record) ----------
+let lastReport = null;
+function studyData() {
+  const res = store.results, all = BANK.concat(DATA.open);
+  const good = id => res[id] && ["first", "yes", "recovered"].includes(res[id].last);
+  const byConcept = {};
+  for (const q of all) {
+    const r = res[q.id];
+    if (!r || r.last === "skipped") continue;
+    for (const c of q.concepts) {
+      const k = "Ch " + q.chapters[0] + " · " + c;
+      byConcept[k] = byConcept[k] || { tried: 0, good: 0, missed: 0 };
+      byConcept[k].tried++; if (good(q.id)) byConcept[k].good++; else byConcept[k].missed++;
+    }
+  }
+  const missed = BANK.filter(q => isMiss(q.id)).slice(-15).map(q => {
+    const r = res[q.id], k = reveal(q.secret);
+    const choice = ["mc", "tf", "multi"].includes(q.type);
+    const pick = choice && r.first ? q.options.filter(o => String(r.first).split(",").includes(o.key)).map(o => o.key + ") " + o.text).join("; ") : String(r.first || "");
+    const right = choice && Array.isArray(k.answer) ? q.options.filter(o => k.answer.includes(o.key)).map(o => o.key + ") " + o.text).join("; ")
+      : q.type === "match" && k.answer ? q.items.map(n => n + "-" + k.answer[n]).join(", ") : String(k.shown || "");
+    return "- [" + q.concepts.join(", ") + "] " + q.question.replace(/\s+/g, " ").slice(0, 220) + (pick ? "\n  Picked: " + pick.slice(0, 160) : "") + (right ? "\n  Correct: " + right.slice(0, 160) : "");
+  });
+  const written = DATA.open.filter(q => res[q.id] && res[q.id].last !== "skipped" && store.drafts[q.id]).slice(-5).map(q =>
+    "- " + q.title + " (self-rating: " + res[q.id].last + "): " + store.drafts[q.id].replace(/\s+/g, " ").slice(0, 400));
+  const triedN = all.filter(q => res[q.id] && res[q.id].last !== "skipped").length;
+  const conceptLines = Object.entries(byConcept).sort((a, b) => b[1].missed - a[1].missed)
+    .map(([k, v]) => "- " + k + ": " + v.good + " of " + v.tried + " right first time / explained" + (v.missed ? ", " + v.missed + " missed" : ""));
+  return { triedN, byConcept, text: "BY CONCEPT:\n" + conceptLines.join("\n") + (missed.length ? "\n\nQUESTIONS THEY MISSED (most recent):\n" + missed.join("\n") : "") +
+    (written.length ? "\n\nSOME OF THEIR WRITTEN ANSWERS:\n" + written.join("\n") : "") };
+}
+function weakConcepts(by) {
+  return Object.entries(by).filter(([, v]) => v.missed > 0).sort((a, b) => (b[1].missed / b[1].tried) - (a[1].missed / a[1].tried) || b[1].missed - a[1].missed)
+    .slice(0, 4).map(([k]) => { const m = k.match(/^Ch (\d+) · (.*)$/); return { ch: +m[1], name: m[2] }; });
+}
+function showReport() {
+  try { drawReport(); } catch (e) {
+    app.innerHTML = "";
+    app.append(el("section", { class: "card" }, el("h2", { style: "margin-top:0", text: "Study report" }),
+      el("p", { text: "Something went wrong building your report. Please flag it to the instructor." }), el("p", { class: "muted small", text: String(e && e.message || e) })));
+  }
+}
+function drawReport() {
+  setNav("report"); app.innerHTML = ""; aiRefresh = () => showReport();
+  const card = el("section", { class: "card" }, el("h2", { style: "margin-top:0", text: "Study report" }));
+  app.append(card);
+  if (!SAMPLE) { card.append(el("p", { class: "muted", text: "The study report needs Claude, which isn't available in this view." })); return; }
+  const d = studyData();
+  card.append(el("p", { class: "muted small", text: "Claude reads your record in this browser (what you got right, which options you picked, your self-ratings and written answers) and tells you what you know and where you seem confused. It runs on your own Claude account, only when you click." }));
+  if (d.triedN < 5) { card.append(el("p", { text: "Answer at least 5 questions first (you've done " + d.triedN + "), then come back." })); return; }
+  const out = el("div", { class: "md" }), note = el("p", { class: "muted small" }), after = el("div");
+  const go = el("button", { class: "btn", onclick: async () => {
+    go.disabled = true; out.innerHTML = ""; out.append(el("p", { class: "muted", text: "Reading your record… (this can take up to a minute)" })); note.textContent = ""; after.innerHTML = "";
+    try {
+      const prompt = AI_RULES + "\n\nWrite a short study report for a student preparing for Exam 1, based ONLY on their practice record below. Don't invent results.\n" +
+        "Format (Markdown, under about 250 words):\n**What you know well** (2-3 bullets)\n**Where you seem confused** (2-4 bullets; for each, name the likely misconception, using the options they picked as evidence)\n**What to do next** (3 short, concrete steps)\n" +
+        "Be encouraging but honest. Address the student as 'you'.\n\nTHEIR RECORD (" + d.triedN + " questions tried):\n" + d.text;
+      const { text } = await SAMPLE(prompt, { modelTier: "default", cache: false, onText: ({ text: t }) => { out.innerHTML = ""; out.append(renderMd(t)); } });
+      lastReport = { text, data: d.text, weak: weakConcepts(d.byConcept) };
+      out.innerHTML = ""; out.append(renderMd(text)); renderAfter();
+    } catch (e) {
+      out.innerHTML = ""; if (e && e.text) out.append(renderMd(e.text));
+      note.textContent = AI_GONE.includes(e && e.code) ? "Claude access wasn't allowed, so the report isn't available." : (AI_ERRORS[e && e.code] || AI_ERRORS.upstream_error);
+    } finally { go.disabled = false; go.textContent = "Update my report"; }
+  } }, lastReport ? "Update my report" : "Write my study report");
+  const chat = el("div");
+  function renderAfter() {
+    after.innerHTML = "";
+    const weak = lastReport.weak;
+    after.append(el("div", { class: "row", style: "margin-top:12px" },
+      weak.length ? el("button", { class: "btn", onclick: () => {
+        setup = { scope: "chapters", chapters: [...new Set(weak.map(w => w.ch))], within: "concepts", concepts: weak, style: "check", source: "mix", length: 10 };
+        startSession(buildPool(false));
+      } }, "Practice my weak spots") : null,
+      el("button", { class: "btn secondary", onclick: () => tutorPanel(chat, { title: "Tutor", q: { images: [] }, tier: "quick",
+        context: () => AI_RULES + "\n\nYou're tutoring a student after giving them this study report:\n" + lastReport.text + "\n\nTheir record:\n" + lastReport.data +
+          "\n\nWork on ONE confusion at a time, starting with the one they pick (or the biggest one if they don't). Ask them a question that probes the misconception, then guide.",
+        chips: ["Start with my biggest confusion", "Quiz me on my weak spots"] }) }, "Talk it through with the tutor")),
+      weak.length ? el("p", { class: "muted small", text: "Weak spots: " + weak.map(w => w.name).join(", ") }) : null);
+  }
+  card.append(el("div", { class: "row" }, go), note, out, after, chat);
+  if (lastReport) { out.append(renderMd(lastReport.text)); renderAfter(); }
 }
 
 showSetup();

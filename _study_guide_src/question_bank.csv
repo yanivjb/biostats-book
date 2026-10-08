@@ -165,9 +165,9 @@ c) ggplot(iris, aes(x = Species, y = Petal.Length)) + geom_jitter(width = .2, al
 B) b
 C) c",B,"A boxplot alone summarizes the data and hides the individual points. Adding jittered points shows them. ggplot draws layers in order, so in b) the points sit on top of the boxplot, while in c) the boxplot is drawn last and covers points inside the box.","A) A boxplot shows a summary (median, quartiles), not the individual data points.
 C) This includes the points, but the boxplot is drawn on top and hides the ones inside the box.",ggplot draws layers in the order you add them. Which layer ends up on top?,,yes,,"The original wording ('Which code will reveal the raw data?') makes c) arguably correct too; 'best' added. Somewhat code-based, but the idea (show the raw data; layer order) is conceptual.","explanation, why_wrong, hint",,
-ch02-quiz-03,"ggplot quiz (2026), Q7",2,"data viz principles, honest plots",short answer,"I plotted sepal width by species with this code:
+ch02-quiz-03,"ggplot quiz (2026), Q7",2,"data viz principles, honest plots",short answer,"I plotted sepal width by species with this code and got the plot below:
 ggplot(iris, aes(x = Species, y = Sepal.Width)) + geom_col() + geom_jitter(width = .2, alpha = .4)
-The bars reach roughly 140 to 170, while the individual points all sit near 3 at the bottom of the plot. Explain what went wrong. Bonus: how would you fix it?",,"geom_col() makes each bar's height the SUM of all the y values in that group (about 50 flowers per species x ~3 cm), not the mean. So the bars show totals that have no useful meaning here, and the raw points get squashed at the bottom. Fix: show the mean instead (e.g., stat_summary(fun = mean, geom = 'bar')), or use a boxplot with jittered points.","Bar heights should show a meaningful summary. Bars of summed widths make the groups look like they differ in something they don't, and hide the real data.","Common mistake: assuming bars always show the mean. In ggplot, geom_col() adds up the values.","If each species has about 50 flowers with sepals about 3 cm wide, what do you get if you add them all up?",,yes,,Original shows the resulting plot; described in text here.,"explanation, why_wrong, hint",,
+As the black points (individual flowers) near zero show, iris sepals are only a few centimeters wide. Explain what went wrong. Bonus: how would you fix it?",,"geom_col() makes each bar's height the SUM of all the y values in that group (about 50 flowers per species x ~3 cm), not the mean. So the bars show totals that have no useful meaning here, and the raw points get squashed at the bottom. Fix: show the mean instead (e.g., stat_summary(fun = mean, geom = 'bar')), or use a boxplot with jittered points.","Bar heights should show a meaningful summary. Bars of summed widths make the groups look like they differ in something they don't, and hide the real data.","Common mistake: assuming bars always show the mean. In ggplot, geom_col() adds up the values.","If each species has about 50 flowers with sepals about 3 cm wide, what do you get if you add them all up?",fix-iris-geomcol.png,yes,,Original shows the resulting plot; described in text here.,"explanation, why_wrong, hint",,
 ch02-quiz-04,"ggplot quiz (2026), Q1",2,"aesthetics, ggplot basics",short answer,"Plot setup (iris data, cleaned names): three panels, one per species (setosa, versicolor, virginica). Each point is a flower. The x-axis is sepal_length (about 4.3 to 7.9) and the y-axis is sepal_width (about 2 to 4.4). Point color shows petal_length (dark purple = short, about 1; yellow = long, about 7), and point size shows petal_width (small = narrow, large = wide). Each panel has a straight trendline from geom_smooth(method = ""lm""). Setosa points sit to the upper left (short, wide sepals), are small and dark purple, and have a steep trendline. Versicolor points are in the middle, medium-sized and teal. Virginica points sit furthest right, are the largest and green to yellow, with the shallowest trendline.
 
 The plot uses four aesthetics. Map each variable onto its aesthetic: aes(x = ___, y = ___, color = ___, size = ___)",,"aes(x = sepal_length, y = sepal_width, color = petal_length, size = petal_width)","Read each mapping from the plot: the axis titles give x and y, and the two legends give color (petal_length) and size (petal_width). Species is not an aesthetic here; it splits the plot into panels (facets).","Common mistake: putting species as color. Species defines the panels, not the colors; color shows petal length.",Look at the axis titles and the two legends.,ch02-quiz-iris-aesthetics.png,yes,,Needs the image (description included in the question text).,"explanation, why_wrong, hint",,
@@ -421,7 +421,7 @@ C) Rename location to Location: ril_data |> rename(Location = location) |> filte
 D) Filter on Location, not location: ril_data |> filter(Location == ""SR"")
 E) After loading the dplyr and conflicted libraries, type: conflict_prefer(""filter"", ""dplyr"")","B, E","R used a different filter() (stats::filter), which doesn't look inside the data for column names, so it searched for an object called location. Telling R to use dplyr's filter fixes it, either each time (dplyr::filter) or once for the session (conflict_prefer).","A) The data are fine; reloading doesn't change which filter() R uses.
 C) Renaming doesn't help: the same wrong filter() is still used.
-D) The column is called location (lowercase), and the wrong filter() would still be used.",The column exists. So which filter() function is R using?,,yes,ch04-book-10,"Option E uses conflict_prefer(); the book teaches the newer conflicts_prefer(dplyr::filter). Both work, but students may think one is a typo.","explanation, why_wrong, hint",,
+D) The column is called location (lowercase), and the wrong filter() would still be used.",The column exists. So which filter() function is R using?,,no,ch04-book-10,"Option E uses conflict_prefer(); the book teaches the newer conflicts_prefer(dplyr::filter). Both work, but students may think one is a typo.; dropped after review: too technical (conflicted package)","explanation, why_wrong, hint",,
 ch04-hw-08,"Data in R homework, Q8 (concept version)",4,"data in R, dplyr verbs",MC,You want to find which RIL (and at which location) had the greatest mean_visits. Which code returns that row?,"A) ril_data |> filter(mean_visits == max(mean_visits, na.rm = TRUE))
 B) ril_data |> summarize(max(mean_visits, na.rm = TRUE))
 C) ril_data |> arrange(mean_visits)
@@ -528,7 +528,7 @@ E) Species must be quoted inside filter()
 F) R used stats::filter() instead of dplyr::filter(), so Species was looked for as an object (not a column)",F,"Two packages have a function called filter(). The one from stats doesn't look inside data for column names, so R searched for an object called Species and couldn't find it.","A) filter() is the right verb for choosing rows.
 B) and C) Species does exist in iris.
 D) filter() works on data frames and tibbles.
-E) Column names are not quoted inside dplyr's filter().",The column exists. So which filter() is R using?,,yes,ch04-hw-07,Book version forces this error with hidden setup code; the question now states that the column exists.,"explanation, why_wrong, hint",,
+E) Column names are not quoted inside dplyr's filter().",The column exists. So which filter() is R using?,,no,ch04-hw-07,Book version forces this error with hidden setup code; the question now states that the column exists.; dropped after review: too technical (conflicted package),"explanation, why_wrong, hint",,
 ch04-book-10,Book: Data in R summary (Q10),4,"data in R, errors & debugging, packages",select-all,"This code fails with: Error: object 'Species' not found.
 
 iris |>
@@ -541,7 +541,7 @@ B) Tell R to use dplyr's filter: iris |> dplyr::filter(Species == ""setosa"")
 C) Rename species to Species: iris |> rename(Species = species) |> filter(Species == ""setosa"")
 D) Filter on species, not Species: iris |> filter(species == ""setosa"")
 E) Tell R to use dplyr's filter. After library(dplyr), type: conflicts_prefer(dplyr::filter)","B, E",Both fixes make R use dplyr's filter(): either name it each time (dplyr::filter) or set it once for the session (conflicts_prefer).,"A) Converting to a tibble doesn't change which filter() is used.
-C) and D) The column is called Species, and the wrong filter() would still be used.",What do B and E have in common?,,yes,ch04-hw-07,,"explanation, why_wrong, hint",,
+C) and D) The column is called Species, and the wrong filter() would still be used.",What do B and E have in common?,,no,ch04-hw-07,dropped after review: too technical (conflicted package),"explanation, why_wrong, hint",,
 ch04-quiz-01,"Data in R group quiz (2026), Q1",4,"data in R, errors & debugging, packages",MC,"In a fresh R session, you type:
 
 iris |>
@@ -1746,9 +1746,9 @@ B) Randomly assigns individuals to a study
 C) Gives participants random homework assignments to ensure they can appropriately complete the experiment",A,"Random assignment means treatments are assigned to study subjects at random, which balances confounders across groups on average.","B) That's random selection (random sampling): choosing who gets into the study. It helps generalization, not causal inference.
 C) 🙃",Assigning a treatment vs choosing who is in the study.,,yes,,,"explanation, why_wrong, hint",,
 ch12-book-02,"Book: Study design summary, Q2",12,"effect size, correlation vs causation, observational studies",MC,"In our RIL study, the correlation between petal area and proportion hybrid seed was r = 0.227, sometimes called an 'effect size.' Why is calling this an effect size misleading?","A) Because effect sizes below a certain threshold don't count as real effects
-B) Because we have not shown any effect, let alone quantified its 'size'
+B) Because we have shown an association, not an effect: nothing here shows that petal area causes hybrid seed
 C) Because effect sizes are measured as Cohen's d
-D) Because 0.227 is not a measure of size",B,"'Effect size' is often applied to observational studies, which show associations, not effects (causes). Calling r an effect size implies causation that the data can't support.","A) There's no threshold for 'real.'
+D) Because 0.227 is not a measure of size",B,"We measured an association (r = 0.227) in an observational study. 'Effect size' is common shorthand for r, but 'effect' implies that petal area causes the change in hybrid seed, which these data can't show.","A) There's no threshold for 'real.'
 C) Cohen's d is one effect size, not the only one.
 D) r does measure the strength of an association.",Does an observational correlation show an effect?,,yes,ch07-book-01,,"explanation, why_wrong, hint",,
 ch12-book-03,"Book: Study design summary, Q3",12,scientific vs statistical models,MC,What distinguishes a scientific model from a statistical model?,"A) A scientific model describes how (we think) the world actually works; a statistical model is a mathematical description of patterns in data
@@ -2043,7 +2043,7 @@ C) standard error
 D) sampling bias",A,Many samples of the same size (20 flips) → many estimates → their distribution approximates the sampling distribution.,"B) The population distribution would be the outcomes of individual flips.
 C) The SE is the SD of this distribution, not the distribution itself.
 D) Bias would be a shift of its center away from the truth.",Distribution of estimates.,,yes,ch08-gquiz-05,,all (AI variant),,ch08-gquiz-05
-ch08-gquiz-05-v2,AI variant of ch08-gquiz-05,8,"sampling distribution, standard error",MC,"If you repeated the crayon activity (10 crayons, count the red ones) an enormous number of times and plotted the proportion red each time, what would the SD of that histogram be?","A) The standard error of the proportion red for samples of 10
+ch08-gquiz-05-v2,AI variant of ch08-gquiz-05,8,"sampling distribution, standard error",MC,"In class, each student drew 10 crayons (without replacement) from a big bin of mixed colors and reported how many were red. We pooled everyone's results to estimate the proportion of red crayons in the bin. If we repeated this activity an enormous number of times and plotted the proportion red each time, what would the SD of that histogram be?","A) The standard error of the proportion red for samples of 10
 B) The standard deviation of crayon colors in the bin
 C) The sampling bias
 D) The true proportion of red crayons",A,"The histogram is the sampling distribution, and the SD of a sampling distribution is the standard error.","B) That describes individual crayons, not estimates.
@@ -2454,12 +2454,12 @@ ch02-chimein-04-v1,AI variant of ch02-chimein-04,2,data viz principles,MC,Two se
 B) The y-axis counts differ
 C) The same horizontal position means a different body mass in each panel, so the eye compares the wrong things",C,"In B, Gentoo's panel starts near 4000 g while Adelie's starts near 2900 g, so the three species look similar in size. Plot A, with a shared axis, shows Gentoo are clearly heavier.","A) Bin widths differ a little, but that's minor.
 B) Different y-ranges are less of a problem here; the x-axis is what misleads.","In plot B, compare the left edges of the three panels.",ch02-var-penguin-facets.png,yes,ch02-chimein-04,,all (AI variant),,ch02-chimein-04
-ch02-chimein-04-v2,AI variant of ch02-chimein-04,2,data viz principles,MC,"A bar chart compares mean nest temperature in two habitats. The y-axis starts at 30 °C instead of 0, so a 31 °C bar looks three times as tall as a 30.5 °C bar. What's the problem?","A) The axis choice exaggerates a small difference, so readers think it's huge
+ch02-chimein-04-v2,AI variant of ch02-chimein-04,2,data viz principles,MC,This bar chart compares mean nest temperature in two habitats. What's the problem with it?,"A) The axis choice exaggerates a small difference, so readers think it's huge
 B) Temperatures can't be shown in bar charts
 C) The colors are misleading
-D) Nothing; truncated axes are always fine",A,Bar length should be proportional to the value. Cutting off the bottom of the axis makes a 0.5 °C difference look enormous. Use points (where a non-zero axis is fine) or start bars at zero.,"B) Bar charts can show temperatures, honestly.
+D) Nothing; truncated axes are always fine",A,"Look at the y-axis: it starts at 30 °C, so the meadow bar looks about three times as tall as the forest bar even though the means differ by only 0.5 °C. Bar length should be proportional to the value. Use points (where a non-zero axis is fine) or start bars at zero.","B) Bar charts can show temperatures, honestly.
 C) Color isn't the issue.
-D) Truncation is especially misleading for bars.",Does bar height still match the size of the values?,,yes,ch02-chimein-04,,all (AI variant),,ch02-chimein-04
+D) Truncation is especially misleading for bars.",Check where the y-axis starts. Does bar height still match the size of the values?,fix-truncated-bars.png,yes,ch02-chimein-04,,all (AI variant),,ch02-chimein-04
 ch02-quiz-01-v1,AI variant of ch02-quiz-01,2,"data viz principles, aesthetics",MC,Which aesthetic makes it easiest for readers to compare exact values of a continuous variable?,"A) Position along an axis (x or y)
 B) Point size
 C) Color shade
@@ -2483,12 +2483,12 @@ ch02-quiz-02-v2,AI variant of ch02-quiz-02,2,"data viz principles, ggplot layers
 B) The boxplot, because it's bigger
 C) Whichever has more data
 D) They're blended together",A,"ggplot draws layers in the order you add them, so the last layer sits on top.","B), C) and D) Order, not size or data, determines what's on top.",Think of stacking transparencies in order.,,yes,ch02-quiz-02,,all (AI variant),,ch02-quiz-02
-ch02-quiz-03-v1,AI variant of ch02-quiz-03,2,"data viz principles, honest plots",MC,"I plotted bill length by species with ggplot(penguins, aes(x = species, y = bill_length)) + geom_col(). The Adelie bar reaches about 5,700 mm, though no penguin has a bill longer than 60 mm. What went wrong?","A) geom_col() stacks (sums) all the values in each group, so the bar shows a total, not a typical bill
+ch02-quiz-03-v1,AI variant of ch02-quiz-03,2,"data viz principles, honest plots",MC,"I plotted bill length (mm) by species with ggplot(penguins, aes(x = species, y = bill_length)) + geom_col() and got the plot below. No penguin has a bill longer than 60 mm. What went wrong?","A) geom_col() stacks (sums) all the values in each group, so the bar shows a total, not a typical bill
 B) The data have a typo
 C) The y-axis is in the wrong units
-D) geom_col() shows the maximum",A,"geom_col() adds up the y values within each group. With about 150 Adelie penguins of ~39 mm each, the bar reaches ~5,700. Show means (stat_summary) or the raw data (boxplot + jitter) instead.","B) The data are fine; the geom is summing them.
+D) geom_col() shows the maximum",A,"geom_col() adds up the y values within each group. With about 150 Adelie penguins of ~39 mm each, the bar reaches ~5,900. Show means (stat_summary) or the raw data (boxplot + jitter) instead.","B) The data are fine; the geom is summing them.
 C) The units are mm; the issue is summing.
-D) geom_col() shows the sum, not the maximum.",About how many penguins × about how long a bill?,,yes,ch02-quiz-03,,all (AI variant),,ch02-quiz-03
+D) geom_col() shows the sum, not the maximum.",About how many penguins × about how long a bill?,fix-penguin-geomcol.png,yes,ch02-quiz-03,,all (AI variant),,ch02-quiz-03
 ch02-quiz-03-v2,AI variant of ch02-quiz-03,2,"data viz principles, honest plots",MC,Which plot best shows how leaf length differs among three tree species?,"A) A bar of the total leaf length per species
 B) Jittered points for every leaf plus a boxplot or mean for each species
 C) A pie chart of total leaf length by species
@@ -2513,10 +2513,10 @@ ch02-quiz-05-v1,AI variant of ch02-quiz-05,2,"aesthetics, associations",MC,"Each
 B) Ridge
 C) Valley",B,"Ridge's line climbs about 30 cm over 30 days (slope ≈ 1 cm/day), Valley's about half that, and North's barely rises.","A) North's line is the flattest.
 C) Valley rises, but less steeply than Ridge.",Compare how much each line rises from day 0 to day 30.,ch02-var-seedling-slopes.png,yes,ch02-quiz-05,,all (AI variant),,ch02-quiz-05
-ch02-quiz-05-v2,AI variant of ch02-quiz-05,2,"aesthetics, associations",MC,"In a faceted scatterplot with shared axes, the trendline in panel A rises 2 units across the x-range, panel B's rises 10 units, and panel C's falls 3 units. Which panel shows the steepest positive relationship?","A) A
+ch02-quiz-05-v2,AI variant of ch02-quiz-05,2,"aesthetics, associations",MC,These faceted scatterplots share the same axes. Which panel shows the steepest positive relationship between x and y?,"A) A
 B) B
-C) C",B,"With shared axes, the panel whose line rises the most over the same x-range has the steepest positive slope.","A) Rises, but much less.
-C) Falls: a negative relationship.",Steepest positive = rises the most.,,yes,ch02-quiz-05,,all (AI variant),,ch02-quiz-05
+C) C",B,"With shared axes, compare how much each trendline rises over the same x-range: B rises about 10 units, A only about 3, and C falls.","A) Positive, but it rises much less than B.
+C) It falls: a negative relationship.",Steepest positive = rises the most.,fix-facet-slopes.png,yes,ch02-quiz-05,,all (AI variant),,ch02-quiz-05
 ch02-quiz-06-v1,AI variant of ch02-quiz-06,2,"aesthetics, data viz principles",matching,"Penguins are shown in three panels by species: x = bill length, y = bill depth, color = flipper length (yellow = long), size = body mass. Visually estimate which species has the:
 
 1. shortest bills
@@ -2838,13 +2838,13 @@ penguins |>
 How do you fix it? (Select all correct.)","A) penguins |> dplyr::filter(island == ""Dream"")
 B) After library(dplyr), run conflicts_prefer(dplyr::filter)
 C) Rename island to Island first
-D) Reload the penguins data","A, B","R is using stats::filter(), which doesn't look inside the data for columns. Tell R to use dplyr's filter, each time or once per session.",C) and D) The same wrong filter() would still be used.,The column exists. So which filter() is running?,,yes,ch04-hw-07,,all (AI variant),,ch04-hw-07
+D) Reload the penguins data","A, B","R is using stats::filter(), which doesn't look inside the data for columns. Tell R to use dplyr's filter, each time or once per session.",C) and D) The same wrong filter() would still be used.,The column exists. So which filter() is running?,,no,ch04-hw-07,dropped after review: too technical (conflicted package),all (AI variant),,ch04-hw-07
 ch04-hw-07-v2,AI variant of ch04-hw-07,4,"data in R, errors & debugging, packages",MC,Why can filter() give 'object not found' for a column that exists?,"A) Another package (stats) also has a function called filter(), and R used that one
 B) filter() only works on numbers
 C) The column must be in quotes
 D) The data are too big",A,"When two loaded packages share a function name, R may use the 'wrong' one. Use dplyr::filter() or conflicts_prefer().","B) filter() works on any column type.
 C) dplyr uses bare column names.
-D) Size isn't the issue.",Could two functions have the same name?,,yes,ch04-hw-07,,all (AI variant),,ch04-hw-07
+D) Size isn't the issue.",Could two functions have the same name?,,no,ch04-hw-07,dropped after review: too technical (conflicted package),all (AI variant),,ch04-hw-07
 ch04-hw-08-v1,AI variant of ch04-hw-08,4,"data in R, dplyr verbs",MC,You want the row for the heaviest penguin (to see its species and island). Which code returns it?,"A) penguins |> filter(body_mass == max(body_mass, na.rm = TRUE))
 B) penguins |> summarize(max(body_mass, na.rm = TRUE))
 C) penguins |> select(max(body_mass))
@@ -2990,11 +2990,11 @@ B) species must be quoted
 C) The data have no species column
 D) filter() only works on numbers",A,"Two packages define filter(). When R uses stats::filter(), column names aren't recognized.","B) dplyr uses bare column names.
 C) The column exists.
-D) filter() works on text too.",Which filter() is R using?,,yes,ch04-book-09,,all (AI variant),,ch04-book-09
+D) filter() works on text too.",Which filter() is R using?,,no,ch04-book-09,dropped after review: too technical (conflicted package),all (AI variant),,ch04-book-09
 ch04-book-09-v2,AI variant of ch04-book-09,4,"data in R, errors & debugging, packages",MC,What does dplyr::filter() mean?,"A) Use the filter() function from the dplyr package specifically
 B) Divide dplyr by filter
 C) Install dplyr
-D) Filter the dplyr package",A,"package::function() tells R exactly which package's function to use, avoiding name conflicts.","B), C) and D) Not what :: does.",What do the double colons do?,,yes,ch04-book-09,,all (AI variant),,ch04-book-09
+D) Filter the dplyr package",A,"package::function() tells R exactly which package's function to use, avoiding name conflicts.","B), C) and D) Not what :: does.",What do the double colons do?,,no,ch04-book-09,dropped after review: too technical (conflicted package),all (AI variant),,ch04-book-09
 ch04-book-10-v1,AI variant of ch04-book-10,4,"data in R, errors & debugging, packages",select-all,"This fails with Error: object 'body_mass' not found, though the column exists and dplyr is loaded:
 
 penguins |>
@@ -3004,13 +3004,13 @@ How do you fix it? (Select both correct answers.)","A) penguins |> dplyr::filter
 B) After library(dplyr), run conflicts_prefer(dplyr::filter)
 C) Put body_mass in quotes
 D) Use select() instead","A, B","Both make R use dplyr's filter(), which understands column names.","C) Quotes compare against the text 'body_mass', not the column.
-D) select() picks columns; it doesn't filter rows.",What do A and B have in common?,,yes,ch04-book-10,,all (AI variant),,ch04-book-10
+D) select() picks columns; it doesn't filter rows.",What do A and B have in common?,,no,ch04-book-10,dropped after review: too technical (conflicted package),all (AI variant),,ch04-book-10
 ch04-book-10-v2,AI variant of ch04-book-10,4,"data in R, errors & debugging, packages",MC,"Which line, run once near the top of your script, prevents filter() conflicts for the whole session?","A) conflicts_prefer(dplyr::filter)
 B) install.packages(""dplyr"")
 C) rm(filter)
 D) library(stats)",A,The conflicted package's conflicts_prefer() tells R which filter() to use every time.,"B) Installing doesn't choose between functions.
 C) Not how to resolve a conflict.
-D) Loading stats makes the conflict, not the fix.",Which function says 'prefer this one'?,,yes,ch04-book-10,,all (AI variant),,ch04-book-10
+D) Loading stats makes the conflict, not the fix.",Which function says 'prefer this one'?,,no,ch04-book-10,dropped after review: too technical (conflicted package),all (AI variant),,ch04-book-10
 ch04-quiz-01-v1,AI variant of ch04-quiz-01,4,"data in R, errors & debugging, packages",MC,"In a fresh R session you type:
 
 penguins |>
@@ -3192,12 +3192,12 @@ B) about 10
 C) a bit above the median; a boxplot doesn't show it directly
 D) right skewed (long upper tail)","1-B, 2-A, 3-C, 4-D","The median line is near 10 days and the values run from about 1 to 46 (≈ 45). The long upper whisker and the high outliers show right skew, which pulls the mean above the median.","Don't stop the range at the whisker: include the outlier points.
 The mean isn't drawn on a boxplot.",Which way is the long tail?,ch05-var-box-right.png,yes,ch05-gquiz-04,,all (AI variant),,ch05-gquiz-04
-ch05-gquiz-04-v2,AI variant of ch05-gquiz-04,5,"boxplots, mean & median, shape of distributions",MC,"In a boxplot, the median line sits near the bottom of the box and the upper whisker is much longer than the lower one. What can you say about the mean?","A) It's probably above the median, because the data are right skewed
+ch05-gquiz-04-v2,AI variant of ch05-gquiz-04,5,"boxplots, mean & median, shape of distributions",MC,Here is a boxplot of a sample. What can you say about the mean?,"A) It's probably above the median, because the data are right skewed
 B) It's probably below the median
 C) It equals the median
-D) Nothing at all",A,"A long upper tail (right skew) pulls the mean above the median. The boxplot doesn't show the mean, but the skew tells you its likely direction.","B) That would be for left skew.
+D) Nothing at all",A,"The median sits low in the box, the upper whisker is longer than the lower one, and there are several high outliers: the data are right skewed. A long upper tail pulls the mean above the median. The boxplot doesn't show the mean, but the skew tells you its likely direction.","B) That would be for left skew.
 C) Only for symmetric data.
-D) The shape does give a clue.",Which way would the long tail pull the mean?,,yes,ch05-gquiz-04,,all (AI variant),,ch05-gquiz-04
+D) The shape does give a clue.",Which way would the long tail pull the mean?,fix-skewed-boxplot.png,yes,ch05-gquiz-04,,all (AI variant),,ch05-gquiz-04
 ch05-gquiz-05-v1,AI variant of ch05-gquiz-05,5,"variance, sums of squares",numeric,"The plot shows wing lengths of 7 butterflies (11, 14, 16, 18, 20, 21, 26 mm) and their deviations from the mean (18 mm). What is the sample variance? (Two decimals.)",,24.33,"Deviations: −7, −4, −2, 0, 2, 3, 8. Squares: 49, 16, 4, 0, 4, 9, 64. SS = 146. Variance = 146 / 6 ≈ 24.33.","Common mistakes: dividing by 7 (20.86), or forgetting to square.","Square each deviation, add, divide by n − 1.",ch05-var-lollipop.png,yes,ch05-gquiz-05,,all (AI variant),,ch05-gquiz-05
 ch05-gquiz-05-v2,AI variant of ch05-gquiz-05,5,"variance, sums of squares, standard deviation",numeric,"Five lizards have tail lengths of 6, 8, 9, 11 and 16 cm (mean = 10). What is the sample standard deviation? (Two decimals.)",,3.81,"Deviations: −4, −2, −1, 1, 6. Squares: 16, 4, 1, 1, 36 → SS = 58. Variance = 58 / 4 = 14.5. SD = √14.5 ≈ 3.81.","Dividing by 5 gives SD ≈ 3.41.
 Forgetting the square root gives the variance (14.5).",SS → variance (n − 1) → square root.,,yes,ch05-gquiz-05,,all (AI variant),,ch05-gquiz-05
@@ -3266,12 +3266,12 @@ C) Bin width never changes what you see
 D) More bins always mislead",A,"With 2 bins, the two beak types merge and you can't see them. With 30, two clear peaks appear. Always try a few bin widths.","B) Simpler isn't better if it hides structure.
 C) It clearly does.
 D) Too many bins add noise, but too few hide structure.",What does the 30-bin version reveal?,ch05-var-beak-2bins.png; ch05-var-beak-30bins.png,yes,ch05-book-03,,all (AI variant),,ch05-book-03
-ch05-book-03-v2,AI variant of ch05-book-03,5,"shape of distributions, histograms",MC,"A histogram with 100 bins of only 40 data points looks jagged, with many empty bins. What's the problem?","A) Too many bins: noise looks like structure
+ch05-book-03-v2,AI variant of ch05-book-03,5,"shape of distributions, histograms",MC,This histogram shows 40 measurements using 100 bins. What's the problem?,"A) Too many bins: noise looks like structure
 B) Too few bins
 C) The data must be bimodal
-D) Nothing; more bins is always better",A,"With so few points per bin, random bumps dominate. Use fewer bins (or a density plot) to see the overall shape.","B) The opposite problem.
+D) Nothing; more bins is always better",A,"With 40 points spread over 100 bins, most bins hold 0, 1 or 2 points, so random bumps and gaps dominate. Use fewer bins (or a density plot) to see the overall shape.","B) The opposite problem.
 C) Jaggedness doesn't mean multiple modes.
-D) Too many bins add noise.",How many points land in each bin?,,yes,ch05-book-03,,all (AI variant),,ch05-book-03
+D) Too many bins add noise.",How many points land in each bin?,fix-hist-100bins.png,yes,ch05-book-03,,all (AI variant),,ch05-book-03
 ch05-book-04-v1,AI variant of ch05-book-04,5,"mean & median, missing data (NA)",MC,"I calculated mean frog mass two ways:
 
 frogs |>
