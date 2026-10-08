@@ -31,3 +31,16 @@ Practice for Exam 1 (chapters 0–12): pick random questions or focus on chapter
 <iframe src="study_guide/index.html" title="Exam 1 study guide"
         style="width:100%; height:85vh; border:1px solid #d5dccb; border-radius:10px;"></iframe>
 ```
+
+
+## Relax
+
+Also, dont worry too much, it's just an exam. 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)   
+include_graphics("figs/fun_figs/relax.png")
+```

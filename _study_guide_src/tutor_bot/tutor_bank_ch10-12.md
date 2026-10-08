@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 738 questions in all. 156 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 725 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -3155,6 +3155,56 @@ Students measure leaf size on sun vs shade branches of 8 trees (several leaves p
   C) They can, just within trees.
   D) Ignoring the trees violates independence.
 - **Hint:** Which leaves are related to each other?
+
+### ch11-new-01
+- **Kind:** Course original
+- **Concepts:** Bootstrap vs permutation; Permutation p-values; Bootstrap CIs
+- **Type:** MC
+- **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [ch11-lineup-null.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch11-lineup-null.png)
+- **Question:**
+
+Permutation eye-test: the plot shows 20 panels of Adelie penguin body mass on Biscoe vs Dream islands, with means and 95% CIs. One panel is the real data; the other 19 were made by shuffling the island labels.
+
+The real data are in panel 14. Most people can't pick it out, and many guess panel 13. What does that tell us?
+
+- **Options:**
+
+  A) The real difference looks like the differences shuffling alone produces, so the p-value is probably large and we'd fail to reject the null. That isn't proof that the islands' penguins weigh the same
+  B) Penguins on the two islands have exactly the same mean body mass
+  C) Panel 13 shows that there is a real difference between the islands
+  D) The shuffling was done wrong, because the real data should always stand out
+
+- **Answer (tutor only):** A
+- **Explanation (tutor only):** If the real panel blends in with the shuffled ones, chance alone easily produces data like ours. Here the real difference is about 21 g, and a permutation test gives p ≈ 0.8. We fail to reject the null, but the data are also consistent with a small difference, so we can't conclude there is none.
+- **Why the wrong options are wrong (tutor only):**
+  B) Failing to reject the null isn't evidence that the means are exactly equal.
+  C) Panel 13 is a shuffle. With 19 shuffles, one of them will look a bit different by chance alone.
+  D) The real data stand out only when there is a strong association; with no real difference, they shouldn't.
+- **Hint:** If island didn't matter, would the real panel look any different from a shuffled one?
+
+### ch11-new-02
+- **Kind:** Course original
+- **Concepts:** Bootstrap vs permutation; Permutation p-values; Bootstrap CIs
+- **Type:** matching
+- **Question:**
+
+In a line-up, 1 panel shows the real data and 19 show data with the labels shuffled. What does each outcome suggest?
+
+1. Most people reliably pick out the real panel.
+2. People can't tell the real panel from the shuffled ones.
+
+- **Options:**
+
+  A) Data like ours would be rare if the null were true (p ≲ 1/20 = 0.05): evidence against the null, though not proof it's false
+  B) Data like ours are typical of what the null produces (p is probably large): no evidence against the null, though not proof it's true
+  C) The null is definitely true
+  D) The null is definitely false
+
+- **Answer (tutor only):** 1-A, 2-B
+- **Explanation (tutor only):** The shuffled panels show what data look like when the null is true. If the real panel stands out, data like ours rarely arise under the null (by luck you'd pick it only 1 time in 20), so we reject the null. If it blends in, chance can easily explain our data, so we fail to reject. Neither outcome proves the null true or false.
+- **Why the wrong options are wrong (tutor only):**
+  C) and D) A line-up, like any permutation test, gives evidence, not certainty.
+- **Hint:** The shuffled panels show what the null produces. Does the real panel look like them?
 
 ## Chapter 12: Study design
 

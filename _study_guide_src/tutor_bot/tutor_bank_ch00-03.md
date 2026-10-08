@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 738 questions in all. 156 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 725 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -3285,75 +3285,6 @@ A collaborator sends you a spreadsheet with a column 'temp' containing values li
   B) and C) Irrelevant.
   D) Numbers without units can't be interpreted.
 - **Hint:** Could you interpret 22 without knowing more?
-
-### ch03-hw-02
-- **Kind:** Course original
-- **Concepts:** Reproducible workflows
-- **Type:** MC
-- **Question:**
-
-Suppose you have just started a new R project and want to read in a file located in the project named animal_data.csv, which contains your raw data. How would you do this?
-
-- **Options:**
-
-  A) Load the readxl package, and type read_xlsx(file = "animal_data.csv")
-  B) Load the readr package and type read_csv("animal_data.csv")
-  C) Load the readr package and type read_csv(animal_data.csv)
-  D) Type read_csv("animal_data.csv")
-
-- **Answer (tutor only):** B
-- **Explanation (tutor only):** read_csv() comes from the readr package, so load it first. Because the file is inside the R project, a relative path (just the file name) works, and file names go in quotes.
-- **Why the wrong options are wrong (tutor only):**
-  A) readxl reads Excel files (.xlsx), not CSV files.
-  C) Without quotes, R looks for an object called animal_data.csv instead of a file.
-  D) read_csv() won't be found unless readr (or the tidyverse) is loaded first.
-- **Hint:** Which package provides read_csv(), and how does R know you mean a file name rather than an object?
-
-### ch03-hw-02-v1
-- **Kind:** AI-written version of ch03-hw-02
-- **Concepts:** Reproducible workflows
-- **Type:** MC
-- **Question:**
-
-Your R project contains a file data/bird_counts.csv. Which code reads it in?
-
-- **Options:**
-
-  A) library(readr); read_csv("data/bird_counts.csv")
-  B) library(readr); read_csv(data/bird_counts.csv)
-  C) read_csv("C:/Users/me/Desktop/bird_counts.csv")
-  D) library(readxl); read_xlsx("data/bird_counts.csv")
-
-- **Answer (tutor only):** A
-- **Explanation (tutor only):** read_csv() comes from readr, the file name goes in quotes, and a relative path (from the project folder) works on any computer.
-- **Why the wrong options are wrong (tutor only):**
-  B) Without quotes, R looks for an object named data.
-  C) An absolute path only works on one computer.
-  D) read_xlsx() reads Excel files, not CSVs.
-- **Hint:** Which package? Quotes? Relative path?
-
-### ch03-hw-02-v2
-- **Kind:** AI-written version of ch03-hw-02
-- **Concepts:** Reproducible workflows
-- **Type:** MC
-- **Question:**
-
-You type read_csv("plants.csv") and get: could not find function "read_csv". What's the fix?
-
-- **Options:**
-
-  A) Load readr (or tidyverse) first with library(readr)
-  B) Remove the quotes
-  C) Rename the file to plants.xlsx
-  D) Use setwd() to your Desktop
-
-- **Answer (tutor only):** A
-- **Explanation (tutor only):** 'could not find function' means the package providing read_csv() isn't loaded.
-- **Why the wrong options are wrong (tutor only):**
-  B) The quotes are correct.
-  C) The file format isn't the problem.
-  D) A path problem would give a 'does not exist' error instead.
-- **Hint:** What does 'could not find function' usually mean?
 
 ### ch03-hw-03
 - **Kind:** Course original

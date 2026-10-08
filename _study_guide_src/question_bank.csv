@@ -198,7 +198,7 @@ B) Load the readr package and type read_csv(""animal_data.csv"")
 C) Load the readr package and type read_csv(animal_data.csv)
 D) Type read_csv(""animal_data.csv"")",B,"read_csv() comes from the readr package, so load it first. Because the file is inside the R project, a relative path (just the file name) works, and file names go in quotes.","A) readxl reads Excel files (.xlsx), not CSV files.
 C) Without quotes, R looks for an object called animal_data.csv instead of a file.
-D) read_csv() won't be found unless readr (or the tidyverse) is loaded first.","Which package provides read_csv(), and how does R know you mean a file name rather than an object?",,yes,,Reads code but doesn't require running it.,"explanation, why_wrong, hint",,
+D) read_csv() won't be found unless readr (or the tidyverse) is loaded first.","Which package provides read_csv(), and how does R know you mean a file name rather than an object?",,no,,Reads code but doesn't require running it.; dropped after review: too much R syntax detail,"explanation, why_wrong, hint",,
 ch03-hw-03,"Reproducible research homework, Q3",3,"reproducibility, scripts",MC,How should you make your code more reproducible? (choose the best answer),"A) Annotate code with comments to indicate the purpose of each section
 B) Read in your data BEFORE loading in the required packages
 C) Use absolute file paths rather than relative paths",A,"Comments explain what each part of the code is for, so others (and future you) can follow, check, and rerun it.","B) Packages should be loaded first, at the top of the script; functions like read_csv() won't exist until they are.
@@ -376,7 +376,7 @@ iris |> pull(petal_length_to_width_ratio)
 and got: Error: object 'petal_length_to_width_ratio' not found. How do you solve it?","A) iris <- iris |> mutate(petal_length_to_width_ratio = Petal.Length / Petal.Width)
 B) iris <- petal_length_to_width_ratio = Petal.Length / Petal.Width
 C) Give petal_length_to_width_ratio a shorter name",A,"mutate() returned a new version of iris with the extra column and printed it, but nothing saved it. iris itself never changed. Assigning the result (iris <- ...) keeps the new column, so pull() can find it.","B) This isn't valid R: you can't assign to two things at once, and there's no mutate() to create the column inside the data.
-C) A long name is fine. The column doesn't exist in iris because the result was never saved.",Did the first block save its result anywhere with <- ?,,yes,ch01-quiz-02,,"explanation, why_wrong, hint",,
+C) A long name is fine. The column doesn't exist in iris because the result was never saved.",Did the first block save its result anywhere with <- ?,,no,ch01-quiz-02,dropped after review: too much R syntax detail,"explanation, why_wrong, hint",,
 ch04-hw-04,"Data in R homework, Q4 (concept version)",4,"data in R, dplyr verbs",MC,"What does this code do?
 
 ril_data |>
@@ -397,7 +397,7 @@ select(rel_asd)
 but got the error: Error: object 'rel_asd' not found. How do I fix this? (select all correct)","A) Type dplyr::select(rel_asd) instead of select(rel_asd)
 B) Add conflicts_prefer(dplyr::select) before running the code
 C) Add a |> after the mutate() line so select(rel_asd) chains onto it
-D) Assign the output of the code above to an object, then call select() on that object","C, D","Without a pipe at the end of the mutate() line, R treats select(rel_asd) as a separate command with no data, so it looks for an object called rel_asd. Either connect it with |> or save the result first and select from that object.",A) and B) fix a different problem (R using the wrong select() function). Here the right select() is being used; it just isn't given any data.,Look at the end of the mutate() line. What connects it to the next line?,,yes,,Original option C said 'Add a |> before select(rel_asd)'; reworded slightly to 'after the mutate() line' (same fix).,"explanation, why_wrong, hint",,
+D) Assign the output of the code above to an object, then call select() on that object","C, D","Without a pipe at the end of the mutate() line, R treats select(rel_asd) as a separate command with no data, so it looks for an object called rel_asd. Either connect it with |> or save the result first and select from that object.",A) and B) fix a different problem (R using the wrong select() function). Here the right select() is being used; it just isn't given any data.,Look at the end of the mutate() line. What connects it to the next line?,,no,,Original option C said 'Add a |> before select(rel_asd)'; reworded slightly to 'after the mutate() line' (same fix).; dropped after review: too much R syntax detail,"explanation, why_wrong, hint",,
 ch04-hw-06,"Data in R homework, Q6",4,"data in R, dplyr verbs",MC,"What does the code below aim to do?
 
 ril_data |>
@@ -427,7 +427,7 @@ B) ril_data |> summarize(max(mean_visits, na.rm = TRUE))
 C) ril_data |> arrange(mean_visits)
 D) ril_data |> select(max(mean_visits))",A,"filter() keeps the row(s) where mean_visits equals its maximum, so you see the whole row, including ril and location. (In the actual data, this is RIL B136 at site SR, with 7.42 visits.)","B) summarize() returns only the maximum value, not which RIL had it.
 C) arrange() sorts from smallest to largest, so the maximum ends up at the bottom, not shown first.
-D) select() picks columns by name; it doesn't find rows.","You need the whole row, not just the number. Which verb keeps rows that meet a condition?",,yes,,Original asked students to find the RIL in R (answer: B136 at SR). Replaced with a concept question about which code finds it.,"question (rewritten), options, explanation, why_wrong, hint",,
+D) select() picks columns by name; it doesn't find rows.","You need the whole row, not just the number. Which verb keeps rows that meet a condition?",,no,,Original asked students to find the RIL in R (answer: B136 at SR). Replaced with a concept question about which code finds it.; dropped after review: too much R syntax detail,"question (rewritten), options, explanation, why_wrong, hint",,
 ch04-book-01,Book: Data in R summary (Q1),4,tidy data,MC,"Consider the table below. The data are:
 
 location | GC | GC | GC | GC | GC | GC
@@ -501,7 +501,7 @@ A) Script A fails: after clean_names(), Petal.Length no longer exists (it's now 
 B) Script A fails for the same reason.
 C) Scripts A and D both use Petal.Length after clean_names(), so both fail.
 E) Script D fails: it uses Petal.Length after clean_names() renamed it.
-F) Script D fails: it uses Petal.Length after clean_names() renamed it.","After clean_names() runs, what is the column Petal.Length called?",,yes,,Code-reading question; scripts A and D are identical in the book (D repeats A). Consider changing one of them.,"explanation, why_wrong, hint",,
+F) Script D fails: it uses Petal.Length after clean_names() renamed it.","After clean_names() runs, what is the column Petal.Length called?",,no,,Code-reading question; scripts A and D are identical in the book (D repeats A). Consider changing one of them.; dropped after review: too much R syntax detail,"explanation, why_wrong, hint",,
 ch04-book-08,Book: Data in R summary (Q8),4,"data in R, dplyr verbs",MC,"What was this code aiming to do?
 
 iris |>
@@ -2558,13 +2558,13 @@ B) library(readr); read_csv(data/bird_counts.csv)
 C) read_csv(""C:/Users/me/Desktop/bird_counts.csv"")
 D) library(readxl); read_xlsx(""data/bird_counts.csv"")",A,"read_csv() comes from readr, the file name goes in quotes, and a relative path (from the project folder) works on any computer.","B) Without quotes, R looks for an object named data.
 C) An absolute path only works on one computer.
-D) read_xlsx() reads Excel files, not CSVs.",Which package? Quotes? Relative path?,,yes,ch03-hw-02,,all (AI variant),,ch03-hw-02
+D) read_xlsx() reads Excel files, not CSVs.",Which package? Quotes? Relative path?,,no,ch03-hw-02,dropped after review: too much R syntax detail,all (AI variant),,ch03-hw-02
 ch03-hw-02-v2,AI variant of ch03-hw-02,3,"reproducibility, loading data",MC,"You type read_csv(""plants.csv"") and get: could not find function ""read_csv"". What's the fix?","A) Load readr (or tidyverse) first with library(readr)
 B) Remove the quotes
 C) Rename the file to plants.xlsx
 D) Use setwd() to your Desktop",A,'could not find function' means the package providing read_csv() isn't loaded.,"B) The quotes are correct.
 C) The file format isn't the problem.
-D) A path problem would give a 'does not exist' error instead.",What does 'could not find function' usually mean?,,yes,ch03-hw-02,,all (AI variant),,ch03-hw-02
+D) A path problem would give a 'does not exist' error instead.",What does 'could not find function' usually mean?,,no,ch03-hw-02,dropped after review: too much R syntax detail,all (AI variant),,ch03-hw-02
 ch03-hw-03-v1,AI variant of ch03-hw-03,3,"reproducibility, scripts",MC,Which practice most helps someone else (or future you) understand and rerun your analysis?,"A) Comments explaining what each section does and why
 B) Running code by typing it into the console instead of saving a script
 C) Using absolute file paths
@@ -2767,13 +2767,13 @@ penguins |> mutate(mass_kg = body_mass / 1000)
 Then I ran penguins |> pull(mass_kg) and got: Error: object 'mass_kg' not found. How do you fix it?","A) penguins <- penguins |> mutate(mass_kg = body_mass / 1000)
 B) penguins <- mass_kg = body_mass / 1000
 C) Rename mass_kg to something shorter",A,"mutate() returned a new version of penguins and printed it, but nothing saved it. Assigning the result keeps the new column.","B) Not valid R, and there's no mutate().
-C) The name isn't the problem; the column was never saved.",Was the first result saved with <- ?,,yes,ch04-hw-03,,all (AI variant),,ch04-hw-03
+C) The name isn't the problem; the column was never saved.",Was the first result saved with <- ?,,no,ch04-hw-03,dropped after review: too much R syntax detail,all (AI variant),,ch04-hw-03
 ch04-hw-03-v2,AI variant of ch04-hw-03,4,"data in R, assignment & environment",MC,You run plants |> filter(height > 10) and see 12 rows printed. Then nrow(plants) returns 40. Why?,"A) filter() printed a filtered copy, but plants was never reassigned
 B) filter() is broken
 C) nrow() counts columns
 D) The filter removed rows from the file on disk",A,"dplyr verbs return a new table and don't change the original unless you assign it, e.g., tall_plants <- plants |> filter(height > 10).","B) filter() worked; the result just wasn't saved.
 C) nrow() counts rows.
-D) R never changes your data file.",Did anything use <- ?,,yes,ch04-hw-03,,all (AI variant),,ch04-hw-03
+D) R never changes your data file.",Did anything use <- ?,,no,ch04-hw-03,dropped after review: too much R syntax detail,all (AI variant),,ch04-hw-03
 ch04-hw-04-v1,AI variant of ch04-hw-04,4,"data in R, dplyr verbs",MC,"What does this code do?
 
 penguins |>
@@ -2804,7 +2804,7 @@ and got: Error: object 'species' not found. How do I fix this? (Select all corre
 B) Use dplyr::select(species, mass_kg)
 C) Save the mutate() result to an object, then select() from that object
 D) Put species in quotes","A, C","Without a pipe, select() runs as a separate command with no data, so R looks for an object called species. Connect the lines with |>, or save the result first.","B) The right select() is used; it just has no data.
-D) Quotes don't give select() any data.",What connects the mutate() line to the next line?,,yes,ch04-hw-05,,all (AI variant),,ch04-hw-05
+D) Quotes don't give select() any data.",What connects the mutate() line to the next line?,,no,ch04-hw-05,dropped after review: too much R syntax detail,all (AI variant),,ch04-hw-05
 ch04-hw-05-v2,AI variant of ch04-hw-05,4,"data in R, pipes, errors & debugging",MC,"What's wrong with this code?
 
 plants |>
@@ -2814,7 +2814,7 @@ B) filter() must come after mutate()
 C) height needs quotes
 D) Nothing",A,A trailing |> tells R more is coming; R either waits or gives an 'unexpected end' error. Remove the last pipe or add the next step.,"B) Order is fine here.
 C) Column names aren't quoted in dplyr.
-D) The dangling pipe is a problem.",What follows the last |> ?,,yes,ch04-hw-05,,all (AI variant),,ch04-hw-05
+D) The dangling pipe is a problem.",What follows the last |> ?,,no,ch04-hw-05,dropped after review: too much R syntax detail,all (AI variant),,ch04-hw-05
 ch04-hw-06-v1,AI variant of ch04-hw-06,4,"data in R, dplyr verbs",MC,"What does this code aim to do?
 
 penguins |>
@@ -2850,13 +2850,13 @@ B) penguins |> summarize(max(body_mass, na.rm = TRUE))
 C) penguins |> select(max(body_mass))
 D) penguins |> arrange(body_mass)",A,"filter() keeps the whole row whose body_mass equals the maximum, so you see species, island and everything else.","B) Returns only the number.
 C) select() picks columns.
-D) Sorts smallest first, so the heaviest is at the bottom.",You need the whole row.,,yes,ch04-hw-08,,all (AI variant),,ch04-hw-08
+D) Sorts smallest first, so the heaviest is at the bottom.",You need the whole row.,,no,ch04-hw-08,dropped after review: too much R syntax detail,all (AI variant),,ch04-hw-08
 ch04-hw-08-v2,AI variant of ch04-hw-08,4,"data in R, dplyr verbs",MC,Which code lists penguins from heaviest to lightest?,"A) penguins |> arrange(desc(body_mass))
 B) penguins |> arrange(body_mass)
 C) penguins |> filter(body_mass)
 D) penguins |> summarize(desc(body_mass))",A,arrange() sorts rows; desc() sorts from largest to smallest.,"B) Sorts lightest first.
 C) filter() needs a TRUE/FALSE condition.
-D) summarize() collapses rows.","Which verb sorts, and how do you reverse the order?",,yes,ch04-hw-08,,all (AI variant),,ch04-hw-08
+D) summarize() collapses rows.","Which verb sorts, and how do you reverse the order?",,no,ch04-hw-08,dropped after review: too much R syntax detail,all (AI variant),,ch04-hw-08
 ch04-book-01-v1,AI variant of ch04-book-01,4,tidy data,MC,"Consider the table below. The data are:
 
 tree | T1 | T2 | T3 | T4
@@ -2959,12 +2959,12 @@ C) penguins |> rename(mass = body_mass) |> mutate(kg = mass / 1000)","A) A only
 B) B and C
 C) A and C
 D) All three",B,"After rename(), the column is called mass, so later steps must use mass (C). B works because mutate() runs before the rename.","A) Script A uses body_mass after it was renamed, so it fails.
-C) and D) Both include script A.","After renaming, what is the column called?",,yes,ch04-book-07,,all (AI variant),,ch04-book-07
+C) and D) Both include script A.","After renaming, what is the column called?",,no,ch04-book-07,dropped after review: too much R syntax detail,all (AI variant),,ch04-book-07
 ch04-book-07-v2,AI variant of ch04-book-07,4,"data in R, errors & debugging",MC,"After running clean_names(), which code refers to the column formerly called Petal.Width?","A) petal_width
 B) Petal.Width
 C) PetalWidth
 D) ""Petal Width""",A,clean_names() converts names to lowercase snake_case: Petal.Width becomes petal_width.,"B) That old name no longer exists after cleaning.
-C) and D) Not what clean_names() produces.",clean_names() → lowercase with underscores.,,yes,ch04-book-07,,all (AI variant),,ch04-book-07
+C) and D) Not what clean_names() produces.",clean_names() → lowercase with underscores.,,no,ch04-book-07,dropped after review: too much R syntax detail,all (AI variant),,ch04-book-07
 ch04-book-08-v1,AI variant of ch04-book-08,4,"data in R, dplyr verbs",MC,"What does this code aim to do?
 
 penguins |>
@@ -4869,3 +4869,18 @@ C) To find out whether the null is true
 D) To calculate the p-value",A,A power analysis helps avoid wasting effort on a study too small to detect meaningful effects.,"B) Nothing guarantees significance.
 C) Power doesn't tell you that.
 D) p-values come from the data.",Is the study big enough?,,yes,ch12-hw-08,,all (AI variant),,ch12-hw-08
+ch11-new-01,"New question (2026), line-up where the real data don't stand out",11,"permutation, null distribution, p-values, interpretation",MC,"Permutation eye-test: the plot shows 20 panels of Adelie penguin body mass on Biscoe vs Dream islands, with means and 95% CIs. One panel is the real data; the other 19 were made by shuffling the island labels.
+
+The real data are in panel 14. Most people can't pick it out, and many guess panel 13. What does that tell us?","A) The real difference looks like the differences shuffling alone produces, so the p-value is probably large and we'd fail to reject the null. That isn't proof that the islands' penguins weigh the same
+B) Penguins on the two islands have exactly the same mean body mass
+C) Panel 13 shows that there is a real difference between the islands
+D) The shuffling was done wrong, because the real data should always stand out",A,"If the real panel blends in with the shuffled ones, chance alone easily produces data like ours. Here the real difference is about 21 g, and a permutation test gives p ≈ 0.8. We fail to reject the null, but the data are also consistent with a small difference, so we can't conclude there is none.","B) Failing to reject the null isn't evidence that the means are exactly equal.
+C) Panel 13 is a shuffle. With 19 shuffles, one of them will look a bit different by chance alone.
+D) The real data stand out only when there is a strong association; with no real difference, they shouldn't.","If island didn't matter, would the real panel look any different from a shuffled one?",ch11-lineup-null.png,yes,ch11-chime-04-v2,New question written to pair with the Chime In line-up (where the real data do stand out).,"question, options, explanation, why_wrong, hint, figure",,
+ch11-new-02,"New question (2026), line-up logic",11,"permutation, p-values, interpretation",matching,"In a line-up, 1 panel shows the real data and 19 show data with the labels shuffled. What does each outcome suggest?
+
+1. Most people reliably pick out the real panel.
+2. People can't tell the real panel from the shuffled ones.","A) Data like ours would be rare if the null were true (p ≲ 1/20 = 0.05): evidence against the null, though not proof it's false
+B) Data like ours are typical of what the null produces (p is probably large): no evidence against the null, though not proof it's true
+C) The null is definitely true
+D) The null is definitely false","1-A, 2-B","The shuffled panels show what data look like when the null is true. If the real panel stands out, data like ours rarely arise under the null (by luck you'd pick it only 1 time in 20), so we reject the null. If it blends in, chance can easily explain our data, so we fail to reject. Neither outcome proves the null true or false.","C) and D) A line-up, like any permutation test, gives evidence, not certainty.",The shuffled panels show what the null produces. Does the real panel look like them?,,yes,"ch11-chime-05, ch11-chime-04-v2",New question.,"question, options, explanation, why_wrong, hint",,

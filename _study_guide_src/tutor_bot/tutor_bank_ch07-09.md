@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 738 questions in all. 156 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 725 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
