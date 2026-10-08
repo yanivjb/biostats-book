@@ -54,7 +54,9 @@ us_rils <- ril_data |>
 
 :::
 
---- 
+
+  
+---
 
 In null hypothesis significance testing  we ask how unusual our observation would be if it came from the null model. To do this we must:  
 
