@@ -119,10 +119,18 @@ Bias occurs when there is a systematic difference between your treatment groups 
 #| code-summary: "Loading, formatting, and plotting the data"
 #| column: margin
 #| label: fig-frogdata  
-frogs <- read_csv("https://raw.githubusercontent.com/ybrandvain/biostat/master/data/Swierk_Langkilde_BEHECO_1.csv")|>
-  dplyr::select(year, pond, treatment,hatched.eggs, total.eggs, num.metamorphosed,field.survival.num)%>%
-  mutate_at(.vars = c("hatched.eggs", "total.eggs", "num.metamorphosed" , "field.survival.num"), as.numeric)
+library(dplyr)
+library(readr)
 library(ggforce)
+frog_link <-"https://raw.githubusercontent.com/ybrandvain/biostat/master/data/Swierk_Langkilde_BEHECO_1.csv"
+
+frogs <- read_csv(frog_link)|>
+  dplyr::select(year, pond, treatment,hatched.eggs, 
+                total.eggs, num.metamorphosed,field.survival.num) |>
+  mutate_at(.vars = c("hatched.eggs", "total.eggs", 
+                      "num.metamorphosed" , "field.survival.num"), 
+            as.numeric)
+
 ggplot(frogs, aes(x = treatment, y = hatched.eggs, color = treatment, shape = treatment)) +
   geom_violin(show.legend = FALSE)+
   geom_sina(show.legend = FALSE, size = 6, alpha = .6) +  # if you don't have ggforce, use geom_jitter

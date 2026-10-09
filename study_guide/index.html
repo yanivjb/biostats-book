@@ -353,7 +353,17 @@ function shuffle(a) {
 function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
 
 // Question text: tables ("a | b | c" lines), code-looking lines, and paragraphs.
+// A sentence that mentions code ("A script contains x <- 3:5 and ...") is prose, not a code block.
+function isProseLine(l) {
+  const t = l.trim();
+  if (!/^[A-Z]/.test(t)) return false;
+  const words = t.split(/\s+/);
+  if (words.length < 6) return false;
+  const plain = words.filter(w => /^[A-Za-z']+[,.:;?!]?$/.test(w)).length;
+  return /^[A-Z][a-z']*,?\s+[a-z(]/.test(t) || plain >= 0.6 * words.length;
+}
 function isCodeLine(l) {
+  if (isProseLine(l)) return false;
   return /<-|\|>|%>%/.test(l) || /^\s{2,}\S/.test(l) || /^(library|ggplot|install\.packages|setwd)\(/.test(l.trim())
     || /^#/.test(l.trim()) || /^[\w.]+\(.*\)\s*(\+|\|>)?$/.test(l.trim());
 }
@@ -373,6 +383,13 @@ function renderText(text) {
       t.append(el("tbody", {}, rows.slice(1).map(r => el("tr", {}, r.map(c => el("td", { text: c }))))));
       box.append(el("div", { class: "tablewrap" }, t));
       continue;
+    }
+    // Lettered lines ("a) x <- 4") stay one list: the code part goes inline.
+    const lettered = l.trim().match(/^(\(?[a-z]\))\s+(.+)$/);
+    if (lettered) {
+      const rest = lettered[2];
+      const looksCode = !isProseLine(rest) && (/<-|\|>|%>%|[\w.]\(/.test(rest)) && !rest.includes("`");
+      para.push(looksCode ? lettered[1] + " `" + rest + "`" : l.trim()); i++; continue;
     }
     if (isCodeLine(l)) {
       flush();

@@ -50,13 +50,13 @@ B) Error: object p not found
 C) Error: object of type closure is not subsettable
 D) Error in ""p""^2 : non-numeric argument to binary operator",D,"The quotes make ""p"" a character string, and you can't do arithmetic (like ^2) on text. R says the argument is ""non-numeric"".","A) R cannot square a word, so it does throw an error.
 B) ""object not found"" happens when you type a name without quotes that doesn't exist (p^2). With quotes, R knows ""p"" is text, not an object.
-C) ""closure is not subsettable"" comes from treating a function like data (e.g., mean[1]). Not relevant here.",What do the quotation marks around p tell R?,,yes,,,"explanation, why_wrong, hint",,
+C) ""closure is not subsettable"" comes from treating a function like data (e.g., mean[1]). Not relevant here.",What do the quotation marks around p tell R?,,no,,dropped after review: too much R syntax detail,"explanation, why_wrong, hint",,
 ch01-book-02,Book: Getting started summary (Q2),1,R basics,MC,Which logical question provides an unexpected answer?,"A) (2.0 + 1.0) == 3.0
 B) (0.2 + 0.1) == 0.3
 C) 2^2 > 8
 D) (1/0) == (10 * 1/0)",B,"(0.2 + 0.1) == 0.3 returns FALSE because of floating-point precision: some decimals can't be stored exactly in binary, so 0.2 + 0.1 is very slightly different from 0.3. Use all.equal() or round() instead of == for decimals.","A) Whole-number arithmetic is exact, so this is TRUE, as expected.
 C) 2^2 is 4, which is not greater than 8, so FALSE, as expected.
-D) 1/0 is Inf in R, and 10 * Inf is also Inf, so this is TRUE. That surprises some people, but it follows from how R handles infinity.",Try (0.2 + 0.1) - 0.3 in R. Is it exactly zero?,,yes,,Option D also returns a result many beginners find surprising (Inf == Inf is TRUE). Consider replacing it with a clearly unsurprising option.,"explanation, why_wrong, hint",,
+D) 1/0 is Inf in R, and 10 * Inf is also Inf, so this is TRUE. That surprises some people, but it follows from how R handles infinity.",Try (0.2 + 0.1) - 0.3 in R. Is it exactly zero?,,no,,Option D also returns a result many beginners find surprising (Inf == Inf is TRUE). Consider replacing it with a clearly unsurprising option.; dropped after review: too much R syntax detail,"explanation, why_wrong, hint",,
 ch01-book-03,Book: Getting started summary (Q3),1,"R basics, vectors",MC,"You measured the length and width (in cm) of five wild grape (Vitis riparia) leaves and stored them in two vectors, leaf_length and leaf_width (in the same leaf order). Leaf area = 0.851 x leaf length x leaf width. Which code gives the mean leaf area?","A) mean(0.851 * leaf_length * leaf_width)
 B) 0.851 * mean(leaf_length) * mean(leaf_width)
 C) mean(leaf_length) * mean(leaf_width)
@@ -68,11 +68,11 @@ Line 1: praise()
 Line 2: library(praise)
 How will running this script make you feel?","A) Amazing, I love being praised
 B) Not good, it won't work :(",B,"R runs a script from top to bottom. Line 1 calls praise() before the praise package is loaded on line 2, so R gives 'could not find function ""praise""'. Load packages at the top of your script.",A) praise() would work only if the package were already loaded. Here it is loaded one line too late.,In what order does R run the lines of a script?,ch01-book-wrongpraise.png,yes,ch01-quiz-03,Book version shows the script as a screenshot; the code is now written into the question text.,"explanation, why_wrong, hint",,
-ch01-book-05,Book: Getting started summary (Q5),1,"R basics, assignment & environment",MC,A script contains two lines: x <- 3:5 and y <- 1. The Environment pane shows only x (int [1:3] 3 4 5); y is not listed. What happens if you enter x^2 in the console?,"A) Error: object x not found
+ch01-book-05,Book: Getting started summary (Q5),1,"R basics, assignment & environment",MC,A script contains two lines: `x <- 3:5` and `y <- 1`. The Environment pane shows only x (`int [1:3] 3 4 5`); y is not listed. What happens if you enter `x^2` in the console?,"A) Error: object x not found
 B) 1 4 9
 C) 9 16 25",C,"x exists (it is in the Environment) and holds 3, 4, 5. Squaring each element gives 9, 16, 25.","A) x is in the Environment, so R can find it.
 B) 1 4 9 would be the squares of 1, 2, 3. But x is 3:5, which is 3, 4, 5.",What values does 3:5 create?,ch01-book-badscript.png,yes,,Shares its setup with ch01-book-06. Book version shows the script and Environment as a screenshot; described in text here.,"explanation, why_wrong, hint",,
-ch01-book-06,Book: Getting started summary (Q6),1,"R basics, assignment & environment",MC,A script contains two lines: x <- 3:5 and y <- 1. The Environment pane shows only x (int [1:3] 3 4 5); y is not listed. What happens if you enter x * y in the console?,"A) Error: object x not found
+ch01-book-06,Book: Getting started summary (Q6),1,"R basics, assignment & environment",MC,A script contains two lines: `x <- 3:5` and `y <- 1`. The Environment pane shows only x (`int [1:3] 3 4 5`); y is not listed. What happens if you enter `x * y` in the console?,"A) Error: object x not found
 B) Error: object y not found
 C) 1 2 3
 D) 3 4 5",B,"Writing y <- 1 in a script does nothing until you run that line. The Environment shows only x, so y was never created, and R stops with 'object y not found'.","A) x is in the Environment, so R can find it.
@@ -118,8 +118,8 @@ C) Write code regularly and reflect on mistakes
 D) Ask AI to solve all your R problems and copy and paste its answers",C,Skill comes from practice and learning from errors. Look-up is easy; understanding comes from doing.,"A) You can always look functions up. Knowing how to use them comes from practice.
 B) Errors are how you learn. Avoiding them means avoiding practice.
 D) Copying answers without understanding them doesn't build skill, and AI answers can be wrong.",,,yes,,Mindset question; low value for exam practice. Consider include = no for the exam study guide.,"explanation, why_wrong, hint",,
-ch01-quiz-01,"Intro to R group quiz (2026), Q1",1,"R basics, assignment & environment",MC,"Two students each typed x <- 5 in an R script.
-Student A ran the line: it appears in the Console (> x<-5) and the Environment shows x = 5.
+ch01-quiz-01,"Intro to R group quiz (2026), Q1",1,"R basics, assignment & environment",MC,"Two students each typed `x <- 5` in an R script.
+Student A ran the line: it appears in the Console (`> x<-5`) and the Environment shows x = 5.
 Student B did not run the line: the Console is empty and the Environment says 'Environment is empty'.
 In which case does x equal 5?","A) A only
 B) B only
@@ -247,7 +247,7 @@ B) logical <lgl>
 C) character <chr>
 D) factor <fct>",D,"Species is a categorical variable, and in iris it is stored as a factor: a category with a fixed set of levels (setosa, versicolor, virginica).","A) Numeric is for measurements.
 B) Logical is for TRUE/FALSE.
-C) Character also stores text, so this is a reasonable guess, but iris stores Species as a factor (with defined levels).",Species has exactly three possible values. Which type is built for categories with set levels?,,yes,ch03-hw-04,"Answering C vs D depends on knowing how iris happens to store Species. Fine as practice, but low value without R.","explanation, why_wrong, hint",,
+C) Character also stores text, so this is a reasonable guess, but iris stores Species as a factor (with defined levels).",Species has exactly three possible values. Which type is built for categories with set levels?,,no,ch03-hw-04,"Answering C vs D depends on knowing how iris happens to store Species. Fine as practice, but low value without R.; dropped after review: too much R syntax detail","explanation, why_wrong, hint",,
 ch03-book-05,Book: Reproducible science summary (Q8),3,"reproducibility, scripts, packages",MC,"Consider this R script:
 
 # My R script
@@ -2265,27 +2265,28 @@ ch00-canvas-06-v1,AI variant of ch00-canvas-06,0,"variable types, modeling choic
 B) FALSE",A,"Counts with many possible values are often treated as continuous. Modeling is a choice guided by, not dictated by, variable type.",B) Variable type isn't an unbreakable rule.,"If counts range from 0 to 300, how much does the 'whole number' part matter?",,yes,ch00-canvas-06,,all (AI variant),,ch00-canvas-06
 ch00-canvas-06-v2,AI variant of ch00-canvas-06,0,"variable types, modeling choices",TF,"TRUE or FALSE: Once a variable is classified as continuous, it must always be analyzed as continuous.","A) TRUE
 B) FALSE",B,Analysts sometimes bin continuous variables or treat counts as continuous. Variable types describe data; they don't lock in the analysis.,A) That's too strict.,"Could there be good reasons to analyze body mass as small, medium or large?",,yes,ch00-canvas-06,,all (AI variant),,ch00-canvas-06
-ch01-book-01-v1,AI variant of ch01-book-01,1,"R basics, errors & debugging",MC,"Entering ""10"" + 5 into R produces:","A) 15
-B) ""105""
-C) Error in ""10"" + 5 : non-numeric argument to binary operator
-D) Error: object 10 not found",C,"The quotes make ""10"" a character string, not a number, so R can't add it to 5.","A) R doesn't convert text to numbers automatically here.
-B) R's + doesn't paste strings together.
-D) Quotes make it a value, not an object name.",What do quotation marks do in R?,,yes,ch01-book-01,,all (AI variant),,ch01-book-01
-ch01-book-01-v2,AI variant of ch01-book-01,1,"R basics, errors & debugging",MC,You type sqrt(x) but never created x. What does R say?,"A) 0
-B) Error: object 'x' not found
-C) Error: non-numeric argument to mathematical function
-D) NA",B,"Without quotes, x is treated as the name of an object. Since nothing called x exists, R can't find it.","A) and D) R doesn't invent a value for a missing object.
-C) That error appears when x exists but holds text.",Does an object named x exist yet?,,yes,ch01-book-01,,all (AI variant),,ch01-book-01
+ch01-book-01-v1,"Rewritten from an AI variant of ch01-book-01 (error given, cause asked)",1,"R basics, errors & debugging",MC,"You type `""10"" + 5` and R says `Error in ""10"" + 5 : non-numeric argument to binary operator`. Why doesn't it say 15?","A) The quotes make ""10"" text (a character string), not a number, and R can't add text to a number
+B) R can only add numbers with the same number of digits
+C) You need to load a package before R can do arithmetic
+D) R thinks ""10"" is the name of an object, and no such object exists",A,"Anything in quotes is text to R, even if it looks like a number. ""+"" only works on numbers, so R complains that one side is non-numeric. `10 + 5` (no quotes) gives 15, and so does `as.numeric(""10"") + 5`.","B) R adds numbers of any size: 10 + 5 is fine.
+C) Arithmetic is built into R; no package is needed.
+D) Quotes mean a value, not a name. A missing object gives a different error: object not found.",What do quotes tell R about the kind of thing inside them?,,yes,ch01-book-01-v2,"Kept as a standalone question at the instructor's request: error given, students diagnose the cause.","question, options, explanation, why_wrong, hint",,
+ch01-book-01-v2,"Rewritten from an AI variant of ch01-book-01 (error given, cause asked)",1,"R basics, errors & debugging",MC,You type `sqrt(x)` and R says `Error: object 'x' not found`. What went wrong?,"A) R has no object called x: the line that creates it (e.g., `x <- 16`) was never run, or x is spelled differently (R is case-sensitive)
+B) The sqrt() function comes from a package you haven't loaded
+C) x is negative, and you can't take the square root of a negative number
+D) x holds text, and sqrt() only works on numbers",A,"""object not found"" means R looked for something named x in the Environment and found nothing. Usually the line that creates x was typed in the script but never run, or the name doesn't match exactly (X vs x).","B) sqrt() is built into R. A missing function gives a different error: could not find function.
+C) The square root of a negative number gives NaN with a warning, not an error about a missing object.
+D) Then x would exist, so R would complain about the text (non-numeric argument), not a missing object.","What does ""not found"" tell you about whether x exists?",,yes,"ch01-book-05, ch01-quiz-01","Kept as a standalone question at the instructor's request: error given, students diagnose the cause.","question, options, explanation, why_wrong, hint",,
 ch01-book-02-v1,AI variant of ch01-book-02,1,R basics,MC,Which logical comparison gives a surprising FALSE in R (and most programming languages)?,"A) (1 + 1) == 2
 B) (0.1 * 3) == 0.3
 C) 5 > 3
-D) (4 / 2) == 2",B,"Computers store most decimals in binary only approximately, so 0.1 * 3 is 0.30000000000000004, not exactly 0.3. Use all.equal() or round() to compare decimals.","A), C) and D) Whole-number arithmetic is exact, so these behave as expected.",Which comparison involves decimals that can't be stored exactly?,,yes,ch01-book-02,,all (AI variant),,ch01-book-02
+D) (4 / 2) == 2",B,"Computers store most decimals in binary only approximately, so 0.1 * 3 is 0.30000000000000004, not exactly 0.3. Use all.equal() or round() to compare decimals.","A), C) and D) Whole-number arithmetic is exact, so these behave as expected.",Which comparison involves decimals that can't be stored exactly?,,no,ch01-book-02,dropped after review: too much R syntax detail,all (AI variant),,ch01-book-02
 ch01-book-02-v2,AI variant of ch01-book-02,1,R basics,MC,Why can (0.2 + 0.1) == 0.3 return FALSE in R?,"A) Decimals are stored with tiny rounding errors in binary
 B) R rounds all numbers to whole numbers
 C) == only works for text
 D) R has a bug that should be reported",A,"Many decimals (like 0.1) have no exact binary representation, so tiny errors creep in. Compare decimals with all.equal() or by rounding.","B) R keeps decimals.
 C) == compares numbers too.
-D) It's expected behavior in nearly all languages.",How does a computer store 0.1?,,yes,ch01-book-02,,all (AI variant),,ch01-book-02
+D) It's expected behavior in nearly all languages.",How does a computer store 0.1?,,no,ch01-book-02,dropped after review: too much R syntax detail,all (AI variant),,ch01-book-02
 ch01-book-03-v1,AI variant of ch01-book-03,1,"R basics, vectors",MC,"You measured the length and width (cm) of six bean pods, stored in vectors pod_length and pod_width (same pod order). Pod area ≈ 0.7 × length × width. Which code gives the mean pod area?","A) mean(0.7 * pod_length * pod_width)
 B) 0.7 * mean(pod_length) * mean(pod_width)
 C) sum(0.7 * pod_length * pod_width)
@@ -2311,23 +2312,23 @@ B) At the very end of the script
 C) Right after the first time you use a function from the package
 D) It doesn't matter",A,"A script runs top to bottom, so packages must be loaded before their functions are used. Putting them at the top also shows readers what the script needs.","B) and C) Code that runs before library() will fail.
 D) Order matters in a script.",Scripts run in order.,,yes,ch01-book-04,,all (AI variant),,ch01-book-04
-ch01-book-05-v1,AI variant of ch01-book-05,1,"R basics, assignment & environment",MC,"Your script contains a <- c(2, 4, 6) and b <- 10, but the Environment pane shows only a (num [1:3] 2 4 6). What happens if you type a / 2 in the console?","A) Error: object 'a' not found
+ch01-book-05-v1,AI variant of ch01-book-05,1,"R basics, assignment & environment",MC,"Your script contains `a <- c(2, 4, 6)` and `b <- 10`, but the Environment pane shows only a (`num [1:3] 2 4 6`). What happens if you type `a / 2` in the console?","A) Error: object 'a' not found
 B) 1 2 3
 C) 0.5 1 1.5",B,"a exists in the Environment (that line was run), so R divides each element by 2.","A) a is listed in the Environment.
 C) That would be dividing by 4; a / 2 halves each value.",Is a in the Environment?,,yes,ch01-book-05,,all (AI variant),,ch01-book-05
-ch01-book-05-v2,AI variant of ch01-book-05,1,"R basics, assignment & environment",MC,"A script contains counts <- c(5, 8, 12). You ran that line. What does sum(counts) return?","A) 25
+ch01-book-05-v2,AI variant of ch01-book-05,1,"R basics, assignment & environment",MC,"A script contains `counts <- c(5, 8, 12)`. You ran that line. What does `sum(counts)` return?","A) 25
 B) Error: object 'counts' not found
 C) 5 8 12
 D) 3",A,"Running the line created counts in the Environment, so sum() adds 5 + 8 + 12.","B) The line was run, so counts exists.
 C) That would just print the vector.
 D) That's length(counts).",Was the line that creates counts run?,,yes,ch01-book-05,,all (AI variant),,ch01-book-05
-ch01-book-06-v1,AI variant of ch01-book-06,1,"R basics, assignment & environment",MC,"Your script contains a <- c(2, 4, 6) and b <- 10, but the Environment pane shows only a. What happens if you type a + b in the console?","A) Error: object 'a' not found
+ch01-book-06-v1,AI variant of ch01-book-06,1,"R basics, assignment & environment",MC,"Your script contains `a <- c(2, 4, 6)` and `b <- 10`, but the Environment pane shows only a. What happens if you type `a + b` in the console?","A) Error: object 'a' not found
 B) Error: object 'b' not found
 C) 12 14 16
 D) 2 4 6",B,"Writing a line in a script doesn't run it. b <- 10 was never run, so b doesn't exist yet.","A) a exists.
 C) That's what you'd get after running b <- 10.
 D) b isn't treated as 0.",Which objects are actually in the Environment?,,yes,ch01-book-06,,all (AI variant),,ch01-book-06
-ch01-book-06-v2,AI variant of ch01-book-06,1,"R basics, assignment & environment",MC,You wrote total <- 100 in your script but didn't run it. Then you type total / 4 in the console. What happens?,"A) 25
+ch01-book-06-v2,AI variant of ch01-book-06,1,"R basics, assignment & environment",MC,You wrote `total <- 100` in your script but didn't run it. Then you type `total / 4` in the console. What happens?,"A) 25
 B) Error: object 'total' not found
 C) 0
 D) R runs the script line automatically",B,"Code in a script does nothing until it's run. Until then, total doesn't exist.","A) That's what you'd get after running the line.
@@ -2389,15 +2390,15 @@ C) Delete the code and give up
 D) Paste the whole assignment into AI and submit the result",A,"Reading errors, forming hypotheses and testing them is how debugging skill develops. Asking for help after trying is great.","B) Rarely fixes a code error.
 C) You learn nothing.
 D) You skip the learning.",Which option involves you thinking about the problem?,,yes,ch01-book-10,,all (AI variant),,ch01-book-10
-ch01-quiz-01-v1,AI variant of ch01-quiz-01,1,"R basics, assignment & environment",MC,"Two students each wrote y <- 12 in a script.
-Student A ran the line: the Console shows > y <- 12 and the Environment lists y = 12.
+ch01-quiz-01-v1,AI variant of ch01-quiz-01,1,"R basics, assignment & environment",MC,"Two students each wrote `y <- 12` in a script.
+Student A ran the line: the Console shows `> y <- 12` and the Environment lists y = 12.
 Student B only typed it; the Environment is empty.
 If each now types y * 2 in the console, who gets 24?","A) A only
 B) B only
 C) Both
 D) Neither",A,"Only running a line creates the object. Student B's y doesn't exist yet, so they'll get 'object not found'.","B) and C) Typing without running does nothing.
 D) Student A ran the line.",Whose Environment contains y?,,yes,ch01-quiz-01,,all (AI variant),,ch01-quiz-01
-ch01-quiz-01-v2,AI variant of ch01-quiz-01,1,"R basics, assignment & environment",MC,You ran z <- 3 an hour ago. Since then you edited the script line to z <- 7 but didn't rerun it. What is z right now?,"A) 3
+ch01-quiz-01-v2,AI variant of ch01-quiz-01,1,"R basics, assignment & environment",MC,You ran `z <- 3` an hour ago. Since then you edited the script line to `z <- 7` but didn't rerun it. What is z right now?,"A) 3
 B) 7
 C) 10
 D) z doesn't exist",A,The Environment holds whatever was last run. Editing a script line doesn't change the object until you run it again.,"B) The edit hasn't been run.
@@ -2636,13 +2637,13 @@ B) logical <lgl>
 C) character <chr>
 D) factor <fct>",D,A categorical variable stored with a fixed set of levels is a factor.,"A) Island names aren't numbers.
 B) Not TRUE/FALSE.
-C) Character would be plain text without levels.",What does <fct> stand for?,,yes,ch03-book-04,,all (AI variant),,ch03-book-04
+C) Character would be plain text without levels.",What does <fct> stand for?,,no,ch03-book-04,dropped after review: too much R syntax detail,all (AI variant),,ch03-book-04
 ch03-book-04-v2,AI variant of ch03-book-04,3,"variable types, data in R",MC,What does a factor in R represent?,"A) A categorical variable with a defined set of levels
 B) A number with decimals
 C) TRUE/FALSE values
 D) A date",A,"Factors store categories (e.g., species, treatment) along with their allowed levels and order.","B) That's double (numeric).
 C) That's logical.
-D) Dates have their own type.",Think: categories with levels.,,yes,ch03-book-04,,all (AI variant),,ch03-book-04
+D) Dates have their own type.",Think: categories with levels.,,no,ch03-book-04,dropped after review: too much R syntax detail,all (AI variant),,ch03-book-04
 ch03-book-05-v1,AI variant of ch03-book-05,3,"reproducibility, scripts, packages",MC,"# Script
 library(readr)
 setwd(""C:/Users/sam/Documents/frogs"")
@@ -3387,7 +3388,7 @@ C) It should be summarise()
 D) na.rm = TRUE isn't needed",A,Save summaries under a new name; don't overwrite your data.,"B) Which summary to use is a separate question.
 C) Both spellings work.
 D) It's needed if any values are NA.",What's in penguins afterward?,,yes,ch05-book-12,,all (AI variant),,ch05-book-12
-ch05-book-12-v2,AI variant of ch05-book-12,5,"summarize, assignment & environment",MC,You accidentally ran iris <- iris |> summarize(m = mean(Sepal.Length)). What's the easiest way to get iris back?,"A) Restart R (or remove your copy) so the built-in iris is available again, and fix the line
+ch05-book-12-v2,AI variant of ch05-book-12,5,"summarize, assignment & environment",MC,You accidentally ran `iris <- iris |> summarize(m = mean(Sepal.Length))`. What's the easiest way to get iris back?,"A) Restart R (or remove your copy) so the built-in iris is available again, and fix the line
 B) Run the line again
 C) It's gone forever
 D) Type undo()",A,"Built-in datasets come back in a fresh session (or with rm(iris)). For your own data, rerun the script from the top, which is why scripts matter.","B) Running it again summarizes the summary.

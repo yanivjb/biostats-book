@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 725 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 718 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -833,140 +833,51 @@ TRUE or FALSE: Once a variable is classified as continuous, it must always be an
 
 ## Chapter 1: Getting started with R
 
-### ch01-book-01
-- **Kind:** Course original
-- **Concepts:** R basics; Errors & debugging
-- **Type:** MC
-- **Question:**
-
-Entering "p"^2 into R produces which error?
-
-- **Options:**
-
-  A) What error? It works great?
-  B) Error: object p not found
-  C) Error: object of type closure is not subsettable
-  D) Error in "p"^2 : non-numeric argument to binary operator
-
-- **Answer (tutor only):** D
-- **Explanation (tutor only):** The quotes make "p" a character string, and you can't do arithmetic (like ^2) on text. R says the argument is "non-numeric".
-- **Why the wrong options are wrong (tutor only):**
-  A) R cannot square a word, so it does throw an error.
-  B) "object not found" happens when you type a name without quotes that doesn't exist (p^2). With quotes, R knows "p" is text, not an object.
-  C) "closure is not subsettable" comes from treating a function like data (e.g., mean[1]). Not relevant here.
-- **Hint:** What do the quotation marks around p tell R?
-
 ### ch01-book-01-v1
-- **Kind:** AI-written version of ch01-book-01
-- **Concepts:** R basics; Errors & debugging
-- **Type:** MC
-- **Question:**
-
-Entering "10" + 5 into R produces:
-
-- **Options:**
-
-  A) 15
-  B) "105"
-  C) Error in "10" + 5 : non-numeric argument to binary operator
-  D) Error: object 10 not found
-
-- **Answer (tutor only):** C
-- **Explanation (tutor only):** The quotes make "10" a character string, not a number, so R can't add it to 5.
-- **Why the wrong options are wrong (tutor only):**
-  A) R doesn't convert text to numbers automatically here.
-  B) R's + doesn't paste strings together.
-  D) Quotes make it a value, not an object name.
-- **Hint:** What do quotation marks do in R?
-
-### ch01-book-01-v2
-- **Kind:** AI-written version of ch01-book-01
-- **Concepts:** R basics; Errors & debugging
-- **Type:** MC
-- **Question:**
-
-You type sqrt(x) but never created x. What does R say?
-
-- **Options:**
-
-  A) 0
-  B) Error: object 'x' not found
-  C) Error: non-numeric argument to mathematical function
-  D) NA
-
-- **Answer (tutor only):** B
-- **Explanation (tutor only):** Without quotes, x is treated as the name of an object. Since nothing called x exists, R can't find it.
-- **Why the wrong options are wrong (tutor only):**
-  A) and D) R doesn't invent a value for a missing object.
-  C) That error appears when x exists but holds text.
-- **Hint:** Does an object named x exist yet?
-
-### ch01-book-02
 - **Kind:** Course original
-- **Concepts:** R basics
+- **Concepts:** R basics; Errors & debugging
 - **Type:** MC
 - **Question:**
 
-Which logical question provides an unexpected answer?
+You type `"10" + 5` and R says `Error in "10" + 5 : non-numeric argument to binary operator`. Why doesn't it say 15?
 
 - **Options:**
 
-  A) (2.0 + 1.0) == 3.0
-  B) (0.2 + 0.1) == 0.3
-  C) 2^2 > 8
-  D) (1/0) == (10 * 1/0)
-
-- **Answer (tutor only):** B
-- **Explanation (tutor only):** (0.2 + 0.1) == 0.3 returns FALSE because of floating-point precision: some decimals can't be stored exactly in binary, so 0.2 + 0.1 is very slightly different from 0.3. Use all.equal() or round() instead of == for decimals.
-- **Why the wrong options are wrong (tutor only):**
-  A) Whole-number arithmetic is exact, so this is TRUE, as expected.
-  C) 2^2 is 4, which is not greater than 8, so FALSE, as expected.
-  D) 1/0 is Inf in R, and 10 * Inf is also Inf, so this is TRUE. That surprises some people, but it follows from how R handles infinity.
-- **Hint:** Try (0.2 + 0.1) - 0.3 in R. Is it exactly zero?
-
-### ch01-book-02-v1
-- **Kind:** AI-written version of ch01-book-02
-- **Concepts:** R basics
-- **Type:** MC
-- **Question:**
-
-Which logical comparison gives a surprising FALSE in R (and most programming languages)?
-
-- **Options:**
-
-  A) (1 + 1) == 2
-  B) (0.1 * 3) == 0.3
-  C) 5 > 3
-  D) (4 / 2) == 2
-
-- **Answer (tutor only):** B
-- **Explanation (tutor only):** Computers store most decimals in binary only approximately, so 0.1 * 3 is 0.30000000000000004, not exactly 0.3. Use all.equal() or round() to compare decimals.
-- **Why the wrong options are wrong (tutor only):**
-  A), C) and D) Whole-number arithmetic is exact, so these behave as expected.
-- **Hint:** Which comparison involves decimals that can't be stored exactly?
-
-### ch01-book-02-v2
-- **Kind:** AI-written version of ch01-book-02
-- **Concepts:** R basics
-- **Type:** MC
-- **Question:**
-
-Why can (0.2 + 0.1) == 0.3 return FALSE in R?
-
-- **Options:**
-
-  A) Decimals are stored with tiny rounding errors in binary
-  B) R rounds all numbers to whole numbers
-  C) == only works for text
-  D) R has a bug that should be reported
+  A) The quotes make "10" text (a character string), not a number, and R can't add text to a number
+  B) R can only add numbers with the same number of digits
+  C) You need to load a package before R can do arithmetic
+  D) R thinks "10" is the name of an object, and no such object exists
 
 - **Answer (tutor only):** A
-- **Explanation (tutor only):** Many decimals (like 0.1) have no exact binary representation, so tiny errors creep in. Compare decimals with all.equal() or by rounding.
+- **Explanation (tutor only):** Anything in quotes is text to R, even if it looks like a number. "+" only works on numbers, so R complains that one side is non-numeric. `10 + 5` (no quotes) gives 15, and so does `as.numeric("10") + 5`.
 - **Why the wrong options are wrong (tutor only):**
-  B) R keeps decimals.
-  C) == compares numbers too.
-  D) It's expected behavior in nearly all languages.
-- **Hint:** How does a computer store 0.1?
+  B) R adds numbers of any size: 10 + 5 is fine.
+  C) Arithmetic is built into R; no package is needed.
+  D) Quotes mean a value, not a name. A missing object gives a different error: object not found.
+- **Hint:** What do quotes tell R about the kind of thing inside them?
+
+### ch01-book-01-v2
+- **Kind:** Course original
+- **Concepts:** R basics; Errors & debugging
+- **Type:** MC
+- **Question:**
+
+You type `sqrt(x)` and R says `Error: object 'x' not found`. What went wrong?
+
+- **Options:**
+
+  A) R has no object called x: the line that creates it (e.g., `x <- 16`) was never run, or x is spelled differently (R is case-sensitive)
+  B) The sqrt() function comes from a package you haven't loaded
+  C) x is negative, and you can't take the square root of a negative number
+  D) x holds text, and sqrt() only works on numbers
+
+- **Answer (tutor only):** A
+- **Explanation (tutor only):** "object not found" means R looked for something named x in the Environment and found nothing. Usually the line that creates x was typed in the script but never run, or the name doesn't match exactly (X vs x).
+- **Why the wrong options are wrong (tutor only):**
+  B) sqrt() is built into R. A missing function gives a different error: could not find function.
+  C) The square root of a negative number gives NaN with a warning, not an error about a missing object.
+  D) Then x would exist, so R would complain about the text (non-numeric argument), not a missing object.
+- **Hint:** What does "not found" tell you about whether x exists?
 
 ### ch01-book-03
 - **Kind:** Course original
@@ -1114,7 +1025,7 @@ Where should library() calls go in an R script?
 - **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [ch01-book-badscript.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch01-book-badscript.png)
 - **Question:**
 
-A script contains two lines: x <- 3:5 and y <- 1. The Environment pane shows only x (int [1:3] 3 4 5); y is not listed. What happens if you enter x^2 in the console?
+A script contains two lines: `x <- 3:5` and `y <- 1`. The Environment pane shows only x (`int [1:3] 3 4 5`); y is not listed. What happens if you enter `x^2` in the console?
 
 - **Options:**
 
@@ -1135,7 +1046,7 @@ A script contains two lines: x <- 3:5 and y <- 1. The Environment pane shows onl
 - **Type:** MC
 - **Question:**
 
-Your script contains a <- c(2, 4, 6) and b <- 10, but the Environment pane shows only a (num [1:3] 2 4 6). What happens if you type a / 2 in the console?
+Your script contains `a <- c(2, 4, 6)` and `b <- 10`, but the Environment pane shows only a (`num [1:3] 2 4 6`). What happens if you type `a / 2` in the console?
 
 - **Options:**
 
@@ -1156,7 +1067,7 @@ Your script contains a <- c(2, 4, 6) and b <- 10, but the Environment pane shows
 - **Type:** MC
 - **Question:**
 
-A script contains counts <- c(5, 8, 12). You ran that line. What does sum(counts) return?
+A script contains `counts <- c(5, 8, 12)`. You ran that line. What does `sum(counts)` return?
 
 - **Options:**
 
@@ -1180,7 +1091,7 @@ A script contains counts <- c(5, 8, 12). You ran that line. What does sum(counts
 - **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [ch01-book-badscript.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch01-book-badscript.png)
 - **Question:**
 
-A script contains two lines: x <- 3:5 and y <- 1. The Environment pane shows only x (int [1:3] 3 4 5); y is not listed. What happens if you enter x * y in the console?
+A script contains two lines: `x <- 3:5` and `y <- 1`. The Environment pane shows only x (`int [1:3] 3 4 5`); y is not listed. What happens if you enter `x * y` in the console?
 
 - **Options:**
 
@@ -1202,7 +1113,7 @@ A script contains two lines: x <- 3:5 and y <- 1. The Environment pane shows onl
 - **Type:** MC
 - **Question:**
 
-Your script contains a <- c(2, 4, 6) and b <- 10, but the Environment pane shows only a. What happens if you type a + b in the console?
+Your script contains `a <- c(2, 4, 6)` and `b <- 10`, but the Environment pane shows only a. What happens if you type `a + b` in the console?
 
 - **Options:**
 
@@ -1225,7 +1136,7 @@ Your script contains a <- c(2, 4, 6) and b <- 10, but the Environment pane shows
 - **Type:** MC
 - **Question:**
 
-You wrote total <- 100 in your script but didn't run it. Then you type total / 4 in the console. What happens?
+You wrote `total <- 100` in your script but didn't run it. Then you type `total / 4` in the console. What happens?
 
 - **Options:**
 
@@ -1547,8 +1458,8 @@ You're stuck on an R error. Which approach is most likely to help you learn?
 - **Type:** MC
 - **Question:**
 
-Two students each typed x <- 5 in an R script.
-Student A ran the line: it appears in the Console (> x<-5) and the Environment shows x = 5.
+Two students each typed `x <- 5` in an R script.
+Student A ran the line: it appears in the Console (`> x<-5`) and the Environment shows x = 5.
 Student B did not run the line: the Console is empty and the Environment says 'Environment is empty'.
 In which case does x equal 5?
 
@@ -1572,8 +1483,8 @@ In which case does x equal 5?
 - **Type:** MC
 - **Question:**
 
-Two students each wrote y <- 12 in a script.
-Student A ran the line: the Console shows > y <- 12 and the Environment lists y = 12.
+Two students each wrote `y <- 12` in a script.
+Student A ran the line: the Console shows `> y <- 12` and the Environment lists y = 12.
 Student B only typed it; the Environment is empty.
 If each now types y * 2 in the console, who gets 24?
 
@@ -1597,7 +1508,7 @@ If each now types y * 2 in the console, who gets 24?
 - **Type:** MC
 - **Question:**
 
-You ran z <- 3 an hour ago. Since then you edited the script line to z <- 7 but didn't rerun it. What is z right now?
+You ran `z <- 3` an hour ago. Since then you edited the script line to `z <- 7` but didn't rerun it. What is z right now?
 
 - **Options:**
 
@@ -2639,75 +2550,6 @@ Your script works, but only if you first run a line you typed into the console l
   B) and C) Fragile: easy to forget or lose.
   D) It only works by accident on your machine.
 - **Hint:** Could a classmate run your script without that line?
-
-### ch03-book-04
-- **Kind:** Course original
-- **Concepts:** Data entry & data dictionaries
-- **Type:** MC
-- **Question:**
-
-R has a built-in dataset called iris. Which variable type is Species in the iris dataset?
-
-- **Options:**
-
-  A) numeric <dbl>
-  B) logical <lgl>
-  C) character <chr>
-  D) factor <fct>
-
-- **Answer (tutor only):** D
-- **Explanation (tutor only):** Species is a categorical variable, and in iris it is stored as a factor: a category with a fixed set of levels (setosa, versicolor, virginica).
-- **Why the wrong options are wrong (tutor only):**
-  A) Numeric is for measurements.
-  B) Logical is for TRUE/FALSE.
-  C) Character also stores text, so this is a reasonable guess, but iris stores Species as a factor (with defined levels).
-- **Hint:** Species has exactly three possible values. Which type is built for categories with set levels?
-
-### ch03-book-04-v1
-- **Kind:** AI-written version of ch03-book-04
-- **Concepts:** Data entry & data dictionaries
-- **Type:** MC
-- **Question:**
-
-In the penguins dataset, island has three values (Biscoe, Dream, Torgersen) stored with levels. What type is it?
-
-- **Options:**
-
-  A) numeric <dbl>
-  B) logical <lgl>
-  C) character <chr>
-  D) factor <fct>
-
-- **Answer (tutor only):** D
-- **Explanation (tutor only):** A categorical variable stored with a fixed set of levels is a factor.
-- **Why the wrong options are wrong (tutor only):**
-  A) Island names aren't numbers.
-  B) Not TRUE/FALSE.
-  C) Character would be plain text without levels.
-- **Hint:** What does <fct> stand for?
-
-### ch03-book-04-v2
-- **Kind:** AI-written version of ch03-book-04
-- **Concepts:** Data entry & data dictionaries
-- **Type:** MC
-- **Question:**
-
-What does a factor in R represent?
-
-- **Options:**
-
-  A) A categorical variable with a defined set of levels
-  B) A number with decimals
-  C) TRUE/FALSE values
-  D) A date
-
-- **Answer (tutor only):** A
-- **Explanation (tutor only):** Factors store categories (e.g., species, treatment) along with their allowed levels and order.
-- **Why the wrong options are wrong (tutor only):**
-  B) That's double (numeric).
-  C) That's logical.
-  D) Dates have their own type.
-- **Hint:** Think: categories with levels.
 
 ### ch03-book-05
 - **Kind:** Course original

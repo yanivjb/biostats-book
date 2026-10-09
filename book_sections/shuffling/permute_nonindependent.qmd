@@ -50,7 +50,7 @@ This, of course, is  a standard challenge for most statistical tests.  When we t
 #| column: margin
 #| eval: false
 library(janitor)
-frogs %>%
+frogs |>
   tabyl(year, treatment)
 ```
 
@@ -63,7 +63,7 @@ frogs %>%
 library(janitor)
 # check out the tabyl 
 # function in janitor!
-frogs %>%
+frogs |>
   tabyl(year, treatment)|>
   kable()
 ```
