@@ -18,23 +18,19 @@ Practice for Exam 1 (chapters 0–12): pick random questions or focus on chapter
 ---
 
 
-
 #### AI version (Claude)
 
-[**Open the AI version ↗**](https://claude.ai/artifact/ANMj6BpXNkn1EmezZWqNsT){target="_blank"} Same questions, plus Claude: a tutor that talks you through questions you're stuck on, feedback on your written answers, new practice questions on demand, and a report on your strengths and weak spots. You need a (free) Claude account, and it uses your own Claude usage, only when you click. I've kept it light, so the free tier should go a long way. It's Claude-only because I couldn't get Gemini or ChatGPT to stick to the course questions.
-
-
+[Open the Claude supported study guide↗](https://claude.ai/artifact/ANMj6BpXNkn1EmezZWqNsT){target="_blank"} Samme questions, plus Claude: a tutor that talks you through questions you’re stuck on, feedback on your written answers, new practice questions on demand, and a report on your strengths and weak spots. You need a (free) Claude account, and it uses your own Claude usage, only when you click. I’ve kept it light, so the free tier should go a long way.
 
 #### AI version (ChatGPT)
 
 I got a version of this going in [ChatGPT](https://chatgpt.com/g/g-68e564b8608c81919d670b272eb411b7-exam-1-tutor). On the whole I like it, but it doesn't allow for images, so it's missing some types of questions.  
 
 
+
 #### AI version (Gemini)
 
-I got a version of this going in [Gemini](https://gemini.google.com/gem/1MHn_YyLFLe0nqoTzhnPtUOKKkc0KIp_W?usp=sharing). On the whole, it's ok.. but it seems to never use my questions, and rather make up questions inspired by mine. It also wont use my images, but seems to make its own.  
-
-
+Gemini is being bad. Sorry
 
 ---
 

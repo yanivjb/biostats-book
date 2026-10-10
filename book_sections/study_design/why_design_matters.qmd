@@ -155,9 +155,9 @@ But now I will reflect on the relationship between our design and the downstream
 
 #### The statistical model    
 
-We have yet to learn enough stats to analyze these data with the full sophistication they require. In fact, we may not introduce all of these ideas by the end of this book. But that's ok. We can get started on these ideas, anyway, and consider any potential roadblocks and how to deal with them. Before starting an experiment you don't need a perfect plan -- just a viable one.
+We have yet to learn enough stats to analyze these data with the full sophistication they require. In fact, we may not introduce all of these ideas by the end of this book. But that's ok. We can get started on these ideas, anyway, and consider any potential roadblocks and how to deal with them. Before starting an experiment, don't need a perfect plan for analysis, but it really helps to have a vaible direction for you analysis that can be adapted to realities of messy data. 
 
-For this question, our key response variable is the proportion of hybrid seeds on a RIL, and our key explanatory variable is petal area. Because we are using RILs we will need to adjust our analysis for associations between petal area and other variables (e.g. petal color). We will also want to account for differences in hybridization rates at different locations. This is all feasible, and we will introduce these techniques in the coming section on linear models. We don't have all the answers now, but we do want to ensure there is a viable path we could take to find answers.
+For this question, our key response variable is the proportion of hybrid seeds on a RIL, and our key explanatory variable is petal area. Because we are using RILs we will need to adjust our analysis for associations between petal area and other variables (e.g. petal color). We will also want to account for differences in hybridization rates at different locations. 
 
 :::fyi
 ## Advanced stats 
