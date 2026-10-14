@@ -4872,3 +4872,229 @@ ch11-new-02,"New question (2026), line-up logic",11,"permutation, p-values, inte
 B) Data like ours are typical of what the null produces (p is probably large): no evidence against the null, though not proof it's true
 C) The null is definitely true
 D) The null is definitely false","1-A, 2-B","The shuffled panels show what data look like when the null is true. If the real panel stands out, data like ours rarely arise under the null (by luck you'd pick it only 1 time in 20), so we reject the null. If it blends in, chance can easily explain our data, so we fail to reject. Neither outcome proves the null true or false.","C) and D) A line-up, like any permutation test, gives evidence, not certainty.",The shuffled panels show what the null produces. Does the real panel look like them?,,yes,"ch11-chime-05, ch11-chime-04-v2",New question.,"question, options, explanation, why_wrong, hint",,
+exam1-q01,"Practice Exam 1 (Fall 2026), Q1",9,"error bars, visualizing uncertainty",select-all,A standard rule in data visualization is to show the data (i.e. all the data points). Say I had a ton of data and didn't want to show every data point. Which would convey both a measure of central tendency and of variability? Pick all correct.,"A) A point for the mean, with bars showing plus or minus one standard error
+B) A point for the mean, with bars showing plus or minus one standard deviation
+C) A point for the mean, with bars showing the 95% confidence interval",B,"The SD describes how spread out the data are, so mean ± SD shows both the center and the variability of the data. The SE and the 95% CI describe uncertainty in the mean, not the spread of the data: they shrink as the sample grows, so with a ton of data they'd be tiny even if the data were very spread out.","A) The SE shows how uncertain the mean is, not how variable the data are. It shrinks as n grows.
+C) A CI shows uncertainty in the mean, not the spread of the data.",Which of these would stay about the same if you collected ten times more data?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q02,"Practice Exam 1 (Fall 2026), Q2",9,"error bars, visualizing uncertainty",select-all,A standard rule in data visualization is to show the data (i.e. all the data points). Say I had a ton of data and didn't want to show every data point. Which would convey both the mean of the data and the uncertainty in it? Pick all correct.,"A) A point for the mean, with bars showing plus or minus one standard error
+B) A point for the mean, with bars showing plus or minus one standard deviation
+C) A point for the mean, with bars showing the 95% confidence interval","A, C","Both the SE and the 95% CI describe how uncertain we are about the mean. We get both from the bootstrap distribution of the mean: the SE is its standard deviation, and the 95% CI is its middle 95%. With more data, that distribution gets narrower (the law of large numbers: averages of more values sit closer to the truth, because highs and lows cancel out).","B) The SD describes how spread out individual data points are. More data doesn't make individuals less variable, so it says nothing about how well we know the mean.",Which bars would get shorter if you collected more data?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q03,"Practice Exam 1 (Fall 2026), Q3",5,"boxplots, range & IQR",select-all,Which values can you reasonably estimate from this plot? Select the two best.,"A) Mean
+B) Median
+C) Mode
+D) The shape of the data
+E) Standard deviation
+F) Interquartile range
+G) 95% confidence interval","B, F","A boxplot shows the median (the thick line, about 76) and the interquartile range (the box, about 58 to 82). It does not show the mean, mode, SD or a confidence interval. The shape is only partly visible: a boxplot can hide features like bimodality.","A) A boxplot doesn't show the mean.
+C) A boxplot doesn't show the mode.
+D) Only partly: a boxplot hints at skew but can hide bimodality, so it's not one of the two best.
+E) A boxplot doesn't show the SD.
+G) A boxplot shows the data, not uncertainty in an estimate.",What do the thick line and the box in a boxplot show?,exam1-boxplot.png,yes,,,"explanation, why_wrong, hint",,
+exam1-q04,"Practice Exam 1 (Fall 2026), Q4",9,"standard error, sample size",select-all,"You conduct the same study twice, once with a sample of size ten, and once with a sample of size 100. Which estimate(s) is (are) most likely to get smaller in the study with a larger sample? Select all correct.","A) Mean
+B) Standard deviation
+C) Variance
+D) Coefficient of variation
+E) Standard error",E,"The standard error describes how much an estimate would vary from sample to sample. Think of bootstrapping: in a resample of 10 values, a few unusually high or low values can easily pile up by chance and pull the mean far off. In a resample of 100, highs and lows almost always cancel out (the law of large numbers). So the bootstrap distribution is narrower and the SE is smaller. The mean, SD, variance and CV describe the population itself; a bigger sample estimates them more precisely but doesn't make them smaller.","A) The mean estimates the population's center. More data makes it more precise, not smaller.
+B) The SD estimates how spread out individuals are. More data doesn't make individuals less variable.
+C) Variance is the SD squared, so it doesn't systematically shrink either.
+D) The CV is SD / mean, both of which describe the population, so it doesn't systematically shrink.","Which of these describes uncertainty in an estimate, rather than the population itself?",,yes,,,"explanation, why_wrong, hint",,
+exam1-q05,"Practice Exam 1 (Fall 2026), Q5",9,"standard error, sample size",MC,"You conduct the same study four times, once with a sample of size ten (n = 10), once with n = 20, once with n = 1000 and once with n = 10000. Which estimates will be most similar?","A) The means of the samples with n = 10 and n = 20
+B) The means of the samples with n = 1000 and n = 10000
+C) The standard errors of the samples with n = 1000 and n = 10000
+D) A & B
+E) A & C
+F) B & C",B,"Big samples have small sampling error, so their means land close to the true mean, and therefore close to each other.","A) Means from samples of 10 and 20 bounce around a lot, so they can easily differ.
+C) The SE keeps shrinking as samples get bigger, so the SE for n = 10,000 is noticeably smaller (about a third the size) than for n = 1000.
+D) A is wrong: small-sample means vary a lot.
+E) Neither A nor C is right.
+F) C is wrong: the SEs differ by a factor of about 3.",Which samples have the least sampling error?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q06,"Practice Exam 1 (Fall 2026), Q6",8,sampling distribution,MC,"A student says, ""The sampling distribution shows how the values in my dataset are spread."" Why are they wrong?","A) Because the sampling distribution describes variation in estimates across repeated samples, not variation within a single sample
+B) Because the sampling distribution only applies to categorical data
+C) Because the sampling distribution is calculated before collecting data
+D) Because the sampling distribution depends on the population size, not the sample size
+E) They aren't wrong",A,"The sampling distribution is the distribution of an estimate (like the mean) across many samples. The spread of values within one dataset is the distribution of the data, summarized by the SD.","B) Sampling distributions exist for any estimate, numeric or categorical.
+C) It describes estimates from many samples; when it's calculated isn't the issue.
+D) It depends on the sample size: bigger samples give narrower sampling distributions.
+E) They are wrong: they're describing the distribution of the data, not of an estimate.",Is a sampling distribution made of individual values or of estimates?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q07,"Practice Exam 1 (Fall 2026), Q7",8,"sampling distribution, sampling error",MC,Why is understanding the sampling distribution essential for doing inference?,"A) It allows us to quantify sampling bias
+B) It allows us to quantify sampling error
+C) It allows us to quantify non-independent sampling",B,"The sampling distribution shows how much estimates vary from sample to sample by chance, which is sampling error. That's what SEs, CIs and p-values are built on.","A) Bias shifts the whole sampling distribution away from the truth, and we can't see that without knowing the truth.
+C) Non-independence comes from how the data were collected; the sampling distribution can't measure it.",What does the spread of estimates across many samples tell you about?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q08,"Practice Exam 1 (Fall 2026), Q8",8,sampling bias,MC,"Because turtle hatchlings are difficult to catch, you scatter food to attract them and measure the running speed of the first 30 individuals that reach the food. This sampling method likely introduces...","A) Sampling error, because estimates differ across samples by chance
+B) Sampling bias, because faster turtles are more likely to be measured
+C) Non-independence, because turtles from the same nest share genetics
+D) Measurement error, because timing turtles is imprecise",B,"The first 30 turtles to reach the food are probably the fastest, so the sample systematically overestimates running speed. Sampling more turtles the same way wouldn't fix it.","A) Every sample has sampling error; the special problem here is that the method favors fast turtles.
+C) Nothing in the setup says the turtles come from the same nest.
+D) Timing may be imprecise, but the bigger problem is who gets measured.",Which turtles reach the food first?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q09,"Practice Exam 1 (Fall 2026), Q9",10,"p-values, interpretation",select-all,A p-value of 0.01 means: (select all correct),"A) We reject the null hypothesis
+B) We fail to reject the null hypothesis
+C) The null is false
+D) There is a 1% chance the null is correct
+E) There is a 1% chance the null generated our data (or something more extreme)
+F) 1% of samples from the null will be as or more extreme than our observation","A, F","With the usual α = 0.05, p = 0.01 < 0.05, so we reject the null. F is the definition of a p-value: the probability of a result as or more extreme than ours, if the null were true.","B) p = 0.01 is below the usual α = 0.05, so we reject.
+C) Rejecting the null doesn't prove it false; we could be making a type I error.
+D) A p-value is calculated assuming the null is true, so it can't be the probability that the null is true.
+E) This reads as the chance the null caused our data, a probability about the hypothesis. A p-value is P(data this extreme | null), not P(null | data).",A p-value is calculated assuming what?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q10,"Practice Exam 1 (Fall 2026), Q10",7,"covariance, correlation",matching,"Look at plots a and b.
+
+1. Which plot has the greater covariance?
+2. Which plot has the greater correlation?","A) Plot a
+B) Plot b","1-B, 2-A","Covariance has units and grows with the spread of the data. The points in b spread much more along y (and the line is steeper), so b has the greater covariance. Correlation is standardized: it measures how tightly points fall along a line. The points in a hug the line almost perfectly, so a has the greater correlation.",Covariance depends on how spread out the data are; correlation only on how tightly they follow a line.,"Which plot's points are more spread out, and which plot's points hug the line more tightly?",exam1-cov-cor.png,yes,,,"explanation, why_wrong, hint",,
+exam1-q11,"Practice Exam 1 (Fall 2026), Q11",10,"alpha, type II error, confidence intervals",select-all,In statistics we usually use an alpha threshold of 0.05. What would happen if the field changed the custom to alpha = 0.01 (select all correct)?,"A) We would reject more false nulls
+B) We would reject more true nulls
+C) We would fail to reject more false nulls
+D) We would fail to reject more true nulls
+E) We would have wider confidence intervals (we use 99% confidence intervals)
+F) We would have narrower confidence intervals (we use 99% confidence intervals)","C, D, E","A lower α makes it harder to reject the null, so we reject fewer nulls, true or false: fewer type I errors but more type II errors (C), and we fail to reject more true nulls (D). To match α = 0.01 we'd report 99% CIs, which are wider than 95% CIs (E).","A) Backwards: a stricter threshold means we reject fewer nulls, including false ones.
+B) Backwards: we'd reject fewer true nulls (fewer type I errors).
+F) Backwards: to be 99% confident, the interval has to be wider.",Is it easier or harder to get p < 0.01 than p < 0.05?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q12,"Practice Exam 1 (Fall 2026), Q12",0,variable types,MC,"Suppose I'm surveying people's ice cream preferences. I have a variable in my dataset named ""deliciousness"", in which I had people choose from the options: ""yuck"", ""bad"", ""meh"", ""good"", ""splendid"", and ""best I've ever had"". What kind of variable is this?","A) Numeric
+B) Binary
+C) Ordinal
+D) Continuous",C,The categories have a natural order (yuck < bad < meh < good < splendid < best) but no meaningful numeric distances between them.,"A) The answers are words, and the 'distance' between them isn't a number.
+B) There are six options, not two.
+D) Continuous variables can take any value in a range; these are categories.",Do the categories have an order?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q13,"Practice Exam 1 (Fall 2026), Q13",6,"jitter, visualizing associations",select-all,"""Jittering"" is a great way to prevent ""overplotting"", but it can go wrong. What should you watch out for (select all correct)?","A) Be sure not to fool readers into thinking x is continuous
+B) Make sure not to trick readers into wrongly thinking the jitter around y-values is true variation
+C) Make sure that readers can differentiate between categories on x
+D) Chill, jitter plots cannot be messed up","A, B, C","Jitter only makes sense on a categorical x: on a numeric x, the spread looks like real differences in x. Jitter should only move points sideways, because jittering in y creates fake variation. And if the jitter width is too large, points from neighboring categories overlap and you can't tell which group a point belongs to.","D) Jitter plots can definitely be messed up: too wide, jittered in y, or used on a numeric x.","What could go wrong if points move too far, or in the wrong direction?",,yes,,,"explanation, why_wrong, hint",,
+exam1-q14,"Practice Exam 1 (Fall 2026), Q14",9,"confidence intervals, interpretation",select-all,"The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+The correct interpretation of the confidence interval is (select all correct):","A) There is a 95% chance the true mean sex difference is between 2.08 and 4.38
+B) If this study were repeated many times, 95% of those confidence intervals would include the true mean sex difference in bill length. We don't know what this is, but from our study a reasonable guess is between 2.08 and 4.38
+C) If I randomly pair male and female Adelie penguins from Dream island, 95% of pairs will have a difference in bill length within 2.08 and 4.38",B,A 95% CI comes from a procedure that captures the true value in 95% of repeated studies. Our one interval either contains the true difference or it doesn't; 2.08 to 4.38 is a range of plausible values.,"A) This gives the CI a probability after it's calculated. The true difference is fixed: this interval either contains it or doesn't.
+C) The CI is about the difference in means, not differences between individual penguins.","Is the 95% about this one interval, or about the procedure?",,yes,,,"explanation, why_wrong, hint",,
+exam1-q15,"Practice Exam 1 (Fall 2026), Q15",6,Cohen's d,numeric,"The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+Find the pooled standard deviation (in mm).",,≈ 1.97 mm,"Cohen's d = difference in means / pooled SD, so pooled SD = difference / d = 3.23 / 1.64 ≈ 1.97 mm.",Rearrange Cohen's d: d = difference / pooled SD.,Cohen's d is the difference in means divided by what?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q17,"Practice Exam 1 (Fall 2026), Q17",11,"permutation, null distribution",MC,"The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+I found the p-value by permutation. This means:","A) I resampled the data with replacement, calculated the mean difference, repeated this many times, and found the proportion of these that were less than zero
+B) I swapped labels of males and females at random, calculated the sex difference in bill length, repeated this many times, and found the proportion of replicates with an absolute value greater than 3.23
+C) I sampled from the population many times and found the proportion of sample mean differences with an absolute value greater than 3.23",B,"A permutation test builds the null distribution by shuffling the sex labels, which breaks any real link between sex and bill length. The p-value is the share of shuffled differences as extreme as the observed 3.23 (two-tailed, so we use absolute values).","A) This describes a bootstrap (resampling with replacement), which is for SEs and CIs, not p-values.
+C) This would need many new samples from the population, which we can't take, and it wouldn't build a null distribution.",How does a permutation make the null true?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q18,"Practice Exam 1 (Fall 2026), Q18",6,"Cohen's d, difference in means",MC,"The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+I am curious to compare the sex difference in bill length to the sex difference in body mass. Which comparison is most insightful?","A) Comparing Cohen's d for the sex difference in bill length to Cohen's d for the sex difference in body mass
+B) Comparing the p-value for the sex difference in bill length to the p-value for the sex difference in body mass
+C) Comparing the sex difference in the conditional means in bill length to the sex difference in the conditional means in body mass
+D) Comparing the correlation between bill length and body mass between the sexes",A,"Bill length (mm) and body mass (g) are in different units, so their raw differences can't be compared directly. Cohen's d puts both on the same unitless scale (difference / pooled SD).","B) p-values depend on sample size and don't measure how big an effect is.
+C) The raw differences are in different units (mm vs g), so they can't be compared directly.
+D) That answers a different question: how the two traits relate, not how big each sex difference is.",How can you compare differences measured in mm and in g?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q19,"Practice Exam 1 (Fall 2026), Q19",4,"errors & debugging, packages",MC,"I was working with the penguins data set in R (morphology of hundreds of penguins from three species and three islands). To calculate summaries for Adelie penguins, I first tried to keep only the Adelie rows. I typed the code shown and got an error. To follow up, I looked at the data with View(penguins). What went wrong?","A) Adelie should not be in quotes
+B) species should be capitalized
+C) filter() should be on a different line than penguins
+D) I didn't tell R which filter function to use",D,"View(penguins) shows the species column exists, so the column name is fine. The problem is that dplyr isn't loaded: without it, R uses base R's stats::filter(), which doesn't know how to look up column names inside a data frame. Fix: run library(dplyr) first (or write dplyr::filter()).","A) Text values like ""Adelie"" do need quotes.
+B) View(penguins) shows the column is called species, lowercase.
+C) Line breaks don't matter here; the code would fail the same way on two lines.","The column exists, so why can't filter() find it? Which filter() is R using?",exam1-filter-error.png,yes,,,"explanation, why_wrong, hint",,
+exam1-q20,"Practice Exam 1 (Fall 2026), Q20",5,"mean & median, shape of distributions",select-all,A histogram of pollinator visits per plant shows that most plants receive zero visits and a few receive many (strongly right-skewed). Which are true? (select all correct),"A) The mean will be greater than the median
+B) The median will be greater than the mean
+C) The median better describes a ""typical"" plant than the mean does
+D) Because the data are skewed, we cannot calculate a standard deviation
+E) Skewed data always have a larger variance than symmetric data","A, C","In right-skewed data the few very large values pull the mean up, so the mean is greater than the median. The median isn't pulled by the long tail, so it better describes a typical plant.","B) Backwards: the long right tail pulls the mean above the median.
+D) An SD can be calculated for any numeric data.
+E) Skew and variance are different things; skewed data can have small or large variance.",Which summary gets pulled toward a long tail?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q21,"Practice Exam 1 (Fall 2026), Q21",10,"non-independence, assumptions",MC,"You give fertilizer to one greenhouse bench and none to another, then measure 50 plants on each bench. What is the problem?","A) A sample of 50 plants per treatment is too small
+B) Data are not independent
+C) There is sampling bias
+D) The researcher should have been blinded
+E) There's no problem",B,"The treatment was applied to whole benches, so the bench (not the plant) is the experimental unit: there is really one replicate per treatment. Plants on a bench share light, temperature and watering, so they aren't independent, and any bench difference is confounded with fertilizer. Fix: randomly assign fertilizer to plants (or pots) across several benches.","A) 50 per bench would be plenty if the plants were independent.
+C) Nothing suggests the plants measured are unrepresentative of their bench.
+D) Blinding can help, but the core problem is that plants on a bench aren't independent.
+E) With one bench per treatment, any bench difference looks like a fertilizer effect.",What was randomly assigned: plants or benches?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q22,"Practice Exam 1 (Fall 2026), Q22",5,standard deviation,MC,"In plain words, the standard deviation of a sample roughly conveys: (pick the best answer)","A) The difference between the largest and smallest values
+B) How far a typical data point is from the mean
+C) How much the sample mean would change if we sampled again
+D) The proportion of data points that fall far from the mean",B,The SD is roughly the typical distance of a data point from the mean.,"A) That's the range.
+C) That's the standard error.
+D) The SD isn't a proportion.",Is the SD about individual data points or about estimates?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q23,"Practice Exam 1 (Fall 2026), Q23",8,standard error,MC,"In plain words, the standard error of a sample mean roughly conveys: (pick the best answer)","A) How far a typical data point is from the mean
+B) The amount of error introduced by sampling bias
+C) How far a sample mean typically is from the true population mean
+D) The probability that our estimate is wrong
+E) Mistakes made while measuring or recording the data",C,"The SE is the standard deviation of the sampling distribution: how far a sample mean typically lands from the true mean, by chance alone.","A) That's the standard deviation.
+B) The SE describes chance variation (sampling error), not bias.
+D) The SE isn't a probability.
+E) The SE doesn't measure recording mistakes.",Is the SE about individual data points or about estimates?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q24,"Practice Exam 1 (Fall 2026), Q24",12,"experimental design, random assignment",MC,"The key difference between an experimental and an observational study is that, in an experiment: (pick the best answer)","A) The study takes place in a lab rather than in the field
+B) The researcher assigns the values of the explanatory variable (ideally at random)
+C) The sample size is larger
+D) There is a comparison group",B,"In an experiment, the researcher sets the explanatory variable, ideally by random assignment, which breaks links with confounders and lets us infer causation.","A) Experiments can be done in the field, and observational studies in the lab.
+C) Observational studies can be very large.
+D) Observational studies often have comparison groups too.",Who decides which individuals get which treatment?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q25,"Practice Exam 1 (Fall 2026), Q25",4,tidy data,MC,"I measured hemoglobin concentration in people from four populations (USA, Andes, Ethiopia and Tibet). There are two ways I could have stored these data. Which is tidy?
+
+Table A:
+
+hemoglobin | population
+15.6 | Tibet
+15.8 | USA
+19.1 | Andes
+15.9 | Ethiopia
+15.2 | USA
+15.2 | Tibet
+18.6 | Andes
+16.3 | Ethiopia
+
+Table B:
+
+USA | Andes | Ethiopia | Tibet
+15.8 | 19.1 | 15.9 | 15.6
+15.2 | 18.6 | 16.3 | 15.2","A) Table A
+B) Table B
+C) Both are tidy
+D) Neither is tidy",A,"Table A is tidy: each row is one person (an observation), and each column is one variable (hemoglobin and population). In Table B, the variable 'population' is spread across the column headers.","B) In Table B the population names are column headers, so the variable 'population' isn't a column.
+C) Table B isn't tidy.
+D) Table A is tidy: one row per person, one column per variable.",In which table is each variable its own column?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q26,"Practice Exam 1 (Fall 2026), Q26",4,tidy data,MC,"I measured hemoglobin concentration in people from four populations (USA, Andes, Ethiopia and Tibet), and stored the data like this (Table B):
+
+USA | Andes | Ethiopia | Tibet
+15.8 | 19.1 | 15.9 | 15.6
+15.2 | 18.6 | 16.3 | 15.2
+
+Table B has a presentation problem. What is it? (pick the best answer)","A) The numbers are rounded
+B) It gives the appearance that a row is meaningful, but here a row has no real meaning
+C) It has too many columns
+D) It uses population names instead of numbers",B,"Putting values side by side in a row suggests they belong together (for example, that the USA value 15.8 and the Andes value 19.1 come from a matched pair). Here they're unrelated people, so the rows have no meaning.","A) Rounding to one decimal is fine.
+C) Four columns isn't too many.
+D) Names are clearer than numeric codes.",What does it suggest when two values sit in the same row?,,yes,,,"explanation, why_wrong, hint",,
+exam1-q27,"Practice Exam 1 (Fall 2026), Q27",3,"reproducibility, scripts",MC,"I wrote the script below while working through my analysis, and everything worked on my computer. I saved it, closed R, and reopened it. Now, when I run the script from top to bottom, I get the error: object 'gc_rils' not found. Why? (pick the best answer)
+
+library(dplyr)
+library(readr)
+
+gc_summary <- gc_rils |>
+  group_by(petal_color) |>
+  summarise(mean_hybrid = mean(prop_hybrid, na.rm = TRUE))
+
+gc_rils <- read_csv(""clarkia_rils.csv"") |>
+  dplyr::filter(location == ""GC"")","A) The data file must have changed after I closed R
+B) The script uses gc_rils before the line that creates it. It only worked before because gc_rils was already in my R session from running lines out of order
+C) I need to reinstall dplyr every time I open R
+D) R scripts cannot be saved and rerun later",B,"The script uses gc_rils before the line that creates it. It worked earlier only because lines were run out of order, so gc_rils already existed in the session. In a fresh session, R runs top to bottom and hits gc_summary first. Fix: move the read_csv() line above the summary, and test by restarting R and running the whole script from the top.","A) A changed file would give a different error, not 'object not found'.
+C) Packages are installed once; you load them with library() each session.
+D) Saving and rerunning scripts is exactly what makes analyses reproducible.","In a fresh R session, which line runs first: the one that uses gc_rils, or the one that creates it?",,yes,,,"explanation, why_wrong, hint",,

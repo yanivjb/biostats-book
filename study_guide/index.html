@@ -490,7 +490,8 @@ function showSetup() {
   app.append(step("1. What do you want to practice?", null,
     el("div", { class: "choices" },
       toggle(setup.scope === "all", el("span", {}, el("strong", { text: "Random from everything" }), el("span", { text: "Chapters 0–12, mixed" })), () => { setup.scope = "all"; showSetup(); }, "big"),
-      toggle(setup.scope === "chapters", el("span", {}, el("strong", { text: "Pick chapters" }), el("span", { text: "Focus on one or more chapters" })), () => { setup.scope = "chapters"; showSetup(); }, "big"))));
+      toggle(setup.scope === "chapters", el("span", {}, el("strong", { text: "Pick chapters" }), el("span", { text: "Focus on one or more chapters" })), () => { setup.scope = "chapters"; showSetup(); }, "big"),
+      EXAM.length ? toggle(setup.scope === "exam", el("span", {}, el("strong", { text: "Practice exam 1" }), el("span", { text: EXAM.length + " questions from the practice exam, in order" })), () => { setup.scope = "exam"; setup.style = "check"; setup.source = "orig"; setup.length = 0; showSetup(); }, "big") : null)));
 
   if (setup.scope === "chapters") {
     app.append(step("2. Which chapters?", "Pick as many as you like.",
@@ -514,8 +515,8 @@ function showSetup() {
     }
   }
 
-  const ready = setup.scope === "all" || (setup.scope === "chapters" && setup.chapters.length && (setup.within === "random" || setup.concepts.length));
-  if (ready) {
+  const ready = setup.scope === "all" || setup.scope === "exam" || (setup.scope === "chapters" && setup.chapters.length && (setup.within === "random" || setup.concepts.length));
+  if (ready && setup.scope !== "exam") {
     const n = setup.scope === "all" ? 2 : 4;
     app.append(step(n + ". Question style", null,
       el("div", { class: "choices" },
@@ -524,8 +525,8 @@ function showSetup() {
         toggle(setup.style === "mix", el("span", {}, el("strong", { text: "Mix" }), el("span", { text: "Mostly checked, with an explain-it every few" })), () => { setup.style = "mix"; showSetup(); }, "big"))));
   }
   if (ready && setup.style) {
-    let n = setup.scope === "all" ? 3 : 5;
-    if (setup.style !== "explain") {
+    let n = setup.scope === "exam" ? 2 : setup.scope === "all" ? 3 : 5;
+    if (setup.style !== "explain" && setup.scope !== "exam") {
       app.append(step(n + ". Which versions?", "Every question has an original (from the course) and new AI-written versions that test the same idea.",
         el("div", { class: "choices" },
           toggle(setup.source === "orig", el("span", {}, el("strong", { text: "Course originals" }), el("span", { text: "Yaniv's homework, quiz and book questions" })), () => { setup.source = "orig"; showSetup(); }, "big"),
@@ -536,7 +537,7 @@ function showSetup() {
     const pool = buildPool(false);
     const total = pool.check.length + pool.open.length;
     app.append(step(n + ". How many?", total + " questions match your choices.",
-      el("div", { class: "choices" }, [5, 10, 20, 0].map(k => toggle(setup.length === k, k ? String(k) : "Until I stop", () => { setup.length = k; showSetup(); }))),
+      el("div", { class: "choices" }, [5, 10, 20, 0].map(k => toggle(setup.length === k, k ? String(k) : setup.scope === "exam" ? "All " + EXAM.length : "Until I stop", () => { setup.length = k; showSetup(); }))),
       el("div", { class: "row", style: "margin-top:16px" },
         el("button", { class: "btn", disabled: total ? null : true, onclick: () => startSession(buildPool(false)) }, "Start"),
         missesCount() ? el("button", { class: "btn secondary", onclick: () => startSession(buildPool(true)) }, "Only questions I've missed (" + missesCount() + ")") : null)));
@@ -544,6 +545,7 @@ function showSetup() {
 }
 
 function inScope(item) {
+  if (setup.scope === "exam" || item.set) return setup.scope === "exam" && item.set === "exam1";
   if (setup.scope === "all") return true;
   const chs = item.chapters.filter(c => setup.chapters.includes(c));
   if (!chs.length) return false;
@@ -552,6 +554,7 @@ function inScope(item) {
 }
 function isMiss(id) { const r = store.results[id]; return !!(r && r.last && !["first", "yes", "recovered"].includes(r.last)); }
 const BANK = DATA.bank.filter(q => !q.variant_of);
+const EXAM = BANK.filter(q => q.set === "exam1");
 function similarFor(q) {
   const root = q.variant_of || q.id;
   const pool = DATA.bank.filter(x => (x.variant_of === root || x.id === root) && x.id !== q.id && !session.used.has(x.id));
@@ -593,7 +596,7 @@ function buildPool(onlyMisses) {
 }
 
 function startSession(pool) {
-  let check = shuffle(pool.check).map(chooseSource), open = shuffle(pool.open);
+  let check = setup.scope === "exam" ? pool.check.slice().sort((a, b) => a.id < b.id ? -1 : 1) : shuffle(pool.check).map(chooseSource), open = shuffle(pool.open);
   const want = setup.length || Infinity;
   let list = [];
   if (setup.style === "mix") {
@@ -628,6 +631,7 @@ function header(item) {
       item.similar ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "Similar question" })
         : item.alt ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "New version" })
         : q.generated ? el("span", { class: "tag", style: "background:var(--warn-soft);font-weight:600", title: "Not reviewed by the instructor. If something looks off, flag it with 👎.", text: "Written by Claude" }) : null,
+      q.set ? el("span", { class: "tag", style: "font-weight:600", text: "Practice exam · Q" + (+q.id.slice(-2)) }) : null,
       el("span", { class: "tag", text: q.chapters.map(c => c + " · " + chapterName(c)).join(", ") }),
       q.concepts.map(c => el("span", { class: "tag", text: c })))
   ];
@@ -763,7 +767,7 @@ function showCheck(item) {
       actions.append(el("button", { class: "btn ghost", onclick: () => finish("skipped") }, "Skip"));
     } else {
       const sim = st.outcome !== "first" && q.type !== "short" ? similarFor(q) : null;
-      if (SAMPLE) {
+      if (SAMPLE && !q.set) {
         const gen = el("button", { class: "btn ghost", title: "Claude writes a fresh question on the same idea", onclick: async () => {
           gen.disabled = true; gen.textContent = "Writing a question…";
           try {

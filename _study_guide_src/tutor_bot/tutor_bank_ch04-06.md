@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 718 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 744 questions in all. 160 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -1238,6 +1238,100 @@ T2 | 0 | 1
 - **Why the wrong options are wrong (tutor only):**
   A) Values of a variable (dates) appear as column headers.
 - **Hint:** Where are the dates stored?
+
+### exam1-q19
+- **Kind:** Course original
+- **Concepts:** Errors & debugging
+- **Type:** MC
+- **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [exam1-filter-error.png](https://yanivjb.github.io/biostats-book/study_guide/images/exam1-filter-error.png)
+- **Question:**
+
+I was working with the penguins data set in R (morphology of hundreds of penguins from three species and three islands). To calculate summaries for Adelie penguins, I first tried to keep only the Adelie rows. I typed the code shown and got an error. To follow up, I looked at the data with View(penguins). What went wrong?
+
+- **Options:**
+
+  A) Adelie should not be in quotes
+  B) species should be capitalized
+  C) filter() should be on a different line than penguins
+  D) I didn't tell R which filter function to use
+
+- **Answer (tutor only):** D
+- **Explanation (tutor only):** View(penguins) shows the species column exists, so the column name is fine. The problem is that dplyr isn't loaded: without it, R uses base R's stats::filter(), which doesn't know how to look up column names inside a data frame. Fix: run library(dplyr) first (or write dplyr::filter()).
+- **Why the wrong options are wrong (tutor only):**
+  A) Text values like "Adelie" do need quotes.
+  B) View(penguins) shows the column is called species, lowercase.
+  C) Line breaks don't matter here; the code would fail the same way on two lines.
+- **Hint:** The column exists, so why can't filter() find it? Which filter() is R using?
+
+### exam1-q25
+- **Kind:** Course original
+- **Concepts:** Tidy data
+- **Type:** MC
+- **Question:**
+
+I measured hemoglobin concentration in people from four populations (USA, Andes, Ethiopia and Tibet). There are two ways I could have stored these data. Which is tidy?
+
+Table A:
+
+hemoglobin | population
+15.6 | Tibet
+15.8 | USA
+19.1 | Andes
+15.9 | Ethiopia
+15.2 | USA
+15.2 | Tibet
+18.6 | Andes
+16.3 | Ethiopia
+
+Table B:
+
+USA | Andes | Ethiopia | Tibet
+15.8 | 19.1 | 15.9 | 15.6
+15.2 | 18.6 | 16.3 | 15.2
+
+- **Options:**
+
+  A) Table A
+  B) Table B
+  C) Both are tidy
+  D) Neither is tidy
+
+- **Answer (tutor only):** A
+- **Explanation (tutor only):** Table A is tidy: each row is one person (an observation), and each column is one variable (hemoglobin and population). In Table B, the variable 'population' is spread across the column headers.
+- **Why the wrong options are wrong (tutor only):**
+  B) In Table B the population names are column headers, so the variable 'population' isn't a column.
+  C) Table B isn't tidy.
+  D) Table A is tidy: one row per person, one column per variable.
+- **Hint:** In which table is each variable its own column?
+
+### exam1-q26
+- **Kind:** Course original
+- **Concepts:** Tidy data
+- **Type:** MC
+- **Question:**
+
+I measured hemoglobin concentration in people from four populations (USA, Andes, Ethiopia and Tibet), and stored the data like this (Table B):
+
+USA | Andes | Ethiopia | Tibet
+15.8 | 19.1 | 15.9 | 15.6
+15.2 | 18.6 | 16.3 | 15.2
+
+Table B has a presentation problem. What is it? (pick the best answer)
+
+- **Options:**
+
+  A) The numbers are rounded
+  B) It gives the appearance that a row is meaningful, but here a row has no real meaning
+  C) It has too many columns
+  D) It uses population names instead of numbers
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** Putting values side by side in a row suggests they belong together (for example, that the USA value 15.8 and the Andes value 19.1 come from a matched pair). Here they're unrelated people, so the rows have no meaning.
+- **Why the wrong options are wrong (tutor only):**
+  A) Rounding to one decimal is fine.
+  C) Four columns isn't too many.
+  D) Names are clearer than numeric codes.
+- **Hint:** What does it suggest when two values sit in the same row?
 
 ## Chapter 5: Univariate summaries
 
@@ -3105,6 +3199,82 @@ Petal length: species X has mean 10 mm and SD 2 mm; species Y has mean 40 mm and
   C) Raw SDs scale with size.
 - **Hint:** Divide each SD by its mean.
 
+### exam1-q03
+- **Kind:** Course original
+- **Concepts:** Range, IQR & boxplots
+- **Type:** select-all
+- **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [exam1-boxplot.png](https://yanivjb.github.io/biostats-book/study_guide/images/exam1-boxplot.png)
+- **Question:**
+
+Which values can you reasonably estimate from this plot? Select the two best.
+
+- **Options:**
+
+  A) Mean
+  B) Median
+  C) Mode
+  D) The shape of the data
+  E) Standard deviation
+  F) Interquartile range
+  G) 95% confidence interval
+
+- **Answer (tutor only):** B, F
+- **Explanation (tutor only):** A boxplot shows the median (the thick line, about 76) and the interquartile range (the box, about 58 to 82). It does not show the mean, mode, SD or a confidence interval. The shape is only partly visible: a boxplot can hide features like bimodality.
+- **Why the wrong options are wrong (tutor only):**
+  A) A boxplot doesn't show the mean.
+  C) A boxplot doesn't show the mode.
+  D) Only partly: a boxplot hints at skew but can hide bimodality, so it's not one of the two best.
+  E) A boxplot doesn't show the SD.
+  G) A boxplot shows the data, not uncertainty in an estimate.
+- **Hint:** What do the thick line and the box in a boxplot show?
+
+### exam1-q20
+- **Kind:** Course original
+- **Concepts:** Shape of distributions; Center: mean & median
+- **Type:** select-all
+- **Question:**
+
+A histogram of pollinator visits per plant shows that most plants receive zero visits and a few receive many (strongly right-skewed). Which are true? (select all correct)
+
+- **Options:**
+
+  A) The mean will be greater than the median
+  B) The median will be greater than the mean
+  C) The median better describes a "typical" plant than the mean does
+  D) Because the data are skewed, we cannot calculate a standard deviation
+  E) Skewed data always have a larger variance than symmetric data
+
+- **Answer (tutor only):** A, C
+- **Explanation (tutor only):** In right-skewed data the few very large values pull the mean up, so the mean is greater than the median. The median isn't pulled by the long tail, so it better describes a typical plant.
+- **Why the wrong options are wrong (tutor only):**
+  B) Backwards: the long right tail pulls the mean above the median.
+  D) An SD can be calculated for any numeric data.
+  E) Skew and variance are different things; skewed data can have small or large variance.
+- **Hint:** Which summary gets pulled toward a long tail?
+
+### exam1-q22
+- **Kind:** Course original
+- **Concepts:** Spread: variance & SD
+- **Type:** MC
+- **Question:**
+
+In plain words, the standard deviation of a sample roughly conveys: (pick the best answer)
+
+- **Options:**
+
+  A) The difference between the largest and smallest values
+  B) How far a typical data point is from the mean
+  C) How much the sample mean would change if we sampled again
+  D) The proportion of data points that fall far from the mean
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** The SD is roughly the typical distance of a data point from the mean.
+- **Why the wrong options are wrong (tutor only):**
+  A) That's the range.
+  C) That's the standard error.
+  D) The SD isn't a proportion.
+- **Hint:** Is the SD about individual data points or about estimates?
+
 ## Chapter 6: Associations I
 
 ### ch06-book-01
@@ -4202,3 +4372,77 @@ When comparing distributions of two groups with faceted histograms, what should 
   B) Separate ranges hide differences between groups.
   C) Different bins make shapes incomparable.
 - **Hint:** Can you compare panels if 3000 g is in a different place in each?
+
+### exam1-q13
+- **Kind:** Course original
+- **Concepts:** Visualizing associations
+- **Type:** select-all
+- **Question:**
+
+"Jittering" is a great way to prevent "overplotting", but it can go wrong. What should you watch out for (select all correct)?
+
+- **Options:**
+
+  A) Be sure not to fool readers into thinking x is continuous
+  B) Make sure not to trick readers into wrongly thinking the jitter around y-values is true variation
+  C) Make sure that readers can differentiate between categories on x
+  D) Chill, jitter plots cannot be messed up
+
+- **Answer (tutor only):** A, B, C
+- **Explanation (tutor only):** Jitter only makes sense on a categorical x: on a numeric x, the spread looks like real differences in x. Jitter should only move points sideways, because jittering in y creates fake variation. And if the jitter width is too large, points from neighboring categories overlap and you can't tell which group a point belongs to.
+- **Why the wrong options are wrong (tutor only):**
+  D) Jitter plots can definitely be messed up: too wide, jittered in y, or used on a numeric x.
+- **Hint:** What could go wrong if points move too far, or in the wrong direction?
+
+### exam1-q15
+- **Kind:** Course original
+- **Concepts:** Difference in means & Cohen's d
+- **Type:** numeric
+- **Question:**
+
+The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+Find the pooled standard deviation (in mm).
+
+- **Answer (tutor only):** ≈ 1.97 mm
+- **Explanation (tutor only):** Cohen's d = difference in means / pooled SD, so pooled SD = difference / d = 3.23 / 1.64 ≈ 1.97 mm.
+- **Why the wrong options are wrong (tutor only):**
+  Rearrange Cohen's d: d = difference / pooled SD.
+- **Hint:** Cohen's d is the difference in means divided by what?
+
+### exam1-q18
+- **Kind:** Course original
+- **Concepts:** Difference in means & Cohen's d
+- **Type:** MC
+- **Question:**
+
+The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+I am curious to compare the sex difference in bill length to the sex difference in body mass. Which comparison is most insightful?
+
+- **Options:**
+
+  A) Comparing Cohen's d for the sex difference in bill length to Cohen's d for the sex difference in body mass
+  B) Comparing the p-value for the sex difference in bill length to the p-value for the sex difference in body mass
+  C) Comparing the sex difference in the conditional means in bill length to the sex difference in the conditional means in body mass
+  D) Comparing the correlation between bill length and body mass between the sexes
+
+- **Answer (tutor only):** A
+- **Explanation (tutor only):** Bill length (mm) and body mass (g) are in different units, so their raw differences can't be compared directly. Cohen's d puts both on the same unitless scale (difference / pooled SD).
+- **Why the wrong options are wrong (tutor only):**
+  B) p-values depend on sample size and don't measure how big an effect is.
+  C) The raw differences are in different units (mm vs g), so they can't be compared directly.
+  D) That answers a different question: how the two traits relate, not how big each sex difference is.
+- **Hint:** How can you compare differences measured in mm and in g?

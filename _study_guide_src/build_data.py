@@ -69,6 +69,7 @@ CONCEPTS = {
 
 # Accepted ranges for numeric questions: (label, low, high, shown answer).
 NUMERIC = {
+    'exam1-q15': [('pooled SD (mm)', 1.85, 2.10, '≈ 1.97 mm')],
     'ch04-book-05': [('', 7, 7, '7')],
     'ch05-quiz-04': [('', 401, 403, '402')],
     'ch05-quiz-05': [('', 200, 202, '201')],
@@ -228,6 +229,8 @@ def build_bank():
              'question': x['question'], 'hint': x['hint'],
              'images': [i.strip() for i in x['image'].split(';') if i.strip()],
              'reveals': x['reveals_answer_to'] or None, 'variant_of': x.get('variant_of') or None}
+        if x['id'].startswith('exam1-'):
+            q['set'] = 'exam1'
         secret = {'explanation': x['explanation']}
         if t in ('MC', 'TF', 'select-all', 'matching'):
             q['options'] = parse_options(x['options'])

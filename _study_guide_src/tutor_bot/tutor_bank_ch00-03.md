@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 718 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 744 questions in all. 160 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -830,6 +830,29 @@ TRUE or FALSE: Once a variable is classified as continuous, it must always be an
 - **Why the wrong options are wrong (tutor only):**
   A) That's too strict.
 - **Hint:** Could there be good reasons to analyze body mass as small, medium or large?
+
+### exam1-q12
+- **Kind:** Course original
+- **Concepts:** Variable types
+- **Type:** MC
+- **Question:**
+
+Suppose I'm surveying people's ice cream preferences. I have a variable in my dataset named "deliciousness", in which I had people choose from the options: "yuck", "bad", "meh", "good", "splendid", and "best I've ever had". What kind of variable is this?
+
+- **Options:**
+
+  A) Numeric
+  B) Binary
+  C) Ordinal
+  D) Continuous
+
+- **Answer (tutor only):** C
+- **Explanation (tutor only):** The categories have a natural order (yuck < bad < meh < good < splendid < best) but no meaningful numeric distances between them.
+- **Why the wrong options are wrong (tutor only):**
+  A) The answers are words, and the 'distance' between them isn't a number.
+  B) There are six options, not two.
+  D) Continuous variables can take any value in a range; these are categories.
+- **Hint:** Do the categories have an order?
 
 ## Chapter 1: Getting started with R
 
@@ -3308,3 +3331,36 @@ TRUE or FALSE: Counts of eggs per nest (3, 5, 2, 4) can be stored as integers wi
 - **Why the wrong options are wrong (tutor only):**
   B) There are no decimals to lose.
 - **Hint:** Do counts ever have decimals?
+
+### exam1-q27
+- **Kind:** Course original
+- **Concepts:** Reproducible workflows
+- **Type:** MC
+- **Question:**
+
+I wrote the script below while working through my analysis, and everything worked on my computer. I saved it, closed R, and reopened it. Now, when I run the script from top to bottom, I get the error: object 'gc_rils' not found. Why? (pick the best answer)
+
+library(dplyr)
+library(readr)
+
+gc_summary <- gc_rils |>
+  group_by(petal_color) |>
+  summarise(mean_hybrid = mean(prop_hybrid, na.rm = TRUE))
+
+gc_rils <- read_csv("clarkia_rils.csv") |>
+  dplyr::filter(location == "GC")
+
+- **Options:**
+
+  A) The data file must have changed after I closed R
+  B) The script uses gc_rils before the line that creates it. It only worked before because gc_rils was already in my R session from running lines out of order
+  C) I need to reinstall dplyr every time I open R
+  D) R scripts cannot be saved and rerun later
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** The script uses gc_rils before the line that creates it. It worked earlier only because lines were run out of order, so gc_rils already existed in the session. In a fresh session, R runs top to bottom and hits gc_summary first. Fix: move the read_csv() line above the summary, and test by restarting R and running the whole script from the top.
+- **Why the wrong options are wrong (tutor only):**
+  A) A changed file would give a different error, not 'object not found'.
+  C) Packages are installed once; you load them with library() each session.
+  D) Saving and rerunning scripts is exactly what makes analyses reproducible.
+- **Hint:** In a fresh R session, which line runs first: the one that uses gc_rils, or the one that creates it?

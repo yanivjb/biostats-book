@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 718 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 744 questions in all. 160 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -997,6 +997,29 @@ Why should you always plot data before trusting a correlation coefficient?
   B) Plotting doesn't change r.
   D) r is correct as a number; it just may not describe the pattern well.
 - **Hint:** Can very different scatterplots have the same r?
+
+### exam1-q10
+- **Kind:** Course original
+- **Concepts:** Covariance; Correlation
+- **Type:** matching
+- **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [exam1-cov-cor.png](https://yanivjb.github.io/biostats-book/study_guide/images/exam1-cov-cor.png)
+- **Question:**
+
+Look at plots a and b.
+
+1. Which plot has the greater covariance?
+2. Which plot has the greater correlation?
+
+- **Options:**
+
+  A) Plot a
+  B) Plot b
+
+- **Answer (tutor only):** 1-B, 2-A
+- **Explanation (tutor only):** Covariance has units and grows with the spread of the data. The points in b spread much more along y (and the line is steeper), so b has the greater covariance. Correlation is standardized: it measures how tightly points fall along a line. The points in a hug the line almost perfectly, so a has the greater correlation.
+- **Why the wrong options are wrong (tutor only):**
+  Covariance depends on how spread out the data are; correlation only on how tightly they follow a line.
+- **Hint:** Which plot's points are more spread out, and which plot's points hug the line more tightly?
 
 ## Chapter 8: Sampling
 
@@ -2853,6 +2876,100 @@ The SD of seed mass in a population is 0.8 mg. Which sample size gives a standar
   C) and B) Too small: SE ≈ 0.28 and 0.2 mg.
   D) Gives SE ≈ 0.028 mg, much smaller than needed.
 - **Hint:** Set 0.8/√n = 0.1 and solve for n.
+
+### exam1-q06
+- **Kind:** Course original
+- **Concepts:** Sampling distribution
+- **Type:** MC
+- **Question:**
+
+A student says, "The sampling distribution shows how the values in my dataset are spread." Why are they wrong?
+
+- **Options:**
+
+  A) Because the sampling distribution describes variation in estimates across repeated samples, not variation within a single sample
+  B) Because the sampling distribution only applies to categorical data
+  C) Because the sampling distribution is calculated before collecting data
+  D) Because the sampling distribution depends on the population size, not the sample size
+  E) They aren't wrong
+
+- **Answer (tutor only):** A
+- **Explanation (tutor only):** The sampling distribution is the distribution of an estimate (like the mean) across many samples. The spread of values within one dataset is the distribution of the data, summarized by the SD.
+- **Why the wrong options are wrong (tutor only):**
+  B) Sampling distributions exist for any estimate, numeric or categorical.
+  C) It describes estimates from many samples; when it's calculated isn't the issue.
+  D) It depends on the sample size: bigger samples give narrower sampling distributions.
+  E) They are wrong: they're describing the distribution of the data, not of an estimate.
+- **Hint:** Is a sampling distribution made of individual values or of estimates?
+
+### exam1-q07
+- **Kind:** Course original
+- **Concepts:** Sampling distribution; Sampling error vs bias
+- **Type:** MC
+- **Question:**
+
+Why is understanding the sampling distribution essential for doing inference?
+
+- **Options:**
+
+  A) It allows us to quantify sampling bias
+  B) It allows us to quantify sampling error
+  C) It allows us to quantify non-independent sampling
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** The sampling distribution shows how much estimates vary from sample to sample by chance, which is sampling error. That's what SEs, CIs and p-values are built on.
+- **Why the wrong options are wrong (tutor only):**
+  A) Bias shifts the whole sampling distribution away from the truth, and we can't see that without knowing the truth.
+  C) Non-independence comes from how the data were collected; the sampling distribution can't measure it.
+- **Hint:** What does the spread of estimates across many samples tell you about?
+
+### exam1-q08
+- **Kind:** Course original
+- **Concepts:** Sampling error vs bias
+- **Type:** MC
+- **Question:**
+
+Because turtle hatchlings are difficult to catch, you scatter food to attract them and measure the running speed of the first 30 individuals that reach the food. This sampling method likely introduces...
+
+- **Options:**
+
+  A) Sampling error, because estimates differ across samples by chance
+  B) Sampling bias, because faster turtles are more likely to be measured
+  C) Non-independence, because turtles from the same nest share genetics
+  D) Measurement error, because timing turtles is imprecise
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** The first 30 turtles to reach the food are probably the fastest, so the sample systematically overestimates running speed. Sampling more turtles the same way wouldn't fix it.
+- **Why the wrong options are wrong (tutor only):**
+  A) Every sample has sampling error; the special problem here is that the method favors fast turtles.
+  C) Nothing in the setup says the turtles come from the same nest.
+  D) Timing may be imprecise, but the bigger problem is who gets measured.
+- **Hint:** Which turtles reach the food first?
+
+### exam1-q23
+- **Kind:** Course original
+- **Concepts:** SD vs SE
+- **Type:** MC
+- **Question:**
+
+In plain words, the standard error of a sample mean roughly conveys: (pick the best answer)
+
+- **Options:**
+
+  A) How far a typical data point is from the mean
+  B) The amount of error introduced by sampling bias
+  C) How far a sample mean typically is from the true population mean
+  D) The probability that our estimate is wrong
+  E) Mistakes made while measuring or recording the data
+
+- **Answer (tutor only):** C
+- **Explanation (tutor only):** The SE is the standard deviation of the sampling distribution: how far a sample mean typically lands from the true mean, by chance alone.
+- **Why the wrong options are wrong (tutor only):**
+  A) That's the standard deviation.
+  B) The SE describes chance variation (sampling error), not bias.
+  D) The SE isn't a probability.
+  E) The SE doesn't measure recording mistakes.
+- **Hint:** Is the SE about individual data points or about estimates?
 
 ## Chapter 9: Uncertainty
 
@@ -4841,3 +4958,125 @@ Suppose you know the population parameter. 100 friends each take random samples 
   C) That's 90% coverage.
   D) Coverage is a property of the method, not of any one sample.
 - **Hint:** Multiply the number of intervals by the confidence level.
+
+### exam1-q01
+- **Kind:** Course original
+- **Concepts:** Visualizing uncertainty
+- **Type:** select-all
+- **Question:**
+
+A standard rule in data visualization is to show the data (i.e. all the data points). Say I had a ton of data and didn't want to show every data point. Which would convey both a measure of central tendency and of variability? Pick all correct.
+
+- **Options:**
+
+  A) A point for the mean, with bars showing plus or minus one standard error
+  B) A point for the mean, with bars showing plus or minus one standard deviation
+  C) A point for the mean, with bars showing the 95% confidence interval
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** The SD describes how spread out the data are, so mean ± SD shows both the center and the variability of the data. The SE and the 95% CI describe uncertainty in the mean, not the spread of the data: they shrink as the sample grows, so with a ton of data they'd be tiny even if the data were very spread out.
+- **Why the wrong options are wrong (tutor only):**
+  A) The SE shows how uncertain the mean is, not how variable the data are. It shrinks as n grows.
+  C) A CI shows uncertainty in the mean, not the spread of the data.
+- **Hint:** Which of these would stay about the same if you collected ten times more data?
+
+### exam1-q02
+- **Kind:** Course original
+- **Concepts:** Visualizing uncertainty
+- **Type:** select-all
+- **Question:**
+
+A standard rule in data visualization is to show the data (i.e. all the data points). Say I had a ton of data and didn't want to show every data point. Which would convey both the mean of the data and the uncertainty in it? Pick all correct.
+
+- **Options:**
+
+  A) A point for the mean, with bars showing plus or minus one standard error
+  B) A point for the mean, with bars showing plus or minus one standard deviation
+  C) A point for the mean, with bars showing the 95% confidence interval
+
+- **Answer (tutor only):** A, C
+- **Explanation (tutor only):** Both the SE and the 95% CI describe how uncertain we are about the mean. We get both from the bootstrap distribution of the mean: the SE is its standard deviation, and the 95% CI is its middle 95%. With more data, that distribution gets narrower (the law of large numbers: averages of more values sit closer to the truth, because highs and lows cancel out).
+- **Why the wrong options are wrong (tutor only):**
+  B) The SD describes how spread out individual data points are. More data doesn't make individuals less variable, so it says nothing about how well we know the mean.
+- **Hint:** Which bars would get shorter if you collected more data?
+
+### exam1-q04
+- **Kind:** Course original
+- **Concepts:** Sampling distribution & SE
+- **Type:** select-all
+- **Question:**
+
+You conduct the same study twice, once with a sample of size ten, and once with a sample of size 100. Which estimate(s) is (are) most likely to get smaller in the study with a larger sample? Select all correct.
+
+- **Options:**
+
+  A) Mean
+  B) Standard deviation
+  C) Variance
+  D) Coefficient of variation
+  E) Standard error
+
+- **Answer (tutor only):** E
+- **Explanation (tutor only):** The standard error describes how much an estimate would vary from sample to sample. Think of bootstrapping: in a resample of 10 values, a few unusually high or low values can easily pile up by chance and pull the mean far off. In a resample of 100, highs and lows almost always cancel out (the law of large numbers). So the bootstrap distribution is narrower and the SE is smaller. The mean, SD, variance and CV describe the population itself; a bigger sample estimates them more precisely but doesn't make them smaller.
+- **Why the wrong options are wrong (tutor only):**
+  A) The mean estimates the population's center. More data makes it more precise, not smaller.
+  B) The SD estimates how spread out individuals are. More data doesn't make individuals less variable.
+  C) Variance is the SD squared, so it doesn't systematically shrink either.
+  D) The CV is SD / mean, both of which describe the population, so it doesn't systematically shrink.
+- **Hint:** Which of these describes uncertainty in an estimate, rather than the population itself?
+
+### exam1-q05
+- **Kind:** Course original
+- **Concepts:** Sampling distribution & SE
+- **Type:** MC
+- **Question:**
+
+You conduct the same study four times, once with a sample of size ten (n = 10), once with n = 20, once with n = 1000 and once with n = 10000. Which estimates will be most similar?
+
+- **Options:**
+
+  A) The means of the samples with n = 10 and n = 20
+  B) The means of the samples with n = 1000 and n = 10000
+  C) The standard errors of the samples with n = 1000 and n = 10000
+  D) A & B
+  E) A & C
+  F) B & C
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** Big samples have small sampling error, so their means land close to the true mean, and therefore close to each other.
+- **Why the wrong options are wrong (tutor only):**
+  A) Means from samples of 10 and 20 bounce around a lot, so they can easily differ.
+  C) The SE keeps shrinking as samples get bigger, so the SE for n = 10,000 is noticeably smaller (about a third the size) than for n = 1000.
+  D) A is wrong: small-sample means vary a lot.
+  E) Neither A nor C is right.
+  F) C is wrong: the SEs differ by a factor of about 3.
+- **Hint:** Which samples have the least sampling error?
+
+### exam1-q14
+- **Kind:** Course original
+- **Concepts:** Confidence intervals
+- **Type:** select-all
+- **Question:**
+
+The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+The correct interpretation of the confidence interval is (select all correct):
+
+- **Options:**
+
+  A) There is a 95% chance the true mean sex difference is between 2.08 and 4.38
+  B) If this study were repeated many times, 95% of those confidence intervals would include the true mean sex difference in bill length. We don't know what this is, but from our study a reasonable guess is between 2.08 and 4.38
+  C) If I randomly pair male and female Adelie penguins from Dream island, 95% of pairs will have a difference in bill length within 2.08 and 4.38
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** A 95% CI comes from a procedure that captures the true value in 95% of repeated studies. Our one interval either contains the true difference or it doesn't; 2.08 to 4.38 is a range of plausible values.
+- **Why the wrong options are wrong (tutor only):**
+  A) This gives the CI a probability after it's calculated. The true difference is fixed: this interval either contains it or doesn't.
+  C) The CI is about the difference in means, not differences between individual penguins.
+- **Hint:** Is the 95% about this one interval, or about the procedure?

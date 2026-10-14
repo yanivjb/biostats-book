@@ -4,7 +4,7 @@ Knowledge file for the course tutor. Each question has an ID, its concepts, the 
 
 - **Course originals** come from the instructor's homework, quizzes, Chime Ins and book.
 - **AI-written versions** test the same idea with a new scenario or numbers. Their ID ends in -v1 or -v2 and names the original.
-- 718 questions in all. 157 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
+- 744 questions in all. 160 use a figure and are marked **Figure question (website only)**: students practice those on the study-guide website, where the figure is shown. Use one only when a student brings it to you; its figure link is included.
 
 ## Chapters and concepts
 
@@ -1787,6 +1787,82 @@ Which statement commits the prosecutor's fallacy?
   C) That's the correct definition.
 - **Hint:** Find the one that makes the p-value a probability about the hypothesis.
 
+### exam1-q09
+- **Kind:** Course original
+- **Concepts:** What a p-value means
+- **Type:** select-all
+- **Question:**
+
+A p-value of 0.01 means: (select all correct)
+
+- **Options:**
+
+  A) We reject the null hypothesis
+  B) We fail to reject the null hypothesis
+  C) The null is false
+  D) There is a 1% chance the null is correct
+  E) There is a 1% chance the null generated our data (or something more extreme)
+  F) 1% of samples from the null will be as or more extreme than our observation
+
+- **Answer (tutor only):** A, F
+- **Explanation (tutor only):** With the usual α = 0.05, p = 0.01 < 0.05, so we reject the null. F is the definition of a p-value: the probability of a result as or more extreme than ours, if the null were true.
+- **Why the wrong options are wrong (tutor only):**
+  B) p = 0.01 is below the usual α = 0.05, so we reject.
+  C) Rejecting the null doesn't prove it false; we could be making a type I error.
+  D) A p-value is calculated assuming the null is true, so it can't be the probability that the null is true.
+  E) This reads as the chance the null caused our data, a probability about the hypothesis. A p-value is P(data this extreme | null), not P(null | data).
+- **Hint:** A p-value is calculated assuming what?
+
+### exam1-q11
+- **Kind:** Course original
+- **Concepts:** What a p-value means; Errors, power & sample size
+- **Type:** select-all
+- **Question:**
+
+In statistics we usually use an alpha threshold of 0.05. What would happen if the field changed the custom to alpha = 0.01 (select all correct)?
+
+- **Options:**
+
+  A) We would reject more false nulls
+  B) We would reject more true nulls
+  C) We would fail to reject more false nulls
+  D) We would fail to reject more true nulls
+  E) We would have wider confidence intervals (we use 99% confidence intervals)
+  F) We would have narrower confidence intervals (we use 99% confidence intervals)
+
+- **Answer (tutor only):** C, D, E
+- **Explanation (tutor only):** A lower α makes it harder to reject the null, so we reject fewer nulls, true or false: fewer type I errors but more type II errors (C), and we fail to reject more true nulls (D). To match α = 0.01 we'd report 99% CIs, which are wider than 95% CIs (E).
+- **Why the wrong options are wrong (tutor only):**
+  A) Backwards: a stricter threshold means we reject fewer nulls, including false ones.
+  B) Backwards: we'd reject fewer true nulls (fewer type I errors).
+  F) Backwards: to be 99% confident, the interval has to be wider.
+- **Hint:** Is it easier or harder to get p < 0.01 than p < 0.05?
+
+### exam1-q21
+- **Kind:** Course original
+- **Concepts:** Confounding & non-independence
+- **Type:** MC
+- **Question:**
+
+You give fertilizer to one greenhouse bench and none to another, then measure 50 plants on each bench. What is the problem?
+
+- **Options:**
+
+  A) A sample of 50 plants per treatment is too small
+  B) Data are not independent
+  C) There is sampling bias
+  D) The researcher should have been blinded
+  E) There's no problem
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** The treatment was applied to whole benches, so the bench (not the plant) is the experimental unit: there is really one replicate per treatment. Plants on a bench share light, temperature and watering, so they aren't independent, and any bench difference is confounded with fertilizer. Fix: randomly assign fertilizer to plants (or pots) across several benches.
+- **Why the wrong options are wrong (tutor only):**
+  A) 50 per bench would be plenty if the plants were independent.
+  C) Nothing suggests the plants measured are unrepresentative of their bench.
+  D) Blinding can help, but the core problem is that plants on a bench aren't independent.
+  E) With one bench per treatment, any bench difference looks like a fertilizer effect.
+- **Hint:** What was randomly assigned: plants or benches?
+
 ## Chapter 11: Shuffling (permutation)
 
 ### ch11-book-01
@@ -3204,6 +3280,35 @@ In a line-up, 1 panel shows the real data and 19 show data with the labels shuff
   C) and D) A line-up, like any permutation test, gives evidence, not certainty.
 - **Hint:** The shuffled panels show what the null produces. Does the real panel look like them?
 
+### exam1-q17
+- **Kind:** Course original
+- **Concepts:** Bootstrap vs permutation
+- **Type:** MC
+- **Question:**
+
+The penguins data set in R describes the morphology of hundreds of penguins from three species and three islands. Here I am looking at the difference in bill length (male − female) of Adelie penguins on Dream island:
+
+Mean male: 40.1
+Estimated difference: 3.23
+95% CI for difference: 2.08 to 4.38
+p-value: 0.00000122
+Cohen's d: 1.64
+
+I found the p-value by permutation. This means:
+
+- **Options:**
+
+  A) I resampled the data with replacement, calculated the mean difference, repeated this many times, and found the proportion of these that were less than zero
+  B) I swapped labels of males and females at random, calculated the sex difference in bill length, repeated this many times, and found the proportion of replicates with an absolute value greater than 3.23
+  C) I sampled from the population many times and found the proportion of sample mean differences with an absolute value greater than 3.23
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** A permutation test builds the null distribution by shuffling the sex labels, which breaks any real link between sex and bill length. The p-value is the share of shuffled differences as extreme as the observed 3.23 (two-tailed, so we use absolute values).
+- **Why the wrong options are wrong (tutor only):**
+  A) This describes a bootstrap (resampling with replacement), which is for SEs and CIs, not p-values.
+  C) This would need many new samples from the population, which we can't take, and it wouldn't build a null distribution.
+- **Hint:** How does a permutation make the null true?
+
 ## Chapter 12: Study design
 
 ### ch12-book-01
@@ -4505,3 +4610,26 @@ Why should a researcher estimate power BEFORE running an experiment?
   B) p-values come from the data.
   C) Nothing guarantees significance.
 - **Hint:** Is the study big enough?
+
+### exam1-q24
+- **Kind:** Course original
+- **Concepts:** Experiments vs observational studies
+- **Type:** MC
+- **Question:**
+
+The key difference between an experimental and an observational study is that, in an experiment: (pick the best answer)
+
+- **Options:**
+
+  A) The study takes place in a lab rather than in the field
+  B) The researcher assigns the values of the explanatory variable (ideally at random)
+  C) The sample size is larger
+  D) There is a comparison group
+
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** In an experiment, the researcher sets the explanatory variable, ideally by random assignment, which breaks links with confounders and lets us infer causation.
+- **Why the wrong options are wrong (tutor only):**
+  A) Experiments can be done in the field, and observational studies in the lab.
+  C) Observational studies can be very large.
+  D) Observational studies often have comparison groups too.
+- **Hint:** Who decides which individuals get which treatment?
