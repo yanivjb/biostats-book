@@ -38,7 +38,7 @@ Linear models provide a unified framework for estimating the expected value (i.e
 
 :::tutor
 
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-6832957bbc8c81919f589ce7f76f92a3-linear-models-tutor)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-6832957bbc8c81919f589ce7f76f92a3-linear-models-tutor), [**Gemini link here**](https://gemini.google.com/gem/1gFu959BjAbqhMPLJzAao_ObIxdfLzH8Y?usp=sharing)). I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
 
