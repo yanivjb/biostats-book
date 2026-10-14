@@ -285,6 +285,17 @@ function sendAnswer(row) {
   } catch (e) { return Promise.reject(e); }
 }
 
+// One anonymous row per finished question (which question, right or wrong, time), so the instructor can see
+// how the study guide is used. Sent only if SUBMIT_URL is set (the book version), never with a name.
+function logActivity(q, row) {
+  if (!SUBMIT_URL) return;
+  const base = { kind: "activity", question_id: q.id, original_id: q.variant_of || q.id,
+    version: q.generated ? "Claude-written" : q.variant_of ? "AI version" : "original",
+    chapter: "ch" + q.chapters.join(",ch"), concepts: (q.concepts || []).join("; ") };
+  sendAnswer(Object.assign(base, row)).catch(() => {});
+}
+function secondsSince(t0) { return Math.min(Math.round((Date.now() - t0) / 1000), 1800); }
+
 // Thumbs up/down on a question, with optional reasons. Sent to the sheet only if SUBMIT_URL is set.
 const RATE_REASONS = ["Confusing wording", "Answer key looks wrong", "Figure unclear", "Too easy", "Too hard"];
 function rateBox(q, outcome) {
@@ -640,7 +651,7 @@ function record(id, outcome, extra) {
 
 function showCheck(item) {
   const q = item.q, s = q.plain || reveal(q.secret);
-  const st = { attempts: 0, firstChoice: null, usedHint: false, done: false, revealed: false, struck: new Set(), locked: {} };
+  const st = { attempts: 0, firstChoice: null, usedHint: false, done: false, revealed: false, struck: new Set(), locked: {}, t0: Date.now() };
   const card = el("section", { class: "card" }, header(item), renderText(q.question), figures(q.images));
   const answerBox = el("div");
   const fb = el("div");
@@ -922,7 +933,7 @@ function showCheck(item) {
     st.done = true;
     fb.innerHTML = "";
     const rate = el("div", { class: "row selfrate" }, el("span", { text: "How did you do?" }),
-      [["yes", "Got it"], ["partly", "Partly"], ["no", "Not yet"]].map(([v, l]) => el("button", { class: "btn ghost", onclick: () => { record(q.id, v === "yes" ? "yes" : v); toast("Saved"); rate.remove(); } }, l)));
+      [["yes", "Got it"], ["partly", "Partly"], ["no", "Not yet"]].map(([v, l]) => el("button", { class: "btn ghost", onclick: () => { record(q.id, v === "yes" ? "yes" : v); logActivity(q, { item: "checked", outcome: "self-" + v, attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) }); toast("Saved"); rate.remove(); } }, l)));
     fb.append(el("div", { class: "feedback info" }, el("h3", { text: "Compare with the model answer" }), answerLine(), el("p", { html: inline(s.explanation) }), rate, rateBox(q, "self")));
     finish("self", true);
     drawActions();
@@ -931,6 +942,7 @@ function showCheck(item) {
   function finish(outcome, keepView) {
     const extra = st.firstChoice ? { first: String(st.firstChoice).slice(0, 200) } : {};
     if (outcome !== "self") record(q.id, outcome, extra);
+    if (outcome !== "self") logActivity(q, { item: "checked", outcome, attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) });
     if (outcome !== "self" && item.alt && !item.similar) record(item.root, outcome, extra);
     if (outcome === "first") session.tally.first++;
     else if (outcome === "retry") session.tally.retry++;
@@ -1000,7 +1012,7 @@ function showOpen(item) {
     }
     if (!st.revealed) {
       actions.append(el("span", { class: "spacer" }));
-      actions.append(el("button", { class: "btn ghost", onclick: () => { record(q.id, "skipped"); nextQuestion(); } }, "Skip"));
+      actions.append(el("button", { class: "btn ghost", onclick: () => { record(q.id, "skipped"); logActivity(q, { item: "checked", outcome: "skipped", attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) }); nextQuestion(); } }, "Skip"));
     }
   }
   ta.addEventListener("input", update);
@@ -1012,7 +1024,8 @@ function showOpen(item) {
     keyBox.innerHTML = "";
     const checks = el("div", { class: "row selfrate" }, el("span", { text: "Did your answer cover it?" }),
       [["yes", "Yes"], ["partly", "Partly"], ["no", "Not yet"]].map(([v, l]) => el("button", { class: "btn ghost", onclick: () => {
-        st.self = v; record(q.id, v === "yes" ? "yes" : v); toast("Saved"); checks.querySelectorAll("button").forEach(b => b.disabled = true);
+        st.self = v; record(q.id, v === "yes" ? "yes" : v); toast("Saved");
+        logActivity(q, { item: "explain-it", outcome: "self-" + v, words: wordCount(ta.value), seconds: secondsSince(started) }); checks.querySelectorAll("button").forEach(b => b.disabled = true);
       } }, l)));
     let submitBox = null;
     if (SUBMIT_URL) {
@@ -1149,7 +1162,7 @@ function showAbout() {
     el("h3", { text: "Privacy" }),
     renderMd("Your progress and drafts are saved only in this browser." +
       (SAMPLE ? " When you use a Claude feature, the question, your answers and (for the study report) your practice record are sent to Claude on your own account." : "") +
-      (SUBMIT_URL ? " Clicking 👍 or 👎 sends that rating (anonymously) so bad questions get fixed, and **Submit for feedback** sends that answer, and your name if you add one, to the instructor."
+      (SUBMIT_URL ? " To help improve the study guide, it also records anonymous practice data (which questions you did, whether you got them right, and how long they took; no names). Clicking 👍 or 👎 sends that rating (anonymously) so bad questions get fixed, and **Submit for feedback** sends that answer, and your name if you add one, to the instructor."
         : (SAMPLE ? "" : " Nothing is sent anywhere."))),
     el("p", { class: "muted small", text: BANK.length + " checked questions (+ " + (DATA.bank.length - BANK.length) + " similar-question variants) · " + DATA.open.length + " explain-it prompts · chapters 0–12" })));
 }

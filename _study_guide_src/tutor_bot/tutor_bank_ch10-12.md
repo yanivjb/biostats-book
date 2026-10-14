@@ -54,7 +54,7 @@ Which statement is most appropriate as a NULL hypothesis?
 
 - **Options:**
 
-  A) Mean lifespan is the same for fruit flies raised on high- and low-sugar diets
+  A) Mean lifespan is the same on both diets
   B) High-sugar diets shorten fruit fly lifespan
   C) Diet affects fruit fly lifespan
 
@@ -74,15 +74,15 @@ Which statement is most appropriate as a NULL hypothesis for a study of whether 
 
 - **Options:**
 
-  A) Bee visit rate is not associated with flower color
-  B) Bees prefer blue flowers
-  C) Flower color affects bee visits
+  A) Bees prefer blue flowers
+  B) Flower color affects how often bees visit
+  C) Visit rate isn't associated with flower color
   D) Bees visit flowers
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Null: no association.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) are alternatives.
+  A) and B) are alternatives.
   D) Not a testable statement about the association.
 - **Hint:** No association = ?
 
@@ -213,17 +213,17 @@ In the T-shirt study, a researcher uses the one-tailed alternative 'mothers pick
 
 - **Options:**
 
-  A) If mothers were actually worse than chance (e.g., reliably picking the wrong shirt), the test couldn't detect it
-  B) The null changes to 'mothers always pick correctly'
-  C) The p-value gets larger
-  D) There is no difference
+  A) There is no difference
+  B) The p-value gets larger, so significance is harder to reach
+  C) The null changes to 'mothers always pick correctly'
+  D) It couldn't detect mothers doing worse than chance
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A one-tailed test only looks for an effect in one direction. Evidence in the other direction is ignored.
 - **Why the wrong options are wrong (tutor only):**
-  B) The null is still 50%.
-  C) For results in the predicted direction, one-tailed p-values are smaller.
-  D) The tails matter.
+  A) The tails matter.
+  B) For results in the predicted direction, one-tailed p-values are smaller.
+  C) The null is still 50%.
 - **Hint:** What does a one-tailed test ignore?
 
 ### ch10-book-04
@@ -302,17 +302,17 @@ With 8 of 9 correct, the P-value is about 0.04. What do we do with the null, and
 
 - **Options:**
 
-  A) Reject it; but we need more information to know whether it's actually true or false
-  B) Reject it; it is false
-  C) Reject it; it has a 4% chance of being true
-  D) Fail to reject it; not enough information
+  A) Fail to reject it; there's not enough information
+  B) Reject it; there is a 4% chance that the null is true
+  C) Reject it, but we still can't be sure whether it's true or false
+  D) Reject it; it is false
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p = 0.04 < 0.05, so we reject. But rejecting doesn't prove the null is false (we could be making a type I error), and the p-value isn't the probability that the null is true.
 - **Why the wrong options are wrong (tutor only):**
-  B) Rejecting isn't proof.
-  C) That's the prosecutor's fallacy: P(data | H0) ≠ P(H0 | data).
-  D) p < α.
+  A) p < α.
+  B) That's the prosecutor's fallacy: P(data | H0) ≠ P(H0 | data).
+  D) Rejecting isn't proof.
 - **Hint:** Compare p to α. Then: what does a p-value NOT tell you?
 
 ### ch10-book-05-v1
@@ -331,7 +331,7 @@ With 9 of 10 correct, the two-sided P-value is about 0.02. What do we do with th
 
 - **Options:**
 
-  A) Reject it; but we can't be certain it's false (this could be a type I error)
+  A) Reject it, though this could be a type I error
   B) Reject it; we've proven dogs can smell cancer
   C) Reject it; there's a 2% chance dogs are guessing
   D) Fail to reject it
@@ -360,15 +360,15 @@ With 9 of 10 correct (p ≈ 0.02), a reporter writes: 'Dogs are 98% accurate at 
 
 - **Options:**
 
-  A) It turns 1 − p into an accuracy; the observed accuracy was 90% (9/10), and with 10 dogs that estimate is very uncertain
-  B) Nothing; that's correct
+  A) Nothing; that's a correct reading of p
+  B) It treats 1 − p as accuracy; observed accuracy was 9/10
   C) The p-value should have been 0.10
   D) Dogs were 2% accurate
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The p-value is about how surprising 9/10 would be under guessing. The accuracy estimate is 9/10 = 0.9, with a wide CI because n is small.
 - **Why the wrong options are wrong (tutor only):**
-  B) 1 − p is not an accuracy or a probability of anything useful here.
+  A) 1 − p is not an accuracy or a probability of anything useful here.
   C) The p-value was computed correctly.
   D) Misreads p again.
 - **Hint:** Where does the accuracy estimate actually come from?
@@ -406,16 +406,16 @@ Which pair of probabilities does the prosecutor's fallacy confuse?
 - **Options:**
 
   A) P(evidence | innocent) and P(innocent | evidence)
-  B) P(guilty) and P(innocent)
-  C) α and β
-  D) The mean and the median
+  B) The mean and the median
+  C) P(guilty) and P(innocent)
+  D) α and β
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The fallacy swaps the conditional: how likely the evidence is if innocent, vs how likely innocence is given the evidence.
 - **Why the wrong options are wrong (tutor only):**
-  B) These are complements, not the confusion.
-  C) Error rates, but not this fallacy.
-  D) Unrelated.
+  B) Unrelated.
+  C) These are complements, not the confusion.
+  D) Error rates, but not this fallacy.
 - **Hint:** Which way does the 'given' go?
 
 ### ch10-book-06-v2
@@ -428,16 +428,16 @@ In hypothesis testing, the prosecutor's fallacy is treating ___ as if it were __
 
 - **Options:**
 
-  A) P(data | H0), P(H0 | data)
-  B) P(H0 | data), P(data | H0)
-  C) α, the power
-  D) the effect size, the p-value
+  A) α, the power
+  B) P(data | H0), P(H0 | data)
+  C) the effect size, the p-value
+  D) P(H0 | data), P(data | H0)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The p-value is P(data this extreme | H0). The fallacy reads it as the probability that H0 is true given the data.
 - **Why the wrong options are wrong (tutor only):**
-  B) Backwards: the p-value is P(data | H0).
-  C) and D) Different confusions.
+  A) and C) Different confusions.
+  D) Backwards: the p-value is P(data | H0).
 - **Hint:** Which conditional probability is the p-value?
 
 ### ch10-chime-01
@@ -549,16 +549,16 @@ A type II error is:
 
 - **Options:**
 
-  A) Failing to reject a null hypothesis that is false
-  B) Rejecting a null hypothesis that is true
-  C) Using the wrong test
-  D) Getting p exactly 0.05
+  A) Getting p exactly 0.05
+  B) Failing to reject a false null
+  C) Using the wrong test for the data
+  D) Rejecting a null hypothesis that is true
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Type II: missing a real effect. Its probability is 1 − power.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's a type I error.
-  C) and D) Not error types.
+  C) and A) Not error types.
+  D) That's a type I error.
 - **Hint:** Missed a real effect, or false alarm?
 
 ### ch10-chime-03
@@ -593,15 +593,15 @@ We use α = 0.10. Assuming the null is TRUE, what's the probability we reject it
 
 - **Options:**
 
-  A) 0.10
-  B) 0.90
+  A) 0.90
+  B) 0.10
   C) Depends on sample size
   D) Depends on effect size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** When the null is true, we falsely reject with probability α = 0.10.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the probability of (correctly) failing to reject.
+  A) That's the probability of (correctly) failing to reject.
   C) and D) α alone sets the false-positive rate.
 - **Hint:** When H0 is true, P(reject) = α.
 
@@ -615,16 +615,16 @@ A type I error is:
 
 - **Options:**
 
-  A) Rejecting a null hypothesis that is actually true
-  B) Failing to reject a false null hypothesis
-  C) Having a small sample
-  D) Making a calculation error
+  A) Rejecting a true null
+  B) Having a small sample
+  C) Making a calculation error in the test
+  D) Failing to reject a false null hypothesis
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Type I: a false positive. Its probability (when H0 is true) is α.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's type II.
-  C) and D) Not error types.
+  B) and C) Not error types.
+  D) That's type II.
 - **Hint:** False alarm or missed effect?
 
 ### ch10-chime-04
@@ -660,16 +660,16 @@ Spot the flaw: a news article says, 'The trial found the drug reduced migraines 
 
 - **Options:**
 
-  A) Treating the p-value as a probability about the hypothesis
-  B) A causal story that ignores confounds
-  C) Ignoring sampling error
+  A) Ignoring sampling error
+  B) Treating p as a probability about the hypothesis
+  C) A causal story that ignores confounds
   D) Using the p-value as a measure of effect size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** 1 − p isn't the probability the drug works. The p-value is P(data this extreme | no effect).
 - **Why the wrong options are wrong (tutor only):**
-  B) A randomized trial handles confounds; that's not the error.
-  C) The p-value addresses sampling error.
+  A) The p-value addresses sampling error.
+  C) A randomized trial handles confounds; that's not the error.
   D) Nothing about effect size is claimed.
 - **Hint:** What does the p-value assume?
 
@@ -683,17 +683,17 @@ Spot the flaw: 'Our new teaching method had a highly significant effect (p < 0.0
 
 - **Options:**
 
-  A) Using the p-value as a measure of effect size
+  A) Ignoring sampling error
   B) Treating the p-value as the probability that the null is true
   C) A causal story that ignores confounds
-  D) Ignoring sampling error
+  D) Using the p-value as a measure of effect size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A tiny p-value can come from a small effect in a large study; 'huge' needs the estimate.
 - **Why the wrong options are wrong (tutor only):**
+  A) The p-value does address sampling error.
   B) No probability of the null is stated.
   C) Possible, but the stated flaw is jumping from p to 'huge'.
-  D) The p-value does address sampling error.
 - **Hint:** Does p measure 'how big'?
 
 ### ch10-chime-05
@@ -727,12 +727,12 @@ Spot the flaw: a survey finds that children who eat breakfast get better grades.
 
 - **Options:**
 
-  A) It tells a causal story while ignoring confounds (e.g., family income or routines may affect both breakfast and grades)
-  B) It misinterprets a p-value as the probability the null is true
-  C) It ignores sampling error
+  A) It ignores sampling error
+  B) It misreads a p-value as the probability the null is true
+  C) A causal story that ignores confounds
   D) It uses a p-value as a measure of effect size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Observational association doesn't show causation. Families that serve breakfast may differ in many ways that also affect grades.
 - **Why the wrong options are wrong (tutor only):**
   B)–D) No p-value is misused; the problem is the causal leap.
@@ -748,15 +748,15 @@ Spot the flaw: 'Cities with more police officers have more crime, so police caus
 
 - **Options:**
 
-  A) Reverse causation or confounding: cities with more crime hire more police, and bigger cities have more of both
-  B) The p-value was misread
-  C) Sampling error
-  D) Effect size was ignored
+  A) Effect size was ignored
+  B) Sampling error
+  C) Reverse causation or confounding
+  D) The p-value was misread as an effect size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The association could run the other way (crime → more police) or be driven by city size.
 - **Why the wrong options are wrong (tutor only):**
-  B)–D) The problem is the causal interpretation.
+  D)–A) The problem is the causal interpretation.
 - **Hint:** Which way could the arrow point?
 
 ### ch10-gquiz-01
@@ -870,17 +870,17 @@ She counts which berries the robin eats in her yard, finds it eats significantly
 
 - **Options:**
 
-  A) Red berries are more available, so the robin could eat more of them with no preference at all
-  B) She should have used a one-tailed test
+  A) The sample size is too large
+  B) Red berries are more available, so no preference is needed
   C) She should never reject the null
-  D) The sample size is too large
+  D) She should have used a one-tailed test, since she predicted red
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Availability is a confound: compare what the robin eats with what it encounters (or offer equal numbers).
 - **Why the wrong options are wrong (tutor only):**
-  B) The tail choice doesn't fix the comparison problem.
+  A) More data doesn't create this problem.
   C) Rejecting is fine when the comparison is fair.
-  D) More data doesn't create this problem.
+  D) The tail choice doesn't fix the comparison problem.
 - **Hint:** What would the robin eat if it had no preference?
 
 ### ch10-gquiz-02-v2
@@ -893,17 +893,17 @@ A study finds that people who own more houseplants report significantly lower st
 
 - **Options:**
 
-  A) Plant owners may differ in other ways (more free time, bigger homes, income) that affect stress, so this doesn't show causation
-  B) p = 0.003 is too large to be significant
-  C) The p-value measures the size of the stress reduction
-  D) There's no problem
+  A) The p-value measures how much stress went down, which here is tiny
+  B) There's no problem
+  C) p = 0.003 is too large to count as significant
+  D) Plant owners may differ in other ways that affect stress
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** This is observational: confounds (or reverse causation, such as relaxed people buying plants) could produce the association.
 - **Why the wrong options are wrong (tutor only):**
-  B) 0.003 is small.
-  C) p-values don't measure effect size.
-  D) The causal claim isn't supported.
+  A) p-values don't measure effect size.
+  B) The causal claim isn't supported.
+  C) 0.003 is small.
 - **Hint:** Was plant ownership randomly assigned?
 
 ### ch10-gquiz-03
@@ -939,17 +939,17 @@ A study of 500,000 people finds that a supplement lowers blood pressure by 0.3 m
 
 - **Options:**
 
-  A) Treating a tiny p-value as evidence of a large effect: 0.3 mmHg is trivially small
-  B) Ignoring that the result might be due to chance
+  A) The sample is too small to detect a real change
+  B) Reading a tiny p-value as a large effect
   C) Using a two-tailed test
-  D) The sample is too small
+  D) Ignoring that the result might just be due to chance
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With half a million people, even a negligible effect is easily detected. The p-value says the effect is probably not zero; the estimate (0.3 mmHg) says it's tiny.
 - **Why the wrong options are wrong (tutor only):**
-  B) p < 0.0001 addresses chance.
+  A) The sample is enormous.
   C) Tail choice isn't the issue.
-  D) The sample is enormous.
+  D) p < 0.0001 addresses chance.
 - **Hint:** Look at the size of the estimate, not the p-value.
 
 ### ch10-gquiz-03-v2
@@ -962,15 +962,15 @@ Study 1 reports p = 0.001; Study 2 reports p = 0.04. Which conclusion is justifi
 
 - **Options:**
 
-  A) Neither p-value tells us which effect is larger; we need the effect sizes (and their CIs)
-  B) Study 1 found a bigger effect
+  A) Study 1's effect is 40 times larger
+  B) Neither; we need the effect sizes (and CIs)
   C) Study 2 found a bigger effect
-  D) Study 1's effect is 40 times larger
+  D) Study 1 found a bigger effect, since its p is smaller
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** p-values depend on both effect size and sample size. A small p could come from a small effect in a huge study.
 - **Why the wrong options are wrong (tutor only):**
-  B)–D) These treat the p-value as a measure of effect size.
+  D)–A) These treat the p-value as a measure of effect size.
 - **Hint:** What two things does a p-value depend on?
 
 ### ch10-gquiz-04
@@ -1008,15 +1008,15 @@ She gets p = 0.03. What does this mean?
 
 - **Options:**
 
-  A) If the robin truly had no preference, there'd be a 3% chance of a difference this large or larger
-  B) There's a 3% chance the robin has no preference
-  C) There's a 97% chance the robin has a preference
+  A) With no preference, a difference this big would occur 3% of the time
+  B) There's a 97% chance the robin truly has a preference
+  C) There's a 3% chance the robin has no preference
   D) There's a 3% chance her results are wrong
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A p-value is P(data this extreme or more | H0 true). It isn't a probability about the hypothesis.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) all turn it into a probability about the hypothesis (the prosecutor's fallacy).
+  C), B) and D) all turn it into a probability about the hypothesis (the prosecutor's fallacy).
 - **Hint:** Probability of what, assuming what?
 
 ### ch10-gquiz-04-v2
@@ -1073,15 +1073,15 @@ A researcher compares bill length between two islands by measuring 400 birds, bu
 
 - **Options:**
 
-  A) Independence of observations
-  B) No sampling error
-  C) Normally distributed data
+  A) No sampling error
+  B) Independence of observations
+  C) Normally distributed bill lengths
   D) A two-tailed test
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Siblings from the same nest share genes and environment, so 400 birds act more like 6 independent units. Treating them as 400 inflates confidence and shrinks p-values.
 - **Why the wrong options are wrong (tutor only):**
-  B) Sampling error is always present.
+  A) Sampling error is always present.
   C) Not the core issue here.
   D) That's a choice, not an assumption.
 - **Hint:** How many truly independent units are there?
@@ -1096,17 +1096,17 @@ A study measures 50 students' reaction times 20 times each and analyzes all 1000
 
 - **Options:**
 
-  A) Standard errors are too small and p-values too small: the study looks more convincing than it is
-  B) p-values are too large
+  A) The estimate becomes biased upward
+  B) p-values are too large, since repeats add noise
   C) There's no consequence
-  D) The estimate becomes biased upward
+  D) SEs and p-values are too small
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Repeated measurements on the same person are correlated. Treating them as independent overstates the information, giving too-narrow CIs and too-small p-values.
 - **Why the wrong options are wrong (tutor only):**
+  A) The main problem is overstated precision, not bias.
   B) The error goes the other way.
   C) Pseudoreplication matters.
-  D) The main problem is overstated precision, not bias.
 - **Hint:** Is the 20th measurement of a student new information?
 
 ### ch10-gquiz-06
@@ -1211,16 +1211,16 @@ A tiny study (n = 12) of a memory supplement reports a huge, significant effect 
 
 - **Options:**
 
-  A) The supplement has little or no effect; the small study's large estimate was probably exaggerated by chance (and amplified by attention to striking results)
-  B) The supplement has a huge effect
-  C) The later studies were all done wrong
+  A) Little or no effect; the small study's estimate was likely inflated
+  B) The later studies were all done wrong, since they disagree with the first
+  C) The supplement has a huge effect, as the first study showed
   D) The supplement has a moderate effect
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Small studies that reach significance tend to overestimate effects (the winner's curse). The large, precise studies carry more weight.
 - **Why the wrong options are wrong (tutor only):**
-  B) One noisy study vs three precise ones.
-  C) No reason to think so.
+  B) No reason to think so.
+  C) One noisy study vs three precise ones.
   D) None of the precise studies supports that.
 - **Hint:** Which studies are more precise?
 
@@ -1234,16 +1234,16 @@ Why do significant results from small studies tend to overestimate the true effe
 
 - **Options:**
 
-  A) With small samples, estimates are noisy, and only the ones that happen to be unusually large cross the significance threshold
-  B) Small studies always measure the wrong thing
-  C) Small studies have smaller standard errors
-  D) They don't; small studies are unbiased
+  A) Small studies have smaller standard errors, so they detect effects more readily
+  B) Only the unusually large noisy estimates reach significance
+  C) Small studies tend to measure the wrong thing
+  D) They don't; small-study estimates are unbiased, significant or not
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** To reach p < 0.05 with a large SE, the estimate must be big. If the true effect is modest, only lucky overestimates make the cut. This is the winner's curse.
 - **Why the wrong options are wrong (tutor only):**
-  B) Small isn't wrong.
-  C) Small studies have larger SEs.
+  A) Small studies have larger SEs.
+  C) Small isn't wrong.
   D) Each estimate is unbiased, but the significant subset is biased upward.
 - **Hint:** What has to happen for a small study to reach p < 0.05?
 
@@ -1284,17 +1284,17 @@ A small study (n = 15 per group) finds that a mentoring program raises test scor
 
 - **Options:**
 
-  A) The program has a real but modest effect; the small study lacked power
-  B) The program has no effect, because the first study wasn't significant
-  C) The studies contradict each other
-  D) The program has a huge effect
+  A) A real but modest effect; the small study lacked power
+  B) The program has a huge effect
+  C) No effect, because the first study wasn't significant
+  D) The two studies contradict each other
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Both estimates are similar (about 3.5–4 points). The small study's CI was wide and included 0. Not significant ≠ no effect.
 - **Why the wrong options are wrong (tutor only):**
-  B) p = 0.30 doesn't show no effect.
-  C) The estimates agree.
-  D) Both estimates are modest.
+  B) Both estimates are modest.
+  C) p = 0.30 doesn't show no effect.
+  D) The estimates agree.
 - **Hint:** Compare the estimates, not just the p-values.
 
 ### ch10-gquiz-08-v2
@@ -1348,14 +1348,14 @@ Which statement is most appropriate as an ALTERNATIVE hypothesis?
 - **Options:**
 
   A) Mean seed size differs between plants in shaded and sunny plots
-  B) Mean seed size is the same in shaded and sunny plots
-  C) Shaded plants produce seeds exactly 1.2 mg heavier than sunny plants
+  B) Shaded plants produce seeds exactly 1.2 mg heavier than sunny plants
+  C) Mean seed size is the same in shaded and sunny plots
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** An alternative hypothesis claims a difference or association.
 - **Why the wrong options are wrong (tutor only):**
-  B) 'The same' is the null.
-  C) Alternatives don't usually claim an exact value.
+  B) Alternatives don't usually claim an exact value.
+  C) 'The same' is the null.
 - **Hint:** Which statement claims something is going on?
 
 ### ch10-hw-01-v2
@@ -1368,16 +1368,16 @@ A researcher asks whether salamander abundance is associated with stream tempera
 
 - **Options:**
 
-  A) There is no association between salamander abundance and stream temperature
+  A) No association between abundance and temperature
   B) Salamanders are more abundant in cooler streams
-  C) Stream temperature affects salamander abundance
-  D) Salamanders are rare
+  C) Salamanders are rare
+  D) Stream temperature affects how many salamanders there are
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The null is 'no association'.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) These claim an association (alternatives).
-  D) That isn't a hypothesis about the relationship.
+  B) and D) These claim an association (alternatives).
+  C) That isn't a hypothesis about the relationship.
 - **Hint:** The null says nothing is going on.
 
 ### ch10-hw-02
@@ -1428,17 +1428,17 @@ Why does the book generally recommend two-tailed tests?
 
 - **Options:**
 
-  A) We'd usually want to know about a surprising effect in the 'wrong' direction too, and one-tailed tests make it too easy to get significance after seeing the data
-  B) Two-tailed tests always give smaller p-values
+  A) Two-tailed tests don't need a null hypothesis
+  B) Two-tailed tests always give smaller p-values, so they find effects more easily
   C) One-tailed tests are mathematically invalid
-  D) Two-tailed tests don't need a null hypothesis
+  D) Effects in the 'wrong' direction matter, and one-tailed tests invite cherry-picking
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A one-tailed test ignores effects in the other direction and halves the p-value for the chosen one, which is tempting to pick after the fact.
 - **Why the wrong options are wrong (tutor only):**
+  A) Every test needs a null.
   B) For the same data, two-tailed p-values are larger.
   C) They're valid when justified in advance.
-  D) Every test needs a null.
 - **Hint:** What does a one-tailed test ignore?
 
 ### ch10-hw-03
@@ -1472,17 +1472,17 @@ A study of 2 million smartphone users finds that a new app layout increases time
 
 - **Options:**
 
-  A) The effect is almost certainly real but practically negligible
-  B) The effect is large because p is so small
-  C) The result is probably due to chance
-  D) The study was biased because it was large
+  A) The study was biased because it was so large
+  B) The result is probably due to chance
+  C) Almost certainly real but practically negligible
+  D) The effect is large, because p is so small
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Huge samples detect tiny effects. Significance tells you the effect is probably not zero; the estimate (0.4 s) tells you it doesn't matter much.
 - **Why the wrong options are wrong (tutor only):**
-  B) p-values don't measure effect size.
-  C) p < 0.0001 makes chance an unlikely explanation.
-  D) Size doesn't cause bias.
+  A) Size doesn't cause bias.
+  B) p < 0.0001 makes chance an unlikely explanation.
+  D) p-values don't measure effect size.
 - **Hint:** Separate 'is there an effect?' from 'how big is it?'
 
 ### ch10-hw-03-v2
@@ -1495,17 +1495,17 @@ If the true effect is small but not zero, what happens to the p-value as sample 
 
 - **Options:**
 
-  A) It gets smaller, eventually falling below 0.05
-  B) It stays about the same
-  C) It gets larger
-  D) It equals the effect size
+  A) It gets larger
+  B) It gets smaller, eventually below 0.05
+  C) It equals the effect size
+  D) It stays about the same, since the effect doesn't change
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A larger n shrinks the SE, so even a small real effect becomes more and more detectable.
 - **Why the wrong options are wrong (tutor only):**
-  B) The p-value depends on n.
-  C) More data gives more evidence, not less.
-  D) p-values aren't effect sizes.
+  A) More data gives more evidence, not less.
+  C) p-values aren't effect sizes.
+  D) The p-value depends on n.
 - **Hint:** What does a bigger n do to the SE?
 
 ### ch10-hw-04
@@ -1538,16 +1538,16 @@ If the null hypothesis is TRUE and you use α = 0.01, what's the probability of 
 
 - **Options:**
 
-  A) 0.01, regardless of sample size
+  A) Larger for bigger studies
   B) 0.05
-  C) Smaller for bigger studies
-  D) Larger for bigger studies
+  C) Smaller for bigger studies, since they're more precise
+  D) 0.01, whatever the sample size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** When the null is true, the false-positive rate equals α, whatever the sample size.
 - **Why the wrong options are wrong (tutor only):**
   B) That's for α = 0.05.
-  C) and D) Sample size affects power, not the false-positive rate.
+  C) and A) Sample size affects power, not the false-positive rate.
 - **Hint:** When H0 is true, P(reject) = ?
 
 ### ch10-hw-04-v2
@@ -1649,10 +1649,10 @@ With 7 of 9 correct, the two-sided P-value is about 0.18. What do we do with the
 
 - **Options:**
 
-  A) Fail to reject it; we don't have enough information to say whether it's true or false
+  A) Fail to reject it; we can't say whether it's true or false
   B) Reject it; it is false
   C) Accept it; it is true
-  D) Fail to reject it; it has an 18% chance of being true
+  D) Fail to reject it; there is an 18% chance that the null is true
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 0.18 > 0.05, so we fail to reject. That does not make the null true (we never 'accept' it): with only 9 mothers we have little power. And the p-value isn't the probability that the null is true.
@@ -1678,17 +1678,17 @@ With 8 of 10 correct, the two-sided P-value is about 0.11. What do we do with th
 
 - **Options:**
 
-  A) Fail to reject it; the data don't establish whether dogs can smell cancer
+  A) Fail to reject it; there's an 11% chance dogs are guessing
   B) Reject it; dogs can smell cancer
-  C) Accept it; dogs can't smell cancer
-  D) Fail to reject it; there's an 11% chance dogs are guessing
+  C) Fail to reject; we can't say whether dogs can do it
+  D) Accept it; dogs can't smell cancer
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 0.11 > 0.05, so we fail to reject. With only 10 dogs the test has little power, so we can't conclude they're guessing either.
 - **Why the wrong options are wrong (tutor only):**
+  A) The p-value isn't P(H0 | data).
   B) p > α.
-  C) Failing to reject ≠ accepting.
-  D) The p-value isn't P(H0 | data).
+  D) Failing to reject ≠ accepting.
 - **Hint:** Compare p with α, then ask what 'fail to reject' does and doesn't mean.
 
 ### ch10-hw-06-v2
@@ -1707,17 +1707,17 @@ Why is it hard to get a significant result with only nine mothers, even if mothe
 
 - **Options:**
 
-  A) With so few trials, only extreme outcomes (8 or 9 correct, or 0 or 1) have p < 0.05, so the test has low power for modest abilities
-  B) The null distribution is wrong
-  C) Two-sided tests can never reject with n = 9
-  D) Small samples always give biased results
+  A) The null distribution is wrong for so few mothers
+  B) Small samples always give biased results
+  C) Only extreme outcomes give p < 0.05, so power is low
+  D) Two-sided tests can never reject with n = 9
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** From the table, P(7 or more) × 2 = 0.18, so you'd need 8 or 9 correct to reject. A mother who's right 70% of the time would usually fall short.
 - **Why the wrong options are wrong (tutor only):**
-  B) The null distribution is correct for guessing.
-  C) 8 or 9 correct would reject.
-  D) Small samples are noisy, not necessarily biased.
+  A) The null distribution is correct for guessing.
+  B) Small samples are noisy, not necessarily biased.
+  D) 8 or 9 correct would reject.
 - **Hint:** Which outcomes would give p < 0.05?
 
 ### ch10-hw-07
@@ -1751,17 +1751,17 @@ A DNA match has a 1-in-a-million chance of occurring for an innocent person. A p
 
 - **Options:**
 
-  A) It confuses P(match | innocent) with P(innocent | match); in a city of millions, several innocent people could match
-  B) DNA evidence is never reliable
-  C) The chance should be 1 in 2 million
-  D) Nothing; that's correct
+  A) It confuses P(match | innocent) with P(innocent | match)
+  B) The chance should be 1 in 2 million, since there are two alleles
+  C) Nothing; that's correct
+  D) DNA evidence is never reliable enough to use in court
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The probability of the evidence given innocence isn't the probability of innocence given the evidence. Same for p-values: P(data | H0) ≠ P(H0 | data).
 - **Why the wrong options are wrong (tutor only):**
-  B) The issue is the logic, not DNA.
-  C) The number isn't the problem.
-  D) This is the classic fallacy.
+  B) The number isn't the problem.
+  C) This is the classic fallacy.
+  D) The issue is the logic, not DNA.
 - **Hint:** Which way does the 'given' go?
 
 ### ch10-hw-07-v2
@@ -1774,17 +1774,17 @@ Which statement commits the prosecutor's fallacy?
 
 - **Options:**
 
-  A) 'p = 0.02, so there's a 2% chance the null hypothesis is true'
-  B) 'If the null were true, data this extreme would occur 2% of the time'
-  C) 'p = 0.02 is below α = 0.05, so we reject the null'
-  D) 'p = 0.02 doesn't tell us the effect size'
+  A) 'p = 0.02 is below α = 0.05, so we reject the null'
+  B) 'p = 0.02 doesn't tell us the effect size'
+  C) 'If the null were true, data this extreme would occur 2% of the time'
+  D) 'p = 0.02, so there's a 2% chance the null hypothesis is true'
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** It flips P(data | H0) into P(H0 | data).
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the correct definition.
-  C) A correct decision rule.
-  D) True and not a fallacy.
+  A) A correct decision rule.
+  B) True and not a fallacy.
+  C) That's the correct definition.
 - **Hint:** Find the one that makes the p-value a probability about the hypothesis.
 
 ## Chapter 11: Shuffling (permutation)
@@ -1935,63 +1935,61 @@ Why is the permutation distribution centered at 0 while the bootstrap distributi
 
 - **Options:**
 
-  A) Shuffling sex labels removes any real sex difference; bootstrapping keeps each bird's sex, so the real difference remains
-  B) Permutation uses fewer replicates
-  C) The bootstrap removes sampling error
+  A) Shuffling removes the sex difference; bootstrapping keeps it
+  B) The bootstrap removes sampling error, so it centers on the truth
+  C) Permutation uses fewer replicates than the bootstrap
   D) It's a coincidence
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Permutation simulates the null (no difference); the bootstrap simulates sampling variation around our estimate.
 - **Why the wrong options are wrong (tutor only):**
-  B) Both use 5000.
-  C) The bootstrap shows sampling error.
+  B) The bootstrap shows sampling error.
+  C) Both use 5000.
   D) It's by design.
 - **Hint:** Which method keeps the association?
 
 ### ch11-book-03
 - **Kind:** Course original
 - **Concepts:** Bootstrap vs permutation
-- **Type:** matching
+- **Type:** MC
 - **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [ch11-book-penguin-boot-perm.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch11-book-penguin-boot-perm.png)
 - **Question:**
 
 Adelie penguins from Torgersen island (23 males, 24 females). Males are 639 g heavier on average. One plot shows 5000 bootstrap replicates of the male − female difference, and the other shows 5000 permutations (blue line = observed 639 g).
 
-1. Which plot is the permutation (null) distribution?
-2. Which plot is the bootstrap distribution?
+Which plot is which?
 
 - **Options:**
 
-  A) Distribution 1
-  B) Distribution 2
+  A) Distribution 1 is the permutation (null) distribution; Distribution 2 is the bootstrap distribution
+  B) Distribution 1 is the bootstrap distribution; Distribution 2 is the permutation (null) distribution
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Distribution 1 is centered at 0 (the null), and the observed 639 g is far outside it, so it's the permutation. Distribution 2 is centered on the observed 639 g, so it's the bootstrap.
 - **Why the wrong options are wrong (tutor only):**
-  Look at the centers: the null value vs the estimate.
+  B) Distribution 1 is centered at 0, the null value. A bootstrap is centered on the estimate (639 g).
 - **Hint:** Where is each one centered?
 
 ### ch11-book-03-v1
 - **Kind:** AI-written version of ch11-book-03
 - **Concepts:** Bootstrap vs permutation
-- **Type:** matching
+- **Type:** MC
 - **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [ch11-var-chin-boot-perm.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch11-var-chin-boot-perm.png)
 - **Question:**
 
 Chinstrap penguins (34 males, 34 females). Males' flippers are 8.2 mm longer on average. One plot shows 5000 bootstrap replicates of the male − female difference, and the other shows 5000 permutations (blue line = observed 8.2 mm).
 
-1. Which plot is the bootstrap distribution?
-2. Which plot is the permutation (null) distribution?
+Which plot is which?
 
 - **Options:**
 
-  A) Distribution 1
-  B) Distribution 2
+  A) Distribution 1 is the permutation (null) distribution; Distribution 2 is the bootstrap distribution
+  B) Distribution 1 is the bootstrap distribution; Distribution 2 is the permutation (null) distribution
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Distribution 1 is centered on the observed 8.2 mm (bootstrap). Distribution 2 is centered at 0, with 8.2 far in the tail (permutation).
 - **Why the wrong options are wrong (tutor only):**
-  Look at the centers: the estimate vs the null value.
+  A) Distribution 1 is centered on the observed 8.2 mm, not 0. A permutation (null) distribution is centered at 0.
 - **Hint:** Where is each centered?
 
 ### ch11-book-03-v2
@@ -2007,17 +2005,17 @@ What does the position of the blue line in Distribution 2 tell you?
 
 - **Options:**
 
-  A) The observed difference is far beyond anything shuffling produced, so p is very small
-  B) The observed difference is typical under the null
-  C) The CI includes 0
-  D) The bootstrap failed
+  A) The observed difference is typical under the null
+  B) The bootstrap failed
+  C) The CI includes 0, so the difference isn't significant
+  D) Shuffling never produced a difference that big, so p is tiny
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The blue line (8.2 mm) lies well past the largest permuted difference (about 6.5 mm in absolute value).
 - **Why the wrong options are wrong (tutor only):**
-  B) It's way out in the tail.
+  A) It's way out in the tail.
+  B) Distribution 2 is the permutation.
   C) Distribution 2 isn't used for a CI.
-  D) Distribution 2 is the permutation.
 - **Hint:** Is 8.2 mm unusual for the null distribution?
 
 ### ch11-book-04
@@ -2033,17 +2031,17 @@ The 2.5th and 97.5th percentiles of the bootstrap distribution are about 458 and
 
 - **Options:**
 
-  A) About 458 to 817 g: a range of plausible values for the true male − female difference
-  B) About 458 to 817 g: 95% of individual males are in this range
-  C) About −450 to 450 g, from the permutation distribution
-  D) 639 ± 1.96 g
+  A) About 458 to 817 g: the range that holds 95% of individual male − female differences
+  B) About 458 to 817 g: plausible values for the true male − female difference
+  C) 639 ± 1.96 g
+  D) About −450 to 450 g, read from the middle 95% of the permutation distribution
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The middle 95% of bootstrap estimates gives the CI: males are plausibly about 460–820 g heavier on average. (The book's answer for the lower bound is 455; random resampling gives slightly different values each run.)
 - **Why the wrong options are wrong (tutor only):**
-  B) The CI is about the mean difference, not individuals.
-  C) The permutation distribution is centered on 0; it's for testing, not CIs.
-  D) That uses the wrong spread.
+  A) The CI is about the mean difference, not individuals.
+  C) That uses the wrong spread.
+  D) The permutation distribution is centered on 0; it's for testing, not CIs.
 - **Hint:** CI = middle 95% of which distribution?
 
 ### ch11-book-04-v1
@@ -2059,17 +2057,17 @@ The 2.5th and 97.5th percentiles of the bootstrap distribution are about 5.5 and
 
 - **Options:**
 
-  A) About 5.5 to 11.1 mm: a range of plausible values for the true male − female difference in mean flipper length
-  B) About 5.5 to 11.1 mm: 95% of males have flippers in this range
-  C) About −6 to 6 mm, from the permutation distribution
-  D) 8.2 ± 1.96 mm
+  A) 8.2 ± 1.96 mm
+  B) About 5.5 to 11.1 mm: the range of 95% of male flipper lengths
+  C) About 5.5 to 11.1 mm: plausible values for the true difference
+  D) About −6 to 6 mm, from the middle of the permutation distribution
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The middle 95% of bootstrap differences gives the CI: males' flippers are plausibly about 5–11 mm longer on average.
 - **Why the wrong options are wrong (tutor only):**
+  A) Uses the wrong spread.
   B) The CI is about the mean difference, not individuals.
-  C) The permutation distribution is for testing.
-  D) Uses the wrong spread.
+  D) The permutation distribution is for testing.
 - **Hint:** Middle 95% of which distribution?
 
 ### ch11-book-04-v2
@@ -2085,17 +2083,17 @@ How would you get the standard error of the sex difference?
 
 - **Options:**
 
-  A) The standard deviation of the 5000 bootstrap differences
-  B) The standard deviation of the 5000 permuted differences
-  C) The mean of the bootstrap differences
-  D) 8.2 / √5000
+  A) 8.2 / √5000
+  B) The mean of the 5000 bootstrap differences
+  C) The SD of the 5000 permuted differences
+  D) The SD of the 5000 bootstrap differences
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The bootstrap distribution approximates the sampling distribution, so its SD is the SE.
 - **Why the wrong options are wrong (tutor only):**
-  B) The permutation SD describes the null world, not the uncertainty around our estimate.
-  C) That's near the estimate itself.
-  D) The number of replicates isn't the sample size.
+  A) The number of replicates isn't the sample size.
+  B) That's near the estimate itself.
+  C) The permutation SD describes the null world, not the uncertainty around our estimate.
 - **Hint:** SE = spread of which distribution?
 
 ### ch11-book-05
@@ -2158,17 +2156,17 @@ Adelie penguins on Torgersen: is bill length correlated with bill depth? Which i
 
 - **Options:**
 
-  A) In the population, the correlation between bill length and depth is 0
-  B) In our sample, r = 0
-  C) The correlation is positive
-  D) Longer bills cause deeper bills
+  A) The correlation is positive
+  B) The population correlation is 0
+  C) Longer bills cause deeper bills
+  D) In our sample of penguins, r = 0
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The null is about the population: no association (ρ = 0).
 - **Why the wrong options are wrong (tutor only):**
-  B) Our sample r is 0.22; hypotheses are about the population.
-  C) An alternative (one-tailed).
-  D) A causal claim, and not a null.
+  A) An alternative (one-tailed).
+  C) A causal claim, and not a null.
+  D) Our sample r is 0.22; hypotheses are about the population.
 - **Hint:** Null = no association in the population.
 
 ### ch11-book-06
@@ -2185,9 +2183,9 @@ In the permutation distribution, none of the 5000 permuted differences was as ex
 - **Options:**
 
   A) p < 3/5000 (about 0.0006); reject the null
-  B) p = 0; the null is impossible
+  B) p = 0, which means the null hypothesis is impossible
   C) p = 0; reject the null
-  D) p > 0.05; fail to reject
+  D) p > 0.05, since nothing was as extreme; fail to reject
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A true p-value is never exactly 0. Zero out of 5000 permutations means p is small but unknown; a common rule of thumb reports p < 3/reps. Either way, we reject the null.
@@ -2210,9 +2208,9 @@ None of the 5000 permuted differences was as extreme as 8.2 mm (the largest in a
 - **Options:**
 
   A) p < 3/5000 (about 0.0006); reject the null
-  B) p = 0; the null is impossible
+  B) p = 0, which means the null is impossible
   C) p = 0; reject the null
-  D) p ≈ 1; fail to reject
+  D) p ≈ 1, since nothing was as extreme; fail to reject
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Zero out of 5000 means p is very small but not exactly 0; report it as below a bound such as 3/reps.
@@ -2231,17 +2229,17 @@ A permutation test with 1000 shuffles finds 0 permuted statistics as extreme as 
 
 - **Options:**
 
-  A) Report p < 0.003 (3/1000), or run more permutations
-  B) p = 0.000 is correct
-  C) Report p = 1
-  D) Report p = 0.05
+  A) p = 0.000 is correct, since none were as extreme
+  B) Report p < 0.003 (3/1000), or run more permutations
+  C) Report p = 0.05, the usual cutoff
+  D) Report p = 1
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With 1000 shuffles you can't distinguish p = 0.0001 from p = 0.0005; report a bound.
 - **Why the wrong options are wrong (tutor only):**
-  B) p-values are never exactly 0.
-  C) The result is extreme, not typical.
-  D) There's no reason to use 0.05.
+  A) p-values are never exactly 0.
+  C) There's no reason to use 0.05.
+  D) The result is extreme, not typical.
 - **Hint:** What's the smallest p you can resolve with 1000 shuffles?
 
 ### ch11-chime-01
@@ -2297,17 +2295,17 @@ A permutation test finds a significant difference in songbird size between two f
 
 - **Options:**
 
-  A) Biased sampling: the permutation test can't fix how the data were collected
-  B) Not enough permutations
-  C) Permutation tests require normal data
-  D) No problem
+  A) Not enough permutations were run
+  B) Biased sampling, which permutation can't fix
+  C) No problem
+  D) Permutation tests require normally distributed data
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Permutation tests assume unbiased sampling. A difference created by the nets would look 'significant' too.
 - **Why the wrong options are wrong (tutor only):**
-  B) More shuffles won't remove bias.
-  C) Permutation doesn't assume normality.
-  D) The bias could explain the result.
+  A) More shuffles won't remove bias.
+  C) The bias could explain the result.
+  D) Permutation doesn't assume normality.
 - **Hint:** Can any test fix biased data?
 
 ### ch11-chime-02
@@ -2341,17 +2339,17 @@ What does each permuted replicate represent?
 
 - **Options:**
 
-  A) A dataset like ours in which any real association has been removed: what we might see if the null were true
-  B) A new sample from the population
-  C) A dataset with the outliers removed
-  D) A resample with replacement
+  A) A resample of our data, drawn with replacement
+  B) Data like ours with any real association removed
+  C) A new sample from the population
+  D) A dataset with the outliers removed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Shuffling breaks the link between variables, so each replicate is one possible 'null world' version of our data.
 - **Why the wrong options are wrong (tutor only):**
-  B) No new data are collected.
-  C) All values are kept.
-  D) That's the bootstrap.
+  A) That's the bootstrap.
+  C) No new data are collected.
+  D) All values are kept.
 - **Hint:** What does shuffling destroy?
 
 ### ch11-chime-02-v2
@@ -2364,7 +2362,7 @@ After building a permutation null distribution, how is the p-value found?
 
 - **Options:**
 
-  A) The proportion of permuted statistics as or more extreme than the observed statistic
+  A) The proportion as or more extreme than observed
   B) The SD of the permuted statistics
   C) The 2.5th and 97.5th percentiles of the permuted statistics
   D) The mean of the permuted statistics
@@ -2437,15 +2435,15 @@ Where is each distribution centered?
 
 - **Options:**
 
-  A) Bootstrap: near the observed estimate; permutation: near the null value (e.g., 0)
-  B) Both near 0
-  C) Both near the observed estimate
-  D) Bootstrap near 0; permutation near the estimate
+  A) Both near 0
+  B) Both near the observed estimate
+  C) Bootstrap near 0; permutation near the estimate
+  D) Bootstrap: the estimate; permutation: the null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The bootstrap keeps the association, so it centers on our estimate. Permutation destroys it, so it centers on the null value.
 - **Why the wrong options are wrong (tutor only):**
-  B)–D) Mix up which method keeps the association.
+  A)–C) Mix up which method keeps the association.
 - **Hint:** Which one keeps the association?
 
 ### ch11-chime-04
@@ -2508,16 +2506,16 @@ In a line-up of 20 panels (1 real, 19 shuffled), the real panel can't be disting
 
 - **Options:**
 
-  A) The real data look like what the null produces, so the p-value is probably not small and we likely wouldn't reject the null
+  A) The null is true, since nobody could find the real panel
   B) The real data show a strong effect
-  C) The null is true
+  C) The data look like the null's, so p probably isn't small
   D) The shuffling was done wrong
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** If data look typical of shuffled data, chance alone can easily explain them. That's not proof the null is true, just no evidence against it.
 - **Why the wrong options are wrong (tutor only):**
+  A) Failing to find evidence isn't proof.
   B) A strong effect would stand out.
-  C) Failing to find evidence isn't proof.
   D) This is what happens when there's little or no effect.
 - **Hint:** What would a weak or absent effect look like?
 
@@ -2534,16 +2532,16 @@ Suppose you (and most of the class) could pick out the real data from the line-u
 
 - **Options:**
 
-  A) p is about 1/20 = 0.05 or less: if the null were true, the real data would be just one more random-looking panel. We reject the null, meaning the null rarely generates data like ours
-  B) p is about 0.95; we accept the null
-  C) p is about 0.05, so the null is false
-  D) We can't say anything about the p-value from a line-up
+  A) p is about 19/20 = 0.95, because 19 of the 20 panels were shuffled; we accept the null
+  B) p is about 0.05, so we have shown that the null hypothesis is false
+  C) p ≲ 1/20 = 0.05: under the null, the real data would look like one more random panel. Reject the null
+  D) We can't say anything about a p-value from a line-up, since no test statistic was calculated
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** If the null were true, the real panel would look like any shuffled panel, so you'd pick it only 1 time in 20 by luck. Picking it reliably means data like ours are rare under the null (p ≲ 0.05). That's evidence against the null, but it doesn't prove the null false.
 - **Why the wrong options are wrong (tutor only):**
-  B) Picking it out means it's unusual, not typical.
-  C) Rejecting ≠ knowing the null is false.
+  A) Picking it out means it's unusual, not typical.
+  B) Rejecting ≠ knowing the null is false.
   D) This is exactly the logic of a permutation test.
 - **Hint:** If the null were true, what's the chance of picking the real panel by luck?
 
@@ -2559,7 +2557,7 @@ In a line-up with 1 real panel and 99 shuffled panels, you correctly pick the re
 
   A) 1/100 = 0.01
   B) 1/20 = 0.05
-  C) 99/100
+  C) 99/100, since 99 panels are shuffled
   D) 0
 
 - **Answer (tutor only):** A
@@ -2583,16 +2581,16 @@ If most of the class picks panel 6 correctly, what can we say?
 
 - **Options:**
 
-  A) Data like ours are rare under the null (p ≲ 0.05): evidence that flipper length differs by sex, though not proof
-  B) The null is definitely false
-  C) p ≈ 0.95
+  A) The null is definitely false
+  B) p ≈ 0.95, since 19 of 20 panels are shuffled
+  C) p ≲ 0.05: evidence, not proof, of a sex difference
   D) Nothing; line-ups are just for fun
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Picking the real panel reliably means it doesn't look like a shuffled one: the logic of a permutation test.
 - **Why the wrong options are wrong (tutor only):**
-  B) Evidence isn't proof.
-  C) Standing out means the data are unusual under the null.
+  A) Evidence isn't proof.
+  B) Standing out means the data are unusual under the null.
   D) The line-up is a visual permutation test.
 - **Hint:** If the null were true, how often would you pick it?
 
@@ -2653,16 +2651,16 @@ In a permutation test of whether mean growth differs between two fertilizers, wh
 
 - **Options:**
 
-  A) The set of growth values (each used exactly once), so the overall mean is unchanged
-  B) The mean of each fertilizer group
+  A) The mean growth of each fertilizer group
+  B) Which plants get which fertilizer label
   C) The difference between group means
-  D) Which plants get which fertilizer label
+  D) The set of growth values, so the overall mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Permutation only reshuffles labels; the same numbers appear in every replicate. Group means and their difference change because the labels move.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) These change as labels are shuffled; that variation forms the null distribution.
-  D) That's exactly what gets shuffled.
+  A) and C) These change as labels are shuffled; that variation forms the null distribution.
+  B) That's exactly what gets shuffled.
 - **Hint:** What does shuffling move, and what does it leave alone?
 
 ### ch11-hw-02
@@ -2716,17 +2714,17 @@ What is the main goal of bootstrapping?
 
 - **Options:**
 
-  A) To estimate the uncertainty in an estimate (an SE or CI) by mimicking repeated sampling
-  B) To test a null hypothesis by breaking associations
-  C) To remove bias from a sample
-  D) To increase the sample size
+  A) To increase the sample size by reusing the data
+  B) To remove bias from a sample
+  C) To test a null hypothesis by breaking associations
+  D) To estimate uncertainty (an SE or CI)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The bootstrap approximates the sampling distribution, so its spread gives the SE and its percentiles a CI.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's permutation.
-  C) Bias in the sample stays in every resample.
-  D) Resamples are the same size as the data.
+  A) Resamples are the same size as the data.
+  B) Bias in the sample stays in every resample.
+  C) That's permutation.
 - **Hint:** Uncertainty or hypothesis test?
 
 ### ch11-hw-03
@@ -2783,17 +2781,17 @@ Why does shuffling the explanatory variable relative to the response produce a n
 
 - **Options:**
 
-  A) Shuffling destroys any real association, so the statistics from shuffled data show what chance alone produces when there's no association
-  B) Shuffling removes sampling error
-  C) Shuffling makes the data normal
-  D) Shuffling increases the sample size
+  A) Shuffling breaks any real association, leaving only chance
+  B) Shuffling removes sampling error from the statistic
+  C) Shuffling increases the sample size
+  D) Shuffling makes the data normally distributed
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** After shuffling, any remaining pattern is coincidence. Repeating many times shows the range of statistics expected under 'no association'.
 - **Why the wrong options are wrong (tutor only):**
   B) Sampling error remains; it's what the null distribution displays.
-  C) Shuffling doesn't change the values' distribution.
-  D) n stays the same.
+  C) n stays the same.
+  D) Shuffling doesn't change the values' distribution.
 - **Hint:** What's left after you break the association?
 
 ### ch11-hw-04
@@ -2833,15 +2831,15 @@ Looking at the scatterplot (with best-fit line), it looks like:
 
 - **Options:**
 
-  A) Penguins with longer bills tend to have slightly deeper bills, but the association is weak and noisy
-  B) Penguins with longer bills have shallower bills
-  C) A strong, tight positive association
+  A) A strong, tight positive association
+  B) Longer bills are slightly deeper; a weak, noisy association
+  C) Penguins with longer bills tend to have shallower bills
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The line tilts gently upward, but the points scatter widely around it (r = 0.22).
 - **Why the wrong options are wrong (tutor only):**
-  B) The slope is positive.
-  C) The points are far from the line.
+  A) The points are far from the line.
+  C) The slope is positive.
 - **Hint:** Direction from the line; strength from the scatter.
 
 ### ch11-hw-04-v2
@@ -2854,17 +2852,17 @@ Two scatterplots both have a positive best-fit line. In Plot 1 the points hug th
 
 - **Options:**
 
-  A) Plot 1 has a stronger correlation (r closer to 1)
-  B) Plot 2 has a stronger correlation
-  C) Both have the same correlation because both lines slope up
-  D) The steeper line always has the larger r
+  A) Plot 2 has a stronger correlation
+  B) The steeper line always has the larger r
+  C) Plot 1 has a stronger correlation (r closer to 1)
+  D) Both have the same correlation because both lines slope up
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Correlation measures how tightly points follow a line, not how steep it is.
 - **Why the wrong options are wrong (tutor only):**
-  B) Wide scatter means weaker correlation.
-  C) Direction alone doesn't set strength.
-  D) Slope and r are different things.
+  A) Wide scatter means weaker correlation.
+  B) Slope and r are different things.
+  D) Direction alone doesn't set strength.
 - **Hint:** r measures tightness.
 
 ### ch11-hw-05
@@ -2932,16 +2930,16 @@ The 95% CI includes 0. What does that tell us?
 
 - **Options:**
 
-  A) No association is among the plausible values, so the data don't clearly establish a correlation (a test would not reject at α = 0.05)
-  B) The correlation is exactly 0
-  C) The correlation is definitely positive
+  A) The correlation is exactly 0
+  B) The correlation is definitely positive, since r = 0.22
+  C) Zero is plausible, so a correlation isn't established
   D) The bootstrap failed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** A CI that includes the null value matches a non-significant test. The interval also includes moderate positive values, so we can't say there's no association either.
 - **Why the wrong options are wrong (tutor only):**
-  B) 0 is plausible, but so are values up to 0.5.
-  C) Negative values are also plausible.
+  A) 0 is plausible, but so are values up to 0.5.
+  B) Negative values are also plausible.
   D) Wide intervals are normal with n = 47.
 - **Hint:** Is the null value inside the CI?
 
@@ -2978,14 +2976,14 @@ Adelie penguins on Torgersen (n = 47): the correlation between bill length and b
 
 - **Options:**
 
-  A) If we repeated this study many times and built a 95% CI each time, about 95% of those intervals would contain the true correlation
-  B) There's a 95% probability the true correlation is between −0.11 and 0.50
+  A) There's a 95% probability the true correlation is between −0.11 and 0.50
+  B) About 95% of intervals built this way contain the true r
   C) 95% of penguins have correlations in this range
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The 95% is the method's long-run success rate.
 - **Why the wrong options are wrong (tutor only):**
-  B) This interval either contains the truth or doesn't.
+  A) This interval either contains the truth or doesn't.
   C) Correlation describes the population, not individual birds.
 - **Hint:** Where does the 95% live?
 
@@ -3001,15 +2999,15 @@ Adelie penguins on Torgersen (n = 47): r = 0.22, 95% CI about −0.11 to 0.50. I
 
   A) It would be narrower
   B) It would be wider
-  C) It would stay the same width
-  D) It would be guaranteed to exclude 0
+  C) It would be guaranteed to exclude 0
+  D) It would stay the same width
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** More data shrinks the SE, so the interval narrows. Whether it then excludes 0 depends on the true correlation.
 - **Why the wrong options are wrong (tutor only):**
   B) More data means less uncertainty.
-  C) Width depends on n.
-  D) If the true r were near 0, it could still include 0.
+  C) If the true r were near 0, it could still include 0.
+  D) Width depends on n.
 - **Hint:** What does a bigger n do to uncertainty?
 
 ### ch11-hw-07
@@ -3051,7 +3049,7 @@ Using Panel B: about 14% of permuted correlations are as or more extreme (in eit
 
 - **Options:**
 
-  A) p ≈ 0.14; fail to reject the null (but this doesn't show there's no association)
+  A) p ≈ 0.14; fail to reject the null
   B) p ≈ 0.14; reject the null
   C) p ≈ 0.86; fail to reject
   D) p ≈ 0.14; there's a 14% chance there's no association
@@ -3120,17 +3118,17 @@ A researcher tests whether a caffeine pill changes reaction time. Each of 20 peo
 
 - **Options:**
 
-  A) Within each person, randomly swap (or keep) the caffeine and placebo labels
-  B) Shuffle all 40 labels across everyone
+  A) Shuffle all 40 labels across everyone
+  B) This design can't be permuted, because each person is tested twice
   C) Shuffle the people's IDs
-  D) This design can't be permuted
+  D) Swap (or keep) the two labels within each person
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Measurements from the same person aren't independent. Shuffling labels within each person breaks the treatment link while keeping each person's pair together.
 - **Why the wrong options are wrong (tutor only):**
-  B) Ignores the pairing and mixes person-to-person differences into the null.
+  A) Ignores the pairing and mixes person-to-person differences into the null.
+  B) Paired designs can be permuted within pairs.
   C) Person isn't the treatment.
-  D) Paired designs can be permuted within pairs.
 - **Hint:** Keep the structure; shuffle only the treatment.
 
 ### ch11-hw-08-v2
@@ -3143,16 +3141,16 @@ Students measure leaf size on sun vs shade branches of 8 trees (several leaves p
 
 - **Options:**
 
-  A) Leaves on the same tree are not independent; shuffling across trees mixes tree-to-tree differences into the null and misrepresents the design
-  B) There are too many leaves to shuffle
-  C) Sun and shade labels can't be shuffled
+  A) Sun and shade labels can't be shuffled
+  B) There are too many leaves to shuffle them all
+  C) Leaves on the same tree aren't independent
   D) It isn't a problem
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Shuffle within each tree instead, so the null keeps the tree structure.
 - **Why the wrong options are wrong (tutor only):**
+  A) They can, just within trees.
   B) Number of leaves isn't the issue.
-  C) They can, just within trees.
   D) Ignoring the trees violates independence.
 - **Hint:** Which leaves are related to each other?
 
@@ -3169,17 +3167,17 @@ The real data are in panel 14. Most people can't pick it out, and many guess pan
 
 - **Options:**
 
-  A) The real difference looks like the differences shuffling alone produces, so the p-value is probably large and we'd fail to reject the null. That isn't proof that the islands' penguins weigh the same
+  A) The shuffling was done wrong, because the real data should always stand out
   B) Penguins on the two islands have exactly the same mean body mass
-  C) Panel 13 shows that there is a real difference between the islands
-  D) The shuffling was done wrong, because the real data should always stand out
+  C) Panel 13 shows that there is a real difference between the islands, not panel 14
+  D) It looks like what shuffling produces: p is probably large. Not proof the islands are the same
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** If the real panel blends in with the shuffled ones, chance alone easily produces data like ours. Here the real difference is about 21 g, and a permutation test gives p ≈ 0.8. We fail to reject the null, but the data are also consistent with a small difference, so we can't conclude there is none.
 - **Why the wrong options are wrong (tutor only):**
+  A) The real data stand out only when there is a strong association; with no real difference, they shouldn't.
   B) Failing to reject the null isn't evidence that the means are exactly equal.
   C) Panel 13 is a shuffle. With 19 shuffles, one of them will look a bit different by chance alone.
-  D) The real data stand out only when there is a strong association; with no real difference, they shouldn't.
 - **Hint:** If island didn't matter, would the real panel look any different from a shuffled one?
 
 ### ch11-new-02
@@ -3239,15 +3237,15 @@ Random sampling (random selection) means the researcher:
 
 - **Options:**
 
-  A) Chooses which individuals from the population are included in the study at random
-  B) Randomly assigns study individuals to treatments
-  C) Randomly decides which variables to measure
+  A) Randomly assigns study individuals to treatments
+  B) Randomly decides which variables to measure
+  C) Picks who from the population is in the study at random
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Random sampling is about who gets into the study; it helps results generalize to the population. Random assignment is about who gets which treatment.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's random assignment.
-  C) Not a design principle.
+  A) That's random assignment.
+  B) Not a design principle.
 - **Hint:** Into the study, or into a treatment?
 
 ### ch12-book-01-v2
@@ -3260,17 +3258,17 @@ A study recruits volunteers from one university (not random sampling) but flips 
 
 - **Options:**
 
-  A) A causal claim about the technique for people like these volunteers, but generalizing to everyone is less certain
-  B) Generalization to all people, but no causal claim
-  C) Neither causation nor generalization
-  D) Both, fully
+  A) A causal claim, for people like these volunteers
+  B) Both, fully, since a coin decided the treatment
+  C) Generalization to all people, but no causal claim
+  D) Neither causation nor generalization
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Random assignment supports causation (internal validity); random sampling supports generalization (external validity). Here only the first was done.
 - **Why the wrong options are wrong (tutor only):**
-  B) Backwards.
-  C) The coin flip supports causal inference.
-  D) The sample wasn't random.
+  B) The sample wasn't random.
+  C) Backwards.
+  D) The coin flip supports causal inference.
 - **Hint:** Which randomization was done, and what does it buy?
 
 ### ch12-book-02
@@ -3306,17 +3304,17 @@ A survey finds that people who drink more green tea have slightly lower blood pr
 
 - **Options:**
 
-  A) In an observational study we've measured an association, not an effect; tea drinkers may differ in many other ways
-  B) 3 mmHg is too small to be an effect
+  A) It isn't misleading
+  B) 3 mmHg is too small to count as an effect
   C) Effects can only be measured as correlations
-  D) It isn't misleading
+  D) It's an association; tea drinkers may differ in other ways
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 'Effect' implies causation. Without random assignment, confounders (diet, exercise, income) could create the difference.
 - **Why the wrong options are wrong (tutor only):**
+  A) The wording implies a causal claim the design can't support.
   B) Size isn't the problem; causality is.
   C) Effects can be expressed many ways.
-  D) The wording implies a causal claim the design can't support.
 - **Hint:** Was green tea randomly assigned?
 
 ### ch12-book-02-v2
@@ -3329,16 +3327,16 @@ When is it most appropriate to call a difference in means an 'effect size'?
 
 - **Options:**
 
-  A) When the explanatory variable was randomly assigned in an experiment
-  B) Whenever the p-value is below 0.05
-  C) Whenever the difference is large
+  A) Whenever the difference is large enough to matter
+  B) When the explanatory variable was randomly assigned
+  C) Whenever the p-value is below 0.05
   D) Never
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Random assignment lets us attribute the difference to the treatment, so 'effect' is justified.
 - **Why the wrong options are wrong (tutor only):**
-  B) Significance doesn't establish causation.
-  C) Big associations can still be confounded.
+  A) Big associations can still be confounded.
+  C) Significance doesn't establish causation.
   D) It's fine for well-designed experiments.
 - **Hint:** What design justifies a causal word?
 
@@ -3373,15 +3371,15 @@ Which of these is a SCIENTIFIC model (rather than a statistical one)?
 
 - **Options:**
 
-  A) Birds with deeper beaks can crack harder seeds, so they survive droughts better
+  A) Beak depth is normally distributed with mean 9.5 mm
   B) Survival = 0.2 + 0.05 × beak depth + error
-  C) Beak depth is normally distributed with mean 9.5 mm
-  D) The correlation between beak depth and survival is 0.3
+  C) The correlation between beak depth and survival is 0.3
+  D) Deeper-beaked birds crack harder seeds, so survive droughts
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A scientific model proposes a mechanism. B–D describe patterns in data mathematically.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) These are statistical descriptions of data.
+  B), A) and C) These are statistical descriptions of data.
 - **Hint:** Which one explains how the world works?
 
 ### ch12-book-03-v2
@@ -3394,17 +3392,17 @@ A statistical model shows that hybrid seed increases with petal area. Why doesn'
 
 - **Options:**
 
-  A) Other mechanisms (e.g., a gene affecting both petal size and mating) could produce the same pattern; the statistical pattern is consistent with the hypothesis but doesn't prove it
-  B) Statistical models are always wrong
-  C) Scientific models can't be tested
-  D) It does confirm it
+  A) Scientific models can't be tested
+  B) It does confirm it
+  C) Other mechanisms could produce the same pattern
+  D) Statistical models are always wrong, so they can't confirm anything
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Many scientific models can predict the same statistical pattern. Distinguishing them needs targeted tests (e.g., experiments with pollinators).
 - **Why the wrong options are wrong (tutor only):**
-  B) Statistical models are useful descriptions.
-  C) They can be tested through their predictions.
-  D) A pattern is consistent with, not proof of, a mechanism.
+  A) They can be tested through their predictions.
+  B) A pattern is consistent with, not proof of, a mechanism.
+  D) Statistical models are useful descriptions.
 - **Hint:** Could another mechanism produce the same pattern?
 
 ### ch12-book-04
@@ -3440,17 +3438,17 @@ A researcher tests two fertilizers on 6 farms, applying both fertilizers to plot
 
 - **Options:**
 
-  A) Comparing fertilizers within each farm removes farm-to-farm variation, so the fertilizer difference is estimated more precisely
-  B) It eliminates the need for randomization
-  C) It lets results generalize to all farms worldwide
-  D) It removes sampling error
+  A) Within-farm comparisons remove farm-to-farm variation
+  B) It lets the results generalize to all farms worldwide
+  C) It removes sampling error
+  D) It eliminates the need to randomize plots within farms
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Blocking means each comparison happens under similar conditions, reducing noise unrelated to the treatment.
 - **Why the wrong options are wrong (tutor only):**
-  B) Treatments are still randomized within farms.
-  C) Generalization depends on which farms were sampled.
-  D) It reduces noise but can't remove sampling error.
+  B) Generalization depends on which farms were sampled.
+  C) It reduces noise but can't remove sampling error.
+  D) Treatments are still randomized within farms.
 - **Hint:** What variation is taken out of the comparison?
 
 ### ch12-book-04-v2
@@ -3463,17 +3461,17 @@ To test a new drug, researchers form pairs of patients matched on age and diseas
 
 - **Options:**
 
-  A) Comparing similar patients reduces variability from age and severity, increasing precision and power
-  B) Matching replaces random assignment
-  C) Matching guarantees the drug works
-  D) Matching increases the sample size
+  A) Matching guarantees the drug works
+  B) Matching increases the sample size
+  C) It reduces variability from age and severity
+  D) Matching replaces the need for random assignment
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Within-pair comparisons cancel out shared differences, so the drug effect stands out more clearly. Randomizing within pairs still protects against confounding.
 - **Why the wrong options are wrong (tutor only):**
-  B) The coin flip is still needed.
-  C) Design can't guarantee a result.
-  D) n is unchanged.
+  A) Design can't guarantee a result.
+  B) n is unchanged.
+  D) The coin flip is still needed.
 - **Hint:** What do matched pairs share?
 
 ### ch12-book-05
@@ -3524,17 +3522,17 @@ How does statistically adjusting for covariates (e.g., including age in a model)
 
 - **Options:**
 
-  A) Adjustment only handles the covariates you measured and modeled correctly; random assignment balances all of them by design
-  B) They're the same thing
-  C) Adjustment is always better than random assignment
-  D) Random assignment only works for measured covariates
+  A) Adjustment is always better than random assignment
+  B) Random assignment only works for measured covariates
+  C) Adjustment covers only measured covariates; randomization covers all
+  D) They're the same thing, done at different stages
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Unmeasured confounders can still bias an adjusted observational analysis, but not a randomized experiment (on average).
 - **Why the wrong options are wrong (tutor only):**
-  B) One is design, the other is modeling.
-  C) Adjustment can't fix unmeasured confounding.
-  D) Backwards.
+  A) Adjustment can't fix unmeasured confounding.
+  B) Backwards.
+  D) One is design, the other is modeling.
 - **Hint:** What about confounders you never measured?
 
 ### ch12-book-06
@@ -3595,16 +3593,16 @@ A small experiment (n = 8 per group) finds a non-significant effect of a trainin
 
 - **Options:**
 
-  A) The study is inconclusive: effects from slightly negative to large are consistent with the data; a larger study is needed
-  B) The training program doesn't work
-  C) The training program clearly works
+  A) The training program clearly works
+  B) Inconclusive: small harm to large benefit are all plausible
+  C) The training program doesn't work, since p > 0.05
   D) The CI proves no effect
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The CI includes 0 but also big improvements. The study lacked precision to tell.
 - **Why the wrong options are wrong (tutor only):**
-  B) Non-significant ≠ no effect.
-  C) The CI includes 0.
+  A) The CI includes 0.
+  C) Non-significant ≠ no effect.
   D) A CI including 0 doesn't prove 0.
 - **Hint:** Look at the whole CI, not just whether it includes 0.
 
@@ -3645,17 +3643,17 @@ Landscapers who spray Weedex also handle fuels, fertilizers and other pesticides
 
 - **Options:**
 
-  A) It's unclear whether Weedex, the other chemicals, or a combination is responsible for the higher disease rate
+  A) Weedex, other chemicals, or a mix could be responsible
   B) Landscapers aren't representative of homeowners
-  C) Disease diagnoses might be inaccurate
-  D) The sample is too small
+  C) The sample is too small
+  D) Disease diagnoses might be inaccurate in landscapers
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Co-exposure confounds the comparison: Weedex use travels with other exposures, so we can't isolate its role.
 - **Why the wrong options are wrong (tutor only):**
   B) That's external validity.
-  C) That's measurement.
-  D) That's precision/power.
+  C) That's precision/power.
+  D) That's measurement.
 - **Hint:** Internal validity = can we attribute the cause?
 
 ### ch12-book-07-v2
@@ -3668,17 +3666,17 @@ An observational study finds that people who own dogs have lower rates of heart 
 
 - **Options:**
 
-  A) Healthier, more active people may be more likely to get dogs in the first place
-  B) The study only included people from one country
-  C) Heart disease is rare
-  D) Some owners had cats too
+  A) The study only included people from one country
+  B) Healthier people may be more likely to get dogs
+  C) Some owners had cats too
+  D) Heart disease is rare
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** If fitness affects both dog ownership and heart disease, it confounds the association (or the causation runs in reverse).
 - **Why the wrong options are wrong (tutor only):**
-  B) That's about generalization (external validity).
-  C) Rarity affects power.
-  D) Not the main confound.
+  A) That's about generalization (external validity).
+  C) Not the main confound.
+  D) Rarity affects power.
 - **Hint:** Could something cause both dog ownership and heart health?
 
 ### ch12-book-08
@@ -3718,17 +3716,17 @@ The evidence comes from landscapers with heavy daily exposure, but most complain
 
 - **Options:**
 
-  A) It's unclear whether results from years of heavy professional exposure apply to occasional home use
-  B) Homeowners weren't randomly assigned to use Weedex
+  A) Heavy professional exposure may not reflect home use
+  B) Landscapers are a larger group
   C) Homeowners may misremember how much they used
-  D) Landscapers are a larger group
+  D) Homeowners weren't randomly assigned to use Weedex
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** External validity asks whether findings from one group or setting generalize to another.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's about causal inference.
+  B) Size affects precision, not generalization.
   C) That's measurement.
-  D) Size affects precision, not generalization.
+  D) That's about causal inference.
 - **Hint:** Do results transfer from one population to another?
 
 ### ch12-book-08-v2
@@ -3741,17 +3739,17 @@ A drug is tested in a randomized trial of adults aged 30–50. A doctor wants to
 
 - **Options:**
 
-  A) External validity: the trial's results may not generalize to much older patients
+  A) The trial had no control group
   B) Internal validity: the trial couldn't show causation
-  C) The trial had no control group
-  D) No concern
+  C) No concern
+  D) External validity: results may not apply to 85-year-olds
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Randomization gives internal validity for the trial population, but older patients may respond differently.
 - **Why the wrong options are wrong (tutor only):**
+  A) Not stated.
   B) Randomization supports causation within the trial.
-  C) Not stated.
-  D) Age could change how the drug works.
+  C) Age could change how the drug works.
 - **Hint:** Does the trial population match the patient?
 
 ### ch12-book-09
@@ -3791,17 +3789,17 @@ In lab studies, rats were fed Weedex at 500 times the dose a landscaper would ab
 
 - **Options:**
 
-  A) An effect at an extreme dose doesn't necessarily tell you what happens at realistic exposures
+  A) An extreme dose may not reflect realistic exposures
   B) Rats can never tell us anything about humans
-  C) The rats weren't randomly assigned
-  D) Kidney damage can't be measured in rats
+  C) Kidney damage can't be measured in rats
+  D) The rats weren't randomly assigned to doses
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** High doses help detect rare effects with few animals, but there's a gap between those conditions and real-world exposure.
 - **Why the wrong options are wrong (tutor only):**
   B) Too strong.
-  C) Not indicated.
-  D) Not the issue.
+  C) Not the issue.
+  D) Not indicated.
 - **Hint:** Lab conditions vs real-world conditions.
 
 ### ch12-book-09-v2
@@ -3814,16 +3812,16 @@ A study finds that a fish species avoids predators in small aquarium tanks with 
 
 - **Options:**
 
-  A) Fish behavior in small, brightly lit tanks may differ from behavior in natural rivers
-  B) The fish weren't randomly sampled from the river
-  C) The study had too few fish
+  A) The fish weren't randomly sampled from the river
+  B) The study had too few fish to detect avoidance
+  C) Behavior in bright tanks may differ from in rivers
   D) Fish can't be studied experimentally
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Ecological validity asks whether the experimental conditions resemble the natural situation of interest.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's external validity / sampling.
-  C) That's power.
+  A) That's external validity / sampling.
+  B) That's power.
   D) They can.
 - **Hint:** Do the lab conditions resemble nature?
 
@@ -3891,16 +3889,16 @@ A restaurant estimates customer satisfaction from online reviews. Why might this
 
 - **Options:**
 
-  A) People with very good or very bad experiences are more likely to write reviews, so reviewers aren't representative
+  A) Reviews are always fake
   B) Online reviews have too much sampling error
-  C) Reviews are always fake
-  D) There's no bias with many reviews
+  C) Very happy or unhappy customers review more often
+  D) There's no bias, as long as there are many reviews
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Self-selected samples overrepresent strong opinions. More reviews don't fix the bias.
 - **Why the wrong options are wrong (tutor only):**
+  A) Too strong.
   B) The main problem is bias, not chance.
-  C) Too strong.
   D) Bias doesn't shrink with n.
 - **Hint:** Who chooses to write a review?
 
@@ -3941,17 +3939,17 @@ Suppose one state bans Weedex for home use while a neighboring state doesn't, an
 
 - **Options:**
 
-  A) Disease among homeowners should drop more in the banning state than in the neighboring state
-  B) Disease should drop equally in both states
+  A) No prediction is possible
+  B) Homeowner disease drops more in the banning state
   C) Disease should rise among landscapers in the banning state
-  D) No prediction is possible
+  D) Disease should drop equally in both states
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** This natural experiment changes exposure in one group but not a comparable one. A larger drop where the ban applies supports a causal role; equal drops suggest something else.
 - **Why the wrong options are wrong (tutor only):**
-  B) Equal drops would point to another cause.
+  A) The comparison makes a clear prediction.
   C) Landscapers' exposure didn't change.
-  D) The comparison makes a clear prediction.
+  D) Equal drops would point to another cause.
 - **Hint:** Compare the change where exposure changed with where it didn't.
 
 ### ch12-book-11-v2
@@ -3964,17 +3962,17 @@ A city adds bike lanes on half its streets (chosen by a construction schedule un
 
 - **Options:**
 
-  A) The extra drop on bike-lane streets is evidence the lanes reduced accidents, since the other streets account for city-wide trends
-  B) The 30% drop proves bike lanes work, regardless of the other streets
+  A) No conclusion is possible without randomization
+  B) The extra drop on bike-lane streets suggests lanes helped
   C) Since accidents dropped everywhere, the lanes did nothing
-  D) No conclusion is possible without randomization
+  D) The 30% drop proves bike lanes work, regardless of the other streets
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The untreated streets serve as a comparison for background trends. The difference in changes (about 25 points) is the best estimate of the lanes' effect.
 - **Why the wrong options are wrong (tutor only):**
-  B) Ignores the 5% background drop.
+  A) Natural experiments can support causal inference when assignment is unrelated to the outcome.
   C) The drop was much bigger on lane streets.
-  D) Natural experiments can support causal inference when assignment is unrelated to the outcome.
+  D) Ignores the 5% background drop.
 - **Hint:** Compare the changes, not just one change.
 
 ### ch12-hw-01
@@ -4008,17 +4006,17 @@ Why is a randomized experiment better than an observational study for inferring 
 
 - **Options:**
 
-  A) Random assignment makes treatment groups alike on average in everything except the treatment, so differences can be attributed to it (plus chance)
-  B) Experiments have larger sample sizes
-  C) Experiments never have sampling error
-  D) Observational studies can't detect associations
+  A) Experiments have larger sample sizes
+  B) Random assignment makes groups alike except for the treatment
+  C) Observational studies can't detect associations
+  D) Experiments never have sampling error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Random assignment breaks links between treatment and confounders.
 - **Why the wrong options are wrong (tutor only):**
-  B) Not necessarily.
-  C) Sampling error is always present.
-  D) They detect associations fine; they struggle with causation.
+  A) Not necessarily.
+  C) They detect associations fine; they struggle with causation.
+  D) Sampling error is always present.
 - **Hint:** What does random assignment balance?
 
 ### ch12-hw-01-v2
@@ -4031,17 +4029,17 @@ When might researchers rely on observational studies to investigate causes?
 
 - **Options:**
 
-  A) When an experiment would be unethical or impossible (e.g., assigning people to smoke)
-  B) When they want stronger causal evidence than an experiment provides
-  C) Never
-  D) Only when sample sizes are small
+  A) Only when sample sizes are small
+  B) When they want stronger causal evidence than an experiment gives
+  C) When an experiment would be unethical or impossible
+  D) Never
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Observational studies are essential when we can't manipulate the cause. Careful designs and multiple lines of evidence can still build a causal case.
 - **Why the wrong options are wrong (tutor only):**
+  A) Sample size isn't the reason.
   B) Experiments give stronger causal evidence.
-  C) Much important science is observational.
-  D) Sample size isn't the reason.
+  D) Much important science is observational.
 - **Hint:** When can't you randomly assign a treatment?
 
 ### ch12-hw-02
@@ -4075,17 +4073,17 @@ In an observational study, people who sleep more report less anxiety. Which expl
 
 - **Options:**
 
-  A) Less anxious people find it easier to sleep
-  B) More sleep reduces anxiety
+  A) More sleep reduces anxiety
+  B) The association is a chance result
   C) A third factor (e.g., stress at work) affects both
-  D) The association is a chance result
+  D) Less anxious people find it easier to sleep
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Reverse causation: the response is actually causing the explanatory variable.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the forward causal story.
+  A) That's the forward causal story.
+  B) That's sampling error.
   C) That's confounding.
-  D) That's sampling error.
 - **Hint:** Flip the arrow.
 
 ### ch12-hw-02-v2
@@ -4098,16 +4096,16 @@ Ice cream sales and sunburns are positively correlated across days. What's the m
 
 - **Options:**
 
-  A) A confounder, sunny hot weather, increases both
-  B) Ice cream causes sunburn
-  C) Sunburns make people buy ice cream
-  D) It must be sampling error
+  A) Sunburns make people buy ice cream to cool down
+  B) It must be sampling error
+  C) Ice cream causes sunburn
+  D) Hot, sunny weather increases both
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Sunny days drive both. This is the classic common-cause pattern.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) No plausible mechanism.
-  D) Possible, but a confounder is far more likely with an obvious common cause.
+  B) Possible, but a confounder is far more likely with an obvious common cause.
+  C) and A) No plausible mechanism.
 - **Hint:** What makes both go up?
 
 ### ch12-hw-03
@@ -4141,17 +4139,17 @@ In a well-designed experiment, researchers randomly assign plants to receive ext
 
 - **Options:**
 
-  A) The researchers set nitrogen themselves before the plants grew, so height couldn't have determined it
-  B) Because p < 0.05
-  C) Because nitrogen is a chemical
-  D) It could explain it
+  A) Nitrogen was assigned before the plants grew
+  B) Because nitrogen is a chemical
+  C) It could explain it
+  D) Because p < 0.05, so the direction is settled
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Manipulating the explanatory variable rules out reverse causation; random assignment rules out confounders. What remains: a causal effect or chance.
 - **Why the wrong options are wrong (tutor only):**
-  B) Significance doesn't address direction.
-  C) Irrelevant.
-  D) Manipulation rules it out.
+  B) Irrelevant.
+  C) Manipulation rules it out.
+  D) Significance doesn't address direction.
 - **Hint:** Who decided which plants got nitrogen?
 
 ### ch12-hw-03-v2
@@ -4165,15 +4163,15 @@ A well-designed randomized experiment finds a significant effect. Which alternat
 - **Options:**
 
   A) Chance: a false positive (type I error)
-  B) Confounding by an unmeasured variable that systematically differs between groups
-  C) Reverse causation
+  B) Reverse causation
+  C) Confounding by an unmeasured variable that systematically differs between groups
   D) None; the effect is proven
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Random assignment handles confounding and reverse causation, but chance can still produce a significant result.
 - **Why the wrong options are wrong (tutor only):**
-  B) Randomization balances confounders on average.
-  C) The researcher set the treatment.
+  B) The researcher set the treatment.
+  C) Randomization balances confounders on average.
   D) There's always some chance of a false positive.
 - **Hint:** What can randomization not remove?
 
@@ -4187,16 +4185,16 @@ Across years, the number of films Nicolas Cage appeared in correlates with the n
 
 - **Options:**
 
-  A) With enough variables, some will be correlated by chance or through shared time trends; the association isn't causal
+  A) With enough variables, some correlate by chance or shared trends; it isn't causal
   B) Watching Nicolas Cage movies makes people careless near pools
-  C) Drownings inspire Nicolas Cage to make more movies
-  D) The correlation must be real because it was statistically significant
+  C) The correlation must be real, because it was statistically significant across many years
+  D) Drownings inspire Nicolas Cage to make more movies
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** If you search through many pairs of variables, some will line up just by chance (and things that trend over time often correlate). Without a plausible mechanism or an experiment, this is not evidence of causation.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Causal stories with no mechanism.
-  D) Significance doesn't rule out chance when you've searched many pairs, and it says nothing about causation.
+  B) and D) Causal stories with no mechanism.
+  C) Significance doesn't rule out chance when you've searched many pairs, and it says nothing about causation.
 - **Hint:** How many silly pairs of variables could you test?
 
 ### ch12-hw-04-v1
@@ -4209,17 +4207,17 @@ A researcher checks correlations between 50 lifestyle variables and 20 health ou
 
 - **Options:**
 
-  A) About 50 significant results are expected by chance alone even if nothing is related
-  B) 50 is too many variables to measure
-  C) Significance proves causation
-  D) No problem
+  A) Significance proves causation
+  B) No problem
+  C) 50 is too many variables to measure well
+  D) About 50 'significant' results are expected by chance
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 1000 tests × 0.05 ≈ 50 false positives when no real associations exist. Searching many pairs guarantees spurious hits.
 - **Why the wrong options are wrong (tutor only):**
-  B) Measuring many variables is fine; the problem is the search.
-  C) It doesn't.
-  D) These could all be false positives.
+  A) It doesn't.
+  B) These could all be false positives.
+  C) Measuring many variables is fine; the problem is the search.
 - **Hint:** How many false positives does α = 0.05 allow over 1000 tests?
 
 ### ch12-hw-04-v2
@@ -4232,17 +4230,17 @@ Across 20 years, a country's internet use and its average life expectancy both r
 
 - **Options:**
 
-  A) Both trend upward over time for many reasons, and things that trend over time tend to correlate even without a causal link
-  B) The correlation is too strong to be real
-  C) Life expectancy can't be measured
-  D) Internet use certainly causes longer life
+  A) Things that trend over time tend to correlate
+  B) Life expectancy can't be measured
+  C) Internet use certainly causes longer life
+  D) The correlation is too strong to be real
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Shared time trends create correlations. Without a mechanism or better design, this isn't causal evidence.
 - **Why the wrong options are wrong (tutor only):**
-  B) Strength doesn't rule out a spurious link.
-  C) It can.
-  D) Unjustified.
+  B) It can.
+  C) Unjustified.
+  D) Strength doesn't rule out a spurious link.
 - **Hint:** What else changed over those 20 years?
 
 ### ch12-hw-05
@@ -4276,17 +4274,17 @@ Why can calling Y the 'response' variable be misleading in an observational stud
 
 - **Options:**
 
-  A) It implies Y responds to (is caused by) X, when we've only observed an association
-  B) Y should always be called the 'explanatory' variable
+  A) It isn't misleading
+  B) It implies Y is caused by X
   C) It makes the p-value incorrect
-  D) It isn't misleading
+  D) Y should always be called the 'explanatory' variable
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Statistical vocabulary often carries causal assumptions that the design can't support.
 - **Why the wrong options are wrong (tutor only):**
-  B) The labels are conventions; the issue is what they imply.
+  A) The word suggests causation.
   C) Words don't change the math.
-  D) The word suggests causation.
+  D) The labels are conventions; the issue is what they imply.
 - **Hint:** What does 'response' suggest?
 
 ### ch12-hw-05-v2
@@ -4320,16 +4318,16 @@ Why do statisticians sometimes describe the 'perfect experiment' as splitting th
 
 - **Options:**
 
-  A) In a perfect experiment, we'd see what happens to each individual both with and without the treatment, and compare the two worlds
-  B) Computer simulations are the best way to infer causation
-  C) Because you need two separate samples to calculate a p-value
-  D) Because experiments should always be repeated twice
+  A) We'd see each individual both with and without the treatment, and compare
+  B) Because experiments should always be repeated twice
+  C) Because computer simulations of two worlds are the best way to infer causation
+  D) Because you need two separate samples, a treated one and a control one, to calculate a p-value
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The ideal comparison is the counterfactual: the same individual, treated and untreated. We can't observe both, so random assignment creates groups that are alike on average, the next best thing.
 - **Why the wrong options are wrong (tutor only):**
-  B) Simulations don't establish causation.
-  C) and D) Not the point of the analogy.
+  C) Simulations don't establish causation.
+  D) and B) Not the point of the analogy.
 - **Hint:** What would you ideally compare each individual to?
 
 ### ch12-hw-06-v1
@@ -4342,9 +4340,9 @@ What is a counterfactual in the context of causal inference?
 
 - **Options:**
 
-  A) What would have happened to the same individual if they had received the other treatment
-  B) A false fact in the data
-  C) A control group that got nothing
+  A) What would have happened to the same individual under the other treatment
+  B) A false fact that slipped into the data
+  C) A control group that got no treatment at all
   D) A statistical test
 
 - **Answer (tutor only):** A
@@ -4365,16 +4363,16 @@ Since we can't observe the same individual both treated and untreated, how does 
 
 - **Options:**
 
-  A) Randomly assigned groups are alike on average, so the control group shows what would have happened to the treated group without treatment
-  B) By measuring each individual twice
-  C) By using a very large sample
+  A) By measuring each individual twice
+  B) By using a sample large enough to cancel out differences
+  C) Randomized groups are alike, so controls stand in for the treated
   D) It can't
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Randomization makes the control group a stand-in for the treated group's 'other world.'
 - **Why the wrong options are wrong (tutor only):**
-  B) Repeated measures help in some designs, but time also changes.
-  C) Size helps precision, not comparability.
+  A) Repeated measures help in some designs, but time also changes.
+  B) Size helps precision, not comparability.
   D) That's exactly what randomization does.
 - **Hint:** Why is the control group a good stand-in?
 
@@ -4407,17 +4405,17 @@ A study tests whether a new surgical procedure reduces knee pain. What is the be
 
 - **Options:**
 
-  A) A sham surgery (incisions but no actual repair), with patients unaware of which they got
-  B) No surgery at all
-  C) Patients who refused surgery
-  D) The same patients before surgery
+  A) A sham surgery, with patients unaware which they got
+  B) No surgery at all, with patients told to rest
+  C) The same patients before surgery
+  D) Patients who refused surgery
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A sham control matches everything except the active ingredient: anesthesia, recovery, expectation of improvement.
 - **Why the wrong options are wrong (tutor only):**
   B) Differs in many ways besides the repair (including placebo effects).
-  C) Self-selected, so confounded.
-  D) Pain changes over time anyway.
+  C) Pain changes over time anyway.
+  D) Self-selected, so confounded.
 - **Hint:** Match everything but the factor of interest.
 
 ### ch12-hw-07-v2
@@ -4430,16 +4428,16 @@ In a plant experiment, treated pots get a fertilizer dissolved in water. What sh
 
 - **Options:**
 
-  A) The same amount of plain water, applied the same way
-  B) Nothing
+  A) Nothing
+  B) Half the fertilizer, to see the dose response
   C) A different fertilizer
-  D) Half the fertilizer
+  D) The same amount of plain water
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The control should differ only in the fertilizer itself, so extra water or handling can't explain differences.
 - **Why the wrong options are wrong (tutor only):**
-  B) Treated pots also got extra water and handling.
-  C) and D) Those are other treatments, not controls.
+  A) Treated pots also got extra water and handling.
+  C) and B) Those are other treatments, not controls.
 - **Hint:** What else does the treatment include besides fertilizer?
 
 ### ch12-hw-08
@@ -4495,15 +4493,15 @@ Why should a researcher estimate power BEFORE running an experiment?
 
 - **Options:**
 
-  A) To check whether the planned sample size is large enough to detect the smallest effect that would matter
-  B) To guarantee a significant result
-  C) To find out whether the null is true
-  D) To calculate the p-value
+  A) To find out whether the null is true
+  B) To calculate the p-value
+  C) To guarantee a significant result
+  D) To check that the sample can detect an effect that matters
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A power analysis helps avoid wasting effort on a study too small to detect meaningful effects.
 - **Why the wrong options are wrong (tutor only):**
-  B) Nothing guarantees significance.
-  C) Power doesn't tell you that.
-  D) p-values come from the data.
+  A) Power doesn't tell you that.
+  B) p-values come from the data.
+  C) Nothing guarantees significance.
 - **Hint:** Is the study big enough?

@@ -20,7 +20,7 @@ Practice for Exam 1 (chapters 0–12): pick random questions or focus on chapter
 
 #### AI version (Claude)
 
-[Open the Claude supported study guide↗](https://claude.ai/artifact/ANMj6BpXNkn1EmezZWqNsT){target="_blank"} Samme questions, plus Claude: a tutor that talks you through questions you’re stuck on, feedback on your written answers, new practice questions on demand, and a report on your strengths and weak spots. You need a (free) Claude account, and it uses your own Claude usage, only when you click. I’ve kept it light, so the free tier should go a long way.
+[Open the Claude supported study guide↗](https://claude.ai/artifact/ANMj6BpXNkn1EmezZWqNsT){target="_blank"} Same questions, plus Claude: a tutor that talks you through questions you’re stuck on, feedback on your written answers, new practice questions on demand, and a report on your strengths and weak spots. You need a (free) Claude account, and it uses your own Claude usage, only when you click. I’ve kept it light, so the free tier should go a long way.
 
 #### AI version (ChatGPT)
 

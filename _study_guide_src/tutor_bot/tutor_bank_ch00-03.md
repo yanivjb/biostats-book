@@ -57,17 +57,17 @@ Whether or not a seed germinated (yes/no) is a special kind of categorical varia
 
 - **Options:**
 
-  A) Nominal
+  A) Ordinal
   B) Binary
-  C) Ordinal
-  D) Continuous
+  C) Continuous
+  D) Nominal
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** A categorical variable with exactly two possible values (germinated or not) is binary.
 - **Why the wrong options are wrong (tutor only):**
-  A) Nominal variables can have many unordered categories; binary is the special two-category case.
-  C) Yes/no has no natural ranking.
-  D) Germination here is a category, not a measurement on a scale.
+  A) Yes/no has no natural ranking.
+  C) Germination here is a category, not a measurement on a scale.
+  D) Nominal variables can have many unordered categories; binary is the special two-category case.
 - **Hint:** How many possible values are there?
 
 ### ch00-book-01-v2
@@ -80,16 +80,16 @@ A researcher records whether each lizard was caught in the sun or in the shade. 
 
 - **Options:**
 
-  A) Binary
+  A) Discrete
   B) Ordinal
-  C) Discrete
+  C) Binary
   D) Continuous
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Two unordered categories (sun or shade) make a binary variable.
 - **Why the wrong options are wrong (tutor only):**
+  A) Discrete variables are counts; this is a category.
   B) Sun and shade aren't ranked.
-  C) Discrete variables are counts; this is a category.
   D) There's no measurement scale here.
 - **Hint:** Count the categories.
 
@@ -124,17 +124,17 @@ Which of these variables is best described as continuous?
 
 - **Options:**
 
-  A) Number of eggs in a nest
-  B) Body temperature of a lizard
-  C) Species of lizard
-  D) Whether a nest was predated (yes/no)
+  A) Species of lizard
+  B) Whether a nest was predated (yes/no)
+  C) Body temperature of a lizard
+  D) Number of eggs in a nest
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Temperature can take any value in a range (32.4, 32.41 …), so it's continuous.
 - **Why the wrong options are wrong (tutor only):**
-  A) Eggs are counted in whole numbers: discrete.
-  C) Species is a category (nominal).
-  D) Yes/no is binary.
+  A) Species is a category (nominal).
+  B) Yes/no is binary.
+  D) Eggs are counted in whole numbers: discrete.
 - **Hint:** Could the value fall between any two values you can name?
 
 ### ch00-book-02-v2
@@ -147,17 +147,17 @@ Which of these variables is best described as continuous?
 
 - **Options:**
 
-  A) Number of leaves on a seedling
-  B) Leaf color (green, yellow, brown)
-  C) Seedling height in mm
-  D) Rank of the seedling in a size contest (1st, 2nd, 3rd)
+  A) Rank of the seedling in a size contest (1st, 2nd, 3rd)
+  B) Seedling height in mm
+  C) Leaf color (green, yellow, brown)
+  D) Number of leaves on a seedling
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Height is measured on a scale and can take any value within a range, so it's continuous.
 - **Why the wrong options are wrong (tutor only):**
-  A) Leaves are counted: discrete.
-  B) Color categories are nominal.
-  D) Ranks are ordinal.
+  A) Ranks are ordinal.
+  C) Color categories are nominal.
+  D) Leaves are counted: discrete.
 - **Hint:** Is it counted, ranked, named, or measured?
 
 ### ch00-book-03
@@ -191,15 +191,15 @@ The number of seeds in a single fruit is:
 
 - **Options:**
 
-  A) Binary
-  B) Continuous
+  A) Continuous
+  B) Binary
   C) Discrete
 
 - **Answer (tutor only):** C
 - **Explanation (tutor only):** Seeds are counted in whole numbers (0, 1, 2, …), so the variable is discrete.
 - **Why the wrong options are wrong (tutor only):**
-  A) There are more than two possible values.
-  B) You can't have 12.6 seeds.
+  A) You can't have 12.6 seeds.
+  B) There are more than two possible values.
 - **Hint:** Can the value be a fraction?
 
 ### ch00-book-03-v2
@@ -212,17 +212,17 @@ The number of times a bird visits a feeder in an hour is:
 
 - **Options:**
 
-  A) Discrete
-  B) Continuous
-  C) Ordinal
-  D) Binary
+  A) Continuous
+  B) Binary
+  C) Discrete
+  D) Ordinal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Visits are counted in whole numbers, so this is a discrete numeric variable.
 - **Why the wrong options are wrong (tutor only):**
-  B) There's no such thing as 3.7 visits.
-  C) Counts have equal steps between values; ordinal categories don't.
-  D) There are more than two possible values.
+  A) There's no such thing as 3.7 visits.
+  B) There are more than two possible values.
+  D) Counts have equal steps between values; ordinal categories don't.
 - **Hint:** Is it a count or a measurement?
 
 ### ch00-book-04
@@ -372,17 +372,17 @@ The variable 'blood type' (A, B, AB or O) is a ___ variable.
 
 - **Options:**
 
-  A) Nominal
-  B) Binary
-  C) Ordinal
-  D) Discrete
+  A) Binary
+  B) Ordinal
+  C) Discrete
+  D) Nominal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Blood types are unordered categories, and there are more than two, so it's nominal.
 - **Why the wrong options are wrong (tutor only):**
-  B) There are four categories, not two.
-  C) No blood type ranks above another.
-  D) Discrete variables are counts.
+  A) There are four categories, not two.
+  B) No blood type ranks above another.
+  C) Discrete variables are counts.
 - **Hint:** Is there a natural order? How many categories?
 
 ### ch00-book-06-v2
@@ -397,15 +397,15 @@ The variable 'habitat type' (forest, grassland, wetland, desert) is a ___ variab
 
   A) Ordinal
   B) Nominal
-  C) Continuous
-  D) Binary
+  C) Binary
+  D) Continuous
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** Several unordered categories: nominal.
 - **Why the wrong options are wrong (tutor only):**
   A) The habitats aren't ranked.
-  C) There's no measurement scale.
-  D) There are more than two categories.
+  C) There are more than two categories.
+  D) There's no measurement scale.
 - **Hint:** Does the order of the categories matter?
 
 ### ch00-book-07
@@ -499,15 +499,15 @@ Bird song is recorded as 'trill', 'whistle', 'buzz' or 'chatter'. Song type is a
 - **Options:**
 
   A) Binary
-  B) Nominal
-  C) Continuous
+  B) Continuous
+  C) Nominal
   D) Ordinal
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Several unordered categories: nominal.
 - **Why the wrong options are wrong (tutor only):**
   A) There are four song types, not two.
-  C) These are categories, not measurements.
+  B) These are categories, not measurements.
   D) No song type ranks above another.
 - **Hint:** Is there a natural order to the categories?
 
@@ -521,17 +521,17 @@ Fruit ripeness is scored as 'unripe', 'ripe' or 'overripe'. This is a ___ variab
 
 - **Options:**
 
-  A) Nominal
-  B) Ordinal
-  C) Binary
-  D) Continuous
+  A) Continuous
+  B) Binary
+  C) Ordinal
+  D) Nominal
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The categories have a natural order (unripe < ripe < overripe), so the variable is ordinal.
 - **Why the wrong options are wrong (tutor only):**
-  A) Nominal categories have no order; these do.
-  C) There are three categories.
-  D) There's no measurement scale.
+  A) There's no measurement scale.
+  B) There are three categories.
+  D) Nominal categories have no order; these do.
 - **Hint:** Can you put the categories in order?
 
 ### ch00-canvas-02
@@ -566,14 +566,14 @@ Which of these variables is best described as continuous?
 - **Options:**
 
   A) Distance a seed travels from the parent plant
-  B) Number of seeds dispersed
-  C) Dispersal mode (wind, animal, water)
+  B) Dispersal mode (wind, animal, water)
+  C) Number of seeds dispersed
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Distance can take any value in a range, so it's continuous.
 - **Why the wrong options are wrong (tutor only):**
-  B) Seeds are counted: discrete.
-  C) Dispersal mode is a category (nominal).
+  B) Dispersal mode is a category (nominal).
+  C) Seeds are counted: discrete.
 - **Hint:** Measured or counted?
 
 ### ch00-canvas-02-v2
@@ -586,15 +586,15 @@ Which of these variables is best described as continuous?
 
 - **Options:**
 
-  A) Number of bees visiting a flower
-  B) Nectar volume in a flower (µL)
-  C) Flower color
+  A) Nectar volume in a flower (µL)
+  B) Flower color
+  C) Number of bees visiting a flower
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Nectar volume is measured on a continuous scale.
 - **Why the wrong options are wrong (tutor only):**
-  A) Bees are counted: discrete.
-  C) Color is categorical.
+  B) Color is categorical.
+  C) Bees are counted: discrete.
 - **Hint:** Which can take fractional values?
 
 ### ch00-canvas-03
@@ -629,14 +629,14 @@ The number of eggs a frog lays in one clutch is a ____ variable.
 - **Options:**
 
   A) Continuous
-  B) Binary
-  C) Discrete
+  B) Discrete
+  C) Binary
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Eggs are counted in whole numbers: discrete.
 - **Why the wrong options are wrong (tutor only):**
   A) You can't lay 412.3 eggs.
-  B) There are many possible values.
+  C) There are many possible values.
 - **Hint:** Can the value be a fraction?
 
 ### ch00-canvas-03-v2
@@ -649,15 +649,15 @@ The number of aphids on a leaf is a ____ variable.
 
 - **Options:**
 
-  A) Discrete
-  B) Continuous
-  C) Nominal
+  A) Continuous
+  B) Nominal
+  C) Discrete
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Aphids are counted, so the variable is discrete numeric.
 - **Why the wrong options are wrong (tutor only):**
-  B) Counts can't be fractional.
-  C) It's a quantity, not a category.
+  A) Counts can't be fractional.
+  B) It's a quantity, not a category.
 - **Hint:** Counted or measured?
 
 ### ch00-canvas-04
@@ -843,17 +843,17 @@ You type `"10" + 5` and R says `Error in "10" + 5 : non-numeric argument to bina
 
 - **Options:**
 
-  A) The quotes make "10" text (a character string), not a number, and R can't add text to a number
-  B) R can only add numbers with the same number of digits
+  A) The quotes make "10" text, and R can't add text to a number
+  B) R thinks "10" is the name of an object, and no object has that name
   C) You need to load a package before R can do arithmetic
-  D) R thinks "10" is the name of an object, and no such object exists
+  D) R can only add numbers that have the same number of digits
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Anything in quotes is text to R, even if it looks like a number. "+" only works on numbers, so R complains that one side is non-numeric. `10 + 5` (no quotes) gives 15, and so does `as.numeric("10") + 5`.
 - **Why the wrong options are wrong (tutor only):**
-  B) R adds numbers of any size: 10 + 5 is fine.
+  B) Quotes mean a value, not a name. A missing object gives a different error: object not found.
   C) Arithmetic is built into R; no package is needed.
-  D) Quotes mean a value, not a name. A missing object gives a different error: object not found.
+  D) R adds numbers of any size: 10 + 5 is fine.
 - **Hint:** What do quotes tell R about the kind of thing inside them?
 
 ### ch01-book-01-v2
@@ -866,17 +866,17 @@ You type `sqrt(x)` and R says `Error: object 'x' not found`. What went wrong?
 
 - **Options:**
 
-  A) R has no object called x: the line that creates it (e.g., `x <- 16`) was never run, or x is spelled differently (R is case-sensitive)
-  B) The sqrt() function comes from a package you haven't loaded
-  C) x is negative, and you can't take the square root of a negative number
-  D) x holds text, and sqrt() only works on numbers
+  A) x holds text, and sqrt() only works on numbers
+  B) The sqrt() function comes from a package you haven't loaded yet
+  C) x is negative, and R can't take the square root of a negative number
+  D) The line that creates x was never run, or x is spelled differently
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** "object not found" means R looked for something named x in the Environment and found nothing. Usually the line that creates x was typed in the script but never run, or the name doesn't match exactly (X vs x).
 - **Why the wrong options are wrong (tutor only):**
+  A) Then x would exist, so R would complain about the text (non-numeric argument), not a missing object.
   B) sqrt() is built into R. A missing function gives a different error: could not find function.
   C) The square root of a negative number gives NaN with a warning, not an error about a missing object.
-  D) Then x would exist, so R would complain about the text (non-numeric argument), not a missing object.
 - **Hint:** What does "not found" tell you about whether x exists?
 
 ### ch01-book-03
@@ -889,16 +889,16 @@ You measured the length and width (in cm) of five wild grape (Vitis riparia) lea
 
 - **Options:**
 
-  A) mean(0.851 * leaf_length * leaf_width)
-  B) 0.851 * mean(leaf_length) * mean(leaf_width)
-  C) mean(leaf_length) * mean(leaf_width)
+  A) mean(leaf_length) * mean(leaf_width)
+  B) mean(0.851 * leaf_length * leaf_width)
+  C) 0.851 * mean(leaf_length) * mean(leaf_width)
   D) sum(0.851 * leaf_length * leaf_width)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** R multiplies vectors element by element, so 0.851 * leaf_length * leaf_width gives the area of each leaf. Then mean() averages those five areas. (With the book's data this gives 16.9 cm².)
 - **Why the wrong options are wrong (tutor only):**
-  B) This multiplies the average length by the average width. The mean of products is not the same as the product of means, so this gives a (slightly) different number.
-  C) Same problem as B, and it also forgets the 0.851.
+  A) Same problem as B, and it also forgets the 0.851.
+  C) This multiplies the average length by the average width. The mean of products is not the same as the product of means, so this gives a (slightly) different number.
   D) sum() gives the total area of all five leaves, not the average.
 - **Hint:** First get one area per leaf, then summarize.
 
@@ -912,17 +912,17 @@ You measured the length and width (cm) of six bean pods, stored in vectors pod_l
 
 - **Options:**
 
-  A) mean(0.7 * pod_length * pod_width)
+  A) mean(pod_length * pod_width)
   B) 0.7 * mean(pod_length) * mean(pod_width)
-  C) sum(0.7 * pod_length * pod_width)
-  D) mean(pod_length * pod_width)
+  C) mean(0.7 * pod_length * pod_width)
+  D) sum(0.7 * pod_length * pod_width)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Multiplying vectors works element by element, giving one area per pod; mean() then averages those six areas.
 - **Why the wrong options are wrong (tutor only):**
+  A) Leaves out the 0.7 conversion.
   B) The mean of products isn't the product of means (unless length and width are unrelated).
-  C) That's the total, not the mean.
-  D) Leaves out the 0.7 conversion.
+  D) That's the total, not the mean.
 - **Hint:** Compute each pod's area first, then average.
 
 ### ch01-book-03-v2
@@ -983,17 +983,17 @@ You restart R and run the script top to bottom. What happens?
 
 - **Options:**
 
-  A) A histogram appears
+  A) A histogram appears, since the script loads ggplot2
   B) Error: could not find function "ggplot"
-  C) R installs ggplot2 automatically
-  D) Nothing happens
+  C) Nothing happens
+  D) R notices the library() line and installs and loads ggplot2 first
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** R runs lines in order. When line 1 runs, ggplot2 hasn't been loaded yet, so R can't find ggplot(). Load packages at the top.
 - **Why the wrong options are wrong (tutor only):**
   A) It would only work if ggplot2 was already loaded from earlier in the session.
-  C) R never installs packages automatically.
-  D) R reports an error.
+  C) R reports an error.
+  D) R never installs packages automatically.
 - **Hint:** Which line runs first?
 
 ### ch01-book-04-v2
@@ -1007,15 +1007,15 @@ Where should library() calls go in an R script?
 - **Options:**
 
   A) At the top, before any code that uses the package
-  B) At the very end of the script
+  B) It doesn't matter
   C) Right after the first time you use a function from the package
-  D) It doesn't matter
+  D) At the very end of the script
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A script runs top to bottom, so packages must be loaded before their functions are used. Putting them at the top also shows readers what the script needs.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Code that runs before library() will fail.
-  D) Order matters in a script.
+  B) Order matters in a script.
+  D) and C) Code that runs before library() will fail.
 - **Hint:** Scripts run in order.
 
 ### ch01-book-05
@@ -1050,14 +1050,14 @@ Your script contains `a <- c(2, 4, 6)` and `b <- 10`, but the Environment pane s
 
 - **Options:**
 
-  A) Error: object 'a' not found
-  B) 1 2 3
+  A) 1 2 3
+  B) Error: object 'a' not found
   C) 0.5 1 1.5
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** a exists in the Environment (that line was run), so R divides each element by 2.
 - **Why the wrong options are wrong (tutor only):**
-  A) a is listed in the Environment.
+  B) a is listed in the Environment.
   C) That would be dividing by 4; a / 2 halves each value.
 - **Hint:** Is a in the Environment?
 
@@ -1071,17 +1071,17 @@ A script contains `counts <- c(5, 8, 12)`. You ran that line. What does `sum(cou
 
 - **Options:**
 
-  A) 25
-  B) Error: object 'counts' not found
-  C) 5 8 12
-  D) 3
+  A) Error: object 'counts' not found
+  B) 5 8 12
+  C) 3
+  D) 25
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Running the line created counts in the Environment, so sum() adds 5 + 8 + 12.
 - **Why the wrong options are wrong (tutor only):**
-  B) The line was run, so counts exists.
-  C) That would just print the vector.
-  D) That's length(counts).
+  A) The line was run, so counts exists.
+  B) That would just print the vector.
+  C) That's length(counts).
 - **Hint:** Was the line that creates counts run?
 
 ### ch01-book-06
@@ -1117,17 +1117,17 @@ Your script contains `a <- c(2, 4, 6)` and `b <- 10`, but the Environment pane s
 
 - **Options:**
 
-  A) Error: object 'a' not found
+  A) 2 4 6
   B) Error: object 'b' not found
-  C) 12 14 16
-  D) 2 4 6
+  C) Error: object 'a' not found
+  D) 12 14 16
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** Writing a line in a script doesn't run it. b <- 10 was never run, so b doesn't exist yet.
 - **Why the wrong options are wrong (tutor only):**
-  A) a exists.
-  C) That's what you'd get after running b <- 10.
-  D) b isn't treated as 0.
+  A) b isn't treated as 0.
+  C) a exists.
+  D) That's what you'd get after running b <- 10.
 - **Hint:** Which objects are actually in the Environment?
 
 ### ch01-book-06-v2
@@ -1140,16 +1140,16 @@ You wrote `total <- 100` in your script but didn't run it. Then you type `total 
 
 - **Options:**
 
-  A) 25
-  B) Error: object 'total' not found
-  C) 0
+  A) Error: object 'total' not found
+  B) 0
+  C) 25
   D) R runs the script line automatically
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Code in a script does nothing until it's run. Until then, total doesn't exist.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's what you'd get after running the line.
-  C) Missing objects aren't treated as zero.
+  B) Missing objects aren't treated as zero.
+  C) That's what you'd get after running the line.
   D) R never runs script lines on its own.
 - **Hint:** Writing code isn't the same as running it.
 
@@ -1183,15 +1183,15 @@ A classmate spends 45 minutes on an error that turns out to be a missing comma. 
 
 - **Options:**
 
-  A) They aren't cut out for coding
-  B) Debugging is part of coding, and they now know to check for missing commas
-  C) R is badly designed
-  D) They should avoid writing code
+  A) They should avoid writing code
+  B) It shows they aren't cut out for coding and should pick a different tool
+  C) It shows that R is badly designed, since a comma shouldn't matter
+  D) Debugging is part of coding; now they'll check commas sooner
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Everyone hits small, frustrating bugs. Finding them builds skill: next time, they'll spot the comma faster.
 - **Why the wrong options are wrong (tutor only):**
-  A), C) and D) These framings make learning harder and aren't accurate.
+  B), C) and A) These framings make learning harder and aren't accurate.
 - **Hint:** Does an experienced coder never make typos?
 
 ### ch01-book-07-v2
@@ -1205,15 +1205,15 @@ After an hour of debugging, you realize you spelled a column name 'Petal.lenght'
 - **Options:**
 
   A) You should give up on R
-  B) Check spelling and capitalization early when you see 'object not found'
-  C) Always ask someone else to write your code
-  D) Never use long column names
+  B) Never use long column names, since they are easy to misspell
+  C) Check spelling and capitalization first when an object isn't found
+  D) Always ask someone else to write your code
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Typos are among the most common causes of errors. Building a habit of checking names first makes debugging faster.
 - **Why the wrong options are wrong (tutor only):**
-  A) and C) Unhelpful conclusions.
-  D) Clear names are good; you just need to check them.
+  A) and D) Unhelpful conclusions.
+  B) Clear names are good; you just need to check them.
 - **Hint:** What error message usually comes from a typo in a name?
 
 ### ch01-book-08
@@ -1265,17 +1265,17 @@ Which is better?
 
 - **Options:**
 
-  A) Script A, it's shorter
-  B) Script B, the names say what the numbers are
-  C) They both work, so they're equally good
-  D) It depends on the computer
+  A) Script A, because it's shorter and quicker to type
+  B) They both work, so they're equally good
+  C) It depends on the computer
+  D) Script B, because the names say what the numbers are
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Descriptive names make code readable for others and for future you. Shorter isn't better if no one can tell what x and y mean.
 - **Why the wrong options are wrong (tutor only):**
   A) Brevity at the cost of clarity isn't a win.
-  C) Working code can still be hard to read.
-  D) Readability doesn't depend on the computer.
+  B) Working code can still be hard to read.
+  C) Readability doesn't depend on the computer.
 - **Hint:** Which would you understand six months from now?
 
 ### ch01-book-08-v2
@@ -1288,15 +1288,15 @@ Which object name is best for the mean beak depth of finches measured in 2024?
 
 - **Options:**
 
-  A) x
-  B) mean_beak_depth_2024
-  C) thing1
+  A) mean_beak_depth_2024
+  B) thing1
+  C) x
   D) m
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Descriptive, consistent names (snake_case) make code self-explaining.
 - **Why the wrong options are wrong (tutor only):**
-  A), C) and D) Short or vague names force readers to guess.
+  C), B) and D) Short or vague names force readers to guess.
 - **Hint:** Could someone guess what it holds from the name alone?
 
 ### ch01-book-09
@@ -1348,17 +1348,17 @@ Which two belong in a saved, shareable script (assuming you use dplyr functions)
 
 - **Options:**
 
-  A) a & b
+  A) c & d
   B) b & d
-  C) a & c
-  D) c & d
+  C) a & b
+  D) a & c
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** Load packages and read data in the script. Install packages once in the console (not every run), and leave interactive View() calls out.
 - **Why the wrong options are wrong (tutor only):**
-  A) Includes install.packages(), which reinstalls every run, and leaves out reading the data.
-  C) Both are console-only actions.
-  D) View() is interactive clutter, and dplyr is never loaded.
+  A) View() is interactive clutter, and dplyr is never loaded.
+  C) Includes install.packages(), which reinstalls every run, and leaves out reading the data.
+  D) Both are console-only actions.
 - **Hint:** Which lines does the analysis actually need every time it runs?
 
 ### ch01-book-09-v2
@@ -1371,15 +1371,15 @@ Why shouldn't install.packages() usually be in your saved script?
 
 - **Options:**
 
-  A) You only need to install a package once; installing on every run is slow and unnecessary
-  B) install.packages() doesn't work in scripts
+  A) install.packages() doesn't work inside scripts, only in the console
+  B) You only need to install a package once, not every time the script runs
   C) It deletes your data
-  D) It loads the package twice
+  D) It loads the package twice, which causes conflicts
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Install once from the console; then use library() in the script to load it each session.
 - **Why the wrong options are wrong (tutor only):**
-  B) It works, it's just unnecessary.
+  A) It works, it's just unnecessary.
   C) It doesn't touch your data.
   D) Installing isn't loading; library() loads.
 - **Hint:** What's the difference between installing and loading a package?
@@ -1416,15 +1416,15 @@ Which habit will help you most in learning R over the semester?
 
 - **Options:**
 
-  A) Copying code from AI without reading it
-  B) Practicing a little often and reading error messages carefully
-  C) Memorizing every function's arguments
-  D) Avoiding code that might give errors
+  A) Practicing a little often and reading error messages
+  B) Copying code from AI without reading it
+  C) Memorizing every function's arguments before you use them
+  D) Avoiding any code that might give errors
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Frequent practice and learning from errors builds lasting skill.
 - **Why the wrong options are wrong (tutor only):**
-  A) You won't learn what the code does.
+  B) You won't learn what the code does.
   C) You can look arguments up; understanding matters more.
   D) Errors are how you learn.
 - **Hint:** What builds understanding rather than just output?
@@ -1439,17 +1439,17 @@ You're stuck on an R error. Which approach is most likely to help you learn?
 
 - **Options:**
 
-  A) Read the error, form a guess about the cause, test it, and ask for help if stuck
-  B) Restart your computer until it works
-  C) Delete the code and give up
-  D) Paste the whole assignment into AI and submit the result
+  A) Paste the whole assignment into an AI and submit what it gives you
+  B) Delete the code and give up
+  C) Read the error, guess the cause, test it, and ask if still stuck
+  D) Restart your computer until the error goes away
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Reading errors, forming hypotheses and testing them is how debugging skill develops. Asking for help after trying is great.
 - **Why the wrong options are wrong (tutor only):**
-  B) Rarely fixes a code error.
-  C) You learn nothing.
-  D) You skip the learning.
+  A) You skip the learning.
+  B) You learn nothing.
+  D) Rarely fixes a code error.
 - **Hint:** Which option involves you thinking about the problem?
 
 ### ch01-quiz-01
@@ -1490,16 +1490,16 @@ If each now types y * 2 in the console, who gets 24?
 
 - **Options:**
 
-  A) A only
-  B) B only
-  C) Both
-  D) Neither
+  A) Neither
+  B) Both
+  C) A only
+  D) B only
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Only running a line creates the object. Student B's y doesn't exist yet, so they'll get 'object not found'.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Typing without running does nothing.
-  D) Student A ran the line.
+  A) Student A ran the line.
+  D) and B) Typing without running does nothing.
 - **Hint:** Whose Environment contains y?
 
 ### ch01-quiz-01-v2
@@ -1512,17 +1512,17 @@ You ran `z <- 3` an hour ago. Since then you edited the script line to `z <- 7` 
 
 - **Options:**
 
-  A) 3
+  A) 10
   B) 7
-  C) 10
-  D) z doesn't exist
+  C) z doesn't exist
+  D) 3
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The Environment holds whatever was last run. Editing a script line doesn't change the object until you run it again.
 - **Why the wrong options are wrong (tutor only):**
+  A) Assignment replaces, it doesn't add.
   B) The edit hasn't been run.
-  C) Assignment replaces, it doesn't add.
-  D) z was created when you ran the first version.
+  C) z was created when you ran the first version.
 - **Hint:** What was the last line that actually ran?
 
 ### ch01-quiz-02
@@ -1554,17 +1554,17 @@ The console shows the renamed column. You then type View(iris). What is the colu
 
 - **Options:**
 
-  A) Species
-  B) species
-  C) Both columns appear
-  D) The column is gone
+  A) species
+  B) The column is gone
+  C) Species
+  D) Both columns appear
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** rename() returned a modified copy and printed it, but nothing saved it: iris was never reassigned. To keep it: iris <- iris |> rename(species = Species).
 - **Why the wrong options are wrong (tutor only):**
-  B) That's only true after reassigning with <-.
-  C) rename() renames; it doesn't duplicate.
-  D) Nothing was deleted.
+  A) That's only true after reassigning with <-.
+  B) Nothing was deleted.
+  D) rename() renames; it doesn't duplicate.
 - **Hint:** Was the result saved back into iris?
 
 ### ch01-quiz-02-v2
@@ -1577,17 +1577,17 @@ You run sort(weights) and the console shows the values in increasing order. Then
 
 - **Options:**
 
-  A) Increasing order
-  B) Their original order
-  C) Decreasing order
-  D) Error: object not found
+  A) Their original order
+  B) Error: object not found
+  C) Increasing order
+  D) Decreasing order
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** sort() returns a sorted copy without changing weights. To keep the sorted version: weights <- sort(weights).
 - **Why the wrong options are wrong (tutor only):**
-  A) Only if you reassigned.
-  C) sort() defaults to increasing, and it didn't change weights anyway.
-  D) weights still exists.
+  B) weights still exists.
+  C) Only if you reassigned.
+  D) sort() defaults to increasing, and it didn't change weights anyway.
 - **Hint:** Did anything assign the sorted result?
 
 ### ch01-quiz-03
@@ -1627,17 +1627,17 @@ What went wrong?
 
 - **Options:**
 
-  A) ggplot2 isn't loaded
-  B) iris doesn't exist
-  C) Sepal.Length is misspelled
-  D) geom_histogram() needs more arguments
+  A) geom_histogram() needs more arguments
+  B) ggplot2 isn't loaded
+  C) iris doesn't exist
+  D) Sepal.Length is misspelled
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** 'could not find function' means R doesn't know the function: usually the package isn't loaded (library(ggplot2)) or the name is misspelled.
 - **Why the wrong options are wrong (tutor only):**
-  B) A missing dataset gives 'object not found'.
-  C) A wrong column name gives a different error.
-  D) geom_histogram() works with defaults.
+  A) geom_histogram() works with defaults.
+  C) A missing dataset gives 'object not found'.
+  D) A wrong column name gives a different error.
 - **Hint:** What does 'could not find function' usually mean?
 
 ### ch01-quiz-03-v2
@@ -1650,17 +1650,17 @@ You type Mean(c(1, 2, 3)) and get: could not find function "Mean". What's the fi
 
 - **Options:**
 
-  A) Load a package for Mean
-  B) Use lowercase: mean(c(1, 2, 3))
-  C) Put quotes around the numbers
-  D) Reinstall R
+  A) Reinstall R
+  B) Put quotes around the numbers so R reads them
+  C) Use lowercase: mean(c(1, 2, 3))
+  D) Load the package that contains Mean() first
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** R is case-sensitive: the base function is mean(), not Mean(). 'could not find function' can mean a typo, including capitalization.
 - **Why the wrong options are wrong (tutor only):**
-  A) mean() is built in; no package is needed.
-  C) Quotes would make the numbers text.
-  D) Unnecessary.
+  A) Unnecessary.
+  B) Quotes would make the numbers text.
+  D) mean() is built in; no package is needed.
 - **Hint:** R cares about capital letters.
 
 ## Chapter 2: ggplot
@@ -1698,15 +1698,15 @@ Both layouts show flipper length for three penguin species as small multiples. I
 
 - **Options:**
 
-  A) A, because stacking on a shared x-axis lines up the values, so positions can be compared directly
-  B) B, because side-by-side panels are always easier to read
-  C) There is no difference
+  A) There is no difference; both show the same data
+  B) B, because side-by-side panels are easier to scan from left to right
+  C) A, because a shared x-axis lines values up for direct comparison
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** When panels are stacked on a common x-axis, the same flipper length sits at the same horizontal position in every panel, so you can see at a glance that Gentoo flippers are longer.
 - **Why the wrong options are wrong (tutor only):**
+  A) The layout changes which comparison is easy.
   B) Side-by-side panels put the x-axes next to each other, so the eye has to jump between different axes to compare positions.
-  C) The layout changes which comparison is easy.
 - **Hint:** Which layout puts 200 mm at the same spot for every species?
 
 ### ch02-chimein-02-v2
@@ -1719,16 +1719,16 @@ You want readers to compare body mass (on the y-axis) across four treatment grou
 
 - **Options:**
 
-  A) Panels side by side in one row, sharing the same y-axis
-  B) Panels stacked in one column, each with its own y-axis
-  C) Panels in a 2 × 2 grid, each with its own y-axis
-  D) Arrangement doesn't matter
+  A) Stacked in one column, each with its own y-axis
+  B) Side by side in one row, sharing one y-axis
+  C) Arrangement doesn't matter
+  D) A 2 × 2 grid, each panel with its own y-axis so nothing is cut off
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** To compare values on the y-axis, line the panels up horizontally with a shared y-axis, so the same body mass sits at the same height in every panel.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Separate y-axes break the comparison.
-  D) Arrangement determines which comparisons are easy.
+  A) and D) Separate y-axes break the comparison.
+  C) Arrangement determines which comparisons are easy.
 - **Hint:** Compare along x → stack vertically. Compare along y → place side by side.
 
 ### ch02-chimein-03
@@ -1764,15 +1764,15 @@ Two density plots show bill length for three penguin species. In A the curves ar
 
 - **Options:**
 
-  A) A, because solid colors stand out more
-  B) B, because you can see every species' distribution, even where they overlap
-  C) They're equally good
+  A) B, because overlapping curves stay visible
+  B) They're equally good, since they show the same curves
+  C) A, because solid colors stand out more and are easier to tell apart
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** With solid fills, curves drawn later cover earlier ones, hiding parts of the distributions (look at how Chinstrap and Gentoo cover each other in A). Transparency keeps all three visible.
 - **Why the wrong options are wrong (tutor only):**
-  A) Bold colors don't help if they hide data.
-  C) A hides information that B shows.
+  B) A hides information that B shows.
+  C) Bold colors don't help if they hide data.
 - **Hint:** In plot A, can you see the whole Chinstrap curve?
 
 ### ch02-chimein-03-v2
@@ -1785,17 +1785,17 @@ You make overlapping density plots of leaf size for four plant populations, and 
 
 - **Options:**
 
-  A) Make the fills semi-transparent (e.g., alpha = 0.4), or facet by population
-  B) Use brighter colors
-  C) Remove the legend
-  D) Make the plot bigger
+  A) Semi-transparent fills (e.g., alpha = 0.4), or facet by population
+  B) Use brighter, more contrasting colors for each population
+  C) Make the plot bigger so the curves spread out
+  D) Remove the legend
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Transparency lets overlapping curves show through; faceting gives each population its own panel. Both keep every distribution visible.
 - **Why the wrong options are wrong (tutor only):**
   B) Brighter opaque colors still hide each other.
-  C) Removing the legend makes it harder to read.
-  D) Size doesn't fix overlap.
+  C) Size doesn't fix overlap.
+  D) Removing the legend makes it harder to read.
 - **Hint:** What would let you see through the front curve?
 
 ### ch02-chimein-04
@@ -1831,15 +1831,15 @@ Two sets of faceted histograms show body mass for three penguin species. In A al
 
 - **Options:**
 
-  A) The bins are different widths
-  B) The y-axis counts differ
-  C) The same horizontal position means a different body mass in each panel, so the eye compares the wrong things
+  A) The y-axis counts differ between the panels
+  B) The same position means a different mass in each panel
+  C) The bins are different widths in each panel, so bar heights can't be compared
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** In B, Gentoo's panel starts near 4000 g while Adelie's starts near 2900 g, so the three species look similar in size. Plot A, with a shared axis, shows Gentoo are clearly heavier.
 - **Why the wrong options are wrong (tutor only):**
-  A) Bin widths differ a little, but that's minor.
-  B) Different y-ranges are less of a problem here; the x-axis is what misleads.
+  A) Different y-ranges are less of a problem here; the x-axis is what misleads.
+  C) Bin widths differ a little, but that's minor.
 - **Hint:** In plot B, compare the left edges of the three panels.
 
 ### ch02-chimein-04-v2
@@ -1853,17 +1853,17 @@ This bar chart compares mean nest temperature in two habitats. What's the proble
 
 - **Options:**
 
-  A) The axis choice exaggerates a small difference, so readers think it's huge
-  B) Temperatures can't be shown in bar charts
-  C) The colors are misleading
-  D) Nothing; truncated axes are always fine
+  A) The axis choice makes a small difference look huge
+  B) The colors are misleading
+  C) Nothing; truncated axes are always fine
+  D) Temperatures can't be shown in bar charts, because they have no true zero
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Look at the y-axis: it starts at 30 °C, so the meadow bar looks about three times as tall as the forest bar even though the means differ by only 0.5 °C. Bar length should be proportional to the value. Use points (where a non-zero axis is fine) or start bars at zero.
 - **Why the wrong options are wrong (tutor only):**
-  B) Bar charts can show temperatures, honestly.
-  C) Color isn't the issue.
-  D) Truncation is especially misleading for bars.
+  B) Color isn't the issue.
+  C) Truncation is especially misleading for bars.
+  D) Bar charts can show temperatures, honestly.
 - **Hint:** Check where the y-axis starts. Does bar height still match the size of the values?
 
 ### ch02-hw-01
@@ -1921,15 +1921,15 @@ The scatterplot shows body mass against bill depth for 342 penguins (all species
 
 - **Options:**
 
-  A) Body mass tends to increase with bill depth
-  B) Body mass tends to decrease with bill depth
-  C) There is no clear relationship
+  A) There is no clear relationship
+  B) Body mass tends to increase with bill depth
+  C) Body mass tends to decrease with bill depth
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Overall, the trendline slopes down (r ≈ −0.47): heavier penguins tend to have shallower bills. (Coloring by species would show why: heavy Gentoo have shallow bills.)
 - **Why the wrong options are wrong (tutor only):**
-  A) The line slopes down.
-  C) There's a clear negative trend.
+  A) There's a clear negative trend.
+  B) The line slopes down.
 - **Hint:** Which way does the line slope?
 
 ### ch02-quiz-01
@@ -1957,17 +1957,17 @@ Which aesthetic makes it easiest for readers to compare exact values of a contin
 
 - **Options:**
 
-  A) Position along an axis (x or y)
-  B) Point size
-  C) Color shade
-  D) Transparency
+  A) Color shade, from light to dark
+  B) Transparency
+  C) Point size
+  D) Position along an axis
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** People judge positions along a common scale most accurately. Size, shade and transparency are much harder to read precisely.
 - **Why the wrong options are wrong (tutor only):**
-  B) Area is hard to judge (twice the size doesn't look twice as big).
-  C) Shades are hard to decode precisely.
-  D) Transparency is very hard to read as a value.
+  A) Shades are hard to decode precisely.
+  B) Transparency is very hard to read as a value.
+  C) Area is hard to judge (twice the size doesn't look twice as big).
 - **Hint:** Which is easiest to read off a ruler?
 
 ### ch02-quiz-01-v2
@@ -1980,17 +1980,17 @@ You need to show five variables in one plot. The most important comparison is be
 
 - **Options:**
 
-  A) On the x and y axes
-  B) In color and point size
-  C) In facets
-  D) It doesn't matter
+  A) In color and point size
+  B) In facets
+  C) It doesn't matter
+  D) On the x and y axes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Put the most important comparison on position (x and y), the aesthetics people read most accurately, and use color, size or facets for secondary variables.
 - **Why the wrong options are wrong (tutor only):**
-  B) Size and color are harder to compare precisely.
-  C) Facets are great for groups, not for a continuous comparison.
-  D) Mapping choices determine what's easy to see.
+  A) Size and color are harder to compare precisely.
+  B) Facets are great for groups, not for a continuous comparison.
+  C) Mapping choices determine what's easy to see.
 - **Hint:** Which aesthetics do people read most accurately?
 
 ### ch02-quiz-02
@@ -2031,14 +2031,14 @@ c) ggplot(penguins, aes(x = species, y = body_mass)) + geom_boxplot() + geom_jit
 - **Options:**
 
   A) a
-  B) b
-  C) c
+  B) c
+  C) b
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Layers are drawn in order. In c the points are drawn last, on top of the boxes, so you see the summary and every penguin.
 - **Why the wrong options are wrong (tutor only):**
   A) The boxes are drawn over the points and hide many of them.
-  B) No raw data at all.
+  C) No raw data at all.
 - **Hint:** Later layers are drawn on top.
 
 ### ch02-quiz-02-v2
@@ -2051,15 +2051,15 @@ In ggplot, if you add geom_boxplot() and then geom_point(), which appears on top
 
 - **Options:**
 
-  A) The points, because later layers are drawn on top
-  B) The boxplot, because it's bigger
-  C) Whichever has more data
-  D) They're blended together
+  A) Whichever layer has more data in it
+  B) The points, since later layers go on top
+  C) They're blended together
+  D) The boxplot, because it's the bigger shape
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** ggplot draws layers in the order you add them, so the last layer sits on top.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) Order, not size or data, determines what's on top.
+  D), A) and C) Order, not size or data, determines what's on top.
 - **Hint:** Think of stacking transparencies in order.
 
 ### ch02-quiz-03
@@ -2090,17 +2090,17 @@ I plotted bill length (mm) by species with ggplot(penguins, aes(x = species, y =
 
 - **Options:**
 
-  A) geom_col() stacks (sums) all the values in each group, so the bar shows a total, not a typical bill
-  B) The data have a typo
-  C) The y-axis is in the wrong units
-  D) geom_col() shows the maximum
+  A) geom_col() shows the maximum bill length in each group
+  B) The y-axis is in the wrong units
+  C) The data have a typo that inflates a few bill lengths
+  D) geom_col() sums the values in each group, so bars show totals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** geom_col() adds up the y values within each group. With about 150 Adelie penguins of ~39 mm each, the bar reaches ~5,900. Show means (stat_summary) or the raw data (boxplot + jitter) instead.
 - **Why the wrong options are wrong (tutor only):**
-  B) The data are fine; the geom is summing them.
-  C) The units are mm; the issue is summing.
-  D) geom_col() shows the sum, not the maximum.
+  A) geom_col() shows the sum, not the maximum.
+  B) The units are mm; the issue is summing.
+  C) The data are fine; the geom is summing them.
 - **Hint:** About how many penguins × about how long a bill?
 
 ### ch02-quiz-03-v2
@@ -2113,16 +2113,16 @@ Which plot best shows how leaf length differs among three tree species?
 
 - **Options:**
 
-  A) A bar of the total leaf length per species
-  B) Jittered points for every leaf plus a boxplot or mean for each species
-  C) A pie chart of total leaf length by species
-  D) A single number: the mean leaf length across all species
+  A) A bar of the total leaf length for each species
+  B) A single number: the mean leaf length across all species
+  C) Jittered points for every leaf, plus a boxplot per species
+  D) A pie chart of total leaf length by species
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Showing every leaf plus a summary reveals both typical values and variation. Totals depend on how many leaves were measured, not on how long they are.
 - **Why the wrong options are wrong (tutor only):**
-  A) and C) Totals mix up sample size with leaf length.
-  D) Ignores the species comparison.
+  A) and D) Totals mix up sample size with leaf length.
+  B) Ignores the species comparison.
 - **Hint:** What would change the 'total' even if leaves were the same length?
 
 ### ch02-quiz-04
@@ -2179,15 +2179,15 @@ Which code makes a scatterplot of flipper length (x) against body mass (y), with
 
 - **Options:**
 
-  A) ggplot(penguins, aes(x = flipper_length, y = body_mass, color = species)) + geom_point()
-  B) ggplot(penguins, aes(x = body_mass, y = flipper_length, color = species)) + geom_point()
+  A) ggplot(penguins, aes(x = body_mass, y = flipper_length, color = species)) + geom_point()
+  B) ggplot(penguins, aes(x = flipper_length, y = body_mass, color = species)) + geom_point()
   C) ggplot(penguins, aes(x = flipper_length, y = body_mass)) + geom_point(color = species)
   D) ggplot(penguins, aes(x = flipper_length, y = body_mass, fill = species)) + geom_line()
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Variables that should change the look of the plot go inside aes(). Here x, y and color are all mapped to variables.
 - **Why the wrong options are wrong (tutor only):**
-  B) x and y are swapped.
+  A) x and y are swapped.
   C) color = species outside aes() looks for an object named species, not the column.
   D) geom_line() connects points, and fill doesn't color points.
 - **Hint:** Mappings to variables go inside aes().
@@ -2228,14 +2228,14 @@ Each panel shows seedling height over time at one site, with a straight trendlin
 - **Options:**
 
   A) North
-  B) Ridge
-  C) Valley
+  B) Valley
+  C) Ridge
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Ridge's line climbs about 30 cm over 30 days (slope ≈ 1 cm/day), Valley's about half that, and North's barely rises.
 - **Why the wrong options are wrong (tutor only):**
   A) North's line is the flattest.
-  C) Valley rises, but less steeply than Ridge.
+  B) Valley rises, but less steeply than Ridge.
 - **Hint:** Compare how much each line rises from day 0 to day 30.
 
 ### ch02-quiz-05-v2
@@ -2313,17 +2313,17 @@ In a scatterplot, point size shows body mass. Why is it hard to tell whether one
 
 - **Options:**
 
-  A) People judge area poorly, so differences in size are hard to read precisely
-  B) Point size can't represent numbers
-  C) Bigger points always hide smaller ones
-  D) Size only works for categorical variables
+  A) Point size can't represent numbers, only categories
+  B) Size only works for categorical variables
+  C) People judge area poorly, so size differences are hard to read
+  D) Bigger points always hide the smaller ones
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Size is one of the least precise aesthetics. Use it for a secondary variable, and put key comparisons on x and y.
 - **Why the wrong options are wrong (tutor only):**
-  B) It can; it's just imprecise.
-  C) Overlap can happen, but isn't the main problem.
-  D) Size can show continuous variables.
+  A) It can; it's just imprecise.
+  B) Size can show continuous variables.
+  D) Overlap can happen, but isn't the main problem.
 - **Hint:** Is twice the area easy to spot?
 
 ## Chapter 3: Reproducible science
@@ -2378,16 +2378,16 @@ P4 | 9.8 | South
 
 - **Options:**
 
-  A) Plant IDs should be numbers
-  B) Ditto marks (") mean the site is implied rather than recorded
-  C) height should be called h
-  D) North and South should be abbreviated
+  A) Plant IDs should be numbers, not text like P1
+  B) height should be called h
+  C) Ditto marks (") leave the site implied, not recorded
+  D) North and South should be abbreviated to N and S
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Every cell should hold its own value. Ditto marks rely on row order and break when data are sorted or filtered.
 - **Why the wrong options are wrong (tutor only):**
   A) Text IDs are fine.
-  C) A shorter name is less descriptive.
+  B) A shorter name is less descriptive.
   D) Full words are clearer.
 - **Hint:** What happens to the ditto marks if you sort by height?
 
@@ -2402,15 +2402,15 @@ Which is the best way to record the collection date in a spreadsheet?
 - **Options:**
 
   A) Write the date in every row, as YYYY-MM-DD
-  B) Write the date in the first row of each day and leave the rest blank
-  C) Color rows by date
+  B) Color rows by date
+  C) Write the date in the first row of each day and leave the rest blank
   D) Put the date in the file name only
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Every row should contain its own values in a consistent, unambiguous format. ISO dates (2024-03-01) sort correctly and can't be misread.
 - **Why the wrong options are wrong (tutor only):**
-  B) Blank cells imply values and break when sorted.
-  C) Colors aren't data.
+  B) Colors aren't data.
+  C) Blank cells imply values and break when sorted.
   D) The date gets lost once data are combined.
 - **Hint:** Could each row stand on its own?
 
@@ -2472,17 +2472,17 @@ Why is a data dictionary important?
 
 - **Options:**
 
-  A) It lets others (and future you) correctly interpret every variable, its units and its codes
-  B) It makes the file smaller
-  C) It replaces the need for a script
-  D) It's only needed for very large datasets
+  A) Others (and future you) can interpret every variable, unit and code
+  B) It's only needed for very large datasets
+  C) It makes the file smaller
+  D) It replaces the need for a script, since it documents the analysis
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Without definitions, units and codes, data can't be reused or checked.
 - **Why the wrong options are wrong (tutor only):**
-  B) It adds a file; it doesn't shrink anything.
-  C) Scripts are still needed.
-  D) Even small datasets need clear definitions.
+  B) Even small datasets need clear definitions.
+  C) It adds a file; it doesn't shrink anything.
+  D) Scripts are still needed.
 - **Hint:** What happens if you open the data in five years?
 
 ### ch03-book-03
@@ -2516,17 +2516,17 @@ What's the best quick check that your script is reproducible?
 
 - **Options:**
 
-  A) Restart R and run the whole script from top to bottom
-  B) Check that the plots look nice
-  C) Run just the last few lines
-  D) Save the script with a new name
+  A) Save the script with a new name
+  B) Run just the last few lines again
+  C) Check that the plots look the way you expect
+  D) Restart R and run the whole script from the top
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A fresh session has no leftover objects, so if the script runs top to bottom, it doesn't depend on anything you did by hand.
 - **Why the wrong options are wrong (tutor only):**
-  B) Nice plots don't mean the code runs.
-  C) Earlier lines may be broken or out of order.
-  D) Renaming doesn't test anything.
+  A) Renaming doesn't test anything.
+  B) Earlier lines may be broken or out of order.
+  C) Nice plots don't mean the code runs.
 - **Hint:** What does a fresh session reveal?
 
 ### ch03-book-03-v2
@@ -2539,15 +2539,15 @@ Your script works, but only if you first run a line you typed into the console l
 
 - **Options:**
 
-  A) Add that line to the script, in the right place
-  B) Remember to type it each time
-  C) Email the line to collaborators
+  A) Email the line to your collaborators
+  B) Remember to type it into the console each time
+  C) Add that line to the script, in the right place
   D) Nothing; it works
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Everything the analysis needs should be in the script, in order, so it runs from scratch.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Fragile: easy to forget or lose.
+  B) and A) Fragile: easy to forget or lose.
   D) It only works by accident on your machine.
 - **Hint:** Could a classmate run your script without that line?
 
@@ -2604,16 +2604,16 @@ Sam opens a new R session on the same computer and runs this script. It fails at
 - **Options:**
 
   A) ggplot2 is never loaded
-  B) setwd() is used
-  C) View() is used
-  D) The data file is a CSV
+  B) The data file is a CSV
+  C) setwd() is used, so the file can't be found
+  D) View() is used, which stops the script
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Only readr is loaded. In a new session, ggplot() isn't available until library(ggplot2) runs. It worked before only because ggplot2 was loaded earlier by hand.
 - **Why the wrong options are wrong (tutor only):**
-  B) setwd() works on Sam's own computer.
-  C) View() is annoying but doesn't cause errors.
-  D) CSV is fine.
+  B) CSV is fine.
+  C) setwd() works on Sam's own computer.
+  D) View() is annoying but doesn't cause errors.
 - **Hint:** Which package does ggplot() come from?
 
 ### ch03-book-05-v2
@@ -2626,16 +2626,16 @@ A script worked yesterday but fails in a fresh R session today with 'could not f
 
 - **Options:**
 
-  A) The script never loads dplyr; it only worked because dplyr was loaded earlier by hand
-  B) The data changed overnight
-  C) R needs reinstalling
-  D) filter() was removed from R
+  A) filter() was removed from R
+  B) The script never loads dplyr
+  C) R needs reinstalling after an update
+  D) The data changed overnight, so filter() no longer matches
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A fresh session only has what the script itself loads. Put library(dplyr) at the top.
 - **Why the wrong options are wrong (tutor only):**
-  B) Data changes cause different errors.
-  C) and D) Unnecessary explanations.
+  C) and A) Unnecessary explanations.
+  D) Data changes cause different errors.
 - **Hint:** What's different about a fresh session?
 
 ### ch03-book-06
@@ -2690,17 +2690,17 @@ Which part will make this script fail on a classmate's computer (but not Sam's)?
 
 - **Options:**
 
-  A) setwd("C:/Users/sam/Documents/frogs")
-  B) library(readr)
-  C) View(frogs)
-  D) geom_boxplot()
+  A) View(frogs)
+  B) geom_boxplot()
+  C) setwd("C:/Users/sam/Documents/frogs")
+  D) library(readr)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** That folder only exists on Sam's computer. Use an R project with relative paths instead.
 - **Why the wrong options are wrong (tutor only):**
-  B) readr loads anywhere it's installed.
-  C) View() doesn't depend on the computer.
-  D) Unrelated to the computer.
+  A) View() doesn't depend on the computer.
+  B) Unrelated to the computer.
+  D) readr loads anywhere it's installed.
 - **Hint:** Which line names a specific person's folder?
 
 ### ch03-book-06-v2
@@ -2713,15 +2713,15 @@ Why are relative paths (e.g., "data/frog_data.csv") better than absolute paths i
 
 - **Options:**
 
-  A) They work wherever the project folder is placed, on any computer
-  B) They load data faster
-  C) They're required by readr
-  D) They encrypt the data
+  A) They work wherever the project folder is
+  B) They load data faster, since the path is shorter
+  C) They encrypt the data
+  D) They're required by readr's read_csv()
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A relative path starts from the project folder, so it works for anyone who has the project.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) None of these is true.
+  B), D) and C) None of these is true.
 - **Hint:** Does the path depend on whose computer it is?
 
 ### ch03-book-07
@@ -2776,15 +2776,15 @@ Which line is unnecessary clutter in a shared script (annoying to others) but do
 - **Options:**
 
   A) setwd(...)
-  B) library(readr)
-  C) View(frogs)
-  D) frogs <- read_csv("frog_data.csv")
+  B) View(frogs)
+  C) frogs <- read_csv("frog_data.csv")
+  D) library(readr)
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** View() opens a window every time the script runs. It's useful interactively but shouldn't be in a shared script.
 - **Why the wrong options are wrong (tutor only):**
   A) setwd() actually breaks the script on other computers.
-  B) and D) Needed.
+  D) and C) Needed.
 - **Hint:** Which line only matters while you're exploring?
 
 ### ch03-book-07-v2
@@ -2797,15 +2797,15 @@ Which of these belongs in your console, not in a saved analysis script?
 
 - **Options:**
 
-  A) install.packages("dplyr")
-  B) library(dplyr)
-  C) my_data <- read_csv("data/plants.csv")
-  D) summary_table <- my_data |> summarize(mean_h = mean(height))
+  A) summary_table <- my_data |> summarize(mean_h = mean(height))
+  B) install.packages("dplyr")
+  C) library(dplyr)
+  D) my_data <- read_csv("data/plants.csv")
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Install once from the console. The script should load packages, read data and do the analysis.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) These are part of the analysis and should run every time.
+  C), D) and A) These are part of the analysis and should run every time.
 - **Hint:** Which line only needs to run once, ever?
 
 ### ch03-chimein-01
@@ -2843,17 +2843,17 @@ While measuring fish, you notice one had a damaged fin that may have affected it
 
 - **Options:**
 
-  A) Leave it out without telling anyone
-  B) Enter it, and write the concern in a notes column
-  C) Change its speed to match the others
-  D) Color the cell red
+  A) Change its speed to match the other fish
+  B) Color the cell red
+  C) Leave it out of the data without telling anyone
+  D) Enter it, and note the concern in a notes column
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Record all the data, and document anything unusual in a notes column. Then decisions about exclusion can be made transparently later.
 - **Why the wrong options are wrong (tutor only):**
-  A) Silent exclusion is undocumented and irreproducible.
-  C) That's fabricating data.
-  D) Colors aren't read by R and are easily lost.
+  A) That's fabricating data.
+  B) Colors aren't read by R and are easily lost.
+  C) Silent exclusion is undocumented and irreproducible.
 - **Hint:** How would someone else know about the concern?
 
 ### ch03-chimein-01-v2
@@ -2866,16 +2866,16 @@ Why is highlighting cells in a spreadsheet a poor way to flag questionable data?
 
 - **Options:**
 
-  A) Formatting isn't data: it's lost when the file is read into R or saved as CSV
-  B) Highlighting is too colorful
-  C) Spreadsheets can't highlight
-  D) It's fine; highlighting is the best method
+  A) Highlighting is too colorful and distracting to read
+  B) Spreadsheets can't highlight
+  C) It's fine; highlighting is the best method
+  D) Formatting is lost when the file is read into R
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Put flags and notes in their own column so they travel with the data.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Not the reason.
-  D) Highlights disappear in most analysis pipelines.
+  A) and B) Not the reason.
+  C) Highlights disappear in most analysis pipelines.
 - **Hint:** What happens to cell colors in a CSV?
 
 ### ch03-chimein-02
@@ -2930,16 +2930,16 @@ A water-quality probe reports 'NA' whenever lead concentration is below its dete
 
 - **Options:**
 
-  A) Get an unbiased estimate
-  B) Overestimate mean lead
-  C) Underestimate mean lead
-  D) Just have a smaller sample, with no bias
+  A) Just have a smaller sample, with no bias
+  B) Underestimate mean lead
+  C) Get an unbiased estimate
+  D) Overestimate mean lead
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The missing values are the lowest ones. Dropping them leaves only the higher readings, so the mean is pushed up.
 - **Why the wrong options are wrong (tutor only):**
-  A) and D) Missingness depends on the value, so it isn't harmless.
-  C) The dropped values are low, not high.
+  B) The dropped values are low, not high.
+  C) and A) Missingness depends on the value, so it isn't harmless.
 - **Hint:** Are the missing values random, or a particular kind of value?
 
 ### ch03-chimein-02-v2
@@ -2952,17 +2952,17 @@ In a survey of plant heights, the tallest plants were too tall to reach, so thei
 
 - **Options:**
 
-  A) Too low
+  A) Unbiased
   B) Too high
-  C) Unbiased
-  D) Impossible to calculate
+  C) Impossible to calculate
+  D) Too low
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The missing plants are the tallest, so averaging only the measured ones underestimates the mean.
 - **Why the wrong options are wrong (tutor only):**
+  A) Missingness depends on height.
   B) The dropped values are high, so the mean goes down.
-  C) Missingness depends on height.
-  D) You can calculate it; it's just biased.
+  C) You can calculate it; it's just biased.
 - **Hint:** Which plants are missing?
 
 ### ch03-chimein-03
@@ -2972,18 +2972,7 @@ In a survey of plant heights, the tallest plants were too tall to reach, so thei
 - **Figure question (website only):** don't pick it for Quiz me or New versions; use it only when the student brings it. Figure: [ch03-chimein-03.png](https://yanivjb.github.io/biostats-book/study_guide/images/ch03-chimein-03.png)
 - **Question:**
 
-Consider this data set:
-
-id | date | glucose
-101 | 2015-06-14 | 149.3
-102 | (blank) | 95.3
-103 | 2015-06-18 | 97.5
-104 | (blank) | 117.0
-105 | (blank) | 108.0
-106 | 2015-06-20 | 149.0
-107 | (blank) | 169.4
-
-What is the biggest problem with this data set?
+Consider the data set shown below. What is the biggest problem with this data set?
 
 - **Options:**
 
@@ -3018,17 +3007,17 @@ T4 | maple | 22.5
 
 - **Options:**
 
-  A) dbh_cm should not include units in its name
-  B) Species is implied (left blank for 'same as above')
-  C) Tree IDs should be numbers
-  D) The data aren't sorted
+  A) Species is implied (blank means 'same as above')
+  B) dbh_cm shouldn't include units in its name
+  C) The data aren't sorted by species, so blanks look missing
+  D) Tree IDs should be numbers
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Blank cells meant as 'same as above' are implied values. They break when data are sorted, filtered or read into R (they become NA).
 - **Why the wrong options are wrong (tutor only):**
-  A) Units in the name are helpful.
-  C) Text IDs are fine.
-  D) Sorting order doesn't matter if every row is complete.
+  B) Units in the name are helpful.
+  C) Sorting order doesn't matter if every row is complete.
+  D) Text IDs are fine.
 - **Hint:** What would R put in those blank cells?
 
 ### ch03-chimein-03-v2
@@ -3041,17 +3030,17 @@ A spreadsheet leaves the 'site' cell blank whenever it's the same as the row abo
 
 - **Options:**
 
-  A) NA (missing)
-  B) Automatically filled with the value above
-  C) Zero
-  D) An error that stops R from reading the file
+  A) Automatically filled with the value above
+  B) An error that stops R from reading the file
+  C) NA (missing)
+  D) Zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** R has no idea a blank means 'same as above'; it records NA. Fill every cell explicitly.
 - **Why the wrong options are wrong (tutor only):**
-  B) R doesn't fill values down.
-  C) Blanks aren't zeros.
-  D) R reads the file; it just records NA.
+  A) R doesn't fill values down.
+  B) R reads the file; it just records NA.
+  D) Blanks aren't zeros.
 - **Hint:** Does R know your shorthand?
 
 ### ch03-hw-01
@@ -3116,16 +3105,16 @@ A collaborator sends you a spreadsheet with a column 'temp' containing values li
 
 - **Options:**
 
-  A) The units (°C or °F?) and what was measured (air, water, soil?)
-  B) The font used in the spreadsheet
-  C) The collaborator's favorite temperature
-  D) Nothing; the numbers speak for themselves
+  A) The units (°C or °F?) and what was measured
+  B) The collaborator's favorite temperature
+  C) Nothing; the numbers speak for themselves if the column is named
+  D) The font used in the spreadsheet
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Without units and a definition, 22 could be 22 °C water or 22 °F air: completely different meanings.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Irrelevant.
-  D) Numbers without units can't be interpreted.
+  C) Numbers without units can't be interpreted.
+  D) and B) Irrelevant.
 - **Hint:** Could you interpret 22 without knowing more?
 
 ### ch03-hw-03
@@ -3159,17 +3148,17 @@ Which practice most helps someone else (or future you) understand and rerun your
 
 - **Options:**
 
-  A) Comments explaining what each section does and why
+  A) Loading packages after you use them
   B) Running code by typing it into the console instead of saving a script
   C) Using absolute file paths
-  D) Loading packages after you use them
+  D) Comments explaining what each section does and why
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Comments make the logic clear. Scripts (not console typing), relative paths and loading packages first all help too.
 - **Why the wrong options are wrong (tutor only):**
+  A) Code would fail when run in order.
   B) Console-only code isn't saved or shareable.
   C) Absolute paths break on other computers.
-  D) Code would fail when run in order.
 - **Hint:** What would a stranger reading your script need?
 
 ### ch03-hw-03-v2
@@ -3183,15 +3172,15 @@ read_csv("/Users/maria/Desktop/thesis/data.csv")
 
 - **Options:**
 
-  A) Use a project with a relative path: read_csv("data/data.csv")
-  B) Add more folders to the path
-  C) Move the file to the Desktop
-  D) Use setwd("/Users/maria/Desktop") first
+  A) Move the file to the Desktop
+  B) Use a project and a relative path: read_csv("data/data.csv")
+  C) Run setwd("/Users/maria/Desktop") first, then read the file
+  D) Add more folders to the path
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Absolute paths only exist on one computer. A relative path inside an R project works anywhere the project folder is copied.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) All still depend on Maria's computer.
+  D), A) and C) All still depend on Maria's computer.
 - **Hint:** Will /Users/maria exist on a classmate's laptop?
 
 ### ch03-hw-04
@@ -3229,15 +3218,15 @@ In the penguins dataset, what type of variable is body_mass (values like 3750, 3
 
   A) character
   B) logical
-  C) factor
-  D) numeric
+  C) numeric
+  D) factor
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Body mass is a measured quantity, stored as numbers (integer or double), so it's numeric.
 - **Why the wrong options are wrong (tutor only):**
   A) Character is text.
   B) Logical is TRUE/FALSE.
-  C) Factors are categories.
+  D) Factors are categories.
 - **Hint:** Is it a quantity or a category?
 
 ### ch03-hw-04-v2
@@ -3250,17 +3239,17 @@ A column called is_flowering contains only TRUE and FALSE. What type is it in R?
 
 - **Options:**
 
-  A) numeric
-  B) logical
-  C) character
-  D) factor
+  A) character
+  B) factor
+  C) numeric
+  D) logical
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** R stores TRUE/FALSE values as a logical variable.
 - **Why the wrong options are wrong (tutor only):**
-  A) They're not numbers (though R can count TRUEs).
-  C) Not text.
-  D) Not a factor unless converted.
+  A) Not text.
+  B) Not a factor unless converted.
+  C) They're not numbers (though R can count TRUEs).
 - **Hint:** Which type holds TRUE/FALSE?
 
 ### ch03-hw-05

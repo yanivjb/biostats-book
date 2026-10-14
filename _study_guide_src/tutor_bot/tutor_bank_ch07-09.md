@@ -66,17 +66,17 @@ In an experiment, Clarkia plants were randomly assigned to have their petals tri
 
 - **Options:**
 
-  A) Petal size, because it was manipulated with random assignment
-  B) Soil moisture, because it's an environmental factor
+  A) Soil moisture, because it's an environmental factor that affects the whole plant
+  B) Neither; correlation never implies causation
   C) Both equally, since the associations are similar
-  D) Neither; correlation never implies causation
+  D) Petal size, because it was randomly assigned
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Random assignment rules out confounders, so the petal experiment supports a causal effect. The soil-moisture correlation could reflect confounding.
 - **Why the wrong options are wrong (tutor only):**
-  B) Being environmental doesn't make it causal.
+  A) Being environmental doesn't make it causal.
+  B) Experiments can support causal claims.
   C) Similar strength doesn't mean similar evidence for causation.
-  D) Experiments can support causal claims.
 - **Hint:** Which result came from an experiment?
 
 ### ch07-book-01-v2
@@ -89,16 +89,16 @@ Two traits correlate with seed set: flower color (r = 0.25) and leaf hairiness (
 
 - **Options:**
 
-  A) Flower color: the correlation plus a known mechanism make it more plausible
-  B) Leaf hairiness, because both correlations are similar
-  C) Both equally
-  D) Neither; we can say nothing
+  A) Flower color: a known mechanism backs it up
+  B) Neither; we can say nothing from correlations
+  C) Leaf hairiness, because its correlation is almost as strong
+  D) Both equally
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** When correlations are similar, biological plausibility (and ideally experiments) helps decide what's likely causal.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Similar r doesn't mean similar plausibility.
-  D) Mechanism provides evidence, though not proof.
+  B) Mechanism provides evidence, though not proof.
+  C) and D) Similar r doesn't mean similar plausibility.
 - **Hint:** What do you know about how pollinators choose flowers?
 
 ### ch07-book-02
@@ -140,16 +140,16 @@ Across towns, the number of churches correlates positively with the number of cr
 
 - **Options:**
 
-  A) Confounding: bigger towns have more of both
-  B) Churches cause crime
-  C) Crime causes church building
-  D) Pure chance
+  A) Crime causes church building
+  B) Confounding: bigger towns have more of both
+  C) Pure chance, since the two have nothing to do with each other
+  D) Churches cause crime
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Population size drives both counts. That's a classic confounder.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Causal stories ignoring an obvious third variable.
-  D) A strong pattern across many towns isn't just chance.
+  C) A strong pattern across many towns isn't just chance.
+  D) and A) Causal stories ignoring an obvious third variable.
 - **Hint:** What makes both numbers go up?
 
 ### ch07-book-02-v2
@@ -162,16 +162,16 @@ Leaf water content correlates negatively with seed set, and leaf water content a
 
 - **Options:**
 
-  A) Petal size may confound it: plants with bigger petals have drier leaves and more seed set
-  B) Dry leaves attract pollinators
+  A) Chance alone
+  B) Petal size may be a confound
   C) Seed set dries out leaves
-  D) Chance alone
+  D) Dry leaves attract pollinators, which boosts seed set
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** If petal size affects seed set and is linked to leaf water content, leaf water content will correlate with seed set even without a direct effect.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) No plausible mechanism.
-  D) A better explanation exists.
+  A) A better explanation exists.
+  D) and C) No plausible mechanism.
 - **Hint:** Look for a third variable linked to both.
 
 ### ch07-book-03
@@ -329,17 +329,17 @@ In panel a, the points fall tightly along a downward line. Which describes its c
 
 - **Options:**
 
-  A) Close to −1
+  A) Close to +1
   B) Close to 0
-  C) Close to +1
-  D) Exactly 0.5
+  C) Exactly 0.5
+  D) Close to −1
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A tight negative linear relationship gives r near −1 (here about −0.96).
 - **Why the wrong options are wrong (tutor only):**
+  A) It slopes down.
   B) The relationship is strong.
-  C) It slopes down.
-  D) No reason for 0.5.
+  C) No reason for 0.5.
 - **Hint:** Direction from the slope; strength from the tightness.
 
 ### ch07-book-05-v2
@@ -352,17 +352,17 @@ Which statement about the correlation coefficient is true?
 
 - **Options:**
 
-  A) A U-shaped or arch-shaped relationship can have r near 0
-  B) r near 0 means x and y are unrelated
-  C) A steeper line always means a larger r
-  D) r can be greater than 1 for very strong relationships
+  A) r can be greater than 1 for very strong relationships
+  B) A steeper line always means a larger r
+  C) An arch-shaped relationship can have r near 0
+  D) r near 0 means x and y are unrelated
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** r measures only linear association; curved relationships can be strong yet have r ≈ 0.
 - **Why the wrong options are wrong (tutor only):**
-  B) Nonlinear relationships can hide behind r ≈ 0.
-  C) r measures tightness around a line, not steepness.
-  D) r is between −1 and 1.
+  A) r is between −1 and 1.
+  B) r measures tightness around a line, not steepness.
+  D) Nonlinear relationships can hide behind r ≈ 0.
 - **Hint:** What kind of relationship does r measure?
 
 ### ch07-gquiz-01
@@ -380,10 +380,10 @@ Which statement is correct?
 
 - **Options:**
 
-  A) Both sum products of deviations from the mean and divide by n − 1; variance multiplies a variable's deviation by itself, while covariance multiplies deviations of two different variables, so covariance can be negative
-  B) They are the same except that covariance divides by n
+  A) Both average products of deviations, but covariance pairs two variables, so it can be negative
+  B) They are identical calculations, except that covariance divides by n instead of n − 1
   C) Covariance is the square root of variance
-  D) Both are always positive
+  D) Both are always positive, because each deviation gets multiplied by another deviation
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Variance is the covariance of a variable with itself: Cov(X, X) = Var(X). Because the deviations in covariance can have opposite signs, covariance can be negative (as X goes up, Y goes down), but variance never can.
@@ -403,16 +403,16 @@ Which statement about covariance is true?
 
 - **Options:**
 
-  A) Cov(X, X) equals Var(X)
-  B) Covariance is always positive
-  C) Covariance has no units
+  A) Covariance has no units
+  B) Cov(X, X) equals Var(X)
+  C) Covariance is always positive
   D) Covariance is the same as correlation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Covariance multiplies the deviations of X and Y. If Y is X itself, that's the squared deviation, i.e., the variance.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's negative when one variable goes down as the other goes up.
-  C) It has units (units of X × units of Y).
+  A) It has units (units of X × units of Y).
+  C) It's negative when one variable goes down as the other goes up.
   D) Correlation is covariance standardized by both SDs.
 - **Hint:** Plug X in for Y.
 
@@ -428,15 +428,15 @@ Big deviations above the mean in X tend to pair with big deviations below the me
 
   A) Negative
   B) Positive
-  C) Zero
-  D) Undefined
+  C) Undefined
+  D) Zero
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Each product (positive × negative) is negative, so their sum (and the covariance) is negative.
 - **Why the wrong options are wrong (tutor only):**
   B) That would need deviations in the same direction.
-  C) Zero would need no consistent pattern.
-  D) It's defined.
+  C) It's defined.
+  D) Zero would need no consistent pattern.
 - **Hint:** What's the sign of (positive) × (negative)?
 
 ### ch07-gquiz-03
@@ -449,10 +449,10 @@ You want to compare how strongly fruit size is related to cost per pound in appl
 
 - **Options:**
 
-  A) Correlation, because it is standardized (unitless, between −1 and 1), so its strength can be compared across groups measured on different scales
-  B) Covariance, because it keeps the original units
+  A) Correlation, because it is unitless and bounded between −1 and 1
+  B) Covariance, because it keeps the original units, which makes it easier to interpret
   C) Covariance, because it can be negative
-  D) Either; they always give the same answer
+  D) Either one; they always lead to the same conclusion about strength
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Covariance depends on the units and spread of each variable, so a bigger covariance in oranges could just mean oranges vary more in size or price. Correlation divides covariance by both SDs, so it measures the strength of the linear relationship on a common scale.
@@ -472,17 +472,17 @@ Two studies relate body size to running speed: one in mice (grams, cm/s), one in
 
 - **Options:**
 
-  A) Correlation
-  B) Covariance
-  C) Either one
-  D) Neither
+  A) Neither
+  B) Either one, since both measure association
+  C) Correlation
+  D) Covariance, since it keeps the units
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Correlation is unitless and bounded by −1 and 1, so it compares strength across scales. Covariance depends on the units.
 - **Why the wrong options are wrong (tutor only):**
-  B) Covariance would differ just because of units.
-  C) Only correlation is standardized.
-  D) Correlation works.
+  A) Correlation works.
+  B) Only correlation is standardized.
+  D) Covariance would differ just because of units.
 - **Hint:** Which statistic doesn't care about units?
 
 ### ch07-gquiz-03-v2
@@ -495,17 +495,17 @@ If you convert mass from grams to kilograms, what happens to the covariance betw
 
 - **Options:**
 
-  A) The covariance shrinks 1000-fold; the correlation is unchanged
-  B) Both shrink 1000-fold
+  A) The correlation shrinks; the covariance doesn't
+  B) Covariance shrinks 1000-fold; correlation is unchanged
   C) Neither changes
-  D) The correlation shrinks; the covariance doesn't
+  D) Both shrink 1000-fold, since mass shrinks 1000-fold
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Covariance carries the units of mass, so it shrinks when mass is in larger units. Correlation divides by the SDs, which shrink by the same factor, so it's unchanged.
 - **Why the wrong options are wrong (tutor only):**
-  B) Correlation is unitless.
+  A) Backwards.
   C) Covariance changes with units.
-  D) Backwards.
+  D) Correlation is unitless.
 - **Hint:** Which one has units?
 
 ### ch07-gquiz-04
@@ -560,17 +560,17 @@ If we measure the heights of people in inches and in feet, the two variables are
 
 - **Options:**
 
-  A) Covariance = 12 × Var(height in feet), which depends on the data and the units; correlation = 1
-  B) Covariance = 1; correlation = 1
-  C) Covariance = 12; correlation = 12
-  D) Covariance = 1; correlation = 1/12
+  A) Covariance = 1; correlation = 1
+  B) Covariance = 1; correlation = 1/12
+  C) Covariance = 12 × Var(height in feet); correlation = 1
+  D) Covariance = 12; correlation = 12, since both scale with the conversion factor
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Cov(12F, F) = 12·Cov(F, F) = 12·Var(F), so there's no fixed number: it depends on how variable heights are. Correlation = Cov / (SD_inches × SD_feet) = 12·Var(F) / (12·SD_F × SD_F) = 1. A perfect positive linear relationship always has r = 1, whatever the units.
 - **Why the wrong options are wrong (tutor only):**
-  B) Covariance isn't standardized, so it's not automatically 1.
-  C) Correlation can never exceed 1.
-  D) Changing units doesn't change correlation.
+  A) Covariance isn't standardized, so it's not automatically 1.
+  B) Changing units doesn't change correlation.
+  D) Correlation can never exceed 1.
 - **Hint:** Covariance has units; correlation doesn't. What is Cov(F, F)?
 
 ### ch07-gquiz-06-v1
@@ -583,16 +583,16 @@ Temperature in °C and the same temperatures in °F (F = 1.8 × C + 32) are perf
 
 - **Options:**
 
-  A) 1
-  B) 1.8
-  C) 32
-  D) It depends on the temperatures
+  A) It depends on the temperatures
+  B) 32
+  C) 1.8
+  D) 1
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Any perfect positive linear relationship has r = 1, no matter the slope or intercept.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Correlation can't exceed 1.
-  D) Perfect linear relationships always give r = 1.
+  A) Perfect linear relationships always give r = 1.
+  C) and B) Correlation can't exceed 1.
 - **Hint:** What does a perfect straight-line relationship give?
 
 ### ch07-gquiz-06-v2
@@ -813,16 +813,16 @@ Across cities, ice-cream sales and drowning deaths have a correlation of 0.7. Wh
 
 - **Options:**
 
-  A) There's a positive association between ice-cream sales and drownings
-  B) Ice cream causes drowning
-  C) Drowning causes ice-cream sales
-  D) There's no relationship
+  A) Drowning causes ice-cream sales
+  B) There's no relationship, since one can't cause the other
+  C) Sales and drownings are positively associated
+  D) Ice cream causes drowning
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The data show an association. Hot weather plausibly drives both (a confounder).
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Causal claims from correlation.
-  D) r = 0.7 is a clear association.
+  B) r = 0.7 is a clear association.
+  D) and A) Causal claims from correlation.
 - **Hint:** What else rises in summer?
 
 ### ch07-hw-04-v2
@@ -835,17 +835,17 @@ A correlation of −0.5 between hours of screen time and sleep quality means:
 
 - **Options:**
 
-  A) People with more screen time tend to report worse sleep
-  B) Screen time causes bad sleep
-  C) Half of people sleep badly
-  D) There's no relationship
+  A) More screen time tends to go with worse sleep
+  B) About half of people sleep badly
+  C) There's no relationship
+  D) Screen time causes bad sleep
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A negative correlation means that as one goes up, the other tends to go down. It doesn't establish cause.
 - **Why the wrong options are wrong (tutor only):**
-  B) Causal.
-  C) r isn't a proportion of people.
-  D) −0.5 is a moderate association.
+  B) r isn't a proportion of people.
+  C) −0.5 is a moderate association.
+  D) Causal.
 - **Hint:** What does the sign mean?
 
 ### ch07-hw-05
@@ -915,17 +915,17 @@ In panel b, y is closely predicted by x (an arch shape), but r ≈ 0.07. Why?
 
 - **Options:**
 
-  A) Correlation only measures linear association; the rising and falling halves cancel out
-  B) The data must be wrong
-  C) There's no relationship between x and y
-  D) The sample is too small
+  A) The data must be wrong, since a strong pattern gives a big r
+  B) r only measures linear association, and the halves cancel
+  C) The sample is too small
+  D) There's no relationship between x and y
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A straight line can't describe an arch, so r is near zero even though the relationship is strong.
 - **Why the wrong options are wrong (tutor only):**
-  B) The data are fine.
-  C) There's a strong (nonlinear) relationship.
-  D) Sample size isn't the issue.
+  A) The data are fine.
+  C) Sample size isn't the issue.
+  D) There's a strong (nonlinear) relationship.
 - **Hint:** Can a straight line fit an arch?
 
 ### ch07-hw-06
@@ -939,17 +939,17 @@ Across 27 countries, the correlation between chocolate consumption and number of
 
 - **Options:**
 
-  A) The association is driven by a few extreme countries; for most countries there is essentially no linear association
-  B) Removing data always lowers the correlation, so this tells us nothing
-  C) Those three countries are errors and should be deleted
-  D) Chocolate causes Nobel prizes only in large countries
+  A) A few extreme countries drive the association; most countries show essentially none
+  B) Chocolate causes Nobel prizes only in large countries
+  C) Those three countries are data errors and should be deleted before any analysis
+  D) Removing data always lowers a correlation, so this change tells us nothing about the association
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Correlation is sensitive to extreme points: three countries with huge laureate counts (which also eat a lot of chocolate) create the whole pattern. Among the other 24, r is about 0. Also note these are raw counts, not per capita, so big, rich countries dominate. Always look at the plot before trusting an r.
 - **Why the wrong options are wrong (tutor only):**
-  B) Removing points can raise, lower or not change r. Here it changed it a lot, which is informative.
+  B) A causal claim the data can't support.
   C) They're real data; you can report results with and without them, but you don't delete them for being inconvenient.
-  D) A causal claim the data can't support.
+  D) Removing points can raise, lower or not change r. Here it changed it a lot, which is informative.
 - **Hint:** Look at the scatterplot. Where would the line go without the three labeled points?
 
 ### ch07-hw-06-v1
@@ -962,17 +962,17 @@ Across 30 lakes, fish species richness and lake area have r = 0.55. Removing the
 
 - **Options:**
 
-  A) One extreme lake drives the correlation; among the other lakes there's little linear association
-  B) Removing data always lowers r
-  C) The largest lake must be a data error and should be deleted
-  D) Big lakes cause more species only above a certain size
+  A) Big lakes cause more species only above a certain size
+  B) The largest lake must be a data error and should be deleted
+  C) Removing data always lowers r, so it tells us nothing
+  D) One extreme lake drives the correlation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Correlation is sensitive to extreme points. Report results with and without the influential point, and look at the plot.
 - **Why the wrong options are wrong (tutor only):**
-  B) Removing points can raise or lower r.
-  C) Real data shouldn't be deleted just for being influential.
-  D) One point can't establish that.
+  A) One point can't establish that.
+  B) Real data shouldn't be deleted just for being influential.
+  C) Removing points can raise or lower r.
 - **Hint:** How much is one point doing?
 
 ### ch07-hw-06-v2
@@ -985,17 +985,17 @@ Why should you always plot data before trusting a correlation coefficient?
 
 - **Options:**
 
-  A) One or two extreme points, or a curved pattern, can make r misleading
-  B) Plots are required for r to be calculated
-  C) r is always wrong
-  D) Plots make r larger
+  A) Plots are required before r can be calculated
+  B) Plots make r larger
+  C) Extreme points or curves can make r misleading
+  D) r is always wrong
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Very different patterns can share the same r (e.g., Anscombe's quartet). The plot shows whether r describes the data well.
 - **Why the wrong options are wrong (tutor only):**
-  B) R calculates r without a plot.
-  C) r is correct as a number; it just may not describe the pattern well.
-  D) Plotting doesn't change r.
+  A) R calculates r without a plot.
+  B) Plotting doesn't change r.
+  D) r is correct as a number; it just may not describe the pattern well.
 - **Hint:** Can very different scatterplots have the same r?
 
 ## Chapter 8: Sampling
@@ -1051,17 +1051,17 @@ Which statement is correct?
 
 - **Options:**
 
-  A) The SE describes how much sample means vary; the SD describes how much individuals vary
-  B) The SE and SD are two names for the same thing
-  C) The SE is always larger than the SD
-  D) The SD shrinks as sample size increases; the SE doesn't
+  A) SE: how much sample means vary; SD: how much individuals vary
+  B) The SD shrinks as sample size increases, but the SE doesn't
+  C) The SE and the SD are two names for the same thing
+  D) The SE is always larger than the SD
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** SD: spread among individuals. SE: spread among estimates (for a given n). Since SE ≈ SD/√n, the SE is smaller than the SD whenever n > 1.
 - **Why the wrong options are wrong (tutor only):**
-  B) They measure different things.
-  C) It's smaller, not larger.
-  D) That's backwards.
+  B) That's backwards.
+  C) They measure different things.
+  D) It's smaller, not larger.
 - **Hint:** Individuals or estimates?
 
 ### ch08-book-02
@@ -1181,17 +1181,17 @@ The difference between the true mean and my estimates is most likely explained b
 
 - **Options:**
 
-  A) Sampling bias
-  B) Non-independence
-  C) Sampling error
-  D) Too few repetitions
+  A) Too few repetitions
+  B) Sampling error
+  C) Sampling bias
+  D) Non-independence
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Nearly all 1000 estimates are above 2.56: a systematic shift. Families with more children have more students to be asked, so big families are oversampled (size-biased sampling). Sampling error would scatter estimates on both sides of the truth.
 - **Why the wrong options are wrong (tutor only):**
-  B) Non-independence would widen the spread, not shift it.
-  C) Chance would put estimates on both sides of the line.
-  D) More repetitions would show the same shift.
+  A) More repetitions would show the same shift.
+  B) Chance would put estimates on both sides of the line.
+  D) Non-independence would widen the spread, not shift it.
 - **Hint:** Are the estimates scattered around the truth, or all off in one direction?
 
 ### ch08-book-03-v2
@@ -1207,17 +1207,17 @@ The individual estimates range from about 27 to 34.5 cm. This spread is best exp
 
 - **Options:**
 
-  A) Sampling error
-  B) Sampling bias
+  A) Sampling bias
+  B) Measurement error
   C) Non-independence
-  D) Measurement error
+  D) Sampling error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The estimates are scattered evenly on both sides of the true mean, as expected from chance differences among random samples. There's no systematic shift, so no bias.
 - **Why the wrong options are wrong (tutor only):**
-  B) Bias would shift the whole histogram away from the red line.
+  A) Bias would shift the whole histogram away from the red line.
+  B) Even perfect measurements would give this spread, because each net catches different fish.
   C) Nothing suggests related fish.
-  D) Even perfect measurements would give this spread, because each net catches different fish.
 - **Hint:** Is the histogram centered on the red line?
 
 ### ch08-book-04
@@ -1230,17 +1230,17 @@ I estimated mean human gene length by randomly choosing nucleotides from the gen
 
 - **Options:**
 
-  A) Long genes contain more nucleotides, so they were more likely to be hit. Fix: randomly sample genes from a list of all genes, giving each gene an equal chance
-  B) My sample of 50 was too small. Fix: sample 5000 genes the same way
-  C) Nucleotides near each other are non-independent. Fix: sample nucleotides farther apart
-  D) Bad luck. Fix: repeat the experiment
+  A) Bad luck. Fix: repeat the experiment
+  B) My sample of 50 was too small to be accurate. Fix: sample 5000 genes the same way
+  C) Long genes contain more nucleotides, so they were hit more often. Fix: sample genes from a list, each with an equal chance
+  D) Nucleotides near each other are non-independent. Fix: sample nucleotides that are farther apart in the genome
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Picking random nucleotides is size-biased sampling: a 20 kb gene is ten times as likely to be picked as a 2 kb gene. Each gene needs an equal chance of being chosen. It's the same issue as picking random times of day for Old Faithful.
 - **Why the wrong options are wrong (tutor only):**
+  A) 1000 repeats were all too high; that's not luck.
   B) A bigger biased sample is still biased, just more precisely wrong.
-  C) Spacing doesn't change the length-based selection.
-  D) 1000 repeats were all too high; that's not luck.
+  D) Spacing doesn't change the length-based selection.
 - **Hint:** Does every gene have the same chance of being in the sample?
 
 ### ch08-book-04-v1
@@ -1253,17 +1253,17 @@ I estimated the mean number of children per family by surveying random high-scho
 
 - **Options:**
 
-  A) Families with more children have more students who could be picked, so big families were oversampled. Fix: randomly sample families (e.g., households), not students
-  B) My sample was too small. Fix: survey more students the same way
-  C) Students are bad at counting siblings. Fix: check birth records
-  D) Bad luck. Fix: repeat the survey
+  A) Bad luck. Fix: repeat the survey
+  B) My sample was too small to be accurate. Fix: survey many more students the same way
+  C) Big families have more students to pick, so they're oversampled. Fix: randomly sample households
+  D) Students are bad at counting their siblings. Fix: check the answers against birth records
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Sampling students gives each family a chance proportional to its number of children: size-biased sampling, like random nucleotides oversampling long genes. Each family needs an equal chance.
 - **Why the wrong options are wrong (tutor only):**
+  A) Repeating gives the same systematic error.
   B) A bigger biased sample is still biased.
-  C) Even perfect counting gives the same bias.
-  D) Repeating gives the same systematic error.
+  D) Even perfect counting gives the same bias.
 - **Hint:** Does every family have the same chance of being in the sample?
 
 ### ch08-book-04-v2
@@ -1276,15 +1276,15 @@ To estimate mean group size of wild horses, researchers flew over the range and 
 
 - **Options:**
 
-  A) Large groups cover more ground, so they're more likely to be nearest a random spot: big groups are oversampled
-  B) Horses move, so photos are blurry
-  C) The flights were too short
-  D) The researchers made arithmetic errors
+  A) The researchers made arithmetic errors
+  B) Horses move during the flight, so the photos blur and groups get double-counted
+  C) The flights were too short to find enough groups
+  D) Large groups cover more ground, so they're more often nearest a random spot
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Like random nucleotides landing in long genes, random spots are more likely to land near big groups. That's size-biased sampling. Fix: sample groups with equal probability, e.g., list all groups and pick at random.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) None of these would push estimates consistently upward.
+  B), C) and A) None of these would push estimates consistently upward.
 - **Hint:** Which groups are easiest to 'hit' with a random spot?
 
 ### ch08-book-05
@@ -1321,17 +1321,17 @@ Individual oak heights range from about 6 to 30 m, but means of random samples o
 
 - **Options:**
 
-  A) Averaging many trees cancels out extremes, so estimates vary much less than individuals
-  B) Sampling bias
-  C) Non-independence
-  D) The samples of 64 must have excluded the tallest and shortest trees
+  A) Non-independence
+  B) Sampling bias pulls every sample mean toward the middle of the range
+  C) The samples of 64 must have left out the tallest and shortest trees
+  D) Averaging cancels out extreme trees, so means vary less than individuals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** One very tall tree in a sample of 64 is diluted by 63 others. That's why SE = SD/√n is much smaller than the SD.
 - **Why the wrong options are wrong (tutor only):**
+  A) Non-independence would widen, not narrow.
   B) Bias would shift the center, not narrow the spread.
-  C) Non-independence would widen, not narrow.
-  D) Random samples include extreme trees; they just don't dominate the mean.
+  C) Random samples include extreme trees; they just don't dominate the mean.
 - **Hint:** What happens to one extreme value when averaged with 63 others?
 
 ### ch08-book-05-v2
@@ -1344,16 +1344,16 @@ Which will be more spread out?
 
 - **Options:**
 
-  A) Heights of 1,000 individual students
-  B) Mean heights of 1,000 random samples of 25 students
-  C) They'll be equally spread out
-  D) It depends on whether the population is skewed
+  A) They'll be equally spread out
+  B) It depends on whether the population is skewed
+  C) Mean heights of 1,000 random samples of 25 students
+  D) Heights of 1,000 individual students
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Individuals vary the most. Means of 25 vary about 1/√25 = 1/5 as much (SE = SD/√n), whatever the shape of the population.
 - **Why the wrong options are wrong (tutor only):**
-  B) Means are less variable than individuals.
-  C) and D) Averaging always reduces spread.
+  A) and B) Averaging always reduces spread.
+  C) Means are less variable than individuals.
 - **Hint:** Do means vary more or less than individuals?
 
 ### ch08-book-06
@@ -1367,17 +1367,17 @@ The plot shows sampling distributions of mean human gene length from 1000 random
 
 - **Options:**
 
-  A) Less sampling error in larger samples; n = 500 has the smallest SE
+  A) Less sampling error in larger samples; they all have about the same SE
   B) Less sampling bias in larger samples; n = 500 has the smallest SE
   C) Less non-independence in larger samples; n = 5 has the smallest SE
-  D) Less sampling error in larger samples; they all have about the same SE
+  D) Less sampling error in larger samples; n = 500 has the smallest SE
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** All three are centered on the truth (no bias). They get narrower as n increases. The SEs computed from the data are about 1.04 kb (n = 5), 0.37 (n = 30) and 0.09 (n = 500).
 - **Why the wrong options are wrong (tutor only):**
+  A) The widths clearly differ.
   B) None of the three is biased; they're all centered on the red line.
   C) Sample size doesn't change independence.
-  D) The widths clearly differ.
 - **Hint:** Center = bias; width = sampling error / SE.
 
 ### ch08-book-06-v1
@@ -1394,16 +1394,16 @@ What explains the difference between the panels, and which n has the smallest st
 - **Options:**
 
   A) Less sampling error in larger samples; n = 160 has the smallest SE
-  B) Less sampling bias in larger samples; n = 160 has the smallest SE
+  B) Less sampling error in larger samples; they all have about the same SE
   C) Less non-independence in larger samples; n = 10 has the smallest SE
-  D) Less sampling error in larger samples; they all have about the same SE
+  D) Less sampling bias in larger samples; n = 160 has the smallest SE
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** All three are centered on 0.30 (no bias) and get narrower as n increases. SE = √(0.3 × 0.7 / n): about 0.145, 0.072 and 0.036.
 - **Why the wrong options are wrong (tutor only):**
-  B) None is biased.
+  B) The widths clearly differ.
   C) Sample size doesn't change independence; n = 10 has the largest SE.
-  D) The widths clearly differ.
+  D) None is biased.
 - **Hint:** Center = bias; width = sampling error / SE.
 
 ### ch08-book-06-v2
@@ -1419,17 +1419,17 @@ Going from n = 16 to n = 64 (four times as many trees), what happens to the stan
 
 - **Options:**
 
-  A) It halves (from about 1 m to about 0.5 m)
-  B) It shrinks to a quarter
-  C) It stays the same
-  D) It doubles
+  A) It doubles
+  B) It halves (about 1 m → 0.5 m)
+  C) It shrinks to a quarter, since there are four times as many trees
+  D) It stays the same
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** SE = SD/√n. Quadrupling n doubles √n, so the SE halves: 4/√16 = 1 m, 4/√64 = 0.5 m. You can see the n = 64 panel is about half as wide as n = 16.
 - **Why the wrong options are wrong (tutor only):**
-  B) That would need 16 times the sample.
-  C) The SE depends on n.
-  D) Larger samples reduce the SE.
+  A) Larger samples reduce the SE.
+  C) That would need 16 times the sample.
+  D) The SE depends on n.
 - **Hint:** SE = SD / √n. What happens to √n when n quadruples?
 
 ### ch08-book-07
@@ -1499,17 +1499,17 @@ If the technician had netted 100 fish each time instead of 25, how would the his
 
 - **Options:**
 
-  A) Still centered on 31 cm, but about half as wide
-  B) Shifted closer to 31 cm
-  C) Centered on 31 cm and the same width
-  D) About a quarter as wide
+  A) Shifted closer to 31 cm, because bigger samples are less biased
+  B) Centered on 31 cm and the same width
+  C) About a quarter as wide, since n is four times larger
+  D) Centered on 31 cm, about half as wide
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Random samples stay centered on the truth. The SE scales with 1/√n, so 4 times the fish makes it 1/2 as wide.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's already centered on 31 cm.
-  C) Larger samples reduce the spread.
-  D) That would take 16 times the fish.
+  A) It's already centered on 31 cm.
+  B) Larger samples reduce the spread.
+  C) That would take 16 times the fish.
 - **Hint:** SE = SD / √n.
 
 ### ch08-book-08
@@ -1525,17 +1525,17 @@ What is the standard error of the mean gene length here?
 
 - **Options:**
 
-  A) There is none: this is the entire population, so 2.62 kb is the parameter itself, known without sampling error
-  B) 2.04 kb, the SD
-  C) 2.04 / √20,290 ≈ 0.014 kb
-  D) 2.62 / √20,290
+  A) 2.62 / √20,290
+  B) There is none: this is the whole population, so 2.62 kb is the parameter itself
+  C) 2.04 kb, the SD
+  D) 2.04 / √20,290 ≈ 0.014 kb, the SD divided by the square root of the number of genes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** An SE describes how much an estimate would vary across samples. We measured every gene, so there's no sample, no sampling error, and no SE: the mean is the parameter.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the SD among genes.
-  C) That's what you'd compute if these 20,290 genes were a sample from a larger population, which they aren't.
-  D) Wrong formula, and it doesn't apply here anyway.
+  A) Wrong formula, and it doesn't apply here anyway.
+  C) That's the SD among genes.
+  D) That's what you'd compute if these 20,290 genes were a sample from a larger population, which they aren't.
 - **Hint:** Is this a sample or the whole population?
 
 ### ch08-book-08-v1
@@ -1548,17 +1548,17 @@ A national park counts every one of its 412 bighorn sheep from the air and finds
 
 - **Options:**
 
-  A) There is none: every sheep in the population was counted, so 7.3 is the parameter
-  B) The SD of group sizes
-  C) The SD of group sizes divided by √412
-  D) 7.3 / √412
+  A) None: every sheep was counted, so 7.3 is the parameter
+  B) The SD of group sizes, since that's how much groups vary
+  C) 7.3 / √412
+  D) The SD of group sizes divided by √412
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** An SE describes how much an estimate would vary across samples. A complete census has no sampling, so no sampling error and no SE (though counting mistakes are still possible).
 - **Why the wrong options are wrong (tutor only):**
   B) That's the spread among groups.
-  C) That would apply if these 412 were a sample from a larger population.
-  D) The wrong formula, and it doesn't apply anyway.
+  C) The wrong formula, and it doesn't apply anyway.
+  D) That would apply if these 412 were a sample from a larger population.
 - **Hint:** Is this a sample or the whole population?
 
 ### ch08-book-08-v2
@@ -1571,17 +1571,17 @@ A teacher calculates the mean exam score of all 28 students in her class: 81.5. 
 
 - **Options:**
 
-  A) No: she measured the whole population she cares about, so 81.5 is the parameter
-  B) Yes: every mean needs a standard error
-  C) Yes, because 28 is a small number
-  D) Only if the scores are normally distributed
+  A) No: she measured the whole population she cares about
+  B) Yes, because 28 students is a small sample
+  C) Only if the scores are normally distributed
+  D) Yes: every reported mean needs a standard error next to it
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Whether something is a population depends on the question. If the class is the population of interest, the mean is known exactly. If she wanted to generalize to future classes, then this class would be a sample and an SE would make sense.
 - **Why the wrong options are wrong (tutor only):**
-  B) SEs describe sampling error; no sampling, no SE.
-  C) Small populations are still populations.
-  D) Shape doesn't matter here.
+  B) Small populations are still populations.
+  C) Shape doesn't matter here.
+  D) SEs describe sampling error; no sampling, no SE.
 - **Hint:** Is she sampling, or did she measure everyone she cares about?
 
 ### ch08-gquiz-01
@@ -1638,16 +1638,16 @@ Two students estimate the proportion of red crayons in the same bin. Ana draws 5
 
 - **Options:**
 
-  A) Ana's, because small samples have more sampling error
-  B) Ben's, because more crayons means more chances for mistakes
-  C) Ana's, because small samples are biased
+  A) Ana's, because small samples are biased
+  B) Ana's, because small samples have more sampling error
+  C) Ben's, because more crayons means more chances for mistakes
   D) Neither; both are random
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Both samples are random, so neither is biased. But Ana's 5 crayons can easily be all red or all blue by chance; Ben's 50 average out more of that luck.
 - **Why the wrong options are wrong (tutor only):**
-  B) More data reduces, not increases, chance error.
-  C) Small random samples are noisy, not biased.
+  A) Small random samples are noisy, not biased.
+  C) More data reduces, not increases, chance error.
   D) Both are random, but they differ in precision.
 - **Hint:** With 5 crayons, how likely is a very lopsided sample?
 
@@ -1686,17 +1686,17 @@ For a class survey of sleep hours, a teacher asks only one person per household 
 
 - **Options:**
 
-  A) To minimize sampling bias
+  A) To reduce the number of responses
   B) To minimize sampling error
-  C) To minimize non-independence
-  D) To reduce the number of responses
+  C) To minimize sampling bias
+  D) To minimize non-independence
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** People in the same household share routines (and noise!), so their sleep is more alike. Counting several per household would treat related observations as independent.
 - **Why the wrong options are wrong (tutor only):**
-  A) It doesn't systematically shift the estimate.
+  A) That's a side effect, not the reason.
   B) Fewer responses would increase, not reduce, sampling error.
-  D) That's a side effect, not the reason.
+  C) It doesn't systematically shift the estimate.
 - **Hint:** Would two people from the same household be more alike than two random students?
 
 ### ch08-gquiz-02-v2
@@ -1709,17 +1709,17 @@ In a class activity, each table drew one sample of 10 crayons, but everyone at t
 
 - **Options:**
 
-  A) The 30 entries aren't independent: the class really has only 6 independent samples
-  B) The estimates are biased toward red
-  C) There's no problem; more entries is always better
-  D) The sample size per draw was too small
+  A) The entries aren't independent: there are really only 6 samples
+  B) There's no problem; more entries is always better
+  C) The sample size for each draw (10 crayons) was too small
+  D) The estimates will be biased toward red, since tables share the same bin
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Duplicate entries of one draw aren't new information. Treating them as 30 independent samples overstates how much data we have, making results look more precise than they are.
 - **Why the wrong options are wrong (tutor only):**
-  B) Duplicating samples doesn't shift the center.
-  C) More entries only help if they're independent.
-  D) That's a separate issue.
+  B) More entries only help if they're independent.
+  C) That's a separate issue.
+  D) Duplicating samples doesn't shift the center.
 - **Hint:** How many independent draws were there?
 
 ### ch08-gquiz-04
@@ -1774,15 +1774,15 @@ Which of these is a parameter?
 
 - **Options:**
 
-  A) The mean height of all 1,204 students enrolled in a school
-  B) The mean height of 30 randomly chosen students from that school
-  C) The SD of heights among those 30 students
-  D) The proportion of the 30 students taller than 170 cm
+  A) The proportion of the 30 students taller than 170 cm
+  B) The mean height of all 1,204 students enrolled in a school
+  C) The mean height of 30 randomly chosen students from that school
+  D) The SD of heights among those 30 students
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A parameter describes the whole population. If the population is all 1,204 students, their true mean height is a parameter. Everything calculated from the 30 is an estimate.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) All are calculated from a sample, so they're estimates.
+  C), D) and A) All are calculated from a sample, so they're estimates.
 - **Hint:** Which number describes everyone?
 
 ### ch08-gquiz-05
@@ -1797,17 +1797,17 @@ The distribution of sample estimates from this exercise (if we repeated it an in
 
 - **Options:**
 
-  A) sampling distribution
-  B) population distribution
-  C) standard error
-  D) sampling bias
+  A) standard error
+  B) sampling distribution
+  C) sampling bias
+  D) population distribution
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Many repeated samples → many estimates → their distribution is the sampling distribution.
 - **Why the wrong options are wrong (tutor only):**
-  B) The population distribution is the colors of all crayons in the bin.
-  C) The SE is the spread (SD) of the sampling distribution, not the distribution itself.
-  D) Bias would be a shift in its center.
+  A) The SE is the spread (SD) of the sampling distribution, not the distribution itself.
+  C) Bias would be a shift in its center.
+  D) The population distribution is the colors of all crayons in the bin.
 - **Hint:** Distribution of estimates.
 
 ### ch08-gquiz-05-v1
@@ -1821,16 +1821,16 @@ Each of 200 students flips a coin 20 times and reports the proportion of heads. 
 - **Options:**
 
   A) sampling distribution of the proportion
-  B) population distribution
-  C) standard error
-  D) sampling bias
+  B) sampling bias
+  C) population distribution of coin flips
+  D) standard error
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Many samples of the same size (20 flips) → many estimates → their distribution approximates the sampling distribution.
 - **Why the wrong options are wrong (tutor only):**
-  B) The population distribution would be the outcomes of individual flips.
-  C) The SE is the SD of this distribution, not the distribution itself.
-  D) Bias would be a shift of its center away from the truth.
+  B) Bias would be a shift of its center away from the truth.
+  C) The population distribution would be the outcomes of individual flips.
+  D) The SE is the SD of this distribution, not the distribution itself.
 - **Hint:** Distribution of estimates.
 
 ### ch08-gquiz-05-v2
@@ -1843,15 +1843,15 @@ In class, each student drew 10 crayons (without replacement) from a big bin of m
 
 - **Options:**
 
-  A) The standard error of the proportion red for samples of 10
-  B) The standard deviation of crayon colors in the bin
+  A) The standard deviation of crayon colors in the whole bin
+  B) The standard error of the proportion red (n = 10)
   C) The sampling bias
-  D) The true proportion of red crayons
+  D) The true proportion of red crayons in the bin
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The histogram is the sampling distribution, and the SD of a sampling distribution is the standard error.
 - **Why the wrong options are wrong (tutor only):**
-  B) That describes individual crayons, not estimates.
+  A) That describes individual crayons, not estimates.
   C) Bias is about the center, not the spread.
   D) The true proportion is where the histogram is centered.
 - **Hint:** SE = the SD of what?
@@ -1868,17 +1868,17 @@ How could you find the standard error of the proportion of red crayons in a samp
 
 - **Options:**
 
-  A) Repeatedly draw samples of 10 crayons (returning them between samples), calculate the proportion red in each sample, and take the standard deviation of those proportions
-  B) Draw one sample of 10 and calculate the standard deviation of crayon colors in it
-  C) Count all the crayons in the bin and calculate the proportion red
-  D) Draw one sample of 100 crayons instead of 10
+  A) Count every crayon in the bin and calculate the overall proportion that are red
+  B) Draw one sample of 100 crayons instead of 10
+  C) Draw one sample of 10 crayons and calculate the standard deviation of crayon colors in it
+  D) Draw many samples of 10 (returning crayons between draws), find each proportion red, and take the SD of those proportions
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The SE is the SD of the sampling distribution, so build the sampling distribution: many samples of the same size (10), one estimate per sample, then the SD of the estimates.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's (roughly) an SD among individuals, not among estimates.
-  C) That gives the parameter, with no uncertainty to describe.
-  D) That gives one estimate from a different sample size, not the SE for n = 10.
+  A) That gives the parameter, with no uncertainty to describe.
+  B) That gives one estimate from a different sample size, not the SE for n = 10.
+  C) That's (roughly) an SD among individuals, not among estimates.
 - **Hint:** SE = the SD of what?
 
 ### ch08-gquiz-07-v1
@@ -1891,17 +1891,17 @@ A biologist wants the standard error of mean beak length for samples of 15 finch
 
 - **Options:**
 
-  A) Catch many separate samples of 15 finches, compute the mean of each, and take the SD of those means
-  B) Catch one sample of 15 and compute the SD of beak lengths
-  C) Catch one sample of 150 and compute its mean
-  D) Measure every finch on the island
+  A) Measure every finch on the island
+  B) Catch one sample of 15 and compute the SD of their beak lengths
+  C) Catch many samples of 15, and take the SD of their means
+  D) Catch one large sample of 150 finches and compute its mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The SE is the SD of the sampling distribution. Building it means many samples of the same size, one mean each, then the SD of those means.
 - **Why the wrong options are wrong (tutor only):**
+  A) That gives the parameter, with no sampling error to describe.
   B) That's the SD among individuals (though SD/√15 would approximate the SE).
-  C) One mean, from a different n, says nothing about variation among means.
-  D) That gives the parameter, with no sampling error to describe.
+  D) One mean, from a different n, says nothing about variation among means.
 - **Hint:** SE = SD of many what?
 
 ### ch08-gquiz-07-v2
@@ -1914,17 +1914,17 @@ You have one sample of 40 plants and can't go back for more. What's the best way
 
 - **Options:**
 
-  A) Use the sample SD divided by √40 (or bootstrap the sample)
-  B) Use the sample SD itself
-  C) It's impossible without more samples
-  D) Use the sample mean divided by √40
+  A) It's impossible to estimate without taking more samples
+  B) Sample SD / √40, or bootstrap the sample
+  C) Use the sample mean divided by √40
+  D) Use the sample SD itself
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With only one sample, we approximate the sampling distribution: either with the formula SE ≈ SD/√n or by resampling the data (bootstrap).
 - **Why the wrong options are wrong (tutor only):**
-  B) The SD describes individuals, not means.
-  C) We can estimate it; we just can't observe it directly.
-  D) The mean isn't a measure of spread.
+  A) We can estimate it; we just can't observe it directly.
+  C) The mean isn't a measure of spread.
+  D) The SD describes individuals, not means.
 - **Hint:** Means vary less than individuals by how much?
 
 ### ch08-hw-01
@@ -2032,15 +2032,15 @@ Many labs each measure 30 randomly chosen zebrafish and report the mean swimming
 
 - **Options:**
 
-  A) Sampling distribution of the mean
-  B) Population distribution of swimming speeds
+  A) Population distribution of swimming speeds
+  B) Sampling distribution of the mean
   C) Standard deviation of swimming speed
   D) Sampling bias
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Each lab produced one estimate (a mean of 30 fish). A distribution of estimates from many samples of the same size is a sampling distribution.
 - **Why the wrong options are wrong (tutor only):**
-  B) The population distribution would show individual fish, not means of 30.
+  A) The population distribution would show individual fish, not means of 30.
   C) The SD is a single number describing spread among individuals.
   D) Bias would be a shift of the means away from the truth, not the distribution itself.
 - **Hint:** Is each value in the histogram an individual fish, or an estimate?
@@ -2056,9 +2056,9 @@ Which of these is a sampling distribution?
 - **Options:**
 
   A) A histogram of the heights of all 600 trees in a forest plot
-  B) A histogram of the means of 1,000 random samples of 10 trees each
+  B) A histogram of the means of 1,000 random samples of 10 trees
   C) A histogram of the heights of 10 trees in one sample
-  D) A bar chart of the number of trees of each species
+  D) A bar chart of how many trees of each species are in the plot
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** A sampling distribution is a distribution of estimates (here, means), one from each of many samples of the same size.
@@ -2101,17 +2101,17 @@ You measured one sample of 50 frogs and found a mean jump distance of 82 cm. Why
 
 - **Options:**
 
-  A) It tells you how much your 82 cm might differ from the truth, because a different sample of 50 would give a different mean
-  B) It tells you how far an individual frog can jump
-  C) It makes your 82 cm exactly correct
-  D) You can read it directly off your one sample of 50 frogs
+  A) It makes your 82 cm exactly correct
+  B) It tells you how far an individual frog can jump, and how much frogs differ
+  C) You can read it directly off the histogram of your one sample of 50 frogs
+  D) It shows how far your 82 cm might be from the truth
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The sampling distribution describes the other estimates you might have gotten. That's what lets us say how uncertain our one estimate is (SE, CI).
 - **Why the wrong options are wrong (tutor only):**
+  A) Nothing removes sampling error.
   B) Individual variation is the population distribution.
-  C) Nothing removes sampling error.
-  D) We can approximate it (bootstrap, formulas), but one sample doesn't show it directly.
+  C) We can approximate it (bootstrap, formulas), but one sample doesn't show it directly.
 - **Hint:** Think about the estimates you didn't get.
 
 ### ch08-hw-03-v2
@@ -2124,17 +2124,17 @@ Two students each estimate the mean caffeine content of a coffee shop's lattes f
 
 - **Options:**
 
-  A) The sampling distribution: estimates vary from sample to sample, and its spread tells us how much
-  B) One of them must have made a measurement mistake
-  C) The population distribution changed between their visits
-  D) Sampling bias: one sample must be non-random
+  A) Sampling bias: at least one of the two samples must be non-random
+  B) The sampling distribution: estimates vary between samples
+  C) The population distribution changed between their visits to the shop
+  D) One of them must have made a measurement mistake
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Even with perfect measurements and random samples, different samples give different estimates. The sampling distribution describes that variation.
 - **Why the wrong options are wrong (tutor only):**
-  B) A difference doesn't require a mistake; chance alone produces it.
+  A) Random samples still differ by chance; that's sampling error, not bias.
   C) Nothing suggests the lattes changed.
-  D) Random samples still differ by chance; that's sampling error, not bias.
+  D) A difference doesn't require a mistake; chance alone produces it.
 - **Hint:** Would two perfectly random samples give the same mean?
 
 ### ch08-hw-04
@@ -2191,17 +2191,17 @@ A paper reports: "mean body mass = 24.1 g (± 0.3 g, SE), n = 100 mice." What do
 
 - **Options:**
 
-  A) How far a typical sample mean of 100 mice would be from the true mean
-  B) How far a typical mouse is from the mean
-  C) The difference between the heaviest and lightest mouse
-  D) The measurement error of the scale
+  A) How far a typical mouse is from the mean
+  B) The measurement error of the scale
+  C) The difference between the heaviest and the lightest mouse in the sample
+  D) How far a typical sample mean (n = 100) is from the true mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A standard error describes the variability of an estimate (the mean of 100 mice). Individual mice vary much more: the SD here would be about 0.3 × √100 = 3 g.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the SD.
+  A) That's the SD.
+  B) Measurement error is a different thing; the SE comes from sampling.
   C) That's the range.
-  D) Measurement error is a different thing; the SE comes from sampling.
 - **Hint:** SE = spread of what?
 
 ### ch08-hw-05
@@ -2237,17 +2237,17 @@ A lab estimates the mean seed mass of a weed from 15 randomly chosen plants. The
 
 - **Options:**
 
-  A) Weigh the seeds on a more precise scale
-  B) Measure 150 randomly chosen plants instead of 15
-  C) Choose the 15 healthiest-looking plants
-  D) Nothing; sampling error can't be reduced
+  A) Weigh the seeds on a more precise scale, so each measurement has less error
+  B) Choose the 15 healthiest-looking plants, so the seeds are more uniform
+  C) Nothing; sampling error can't be reduced
+  D) Measure 150 randomly chosen plants
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Sampling error comes from which individuals happen to be in the sample. Larger random samples average over more individuals, so the SE shrinks (with √n).
 - **Why the wrong options are wrong (tutor only):**
   A) Reduces measurement error, a different source of error.
-  C) Non-random selection adds bias.
-  D) It can't be eliminated, but it can be reduced.
+  B) Non-random selection adds bias.
+  C) It can't be eliminated, but it can be reduced.
 - **Hint:** What makes a sampling distribution narrower?
 
 ### ch08-hw-05-v2
@@ -2260,15 +2260,15 @@ A researcher doubles her sample size but keeps sampling only from plants near th
 
 - **Options:**
 
-  A) Sampling error decreases, but any bias from sampling only near the road remains
-  B) Both sampling error and bias decrease
-  C) Bias decreases, but sampling error stays the same
+  A) Sampling error decreases; the roadside bias remains
+  B) Bias decreases, but sampling error stays the same
+  C) Both sampling error and bias decrease, since more data fixes both
   D) Nothing changes
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A larger sample makes the estimate more precise (less sampling error), but if roadside plants differ from the rest, the estimate is still systematically off. A bigger biased sample is precisely wrong.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Sample size doesn't fix bias.
+  C) and B) Sample size doesn't fix bias.
   D) Precision does improve.
 - **Hint:** Does sampling more from the same place fix who's being sampled?
 
@@ -2307,16 +2307,16 @@ The histogram shows the number of pollinator visits to each of 400 plants. The d
 
 - **Options:**
 
-  A) Unimodal & right skewed
-  B) Unimodal & left skewed
-  C) Unimodal & symmetric
+  A) Unimodal & left skewed
+  B) Unimodal & symmetric
+  C) Unimodal & right skewed
   D) Bimodal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** One peak at 0–2 visits, with a long tail stretching to the right (a few plants get 10+ visits). That's unimodal and right skewed, common for counts.
 - **Why the wrong options are wrong (tutor only):**
-  B) The long tail goes to the right, not the left.
-  C) The two sides aren't mirror images.
+  A) The long tail goes to the right, not the left.
+  B) The two sides aren't mirror images.
   D) There's only one peak.
 - **Hint:** Which side has the long tail?
 
@@ -2331,15 +2331,15 @@ The histogram shows the heights of 600 trees. The distribution is:
 
 - **Options:**
 
-  A) Unimodal & right skewed
-  B) Unimodal & left skewed
-  C) Unimodal & symmetric
+  A) Unimodal & left skewed
+  B) Unimodal & symmetric
+  C) Unimodal & right skewed
   D) Bimodal
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** One peak near 18 m, falling off about equally on both sides: unimodal and roughly symmetric.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) Neither tail is clearly longer.
+  C) and A) Neither tail is clearly longer.
   D) There's one peak; small bumps are just noise.
 - **Hint:** Would it look about the same flipped left to right?
 
@@ -2378,16 +2378,16 @@ You want the mean length of time patients stay in a hospital. Which method gives
 
 - **Options:**
 
-  A) Pick a random sample of patients from the year's admission records and average their stays
-  B) Visit the wards on a random day and average the stays of the patients who are there
-  C) Ask the first 50 patients discharged in January
-  D) Visit the wards on several random days and average the stays of the patients there
+  A) Visit the wards on several random days and average the stays of the patients there
+  B) Ask the first 50 patients discharged in January
+  C) Visit the wards on a random day and average the stays of patients who are there
+  D) Average the stays of a random sample from the year's admission records
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Every admission should have an equal chance of being picked. On any given day, the wards are full of long-stay patients (they're there for many days), so sampling whoever is present oversamples long stays: size-biased sampling.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Long stays are more likely to be 'caught' on a random day, so the mean is biased upward; more days doesn't fix it.
-  C) January discharges may not represent the whole year.
+  B) January discharges may not represent the whole year.
+  C) and A) Long stays are more likely to be 'caught' on a random day, so the mean is biased upward; more days doesn't fix it.
 - **Hint:** Does every patient have the same chance of being included?
 
 ### ch08-hw-07-v2
@@ -2401,15 +2401,15 @@ To estimate the mean size of fish schools in a bay, a diver picks random fish an
 - **Options:**
 
   A) Fish in big schools are more likely to be picked, so big schools are oversampled
-  B) The diver's sample is too small
-  C) Fish in the same school are non-independent, which increases sampling error but doesn't shift the mean
+  B) Fish in the same school are non-independent, which increases sampling error but doesn't shift the mean
+  C) The diver's sample is too small
   D) It won't; picking random fish is random sampling of schools
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A school of 200 fish has 200 chances to be picked; a school of 5 has only 5. Sampling individuals gives schools probability proportional to their size, so the estimate is biased upward. Fix: sample schools, not fish.
 - **Why the wrong options are wrong (tutor only):**
-  B) More fish chosen the same way gives the same bias.
-  C) True that they're related, but the main problem is the shift in the mean.
+  B) True that they're related, but the main problem is the shift in the mean.
+  C) More fish chosen the same way gives the same bias.
   D) Random fish ≠ random schools.
 - **Hint:** Does every school have the same chance of being included?
 
@@ -2447,17 +2447,17 @@ You want to estimate the average song rate of male wrens across a forest. Which 
 
 - **Options:**
 
-  A) Record 30 males, each from a different randomly chosen territory spread across the forest
-  B) Record one male 30 times
-  C) Record 30 males that all sing from the same clearing
-  D) Record 30 males on the same morning in the same weather
+  A) Record one male 30 times
+  B) Record 30 different males on the same morning, in the same weather
+  C) Record 30 different males that all sing from the same clearing
+  D) Record 30 males from 30 randomly chosen territories
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Independent observations don't share anything that would make them more alike. Randomly chosen, spread-out territories avoid shared individuals, locations and conditions.
 - **Why the wrong options are wrong (tutor only):**
-  B) Repeated measures of one bird tell you about that bird, not the population.
+  A) Repeated measures of one bird tell you about that bird, not the population.
+  B) Shared weather and time of day can make songs alike.
   C) Birds in one clearing share habitat and may influence each other.
-  D) Shared weather and time of day can make songs alike.
 - **Hint:** What could make two of your observations more similar than two random birds?
 
 ### ch08-hw-08-v2
@@ -2470,9 +2470,9 @@ A student measures leaf toughness on 60 leaves. Which design gives the most inde
 
 - **Options:**
 
-  A) 1 leaf from each of 60 randomly chosen plants
+  A) 1 leaf from each of 60 random plants
   B) 60 leaves from one plant
-  C) 10 leaves from each of 6 plants
+  C) 10 leaves from each of 6 randomly chosen plants
   D) 60 leaves from one branch of one plant
 
 - **Answer (tutor only):** A
@@ -2520,15 +2520,15 @@ Which sampling distribution has the greatest proportion of sample means above th
 
 - **Options:**
 
-  A) n: 4
-  B) n: 16
-  C) n: 64
-  D) They all have about half above the true mean
+  A) About half above the true mean for all three
+  B) n = 4, because small samples swing more widely around the truth
+  C) n = 64, because large samples are pulled closer to the truth
+  D) n = 16
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** All three are centered on the true mean (random samples give unbiased estimates), so about half of the means fall above it whatever n is. Larger n changes the spread, not the center.
 - **Why the wrong options are wrong (tutor only):**
-  A)–C) Sample size affects how far estimates stray, not which side they're on.
+  B)–C) Sample size affects how far estimates stray, not which side they're on.
 - **Hint:** Where is each histogram centered?
 
 ### ch08-hw-09-v2
@@ -2593,14 +2593,14 @@ Which statement about sampling bias is correct?
 
 - **Options:**
 
-  A) Sampling bias is greatest with n = 4
-  B) Sampling bias is greatest with n = 64
-  C) There is no difference in sampling bias between them, only in sampling error
+  A) None; they differ only in sampling error
+  B) Sampling bias is greatest with n = 4, since small samples are least accurate
+  C) Sampling bias is greatest with n = 64
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** All three distributions are centered on the true mean, so none is biased. They differ only in spread (sampling error).
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) A small sample is noisier, not biased; a large one is more precise, not less biased.
+  B) and C) A small sample is noisier, not biased; a large one is more precise, not less biased.
 - **Hint:** Bias moves the center; error widens the spread.
 
 ### ch08-hw-10-v2
@@ -2616,15 +2616,15 @@ Which statement about sampling bias is correct?
 
 - **Options:**
 
-  A) Sampling bias is greatest with n = 10
-  B) Sampling bias is greatest with n = 160
-  C) None of these is biased; they differ in sampling error
+  A) Sampling bias is greatest with n = 160
+  B) None is biased; they differ in sampling error
+  C) Sampling bias is greatest with n = 10, since small samples miss more often
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Each distribution is centered on 0.30, so random samples of any size give unbiased estimates. The n = 10 distribution is just much wider.
 - **Why the wrong options are wrong (tutor only):**
-  A) Wide is not the same as biased.
-  B) Larger random samples don't add bias.
+  A) Larger random samples don't add bias.
+  C) Wide is not the same as biased.
 - **Hint:** Where is each distribution centered?
 
 ### ch08-hw-11
@@ -2667,15 +2667,15 @@ Which statement about sampling error is correct?
 
 - **Options:**
 
-  A) Sampling error is greatest with n = 4
+  A) There is no difference in sampling error between them
   B) Sampling error is greatest with n = 64
-  C) There is no difference in sampling error between them
+  C) Sampling error is greatest with n = 4
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The n = 4 distribution is the widest, so its sample means stray furthest from the truth by chance.
 - **Why the wrong options are wrong (tutor only):**
+  A) The widths clearly differ.
   B) n = 64 is the narrowest, with the least sampling error.
-  C) The widths clearly differ.
 - **Hint:** Which histogram is widest?
 
 ### ch08-hw-11-v2
@@ -2691,16 +2691,16 @@ If you took one random sample of each size, which estimate is most likely to be 
 
 - **Options:**
 
-  A) The n = 10 estimate
-  B) The n = 40 estimate
-  C) The n = 160 estimate
-  D) All are equally likely to be far off
+  A) The n = 40 estimate
+  B) All are equally likely to be far off
+  C) The n = 10 estimate
+  D) The n = 160 estimate
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The n = 10 distribution spreads from 0 to 0.7, so a single small sample can easily miss by 0.2 or more. Larger samples cluster tightly around 0.30.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Their distributions are narrower.
-  D) Spread depends strongly on n.
+  A) and D) Their distributions are narrower.
+  B) Spread depends strongly on n.
 - **Hint:** Which distribution reaches furthest from the red line?
 
 ### ch08-hw-12
@@ -2742,16 +2742,16 @@ Which sampling distribution has the greatest proportion of sample means more tha
 
 - **Options:**
 
-  A) n: 4
+  A) n: 64
   B) n: 16
-  C) n: 64
+  C) n: 4
   D) They all have about 62% more than 2 m away
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Only the wide n = 4 distribution has much beyond 16 and 20 m (about 32% of means). For n = 16 it's about 5%, and for n = 64 almost none. 'About 62%' describes individual trees, not means.
 - **Why the wrong options are wrong (tutor only):**
+  B) and A) Narrower distributions have less in their tails.
   D) About 62% of individual trees are more than 0.5 SD from the mean; means are much less spread out.
-  B) and C) Narrower distributions have less in their tails.
 - **Hint:** Mark 16 and 20 m on each panel. Which has bars outside them?
 
 ### ch08-hw-12-v2
@@ -2767,15 +2767,15 @@ For which sample size is a sample proportion of 0.45 or higher (half again as la
 
 - **Options:**
 
-  A) n = 10
-  B) n = 40
-  C) n = 160
+  A) n = 40
+  B) n = 160
+  C) n = 10
   D) It's equally likely for all three
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With n = 10, about 15% of samples give 0.45 or more (exact binomial). With n = 40 it's about 3%, and with n = 160 essentially never. Small samples are much more likely to be far off.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Larger samples rarely stray that far.
+  A) and B) Larger samples rarely stray that far.
   D) The spread shrinks as n grows.
 - **Hint:** Find 0.45 on the x-axis in each panel.
 
@@ -2820,16 +2820,16 @@ Which sample size has the smallest standard error?
 - **Options:**
 
   A) n: 4
-  B) n: 16
-  C) n: 64
-  D) They all have the same standard error
+  B) n: 64
+  C) They all have the same standard error
+  D) n: 16
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The SE is the SD of the sampling distribution; n = 64 is the narrowest. SE ≈ SD/√n: 4/√64 = 0.5 m vs 4/√4 = 2 m.
 - **Why the wrong options are wrong (tutor only):**
   A) n = 4 has the largest SE.
-  B) Narrower than n = 4 but wider than n = 64.
-  D) The SE shrinks as n grows.
+  C) The SE shrinks as n grows.
+  D) Narrower than n = 4 but wider than n = 64.
 - **Hint:** Narrowest histogram = smallest SE.
 
 ### ch08-hw-13-v2
@@ -2842,15 +2842,15 @@ The SD of seed mass in a population is 0.8 mg. Which sample size gives a standar
 
 - **Options:**
 
-  A) n = 8
+  A) n = 64
   B) n = 16
-  C) n = 64
+  C) n = 8
   D) n = 800
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** SE = SD/√n. For SE = 0.1, √n = 0.8/0.1 = 8, so n = 64. To halve the SE you need four times the sample size.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) Too small: SE ≈ 0.28 and 0.2 mg.
+  C) and B) Too small: SE ≈ 0.28 and 0.2 mg.
   D) Gives SE ≈ 0.028 mg, much smaller than needed.
 - **Hint:** Set 0.8/√n = 0.1 and solve for n.
 
@@ -2892,18 +2892,18 @@ The ___ summarizes the spread of the sampling distribution in one number.
 - **Options:**
 
   A) Standard error
-  B) Standard deviation of the sample
-  C) Bootstrap
-  D) Sample mean
-  E) Confidence level
+  B) Confidence level
+  C) Standard deviation of the sample
+  D) Bootstrap
+  E) Sample mean
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The SE is the standard deviation of the sampling distribution: the typical size of sampling error.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's spread of individuals.
-  C) The bootstrap is a method for approximating the sampling distribution.
-  D) That's an estimate, not a spread.
-  E) That's a chosen percentage, like 95%.
+  B) That's a chosen percentage, like 95%.
+  C) That's spread of individuals.
+  D) The bootstrap is a method for approximating the sampling distribution.
+  E) That's an estimate, not a spread.
 - **Hint:** Spread of estimates.
 
 ### ch09-book-01-v2
@@ -2916,17 +2916,17 @@ The bootstrap distribution is best described as:
 
 - **Options:**
 
-  A) An approximation of the sampling distribution, made by resampling our one sample with replacement
-  B) The exact sampling distribution
-  C) The distribution of values in our sample
-  D) The population distribution
+  A) The population distribution
+  B) An approximation of the sampling distribution
+  C) The exact sampling distribution, rebuilt from our sample
+  D) The distribution of values in our one sample
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** We can't observe the true sampling distribution, so we approximate it by treating our sample as the population and resampling.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's an approximation; its quality depends on the sample.
-  C) Its values are estimates, not individual observations.
-  D) It describes estimates, not individuals.
+  A) It describes estimates, not individuals.
+  C) It's an approximation; its quality depends on the sample.
+  D) Its values are estimates, not individual observations.
 - **Hint:** What do we resample, and what does that approximate?
 
 ### ch09-book-02
@@ -2961,17 +2961,17 @@ To make a bootstrap replicate from a sample of size n, we draw ___ observations 
 
 - **Options:**
 
-  A) n, with
+  A) 2n, without
   B) n, without
   C) n/2, with
-  D) 2n, without
+  D) n, with
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Same size, with replacement: that mimics drawing a new sample of size n from a population shaped like our data.
 - **Why the wrong options are wrong (tutor only):**
+  A) You can't draw 2n without replacement from n values.
   B) Without replacement just reshuffles the data.
   C) Smaller resamples exaggerate uncertainty.
-  D) You can't draw 2n without replacement from n values.
 - **Hint:** Same size as the original?
 
 ### ch09-book-02-v2
@@ -2985,16 +2985,16 @@ The true sampling distribution is made by drawing many ___ from the ___.
 - **Options:**
 
   A) new samples, population
-  B) resamples, sample
+  B) estimates, bootstrap
   C) individuals, sample
-  D) estimates, bootstrap
+  D) resamples, sample
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The sampling distribution comes from repeated independent samples of the population; the bootstrap approximates it with resamples of our one sample.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the bootstrap.
+  B) Backwards: the bootstrap approximates the sampling distribution.
   C) That just gives the sample distribution.
-  D) Backwards: the bootstrap approximates the sampling distribution.
+  D) That's the bootstrap.
 - **Hint:** Where do truly new samples come from?
 
 ### ch09-book-03
@@ -3049,17 +3049,17 @@ Study 1 (n = 20) and Study 2 (n = 200) sample the same population. Which is most
 
 - **Options:**
 
-  A) Study 2's 95% CI will be narrower, but both have the same coverage
+  A) Both CIs will be about the same width
   B) Study 2's CI is more likely to contain the true mean
-  C) Study 1's CI will be narrower
-  D) Both CIs will be about the same width
+  C) Study 2's CI is narrower; coverage is the same
+  D) Study 1's CI will be narrower
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Larger n → smaller SE → narrower CI. A correctly made 95% CI catches the truth 95% of the time regardless of n.
 - **Why the wrong options are wrong (tutor only):**
+  A) Ten times the data makes a big difference.
   B) Coverage stays 95%; only width changes.
-  C) Smaller samples give wider CIs.
-  D) Ten times the data makes a big difference.
+  D) Smaller samples give wider CIs.
 - **Hint:** Width and coverage are different things.
 
 ### ch09-book-04
@@ -3095,17 +3095,17 @@ A 95% CI for the proportion of infected ticks is 0.21 to 0.34. Which statement i
 
 - **Options:**
 
-  A) Whether the true proportion lies in 0.21–0.34 is settled; it either does or doesn't
-  B) There's a 95% chance the true proportion is between 0.21 and 0.34
-  C) 95% of ticks have infection proportions between 0.21 and 0.34
-  D) The true proportion is 0.275
+  A) It either does or doesn't contain the true proportion
+  B) The true proportion is 0.275
+  C) There's a 95% chance the true proportion is between 0.21 and 0.34
+  D) 95% of ticks have infection proportions between 0.21 and 0.34
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** After calculation, the interval and the parameter are fixed. The 95% refers to the method.
 - **Why the wrong options are wrong (tutor only):**
-  B) Attaches the method's rate to this one interval.
-  C) Individual ticks are infected or not; the CI is about the population proportion.
-  D) 0.275 is the midpoint, an estimate, not the truth.
+  B) 0.275 is the midpoint, an estimate, not the truth.
+  C) Attaches the method's rate to this one interval.
+  D) Individual ticks are infected or not; the CI is about the population proportion.
 - **Hint:** Is anything random left once the interval is computed?
 
 ### ch09-book-04-v2
@@ -3185,17 +3185,17 @@ In a simulation, only 80% of supposedly 95% CIs contain the true parameter. What
 
 - **Options:**
 
-  A) The CI method isn't working as advertised for these data (e.g., the sample is too small for the bootstrap, or assumptions are violated)
-  B) That's expected: coverage varies with the sample mean
-  C) The true parameter changed during the simulation
-  D) Nothing; 80% is close to 95%
+  A) That's expected, since coverage varies with the sample mean
+  B) Nothing; 80% is close enough to 95%
+  C) The CI method isn't working for these data
+  D) The true parameter changed during the simulation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Simulations check coverage. A 95% method should catch the truth about 95% of the time; 80% means the intervals are too narrow.
 - **Why the wrong options are wrong (tutor only):**
-  B) Coverage should hold across samples.
-  C) The parameter is fixed in a simulation.
-  D) Missing 20% vs 5% is a big difference.
+  A) Coverage should hold across samples.
+  B) Missing 20% vs 5% is a big difference.
+  D) The parameter is fixed in a simulation.
 - **Hint:** What should coverage be?
 
 ### ch09-book-06
@@ -3235,14 +3235,14 @@ The histogram shows flipper lengths of all three species together. The distribut
 - **Options:**
 
   A) Bimodal
-  B) Unimodal and symmetric
-  C) Uniform
+  B) Uniform
+  C) Unimodal and symmetric
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** There are two humps (around 190 mm and 215 mm): Adelie and Chinstrap have shorter flippers, Gentoo longer ones.
 - **Why the wrong options are wrong (tutor only):**
-  B) There's a clear dip near 205 mm between two peaks.
-  C) Counts are far from flat.
+  B) Counts are far from flat.
+  C) There's a clear dip near 205 mm between two peaks.
 - **Hint:** Count the humps.
 
 ### ch09-book-06-v2
@@ -3258,17 +3258,17 @@ The histogram shows the visit times. The distribution is:
 
 - **Options:**
 
-  A) Right-skewed
+  A) Bimodal
   B) Left-skewed
   C) Symmetric
-  D) Bimodal
+  D) Right-skewed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Most visits are short, with a long tail of a few long visits. The mean (14.9) above the median (10.2) is another sign of right skew.
 - **Why the wrong options are wrong (tutor only):**
+  A) There's one peak.
   B) The long tail is to the right.
   C) The tail is lopsided, and mean ≠ median.
-  D) There's one peak.
 - **Hint:** Which side has the long tail?
 
 ### ch09-book-07
@@ -3330,16 +3330,16 @@ The plot shows 5000 bootstrap means. Compared with the raw data (strongly right-
 
 - **Options:**
 
-  A) Much closer to symmetric, with only a slight right tail
-  B) Just as right-skewed as the data
-  C) Left-skewed
+  A) Just as right-skewed as the raw data
+  B) Left-skewed
+  C) Much closer to symmetric
   D) Bimodal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Averaging 150 visits smooths out the skew a lot, though a little remains with skewed data. The bootstrap distribution is single-peaked and nearly symmetric.
 - **Why the wrong options are wrong (tutor only):**
-  B) Means are much less skewed than individuals.
-  C) Averaging doesn't flip skew.
+  A) Means are much less skewed than individuals.
+  B) Averaging doesn't flip skew.
   D) There's one peak.
 - **Hint:** What does averaging do to a long tail?
 
@@ -3356,16 +3356,16 @@ In the plot of 5000 bootstrap means, the red dashed lines mark the 0.5th and 99.
 
 - **Options:**
 
-  A) The 99% CI for mean waiting time is about 68.8 to 73.0 minutes, and the bootstrap SE is the standard deviation of the 5000 bootstrap means (about 0.82 min)
-  B) The 95% CI is about 68.8 to 73.0 minutes, and the SE is the mean of the bootstrap distribution
-  C) The 99% CI is about 68.8 to 73.0 minutes, and the SE is the SD of the original data (13.6 min)
+  A) The 99% CI is about 68.8 to 73.0 min; the SE is the SD of the 5000 bootstrap means (≈ 0.82 min)
+  B) The 99% CI is about 68.8 to 73.0 min; the SE is the SD of the original data (13.6 min)
+  C) The 95% CI is about 68.8 to 73.0 min; the SE is the mean of the 5000 bootstrap means
   D) 99% of individual waiting times fall between 68.8 and 73.0 minutes
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The middle 99% of bootstrap estimates (0.5th to 99.5th percentiles) gives the 99% CI. The SE is the spread (SD) of the bootstrap distribution. A 99% CI is wider than a 95% CI (69.3–72.5) from the same data: more confidence costs precision.
 - **Why the wrong options are wrong (tutor only):**
-  B) The 0.5th–99.5th percentiles give 99%, not 95%, and the SE is an SD, not a mean.
-  C) 13.6 is the SD among individual waits.
+  B) 13.6 is the SD among individual waits.
+  C) The 0.5th–99.5th percentiles give 99%, not 95%, and the SE is an SD, not a mean.
   D) The CI is for the mean, not for individuals (which range from about 43 to 96 minutes).
 - **Hint:** Which percentiles leave 0.5% in each tail? And SE = SD of what?
 
@@ -3382,17 +3382,17 @@ In the plot of 5000 bootstrap means, the red dashed lines mark the 2.5th and 97.
 
 - **Options:**
 
-  A) The 95% CI for mean flipper length is about 199.5 to 202.4 mm, and the bootstrap SE is about 0.75 mm
-  B) The 99% CI is about 199.5 to 202.4 mm, and the SE is 14.1 mm
-  C) 95% of penguins have flippers between 199.5 and 202.4 mm
-  D) The SE is 200.9 mm, the mean of the bootstrap distribution
+  A) 95% CI ≈ 199.5 to 202.4 mm; bootstrap SE ≈ 0.75 mm
+  B) The SE is 200.9 mm, the mean of the bootstrap distribution
+  C) 99% CI ≈ 199.5 to 202.4 mm; SE = 14.1 mm
+  D) 95% of penguins have flippers between 199.5 and 202.4 mm
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The middle 95% of bootstrap means gives the 95% CI. The SE is the SD of the bootstrap means (≈ 14.1/√342 ≈ 0.76).
 - **Why the wrong options are wrong (tutor only):**
-  B) 2.5th–97.5th percentiles give 95%, and 14.1 is the SD of individual birds.
-  C) Individual flippers range from about 172 to 231 mm; the CI is for the mean.
-  D) The mean of the bootstrap means is the estimate, not its SE.
+  B) The mean of the bootstrap means is the estimate, not its SE.
+  C) 2.5th–97.5th percentiles give 95%, and 14.1 is the SD of individual birds.
+  D) Individual flippers range from about 172 to 231 mm; the CI is for the mean.
 - **Hint:** Which percentiles, and what does the SD of bootstrap means measure?
 
 ### ch09-book-08-v2
@@ -3408,17 +3408,17 @@ In the plot of 5000 bootstrap means, the red dashed lines mark the 5th and 95th 
 
 - **Options:**
 
-  A) This is a 90% CI for the mean visit time: about 13.2 to 16.8 s
-  B) This is a 95% CI for the mean visit time
-  C) 90% of visits last 13.2 to 16.8 s
-  D) This is a 90% CI for the median visit time
+  A) 90% of visits last 13.2 to 16.8 s
+  B) It's a 90% CI for the median visit time
+  C) It's a 90% CI for the mean: 13.2 to 16.8 s
+  D) It's a 95% CI for the mean visit time
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 5th to 95th percentiles leaves 5% in each tail: a 90% interval. It's for the mean, because the replicates are means.
 - **Why the wrong options are wrong (tutor only):**
-  B) 95% would use the 2.5th and 97.5th percentiles.
-  C) Individual visits range from about 1 s to over 90 s; the CI is for the mean.
-  D) The replicates are means, not medians.
+  A) Individual visits range from about 1 s to over 90 s; the CI is for the mean.
+  B) The replicates are means, not medians.
+  D) 95% would use the 2.5th and 97.5th percentiles.
 - **Hint:** How much is cut from each tail?
 
 ### ch09-chime-01
@@ -3536,16 +3536,16 @@ A researcher measures 2000 birds, but only at feeders (which attract bolder bird
 
 - **Options:**
 
-  A) It makes sampling error small, but doesn't fix the bias: the estimate is precise but may be precisely wrong
-  B) It removes both sampling error and bias
+  A) Shrinks sampling error, but doesn't fix the bias
+  B) It fixes the bias, since many birds average out boldness, but not sampling error
   C) It increases sampling error
-  D) It fixes the bias but not sampling error
+  D) It removes both sampling error and bias
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Larger n shrinks sampling error (SE ∝ 1/√n), but a biased sampling method stays biased no matter how many birds you measure.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Sample size doesn't fix bias.
   C) More data reduces sampling error.
+  D) and B) Sample size doesn't fix bias.
 - **Hint:** Sampling error vs sampling bias: which one does n fix?
 
 ### ch09-chime-03
@@ -3579,17 +3579,17 @@ Why can't a sampling distribution reveal sampling bias in a real study?
 
 - **Options:**
 
-  A) Bias shifts the whole distribution away from the truth, but in a real study we don't know the truth, so we can't see the shift
-  B) Sampling distributions don't exist for biased samples
-  C) Bias makes the sampling distribution wider
-  D) It can; bias shows up as bimodality
+  A) Sampling distributions don't exist for biased samples
+  B) Bias shifts it from a truth we don't know
+  C) It can; bias shows up as bimodality
+  D) Bias makes the sampling distribution wider, which looks like ordinary noise
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The sampling distribution shows chance spread around wherever the method is centered. Detecting a shifted center would require knowing the true parameter.
 - **Why the wrong options are wrong (tutor only):**
-  B) They exist; they're just centered in the wrong place.
-  C) Bias is about the center, not the spread.
-  D) Bias doesn't create extra peaks.
+  A) They exist; they're just centered in the wrong place.
+  C) Bias doesn't create extra peaks.
+  D) Bias is about the center, not the spread.
 - **Hint:** Bias moves the center. Do we know where the center should be?
 
 ### ch09-chime-03-v2
@@ -3602,17 +3602,17 @@ Which summary of the sampling distribution do we use to quantify sampling error?
 
 - **Options:**
 
-  A) Its standard deviation (the standard error)
+  A) Its sample size
   B) Its mean
   C) Its maximum
-  D) Its sample size
+  D) Its standard deviation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Sampling error is about how much estimates scatter; the SD of the sampling distribution (the SE) measures that.
 - **Why the wrong options are wrong (tutor only):**
+  A) Sample size affects the SE but isn't a summary of the distribution.
   B) The mean is near the estimate itself (or the truth), not the error.
   C) A single extreme isn't a typical error.
-  D) Sample size affects the SE but isn't a summary of the distribution.
 - **Hint:** Error = scatter. Which summary measures scatter?
 
 ### ch09-chime-04
@@ -3667,17 +3667,17 @@ If the SD stays the same, by how much does the standard error of the mean change
 
 - **Options:**
 
-  A) It is cut in half
+  A) It doubles
   B) It is cut to a quarter
   C) It stays the same
-  D) It doubles
+  D) It is cut in half
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** SE = SD/√n. √25 = 5 and √100 = 10, so the SE is halved.
 - **Why the wrong options are wrong (tutor only):**
+  A) More data reduces, not increases, the SE.
   B) The SE scales with 1/√n, not 1/n.
   C) More data reduces the SE.
-  D) More data reduces, not increases, the SE.
 - **Hint:** Compare √25 and √100.
 
 ### ch09-chime-05
@@ -3713,16 +3713,16 @@ In a computer simulation where we invent the population, which can we generate?
 - **Options:**
 
   A) Only the sampling distribution
-  B) Only the bootstrap distribution
+  B) Neither
   C) Both
-  D) Neither
+  D) Only the bootstrap distribution
 
 - **Answer (tutor only):** C
 - **Explanation (tutor only):** In a simulation we can draw as many new samples as we want (sampling distribution), and we can also bootstrap any one sample. That's how we check that the bootstrap works.
 - **Why the wrong options are wrong (tutor only):**
   A) We can also bootstrap any one simulated sample.
-  B) Simulation lets us sample the population repeatedly too.
-  D) Simulation makes both possible.
+  B) Simulation makes both possible.
+  D) Simulation lets us sample the population repeatedly too.
 - **Hint:** What does knowing the population let you do?
 
 ### ch09-chime-05-v2
@@ -3735,7 +3735,7 @@ Why do we bootstrap in real studies instead of building the true sampling distri
 
 - **Options:**
 
-  A) Building the sampling distribution would require many new samples from the population, but we usually only have one
+  A) The true one needs many samples; we have one
   B) The bootstrap is more accurate than the sampling distribution
   C) The sampling distribution only works for normal data
   D) The bootstrap removes sampling bias
@@ -3781,17 +3781,17 @@ The 95% bootstrap confidence interval is found from the _____ of the bootstrap e
 
 - **Options:**
 
-  A) 2.5th and 97.5th percentiles
-  B) Mean
-  C) Standard deviation
-  D) Minimum and maximum
+  A) Mean
+  B) Minimum and maximum
+  C) 2.5th and 97.5th percentiles
+  D) standard deviation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The middle 95% of bootstrap estimates (between the 2.5th and 97.5th percentiles) gives the percentile 95% CI.
 - **Why the wrong options are wrong (tutor only):**
-  B) The mean is a single center value.
-  C) The SD gives the SE, not the interval.
-  D) The min–max isn't 95%.
+  A) The mean is a single center value.
+  B) The min–max isn't 95%.
+  D) The SD gives the SE, not the interval.
 - **Hint:** Cut off 2.5% in each tail.
 
 ### ch09-chime-06-v2
@@ -3871,17 +3871,17 @@ For a sample of size n = 1, how would the standard error of the mean compare to 
 
 - **Options:**
 
-  A) They'd be the same (SD/√1 = SD), because the 'mean' of one observation is just that observation
-  B) The SE would be smaller
+  A) The SE would be zero, since there's nothing to vary
+  B) The same (SD/√1 = SD)
   C) The SE would be larger
-  D) The SE would be zero
+  D) The SE would be smaller
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With one observation, its mean varies exactly as much as individuals do. Averaging only reduces spread when n > 1. (In practice you can't estimate an SD from one value, but the idea holds.)
 - **Why the wrong options are wrong (tutor only):**
-  B) Only with n > 1.
+  A) Different samples of one would give different values.
   C) The SE is never larger than the SD.
-  D) Different samples of one would give different values.
+  D) Only with n > 1.
 - **Hint:** Plug n = 1 into SD/√n.
 
 ### ch09-chime-08
@@ -3913,17 +3913,17 @@ Which is a non-bootstrap way to estimate the standard error of a mean?
 
 - **Options:**
 
-  A) SE = SD/√n
-  B) SE = the mean/√n
-  C) SE = the range/2
-  D) There is none
+  A) There is none
+  B) SE = the range/2
+  C) SE = the mean/√n
+  D) SE = SD/√n
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The mathematical formula SE = SD/√n approximates the spread of the sampling distribution of the mean without any resampling.
 - **Why the wrong options are wrong (tutor only):**
-  B) The mean doesn't determine the spread.
-  C) Half the range isn't an SE.
-  D) Math-based approaches exist (and we'll use them later).
+  A) Math-based approaches exist (and we'll use them later).
+  B) Half the range isn't an SE.
+  C) The mean doesn't determine the spread.
 - **Hint:** The formula with √n.
 
 ### ch09-chime-08-v2
@@ -3979,16 +3979,16 @@ You calculated a 90% CI for mean wing length: 41.2 to 43.0 mm. Which statement i
 
 - **Options:**
 
-  A) This interval either contains the true mean or it doesn't; 90% of intervals made this way capture the truth
-  B) There's a 90% chance the true mean is in 41.2–43.0
-  C) 90% of birds have wings 41.2–43.0 mm
-  D) There's a 10% chance the true mean is outside this interval
+  A) 90% of birds have wings 41.2–43.0 mm
+  B) There's a 90% chance the true mean is in 41.2–43.0 mm
+  C) There's a 10% chance the true mean is outside this interval
+  D) It does or doesn't contain the mean; 90% of such intervals do
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Once calculated, the interval is fixed and the mean is fixed. The 90% describes the long-run success rate of the procedure.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) These attach probability to this one finished interval.
-  C) The CI is about the mean, not individuals.
+  A) The CI is about the mean, not individuals.
+  B) and C) These attach probability to this one finished interval.
 - **Hint:** Before vs after calculating.
 
 ### ch09-chime-09-v2
@@ -4002,16 +4002,16 @@ Two researchers each compute a correct 95% CI from different samples. Researcher
 
 - **Options:**
 
-  A) Researcher 1's estimate is more precise, but neither interval has a 'probability' of containing the truth once calculated
-  B) Researcher 1's interval has a higher probability of containing the truth
+  A) The narrower interval must be biased
+  B) Researcher 1's estimate is more precise
   C) Researcher 1's interval is less likely to contain the truth
-  D) The narrower interval must be biased
+  D) Researcher 1's interval has a higher probability of containing the truth
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Width reflects precision (sample size, variability). Both come from 95% methods; after calculation each one simply did or didn't capture the parameter.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Width doesn't change the interpretation for a finished interval.
-  D) Narrow means precise, not biased.
+  A) Narrow means precise, not biased.
+  D) and C) Width doesn't change the interpretation for a finished interval.
 - **Hint:** What does width tell you?
 
 ### ch09-chime-10
@@ -4069,16 +4069,16 @@ Before collecting any data, what is the probability that the 99% CI you're about
 
 - **Options:**
 
-  A) 0.99
-  B) 0.01
-  C) It either will or won't, so there's no probability
+  A) 0.01
+  B) It either will or won't, so there's no probability
+  C) 0.99
   D) It depends on the sample mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Before sampling, the outcome is still random, so the method's 99% success rate applies. Only after calculation does it become 'did or didn't'.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the chance of missing.
-  C) That applies after the interval is calculated.
+  A) That's the chance of missing.
+  B) That applies after the interval is calculated.
   D) The sample mean doesn't exist yet.
 - **Hint:** Has the randomness happened yet?
 
@@ -4092,17 +4092,17 @@ Which statement best describes the sampling distribution and how it relates to s
 
 - **Options:**
 
-  A) It's the distribution of estimates we would get from many samples of the same size; its spread reflects sampling error, so it tells us how uncertain any single estimate is
-  B) It's the distribution of values in our sample; its spread is the standard deviation
-  C) It's the distribution of individuals in the population; it shows sampling bias
-  D) It's what we get after removing sampling error from our data
+  A) The distribution of estimates from many same-sized samples; its spread shows how uncertain one estimate is
+  B) The distribution of individuals in the population; its shape shows how much sampling bias there is
+  C) It's what we get after removing sampling error from our data
+  D) The distribution of values in our own sample; its spread is the standard deviation of the data
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Each sample gives a slightly different estimate by chance (sampling error). The sampling distribution collects all those possible estimates; its SD is the standard error, our measure of uncertainty.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the sample distribution.
-  C) That's the population distribution, and bias is about the center, not this idea.
-  D) Sampling error can't be removed, only described.
+  B) That's the population distribution, and bias is about the center, not this idea.
+  C) Sampling error can't be removed, only described.
+  D) That's the sample distribution.
 - **Hint:** Distribution of what: individuals or estimates?
 
 ### ch09-gquiz-01-v1
@@ -4115,17 +4115,17 @@ If we could draw 10,000 samples of 25 penguins and compute each sample's mean bo
 
 - **Options:**
 
-  A) The sampling distribution of the mean; its spread is the standard error
-  B) The population distribution of body mass
-  C) The sample distribution; its spread is the standard deviation
-  D) A bootstrap distribution
+  A) The population distribution of body mass
+  B) The sample distribution; its spread is the standard deviation
+  C) A bootstrap distribution of body mass
+  D) The sampling distribution of the mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A distribution of estimates from many independent samples of the same size is the sampling distribution. Its SD is the standard error.
 - **Why the wrong options are wrong (tutor only):**
-  B) The population distribution describes individual penguins.
-  C) A sample distribution is the values in one sample.
-  D) A bootstrap resamples one sample; here we drew new samples from the population.
+  A) The population distribution describes individual penguins.
+  B) A sample distribution is the values in one sample.
+  C) A bootstrap resamples one sample; here we drew new samples from the population.
 - **Hint:** Is each value in the histogram an individual or an estimate?
 
 ### ch09-gquiz-01-v2
@@ -4138,17 +4138,17 @@ Two sampling distributions of a mean are centered on the true value. One is narr
 
 - **Options:**
 
-  A) Any single estimate from that design is likely to land farther from the truth (more sampling error, more uncertainty)
-  B) That design is biased
-  C) The population is more variable than the sample
-  D) The estimate is wrong
+  A) The population is more variable than the sample
+  B) The estimate is wrong
+  C) Single estimates will tend to land farther from the truth
+  D) That design is biased, since its estimates are spread out
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** A wider sampling distribution means estimates scatter more from sample to sample, so one estimate is less precise. Both are centered on the truth, so neither is biased.
 - **Why the wrong options are wrong (tutor only):**
-  B) Both are centered on the truth, so neither is biased.
-  C) Spread here is spread of estimates, not individuals.
-  D) It's imprecise, not wrong.
+  A) Spread here is spread of estimates, not individuals.
+  B) It's imprecise, not wrong.
+  D) Both are centered on the truth, so neither is biased.
 - **Hint:** Spread of a sampling distribution = ?
 
 ### ch09-gquiz-02
@@ -4161,15 +4161,15 @@ How does the bootstrap approximate the sampling distribution?
 
 - **Options:**
 
-  A) Resample the data WITH replacement, making each resample the same size as the original sample; calculate the estimate (e.g., the mean) for each resample; repeat many times
-  B) Resample the data WITHOUT replacement, same size as the original; calculate the estimate; repeat
+  A) Resample the data WITHOUT replacement, same size as the original; calculate the estimate; repeat many times
+  B) Resample the data WITH replacement, same size as the original; calculate the estimate; repeat many times
   C) Take new samples from the population many times and calculate the estimate for each
-  D) Resample WITH replacement, but make each resample much larger than the original sample to reduce error
+  D) Resample WITH replacement, but make each resample much larger than the original to reduce error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With replacement and the same n means each resample is a plausible alternative sample: some observations show up twice, some not at all. The spread of the estimates across resamples approximates the sampling distribution.
 - **Why the wrong options are wrong (tutor only):**
-  B) Without replacement, every resample is just the original data shuffled, so every estimate is identical.
+  A) Without replacement, every resample is just the original data shuffled, so every estimate is identical.
   C) That's the true sampling distribution; in real studies we can't keep resampling the population.
   D) Uncertainty depends on n; bigger resamples would understate it.
 - **Hint:** What happens if you resample n values from n values without replacement?
@@ -4184,17 +4184,17 @@ Your sample has 30 seed masses. Which describes ONE bootstrap replicate?
 
 - **Options:**
 
-  A) Draw 30 values from your 30 with replacement, then compute the mean
-  B) Draw 30 values from your 30 without replacement, then compute the mean
-  C) Draw 10 values with replacement, then compute the mean
-  D) Collect 30 new seeds from the field, then compute the mean
+  A) Draw 30 values from your 30 without replacement, then compute the mean
+  B) Draw 30 values from your 30 with replacement, then compute the mean
+  C) Collect 30 new seeds from the field, then compute the mean
+  D) Draw 10 values with replacement, then compute the mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Same size (30), with replacement: some seeds appear twice, some not at all. Computing the estimate on that resample gives one bootstrap replicate.
 - **Why the wrong options are wrong (tutor only):**
-  B) Without replacement you just reshuffle the same 30, so every mean is identical.
-  C) Smaller resamples overstate uncertainty.
-  D) That's a new sample from the population, not a bootstrap.
+  A) Without replacement you just reshuffle the same 30, so every mean is identical.
+  C) That's a new sample from the population, not a bootstrap.
+  D) Smaller resamples overstate uncertainty.
 - **Hint:** Same n, and with or without replacement?
 
 ### ch09-gquiz-02-v2
@@ -4207,16 +4207,16 @@ A student bootstraps by sampling WITHOUT replacement (same size as the data). Wh
 
 - **Options:**
 
-  A) Every resample contains exactly the original data, so every bootstrap mean is identical and the SE looks like 0
-  B) The bootstrap SE is slightly too large
-  C) It works the same as sampling with replacement
+  A) The bootstrap SE is slightly too large, as with any small sample
+  B) It works the same as sampling with replacement
+  C) Every resample is just the data, so the SE looks like 0
   D) The bootstrap distribution becomes bimodal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Drawing all n values without replacement just reorders the data, and the mean doesn't depend on order, so there's no variation.
 - **Why the wrong options are wrong (tutor only):**
-  B) There is no variation at all, not a little extra.
-  C) Replacement is what creates variation among resamples.
+  A) There is no variation at all, not a little extra.
+  B) Replacement is what creates variation among resamples.
   D) There's no spread at all.
 - **Hint:** What's in a 'resample' if no value can be drawn twice?
 
@@ -4230,17 +4230,17 @@ Why does bootstrapping do a poor job of approximating the sampling distribution 
 
 - **Options:**
 
-  A) The bootstrap can only resample the few values we observed, so a tiny sample poorly represents the population's spread and shape; bootstrap distributions are then lumpy and tend to understate uncertainty
-  B) Small samples are always biased
-  C) The bootstrap needs at least 1000 observations to run
-  D) With small samples you must resample without replacement
+  A) With small samples you must resample without replacement
+  B) It can only resample the few observed values, which poorly represent the population, so it understates uncertainty
+  C) The bootstrap needs at least 1000 observations to run, because it draws 1000 resamples
+  D) Small samples are always biased, and resampling them copies that bias into every replicate
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The bootstrap treats your sample as a stand-in for the population. With, say, 5 values, that stand-in is crude: there are few distinct resamples, extremes are missing, and the bootstrap spread is often too narrow.
 - **Why the wrong options are wrong (tutor only):**
-  B) Small random samples are noisy, not biased.
+  A) Without replacement, every resample is identical.
   C) It runs fine; it just approximates poorly.
-  D) Without replacement, every resample is identical.
+  D) Small random samples are noisy, not biased.
 - **Hint:** What does the bootstrap use as its 'population'?
 
 ### ch09-gquiz-03-v1
@@ -4253,16 +4253,16 @@ A researcher has only 4 measurements: 2.1, 2.3, 2.4, 9.8. Why should they be cau
 
 - **Options:**
 
-  A) The bootstrap can only reshuffle these 4 values, so it poorly reflects the population and its uncertainty; the resulting distribution is lumpy and often too narrow
-  B) The bootstrap requires normal data
-  C) The bootstrap needs at least 100 values to run
-  D) With 4 values, sampling with replacement is impossible
+  A) The bootstrap needs at least 100 values to run
+  B) The bootstrap requires normally distributed data
+  C) It can only reshuffle 4 values, so the CI is often too narrow
+  D) With only 4 values, sampling with replacement is impossible
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With tiny samples the bootstrap's stand-in population is crude: few distinct resamples, and one odd value (9.8) dominates. Bootstrap intervals tend to understate uncertainty.
 - **Why the wrong options are wrong (tutor only):**
+  A) It runs; it just approximates poorly.
   B) The bootstrap doesn't assume normality.
-  C) It runs; it just approximates poorly.
   D) You can resample with replacement from any sample.
 - **Hint:** The bootstrap treats your sample as the population. How good is a 4-value population?
 
@@ -4295,17 +4295,17 @@ A study compared the proportion of correct predictions made by professional astr
 
 - **Options:**
 
-  A) Astrologers did slightly better than guessers (a small effect); the plausible range runs from tiny to almost medium, and it excludes zero
-  B) Astrologers did much better than guessers; a large effect
-  C) There's a 95% chance the true d is exactly 0.27
-  D) Because the CI includes small values, there is no difference
+  A) There's a 95% chance the true d is exactly 0.27
+  B) Astrologers did much better than guessers, a large effect, because the CI excludes zero
+  C) Because the CI includes small values, we conclude there is no real difference between groups
+  D) Astrologers did slightly better (a small effect); plausible values run from tiny to nearly medium, excluding zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** d = 0.27 is 'small' by convention. The CI [0.05, 0.48] says effects from tiny (0.05) to nearly medium (0.48) are consistent with the data. The CI doesn't include 0, but the plausible effect is modest at best.
 - **Why the wrong options are wrong (tutor only):**
+  A) The CI gives a range; 0.27 is our best estimate, not the truth.
   B) 0.27 is small, not large.
-  C) The CI gives a range; 0.27 is our best estimate, not the truth.
-  D) The CI excludes 0, so 'no difference' isn't supported.
+  C) The CI excludes 0, so 'no difference' isn't supported.
 - **Hint:** Read the point estimate first, then the range.
 
 ### ch09-gquiz-04-v1
@@ -4318,17 +4318,17 @@ A study compared plant height with vs without fertilizer. Cohen's d (fertilized 
 
 - **Options:**
 
-  A) Fertilized plants were taller, a large effect; plausible values run from medium to very large, and zero is not plausible
-  B) A small effect that could be zero
-  C) There's a 95% chance the true d is 0.95
-  D) Because the CI is wide, we can't say anything
+  A) A large effect; plausible values run from medium to very large
+  B) Because the CI is wide, we can't say anything about the effect
+  C) A small effect that could well be zero
+  D) There's a 95% chance the true d is 0.95
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 0.95 is a large effect. The CI [0.60, 1.30] spans medium to very large and excludes 0, so the data support a substantial positive effect.
 - **Why the wrong options are wrong (tutor only):**
-  B) 0.95 is large, and the CI excludes 0.
-  C) 0.95 is the best estimate; the CI gives a plausible range.
-  D) Even the low end (0.60) is a medium effect.
+  B) Even the low end (0.60) is a medium effect.
+  C) 0.95 is large, and the CI excludes 0.
+  D) 0.95 is the best estimate; the CI gives a plausible range.
 - **Hint:** Place both the estimate and the CI ends on the benchmark scale.
 
 ### ch09-gquiz-04-v2
@@ -4341,17 +4341,17 @@ Caffeinated vs decaf students' quiz scores: Cohen's d (caffeine − decaf) = 0.1
 
 - **Options:**
 
-  A) The estimated effect is tiny; plausible values range from a slight disadvantage to a small advantage, including zero, so the data don't establish an effect either way
-  B) Caffeine has a small positive effect
-  C) Caffeine has no effect
-  D) There's a 95% chance d is between −0.15 and 0.39
+  A) Caffeine has a small positive effect on quiz scores
+  B) There's a 95% chance d is between −0.15 and 0.39
+  C) Caffeine has no effect on quiz scores
+  D) A tiny estimate; the CI includes zero, so no effect is established
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The CI includes 0 and spans small negative to small positive effects. We can't conclude there's an effect, nor that it's exactly zero; any effect is likely small.
 - **Why the wrong options are wrong (tutor only):**
-  B) The CI includes 0 and negative values.
+  A) The CI includes 0 and negative values.
+  B) The 95% belongs to the method, not to this interval.
   C) Failing to show an effect isn't showing no effect.
-  D) The 95% belongs to the method, not to this interval.
 - **Hint:** Does the CI include 0? How big are the plausible effects?
 
 ### ch09-gquiz-05
@@ -4364,17 +4364,17 @@ We bootstrapped the slope of sepal length on sepal width for Iris versicolor (10
 
 - **Options:**
 
-  A) SE = standard deviation of the 1000 slopes; 95% CI = their 2.5th and 97.5th percentiles
-  B) SE = mean of the 1000 slopes; 95% CI = their 5th and 95th percentiles
-  C) SE = standard deviation of the 1000 slopes; 95% CI = their 5th and 95th percentiles
-  D) SE = the original slope / √1000; 95% CI = their minimum and maximum
+  A) SE = the original slope / √1000; 95% CI = the minimum and maximum of the 1000 slopes
+  B) SE = standard deviation of the 1000 slopes; 95% CI = their 5th and 95th percentiles
+  C) SE = SD of the 1000 slopes; 95% CI = their 2.5th and 97.5th percentiles
+  D) SE = mean of the 1000 slopes; 95% CI = their 5th and 95th percentiles
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The bootstrap distribution approximates the sampling distribution, so its SD is the SE. A 95% CI leaves 2.5% in each tail, so use the 2.5th and 97.5th percentiles (quantile(stat, 0.025) and quantile(stat, 0.975)).
 - **Why the wrong options are wrong (tutor only):**
-  B) The mean of the replicates is near the estimate itself, not its uncertainty.
-  C) 5th to 95th percentiles is a 90% interval.
-  D) The number of replicates isn't the sample size, and min–max isn't a 95% interval.
+  A) The number of replicates isn't the sample size, and min–max isn't a 95% interval.
+  B) 5th to 95th percentiles is a 90% interval.
+  D) The mean of the replicates is near the estimate itself, not its uncertainty.
 - **Hint:** 95% in the middle leaves how much in each tail?
 
 ### ch09-gquiz-05-v1
@@ -4389,15 +4389,15 @@ You have 2000 bootstrap replicates of a correlation coefficient. How do you get 
 
   A) The 5th and 95th percentiles of the 2000 replicates
   B) The 2.5th and 97.5th percentiles
-  C) The mean ± the standard deviation of the replicates
-  D) The minimum and maximum of the replicates
+  C) The minimum and maximum of the replicates
+  D) The mean ± the standard deviation of the replicates
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A 90% interval leaves 5% in each tail, so use the 5th and 95th percentiles.
 - **Why the wrong options are wrong (tutor only):**
   B) That's a 95% interval.
-  C) Mean ± 1 SD covers roughly 68%.
-  D) The min–max covers essentially 100%, and depends on the number of replicates.
+  C) The min–max covers essentially 100%, and depends on the number of replicates.
+  D) Mean ± 1 SD covers roughly 68%.
 - **Hint:** How much goes in each tail for 90%?
 
 ### ch09-gquiz-05-v2
@@ -4481,17 +4481,17 @@ In Plot B, the 95% CI error bars for Adelie and Chinstrap mean body mass overlap
 
 - **Options:**
 
-  A) Error bars show uncertainty in the mean (≈ SD/√n), which is much smaller than the variation among individual penguins
-  B) The error bars hide the outliers
-  C) The error bars show the interquartile range
-  D) Error bars are drawn at a different scale
+  A) The error bars leave out the outliers
+  B) Error bars show uncertainty in the mean, not individual spread
+  C) Error bars are drawn at a different scale
+  D) The error bars show the interquartile range of each species
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A mean of about 70–150 birds is far more stable than any single bird, so the CI for the mean is narrow even though individuals vary a lot.
 - **Why the wrong options are wrong (tutor only):**
-  B) Error bars aren't about outliers.
-  C) That's what a boxplot's box shows.
-  D) Same y-axis.
+  A) Error bars aren't about outliers.
+  C) Same y-axis.
+  D) That's what a boxplot's box shows.
 - **Hint:** What does dividing by √n do?
 
 ### ch09-gquiz-07
@@ -4505,17 +4505,17 @@ People often say a 95% CI is 'the interval with a 95% chance of capturing the tr
 
 - **Options:**
 
-  A) The probability belongs to the process of making intervals (tossing rings); the true value is fixed, and any single interval either caught it or didn't
-  B) The true parameter moves around, and the interval might catch it
-  C) There is no difference; it's just wording
-  D) 95% CIs are wrong 95% of the time
+  A) 95% CIs are wrong 95% of the time
+  B) There is no real difference; the two pictures are just different wording for the same idea
+  C) The probability belongs to the interval-making process; the true value is fixed and any one interval caught it or didn't
+  D) The true parameter moves around from study to study, and each interval might or might not catch it
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Like a coin already flipped under a cup: it's heads or tails, not '50% heads.' Before sampling, the method has a 95% chance of catching the parameter. After, your interval is right or wrong. (Whether to police this in everyday speech is a fair debate.)
 - **Why the wrong options are wrong (tutor only):**
-  B) The parameter is fixed (the post in ring toss).
-  C) It's a real conceptual difference about where the randomness lives.
-  D) They miss about 5% of the time.
+  A) They miss about 5% of the time.
+  B) It's a real conceptual difference about where the randomness lives.
+  D) The parameter is fixed (the post in ring toss).
 - **Hint:** In ring toss, what moves: the post or the ring?
 
 ### ch09-gquiz-07-v1
@@ -4529,17 +4529,17 @@ A coin is flipped and hidden under a cup. A friend says 'there's a 50% chance it
 
 - **Options:**
 
-  A) Like the coin, the interval's outcome is already settled: it caught the parameter or it didn't; the 95% describes the procedure before it's run
-  B) The 95% CI has a 95% chance of containing the parameter, just as the coin is 50% heads
+  A) The analogy shows CIs are useless
+  B) Like the coin, the outcome is settled; 95% describes the procedure
   C) The parameter moves like a flipping coin
-  D) The analogy shows CIs are useless
+  D) The CI has a 95% chance of containing the parameter, just as the coin is 50% heads
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Before flipping, P(heads) = 0.5. After, it's heads or tails. Likewise, before sampling the method has a 95% chance to succeed; after, the interval is right or wrong. (Many people still talk loosely here.)
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the loose reading statisticians object to.
+  A) CIs are useful; the analogy is about interpretation.
   C) The parameter is fixed.
-  D) CIs are useful; the analogy is about interpretation.
+  D) That's the loose reading statisticians object to.
 - **Hint:** Before vs after the randomness happens.
 
 ### ch09-gquiz-07-v2
@@ -4553,17 +4553,17 @@ In the ring toss analogy for confidence intervals, what are the post and the rin
 
 - **Options:**
 
-  A) Post = the true parameter (fixed); ring = the interval (random, changes with each sample)
-  B) Post = the interval; ring = the parameter
-  C) Post = the sample mean; ring = the population
-  D) Both move each time
+  A) Both move each time
+  B) Post = the sample mean; ring = the population it came from
+  C) Post = the interval; ring = the parameter
+  D) Post = true parameter (fixed); ring = interval
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The truth stays put; each sample produces a new interval that may or may not land around it. 95% CIs are a ring-toss method that rings the post 95% of the time.
 - **Why the wrong options are wrong (tutor only):**
-  B) The interval is what varies across samples.
-  C) The sample mean changes; the post doesn't.
-  D) The parameter is fixed.
+  A) The parameter is fixed.
+  B) The sample mean changes; the post doesn't.
+  C) The interval is what varies across samples.
 - **Hint:** Which thing changes from sample to sample?
 
 ### ch09-hw-01
@@ -4740,17 +4740,17 @@ From one random sample of lakes you calculate a 95% CI for mean phosphorus: 12.1
 
 - **Options:**
 
-  A) There is a 95% probability the true mean is between 12.1 and 15.8
-  B) If we repeated the study many times, about 95% of intervals made this way would contain the true mean; this interval either does or doesn't
-  C) 95% of lakes have phosphorus between 12.1 and 15.8
-  D) The true mean changes depending on which lakes we sampled
+  A) About 95% of intervals made this way contain the true mean
+  B) The true mean changes depending on which lakes we sampled
+  C) There is a 95% probability the true mean is between 12.1 and 15.8
+  D) 95% of lakes have phosphorus between 12.1 and 15.8
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** The 95% is about the method. The true mean is fixed, and so is this interval once calculated, so it simply did or didn't catch the truth.
 - **Why the wrong options are wrong (tutor only):**
-  A) The common misreading: the probability belongs to the process.
-  C) The CI is for the mean, not for individual lakes.
-  D) The parameter is fixed; estimates change.
+  B) The parameter is fixed; estimates change.
+  C) The common misreading: the probability belongs to the process.
+  D) The CI is for the mean, not for individual lakes.
 - **Hint:** Where does the randomness live: in the parameter or the procedure?
 
 ### ch09-hw-03-v2
@@ -4829,15 +4829,15 @@ Suppose you know the population parameter. 100 friends each take random samples 
 
 - **Options:**
 
-  A) All 50, guaranteed
-  B) About 49 or 50
+  A) About 49 or 50
+  B) All 50, guaranteed
   C) About 45
   D) It depends on each lab's sample mean
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** 99% of 50 is 49.5, so expect almost all of them, with perhaps one miss.
 - **Why the wrong options are wrong (tutor only):**
-  A) Even 99% intervals miss sometimes.
+  B) Even 99% intervals miss sometimes.
   C) That's 90% coverage.
   D) Coverage is a property of the method, not of any one sample.
 - **Hint:** Multiply the number of intervals by the confidence level.

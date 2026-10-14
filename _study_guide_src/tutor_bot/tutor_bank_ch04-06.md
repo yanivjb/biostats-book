@@ -230,16 +230,16 @@ Which is the tidy version of a table of bird counts at sites N1 and S1 in 2023 a
 
 - **Options:**
 
-  A) Columns: site, year, count (4 rows)
-  B) Columns: site, 2023, 2024 (2 rows)
-  C) Columns: year, N1, S1 (2 rows)
-  D) One column holding '2023: N1=14, S1=9'
+  A) One column holding '2023: N1=14, S1=9'
+  B) Columns: year, N1, S1 (2 rows)
+  C) Columns: site, 2023, 2024 (2 rows)
+  D) Columns: site, year, count (4 rows)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Each observation (a site in a year) gets its own row, and each variable (site, year, count) its own column.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Values of a variable are used as column names.
-  D) Many values crammed into one cell.
+  A) Many values crammed into one cell.
+  C) and B) Values of a variable are used as column names.
 - **Hint:** How many site-year combinations are there?
 
 ### ch04-book-04
@@ -275,16 +275,16 @@ Why do dplyr and ggplot work best with tidy data?
 
 - **Options:**
 
-  A) They expect each variable to be a column, so you can name columns in filter(), mutate() and aes()
-  B) They can't read numbers otherwise
-  C) Tidy data are smaller
-  D) They don't; any shape works equally well
+  A) They expect each variable to be a column you can name
+  B) Tidy data are smaller
+  C) They can't read numbers that are stored in rows
+  D) They don't; any table shape works equally well with both
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Tidy data let you refer to each variable by its column name, which is how these tools are designed.
 - **Why the wrong options are wrong (tutor only):**
-  B) They read numbers either way.
-  C) Tidy data are often longer.
+  B) Tidy data are often longer.
+  C) They read numbers either way.
   D) Untidy data make these tools awkward or impossible to use.
 - **Hint:** How do you tell ggplot what goes on the x-axis?
 
@@ -298,17 +298,17 @@ When is a wide (untidy) table perfectly fine?
 
 - **Options:**
 
-  A) As a compact display table for readers, as long as you analyze a tidy version
-  B) Always, including for analysis
-  C) Never, even in a presentation
-  D) Only for data with fewer than 10 rows
+  A) Only for data with fewer than 10 rows
+  B) As a compact display table, if you analyze a tidy version
+  C) Always, including for analysis, as long as it's labeled
+  D) Never, even in a presentation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Wide tables can be easier to read in a report. For analysis with dplyr and ggplot, use tidy data.
 - **Why the wrong options are wrong (tutor only):**
-  B) Analysis tools expect tidy data.
-  C) Display tables can be wide.
-  D) Size isn't the criterion.
+  A) Size isn't the criterion.
+  C) Analysis tools expect tidy data.
+  D) Display tables can be wide.
 - **Hint:** Analysis or display?
 
 ### ch04-book-05
@@ -511,16 +511,16 @@ penguins |>
 
 - **Options:**
 
-  A) Create a column called sex
-  B) Keep only the female penguins
-  C) Remove the sex column
+  A) Create a column called sex set to "female"
+  B) Remove the sex column
+  C) Keep only the female penguins
   D) Sort by sex
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** filter() keeps rows where the condition is TRUE: here, sex equal to "female".
 - **Why the wrong options are wrong (tutor only):**
   A) That's mutate().
-  C) That's select().
+  B) That's select().
   D) That's arrange().
 - **Hint:** Rows or columns?
 
@@ -534,17 +534,17 @@ Which code keeps only setosa flowers with petals longer than 1.5 cm?
 
 - **Options:**
 
-  A) iris |> filter(Species == "setosa", Petal.Length > 1.5)
-  B) iris |> select(Species == "setosa", Petal.Length > 1.5)
-  C) iris |> filter(Species = "setosa" & Petal.Length > 1.5)
-  D) iris |> mutate(Species == "setosa")
+  A) iris |> filter(Species = "setosa" & Petal.Length > 1.5)
+  B) iris |> mutate(Species == "setosa")
+  C) iris |> filter(Species == "setosa", Petal.Length > 1.5)
+  D) iris |> select(Species == "setosa", Petal.Length > 1.5)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** filter() can take several conditions separated by commas; rows must meet all of them. Use == to test equality.
 - **Why the wrong options are wrong (tutor only):**
-  B) select() picks columns.
-  C) = assigns instead of testing equality.
-  D) mutate() adds columns.
+  A) = assigns instead of testing equality.
+  B) mutate() adds columns.
+  D) select() picks columns.
 - **Hint:** Which verb keeps rows, and how do you test equality?
 
 ### ch04-hw-01
@@ -702,17 +702,17 @@ ril_data |>
 
 - **Options:**
 
-  A) It renames two columns and adds a new column, rel_asd, calculated row by row as asd divided by petal_area, then prints the result. ril_data itself is unchanged.
-  B) It permanently renames the columns in ril_data and adds rel_asd to it
-  C) It calculates one overall value: the mean asd divided by the mean petal area
-  D) It removes petal_area_mm and asd_mm and keeps only rel_asd
+  A) Calculates one overall value: the mean asd divided by the mean petal area
+  B) It removes petal_area_mm and asd_mm and keeps only rel_asd
+  C) Permanently renames the columns in ril_data and saves rel_asd into it as a new column
+  D) Renames two columns and adds rel_asd (asd / petal_area, row by row); ril_data itself is unchanged
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** rename() changes column names, and mutate() adds a column calculated separately for every row (each RIL gets its own rel_asd). Because the result isn't assigned with <-, it is only printed; ril_data stays as it was.
 - **Why the wrong options are wrong (tutor only):**
-  B) Nothing is saved: there's no <- assignment.
-  C) mutate() works row by row; a single summary value would need summarize().
-  D) mutate() adds a column and keeps all the others; rename() only changes names.
+  A) mutate() works row by row; a single summary value would need summarize().
+  B) mutate() adds a column and keeps all the others; rename() only changes names.
+  C) Nothing is saved: there's no <- assignment.
 - **Hint:** Does mutate() give one value per row, or one value overall? And was anything saved?
 
 ### ch04-hw-04-v1
@@ -729,17 +729,17 @@ penguins |>
 
 - **Options:**
 
-  A) Renames body_mass to mass and adds mass_kg, calculated for each penguin, then prints the result; penguins itself is unchanged
-  B) Permanently changes penguins
-  C) Calculates one value: the mean mass in kg
-  D) Removes all columns except mass_kg
+  A) Permanently renames body_mass in penguins and saves mass_kg into it
+  B) Renames body_mass to mass and adds mass_kg, then prints; penguins is unchanged
+  C) Removes all columns except mass_kg
+  D) Calculates one overall value: the mean body mass in kg
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** rename() changes a column name; mutate() adds a column calculated row by row. Without <-, the result is just printed.
 - **Why the wrong options are wrong (tutor only):**
-  B) Nothing is assigned.
-  C) mutate() works row by row; summarize() would give one value.
-  D) mutate() keeps all columns.
+  A) Nothing is assigned.
+  C) mutate() keeps all columns.
+  D) mutate() works row by row; summarize() would give one value.
 - **Hint:** Row by row or one value? Saved or printed?
 
 ### ch04-hw-04-v2
@@ -756,16 +756,16 @@ plants |>
 
 - **Options:**
 
-  A) A single row with the mean area of all plants
-  B) Every plant with a new area column
-  C) The area of the first plant only
-  D) An error, because area doesn't exist
+  A) The area of the first plant only
+  B) One row: the mean area of all plants
+  C) Every plant, each with a new area column added
+  D) An error, because area doesn't exist in plants yet
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** mutate() adds an area for each plant; summarize() then collapses all rows into one summary value.
 - **Why the wrong options are wrong (tutor only):**
-  B) summarize() collapses the rows.
-  C) It averages over all plants.
+  A) It averages over all plants.
+  C) summarize() collapses the rows.
   D) area is created by mutate() in the line before.
 - **Hint:** What does summarize() do to the rows?
 
@@ -809,17 +809,17 @@ penguins |>
 
 - **Options:**
 
-  A) Create a new column called island
-  B) Keep only penguins from Dream island
-  C) Remove the island column
-  D) Sort penguins by island
+  A) Keep only penguins from Dream
+  B) Remove the island column
+  C) Sort penguins by island
+  D) Create a new column called island set to "Dream"
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** filter() keeps the rows that meet a condition: here, island equal to "Dream".
 - **Why the wrong options are wrong (tutor only):**
-  A) That's mutate().
-  C) That's select().
-  D) That's arrange().
+  B) That's select().
+  C) That's arrange().
+  D) That's mutate().
 - **Hint:** Rows or columns?
 
 ### ch04-hw-06-v2
@@ -833,16 +833,16 @@ Which code keeps only penguins heavier than 5000 g?
 - **Options:**
 
   A) penguins |> filter(body_mass > 5000)
-  B) penguins |> select(body_mass > 5000)
-  C) penguins |> mutate(body_mass > 5000)
-  D) penguins |> arrange(body_mass > 5000)
+  B) penguins |> arrange(body_mass > 5000)
+  C) penguins |> select(body_mass > 5000)
+  D) penguins |> mutate(body_mass > 5000)
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** filter() keeps rows where the condition is TRUE.
 - **Why the wrong options are wrong (tutor only):**
-  B) select() picks columns.
-  C) mutate() would add a TRUE/FALSE column.
-  D) arrange() sorts.
+  B) arrange() sorts.
+  C) select() picks columns.
+  D) mutate() would add a TRUE/FALSE column.
 - **Hint:** Which verb keeps rows?
 
 ### ch04-quiz-01
@@ -897,17 +897,17 @@ and get: could not find function "select". Most likely explanation?
 
 - **Options:**
 
-  A) dplyr isn't loaded
-  B) body_mass is misspelled
-  C) penguins wasn't reassigned
-  D) select() only works in scripts
+  A) body_mass is misspelled
+  B) select() only works in scripts
+  C) dplyr isn't loaded
+  D) penguins wasn't reassigned
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 'could not find function' means the package providing it isn't loaded: add library(dplyr).
 - **Why the wrong options are wrong (tutor only):**
-  B) A misspelled column gives 'object not found'.
-  C) Reassignment isn't involved.
-  D) select() works anywhere.
+  A) A misspelled column gives 'object not found'.
+  B) select() works anywhere.
+  D) Reassignment isn't involved.
 - **Hint:** What does 'could not find function' usually mean?
 
 ### ch04-quiz-01-v2
@@ -920,17 +920,17 @@ Match the error to its likely cause. 'could not find function "mutate"' most lik
 
 - **Options:**
 
-  A) The package containing mutate() isn't loaded (or the name is misspelled)
-  B) A column name is misspelled
-  C) The result wasn't saved
-  D) The data file is missing
+  A) A column name inside mutate() is misspelled
+  B) Its package isn't loaded (or mutate is misspelled)
+  C) The data file is missing
+  D) The result of the pipe wasn't saved
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** R doesn't know a function called mutate in this session: load dplyr (or check the spelling).
 - **Why the wrong options are wrong (tutor only):**
-  B) That gives 'object not found'.
-  C) Unsaved results don't cause errors.
-  D) A missing file gives a 'does not exist' error.
+  A) That gives 'object not found'.
+  C) A missing file gives a 'does not exist' error.
+  D) Unsaved results don't cause errors.
 - **Hint:** Function problem or object problem?
 
 ### ch04-quiz-02
@@ -980,17 +980,17 @@ and get: object 'bodymass' not found. The columns are species, island, bill_leng
 
 - **Options:**
 
-  A) The column name is misspelled; it's body_mass
-  B) dplyr isn't loaded
-  C) penguins wasn't reassigned
-  D) You can't divide in mutate()
+  A) dplyr isn't loaded
+  B) You can't divide by a number inside mutate()
+  C) The column name is misspelled; it's body_mass
+  D) penguins wasn't reassigned after an earlier step
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 'object not found' inside mutate() usually means a typo in a column name.
 - **Why the wrong options are wrong (tutor only):**
-  B) If dplyr weren't loaded, R couldn't find mutate().
-  C) Not saving doesn't cause errors.
-  D) Arithmetic works in mutate().
+  A) If dplyr weren't loaded, R couldn't find mutate().
+  B) Arithmetic works in mutate().
+  D) Not saving doesn't cause errors.
 - **Hint:** Compare the name you typed with the column list.
 
 ### ch04-quiz-02-v2
@@ -1003,17 +1003,17 @@ You get object 'Bill_Length' not found, but the column is bill_length. Why?
 
 - **Options:**
 
-  A) R is case-sensitive, so Bill_Length and bill_length are different names
-  B) The column was deleted
-  C) dplyr isn't loaded
-  D) Column names can't contain underscores
+  A) Column names can't contain underscores in dplyr
+  B) dplyr isn't loaded
+  C) The column was deleted by an earlier step
+  D) R is case-sensitive: Bill_Length ≠ bill_length
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Capitalization matters in R names.
 - **Why the wrong options are wrong (tutor only):**
-  B) The column exists with lowercase letters.
-  C) That would give a 'could not find function' error.
-  D) Underscores are fine.
+  A) Underscores are fine.
+  B) That would give a 'could not find function' error.
+  C) The column exists with lowercase letters.
 - **Hint:** Compare the capitalization.
 
 ### ch04-quiz-03
@@ -1060,17 +1060,17 @@ But when you type View(penguins), mass_kg is gone. What happened?
 
 - **Options:**
 
-  A) You didn't assign the result back to penguins (or to a new object)
-  B) dplyr isn't loaded
-  C) The column name is misspelled
-  D) View() hides new columns
+  A) View() hides newly created columns by default
+  B) The result was never assigned back to penguins
+  C) dplyr isn't loaded, so the change was temporary
+  D) The column name is misspelled
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** dplyr verbs return a new table; without <- the result is printed and then lost.
 - **Why the wrong options are wrong (tutor only):**
-  B) The code ran, so dplyr is loaded.
-  C) The column appeared in the printout.
-  D) View() shows all columns.
+  A) View() shows all columns.
+  C) The code ran, so dplyr is loaded.
+  D) The column appeared in the printout.
 - **Hint:** Was anything assigned with <- ?
 
 ### ch04-quiz-03-v2
@@ -1084,15 +1084,15 @@ Which line permanently adds mass_kg to the penguins object?
 - **Options:**
 
   A) penguins <- penguins |> mutate(mass_kg = body_mass / 1000)
-  B) penguins |> mutate(mass_kg = body_mass / 1000)
-  C) mutate(mass_kg = body_mass / 1000)
+  B) mutate(mass_kg = body_mass / 1000)
+  C) penguins |> mutate(mass_kg = body_mass / 1000)
   D) View(penguins |> mutate(mass_kg = body_mass / 1000))
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Assigning the result back to penguins replaces the old version with the new one.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Only display the result.
-  C) Doesn't say which data to use.
+  B) Doesn't say which data to use.
+  C) and D) Only display the result.
 - **Hint:** Look for <-.
 
 ### ch04-quiz-04
@@ -1157,17 +1157,17 @@ You want one new column per row (e.g., each penguin's mass in kg). Which verb?
 
 - **Options:**
 
-  A) mutate()
-  B) summarize()
-  C) select()
-  D) filter()
+  A) filter()
+  B) select()
+  C) summarize()
+  D) mutate()
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** mutate() adds a column calculated for each row.
 - **Why the wrong options are wrong (tutor only):**
-  B) summarize() gives one value per group.
-  C) select() picks columns.
-  D) filter() keeps rows.
+  A) filter() keeps rows.
+  B) select() picks columns.
+  C) summarize() gives one value per group.
 - **Hint:** One value per row.
 
 ### ch04-quiz-05
@@ -1274,17 +1274,17 @@ The histogram shows parasite load in 350 sheep. Which transformation would make 
 
 - **Options:**
 
-  A) A log transformation
+  A) No transformation can change the shape
   B) Squaring the values
   C) Subtracting the mean
-  D) No transformation can change the shape
+  D) A log transformation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Logs compress large values more than small ones, pulling in a long right tail. Squaring would make the skew worse; subtracting the mean just shifts the data.
 - **Why the wrong options are wrong (tutor only):**
+  A) Monotonic transformations like log do change shape.
   B) Squaring stretches large values even more.
   C) Shifting doesn't change shape.
-  D) Monotonic transformations like log do change shape.
 - **Hint:** Which transformation shrinks big numbers the most?
 
 ### ch05-book-01-v2
@@ -1298,16 +1298,16 @@ The histogram shows the day of year fruit ripened on 5,000 plants. The distribut
 
 - **Options:**
 
-  A) unimodal and symmetric
-  B) unimodal and right skewed
-  C) unimodal and left skewed
+  A) unimodal and right skewed
+  B) unimodal and left skewed
+  C) unimodal and symmetric
   D) bimodal
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** One peak late in the season, with a long tail toward earlier days: unimodal and left skewed.
 - **Why the wrong options are wrong (tutor only):**
-  A) Not symmetric.
-  B) The long tail points left, toward small values.
+  A) The long tail points left, toward small values.
+  C) Not symmetric.
   D) One peak.
 - **Hint:** Which way does the long tail point?
 
@@ -1345,14 +1345,14 @@ The histogram shows the heights of 600 trees. The distribution is:
 - **Options:**
 
   A) unimodal and symmetric
-  B) unimodal and right skewed
-  C) bimodal
+  B) bimodal
+  C) unimodal and right skewed
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** One peak, roughly mirror-image sides: unimodal and symmetric.
 - **Why the wrong options are wrong (tutor only):**
-  B) Neither tail is clearly longer.
-  C) One peak.
+  B) One peak.
+  C) Neither tail is clearly longer.
 - **Hint:** Would it look similar flipped?
 
 ### ch05-book-02-v2
@@ -1366,15 +1366,15 @@ For a unimodal, symmetric distribution, how do the mean and median compare?
 - **Options:**
 
   A) They're about equal
-  B) The mean is much larger
-  C) The median is much larger
+  B) The median is much larger
+  C) The mean is much larger
   D) There's no relationship
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** With no long tail pulling it, the mean sits at about the same place as the median (and the peak).
 - **Why the wrong options are wrong (tutor only):**
-  B) That's typical of right skew.
-  C) That's typical of left skew.
+  B) That's typical of left skew.
+  C) That's typical of right skew.
   D) Shape and these summaries are closely linked.
 - **Hint:** What would pull the mean away from the middle?
 
@@ -1389,17 +1389,17 @@ This histogram of waiting times between eruptions of the Old Faithful geyser use
 
 - **Options:**
 
-  A) Too few bins can hide the shape of a distribution, so try several bin sizes
-  B) The 4-bin histogram is correct; the data are left skewed
-  C) More bins always distort a histogram, so use as few as possible
-  D) Bin size only changes the y-axis, not the shape
+  A) More bins always distort a histogram by adding noise, so use as few bins as possible
+  B) Too few bins can hide a distribution's shape, so try several bin sizes
+  C) Bin size only changes the y-axis, not the shape
+  D) The 4-bin histogram is correct; the data are left skewed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With 4 wide bins, the two humps get merged, and the plot looks unimodal and left skewed. Bin width is a choice: too few bins hide features, while too many make noise look like structure. Try a few and see what's robust.
 - **Why the wrong options are wrong (tutor only):**
-  B) The apparent left skew comes from the coarse bins.
-  C) Too many bins can make noise look like structure, but too few hide real structure.
-  D) Bin size changes how values are grouped, so it changes the apparent shape.
+  A) Too many bins can make noise look like structure, but too few hide real structure.
+  C) Bin size changes how values are grouped, so it changes the apparent shape.
+  D) The apparent left skew comes from the coarse bins.
 - **Hint:** What happens to two nearby peaks if they land in the same wide bin?
 
 ### ch05-book-03-v1
@@ -1413,17 +1413,17 @@ The first histogram of finch beak depth uses only 2 bins. The second shows the s
 
 - **Options:**
 
-  A) Too few bins can hide important features like bimodality, so try several bin widths
-  B) The 2-bin version is more honest because it's simpler
-  C) Bin width never changes what you see
-  D) More bins always mislead
+  A) The 2-bin version is more honest, because it's simpler and smooths out noise
+  B) More bins always mislead
+  C) Too few bins can hide features like bimodality
+  D) Bin width never changes what you see
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With 2 bins, the two beak types merge and you can't see them. With 30, two clear peaks appear. Always try a few bin widths.
 - **Why the wrong options are wrong (tutor only):**
-  B) Simpler isn't better if it hides structure.
-  C) It clearly does.
-  D) Too many bins add noise, but too few hide structure.
+  A) Simpler isn't better if it hides structure.
+  B) Too many bins add noise, but too few hide structure.
+  D) It clearly does.
 - **Hint:** What does the 30-bin version reveal?
 
 ### ch05-book-03-v2
@@ -1437,17 +1437,17 @@ This histogram shows 40 measurements using 100 bins. What's the problem?
 
 - **Options:**
 
-  A) Too many bins: noise looks like structure
-  B) Too few bins
-  C) The data must be bimodal
-  D) Nothing; more bins is always better
+  A) Nothing; more bins is always better
+  B) Too few bins, so the shape is hidden
+  C) Too many bins: noise looks like structure
+  D) The data must be bimodal, given all the peaks
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With 40 points spread over 100 bins, most bins hold 0, 1 or 2 points, so random bumps and gaps dominate. Use fewer bins (or a density plot) to see the overall shape.
 - **Why the wrong options are wrong (tutor only):**
+  A) Too many bins add noise.
   B) The opposite problem.
-  C) Jaggedness doesn't mean multiple modes.
-  D) Too many bins add noise.
+  D) Jaggedness doesn't mean multiple modes.
 - **Hint:** How many points land in each bin?
 
 ### ch05-book-04
@@ -1507,15 +1507,15 @@ Which mean is correct?
 
 - **Options:**
 
-  A) mean_1
+  A) It depends
   B) mean_2
-  C) It depends
+  C) mean_1
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** 690 g comes from the 46 frogs with data, so the mean is 690 / 46 = 15.0. mean_1 divides by all 50 rows.
 - **Why the wrong options are wrong (tutor only):**
-  A) Divides by 50 but only 46 frogs contributed to the total.
-  C) Only one is the mean of the measured frogs.
+  A) Only one is the mean of the measured frogs.
+  C) Divides by 50 but only 46 frogs contributed to the total.
 - **Hint:** How many frogs contributed to the total?
 
 ### ch05-book-04-v2
@@ -1528,17 +1528,17 @@ A column has values 4, 6, NA and 10. What does mean(x) return in R, and what doe
 
 - **Options:**
 
-  A) NA, and 6.67
-  B) 5, and 6.67
-  C) 6.67, and 6.67
-  D) An error, and 5
+  A) 6.67, and 6.67
+  B) An error, and 5
+  C) 5, and 6.67
+  D) NA, and 6.67
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Any NA makes mean() return NA unless you ask it to drop missing values. With na.rm = TRUE: (4 + 6 + 10) / 3 = 6.67.
 - **Why the wrong options are wrong (tutor only):**
-  B) 20 / 4 = 5 treats NA as zero, which R doesn't do.
-  C) The first call returns NA.
-  D) No error, and the second answer is 6.67.
+  A) The first call returns NA.
+  B) No error, and the second answer is 6.67.
+  C) 20 / 4 = 5 treats NA as zero, which R doesn't do.
 - **Hint:** What does R do with NA by default?
 
 ### ch05-book-05
@@ -1600,17 +1600,17 @@ What went wrong with mean_1?
 
 - **Options:**
 
-  A) n() counts all rows, including the 4 with missing mass
-  B) na.rm should be FALSE
-  C) The mean should divide by n − 1
-  D) Nothing; both are valid
+  A) Nothing; both are valid
+  B) na.rm should be FALSE so missing values are kept
+  C) n() counts all rows, including the 4 NAs
+  D) The mean should divide by n − 1, not n
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The total skips NAs but n() doesn't, so the numerator and denominator don't match.
 - **Why the wrong options are wrong (tutor only):**
+  A) Dividing a 46-frog total by 50 isn't a valid mean.
   B) Then the total would be NA.
-  C) n − 1 is for variance.
-  D) Dividing a 46-frog total by 50 isn't a valid mean.
+  D) n − 1 is for variance.
 - **Hint:** Does n() know which rows are NA?
 
 ### ch05-book-05-v2
@@ -1625,14 +1625,14 @@ How can you count only the non-missing values of mass inside summarize()?
 
   A) sum(!is.na(mass))
   B) n()
-  C) length(mass)
-  D) mean(mass)
+  C) mean(mass)
+  D) length(mass)
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** !is.na(mass) is TRUE for each non-missing value, and sum() counts the TRUEs.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Count all rows, including NAs.
-  D) That's the mean, not a count.
+  B) and D) Count all rows, including NAs.
+  C) That's the mean, not a count.
 - **Hint:** How do you turn 'is it missing?' into a count?
 
 ### ch05-book-06
@@ -1687,8 +1687,8 @@ Which is most variable relative to its mean?
 - **Answer (tutor only):** C
 - **Explanation (tutor only):** CV = SD / mean: Pop 1 0.20, Pop 2 0.15, Pop 3 0.25. Pop 3 is the most variable relative to its size.
 - **Why the wrong options are wrong (tutor only):**
-  B) Largest SD, but also the largest mean: the least variable relatively.
   A) Middle CV.
+  B) Largest SD, but also the largest mean: the least variable relatively.
 - **Hint:** Divide each SD by its mean.
 
 ### ch05-book-06-v2
@@ -1701,17 +1701,17 @@ Two traits: wing length (mean 50 mm, SD 5 mm) and wing mass (mean 0.20 g, SD 0.0
 
 - **Options:**
 
-  A) Wing mass (CV 0.20 vs 0.10)
+  A) Different units can't be compared
   B) Wing length, because 5 > 0.04
-  C) They're equal
-  D) Different units can't be compared
+  C) Wing mass (CV 0.20 vs 0.10)
+  D) They're equal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** CV: length 5 / 50 = 0.10; mass 0.04 / 0.20 = 0.20.
 - **Why the wrong options are wrong (tutor only):**
+  A) CV is unitless.
   B) Raw SDs in different units can't be compared directly.
-  C) The CVs differ.
-  D) CV is unitless.
+  D) The CVs differ.
 - **Hint:** Compute SD / mean for each.
 
 ### ch05-book-07
@@ -1917,17 +1917,17 @@ Nectar volume has mean 2 µL and SD 1 µL. Flower width has mean 40 mm and SD 4 
 
 - **Options:**
 
-  A) Nectar volume is about five times as variable (CV 0.5 vs 0.1)
-  B) Flower width is more variable because 4 > 1
-  C) They're equally variable
-  D) They can't be compared
+  A) They're equally variable
+  B) They can't be compared, since the units differ
+  C) Flower width is more variable, because its SD (4) is bigger than 1
+  D) Nectar is ~5× as variable (CV 0.5 vs 0.1)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** CV: nectar 1 / 2 = 0.5; width 4 / 40 = 0.1. Nectar varies five times as much relative to its mean.
 - **Why the wrong options are wrong (tutor only):**
-  B) Raw SDs in different units mislead.
-  C) The CVs differ fivefold.
-  D) The CV is unitless.
+  A) The CVs differ fivefold.
+  B) The CV is unitless.
+  C) Raw SDs in different units mislead.
 - **Hint:** SD / mean for each.
 
 ### ch05-book-10-v2
@@ -1940,8 +1940,8 @@ If you converted flower width from mm to cm, what would happen to its SD and its
 
 - **Options:**
 
-  A) The SD would shrink 10-fold; the CV would stay the same
-  B) Both would shrink 10-fold
+  A) SD shrinks 10-fold; the CV stays the same
+  B) Both would shrink 10-fold, since all values shrink
   C) Neither would change
   D) The CV would grow 10-fold
 
@@ -1963,17 +1963,17 @@ Why is it important to standardize by the mean when comparing variability betwee
 
 - **Options:**
 
-  A) Because the SD depends on the scale and units of measurement: bigger numbers tend to vary by bigger amounts, so dividing by the mean puts variables on a common, unitless scale
-  B) Because the mean is always larger than the SD
-  C) Because dividing by the mean removes outliers
-  D) Because variables with larger means are always more variable
+  A) Because variables with larger means are always more variable, and dividing corrects for that
+  B) Because dividing by the mean removes outliers
+  C) The SD scales with the units and size of the values, so dividing by the mean makes variability comparable
+  D) Because the mean is always larger than the SD, so the ratio keeps things between 0 and 1
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** If you measured petal area in cm² instead of mm², the SD would shrink 100-fold even though nothing biological changed. The CV (SD / mean) is unaffected by units, so it compares relative variability fairly.
 - **Why the wrong options are wrong (tutor only):**
-  B) Not necessarily true, and irrelevant anyway.
-  C) Dividing doesn't remove any data points.
-  D) Larger values often vary more in absolute terms, which is exactly why we standardize. Relative variability can be larger or smaller.
+  A) Larger values often vary more in absolute terms, which is exactly why we standardize. Relative variability can be larger or smaller.
+  B) Dividing doesn't remove any data points.
+  D) Not necessarily true, and irrelevant anyway.
 - **Hint:** What would happen to the SD of petal area if you switched from mm² to cm²?
 
 ### ch05-book-11-v1
@@ -1986,17 +1986,17 @@ A student says: 'Elephant mass is more variable than mouse mass because its SD i
 
 - **Options:**
 
-  A) SDs scale with the size and units of the trait; comparing variability fairly requires dividing by the mean (CV)
-  B) Nothing; bigger SD means more variable
+  A) Elephants should be weighed in grams too, so the units match
+  B) SDs scale with a trait's size; compare CVs instead
   C) Mice can't be weighed precisely
-  D) Elephants should be weighed in grams
+  D) Nothing; a bigger SD always means more variable
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Big things vary by big amounts. The CV compares relative variability on a unitless scale.
 - **Why the wrong options are wrong (tutor only):**
-  B) Raw SDs mostly reflect scale here.
+  A) Changing units changes the SD but not the conclusion; the CV is the fix.
   C) Not the issue.
-  D) Changing units changes the SD but not the conclusion; the CV is the fix.
+  D) Raw SDs mostly reflect scale here.
 - **Hint:** What would the CVs say?
 
 ### ch05-book-11-v2
@@ -2009,17 +2009,17 @@ Which statement about the coefficient of variation is true?
 
 - **Options:**
 
-  A) It is SD divided by the mean, and has no units
-  B) It is the variance divided by n
-  C) It has the same units as the data
-  D) It only works for normally distributed data
+  A) It only works for normally distributed data
+  B) It is the variance divided by the sample size
+  C) It is SD / mean, and has no units
+  D) It has the same units as the data
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** CV = SD / mean, so the units cancel and traits on different scales can be compared.
 - **Why the wrong options are wrong (tutor only):**
+  A) It's used regardless of shape (though it needs positive values).
   B) That's not the CV.
-  C) Units cancel.
-  D) It's used regardless of shape (though it needs positive values).
+  D) Units cancel.
 - **Hint:** What happens to the units when you divide SD by the mean?
 
 ### ch05-book-12
@@ -2061,17 +2061,17 @@ penguins <- penguins |>
 
 - **Options:**
 
-  A) penguins is replaced by a single number, so the raw data are lost
-  B) max() should be mean()
+  A) na.rm = TRUE isn't needed
+  B) penguins is overwritten, so the raw data are lost
   C) It should be summarise()
-  D) na.rm = TRUE isn't needed
+  D) max() should be mean(), since the mean is the usual summary
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Save summaries under a new name; don't overwrite your data.
 - **Why the wrong options are wrong (tutor only):**
-  B) Which summary to use is a separate question.
+  A) It's needed if any values are NA.
   C) Both spellings work.
-  D) It's needed if any values are NA.
+  D) Which summary to use is a separate question.
 - **Hint:** What's in penguins afterward?
 
 ### ch05-book-12-v2
@@ -2084,17 +2084,17 @@ You accidentally ran `iris <- iris |> summarize(m = mean(Sepal.Length))`. What's
 
 - **Options:**
 
-  A) Restart R (or remove your copy) so the built-in iris is available again, and fix the line
-  B) Run the line again
-  C) It's gone forever
-  D) Type undo()
+  A) It's gone for good, since iris was overwritten
+  B) Restart R (or rm(iris)) and fix the line
+  C) Type undo()
+  D) Run the same line again to reverse it
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Built-in datasets come back in a fresh session (or with rm(iris)). For your own data, rerun the script from the top, which is why scripts matter.
 - **Why the wrong options are wrong (tutor only):**
-  B) Running it again summarizes the summary.
-  C) The original is restored from the package.
-  D) R has no undo().
+  A) The original is restored from the package.
+  C) R has no undo().
+  D) Running it again summarizes the summary.
 - **Hint:** Your script and fresh sessions are your safety net.
 
 ### ch05-gquiz-01
@@ -2155,16 +2155,16 @@ A dataset of household incomes includes a few billionaires. Which summary best d
 
 - **Options:**
 
-  A) The median
+  A) The range
   B) The mean
-  C) The range
-  D) The variance
+  C) The variance
+  D) The median
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The median is the middle value, so it isn't dragged upward by a few extreme incomes.
 - **Why the wrong options are wrong (tutor only):**
+  A) and C) Measures of spread, not of a typical value.
   B) The mean is pulled far up by the billionaires.
-  C) and D) Measures of spread, not of a typical value.
 - **Hint:** Which center isn't pulled by extremes?
 
 ### ch05-gquiz-02
@@ -2199,17 +2199,17 @@ A sample of 12 seeds has a standard deviation of 0. What must be true?
 
 - **Options:**
 
-  A) All 12 seeds have the same mass
-  B) All seeds weigh 0 mg
-  C) Half the seeds are above the mean
-  D) The seeds were weighed incorrectly
+  A) The seeds were weighed incorrectly
+  B) Half the seeds are above the mean
+  C) All 12 seeds have the same mass
+  D) All seeds weigh 0 mg
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** SD = 0 means no deviations from the mean at all, so every value is identical.
 - **Why the wrong options are wrong (tutor only):**
-  B) They must be equal, not necessarily zero.
-  C) That describes data with spread.
-  D) Identical values are possible (e.g., rounded measurements).
+  A) Identical values are possible (e.g., rounded measurements).
+  B) That describes data with spread.
+  D) They must be equal, not necessarily zero.
 - **Hint:** When can the average squared deviation be zero?
 
 ### ch05-gquiz-02-v2
@@ -2224,15 +2224,15 @@ Set 2: 8, 9, 11, 12
 
 - **Options:**
 
-  A) Set 1
-  B) Set 2
+  A) Set 2
+  B) Set 1
   C) They're equal
   D) Can't tell without the means
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Set 1 has no spread (variance 0). Set 2 has the same mean (10) but values spread around it (variance ≈ 3.3).
 - **Why the wrong options are wrong (tutor only):**
-  A) No variation means variance 0.
+  B) No variation means variance 0.
   C) Same mean, different spread.
   D) Both means are 10, and spread is visible directly.
 - **Hint:** Which set has values away from the mean?
@@ -2268,15 +2268,15 @@ You measure heights in a sample of 20 trees, then in a sample of 500 trees from 
 
 - **Options:**
 
-  A) Mean
-  B) Median
-  C) Range
-  D) Standard deviation
+  A) Range
+  B) Mean
+  C) Standard deviation
+  D) Median
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** The range is set by the most extreme trees. A bigger sample is more likely to include very short and very tall trees, so the range tends to grow.
 - **Why the wrong options are wrong (tutor only):**
-  A), B) and D) These estimate population values and don't trend upward with n.
+  B), D) and C) These estimate population values and don't trend upward with n.
 - **Hint:** Which summary can only stay the same or grow when you add data?
 
 ### ch05-gquiz-03-v2
@@ -2289,17 +2289,17 @@ Why is the range a poor summary for comparing samples of very different sizes?
 
 - **Options:**
 
-  A) It tends to grow with sample size, because larger samples catch more extreme values
-  B) It can't be calculated for large samples
-  C) It always equals the SD
-  D) It ignores the minimum
+  A) It ignores the minimum
+  B) It tends to grow with sample size
+  C) It always equals about four SDs, so it adds nothing
+  D) It can't be calculated for large samples
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A bigger sample is more likely to include rare extremes, so the range depends on n as well as on the population.
 - **Why the wrong options are wrong (tutor only):**
-  B) It can always be calculated.
+  A) The range uses both the minimum and the maximum.
   C) Not true.
-  D) The range uses both the minimum and the maximum.
+  D) It can always be calculated.
 - **Hint:** What happens to the extremes as you sample more?
 
 ### ch05-gquiz-04
@@ -2371,17 +2371,17 @@ Here is a boxplot of a sample. What can you say about the mean?
 
 - **Options:**
 
-  A) It's probably above the median, because the data are right skewed
-  B) It's probably below the median
-  C) It equals the median
-  D) Nothing at all
+  A) It equals the median
+  B) Nothing at all; boxplots don't show the mean
+  C) It's probably below the median, since the box sits low
+  D) It's probably above the median (right skew)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The median sits low in the box, the upper whisker is longer than the lower one, and there are several high outliers: the data are right skewed. A long upper tail pulls the mean above the median. The boxplot doesn't show the mean, but the skew tells you its likely direction.
 - **Why the wrong options are wrong (tutor only):**
-  B) That would be for left skew.
-  C) Only for symmetric data.
-  D) The shape does give a clue.
+  A) Only for symmetric data.
+  B) The shape does give a clue.
+  C) That would be for left skew.
 - **Hint:** Which way would the long tail pull the mean?
 
 ### ch05-gquiz-05
@@ -2501,16 +2501,16 @@ Which code gives the SD of flipper length for Adelie penguins only?
 - **Options:**
 
   A) penguins |> filter(species == "Adelie") |> summarize(sd_flip = sd(flipper_len, na.rm = TRUE))
-  B) penguins |> summarize(sd_flip = sd(flipper_len)) |> filter(species == "Adelie")
-  C) penguins |> filter(species = "Adelie") |> summarize(sd(flipper_len))
-  D) penguins |> select(species == "Adelie") |> sd(flipper_len)
+  B) penguins |> select(species == "Adelie") |> summarize(sd_flip = sd(flipper_len))
+  C) penguins |> filter(species = "Adelie") |> summarize(sd_flip = sd(flipper_len, na.rm = TRUE))
+  D) penguins |> summarize(sd_flip = sd(flipper_len, na.rm = TRUE)) |> filter(species == "Adelie")
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Keep the Adelie rows first, then summarize them.
 - **Why the wrong options are wrong (tutor only):**
-  B) After summarize(), species is gone.
+  B) select() picks columns, and sd() isn't a pipe step on a data frame.
   C) = instead of ==.
-  D) select() picks columns, and sd() isn't a pipe step on a data frame.
+  D) After summarize(), species is gone.
 - **Hint:** Filter, then summarize.
 
 ### ch05-gquiz-07
@@ -2544,16 +2544,16 @@ Seven frogs have masses 12, 15, 15, 17, 19, 22 and 24 g. What is the largest amo
 
 - **Options:**
 
-  A) No limit: any amount
-  B) 2 g
+  A) 2 g
+  B) It would always change the median
   C) 5 g
-  D) It would always change the median
+  D) No limit: any amount
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The median is the 4th of 7 ordered values (17 g). Making the heaviest frog heavier doesn't change which value is in the middle.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) There's no limit.
-  D) The median ignores how extreme the largest value is.
+  A) and C) There's no limit.
+  B) The median ignores how extreme the largest value is.
 - **Hint:** Which value is the median, and does it move?
 
 ### ch05-gquiz-07-v2
@@ -2566,15 +2566,15 @@ Seven frogs have masses 12, 15, 15, 17, 19, 22 and 24 g. If the heaviest frog's 
 
 - **Options:**
 
-  A) The mean rises a lot; the median stays at 17 g
-  B) Both rise a lot
-  C) The median rises; the mean stays the same
+  A) Both rise a lot, since one value changed
+  B) The mean rises a lot; the median stays at 17 g
+  C) The median rises; the mean stays about the same
   D) Neither changes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The mean uses every value: (124 + 216 extra) / 7 jumps from about 17.7 to about 48.6 g. The median is still the 4th value, 17 g.
 - **Why the wrong options are wrong (tutor only):**
-  B) The median is robust to one extreme value.
+  A) The median is robust to one extreme value.
   C) Backwards.
   D) The mean changes.
 - **Hint:** Mean uses sizes; median uses order.
@@ -2635,17 +2635,17 @@ Tree height SD is 3 m (mean 30 m); seedling height SD is 2 cm (mean 10 cm). Whic
 
 - **Options:**
 
-  A) Seedlings (CV = 0.20 vs 0.10)
-  B) Trees, because 3 m is bigger than 2 cm
-  C) Equal
-  D) Can't compare different units
+  A) Equal
+  B) Can't compare different units
+  C) Seedlings (CV = 0.20 vs 0.10)
+  D) Trees, because 3 m is bigger than 2 cm
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** CV = SD / mean: trees 3 / 30 = 0.10; seedlings 2 / 10 = 0.20. Seedlings vary twice as much relative to their size.
 - **Why the wrong options are wrong (tutor only):**
-  B) Raw SDs depend on units and scale.
-  C) The CVs differ.
-  D) CV is unitless, which is exactly what makes the comparison possible.
+  A) The CVs differ.
+  B) CV is unitless, which is exactly what makes the comparison possible.
+  D) Raw SDs depend on units and scale.
 - **Hint:** Divide each SD by its mean.
 
 ### ch05-quiz-01
@@ -2682,14 +2682,14 @@ The histogram shows seed mass for 400 seeds. The distribution is best described 
 - **Options:**
 
   A) unimodal and symmetric
-  B) unimodal and right skewed
-  C) bimodal
+  B) bimodal
+  C) unimodal and right skewed
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** One peak near 2.5–3 mg with a long tail toward heavy seeds: unimodal and right skewed (mean 3.5 mg > median 3.0 mg).
 - **Why the wrong options are wrong (tutor only):**
   A) The right tail is much longer than the left.
-  C) There's only one peak.
+  B) There's only one peak.
 - **Hint:** Which side has the long tail?
 
 ### ch05-quiz-01-v2
@@ -2703,16 +2703,16 @@ The histogram shows parasite load (eggs per gram) in 350 sheep. The distribution
 
 - **Options:**
 
-  A) unimodal and symmetric
+  A) unimodal and left skewed
   B) unimodal and right skewed
-  C) unimodal and left skewed
+  C) unimodal and symmetric
   D) bimodal
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** Most sheep have low loads and a few have very high loads, giving a long right tail. Mean (54) is well above the median (40).
 - **Why the wrong options are wrong (tutor only):**
-  A) Very lopsided.
-  C) The long tail is on the right (high values).
+  A) The long tail is on the right (high values).
+  C) Very lopsided.
   D) One peak.
 - **Hint:** Where are most values, and where does the tail go?
 
@@ -2748,14 +2748,14 @@ The histogram shows beak depth for 400 finches. The distribution is best describ
 
 - **Options:**
 
-  A) unimodal and symmetric
-  B) unimodal and right skewed
-  C) bimodal
+  A) unimodal and right skewed
+  B) bimodal
+  C) unimodal and symmetric
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Two clear peaks (near 9 and 12.5 mm) with a dip between: bimodal. This often means two groups are mixed, e.g., two species or beak morphs.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) There are two humps, not one.
+  C) and A) There are two humps, not one.
 - **Hint:** Count the peaks.
 
 ### ch05-quiz-02-v2
@@ -2769,16 +2769,16 @@ The histogram shows body temperature for 300 healthy mice. The distribution is b
 
 - **Options:**
 
-  A) unimodal and symmetric
-  B) unimodal and right skewed
-  C) unimodal and left skewed
-  D) bimodal
+  A) unimodal and right skewed
+  B) bimodal
+  C) unimodal and symmetric
+  D) unimodal and left skewed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** One peak near 37 °C, falling off about equally on both sides: unimodal and symmetric.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Neither tail is clearly longer.
-  D) There's one peak.
+  A) and D) Neither tail is clearly longer.
+  B) There's one peak.
 - **Hint:** Would it look the same flipped left to right?
 
 ### ch05-quiz-03
@@ -3005,15 +3005,15 @@ frogs <- frogs |>
 
 - **Options:**
 
-  A) It uses summarize() instead of summarise()
-  B) It overwrites frogs with a one-row summary, losing the raw data
-  C) It should use the median instead
+  A) It should use the median instead of the mean
+  B) It overwrites frogs with a one-row summary
+  C) It uses the American summarize() instead of summarise()
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** After this line, frogs holds only the mean. Save summaries under a new name, e.g., frog_summary <- frogs |> summarize(...).
 - **Why the wrong options are wrong (tutor only):**
-  A) Both spellings work identically.
-  C) The choice of summary isn't the main problem; losing the data is.
+  A) The choice of summary isn't the main problem; losing the data is.
+  C) Both spellings work identically.
 - **Hint:** What's left in frogs after this runs?
 
 ### ch05-quiz-06-v2
@@ -3028,8 +3028,8 @@ Which line safely stores the mean flipper length without losing the penguins dat
 
   A) flipper_summary <- penguins |> summarize(mean_flipper = mean(flipper_len, na.rm = TRUE))
   B) penguins <- penguins |> summarize(mean_flipper = mean(flipper_len, na.rm = TRUE))
-  C) penguins <- mean(penguins)
-  D) summarize(penguins) <- mean(flipper_len)
+  C) penguins <- penguins |> mean(flipper_len, na.rm = TRUE)
+  D) summarize(penguins) <- mean(penguins$flipper_len, na.rm = TRUE)
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Assigning the summary to a new name keeps the original data intact.
@@ -3048,17 +3048,17 @@ You want to compare the variability in fruit area between apples and oranges. Wh
 
 - **Options:**
 
-  A) The coefficient of variation (SD / mean), because oranges and apples differ in mean size, and bigger things tend to vary by bigger amounts
-  B) The variance, because it uses all the data
-  C) The range, because it shows the biggest and smallest fruit
-  D) The covariance between apple area and orange area
+  A) The variance, because it uses every observation and not just the extremes
+  B) The range, because it shows the biggest and smallest fruit of each kind
+  C) The covariance between apple area and orange area
+  D) The coefficient of variation (SD / mean), since the fruits differ in mean size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The CV puts variability relative to the mean, so it compares spread fairly between groups with different average sizes.
 - **Why the wrong options are wrong (tutor only):**
-  B) Variance is in squared units and scales with the mean, so larger fruits would look more variable just because they are larger.
-  C) The range depends on extremes and on sample size.
-  D) Covariance measures how two variables vary together, which doesn't apply here (apples and oranges aren't paired).
+  A) Variance is in squared units and scales with the mean, so larger fruits would look more variable just because they are larger.
+  B) The range depends on extremes and on sample size.
+  C) Covariance measures how two variables vary together, which doesn't apply here (apples and oranges aren't paired).
 - **Hint:** If oranges were twice as big on average, would you expect their SD to be bigger even if they were 'equally variable'?
 
 ### ch07-gquiz-02-v1
@@ -3071,15 +3071,15 @@ You want to compare how variable body mass is in hummingbirds versus eagles. Whi
 
 - **Options:**
 
-  A) The coefficient of variation (SD / mean)
-  B) The variance
-  C) The standard deviation
-  D) The range
+  A) The coefficient of variation
+  B) The range
+  C) The variance, since it uses every bird
+  D) The standard deviation, in grams for both
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Eagles weigh about a thousand times more, so their SD will be far larger even if they're no more variable relative to their size. The CV puts both on a unitless scale.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) All scale with the size of the animal.
+  C), D) and B) All scale with the size of the animal.
 - **Hint:** What happens to the SD when everything is a thousand times bigger?
 
 ### ch07-gquiz-02-v2
@@ -3092,17 +3092,17 @@ Petal length: species X has mean 10 mm and SD 2 mm; species Y has mean 40 mm and
 
 - **Options:**
 
-  A) X (CV 0.20 vs 0.10)
-  B) Y, because 4 > 2
-  C) Equal
-  D) Can't compare
+  A) Equal
+  B) Can't compare
+  C) Y, because its SD of 4 is twice as big
+  D) X (CV 0.20 vs 0.10)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** CV = SD / mean: X 2/10 = 0.20, Y 4/40 = 0.10.
 - **Why the wrong options are wrong (tutor only):**
-  B) Raw SDs scale with size.
-  C) The CVs differ.
-  D) The CV allows the comparison.
+  A) The CVs differ.
+  B) The CV allows the comparison.
+  C) Raw SDs scale with size.
 - **Hint:** Divide each SD by its mean.
 
 ## Chapter 6: Associations I
@@ -3169,17 +3169,17 @@ A stacked bar chart shows survival (yes/no) for two groups of very different siz
 
 - **Options:**
 
-  A) Stacked bars show counts, so the big group's bar dominates; you'd need fill to compare proportions
-  B) Stacked bars can't show two categories
-  C) The colors are too similar
-  D) Survival can't be plotted
+  A) Stacked bars can't show two categories at once
+  B) Survival can't be plotted
+  C) The colors are too similar to tell yes from no
+  D) Bars show counts, so the big group dominates
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** With counts, the 500-animal bar towers over the 50-animal bar; proportions are hidden. position = "fill" scales both to 1.
 - **Why the wrong options are wrong (tutor only):**
-  B) They can.
+  A) They can.
+  B) It can.
   C) Not the main problem.
-  D) It can.
 - **Hint:** What would make both bars the same height?
 
 ### ch06-book-02
@@ -3327,17 +3327,17 @@ P(dark | lava) ≈ 0.86 and P(dark | sand) ≈ 0.15. What do you conclude?
 
 - **Options:**
 
-  A) Coat color is strongly associated with habitat: dark mice are far more common on lava
-  B) Because more light mice were caught overall, light coats are favored on lava
+  A) Because more light mice were caught overall, light coats are favored on lava
+  B) The joint proportion of dark lava mice is small, so no association
   C) Coat color and habitat are independent
-  D) The joint proportion of dark lava mice is small, so there's no association
+  D) Coat color and habitat are strongly associated
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Compare conditional proportions: most lava mice are dark and most sand mice are light, a strong association (consistent with camouflage, though this survey alone doesn't prove cause).
 - **Why the wrong options are wrong (tutor only):**
-  B) Overall counts don't answer a question about lava mice.
+  A) Overall counts don't answer a question about lava mice.
+  B) A joint proportion's size doesn't measure association.
   C) The conditional proportions are very different.
-  D) A joint proportion's size doesn't measure association.
 - **Hint:** Compare conditional proportions, not raw counts.
 
 ### ch06-book-03-v2
@@ -3350,17 +3350,17 @@ More women than men survived a shipwreck (300 vs 200), but there were 400 women 
 
 - **Options:**
 
-  A) Women (75% vs 12.5%)
+  A) Can't tell
   B) Men, because 200 is close to 300
-  C) Equally likely
-  D) Can't tell
+  C) Women (75% vs 12.5%)
+  D) Equally likely
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Survival rates: women 300/400 = 75%, men 200/1600 = 12.5%. Compare proportions, not raw counts.
 - **Why the wrong options are wrong (tutor only):**
+  A) The rates can be calculated.
   B) Counts reflect group sizes.
-  C) The rates differ sixfold.
-  D) The rates can be calculated.
+  D) The rates differ sixfold.
 - **Hint:** Divide by each group's size.
 
 ### ch06-book-04
@@ -3412,10 +3412,10 @@ What is the difference in mean bill length (male − female), and how big is it 
 
 - **Options:**
 
-  A) 3.91 mm; huge or very large (d ≈ 1.6)
+  A) 3.91 mm; very large (d ≈ 1.6)
   B) 3.91 mm; small (d ≈ 0.3)
   C) −3.91 mm; large
-  D) 1.62 mm; large
+  D) 1.62 mm; large, using the pooled SD
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Difference = 49.47 − 45.56 = 3.91 mm. d = 3.91 / 2.42 ≈ 1.62, well above the 0.8 'large' benchmark.
@@ -3436,16 +3436,16 @@ Two studies report differences: A) 2 mm with pooled SD 10 mm; B) 2 mm with poole
 - **Options:**
 
   A) Study B (d = 2.0 vs 0.2)
-  B) Study A
-  C) Equal, since both differences are 2 mm
-  D) Can't compare
+  B) Can't compare
+  C) Study A
+  D) Equal, since both differences are 2 mm
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Cohen's d scales the difference by the spread: 2/1 = 2.0 is huge, 2/10 = 0.2 is small.
 - **Why the wrong options are wrong (tutor only):**
-  B) Same difference, but much more noise.
-  C) Same raw difference, different d.
-  D) d is designed for this.
+  B) d is designed for this.
+  C) Same difference, but much more noise.
+  D) Same raw difference, different d.
 - **Hint:** Divide each difference by its SD.
 
 ### ch06-book-05
@@ -3496,15 +3496,15 @@ Which conclusion is best?
 
 - **Options:**
 
-  A) Male Gentoo penguins tend to have longer bills than females
-  B) Being male causes long bills through testosterone
+  A) Being male causes long bills through testosterone
+  B) Males tend to have longer bills than females
   C) There's no difference in bill length
   D) All males have longer bills than all females
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A describes the observed difference in means. Sex differences may well have biological causes, but these summaries alone don't show the mechanism.
 - **Why the wrong options are wrong (tutor only):**
-  B) A mechanism claim these data can't test.
+  A) A mechanism claim these data can't test.
   C) The difference is large.
   D) The distributions overlap; some females have longer bills than some males.
 - **Hint:** Which answer describes the pattern without over-reaching?
@@ -3519,16 +3519,16 @@ Plants that received more pollinator visits had larger petals on average. Which 
 
 - **Options:**
 
-  A) Visited plants tend to have larger petals
-  B) Large petals attract pollinators
-  C) Pollinator visits make petals grow
-  D) Petal size and visits are unrelated
+  A) Petal size and visits are unrelated
+  B) Visited plants tend to have larger petals
+  C) Pollinator visits make petals grow larger
+  D) Large petals attract more pollinators to the plant
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A describes the association. B is plausible but needs an experiment (e.g., manipulating petal size) to show cause.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Causal claims, in opposite directions.
-  D) The data show an association.
+  A) The data show an association.
+  D) and C) Causal claims, in opposite directions.
 - **Hint:** Description vs explanation.
 
 ### ch06-book-06
@@ -3595,10 +3595,10 @@ Which plot best shows both the individual data and a summary for two groups?
 
 - **Options:**
 
-  A) A boxplot with jittered points drawn on top
-  B) A bar chart of the two means only
+  A) A boxplot with jittered points on top
+  B) A bar chart showing only the two group means
   C) A pie chart
-  D) A table of the two means
+  D) A table listing the two means and their SDs
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Boxplot + jittered points shows the distribution, the median and quartiles, and every individual.
@@ -3617,17 +3617,17 @@ You want to describe the difference in mean fruit area of apples and oranges. Wh
 
 - **Options:**
 
-  A) When you want a unitless effect size relative to the variability in the data, e.g., to compare with other studies or traits measured in different units; the raw difference is better when its units are meaningful to readers (e.g., 'oranges are 12 cm² larger')
-  B) Always; the raw difference is never useful
-  C) When the two groups have the same mean
-  D) Only when the data are categorical
+  A) Always; a raw difference in means is never useful once you can compute Cohen's d
+  B) Only when the data are categorical
+  C) When you want a unitless effect size, e.g., to compare with studies measured in other units
+  D) When the two groups have the same mean, so the raw difference can't show anything
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The difference in means is in real units, so it's easy to interpret when those units mean something. Cohen's d scales the difference by the pooled SD, which tells you how big it is relative to the spread and allows comparison across traits or studies.
 - **Why the wrong options are wrong (tutor only):**
-  B) Raw differences are often more interpretable.
-  C) Then both are zero.
-  D) Both require a numeric response.
+  A) Raw differences are often more interpretable.
+  B) Both require a numeric response.
+  D) Then both are zero.
 - **Hint:** Which one has units? Which one is relative to the spread?
 
 ### ch06-gquiz-05-v1
@@ -3640,17 +3640,17 @@ When is the raw difference in means (e.g., 'treated plants grew 4 cm taller') mo
 
 - **Options:**
 
-  A) When the units are meaningful to readers and you want to say how much something changed in real terms
+  A) When comparing traits measured in different units, like cm and grams
   B) Never
-  C) Only when the groups have equal sample sizes
-  D) When comparing traits measured in different units
+  C) When its units mean something to readers
+  D) Only when the groups have equal sample sizes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Raw differences are directly interpretable ('4 cm taller'). Cohen's d is better for comparing across traits or studies with different units or variability.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's when d is more useful.
   B) Raw differences are often the most useful report.
-  C) Sample size doesn't decide this.
-  D) That's when d is more useful.
+  D) Sample size doesn't decide this.
 - **Hint:** Which one has units a reader understands?
 
 ### ch06-gquiz-05-v2
@@ -3663,16 +3663,16 @@ You want to compare the effect of fertilizer on height (cm) with its effect on l
 
 - **Options:**
 
-  A) Cohen's d for each, since it puts both on a unitless scale
-  B) The raw differences (cm vs leaves)
-  C) The sample sizes
-  D) The means alone
+  A) Cohen's d for each, since it's unitless
+  B) The raw differences in means (cm and leaves)
+  C) The treatment means alone, side by side
+  D) The sample sizes
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Cohen's d divides each difference by its pooled SD, so effects measured in different units can be compared.
 - **Why the wrong options are wrong (tutor only):**
   B) cm and leaves can't be compared directly.
-  C) and D) Don't measure effect size.
+  D) and C) Don't measure effect size.
 - **Hint:** How do you remove units?
 
 ### ch06-hw-01
@@ -3739,17 +3739,17 @@ You want readers to compare the proportion of females on three islands, even tho
 
 - **Options:**
 
-  A) position = "fill"
-  B) position = "stack"
-  C) position = "dodge"
-  D) It doesn't matter
+  A) It doesn't matter
+  B) position = "fill"
+  C) position = "stack"
+  D) position = "dodge"
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** fill scales every bar to 1, so the female segment directly shows the proportion on each island, whatever the sample size.
 - **Why the wrong options are wrong (tutor only):**
-  B) Stacked counts make islands with more birds look different just because they're bigger.
-  C) Dodged counts need mental division.
-  D) The position decides what's easy to compare.
+  A) The position decides what's easy to compare.
+  C) Stacked counts make islands with more birds look different just because they're bigger.
+  D) Dodged counts need mental division.
 - **Hint:** Proportions → scale each bar to the same height.
 
 ### ch06-hw-02
@@ -3892,15 +3892,15 @@ P(infected | meadow) = 0.70 and P(infected | forest) = 0.25. What do you conclud
 
 - **Options:**
 
-  A) Infection is strongly associated with habitat: meadow frogs were much more likely to be infected
-  B) Habitat and infection are unrelated
-  C) Meadows cause infection
+  A) Habitat and infection are strongly associated
+  B) Meadows cause infection
+  C) Habitat and infection are unrelated, since totals are equal
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The conditional proportions differ a lot (0.70 vs 0.25), so habitat and infection are associated. This survey alone doesn't show that habitat causes infection.
 - **Why the wrong options are wrong (tutor only):**
-  B) The proportions are very different.
-  C) Observational data show association, not cause (e.g., frog species might differ between habitats).
+  B) Observational data show association, not cause (e.g., frog species might differ between habitats).
+  C) The proportions are very different.
 - **Hint:** Compare the two conditional proportions.
 
 ### ch06-hw-03-v2
@@ -3913,8 +3913,8 @@ In a survey, P(flowering | sunny plot) = 0.42 and P(flowering | shady plot) = 0.
 
 - **Options:**
 
-  A) Any association between light and flowering is small, if it exists at all
-  B) Sun strongly increases flowering
+  A) Any association is small, if it exists at all
+  B) Sun strongly increases flowering, since 0.42 > 0.40
   C) Light definitely has no effect on flowering
   D) Shade prevents flowering
 
@@ -4021,16 +4021,16 @@ In a survey, meadow frogs were infected much more often than forest frogs (70% v
 
 - **Options:**
 
-  A) In this survey, meadow frogs tended to be infected more often than forest frogs
-  B) Meadows cause infection
-  C) Infected frogs move to meadows
-  D) Habitat doesn't matter
+  A) Infected frogs move into meadows to recover
+  B) Habitat doesn't matter
+  C) Meadow frogs were infected more often in this survey
+  D) Meadows cause infection
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** A describes the association without claiming a cause. Other differences between habitats (frog species, water temperature, density) could explain it.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Causal stories that observational data can't distinguish.
-  D) The data show a clear difference.
+  B) The data show a clear difference.
+  D) and A) Causal stories that observational data can't distinguish.
 - **Hint:** Which answer only describes the pattern?
 
 ### ch06-hw-05-v2
@@ -4043,9 +4043,9 @@ Students who sit in the front row get higher grades on average. What can you con
 
 - **Options:**
 
-  A) Front-row students tend to get higher grades; this doesn't show that sitting there causes it
+  A) Front-row students tend to do better; cause is unclear
   B) Moving to the front row will raise your grade
-  C) Good grades make students sit in front
+  C) Good grades give students the confidence to sit in front
   D) There is no association
 
 - **Answer (tutor only):** A
@@ -4072,14 +4072,14 @@ C) geom_jitter(width = 1)
 
 - **Options:**
 
-  A) Plot A
-  B) Plot B
+  A) Plot B
+  B) Plot A
   C) Plot C
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** In ggplot, layers are drawn in order. In A the points are drawn on top of the boxplot, so you see both the summary and every country. In B the boxes are drawn over the points and hide many of them. In C, width = 1 jitters the points so far that the two groups blur together.
 - **Why the wrong options are wrong (tutor only):**
-  B) The boxplot covers the points drawn before it.
+  A) The boxplot covers the points drawn before it.
   C) The jitter is too wide: you can't tell which group a point belongs to.
 - **Hint:** Later layers are drawn on top of earlier ones.
 
@@ -4095,14 +4095,14 @@ Three plots compare bill length between female and male Gentoo penguins. Which i
 - **Options:**
 
   A) Plot A
-  B) Plot B
-  C) Plot C
+  B) Plot C
+  C) Plot B
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Plot C draws the boxplot first and the points on top, so you see both the summary and every penguin. Plot B draws the boxes over the points, hiding many. Plot A jitters so widely that the sexes blur together.
 - **Why the wrong options are wrong (tutor only):**
   A) Jitter width = 1 mixes the two groups.
-  B) The boxes cover the points.
+  C) The boxes cover the points.
 - **Hint:** Which plot shows every point and keeps the groups apart?
 
 ### ch06-hw-06-v2
@@ -4115,17 +4115,17 @@ Why add jitter (a little random horizontal spread) when plotting points by group
 
 - **Options:**
 
-  A) To stop points with similar values from hiding on top of each other
-  B) To change the data values
-  C) To make the groups look more different
-  D) To show the mean
+  A) To show the mean
+  B) To change the data values slightly
+  C) So overlapping points don't hide each other
+  D) To make the groups look more different from each other
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Jitter only spreads points sideways within each group so overlapping points become visible. It doesn't change the y-values. Too much jitter, though, blurs the groups together.
 - **Why the wrong options are wrong (tutor only):**
+  A) Jitter doesn't summarize.
   B) The y-values aren't changed.
-  C) It shouldn't change comparisons.
-  D) Jitter doesn't summarize.
+  D) It shouldn't change comparisons.
 - **Hint:** What happens to 30 points with the same value?
 
 ### ch06-hw-07
@@ -4148,14 +4148,14 @@ Which plot is the poor choice?
 - **Options:**
 
   A) Plot D
-  B) Plot E
-  C) Plot F
+  B) Plot F
+  C) Plot E
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Without transparency, the density drawn second covers the first, so where they overlap you can't see one of the groups. alpha = .4 makes both visible. Faceted histograms are also a fine choice.
 - **Why the wrong options are wrong (tutor only):**
   A) Faceted histograms clearly show each group's distribution.
-  C) Transparency lets you see both densities where they overlap.
+  B) Transparency lets you see both densities where they overlap.
 - **Hint:** Look at the region where the two groups overlap. Can you see both?
 
 ### ch06-hw-07-v1
@@ -4169,15 +4169,15 @@ Three plots compare body mass of female and male Chinstrap penguins. Which is th
 
 - **Options:**
 
-  A) Plot D
-  B) Plot E
-  C) Plot F
+  A) Plot F
+  B) Plot D
+  C) Plot E
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Plot E uses solid fills, so the curve drawn second hides part of the first. Plot D (transparent) and Plot F (faceted histograms) both show each group fully.
 - **Why the wrong options are wrong (tutor only):**
-  A) Transparency keeps both visible.
-  C) Facets show each distribution separately.
+  A) Facets show each distribution separately.
+  B) Transparency keeps both visible.
 - **Hint:** In which plot can't you see one group where they overlap?
 
 ### ch06-hw-07-v2
@@ -4190,15 +4190,15 @@ When comparing distributions of two groups with faceted histograms, what should 
 
 - **Options:**
 
-  A) The same x-axis scale
+  A) Different colors only
   B) Different x-axis ranges fitted to each group
   C) Different bin widths
-  D) Different colors only
+  D) The same x-axis scale
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A shared x-axis puts the same value at the same position in each panel, so differences in location and spread are visible.
 - **Why the wrong options are wrong (tutor only):**
+  A) Color alone doesn't help comparison.
   B) Separate ranges hide differences between groups.
   C) Different bins make shapes incomparable.
-  D) Color alone doesn't help comparison.
 - **Hint:** Can you compare panels if 3000 g is in a different place in each?
