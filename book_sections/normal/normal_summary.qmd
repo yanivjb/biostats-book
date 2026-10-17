@@ -45,7 +45,7 @@ The Normal Distribution is a symmetric, bell-shaped curve defined by its mean ($
 :::tutor
 
 
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-68a93cfbc0008191aba4bff044454bb2-normal-tutor)). I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-68a93cfbc0008191aba4bff044454bb2-normal-tutor), [**Gemini link here**](https://gemini.google.com/gem/1mgVJBoXgVbliiBdswqotr0SFDnovKyTC?usp=sharing)). I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
 
