@@ -61,7 +61,7 @@ We use the *t*-distribution to quantify uncertainty and to conduct a *one-sample
 :::tutor
 
 
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-68b5014fafb881919923b5a1b582b79e-t-distribution-tutor)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-68b5014fafb881919923b5a1b582b79e-t-distribution-tutor), [**Gemini link here**](https://gemini.google.com/gem/1OACEmnS1aplx5MTyZteQSF4P-c0mJJkK?usp=sharing)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
 
@@ -383,6 +383,10 @@ qt(p = 0.025, df = 8, lower.tail = FALSE)
 ## Additional resources   {#t_summary_additional-resources}
 
 :::learnmore 
+
+**Videos** 
+
+- [Z-statistics vs. T-statistics | Inferential statistics | Probability and Statistics | Khan Academy](https://www.youtube.com/watch?v=5ABpqVSx33I)
 
 :::
 

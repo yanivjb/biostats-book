@@ -510,6 +510,7 @@ iris <- iris |>
 
 **Web resources:**. 
 
+
 - [Mean, Median, and Mode from teacups giraffes](https://tinystats.github.io/teacups-giraffes-and-statistics/03_mean.html): This is awesome. I love this book I wish they wrote more of it.  
 
 - [Spread of the data from teacups giraffes](https://tinystats.github.io/teacups-giraffes-and-statistics/04_mean.html): This is awesome. I love this book I wish they wrote more of it.  
@@ -524,6 +525,10 @@ iris <- iris |>
 
 
 **Videos:**  
+
+- [THINK OF MEAN MEDIAN MODE BALANCE](https://www.youtube.com/watch?v=fWvo1biJuYE). Form the amazing Mr. [MrNystrom](https://www.youtube.com/watch?v=fWvo1biJuYE).
+
+
 
 - [Data summaries](https://www.youtube.com/watch?v=mc-6-v2c4WM) from Calling Bullshit [@bergstrom2020]. Fun video to help with thinking about various summaries of center, and when to use which.    
 

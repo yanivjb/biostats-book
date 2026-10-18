@@ -179,6 +179,9 @@ include_graphics("../../figs/stats_foundations/nhst/null_dist.png")
 
 **Videos:**  
 
+- [Null and alternative hypotheses](https://www.youtube.com/watch?v=spwEHuHOMuk&t=1s), [Basic logic of hypothesis testing](https://www.youtube.com/watch?v=S4wmS0a0Ams), and [What is a p value? What does it tell us?](https://www.youtube.com/watch?v=-MKT3yLDkqk).  From [MrNystrom](https://www.youtube.com/@MrNystrom) --  the same guy who brought you "sampling distributions."   
+
+
 -  [P-values and The prosecutor's fallacy](https://www.youtube.com/watch?v=eesUdFlYMh8) from calling bullshit.  
 
 - [Probability, Part 7: What is Null Hypothesis Significance Testing?](https://www.youtube.com/watch?v=2QsTJclNqVs) from  Simplistics (QuantPsych). An opinionated but entertaining presentation of p-values & NHST. 

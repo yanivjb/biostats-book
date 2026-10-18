@@ -336,6 +336,8 @@ tibble(x = rnorm(30, mean = 12, sd = 4))|>
 
 **Videos:**  
 
+- [What is regression video 3? A DEEP LOOK INTO The Pearson product-moment correlation coefficient](https://www.youtube.com/watch?v=fbY45mz42so). This video is from APStats teacher,  [MrNystrom](https://www.youtube.com/@MrNystrom). He is a remarkable explainer of stats.
+
 - [Correlation Doesn't Equal Causation: Crash Course Statistics #8](https://www.youtube.com/watch?v=GtV-VYdNt_g&pp=0gcJCfcAhR29_xXO).  
 
 - [Calling Bullshit](https://callingbullshit.org/index.html) has a fantastic set of videos on correlation and causation.   

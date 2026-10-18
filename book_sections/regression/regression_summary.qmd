@@ -494,7 +494,11 @@ pf(7.1,1,47,lower.tail = FALSE)
 
 :::learnmore 
 
-**Videos:**         
+**Videos:**    
+
+
+- [Use Regression Formulas - What does R SY / SX mean?](https://www.youtube.com/watch?v=hdSHXdprzBg), [What does r squared tell us? What does it all mean](https://www.youtube.com/watch?v=IMjrEeeDB-Y),
+ [Interpret Slope and intercept](https://www.youtube.com/watch?v=ef94Hjfu110), and [Leverage Influence](https://www.youtube.com/watch?v=427RxJ0lgwE). From [MrNystrom](https://www.youtube.com/@MrNystrom) --  the same guy who brought you "sampling distributions." 
 
 - [Simple Linear Regression](https://www.youtube.com/watch?v=WWqE7YHR4Jc), a video introduction to fitting and interpreting a regression line from Crash Course Statistics.  
 

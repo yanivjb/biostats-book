@@ -226,7 +226,7 @@ The standard deviation of the sampling distribution is the standard error, calcu
 **Videos:**         
 
 
-
+- [What is the CENTRAL LIMIT THEOREM? and why is it so hard to understand??](https://www.youtube.com/watch?v=zr-97MVZYb0). From [MrNystrom](https://www.youtube.com/@MrNystrom) --  the same guy who brought you "sampling distributions."  
 
 
 

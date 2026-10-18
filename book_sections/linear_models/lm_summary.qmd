@@ -310,6 +310,9 @@ library(palmerpenguins)
 
 :::learnmore 
 
+**Videos:**    
+
+- [RESIDUALS! What are they? how to find them, how to use them](https://www.youtube.com/watch?v=-qlb_nZvN_U).  From [MrNystrom](https://www.youtube.com/@MrNystrom) --  the same guy who brought you "sampling distributions." 
 
 
 **Web resources:**       

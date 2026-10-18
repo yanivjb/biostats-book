@@ -52,7 +52,7 @@ The analysis of variance (ANOVA) provides a way to understand variation by break
 
 
 
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-68db186815108191a327731289b4d1e4-f-tutor)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-68db186815108191a327731289b4d1e4-f-tutor), [**Gemini link here**](https://gemini.google.com/gem/1aPpOKhizoX_S2klUCnWocGq71tcGC6nt?usp=sharing)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
 

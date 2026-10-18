@@ -46,7 +46,7 @@ We can naturally build from our description and analysis of a single sample to t
 :::tutor
 
 
-Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-68c3a28f94848191b4c91bcd61cdd87d-two-sample-t-tutor)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgpt.com/g/g-68c3a28f94848191b4c91bcd61cdd87d-two-sample-t-tutor), [**Gemini link here**](https://gemini.google.com/gem/13wnV3MuTpkj1qNme4JZr3naxCvI_YguO?usp=sharing)). I have made it to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
 
@@ -410,11 +410,11 @@ wilcox.test(y ~ group, data = df, exact = FALSE)
 :::learnmore 
 
 **Videos:**         
+T-Tests: A Matched Pair Made in Heaven (Crash Course Statistics #27). 
 
 
 
-
-- [Crash Course Statistics #27 T test](https://www.youtube.com/watch?v=AGh66ZPpOSQ).
+- [Crash Course Statistics #27 T test. A Matched Pair Made in Heaven](https://www.youtube.com/watch?v=AGh66ZPpOSQ). An approachable walk through the logic of t-tests, including matched/paired designs.
 
 - [Khan Academy: Two sample t-test](https://www.khanacademy.org/math/ap-statistics/xfb5d8e68:inference-quantitative-means/two-sample-t-test-means/v/two-sample-t-test-for-difference-of-means).    
 
