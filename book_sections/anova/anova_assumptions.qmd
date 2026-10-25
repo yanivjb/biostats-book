@@ -32,7 +32,7 @@ clarkia_hz <- read_csv(hz_link)|>
   clean_names() |>
   mutate(site = if_else(site == "SAW", "SR", site)) |>
   filter(subsp=="P")|>
-  mutate(site = fct_reorder(site, mean_petal_area_sq_cm))
+  mutate(site = fct_reorder(site, admix_proportion))
 ```
 
 
@@ -90,8 +90,12 @@ clarkia_hz|>
 #| column: margin
 #| echo: false 
 clarkia_hz|>
-    group_by(site)|> # below I multiply the variance by a lot to make it easier to read.
-    summarise(var_admix = var(admix_proportion) * 10000)                                   |>     mutate(var_admix = paste(round(var_admix, digits = 2)," x 10^4", sep=""))|>kable()
+    group_by(site)|>
+    summarise(var_admix = var(admix_proportion) * 10000)|>
+    kable(digits = 2, col.names = c("Site", "Variance (× 10⁻⁴)"))
+#clarkia_hz|>
+#    group_by(site)|> # below I multiply the variance by a lot to make it easier to read.
+#    summarise(var_admix = var(admix_proportion) * 10000)                                #   |>     mutate(var_admix = paste(round(var_admix, digits = 2)," x 10^4", #sep=""))|>kable()
 ```
 
 
