@@ -80,7 +80,9 @@ Now we must ask how much we can trust this equation to describe the data, and ho
 #| fig-alt: "A meme showing a stern-looking man in sunglasses pointing toward the viewer. Over the image, bold white text reads: Yes, I always ensure assumptions concerning normality, homoscedasticity, and n size are satisfied prior to analysis. I also always follow the speed limit and like everyone I meet. Next question."
 #| fig-cap: "I just wanted a fun meme here."
 #| label: fig-meme
-include_graphics("https://i1-c.pinimg.com/736x/bd/72/49/bd72496fcb9f62cabe270fb648713f61.jpg")
+#| out-width: "100%"
+#include_graphics("https://i1-c.pinimg.com/736x/bd/72/49/bd72496fcb9f62cabe270fb648713f61.jpg")
+include_graphics("../../figs/linear_models/linear_regression/hardknocks.jpg")
 ```
 
 --- 
@@ -326,7 +328,9 @@ There are numerous ways to analyze data that do not meet assumptions of your mod
 #| fig-alt: "A meme showing a serious-looking man in a tank top leaning toward the viewer. Bold white text reads: “Yeah, I keep to myself. I learned stats on the mean streets of violated assumptions and limited sample sizes. I don’t like to talk about it much.”."
 #| fig-cap: "I'm just in a meme-y mood this section. Meme of Mark Wahlberg from Shooter"
 #| label: fig-meme2
-include_graphics("https://i1-c.pinimg.com/736x/b0/1a/a0/b01aa06f274607562e8812d51f49d62b.jpg")
+#| out-width: "100%"
+#include_graphics("https://i1-c.pinimg.com/736x/b0/1a/a0/b01aa06f274607562e8812d51f49d62b.jpg")
+include_graphics("../../figs/linear_models/linear_regression/mean_streets.jpg")
 ```
 
 ---

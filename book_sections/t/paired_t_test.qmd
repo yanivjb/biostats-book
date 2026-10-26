@@ -68,6 +68,39 @@ We can therefore test if the hybridization rate differs across locations. Here w
 Below I introduce the paired t-test, which tests the null hypothesis that the mean difference between pairs is zero. To do this, we run a one-sample t-test on the differences within each pair. This means our degrees of freedom equals the number of pairs minus one. By accounting for variation between RILs, the paired t-test focuses on differences within each pair. This often increases statistical power (i.e. our ability to reject a false null hypothesis).
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Loading and formatting data"
+#| message: false
+#| warning: false
+# Load packages -------------------------------------------------------------
+library(readr)   # read_csv()
+library(dplyr)   # filter(), select(), mutate(), case_when()
+library(tidyr)   # pivot_wider(), drop_na()
+
+ril_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/clarkia_rils.csv"
+
+# Read data and keep each RIL's proportion of hybrid seed at the two sites ----------------
+lb_sr_data <- read_csv(ril_link) |>
+  filter(location %in% c("LB", "SR"),   # keep only the LB and SR sites
+         !is.na(prop_hybrid)) |>        # drop plants with no hybrid-seed data
+  select(ril, location, prop_hybrid)
+
+# Paired, wide format: one row per RIL, one column per site -----------------
+wide_LB_SR <- lb_sr_data |>
+  pivot_wider(id_cols     = ril,
+              names_from  = location,     # creates columns LB and SR
+              values_from = prop_hybrid) |>
+  drop_na(LB, SR) |>                      # keep only RILs measured at BOTH sites
+  mutate(
+    diffs  = SR - LB,                     # positive = more hybrid seed at SR
+    bigger = case_when(diffs > 0 ~ "SR",  # which site had more hybrid seed?
+                       diffs < 0 ~ "LB",
+                       .default   = "tie")
+  )
+```
+
+
+```{r}
 #| echo: false
 #| fig-height: 4.5
 #| fig-width: 13
@@ -221,7 +254,7 @@ If your data are formatted like these (see margin), the [`t.test()`](https://sta
 #| echo: false
 slice_head(wide_LB_SR, n = 4)|>
   mutate_at(-1, round, digits = 3)|>
-  gt(caption = "Data for paired t-test")
+  gt(caption = "Data for paired t-test\n(Showing only 1st four rows)")
 ```
 
 :::::: panel-tabset
