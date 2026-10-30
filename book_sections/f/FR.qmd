@@ -49,6 +49,30 @@ clarkia_hz <- read_csv(hz_link)|>
 
 :::
 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Load clarkia_hz data."
+library(dplyr)
+library(readr)
+library(forcats)
+library(janitor)
+hz_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/zones_df_admix_weight_cutoff0.9_gps_dist2het_phenos_excl_GC.csv"
+clarkia_hz <- read_csv(hz_link)|> 
+  dplyr::select(-weighted)|>
+  dplyr::rename(admix_proportion = `cutoff0.9`) |>
+  dplyr::filter(!is.na(admix_proportion))|>
+  clean_names() |>
+  mutate(site = if_else(site == "SAW", "SR", site)) |>
+  dplyr::filter(subsp=="P")|>
+  dplyr::filter(site == "SM") |>
+  mutate(tmp = as.numeric(factor(petal_color)) + admix_proportion,
+         id = factor(id),
+         id = fct_reorder(id, tmp))
+```
+
+
+
 ---
 
 In the previous sections we worked through the math and the theory, and even how we could use R to do our calculations for us. This is all useful and I hope it helps you understand what is going on behind the scenes. But now that we know what's going on, we can have R do our work for us. Here, I show you two ways to have R calculate the F statistic, and conduct an ANOVA test for us. 

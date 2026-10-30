@@ -18,13 +18,13 @@ library(janitor)
 source("../../_common.R") 
 hz_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/zones_df_admix_weight_cutoff0.9_gps_dist2het_phenos_excl_GC.csv"
 clarkia_hz <- read_csv(hz_link)|> 
-  select(-weighted)|>
-  rename(admix_proportion = `cutoff0.9`) |>
-  filter(!is.na(admix_proportion))|>
+  dplyr::select(-weighted)|>
+  dplyr::rename(admix_proportion = `cutoff0.9`) |>
+  dplyr::filter(!is.na(admix_proportion))|>
   clean_names() |>
   mutate(site = if_else(site == "SAW", "SR", site)) |>
-  filter(subsp=="P")|>
-  filter(site == "SM") |>
+  dplyr::filter(subsp=="P")|>
+  dplyr::filter(site == "SM") |>
   mutate(tmp = as.numeric(factor(petal_color)) + admix_proportion,
          id = factor(id),
          id = fct_reorder(id, tmp))
@@ -50,13 +50,34 @@ clarkia_hz <- read_csv(hz_link)|>
 
 :::
 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Load clarkia_hz data."
+library(dplyr)
+library(readr)
+library(forcats)
+library(janitor)
+hz_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/zones_df_admix_weight_cutoff0.9_gps_dist2het_phenos_excl_GC.csv"
+clarkia_hz <- read_csv(hz_link)|> 
+  dplyr::select(-weighted)|>
+  dplyr::rename(admix_proportion = `cutoff0.9`) |>
+  dplyr::filter(!is.na(admix_proportion))|>
+  clean_names() |>
+  mutate(site = if_else(site == "SAW", "SR", site)) |>
+  dplyr::filter(subsp=="P")|>
+  dplyr::filter(site == "SM") |>
+  mutate(tmp = as.numeric(factor(petal_color)) + admix_proportion,
+         id = factor(id),
+         id = fct_reorder(id, tmp))
+```
+
+
+
 ---
 
 
 Let's look at the association between petal color and admixture proportion of natural *parviflora* plants in the SM hybrid zone. The motivating idea is: if  white petals do not attract pollinators (as seen in the previous chapter), white plants will have had less admixture (because they would not receive *xantiana* pollen). 
-
-
-
 
 ## Visualizing components of variation 
 
@@ -76,6 +97,7 @@ library(tidyverse)
 
 
 # ---- Load & prepare data ----
+hz_link <- "https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/zones_df_admix_weight_cutoff0.9_gps_dist2het_phenos_excl_GC.csv"
 clarkia_hz <- read_csv(hz_link)|> 
   select(-weighted)|>
   rename(admix_proportion = `cutoff0.9`) |>
@@ -340,7 +362,7 @@ tibble(n_white = 3:27, mean_r2 = sapply(3:27, function(X){
 ::: {.column width="45%"}
 - <span style="color: Red;"> **It is incorrect to state** </span>   
 
-> Petal color explains 63.4% of the variance in admixture proportion or admixture in parviflora.  
+> Petal color explains 63.4% of the variance in admixture proportion in parviflora.  
 :::
 
 ::: {.column width="10%"}
