@@ -159,7 +159,7 @@ A fantastic feature of this book is that it does not stand alone. It is neither 
 
 ## The Use of Large Language Models
 
-We are in the early days of a truly disruptive technology. Large Language Models (LLMs) like ChatGPT and Claude are transforming how we work and learn. While the impact of these tools on future employment, expertise, and citizenry is yet to be settled, it seems clear that no one will hire you to copy and paste AI-generated output. At the same time, no one will hire you to ignore this technology. Success lies in learning how to critically evaluate and work with LLMs—to validate their output, improve your own understanding, and create high-quality results. Subject-level expertise, in conjunction with strong skills in working with AI, will be essential for the foreseeable future.
+It's still early days in the roll-out and development of a disruptive technology. Large Language Models (LLMs) like ChatGPT and Claude are transforming both how we work and learn, and what we need to know. I can't predict the impact of these tools on  employment, expertise, being a citizen, and knowing what's worth knowing, but it's clear to me that no one will hire you to copy and paste AI-generated output, and blindly listening to AI is not a good route forward. At the same time, no one will hire you to ignore this technology. Success lies in learning how to critically evaluate and work with LLMs. In my view, "AI literacy" simply means a combination of AI familiarity, critical thinking, and subject area expertise. So I believe what you learn in this book will be essential for the foreseeable future.
 
 
 

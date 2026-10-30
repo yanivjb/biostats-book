@@ -41,9 +41,9 @@ library(knitr)
 include_graphics("../../figs/intro_to_r/getting_started/vec_a.png")
 ```
 
-We noted previously that when using R as a calculator it returns `[1]` followed by the answer. This does not mean the answer is in brackets. Instead, `[1]` indicates the position (index) of the first element in the output vector. This is because `1 + 1` returns  a vector of length one, with its first (and only) element equal to 2. The `[1]` tells us that the value being printed is the first element of that vector.
+We noted previously that when using R as a calculator it returns `[1]` followed by the answer. This does not mean the answer is in brackets. Instead, `[1]` indicates the position (index) of the first element in the output vector. This is because `1 + 1` returns  a vector of length one, with its first (and only) element equal to 2. 
 
-You can see this more clearly in @fig-vec_a, which shows a vector containing the numbers one through ten, each squared. The first line of output begins with `[1]`. The second line begins with `[7]`, indicating that the first value on that line is the seventh element of the vector. The line breaks are just for printing—they do not change the structure of the vector.
+@fig-vec_a, which depicts a vector of numbers one through ten squared, shows this a bit more clearly. The first line begins with `[1]`, and the second begins with `[7]`. These are helpful as they show us where in the vector a given value lies. But, these are just guides, they do not change the structure of the vector.
 
 
 
@@ -127,9 +127,9 @@ c(3, 0.5, 1, 1) * c(1, 2, 3, 2)
 So, the common types of vectors are:  
 
 - **Numeric:** Numbers, including **doubles** (`<dbl>`) and **integers** (`<int>`).  Integers keep track of whole numbers, while doubles keep track of decimals (but R often stores whole numbers as doubles). 
-- **Character:** Text, such as letters, words, and phrases (`<chr>`, e.g., `"pink"` or `"Clarkia xantiana"`).  
-- **Logical:** Boolean values—`TRUE` or `FALSE` (`<logi>`), often used for comparisons and conditional statements.  We saw this in the first section when we asked logical questions. 
-- **Factors:** Categorical variables that store predefined levels, often used in statistical modeling. While they resemble character data, they behave differently in analyses. We will ignore them in this chapter but revisit them later.  
+- **Character:** Text, such as letters, words, phrases, and sentences (`<chr>`, e.g., `"pink"` or `"Clarkia xantiana"`).  
+- **Logical:** `TRUE` or `FALSE` (`<logi>`), often used for comparisons and conditional statements.  We saw this in the first section when we asked logical questions. 
+- **Factors:** These are categorical variables that store predefined levels. For now, you can think of these as character vectors, with a few features that act somewhat differently in analyses. We will ignore them in this chapter but revisit them later.  
 
 Note that R only allows one type of element per vector, and if you make a vector with more than one kind of element, R will make them all of the same type. The [`class()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/class.html) function reveals the kind of vector you're dealing with. **This is important, because R will act weird if the vector you give it is not of the type it expects.** 
 

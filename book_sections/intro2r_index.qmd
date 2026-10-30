@@ -47,7 +47,7 @@ Of course, there is a lot covered under "getting on board with using R for stats
 #| echo: false
 #| label: fig-hex
 #| fig-alt: "A collection of hexagonal stickers representing popular packages in the Tidyverse, an ecosystem of R packages for data science. Each hex showcases a different package: dplyr (pliers illustration), tibble (stylized data table in a space theme), ggplot2 (scatterplot icon), readr (document and table icon), tidyr (highlighters zooming through space), stringr (violin), forcats (three black cats in a box), lubridate (calendar and clock), and purrr (a peacefully sleeping cat). The hexes are arranged in a honeycomb pattern."
-#| fig-cap: "A collection of Tidyverse hex stickers representing key R packages for data science, including dplyr, ggplot2, tidyr, readr, and more—each with a unique thematic design."  
+#| fig-cap: "A collection of Tidyverse hex stickers for key R packages in the tidyverse (e.g. dplyr, ggplot2, tidyr, and readr)."  
 #| column: margin 
 include_graphics("../figs/intro_to_r/intro_to_R/hex.png")
 ```
@@ -56,7 +56,7 @@ As `R` has evolved over time and its capabilities can be extended with packages 
 
 I focus on tidyverse programming, not because it is better than base R, but because learning tidyverse is a powerful way to do a lot without learning a lot of formal programming. This means that you will be well prepared for a lot of complex data analysis. If you continue to pursue advanced programming in R (or other languages) you will have some programming concepts to catch up on.
 
-If you already know how to accomplish certain tasks with base R tools, I encourage you to invest the time in learning the equivalent approaches in tidyverse. While it may feel redundant at first, this foundation knowledge will make you a more versatile and effective R programmer in the long term, and will allow you to make sense of what we do throughout the term.
+If you already know how to accomplish certain tasks with base R tools, I encourage you to invest the time in learning the equivalent approaches in tidyverse. While it may feel redundant initially, this foundation of knowledge will help you do more with R, get more out of this book, and understand R code you see in nature.
 
 
 ## Important hints for R coding
@@ -82,7 +82,7 @@ include_graphics("../figs/intro_to_r/intro_to_R/balanced.png")
 
 
 
-- **Be patient with yourself.** Every expert R programmer started exactly where you are now. Your understanding will grow naturally as you tackle real problems and challenges. Do not beat yourself up, you are learning. Replace automatic negative thoughts with balanced thoughts (@fig-balanced).
+- **Be patient with yourself.** Every expert R programmer started exactly where you are now. You will understand more and gain more confidence the more experience you get with real problems and challenges. Don't beat yourself up, you are learning. Replace automatic negative thoughts with balanced thoughts (@fig-balanced).
 
 - **`R` is literally a language.** Languages take a while to learn -- at first, looking at an unfamiliar alphabet or hearing people speak a foreign language makes no sense. Aluksi vieraan aakkoston katsominen tai vieraan kielen puhumisen kuuleminen ei tunnu lainkaan järkevältä. With time and effort, you can make sense of a bunch of words and sentences but it takes time. You are not dumb for not understanding the sentence I pasted above (and if you do understand it is because you know Finnish, not because you are smart).
 

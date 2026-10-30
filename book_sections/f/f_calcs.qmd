@@ -358,7 +358,7 @@ tibble(n_white = 3:27, mean_r2 = sapply(3:27, function(X){
 ---
 
 :::warning
-The value of $R^2$  depends on the unique characteristics of the study sample, such as the relative representation of each host species and the specific conditions they experience. 
+The value of $R^2$  depends on the unique characteristics of the study sample, such as the relative representation of each petal color morph and the specific conditions they experience. 
 
 To understand why, consider the effect of downsampling white-petaled flowers from our data set. Changes in sample composition or size will change $R^2$ from roughly $64\%$ in our full data set to  less than $40\%$ if we only have three white-petaled flowers @fig-downsamp. 
 :::

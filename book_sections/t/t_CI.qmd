@@ -102,7 +102,7 @@ range_shift_summary <- range_shift |>
 
 ## Degrees of Freedom  
 
-As you can see, the only difference between the standard error when the population standard deviation is known ($\sigma_x$) and the standard error used with the t-distribution ($s_x$) is that we replace the unknown population standard deviation ($\sigma$) with its estimate from the sample ($s$).
+As you can see, the only difference between the standard error when the population standard deviation is known ($\sigma_{\bar{x}}$) and the standard error used with the t-distribution ($s_{\bar{x}}$) is that we replace the unknown population standard deviation ($\sigma$) with its estimate from the sample ($s$).
 
 The difference between $\sigma$ and $s$ comes from how they are calculated:  
 
