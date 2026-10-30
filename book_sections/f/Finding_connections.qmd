@@ -107,8 +107,10 @@ lm(admix_proportion ~ petal_color, data = clarkia_hz) |>
 
 **But wait, there's more:** 
 
-- Additionally the F value (76.539) is simply the t-value (8.7486) squared.   
-- Finally, although R did not show us this, the Mean Square error of  0.0000239 equals the pooled variance: 
+- Additionally, when we have two groups, the F value  equals the t-value squared. In this case ($76.539 = 8.7486^2$). This is because:
+   - The Mean Square Groups equals the squared difference between group means, weighted by sample size. That is, Mean Square Groups is: $\frac{(\bar{x}_1-\bar{x}_2)^2}{\frac{1}{n_1}+\frac{1}{n_2}}$
+   - The Mean Square Error equals the pooled variance, $s^2_p$ (seecode below).
+   - So $F=\frac{(\bar{x}_1-\bar{x}_2)^2}{s^2_p\Big(\frac{1}{n_1}+\frac{1}{n_2}\Big)}$ and $t=\frac{\bar{x}_1-\bar{x}_2}{SE_p}$, where $SE_p = \sqrt{s^2_p\Big(\frac{1}{n_1}+\frac{1}{n_2}\Big)}$. Squaring $t$ gives $F$.
 
 ```{r}
 # finding the pooled variance
