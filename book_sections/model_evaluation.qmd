@@ -361,7 +361,7 @@ $$R^2_{\text{adjusted}} = 1 - \left( \frac{(1 - R^2)(n - 1)}{\text{df}_\text{err
 Unlike  $R^2$ , the adjusted  $R^2$  can **decrease** as we add parameters, indicating that the added complexity does not sufficiently improve model fit. So, don’t get overly excited about an increase in  $R^2$  from adding a variable—be sure to check the change in adjusted  $R^2$  as well.
 
 - **AIC penalizes the log-likelihood.** Specifically, AIC is calculated as:  
-$$2\times(k+1) - ln(\widehat{L})$$
+$$2\times\left((k+1) - \ln(\widehat{L})\right)$$
   where $k$  is the number of parameters in the model, and $ln(\widehat{L})$ is the log-likelihood of the model. A lower AIC indicates that the added parameter improves model fit. In general, a decrease in AIC of **at least 2** (approximately equivalent to a two-standard-error improvement) is considered evidence to prefer the model with more parameters. 
   
 R is happy to calculate these values for us. The adjusted $R^2$ value is provided from the `summary()`function, and the `AIC()` function will return the AIC of your model. Even better, the `glance()` function in the `broom` package gives us these values and more.  
@@ -401,7 +401,7 @@ Rather than relying solely on simple measures of significant model improvement (
 
 I am interested in the features that mediate how much gene flow can occur during the process of speciation. With my collaborators we estimated the admixture proportion in *Clarkia xantiana xantiana* (i.e. the proportion of a populations' genome which is derived from recent hybridization with its sister subspecies, *Clarkia xantiana parviflora*). The data were hard to get -- and we only have so many populations to choose from.  We ultimately estimated the admixture proportion across six populations for which we had complementary data (geography and temperature). 
 
-We honed in on two promising predictors -- the variation in spring precipitation, and how far north a population was. Individually each term was significant, but together neither was likely because of multicollinearity (@fig-admix). 
+We honed in on two promising predictors -- the variation in spring precipitation, and how far north a population was. Individually each term was significant, but together neither was significant, likely because of multicollinearity (@fig-admix). 
 
 ```{r}
 admixture <- read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/admix_sites.csv")

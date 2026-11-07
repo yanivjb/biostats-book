@@ -479,13 +479,27 @@ penguin_interaction_model <- lm(body_mass ~ sex + species + sex:species, data = 
 
 
 
-Links to: [Summary](#interaction_summary_chapter-summary). [Questions](#interaction_summary_practice-questions). [Glossary](#interaction_summary_glossary-of-terms). [R functions](#interaction_summary_key-r-functions). [R packages](#interaction_summary_r-packages-introduced). [More resources](#interaction_summary_additional-resources).
+Links to: [Summary](#interaction_summary_chapter-summary).  
+[Chatbot tutor](#interactions_summary_chatbot_tutor).     
+[Questions](#interaction_summary_practice-questions). [Glossary](#interaction_summary_glossary-of-terms). [R functions](#interaction_summary_key-r-functions). [R packages](#interaction_summary_r-packages-introduced). [More resources](#interaction_summary_additional-resources).
 
 ---
 
 ## Chapter summary {#interaction_summary_chapter-summary}
 
 Sometimes the impact of changing one variable depends on the value of another. Such statistical interactions can both illuminate biological processes and complicate statistical analyses and interpretation. This chapter explains the best practices when modelling statistical interactions. I then show how we can think of an interaction of a variable with itself as a polynomial regression. This section serves to show that "linear models" can fit curved data.
+
+
+
+
+### Chatbot tutor  {#interactions_summary_chatbot_tutor}  
+
+:::tutor
+
+
+Please interact with this custom chatbot ([**ChatGRPT link here**](https://chatgpt.com/g/g-690a6a2ef9c48191ab07696d60a694f4-interaction-tutor), [Gemini link here](https://gemini.google.com/gem/1lfaqYKjjJF0V9iTaf9lvpsC8JgBzLzAb?usp=sharin)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+
+:::
 
 ## Practice Questions {#interaction_summary_practice-questions}
 
@@ -746,7 +760,7 @@ emmeans(penguin_interaction_model, pairwise ~ species)$contrasts
 
 - `car::Anova(model, type = "II")` gives Type II term-level tests.
 
-- `car::Anova(model, type = "III")` gives Type III term-level tests, often used when interpreting models with interactions.
+- `car::Anova(model, type = "III")` gives Type III term-level tests (see the aside in Significant interactions. In this book I advocate for Type II). 
 
 - `emmeans::emmeans(model, pairwise ~ x)` estimates marginal means and pairwise contrasts for `x`.
 

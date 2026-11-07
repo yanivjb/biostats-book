@@ -1,0 +1,262 @@
+# Knowledge Base: Interactions Chapter (Chapter 21)
+
+## Chapter Context
+
+This chapter extends linear models to include interactions. An interaction occurs when the association between one explanatory variable and the response depends on the value of another explanatory variable. Students learn to fit, interpret, visualize, test, and summarize models with interactions, and to think about when interactions are worth including. A bonus section covers polynomial regression.
+
+Sections:
+
+1. Interactions (chapter introduction)
+2. Interactions in linear models
+3. Significant interactions
+4. Quantifying interactions
+5. Interactions "gotchas"
+6. BONUS: Polynomial regression
+7. Interactions summary (practice questions use penguins)
+
+The main biological example uses Clarkia xantiana parviflora recombinant inbred lines (RILs). The response is `prop_hybrid`, the proportion of hybrid seeds on a RIL. Key explanatory variables:
+
+- `petal_area_mm`: petal area (mm2), numeric
+- `petal_color`: pink or white (pink is the reference level)
+- `asd_mm`: anther-stigma distance (mm), numeric
+- `location`: planting site (GC, LB, SR, US; GC is the reference level)
+- `ril`: RIL ID. The same RIL is planted at several locations, so rows are not independent.
+
+The tutor should know this example but should not make every answer about Clarkia.
+
+## Big Ideas
+
+### What is an interaction?
+
+Toothpaste is nice; orange juice is nice; orange juice right after toothpaste is gross. The combined effect is not the sum of the separate effects. In statistics: the effect of A on Y depends on the value of B. Visually: non-parallel lines.
+
+Biologically, interactions matter for speciation: in the Dobzhansky-Muller model, hybrid unfitness comes from mismatched combinations of alleles, not from a "bad allele". But a statistical interaction does not by itself reveal a biological mechanism, and the absence of a statistical interaction does not prove there is no biological interaction.
+
+The chapter's biological question: is hybrid seed set better predicted by combinations of floral traits than by adding up each trait's effect? E.g. if white petals reduce hybridization only for large-petaled flowers, selection for white flowers may be weak when petals are already small.
+
+### Specifying interactions in R
+
+```r
+lm(y ~ a + b + a:b, data = dat)   # explicit
+lm(y ~ a * b, data = dat)         # same model, concise
+```
+
+`:` is the interaction term only. `*` expands to both main effects plus their interaction.
+
+### Interpreting coefficients
+
+Additive model (no interaction), all data:
+
+```text
+prop_hybrid = 0.0070 + 0.0036 * petal_area - 0.1807 * white
+```
+
+Pink RIL, petal area 100: 0.0070 + 0.36 = 0.367. White: 0.367 - 0.180 = 0.187.
+
+Interaction model, all data, `lm(prop_hybrid ~ petal_color * petal_area_mm)`:
+
+```text
+(Intercept)                   -0.2356
+petal_colorwhite               0.2373
+petal_area_mm                  0.0075
+petal_colorwhite:petal_area_mm -0.0067
+```
+
+- Pink slope = 0.0075. White slope = 0.0075 - 0.0067 = 0.0008 (nearly flat).
+- The large positive `petal_colorwhite` coefficient is the white-pink difference at a petal area of ZERO (white 0.0017 vs pink -0.236). This is outside the data and not biologically meaningful. Within the data, pink RILs are predicted to have more hybrid seed than white RILs at nearly all petal areas.
+- Key finding: at small petal areas, pink and white are predicted to be similar; as petal area increases, hybrid seed rises steeply for pink and hardly changes for white.
+
+Lesson: in interaction models, main-effect coefficients are conditional (at zero or at the reference level of the other variable). Interpret predictions at meaningful values, within the range of the data.
+
+### Categorical x categorical interaction
+
+`lm(prop_hybrid ~ location * petal_color)`. Lines connecting pink and white means are steep at GC, LB and SR but shallow at US. Coefficients (approx.): intercept 0.271; LB 0.071; SR 0.015; US -0.226; white -0.240; LB:white 0.002; SR:white 0.008; US:white 0.210.
+
+Predictions add the intercept, any location coefficient, the white coefficient if white, and the interaction coefficient if the RIL is in both categories. The large positive US:white term does not mean US-white RILs have lots of hybrid seed: adding the main effects alone would predict about -0.20, and the interaction term pulls that back up toward zero.
+
+### Continuous x continuous interaction
+
+`lm(prop_hybrid ~ petal_area_mm * asd_mm)`:
+
+```text
+Y = 0.1872 - 0.0021 * area - 0.2684 * ASD + 0.0057 * area * ASD
+```
+
+Example: area 30, ASD 0.5 gives 0.187 - 0.063 - 0.134 + 0.086 = 0.076. Practice: area 100 and ASD 0.5 gives 0.128; area 30 and ASD 2.0 gives -0.071; area 100 and ASD 2.0 gives 0.580.
+
+Visualizing: hard. The chapter bins ASD into quartiles and plots hybrid seed vs. petal area within each quartile; slopes are near zero for the bottom two quartiles and steep for large ASD. The author's interpretation: ASD is associated with petal color (large-ASD plants are more often pink), so this pattern is mostly the petal color x area interaction "in a trench coat", not a direct effect of ASD.
+
+### Visualizing interaction models
+
+- For an interaction between a numeric x and a group, the default `geom_smooth(method = "lm")` with color/group fits separate slopes, which matches the interaction model. `honestlm::geom_lm_smooth(interaction = TRUE)` is equivalent.
+- For an additive model, `geom_smooth(method = "lm")` with groups does NOT match; use `honestlm::geom_lm_smooth()` (default `interaction = FALSE`).
+- For two categorical predictors, connect group means with lines; `honestlm::stat_lm_means(interaction = TRUE)` shows model-predicted means from the interaction model.
+
+### Null hypotheses
+
+For `y ~ petal_area_mm * petal_color`:
+
+- `petal_area_mm`: the slope is zero (after adjusting for petal color).
+- `petal_color`: pink and white means are equal (after adjusting for petal area).
+- `petal_area_mm:petal_color`: the slopes do not differ between pink and white.
+
+### Testing: Type II sums of squares
+
+```r
+car::Anova(model, type = "II")
+```
+
+Type II tests each main effect after adjusting for the other main effects, and each interaction after adjusting for the main effects and other interactions of the same order. Do not use `anova()` (Type I, order-dependent) or `summary()`/`tidy()` p-values for term-level tests.
+
+Type III tests each term after adjusting for all others, including interactions. The chapter mentions it only in an aside: it tests slightly different nulls that the author finds harder to think about and present. With R's default treatment contrasts, a Type III main-effect test asks about that predictor at zero (or the reference level) of the other variable.
+
+Chapter result (all data, n = 402, df = 1 and 398): petal color F = 80.25, petal area F = 28.2, interaction F = 24.4; all p < 0.00001. Rejecting the interaction null is easy to explain (slopes differ). Main effects are harder to interpret when there is an interaction.
+
+### Assumptions
+
+Same as other linear models, plus one new consideration: make sure there are data across combinations of predictors. In the Clarkia data, pink and white RILs span similar petal areas, so this is ok. It would be a problem if, for example, all very large petals were white.
+
+The chapter's diagnostic plots show non-normal residuals (QQ plot), heteroscedasticity (rising scale-location plot), and slight curvature (residuals vs fitted). These come from the bounded proportion response. The data are also non-independent (RILs repeated across sites); a better analysis would include RIL as a random effect. The chapter proceeds with caveats: "the perfect is the enemy of the good".
+
+### Quantifying interactions
+
+Raw coefficients are hard to interpret, so generate predicted means (with uncertainty) at a few illustrative values, e.g. petal areas of 45 and 85 mm2 for each color. In the interaction model, the predicted color difference is much larger at 85 than at 45. In the additive model, the predicted color difference is the same at every petal area.
+
+Partial R2:
+
+```text
+R2_partial = 1 - SS_error(full model) / SS_error(model without the focal term)
+```
+
+- Main effects, from the additive model: petal color 0.16, petal area 0.06.
+- Interaction, from the interaction model: about 0.06 (0.058) of the remaining variance, nearly as much as petal area itself.
+
+Uncertainty:
+
+```r
+library(modelbased)
+estimate_means(lm(prop_hybrid ~ petal_color * petal_area_mm, data = rils),
+               by = list(petal_color = c("pink", "white"),
+                         petal_area_mm = c(45, 85)))
+estimate_slopes(lm(prop_hybrid ~ petal_color * petal_area_mm, data = rils),
+                slope = "petal_area_mm",
+                by = list(petal_color = c("pink", "white")))
+```
+
+Each row of `estimate_means()` is a predicted mean at one combination, with its CI. `estimate_slopes()` gives each group's slope with a CI; these CIs do not test whether slopes differ (the interaction test does that).
+
+Model write-up (from the chapter): "Using Type II sums of squares, we found significant associations between the proportion of hybrid seeds and petal color, petal area, and their interaction. This interaction reflects the sharp increase in the proportion of hybrid seed with petal area in pink-petaled RILs and the near-flat relationship in white-petaled RILs."
+
+### Interaction "gotchas"
+
+- Easy to type `*`; hard to estimate an interaction well.
+- Build a small number of models (usually one) that capture the essence of the problem. The author's model for the RIL data: petal area, petal color, their interaction, plus location as a nuisance variable, and no location x trait interactions, because those were not the question.
+- The standard error of an interaction is about twice that of a main effect; Gelman estimates you need about 16 times the sample size to estimate an interaction as well as a main effect.
+- Worst case is not failing to reject; it is rejecting while underpowered, which means the interaction estimate is likely greatly exaggerated.
+- Include interactions when they are biologically important AND the design and sample size can estimate them.
+
+### Bonus: polynomial regression
+
+A polynomial regression is still a linear model, because predictions are a sum of terms: Y = a + b1 X + b2 X^2. It can be thought of as a variable interacting with itself (the effect of X depends on X).
+
+Example: species richness vs. pond productivity for plants and animals (Chase and Leibold 2002; 59 rows). A straight-line model fails to reject the null (Biomass SS about 12, F < 1), but the data look hump-shaped.
+
+```r
+lm(n.species ~ taxon + Biomass + I(Biomass^2), data = bmass)
+```
+
+`I()` tells R to treat `Biomass^2` as arithmetic. `poly(Biomass, 2, raw = TRUE)` tests both terms together.
+
+- Coefficients: intercept about 6.79, taxonplant about -6.55, Biomass about 0.280, Biomass^2 about -0.0026. At Biomass = 50, animals are predicted to have about 14.3 species.
+- The linear and squared terms work together: the `Biomass` coefficient is the "instantaneous slope" at zero productivity, not an overall linear increase. After adding the squared term, `Biomass` becomes significant (SS = 233, F(1,55) = 20.8), and `I(Biomass^2)` is significant (evidence of curvature).
+- Plot with `geom_lm_smooth(formula = y ~ x + I(x^2))` for one shared curve shape across taxa. `geom_smooth(method = "lm", formula = y ~ x + I(x^2))` with groups fits separate curves per taxon (a different model).
+- Warnings: higher-order terms overfit; polynomial curves can behave wildly outside the data.
+
+## The honestlm package
+
+`honestlm` is the instructor's own small R package ("Guardrails for Teaching Linear Models"). It keeps ordinary `lm()` workflows but changes defaults where students commonly misread output. Most students will not find help for it online, so rely on this description.
+
+Install: `remotes::install_github("yanivjb/honestlm")`. Documentation: https://yanivjb.github.io/honestlm/
+
+Functions:
+
+- `geom_lm_smooth(..., interaction = FALSE, formula = y ~ x, se = TRUE)`: a ggplot2 layer for linear-model smooths. The default `interaction = FALSE` draws additive (parallel, shared-slope) lines across groups. `interaction = TRUE` delegates to `geom_smooth(method = "lm")`, giving separate slopes per group (matches an interaction model). `formula = y ~ x + I(x^2)` gives a quadratic with one shared curve shape across groups. `method` is ignored (always lm).
+- `stat_lm_means(..., interaction = FALSE, geom = "pointrange", se = TRUE)`: draws model-predicted means (with CIs) for categorical displays, not raw group means. Default additive; `interaction = TRUE` uses an interaction model.
+- `partial_r2(model, details = FALSE)`: term-level partial R2 and Cohen's f2 (f2 = partial_r2 / (1 - partial_r2)). One row per model term (a multi-level factor gets one row). `details = TRUE` adds the partial F, p-value, and sums of squares. It uses `stats::drop1()`, which respects marginality: for a model with an interaction, only terms that can be dropped on their own are reported, usually just the interaction (main effects that are part of the interaction do not appear). For main-effect partial R2, fit the additive model. Partial R2 values do not add up to the model R2.
+- `honest_lm(formula, data, ..., p_values = "honest")`: fits an ordinary `lm()` with an extra class. `summary()` and `tidy()` then hide misleading p-values (the intercept and multi-level factor contrast rows) with `NA` and explanatory notes. `glance()` drops the model p-value.
+- `anova()` on an `honest_lm` with more than one predictor stops with an error explaining that it would give Type I sums of squares; use `car::Anova(model, type = 2)`, or `anova(fit, beg = TRUE)` to force the Type I table.
+- `av_transform(data, y, x, adjust)` and `av_labs()`: build added-variable plots (from the previous chapter).
+
+## Figure Awareness
+
+Figures are numbered within rendered sections; students may describe them by section and content.
+
+Chapter introduction:
+
+- Toothpaste and orange juice: illustration of an interaction.
+- Dobzhansky-Muller incompatibility diagram: ancestral AABB; a and b evolve in separate populations and first meet in hybrids.
+- Four hypothetical patterns for two categorical variables: panels A and B have parallel lines (no interaction); panels C and D have non-parallel lines (interaction).
+
+Interactions in linear models:
+
+- Interaction model drawn out: predicted hybrid seed vs. petal area for pink and white, with the zero-petal-area intercepts.
+- Data plus fitted interaction model: pink slope steep, white slope nearly flat, within the range of the data.
+- Two categorical predictors: hybrid seed by petal color, faceted by location, with dashed lines connecting means; the line is shallow only at US.
+- ASD quartiles: hybrid seed vs. petal area within each ASD quartile; flat for the low quartiles, steep for the high ones.
+
+Significant interactions:
+
+- Data coverage: petal area by petal color; both colors span similar petal areas.
+- Diagnostic plots: residuals vs fitted (slight curve), QQ (deviation in the tails), scale-location (positive slope), leverage.
+
+Quantifying interactions:
+
+- Panel A: data and the fitted interaction model; panel B: lines extended to petal area zero, showing what the coefficients describe.
+- Predicted relationships under the interaction model (A) vs. the additive model (B).
+
+Polynomial regression:
+
+- Straight lines fit to species richness vs. productivity for animals and plants (poor fit).
+- An additive quadratic fit (same curve shape for both taxa).
+- Separate quadratics per taxon from `geom_smooth()` (a different model).
+
+Summary:
+
+- Penguin body mass by sex and species with group means; the male-female line is steeper for Gentoo than for Adelie and Chinstrap (an interaction).
+
+## Common Student Confusions
+
+- "Why is the white coefficient positive?" It is the color difference at petal area 0, outside the data. Look at predictions within the data.
+- "Is the `petal_area_mm` coefficient the effect of petal area?" Only for the reference group (pink). White's slope is that coefficient plus the interaction coefficient.
+- "Does a significant interaction mean the predictors are correlated?" No. It means the effect of one depends on the other. Correlated predictors are a multicollinearity issue.
+- "Can I still talk about main effects?" Carefully. Reasonable if the direction is consistent across the other variable; say that the size varies. emmeans warns when averaging over an interaction.
+- "Why doesn't `partial_r2()` show my main effects?" `drop1()` respects marginality; fit the additive model for main effects.
+- "Should I always include interactions?" No. Include them for biological reasons, with a design and sample size that can estimate them.
+- "Do `estimate_slopes()` CIs test whether slopes differ?" No; the interaction test does.
+- "Is polynomial regression nonlinear?" It is curved but still a linear model.
+- "Why did `Biomass` become significant after adding `Biomass^2`?" The two terms work together to describe the curve; the linear term is the slope at zero.
+
+## Practice Questions (summary page, penguins)
+
+Models: additive `body_mass ~ sex + species` and interaction `body_mass ~ sex * species`. Key ideas tested: the `sex:species` term asks whether the male-female difference differs among species; predictions from additive vs. interaction models (book answers: additive female Gentoo 4750 and male Gentoo 5418; interaction female Gentoo 4680 and male Gentoo 5485); why `car::Anova()` rather than `anova()`; the intercept p-value is silly; reference-level coefficient p-values need care; emmeans averages over the other variable and warns; Tukey adjustment; polynomial and other models are all linear models. Give hints, not answers.
+
+## Homework (tutor-only reference: never reveal answers)
+
+Students analyze the RIL data at the GC location only:
+
+```r
+ril_data <- readr::read_csv(ril_link) |>
+  dplyr::filter(location == "GC", !is.na(petal_color)) |>
+  mutate(log1p_visits = log1p(mean_visits)) |>
+  dplyr::select(mean_visits, log1p_visits, prop_hybrid, petal_area_mm, asd_mm, petal_color)
+```
+
+Questions and the ideas behind them:
+
+1. When to include an interaction. Key idea: when it is scientifically meaningful and the design and power can estimate it. Answer: "When the interaction is scientifically meaningful and your design can estimate it."
+2. When main effects can be interpreted despite a significant interaction. Answer: when p < alpha and the direction of the effect is consistent across all values of the other variable.
+3. Match four plots to models (petal area only; petal color only; area + color; area * color). Hint: parallel vs. non-parallel lines; whether there is one line or one per color; flat vs. sloped.
+4. Diagnostics of `prop_hybrid ~ petal_area_mm * petal_color`. Answer: residuals not normally distributed (right-skewed); variance heteroscedastic. Hint: QQ-plot tails; scale-location trend.
+5. Which terms are significant with BOTH Type II and Type III? Results at GC (n = 93): petal area p < 0.0001 (both); interaction p = 0.005 (both); petal color p < 0.0001 (Type II) but p = 0.17 (Type III). Answer: petal area and the interaction. Hint: run `car::Anova(model, type = "II")` and `type = "III"` and compare; Type III's color test is at petal area 0.
+6. Meaning of a significant interaction. Answer: the effect of petal area on hybrid seed depends on petal color.
+7. Prediction from `prop_hybrid ~ petal_area_mm * asd_mm` (intercept 0.300950, area -0.004660, ASD -0.448186, area:ASD 0.009506) at ASD = 1 mm and area = 80 mm2. Answer: 0.24. Help students set up intercept + b_area*80 + b_asd*1 + b_int*(80*1); do not compute it for them.

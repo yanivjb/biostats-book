@@ -124,7 +124,7 @@ I will not focus on planned comparisons. See [this resource](https://web.pdx.edu
 :::aside 
 The Tukey-Kramer method is one common post hoc test. Its test statistic, $q$,  measures the distance between group means in standard error units.    
 
-$q= \frac{Y_i-Y_j}{SE}$, where $\text{SE} = \sqrt{\text{MS}_\text{error}(\frac{1}{n_i}+ \frac{1}{n_j})}$.
+$q= \frac{\bar{Y}_i-\bar{Y}_j}{SE}$, where $\text{SE} = \sqrt{\frac{\text{MS}_\text{error}}{2}\left(\frac{1}{n_i}+ \frac{1}{n_j}\right)}$.
 :::
 
 

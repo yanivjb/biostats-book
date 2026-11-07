@@ -33,18 +33,28 @@ clarkia_hz <- read_csv(hz_link)|>
 
 ```
 
-
-
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
+**Motivating Scenario:** Biology rarely changes one variable at a time. This chapter shows you how to ask if a trait is still associated with the response after accounting for the others.
 
-**Motivating Scenario:**   
+**Learning Goals: By the end of this chapter, you should be able to:**
+
+1. Interpret coefficients in models with more than one explanatory variable.
+
+2. Explain the meaning of "adjusting for" another explanatory variable, and why this is not "controlling for".
+
+3. Make plots that match your model.
+
+4. Evaluate the assumptions of multiple regression, including using VIF to diagnose multicollinearity.
+
+5. Compare effect sizes across explanatory variables with standardized coefficients and partial $R^2$.
+
+6. Use Type II sums of squares (`car::Anova()`) to test model terms, and NEVER conduct type I sums of squares.
+
+7. Estimate model-adjusted means, run post-hoc tests, and report uncertainty in models with > 1 predictor.
 
 
-
-**Learning Goals: By the end of this chapter, you should be able to:**   
-
-:::     
+:::
 
 ---
 
