@@ -75,17 +75,17 @@ A t-based test differs from a z-based test because the t:
 
 - **Options:**
 
-  A) Uses an SD estimated from the sample
-  B) Does not assume normality at all
-  C) Is only for comparing two groups
-  D) Assumes the true mean is zero
+  A) Assumes the true mean is zero
+  B) Is only for comparing two groups
+  C) Does not assume normality at all
+  D) Uses an SD estimated from the sample
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The t accounts for estimating the SD from the sample.
 - **Why the wrong options are wrong (tutor only):**
-  B) Both assume normality.
-  C) The t is used for one sample, two samples and more.
-  D) Neither assumes that.
+  A) Neither assumes that.
+  B) The t is used for one sample, two samples and more.
+  C) Both assume normality.
 - **Hint:** What does the t not know?
 
 ### ch15-book-02
@@ -119,16 +119,16 @@ A sample of 80 leaf areas is slightly right-skewed. Can we use a t-test?
 
 - **Options:**
 
-  A) Yes, probably: the CLT makes the mean nearly normal
-  B) No: t-tests require perfectly normal data
-  C) Yes: the t is designed to correct for skewed data
-  D) No: skewed data can never be analyzed with t
+  A) No: t-tests require perfectly normal data
+  B) Yes: the t is designed to correct for skewed data
+  C) No: skewed data can never be analyzed with t
+  D) Yes, probably: the CLT makes the mean nearly normal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** With 80 observations and mild skew, the sampling distribution of the mean is close to normal.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Perfect normality isn't required.
-  C) The t corrects for estimating the SD, not for skew.
+  A) and C) Perfect normality isn't required.
+  B) The t corrects for estimating the SD, not for skew.
 - **Hint:** Central limit theorem.
 
 ### ch15-book-02-v2
@@ -141,16 +141,16 @@ Which situation is the BIGGEST concern for using a t-test?
 
 - **Options:**
 
-  A) A small sample with strong skew
-  B) A large sample with mild skew
-  C) A large sample with normal data
-  D) A small sample with normal data
+  A) A large sample with normal data
+  B) A small sample with normal data
+  C) A large sample with mild skew
+  D) A small sample with strong skew
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Strong skew with few observations means the CLT can't make the sampling distribution normal.
 - **Why the wrong options are wrong (tutor only):**
-  B) The CLT handles mild skew in large samples.
-  C) and D) Normal data are fine.
+  A) and B) Normal data are fine.
+  C) The CLT handles mild skew in large samples.
 - **Hint:** When can't the CLT help?
 
 ### ch15-book-03
@@ -186,16 +186,16 @@ With which degrees of freedom are the t and z distributions most different?
 
 - **Options:**
 
-  A) 2 df
-  B) 20 df
+  A) 20 df
+  B) They're equally different at every df
   C) 200 df
-  D) They're equally different at every df
+  D) 2 df
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** With very few df, the t has much fatter tails; it approaches z as df grow.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) t is closer to z there.
-  D) The difference shrinks with df.
+  A) and C) t is closer to z there.
+  B) The difference shrinks with df.
 - **Hint:** When is the SD estimate least reliable?
 
 ### ch15-book-03-v2
@@ -209,15 +209,15 @@ Why does the t approach the z as sample size grows?
 - **Options:**
 
   A) The SD estimate gets more precise, adding less uncertainty
-  B) The data themselves become more normally distributed
-  C) The sample mean gets closer and closer to zero
-  D) The null hypothesis becomes more likely to be true
+  B) The null hypothesis becomes more likely to be true
+  C) The data themselves become more normally distributed
+  D) The sample mean gets closer and closer to zero
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** With many observations, the estimated SD is close to σ, so the extra uncertainty that fattens t's tails disappears.
 - **Why the wrong options are wrong (tutor only):**
-  B) Data keep their shape.
-  C) and D) Irrelevant to the t's shape.
+  C) Data keep their shape.
+  D) and B) Irrelevant to the t's shape.
 - **Hint:** What extra uncertainty does the t include?
 
 ### ch15-book-04
@@ -276,17 +276,17 @@ Why is effect size standardized by the SD rather than by the SE?
 
 - **Options:**
 
-  A) The SD doesn't shrink with sample size
-  B) The SE is harder to calculate than the SD
+  A) The SE describes variation among individuals
+  B) The SD doesn't shrink with sample size
   C) The SD always gives a larger effect size
-  D) The SE describes variation among individuals
+  D) The SE is harder to calculate than the SD
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Dividing by the SE would make the 'effect size' grow with n (that's t). The SD keeps it independent of sample size.
 - **Why the wrong options are wrong (tutor only):**
-  B) The SE is easy: SD / √n.
+  A) The SD describes individuals; the SE describes estimates.
   C) Dividing by the larger SD gives a smaller value.
-  D) The SD describes individuals; the SE describes estimates.
+  D) The SE is easy: SD / √n.
 - **Hint:** Which one depends on n?
 
 ### ch15-book-05
@@ -352,17 +352,17 @@ The QQ plot of the nine differences is shown. Which feature would most worry you
 
 - **Options:**
 
-  A) Points curving far from the line, e.g. a strong bend
-  B) Points wobbling a little around the line at the ends
+  A) Points wobbling a little around the line at the ends
+  B) The plot having only nine points
   C) Points that are exactly on the line from end to end
-  D) The plot having only nine points
+  D) Points curving far from the line, e.g. a strong bend
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A systematic curve suggests skew. Small wobbles are expected, especially with few points.
 - **Why the wrong options are wrong (tutor only):**
-  B) Expected with small samples.
+  A) Expected with small samples.
+  B) Few points make the plot noisy but aren't a violation.
   C) That would be reassuring.
-  D) Few points make the plot noisy but aren't a violation.
 - **Hint:** Wobble vs systematic curve.
 
 ### ch15-book-05-v2
@@ -391,15 +391,15 @@ For a paired t-test, which values should be checked for normality?
 
 - **Options:**
 
-  A) The nine differences
-  B) The dominant and subordinate values separately
+  A) All 18 values pooled together
+  B) The nine differences
   C) The dominant values only
-  D) All 18 values pooled together
+  D) The dominant and subordinate values separately
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A paired t-test is a one-sample t-test on the differences, so it assumes the differences are normal.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) The test is on the differences.
+  D), C) and A) The test is on the differences.
 - **Hint:** What does the paired t-test analyze?
 
 ### ch15-book-06
@@ -519,16 +519,16 @@ A 95% CI is calculated as the estimate ± ____ × the standard error.
 
 - **Options:**
 
-  A) the critical t value
-  B) the observed t value
-  C) Cohen's d
-  D) the p-value
+  A) the p-value
+  B) Cohen's d
+  C) the observed t value
+  D) the critical t value
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** CI = estimate ± critical t × SE.
 - **Why the wrong options are wrong (tutor only):**
-  B) The observed t is for the test.
-  C) and D) Not used to build the CI.
+  B) and A) Not used to build the CI.
+  C) The observed t is for the test.
 - **Hint:** Which t is a cutoff?
 
 ### ch15-book-07-v2
@@ -541,17 +541,17 @@ Which change would make a 95% confidence interval narrower?
 
 - **Options:**
 
-  A) A larger sample size
-  B) A larger standard deviation
+  A) A larger standard deviation
+  B) Using fewer degrees of freedom
   C) Using a 99% interval instead
-  D) Using fewer degrees of freedom
+  D) A larger sample size
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Larger n shrinks the SE (and slightly the critical t).
 - **Why the wrong options are wrong (tutor only):**
-  B) Larger SD widens the CI.
+  A) Larger SD widens the CI.
+  B) Fewer df means a larger critical t.
   C) 99% needs a larger critical value.
-  D) Fewer df means a larger critical t.
 - **Hint:** What shrinks the SE?
 
 ### ch15-book-08
@@ -587,17 +587,17 @@ For a paired study of 12 pairs, which R code gives the critical t value for a tw
 
 - **Options:**
 
-  A) qt(0.025, df = 11, lower.tail = FALSE)
-  B) qt(0.025, df = 12, lower.tail = FALSE)
-  C) qt(0.05, df = 11, lower.tail = FALSE)
-  D) pt(0.025, df = 11)
+  A) pt(0.025, df = 11)
+  B) qt(0.05, df = 11, lower.tail = FALSE)
+  C) qt(0.025, df = 11, lower.tail = FALSE)
+  D) qt(0.025, df = 12, lower.tail = FALSE)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 2.5% in each tail; df = 12 pairs - 1 = 11.
 - **Why the wrong options are wrong (tutor only):**
-  B) df is pairs - 1.
-  C) That's for a 90% two-tailed interval.
-  D) pt() returns a probability.
+  A) pt() returns a probability.
+  B) That's for a 90% two-tailed interval.
+  D) df is pairs - 1.
 - **Hint:** df = pairs - 1; 2.5% per tail.
 
 ### ch15-book-08-v2
@@ -610,17 +610,17 @@ For the nine hyena pairs, which R code gives the critical t value for a two-tail
 
 - **Options:**
 
-  A) qt(0.005, df = 8, lower.tail = FALSE)
-  B) qt(0.01, df = 8, lower.tail = FALSE)
-  C) qt(0.005, df = 9, lower.tail = FALSE)
-  D) qt(0.025, df = 8, lower.tail = FALSE)
+  A) qt(0.005, df = 9, lower.tail = FALSE)
+  B) qt(0.025, df = 8, lower.tail = FALSE)
+  C) qt(0.01, df = 8, lower.tail = FALSE)
+  D) qt(0.005, df = 8, lower.tail = FALSE)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A 99% two-tailed interval leaves 0.5% in each tail; df = 9 - 1 = 8.
 - **Why the wrong options are wrong (tutor only):**
-  B) That puts 1% in each tail (98% CI).
-  C) df should be 8.
-  D) That's for 95%.
+  A) df should be 8.
+  B) That's for 95%.
+  C) That puts 1% in each tail (98% CI).
 - **Hint:** Split 1% between two tails.
 
 ### ch15-book-09
@@ -724,17 +724,17 @@ t = 2.85 and p = 0.022. Which statement is correct?
 
 - **Options:**
 
-  A) We reject the null, but could be making a type I error
-  B) We reject the null, which proves subordinates giggle more
-  C) There's a 2.2% chance subordinates giggle the same amount
-  D) We fail to reject, because 2.85 is larger than 2.31
+  A) We fail to reject, because 2.85 is larger than 2.31
+  B) There's a 2.2% chance subordinates giggle the same amount
+  C) We reject the null, which proves subordinates giggle more
+  D) We reject the null, but could be making a type I error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p < 0.05, so we reject, accepting a chance of a false positive.
 - **Why the wrong options are wrong (tutor only):**
-  B) Rejection isn't proof.
-  C) p isn't the probability the null is true.
-  D) |t| > critical t means reject.
+  A) |t| > critical t means reject.
+  B) p isn't the probability the null is true.
+  C) Rejection isn't proof.
 - **Hint:** What can p < α not guarantee?
 
 ### ch15-book-10
@@ -767,16 +767,16 @@ A study reports p = 0.01. Which interpretation is correct?
 
 - **Options:**
 
-  A) If the null were true, 1% of samples would be this extreme or more
+  A) The effect is large, because p is small
   B) There is a 1% chance the null hypothesis is true
   C) There is a 99% chance the alternative hypothesis is true
-  D) The effect is large, because p is small
+  D) If the null were true, 1% of samples would be this extreme or more
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p is calculated assuming the null is true.
 - **Why the wrong options are wrong (tutor only):**
+  A) Small p can come from a tiny effect in a big sample.
   B) and C) p is not a probability about hypotheses.
-  D) Small p can come from a tiny effect in a big sample.
 - **Hint:** What does p assume?
 
 ### ch15-book-10-v2
@@ -789,15 +789,15 @@ Which statement about p-values is FALSE?
 
 - **Options:**
 
-  A) A p-value is the probability that the null is true
-  B) A p-value is calculated assuming the null is true
-  C) Smaller p-values mean data less compatible with the null
-  D) A p-value depends on both effect size and sample size
+  A) Smaller p-values mean data less compatible with the null
+  B) A p-value depends on both effect size and sample size
+  C) A p-value is calculated assuming the null is true
+  D) A p-value is the probability that the null is true
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p is P(data this extreme | null), not P(null | data).
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) are all true.
+  C), A) and B) are all true.
 - **Hint:** Look for the reversed conditional.
 
 ### ch15-book-11
@@ -867,12 +867,12 @@ Fill in the blanks: A t value is the distance in (1) ____ between a parameter es
 
 - **Options:**
 
-  A) standard errors
-  B) standard deviations
-  C) null
+  A) standard deviations
+  B) null
+  C) standard errors
   D) true
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-C, 2-B
 - **Explanation (tutor only):** t = (estimate - null value) / SE: how many standard errors the estimate is from the null.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-ups: standard deviations (that's Cohen's d) and the true value (which we don't know).
@@ -888,16 +888,16 @@ A t value of -3 means that the parameter estimate is:
 
 - **Options:**
 
-  A) 3 standard errors below its null value
+  A) 3 times smaller than its null value
   B) 3 standard deviations below its null value
-  C) 3 units below its true population value
-  D) 3 times smaller than its null value
+  C) 3 standard errors below its null value
+  D) 3 units below its true population value
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** t = (estimate - null) / SE: the distance from the null in standard errors.
 - **Why the wrong options are wrong (tutor only):**
   B) That would be like Cohen's d.
-  C) and D) t is in SE units, measured from the null.
+  D) and A) t is in SE units, measured from the null.
 - **Hint:** t's denominator is the SE.
 
 ### ch15-chimein-01-v2
@@ -910,12 +910,12 @@ Fill in the blanks: t = (1) ____ minus its null value, divided by its (2) ____.
 
 - **Options:**
 
-  A) the estimate
-  B) the true parameter
-  C) standard error
+  A) standard error
+  B) the estimate
+  C) the true parameter
   D) standard deviation
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** t = (estimate - null) / SE.
 - **Why the wrong options are wrong (tutor only):**
   We never know the true parameter; dividing by the SD gives an effect size.
@@ -954,16 +954,16 @@ Because the t distribution has fatter tails than the z, the critical value for a
 
 - **Options:**
 
-  A) Larger than 1.96
-  B) Smaller than 1.96
-  C) Exactly 1.96
-  D) Negative
+  A) Exactly 1.96
+  B) Larger than 1.96
+  C) Negative
+  D) Smaller than 1.96
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Fatter tails push 2.5% of the area farther out, so the critical t exceeds 1.96 (e.g. 2.78 for 4 df).
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Fatter tails mean a larger cutoff.
-  D) We use the absolute value.
+  C) We use the absolute value.
+  D) and A) Fatter tails mean a larger cutoff.
 - **Hint:** Where does the outer 2.5% start in a fat-tailed distribution?
 
 ### ch15-chimein-02-v2
@@ -976,17 +976,17 @@ Why does the t distribution have fatter tails than the standard normal (z)?
 
 - **Options:**
 
-  A) Because the SD is estimated from the sample, adding uncertainty
-  B) Because biological data are skewed, adding extreme values
-  C) Because the t is used only for paired data, not independent data
-  D) Because the null hypothesis is usually false in real studies
+  A) Because biological data are skewed, adding extreme values
+  B) Because the t is used only for paired data, not independent data
+  C) Because the null hypothesis is usually false in real studies
+  D) Because the SD is estimated from the sample, adding uncertainty
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Estimating the SD (and so the SE) adds uncertainty, making extreme t values more common.
 - **Why the wrong options are wrong (tutor only):**
-  B) The t assumes normal data.
-  C) The t is used for many tests.
-  D) Tails come from the sampling math, not the truth of the null.
+  A) The t assumes normal data.
+  B) The t is used for many tests.
+  C) Tails come from the sampling math, not the truth of the null.
 - **Hint:** What does the t estimate that the z knows?
 
 ### ch15-chimein-03
@@ -1023,15 +1023,15 @@ A large p-value (say 0.6) means that, if the null were true, sampling error woul
 - **Options:**
 
   A) often
-  B) rarely
-  C) never
-  D) always
+  B) always
+  C) rarely
+  D) never
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** p = 0.6 means 60% of samples under the null would be at least as extreme: very common.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's a small p.
-  C) and D) p is between 0 and 1.
+  C) That's a small p.
+  D) and B) p is between 0 and 1.
 - **Hint:** What fraction of null samples are this extreme?
 
 ### ch15-chimein-03-v2
@@ -1044,17 +1044,17 @@ A p-value is the probability of a result at least as extreme as ours, assuming:
 
 - **Options:**
 
-  A) The null hypothesis is true
+  A) The sample is very large
   B) The alternative hypothesis is true
-  C) There is no sampling error
-  D) The sample is very large
+  C) The null hypothesis is true
+  D) There is no sampling error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p-values are calculated under the null: how often would chance alone produce this?
 - **Why the wrong options are wrong (tutor only):**
+  A) p-values exist for any sample size.
   B) p doesn't assume the alternative.
-  C) Sampling error is what p accounts for.
-  D) p-values exist for any sample size.
+  D) Sampling error is what p accounts for.
 - **Hint:** Which hypothesis do we assume?
 
 ### ch15-chimein-04
@@ -1089,14 +1089,14 @@ Two studies find the same difference from the null and the same SD, but one has 
 - **Options:**
 
   A) Cohen's d
-  B) t
+  B) The standard error
   C) The p-value
-  D) The standard error
+  D) t
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** d = difference / SD, which doesn't depend on n. The SE, t and p all change with n.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) All depend on sample size.
+  D), C) and B) All depend on sample size.
 - **Hint:** Which one doesn't involve n?
 
 ### ch15-chimein-04-v2
@@ -1109,15 +1109,15 @@ Which quantity measures how far an estimate is from the null in units of standar
 
 - **Options:**
 
-  A) t
+  A) The p-value
   B) Cohen's d
-  C) The p-value
+  C) t
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** t = (estimate - null) / SE. Cohen's d uses the SD instead.
 - **Why the wrong options are wrong (tutor only):**
+  A) p is a probability.
   B) d uses the SD.
-  C) p is a probability.
 - **Hint:** SE units.
 
 ### ch15-chimein-05
@@ -1214,15 +1214,15 @@ Researchers measure blood pressure in 20 patients before and after a drug. Why i
 - **Options:**
 
   A) It removes variation among patients, increasing power
-  B) It doesn't assume the differences are normally distributed
-  C) It needs only half as many patients as a two-sample test
+  B) It needs only half as many patients as a two-sample test
+  C) It doesn't assume the differences are normally distributed
   D) It works even when the measurements are not independent pairs
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Each patient is their own control, so differences among patients drop out.
 - **Why the wrong options are wrong (tutor only):**
-  B) The paired t assumes normal differences.
-  C) It's about power, not a rule on sample size.
+  B) It's about power, not a rule on sample size.
+  C) The paired t assumes normal differences.
   D) It needs genuine pairs.
 - **Hint:** What does comparing within a patient remove?
 
@@ -1236,14 +1236,14 @@ Compared with ignoring the pairs and running a two-sample t-test, a paired t-tes
 
 - **Options:**
 
-  A) A smaller SE and more power
-  B) A larger SE and less power
+  A) A larger SE and less power
+  B) A smaller SE and more power
   C) The same SE and the same power
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Removing pair-to-pair variation shrinks the SE, increasing power.
 - **Why the wrong options are wrong (tutor only):**
-  B) Pairing reduces noise.
+  A) Pairing reduces noise.
   C) Pairing changes the SE when pairs share variation.
 - **Hint:** What happens to noise when you compare within pairs?
 
@@ -1277,14 +1277,14 @@ Which designs are appropriate for a paired t-test? (Select all that apply.)
 
 - **Options:**
 
-  A) Measuring the same lizards' sprint speed at two temperatures
-  B) Comparing twins, one given a supplement and one a placebo
-  C) Matching ten treatment and ten control mice at random after the experiment
+  A) Matching ten treatment and ten control mice at random after the experiment
+  B) Measuring the same lizards' sprint speed at two temperatures
+  C) Comparing twins, one given a supplement and one a placebo
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** Repeated measures and twins are real pairs. Random after-the-fact matching shares nothing.
 - **Why the wrong options are wrong (tutor only):**
-  C) Random pairing adds no information.
+  A) Random pairing adds no information.
 - **Hint:** Do the pairs share something real?
 
 ### ch15-chimein-08-v2
@@ -1297,14 +1297,14 @@ Which designs are NOT appropriate for a paired t-test? (Select all that apply.)
 
 - **Options:**
 
-  A) Pairing plants at random after the experiment because the design is balanced
-  B) Comparing left and right leaves on the same plant, one treated and one not
+  A) Comparing left and right leaves on the same plant, one treated and one not
+  B) Pairing plants at random after the experiment because the design is balanced
   C) Pairing the tallest treated plant with the tallest control plant after the experiment
 
-- **Answer (tutor only):** A, C
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** Pairs must be set by real shared features before treatment. Pairing after the fact (randomly or by the outcome) is invalid.
 - **Why the wrong options are wrong (tutor only):**
-  B) Two leaves on the same plant are natural pairs.
+  A) Two leaves on the same plant are natural pairs.
 - **Hint:** When and how were the pairs formed?
 
 ### ch15-chimein-09
@@ -1338,14 +1338,14 @@ Which quantity describes VARIABILITY among individuals rather than uncertainty i
 
 - **Options:**
 
-  A) The standard deviation
-  B) The standard error
+  A) The standard error
+  B) The standard deviation
   C) The width of the confidence interval
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The SD describes spread among individuals; the SE and CI describe uncertainty in an estimate.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) describe uncertainty.
+  A) and C) describe uncertainty.
 - **Hint:** Individuals vs estimates.
 
 ### ch15-chimein-09-v2
@@ -1399,14 +1399,14 @@ Which tells us how large an effect is, regardless of sample size?
 
 - **Options:**
 
-  A) Cohen's d
-  B) The t value
-  C) The p-value
+  A) The p-value
+  B) Cohen's d
+  C) The t value
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** d standardizes the difference by the SD. t and p both depend on sample size.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) change with n.
+  C) and A) change with n.
 - **Hint:** Which one ignores n?
 
 ### ch15-chimein-10-v2
@@ -1420,13 +1420,13 @@ Which measures how many standard errors our estimate is from the null value?
 - **Options:**
 
   A) t
-  B) p
-  C) Cohen's d
+  B) Cohen's d
+  C) p
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** t = (estimate - null) / SE.
 - **Why the wrong options are wrong (tutor only):**
-  B) p is a probability. C) d uses the SD.
+  C) p is a probability. B) d uses the SD.
 - **Hint:** SE units.
 
 ### ch15-chimein-11
@@ -1521,17 +1521,17 @@ A researcher knows the true population SD of fish length from decades of census 
 
 - **Options:**
 
-  A) z, because the population SD is known
-  B) t, because the sample size is small
-  C) t, because the mean is not zero
-  D) z, because fish length is continuous
+  A) t, because the sample size is small
+  B) z, because fish length is continuous
+  C) z, because the population SD is known
+  D) t, because the mean is not zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The t accounts for estimating the SD. If σ is truly known, z is appropriate even for small samples.
 - **Why the wrong options are wrong (tutor only):**
-  B) Small n matters only because the SD is estimated.
-  C) Neither needs the mean to be 0.
-  D) Both handle continuous data.
+  A) Small n matters only because the SD is estimated.
+  B) Both handle continuous data.
+  D) Neither needs the mean to be 0.
 - **Hint:** What extra uncertainty does the t account for?
 
 ### ch15-hw-01-v2
@@ -1544,17 +1544,17 @@ Why do we usually use a t distribution rather than a z for a sample mean in biol
 
 - **Options:**
 
-  A) We rarely know the population SD, so we estimate it from the sample
+  A) The t works for proportions, and the z only works for means
   B) Biological data are rarely normally distributed, and the t corrects for that
-  C) The t works for proportions, and the z only works for means
-  D) Our sample sizes are almost always larger than 1,000 individuals
+  C) Our sample sizes are almost always larger than 1,000 individuals
+  D) We rarely know the population SD, so we estimate it from the sample
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The t adds uncertainty for estimating σ from the data.
 - **Why the wrong options are wrong (tutor only):**
+  A) Not the distinction.
   B) The t assumes normality too.
-  C) Not the distinction.
-  D) Large n would make t ≈ z anyway.
+  C) Large n would make t ≈ z anyway.
 - **Hint:** What does the t assume we don't know?
 
 ### ch15-hw-02
@@ -1590,16 +1590,16 @@ A researcher runs a t-test on 6 measurements of flower height, and the data are 
 - **Options:**
 
   A) It's risky: with so few points, the CLT can't fix the skew
-  B) It's fine: the t distribution automatically corrects for skew
-  C) It's fine: t-tests make no assumptions about the data
-  D) It's risky only because the sample mean is not zero
+  B) It's risky only because the sample mean is not zero
+  C) It's fine: the t distribution automatically corrects for skew
+  D) It's fine: t-tests make no assumptions about the data
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The t-test is robust to skew mainly in larger samples. With n = 6 and strong skew, the sampling distribution of the mean may be far from normal.
 - **Why the wrong options are wrong (tutor only):**
-  B) The t corrects for estimating the SD, not for skew.
-  C) It assumes normality of the sampling distribution.
-  D) The mean being zero is irrelevant.
+  B) The mean being zero is irrelevant.
+  C) The t corrects for estimating the SD, not for skew.
+  D) It assumes normality of the sampling distribution.
 - **Hint:** Does the CLT help with n = 6?
 
 ### ch15-hw-02-v2
@@ -1612,16 +1612,16 @@ Which situation makes a t-test MOST robust to mildly skewed data?
 
 - **Options:**
 
-  A) A large sample, such as 200 observations
-  B) A small sample, such as 5 observations
-  C) A sample whose mean happens to be near zero
-  D) A sample with a large standard deviation
+  A) A small sample, such as 5 observations
+  B) A large sample, such as 200 observations
+  C) A sample with a large standard deviation
+  D) A sample whose mean happens to be near zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With large samples, the CLT makes the sampling distribution of the mean nearly normal.
 - **Why the wrong options are wrong (tutor only):**
-  B) Small samples don't benefit from the CLT.
-  C) and D) These don't affect robustness to skew.
+  A) Small samples don't benefit from the CLT.
+  D) and C) These don't affect robustness to skew.
 - **Hint:** Central limit theorem.
 
 ### ch15-hw-03
@@ -1657,15 +1657,15 @@ With which sample would a t-test and a z-test give the MOST different p-values?
 
 - **Options:**
 
-  A) n = 4
+  A) n = 400
   B) n = 40
-  C) n = 400
+  C) n = 4
   D) They always give identical p-values
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With few df, the t has much fatter tails than the z (critical t for 3 df is 3.18 vs 1.96).
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) t approaches z as n grows.
+  B) and A) t approaches z as n grows.
   D) They differ, especially for small n.
 - **Hint:** When does t look least like z?
 
@@ -1680,16 +1680,16 @@ The critical t value (α = 0.05, two-tailed) is 2.78 for 4 df, 2.09 for 20 df an
 - **Options:**
 
   A) The t approaches the z (1.96) as degrees of freedom grow
-  B) The t has thinner tails than the z for small samples
-  C) Larger samples need larger t values to reject the null
-  D) The critical value depends on the sample mean
+  B) Larger samples need larger t values to reject the null
+  C) The critical value depends on the sample mean
+  D) The t has thinner tails than the z for small samples
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** As df grow, the SD is estimated more precisely and the t converges to the z.
 - **Why the wrong options are wrong (tutor only):**
-  B) The t has fatter tails for small samples.
-  C) The critical value shrinks with n.
-  D) It depends only on df and α.
+  B) The critical value shrinks with n.
+  C) It depends only on df and α.
+  D) The t has fatter tails for small samples.
 - **Hint:** Compare each to 1.96.
 
 ### ch15-hw-04
@@ -1711,16 +1711,16 @@ For a two-tailed test, match each hypothesis to its statement:
 
 - **Options:**
 
-  A) The mean difference in exam scores (chatbot - control) equals 0
+  A) Chatbots help you learn
   B) The mean difference in exam scores (chatbot - control) does not equal 0
   C) The mean difference in exam scores (chatbot - control) is greater than 0
-  D) Chatbots help you learn
+  D) The mean difference in exam scores (chatbot - control) equals 0
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** The null is a specific value (no difference). A two-tailed alternative is 'not equal to', allowing a difference in either direction.
 - **Why the wrong options are wrong (tutor only):**
   C) That's a one-tailed alternative.
-  D) That's a biological hypothesis, not a statistical one.
+  A) That's a biological hypothesis, not a statistical one.
 - **Hint:** Two-tailed means either direction counts.
 
 ### ch15-hw-04-v1
@@ -1738,15 +1738,15 @@ For a two-tailed test, match each hypothesis to its statement:
 
 - **Options:**
 
-  A) The mean difference in foragers (warm - cool) equals 0
-  B) The mean difference in foragers (warm - cool) does not equal 0
-  C) The mean difference in foragers (warm - cool) is greater than 0
-  D) Warm weather makes ants forage more
+  A) The mean difference in foragers (warm - cool) does not equal 0
+  B) Warm weather makes ants forage more
+  C) The mean difference in foragers (warm - cool) equals 0
+  D) The mean difference in foragers (warm - cool) is greater than 0
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** Null: no difference. Two-tailed alternative: a difference in either direction.
 - **Why the wrong options are wrong (tutor only):**
-  C) is one-tailed; D) is a scientific hypothesis, not a statistical one.
+  D) is one-tailed; B) is a scientific hypothesis, not a statistical one.
 - **Hint:** Two-tailed means 'not equal'.
 
 ### ch15-hw-04-v2
@@ -1768,12 +1768,12 @@ For a ONE-tailed test of whether the chatbot improves scores, match each hypothe
 
 - **Options:**
 
-  A) The mean difference in exam scores (chatbot - control) is 0 or less
+  A) The mean difference in exam scores (chatbot - control) is greater than 0
   B) The mean difference in exam scores (chatbot - control) does not equal 0
-  C) The mean difference in exam scores (chatbot - control) is greater than 0
+  C) The mean difference in exam scores (chatbot - control) is 0 or less
   D) Chatbots help you learn
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** A one-tailed alternative specifies a direction (greater than 0); the null covers everything else.
 - **Why the wrong options are wrong (tutor only):**
   B) is two-tailed; D) is not a statistical hypothesis.
@@ -1820,17 +1820,17 @@ What is Cohen's d for this difference?
 
 - **Options:**
 
-  A) 1.2
+  A) 12
   B) 0.12
-  C) 3.8
-  D) 12
+  C) 1.2
+  D) 3.8
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** SD = √100 = 10, so d = 12 / 10 = 1.2.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's the raw difference.
   B) Divides by the variance.
-  C) That's t (12 / SE of 3.16).
-  D) That's the raw difference.
+  D) That's t (12 / SE of 3.16).
 - **Hint:** Mean difference ÷ SD.
 
 ### ch15-hw-05-v2
@@ -1849,17 +1849,17 @@ Why is Cohen's d (1.42) a better measure of effect size here than t (3.17)?
 
 - **Options:**
 
-  A) d doesn't change with sample size; t grows as n grows
-  B) d accounts for sample size; t ignores it entirely
-  C) d is a probability; t is not a probability at all
-  D) d is always larger than t, so it's easier to detect
+  A) d accounts for sample size; t ignores it entirely
+  B) d is a probability; t is not a probability at all
+  C) d is always larger than t, so it's easier to detect
+  D) d doesn't change with sample size; t grows as n grows
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** d = difference / SD describes the size of the effect. t = difference / SE grows with √n, so it mixes effect size with sample size.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's the reverse.
-  C) Neither is a probability.
-  D) d is usually smaller than t.
+  A) It's the reverse.
+  B) Neither is a probability.
+  C) d is usually smaller than t.
 - **Hint:** Which one depends on n?
 
 ### ch15-hw-06
@@ -2008,16 +2008,16 @@ To ask whether ant colonies forage more in warm weather, a researcher counted fo
 
 - **Options:**
 
-  A) Reject; warm weather definitely increases foraging
+  A) Fail to reject; we need more nests before deciding
   B) Reject; we act as if the null is false, knowing we could be wrong
   C) Fail to reject; foraging is the same at both temperatures
-  D) Fail to reject; we need more nests before deciding
+  D) Reject; warm weather definitely increases foraging
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** p < 0.05, so we reject. That's not proof: a type I error is possible.
 - **Why the wrong options are wrong (tutor only):**
-  A) Rejection isn't proof.
-  C) and D) p < α.
+  C) and A) p < α.
+  D) Rejection isn't proof.
 - **Hint:** Rejecting isn't proving.
 
 ### ch15-hw-08-v2
@@ -2036,16 +2036,16 @@ Suppose instead the p-value had been 0.21. At α = 0.05, what would we do, and w
 
 - **Options:**
 
-  A) Reject; the chatbot has no effect on exam scores
-  B) Fail to reject; the chatbot has no effect on exam scores
-  C) Fail to reject; the data don't show a clear effect either way
-  D) Accept the null; the chatbot certainly does not help
+  A) Fail to reject; the chatbot has no effect on exam scores
+  B) Reject; the chatbot has no effect on exam scores
+  C) Accept the null; the chatbot certainly does not help
+  D) Fail to reject; the data don't show a clear effect either way
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p > α, so we fail to reject. With five pairs, we may simply lack power; it doesn't show there's no effect.
 - **Why the wrong options are wrong (tutor only):**
-  A) p > α.
-  B) and D) Failing to reject isn't evidence of no effect.
+  A) and C) Failing to reject isn't evidence of no effect.
+  B) p > α.
 - **Hint:** Absence of evidence…
 
 ### ch15-hw-09
@@ -2087,17 +2087,17 @@ To ask whether ant colonies forage more in warm weather, a researcher counted fo
 
 - **Options:**
 
-  A) (4.85, 19.15)
-  B) (8.84, 15.16)
+  A) (5.80, 18.20)
+  B) (4.85, 19.15)
   C) (-10.6, 34.6)
-  D) (5.80, 18.20)
+  D) (8.84, 15.16)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** 12 ± 2.262 × 3.16 = 12 ± 7.15 → (4.85, 19.15). It excludes 0, matching p < 0.05.
 - **Why the wrong options are wrong (tutor only):**
-  B) Forgets the critical t.
+  A) Uses 1.96 × 3.16, the z value, instead of the critical t.
   C) Uses the SD instead of the SE.
-  D) Uses 1.96 × 3.16, the z value, instead of the critical t.
+  D) Forgets the critical t.
 - **Hint:** Estimate ± critical t × SE.
 
 ### ch15-hw-09-v2
@@ -2116,17 +2116,17 @@ The 95% CI for the mean difference is (0.65, 9.85). Which statement is correct?
 
 - **Options:**
 
-  A) It excludes 0, consistent with rejecting the null at α = 0.05
-  B) It includes 5.25, so we fail to reject the null at α = 0.05
-  C) It is wide, so the chatbot must have no real effect on scores
-  D) There is a 95% chance the true difference is between 0.65 and 9.85
+  A) There is a 95% chance the true difference is between 0.65 and 9.85
+  B) It excludes 0, consistent with rejecting the null at α = 0.05
+  C) It includes 5.25, so we fail to reject the null at α = 0.05
+  D) It is wide, so the chatbot must have no real effect on scores
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A 95% CI excluding 0 corresponds to p < 0.05 for a two-tailed test of no difference.
 - **Why the wrong options are wrong (tutor only):**
-  B) The CI always contains the estimate; what matters is the null value (0).
-  C) A wide CI means imprecision, not no effect.
-  D) The 95% describes the procedure, not this interval.
+  A) The 95% describes the procedure, not this interval.
+  C) The CI always contains the estimate; what matters is the null value (0).
+  D) A wide CI means imprecision, not no effect.
 - **Hint:** Is the null value inside the interval?
 
 ### ch15-quiz-01
@@ -2252,17 +2252,17 @@ The mean is 0.30 °F below 98.6, and the SD is 0.80 °F. What is Cohen's d, and 
 
 - **Options:**
 
-  A) d ≈ 0.38, a small effect (< 0.5)
+  A) d ≈ 0.09, a small effect (< 0.5)
   B) d ≈ 0.60, a medium effect (0.5 to 0.8)
   C) d ≈ 1.50, a large effect (> 0.8)
-  D) d ≈ 0.09, a small effect (< 0.5)
+  D) d ≈ 0.38, a small effect (< 0.5)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** d = 0.30 / 0.80 = 0.375, a small effect.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's 0.30 × 0.30.
   B) Divides by something other than the SD.
   C) That's t (0.30 / SE of 0.20), not d.
-  D) That's 0.30 × 0.30.
 - **Hint:** Difference ÷ SD.
 
 ### ch15-quiz-03-v2
@@ -2277,17 +2277,17 @@ Why is Cohen's d (0.11) so much smaller than |t| (0.56) for these data?
 
 - **Options:**
 
-  A) d divides by the SD, while t divides by the smaller SE
-  B) d divides by the SE, while t divides by the larger SD
-  C) d ignores the sign of the difference, so it is smaller
-  D) d is a probability, so it must be less than t
+  A) d is a probability, so it must be less than t
+  B) d divides by the SD, while t divides by the smaller SE
+  C) d divides by the SE, while t divides by the larger SD
+  D) d ignores the sign of the difference, so it is smaller
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** d = difference / SD; t = difference / SE, and SE = SD / √n is smaller, so |t| = d × √n = 0.11 × 5 = 0.56.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's the other way around.
-  C) Ignoring the sign doesn't change the size.
-  D) d is not a probability.
+  A) d is not a probability.
+  C) It's the other way around.
+  D) Ignoring the sign doesn't change the size.
 - **Hint:** Compare the denominators.
 
 ### ch15-quiz-04
@@ -2434,15 +2434,15 @@ A one-sample t-test with 24 df gives t = 4.8. Before calculating a p-value, what
 
 - **Options:**
 
-  A) Clearly reject the null
-  B) Clearly fail to reject the null
-  C) Uncertain: it's on the border
+  A) Clearly fail to reject the null
+  B) Uncertain: it's on the border
+  C) Clearly reject the null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** |t| = 4.8 is far beyond the critical value of about 2.06, so p is tiny (< 0.001).
 - **Why the wrong options are wrong (tutor only):**
-  B) Large |t| means the estimate is far from the null.
-  C) 4.8 is nowhere near the border of ~2.
+  A) Large |t| means the estimate is far from the null.
+  B) 4.8 is nowhere near the border of ~2.
 - **Hint:** Compare |t| with about 2.
 
 ### ch15-quiz-07
@@ -2505,16 +2505,16 @@ A one-sample t-test of whether mean body temperature equals 98.6 °F gives p = 0
 
 - **Options:**
 
-  A) Reject; the data are unlikely if the mean were 98.6 °F
+  A) Fail to reject; p is smaller than α, so the null stands
   B) Reject; there's a 0.2% chance the mean is 98.6 °F
-  C) Fail to reject; p is smaller than α, so the null stands
+  C) Reject; the data are unlikely if the mean were 98.6 °F
   D) Fail to reject; we need a larger sample to decide
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p < α, so we reject: data this extreme would be rare if the true mean were 98.6.
 - **Why the wrong options are wrong (tutor only):**
+  A) and D) p < α means we reject.
   B) p isn't the probability the null is true.
-  C) and D) p < α means we reject.
 - **Hint:** What does a small p say about the data under the null?
 
 ### ch15-quiz-08
@@ -2550,17 +2550,17 @@ For the body temperature data (t = -0.56, n = 25, so 24 df), which R code gives 
 
 - **Options:**
 
-  A) pt(-0.56, df = 24)
-  B) 2 * pt(-0.56, df = 24)
-  C) pt(-0.56, df = 24, lower.tail = FALSE)
-  D) qt(-0.56, df = 24)
+  A) 2 * pt(-0.56, df = 24)
+  B) pt(-0.56, df = 24)
+  C) qt(-0.56, df = 24)
+  D) pt(-0.56, df = 24, lower.tail = FALSE)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** pt() gives the area below t, which is the lower tail for this one-sided alternative.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's two-tailed.
-  C) That's the area above -0.56.
-  D) qt() takes a probability.
+  A) That's two-tailed.
+  C) qt() takes a probability.
+  D) That's the area above -0.56.
 - **Hint:** Which tail matches 'less than'?
 
 ### ch15-quiz-08-v2
@@ -2574,16 +2574,16 @@ For a one-sample t-test with n = 16 and t = 2.1, which R code gives the two-tail
 - **Options:**
 
   A) 2 * pt(2.1, df = 15, lower.tail = FALSE)
-  B) 2 * pt(2.1, df = 16, lower.tail = FALSE)
+  B) 2 * pt(2.1, df = 15)
   C) pt(2.1, df = 15, lower.tail = FALSE)
-  D) 2 * pt(2.1, df = 15)
+  D) 2 * pt(2.1, df = 16, lower.tail = FALSE)
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** One-sample df = n - 1 = 15. Area above |t| in one tail, doubled.
 - **Why the wrong options are wrong (tutor only):**
-  B) df should be 15.
+  B) That doubles the area BELOW 2.1, giving more than 1.
   C) That's one-tailed.
-  D) That doubles the area BELOW 2.1, giving more than 1.
+  D) df should be 15.
 - **Hint:** df = n - 1; double one tail.
 
 ### ch15-quiz-09
@@ -2623,15 +2623,15 @@ The standard error is 0.20 and the critical t value for 15 df at α = 0.05 is 2.
 
 - **Options:**
 
-  A) 98.30 ± 0.20, i.e. (98.10, 98.50)
-  B) 98.30 ± 0.43, i.e. (97.87, 98.73)
+  A) 98.30 ± 0.43, i.e. (97.87, 98.73)
+  B) 98.30 ± 0.20, i.e. (98.10, 98.50)
   C) 98.30 ± 1.70, i.e. (96.60, 100.00)
   D) 98.60 ± 0.43, i.e. (98.17, 99.03)
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** 98.30 ± 2.131 × 0.20 = 98.30 ± 0.43. It includes 98.6, matching p > 0.05.
 - **Why the wrong options are wrong (tutor only):**
-  A) Forgets the critical t.
+  B) Forgets the critical t.
   C) Uses the SD × critical t.
   D) Centers on the null value instead of the estimate.
 - **Hint:** Estimate ± critical t × SE.
@@ -2650,15 +2650,15 @@ The 95% confidence interval for mean body temperature is (98.24, 98.80). Without
 
   A) p > 0.05, because 98.6 is inside the 95% CI
   B) p < 0.05, because 98.6 is inside the 95% CI
-  C) p > 0.05, because 98.6 is not equal to 98.524
-  D) Nothing; CIs and p-values are unrelated
+  C) Nothing; CIs and p-values are unrelated
+  D) p > 0.05, because 98.6 is not equal to 98.524
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A two-tailed test at α = 0.05 rejects exactly when the null value falls outside the 95% CI. 98.6 is inside, so p > 0.05.
 - **Why the wrong options are wrong (tutor only):**
   B) Inside the CI means don't reject.
-  C) The estimate never equals the null exactly.
-  D) They're two sides of the same calculation.
+  C) They're two sides of the same calculation.
+  D) The estimate never equals the null exactly.
 - **Hint:** Is 98.6 inside the interval?
 
 ## Chapter 16: Comparing two means
@@ -2708,16 +2708,16 @@ The plot shows each mated pair and the group means with 95% CIs. What does the s
 
 - **Options:**
 
-  A) Hatched eggs vary hugely among pairs in both treatments
+  A) Only the nonpreferred treatment shows much variation
   B) Hatched eggs are nearly identical within each treatment
-  C) Only the preferred treatment shows much variation
-  D) Only the nonpreferred treatment shows much variation
+  C) Hatched eggs vary hugely among pairs in both treatments
+  D) Only the preferred treatment shows much variation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Both groups range from near 0 to around 900 eggs; variation within groups dwarfs the difference between them.
 - **Why the wrong options are wrong (tutor only):**
   B) There's huge variation.
-  C) and D) Both groups vary similarly (variances 56,118 vs 67,412).
+  D) and A) Both groups vary similarly (variances 56,118 vs 67,412).
 - **Hint:** Look at the range of points in each group.
 
 ### ch16-book-01-v2
@@ -2737,16 +2737,16 @@ The plot shows each mated pair and the group means with 95% CIs. What do the ove
 
 - **Options:**
 
-  A) The data don't clearly show a difference between treatments
-  B) Preferred females clearly produce more hatched eggs
-  C) Nonpreferred females clearly produce more hatched eggs
-  D) The treatments definitely have identical means
+  A) The treatments definitely have identical means
+  B) The data don't clearly show a difference between treatments
+  C) Preferred females clearly produce more hatched eggs
+  D) Nonpreferred females clearly produce more hatched eggs
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Broadly overlapping CIs suggest the difference may not be significant (p = 0.30). That's not proof the means are equal.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) The difference is uncertain.
-  D) Overlap doesn't prove equality.
+  A) Overlap doesn't prove equality.
+  C) and D) The difference is uncertain.
 - **Hint:** Overlap ≠ identical.
 
 ### ch16-book-02
@@ -2820,16 +2820,16 @@ The figure shows histograms of hatched eggs, (A) with both treatments combined a
 
 - **Options:**
 
-  A) The values within each treatment (the residuals)
-  B) The values with both treatments combined
-  C) The two treatment means, compared to each other
+  A) The two treatment means, compared to each other
+  B) The values within each treatment (the residuals)
+  C) The values with both treatments combined
   D) The p-values from many repeated studies
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The assumption is about residuals: each value minus its group mean.
 - **Why the wrong options are wrong (tutor only):**
-  B) Combined data mix two means.
-  C) and D) Not the assumption.
+  A) and D) Not the assumption.
+  C) Combined data mix two means.
 - **Hint:** Residuals.
 
 ### ch16-book-03
@@ -2870,14 +2870,14 @@ Two groups of 15 tadpoles have growth-rate variances of 4.0 and 26.0. Should you
 
 - **Options:**
 
-  A) Yes
-  B) No
-  C) Maybe
+  A) No
+  B) Maybe
+  C) Yes
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** 26.0 / 4.0 = 6.5, beyond the rule of thumb of about 5. Welch's t-test would be safer.
 - **Why the wrong options are wrong (tutor only):**
-  A) and C) The ratio exceeds 5.
+  C) and B) The ratio exceeds 5.
 - **Hint:** Ratio of variances.
 
 ### ch16-book-03-v2
@@ -3114,17 +3114,17 @@ The t-test gives p = 0.30 and d = 0.28. Which statement is best?
 
 - **Options:**
 
-  A) The estimated effect is small, and there's no clear difference
-  B) The effect is small, so the null hypothesis must be true
-  C) The effect is small, so the p-value must be wrong
-  D) The p-value shows that preferred females lay fewer eggs
+  A) The effect is small, so the p-value must be wrong
+  B) The p-value shows that preferred females lay fewer eggs
+  C) The effect is small, so the null hypothesis must be true
+  D) The estimated effect is small, and there's no clear difference
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** d describes the estimated size; p says the data are consistent with no difference. Neither proves the null.
 - **Why the wrong options are wrong (tutor only):**
-  B) Failing to reject isn't proof.
-  C) Small d and large p are consistent.
-  D) p > 0.05; no clear difference.
+  A) Small d and large p are consistent.
+  B) p > 0.05; no clear difference.
+  C) Failing to reject isn't proof.
 - **Hint:** Size vs evidence.
 
 ### ch16-book-07
@@ -3146,16 +3146,16 @@ Match each hypothesis to its statement:
 
 - **Options:**
 
-  A) Mean hatched eggs are the same with preferred and nonpreferred females
+  A) Mean hatched eggs are higher with preferred females
   B) Mean hatched eggs differ between preferred and nonpreferred females
-  C) Mean hatched eggs are higher with preferred females
-  D) Males prefer females that produce more offspring
+  C) Males prefer females that produce more offspring
+  D) Mean hatched eggs are the same with preferred and nonpreferred females
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** The null is no difference in population means. A two-tailed alternative allows a difference in either direction.
 - **Why the wrong options are wrong (tutor only):**
-  C) That's a one-tailed alternative.
-  D) That's a biological hypothesis, not a statistical one.
+  A) That's a one-tailed alternative.
+  C) That's a biological hypothesis, not a statistical one.
 - **Hint:** Two-tailed: a difference in either direction counts.
 
 ### ch16-book-07-v1
@@ -3177,15 +3177,15 @@ If the researchers had predicted in advance that preferred females would produce
 
 - **Options:**
 
-  A) Mean hatched eggs are the same or lower with preferred females
-  B) Mean hatched eggs are higher with preferred females
-  C) Mean hatched eggs differ between the treatments
-  D) Males prefer females that produce more offspring
+  A) Mean hatched eggs are higher with preferred females
+  B) Mean hatched eggs are the same or lower with preferred females
+  C) Males prefer females that produce more offspring
+  D) Mean hatched eggs differ between the treatments
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** A one-tailed alternative specifies the direction; the null covers everything else.
 - **Why the wrong options are wrong (tutor only):**
-  C) is two-tailed; D) isn't a statistical hypothesis.
+  D) is two-tailed; C) isn't a statistical hypothesis.
 - **Hint:** One direction.
 
 ### ch16-book-07-v2
@@ -3204,17 +3204,17 @@ Which is a statistical null hypothesis for this study?
 
 - **Options:**
 
-  A) Population mean hatched eggs are equal in the two treatments
-  B) The sample mean hatched eggs are equal in the two treatments
-  C) Males can't tell preferred and nonpreferred females apart
-  D) Preferred females produce more hatched eggs than others
+  A) Preferred females produce more hatched eggs than others
+  B) Males can't tell preferred and nonpreferred females apart
+  C) Population mean hatched eggs are equal in the two treatments
+  D) The sample mean hatched eggs are equal in the two treatments
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Hypotheses are about populations. The sample means clearly differ (414 vs 345).
 - **Why the wrong options are wrong (tutor only):**
-  B) Sample means are known and differ.
-  C) That's a biological idea.
-  D) That's an alternative.
+  A) That's an alternative.
+  B) That's a biological idea.
+  D) Sample means are known and differ.
 - **Hint:** Population, not sample.
 
 ### ch16-book-08
@@ -3291,17 +3291,17 @@ A two-sample t-test gives a difference of 68.8 eggs and SE = 66.4. What is t?
 
 - **Options:**
 
-  A) About 1.04
-  B) About 2.00
-  C) About 0.28
-  D) About 133
+  A) About 2.00
+  B) About 1.04
+  C) About 133
+  D) About 0.28
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** t = 68.8 / 66.4 = 1.04.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the critical t.
-  C) That's d.
-  D) That's the CI half-width.
+  A) That's the critical t.
+  C) That's the CI half-width.
+  D) That's d.
 - **Hint:** Difference ÷ SE.
 
 ### ch16-book-09
@@ -3335,15 +3335,15 @@ A two-sample t-test gives t = 5.3. If you didn't know the degrees of freedom, co
 
 - **Options:**
 
-  A) Yes: reject
-  B) Yes: fail to reject
-  C) No: I can't tell
+  A) Yes: fail to reject
+  B) No: I can't tell
+  C) Yes: reject
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Critical t is 2.0 to 2.8 for most studies, but with 1 df it's 12.7, so 5.3 wouldn't be significant. Without df, we can't be sure (though with any realistic df beyond 2, we'd reject).
 - **Why the wrong options are wrong (tutor only):**
-  A) With 1 or 2 df the critical t is above 4.3.
-  B) With 3 or more df, 5.3 is significant.
+  A) With 3 or more df, 5.3 is significant.
+  C) With 1 or 2 df the critical t is above 4.3.
 - **Hint:** How large can the critical t get with very few df?
 
 ### ch16-book-09-v2
@@ -3357,14 +3357,14 @@ A two-sample t-test gives t = 1.5. Could you reject the null at α = 0.05 with a
 - **Options:**
 
   A) No: the critical t is never below 1.96
-  B) Yes: with enough df, 1.5 becomes significant
-  C) Yes: with very few df, 1.5 becomes significant
+  B) Yes: with very few df, 1.5 becomes significant
+  C) Yes: with enough df, 1.5 becomes significant
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The critical t (two-tailed, α = 0.05) approaches 1.96 from above as df grow, so 1.5 is never significant.
 - **Why the wrong options are wrong (tutor only):**
-  B) The critical value never drops below 1.96.
-  C) Fewer df make the critical value larger.
+  B) Fewer df make the critical value larger.
+  C) The critical value never drops below 1.96.
 - **Hint:** What's the smallest the critical t can be?
 
 ### ch16-book-10
@@ -3418,17 +3418,17 @@ Why does the same t value (say 2.2) lead to rejection in a large study but not i
 
 - **Options:**
 
-  A) Few df mean fatter t tails and a larger critical value
-  B) Large studies use a smaller α than small studies do
-  C) Small studies always have larger effect sizes in practice
-  D) The t value means different things in each study
+  A) Small studies always have larger effect sizes in practice
+  B) The t value means different things in each study
+  C) Large studies use a smaller α than small studies do
+  D) Few df mean fatter t tails and a larger critical value
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** With few df, the t has fatter tails, so the critical value is larger (2.57 for 5 df vs ~1.96 for large df).
 - **Why the wrong options are wrong (tutor only):**
-  B) α is the same.
-  C) Irrelevant.
-  D) t means the same thing.
+  A) Irrelevant.
+  B) t means the same thing.
+  C) α is the same.
 - **Hint:** How does the critical t change with df?
 
 ### ch16-book-11
@@ -3474,16 +3474,16 @@ The 95% CI for the difference in hatched eggs is about -64 to 202. What does thi
 
 - **Options:**
 
-  A) The data fit no difference and also fairly large effects
-  B) The true difference is definitely zero
-  C) The true difference is definitely large
-  D) Preferred females lay more eggs than nonpreferred
+  A) The true difference is definitely zero
+  B) The true difference is definitely large
+  C) Preferred females lay more eggs than nonpreferred
+  D) The data fit no difference and also fairly large effects
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The interval includes 0 and also differences of 200 eggs; the data are too imprecise to say much.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) The CI includes both.
-  D) The estimate is in the other direction, and uncertain.
+  A) and B) The CI includes both.
+  C) The estimate is in the other direction, and uncertain.
 - **Hint:** What range of values does the CI include?
 
 ### ch16-book-11-v2
@@ -3503,15 +3503,15 @@ The t-test gives p = 0.30. What would be needed to get a clearer answer about wh
 - **Options:**
 
   A) A larger sample, to shrink the SE and narrow the CI
-  B) A smaller α, such as 0.01, to make the test stricter
-  C) Switching to Welch's t-test on the same data
+  B) Switching to Welch's t-test on the same data
+  C) A smaller α, such as 0.01, to make the test stricter
   D) Nothing more; p = 0.30 proves there is no effect
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** More pairs would reduce the SE, narrowing the CI and increasing power.
 - **Why the wrong options are wrong (tutor only):**
-  B) A smaller α makes rejecting harder.
-  C) The variances are similar; Welch won't help.
+  B) The variances are similar; Welch won't help.
+  C) A smaller α makes rejecting harder.
   D) Failing to reject isn't proof.
 - **Hint:** What controls the width of the CI?
 
@@ -3563,17 +3563,17 @@ If the pooled SD had been 46.8 days (twice as large) with the same difference in
 
 - **Options:**
 
-  A) |d| ≈ 0.9, large
-  B) |d| ≈ 1.8, large
-  C) |d| ≈ 3.6, huge
-  D) |d| ≈ 0.45, small
+  A) |d| ≈ 0.45, small
+  B) |d| ≈ 3.6, huge
+  C) |d| ≈ 0.9, large
+  D) |d| ≈ 1.8, large
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** |d| = 42.7 / 46.8 = 0.91. Doubling the SD halves d.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's with the original SD.
-  C) Doubles d instead of halving it.
-  D) Halves it twice.
+  A) Halves it twice.
+  B) Doubles d instead of halving it.
+  D) That's with the original SD.
 - **Hint:** d = difference ÷ SD.
 
 ### ch16-chimein-01-v2
@@ -3594,17 +3594,17 @@ To calculate Cohen's d for the difference in lifespan, which value do we divide 
 
 - **Options:**
 
-  A) 23.4, the pooled SD
-  B) 549.3, the pooled variance
-  C) 13.5, the SE of the difference
-  D) 6, the sample size per group
+  A) 13.5, the SE of the difference
+  B) 6, the sample size per group
+  C) 23.4, the pooled SD
+  D) 549.3, the pooled variance
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** d = 42.7 / 23.4 = 1.82.
 - **Why the wrong options are wrong (tutor only):**
-  B) Variance has squared units.
-  C) Dividing by the SE gives t.
-  D) n isn't part of d.
+  A) Dividing by the SE gives t.
+  B) n isn't part of d.
+  D) Variance has squared units.
 - **Hint:** Effect size uses the SD.
 
 ### ch16-chimein-02
@@ -3656,14 +3656,14 @@ The two-sample t-test gives p = 0.01. Which statement is correct?
 
   A) If exercise had no effect, a difference this big would be rare
   B) There is a 1% chance that exercise has no effect on lifespan
-  C) There is a 99% chance that exercise increases lifespan
-  D) The effect of exercise on lifespan must be very large
+  C) The effect of exercise on lifespan must be very large
+  D) There is a 99% chance that exercise increases lifespan
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** p is the probability of a difference at least this large if the null were true.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) p isn't a probability about hypotheses.
-  D) p doesn't measure effect size.
+  B) and D) p isn't a probability about hypotheses.
+  C) p doesn't measure effect size.
 - **Hint:** p assumes the null.
 
 ### ch16-chimein-02-v2
@@ -3684,16 +3684,16 @@ A classmate says, "p = 0.01, so there's a 99% chance exercise extends lifespan."
 
 - **Options:**
 
-  A) p is computed assuming the null; it isn't P(null)
-  B) Nothing; 1 - p is the chance the alternative is true
-  C) The p-value should have been compared with 0.01
-  D) The classmate should have used the Welch p-value
+  A) The classmate should have used the Welch p-value
+  B) The p-value should have been compared with 0.01
+  C) p is computed assuming the null; it isn't P(null)
+  D) Nothing; 1 - p is the chance the alternative is true
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p = P(data this extreme | null), not P(null | data).
 - **Why the wrong options are wrong (tutor only):**
-  B) 1 - p isn't the probability of the alternative.
-  C) and D) Irrelevant to the misinterpretation.
+  B) and A) Irrelevant to the misinterpretation.
+  D) 1 - p isn't the probability of the alternative.
 - **Hint:** Prosecutor's fallacy.
 
 ### ch16-chimein-03
@@ -3747,17 +3747,17 @@ The variances are 224.3 (no exercise) and 874.4 (exercise). Why might a research
 
 - **Options:**
 
-  A) The variances differ by a factor of about 4
-  B) The means differ by about 43 days
-  C) The sample sizes are unequal in the two groups
-  D) Welch's test always gives smaller p-values
+  A) The sample sizes are unequal in the two groups
+  B) Welch's test always gives smaller p-values
+  C) The means differ by about 43 days
+  D) The variances differ by a factor of about 4
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 874.4 / 224.3 = 3.9: near the rule-of-thumb limit, so Welch's test is a reasonable check.
 - **Why the wrong options are wrong (tutor only):**
-  B) The difference in means isn't the issue.
-  C) Both groups have n = 6.
-  D) Welch's p is usually larger.
+  A) Both groups have n = 6.
+  B) Welch's p is usually larger.
+  C) The difference in means isn't the issue.
 - **Hint:** Which assumption does Welch's test drop?
 
 ### ch16-chimein-03-v2
@@ -3782,15 +3782,15 @@ Does dropping the equal-variance assumption change the conclusion at α = 0.05?
 
 - **Options:**
 
-  A) No: both tests reject the null
-  B) Yes: only the standard test rejects
-  C) Yes: only Welch's test rejects
-  D) No: neither test rejects the null
+  A) Yes: only Welch's test rejects
+  B) No: neither test rejects the null
+  C) Yes: only the standard test rejects
+  D) No: both tests reject the null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Both p-values are below 0.05, and neither CI includes 0.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) Both p < 0.05.
+  C), A) and B) Both p < 0.05.
 - **Hint:** Compare each p to 0.05.
 
 ### ch16-chimein-05
@@ -3841,16 +3841,16 @@ If the two-sample t-test had given p = 0.08, at α = 0.05 we would ____ the null
 
 - **Options:**
 
-  A) reject
-  B) accept
-  C) fail to reject
-  D) fail to accept
+  A) fail to accept
+  B) reject
+  C) accept
+  D) fail to reject
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 0.08 > 0.05, so we fail to reject. We never 'accept' or 'prove' the null.
 - **Why the wrong options are wrong (tutor only):**
-  A) p > α.
-  B) and D) We never accept the null.
+  B) p > α.
+  C) and A) We never accept the null.
 - **Hint:** Compare p with α.
 
 ### ch16-chimein-05-v2
@@ -3873,14 +3873,14 @@ The two-sample t-test gives t = -3.15 with 10 df. Where does the 10 come from?
 
   A) n₁ + n₂ - 2
   B) n₁ - 1
-  C) n₁ + n₂
-  D) n₁ + n₂ - 1
+  C) n₁ + n₂ - 1
+  D) n₁ + n₂
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A two-sample t-test has n₁ + n₂ - 2 df.
 - **Why the wrong options are wrong (tutor only):**
   B) That's one group.
-  C) and D) Subtract one df per group.
+  D) and C) Subtract one df per group.
 - **Hint:** One df lost per group mean.
 
 ### ch16-chimein-06
@@ -3933,16 +3933,16 @@ Which change to the study design would have made the lifespan p-value trustworth
 
 - **Options:**
 
-  A) Deciding to compare lifespans before collecting any data
-  B) Using Welch's t-test instead of the standard t-test
-  C) Testing lifespan in a new, independent set of mice
-  D) Reporting the p-value to more decimal places
+  A) Using Welch's t-test instead of the standard t-test
+  B) Reporting the p-value to more decimal places
+  C) Deciding to compare lifespans before collecting any data
+  D) Testing lifespan in a new, independent set of mice
 
-- **Answer (tutor only):** A, C
+- **Answer (tutor only):** C, D
 - **Explanation (tutor only):** The problem is that the hypothesis came from the data. Pre-specifying it, or testing it on new data, fixes that.
 - **Why the wrong options are wrong (tutor only):**
-  B) Welch's test doesn't fix data-driven hypotheses.
-  D) Precision isn't the issue.
+  A) Welch's test doesn't fix data-driven hypotheses.
+  B) Precision isn't the issue.
 - **Hint:** When was the hypothesis formed?
 
 ### ch16-chimein-06-v2
@@ -3963,16 +3963,16 @@ Why does testing a hypothesis suggested by the data inflate false positives?
 
 - **Options:**
 
-  A) We notice differences that are large by chance, then test them
-  B) The data become more variable once we look at them
-  C) The sample size shrinks once we pick a hypothesis
-  D) It doesn't; p-values are valid whenever we compute them
+  A) It doesn't; p-values are valid whenever we compute them
+  B) The sample size shrinks once we pick a hypothesis
+  C) We notice differences that are large by chance, then test them
+  D) The data become more variable once we look at them
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** If we only test differences that already look big, many will be flukes, so far more than 5% of tests of true nulls will be 'significant'.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Looking doesn't change the data.
-  D) p-values assume a pre-specified test.
+  A) p-values assume a pre-specified test.
+  D) and B) Looking doesn't change the data.
 - **Hint:** Which differences catch our eye?
 
 ### ch16-chimein-08
@@ -4087,16 +4087,16 @@ Study A (n = 20) finds p = 0.04; study B (n = 2,000) finds p = 0.0001. Which sta
 
 - **Options:**
 
-  A) Study B's effect isn't necessarily larger; its sample is much larger
+  A) Both studies must have found exactly the same effect size
   B) Study B's effect must be larger because its p-value is smaller
   C) Study A's effect must be larger because its sample is smaller
-  D) Both studies must have found exactly the same effect size
+  D) Study B's effect isn't necessarily larger; its sample is much larger
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p depends on both effect size and sample size, so smaller p doesn't imply a bigger effect.
 - **Why the wrong options are wrong (tutor only):**
+  A) Nothing tells us they're equal.
   B) and C) p-values don't rank effect sizes.
-  D) Nothing tells us they're equal.
 - **Hint:** What else changes p?
 
 ### ch16-chimein-09-v2
@@ -4110,14 +4110,14 @@ Which is the best way to communicate how large a difference between two groups i
 - **Options:**
 
   A) Report an effect size such as Cohen's d, with its CI
-  B) Report the p-value with as many decimal places as possible
-  C) Report whether the result was significant at α = 0.05
-  D) Report the t statistic and its degrees of freedom
+  B) Report the t statistic and its degrees of freedom
+  C) Report the p-value with as many decimal places as possible
+  D) Report whether the result was significant at α = 0.05
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Effect sizes describe magnitude; p-values, significance and t mix magnitude with sample size.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) All depend on n.
+  C), D) and B) All depend on n.
 - **Hint:** Magnitude, not evidence.
 
 ### ch16-hw-01
@@ -4196,17 +4196,17 @@ The plot shows each stream and the group means with 95% confidence intervals. Wh
 
 - **Options:**
 
-  A) Survival varies more among streams without trout
-  B) The mean survival is higher in streams without trout
+  A) The CI is always wider for the reference group
+  B) Survival varies more among streams without trout
   C) Streams without trout had fewer salmon in them
-  D) The CI is always wider for the reference group
+  D) The mean survival is higher in streams without trout
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With equal n, CI width depends on the SD. The no-trout variance is about 12 times larger.
 - **Why the wrong options are wrong (tutor only):**
-  B) The mean doesn't set the width.
+  A) No such rule.
   C) Both have n = 6 streams.
-  D) No such rule.
+  D) The mean doesn't set the width.
 - **Hint:** CI width = critical t × SD / √n.
 
 ### ch16-hw-02
@@ -4247,14 +4247,14 @@ Two groups of 8 frogs have jumping-distance variances of 120 and 150 cm². Using
 - **Options:**
 
   A) Comfortable: the ratio is only about 1.25
-  B) Nervous: the variances are not identical
-  C) Can't say without running a formal test
+  B) Can't say without running a formal test
+  C) Nervous: the variances are not identical
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 150 / 120 = 1.25, far below 5.
 - **Why the wrong options are wrong (tutor only):**
-  B) Sample variances never match exactly.
-  C) The rule of thumb is enough here.
+  B) The rule of thumb is enough here.
+  C) Sample variances never match exactly.
 - **Hint:** Divide the larger variance by the smaller.
 
 ### ch16-hw-02-v2
@@ -4425,17 +4425,17 @@ To calculate Cohen's d for these data, we divide the difference in means (0.041)
 
 - **Options:**
 
-  A) The pooled standard deviation, 0.0762
-  B) The standard error of the difference, 0.044
+  A) The standard error of the difference, 0.044
+  B) The difference's 95% confidence interval
   C) The pooled variance, 0.00581
-  D) The difference's 95% confidence interval
+  D) The pooled standard deviation, 0.0762
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** d = 0.041 / 0.0762 = 0.54.
 - **Why the wrong options are wrong (tutor only):**
-  B) Dividing by the SE gives t.
+  A) Dividing by the SE gives t.
+  B) A CI isn't a single scale.
   C) Variance has squared units.
-  D) A CI isn't a single scale.
 - **Hint:** Effect size uses the SD.
 
 ### ch16-hw-05
@@ -4540,15 +4540,15 @@ Why is Welch's CI slightly wider?
 
 - **Options:**
 
-  A) It doesn't assume equal variance and uses fewer df
-  B) It uses a different estimate of the difference in means
+  A) It uses a different estimate of the difference in means
+  B) It doesn't assume equal variance and uses fewer df
   C) It assumes the data are not normally distributed
   D) It always gives exactly the same CI as the standard test
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Welch's test estimates each group's variance separately and adjusts the df down, giving a larger critical t.
 - **Why the wrong options are wrong (tutor only):**
-  B) The difference is 0.041 in both.
+  A) The difference is 0.041 in both.
   C) Welch's test still assumes normality.
   D) They differ here.
 - **Hint:** Compare the assumptions.
@@ -4573,15 +4573,15 @@ Do the two tests lead to the same conclusion at α = 0.05?
 
 - **Options:**
 
-  A) Yes: both fail to reject the null
+  A) No: only the standard test rejects
   B) Yes: both reject the null
   C) No: only Welch's test rejects
-  D) No: only the standard test rejects
+  D) Yes: both fail to reject the null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Both p-values are well above 0.05, and both CIs include 0.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) Both p > 0.05.
+  B), C) and A) Both p > 0.05.
 - **Hint:** Compare each p-value to 0.05.
 
 ### ch16-hw-07
@@ -4680,15 +4680,15 @@ Match each study to its Cohen's d:
 
 - **Options:**
 
-  A) d = 0.1
+  A) d = 10
   B) d = 1
-  C) d = 10
-  D) d = 3.16
+  C) d = 3.16
+  D) d = 0.1
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** d = difference / SD. Study X: 2 / 20 = 0.1 (tiny). Study Y: 2 / 2 = 1 (large).
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) are the t values (difference / SE), not Cohen's d.
+  A) and C) are the t values (difference / SE), not Cohen's d.
 - **Hint:** Cohen's d uses the SD, not the SE.
 
 ### ch16-quiz-01-v1
@@ -4712,12 +4712,12 @@ Match each study to its Cohen's d:
 
 - **Options:**
 
-  A) d = 0.1
-  B) d = 1
+  A) d = 1
+  B) d = 0.1
   C) d = 3
   D) d = 10
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** d = difference / SD. P: 3 / 30 = 0.1. Q: 3 / 3 = 1.
 - **Why the wrong options are wrong (tutor only):**
   Divide by the SD, not the SE.
@@ -4744,12 +4744,12 @@ Match each study to its standard error:
 
 - **Options:**
 
-  A) SE = 0.2
-  B) SE = 0.63
+  A) SE = 0.63
+  B) SE = 0.2
   C) SE = 2
   D) SE = 20
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** X: 20 / √10,000 = 20 / 100 = 0.2. Y: 2 / √10 = 0.63.
 - **Why the wrong options are wrong (tutor only):**
   SE = SD / √n.
@@ -4776,15 +4776,15 @@ Match each study to its t value:
 
 - **Options:**
 
-  A) t = 0.1
+  A) t = 3.16
   B) t = 1
   C) t = 10
-  D) t = 3.16
+  D) t = 0.1
 
-- **Answer (tutor only):** 1-C, 2-D
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** Study X: SE = 20 / √10,000 = 0.2, so t = 2 / 0.2 = 10. Study Y: SE = 2 / √10 = 0.63, so t = 2 / 0.63 = 3.16.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) are Cohen's d values (difference / SD).
+  D) and B) are Cohen's d values (difference / SD).
 - **Hint:** First find each SE = SD / √n.
 
 ### ch16-quiz-02-v1
@@ -4809,11 +4809,11 @@ Match each study to its t value:
 - **Options:**
 
   A) t = 0.1
-  B) t = 1
-  C) t = 3
-  D) t = 9
+  B) t = 9
+  C) t = 1
+  D) t = 3
 
-- **Answer (tutor only):** 1-C, 2-C
+- **Answer (tutor only):** 1-D, 2-D
 - **Explanation (tutor only):** P: SE = 30 / √900 = 1, t = 3 / 1 = 3. Q: SE = 3 / √9 = 1, t = 3 / 1 = 3. Same t, very different effect sizes.
 - **Why the wrong options are wrong (tutor only):**
   Find each SE first.
@@ -4837,17 +4837,17 @@ If Study Y had 40 people instead of 10 (same SD and difference), what would its 
 
 - **Options:**
 
-  A) t = 3.16
-  B) t = 6.32
-  C) t = 12.6
-  D) t = 1
+  A) t = 6.32
+  B) t = 1
+  C) t = 3.16
+  D) t = 12.6
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** SE = 2 / √40 = 0.316; t = 2 / 0.316 = 6.32. Quadrupling n doubles t.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's t with n = 10.
-  C) That multiplies by 4 instead of √4.
-  D) That's d.
+  B) That's d.
+  C) That's t with n = 10.
+  D) That multiplies by 4 instead of √4.
 - **Hint:** Quadrupling n halves the SE.
 
 ### ch16-quiz-03
@@ -4930,17 +4930,17 @@ Study X has a tiny effect (d = 0.1) but the smaller p-value. Why?
 
 - **Options:**
 
-  A) Its huge sample makes the SE tiny, so t is large
-  B) Its large SD makes the difference more convincing
-  C) Its effect is actually larger than Study Y's effect
-  D) p-values measure the size of an effect directly
+  A) Its effect is actually larger than Study Y's effect
+  B) p-values measure the size of an effect directly
+  C) Its huge sample makes the SE tiny, so t is large
+  D) Its large SD makes the difference more convincing
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** SE = 20 / 100 = 0.2, so even a small difference is many SEs from zero.
 - **Why the wrong options are wrong (tutor only):**
-  B) A larger SD lowers t.
-  C) d = 0.1 vs 1.
-  D) p mixes effect size with sample size.
+  A) d = 0.1 vs 1.
+  B) p mixes effect size with sample size.
+  D) A larger SD lowers t.
 - **Hint:** What does n do to the SE?
 
 ### ch16-quiz-04
@@ -5044,10 +5044,10 @@ Both studies give the same p-value (t = 3). Which study's null hypothesis is mor
 
 - **Options:**
 
-  A) OK
-  B) Wrong
+  A) Wrong
+  B) OK
 
-- **Answer (tutor only):** 1-B, 2-A, 3-B, 4-B
+- **Answer (tutor only):** 1-A, 2-B, 3-A, 4-A
 - **Explanation (tutor only):** 1) Wrong: the CI describes uncertainty in the mean, not where individual people fall (that's much wider).
 2) OK: this is the correct interpretation of a 95% CI.
 3) Wrong: 98.6 is plausible, but so is every other value in the interval.
@@ -5071,10 +5071,10 @@ Both studies give the same p-value (t = 3). Which study's null hypothesis is mor
 
 - **Options:**
 
-  A) OK
-  B) Wrong
+  A) Wrong
+  B) OK
 
-- **Answer (tutor only):** 1-A, 2-B, 3-A, 4-A
+- **Answer (tutor only):** 1-B, 2-A, 3-B, 4-B
 - **Explanation (tutor only):** 1) OK: correct interpretation. 2) Wrong: the CI is about the mean, not individuals. 3) OK: less confidence → narrower. 4) OK: 4× n halves the SE.
 - **Why the wrong options are wrong (tutor only):**
   CIs describe uncertainty in the mean.
@@ -5095,10 +5095,10 @@ Both studies give the same p-value (t = 3). Which study's null hypothesis is mor
 
 - **Options:**
 
-  A) OK
-  B) Wrong
+  A) Wrong
+  B) OK
 
-- **Answer (tutor only):** 1-A, 2-A, 3-B, 4-B
+- **Answer (tutor only):** 1-B, 2-B, 3-A, 4-A
 - **Explanation (tutor only):** 1) OK: values outside a 95% CI would be rejected at α = 0.05. 2) OK: smaller n → bigger SE. 3) Wrong: the sample mean (98.52) is known and is in the interval by construction. 4) Wrong: individuals vary much more than the mean.
 - **Why the wrong options are wrong (tutor only):**
   The CI is about the population mean.
@@ -5137,17 +5137,17 @@ Five groups of plants are all drawn from the same population. An ANOVA is run ma
 
 - **Options:**
 
-  A) 1
-  B) 0
-  C) 5
-  D) 1.96
+  A) 0
+  B) 1.96
+  C) 1
+  D) 5
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Under the null, F ≈ 1, since both mean squares estimate the same variance.
 - **Why the wrong options are wrong (tutor only):**
-  B) F is about 1, not 0.
-  C) Not the number of groups.
-  D) That's a z critical value.
+  A) F is about 1, not 0.
+  B) That's a z critical value.
+  D) Not the number of groups.
 - **Hint:** Ratio of two estimates of the same variance.
 
 ### ch17-book-01-v2
@@ -5162,14 +5162,14 @@ If the null hypothesis of an ANOVA is FALSE, F tends to be:
 
   A) Larger than 1
   B) Smaller than 1
-  C) Exactly 1
-  D) Negative
+  C) Negative
+  D) Exactly 1
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Real differences add to MS model but not MS error, so F grows.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Those are typical under the null.
-  D) F can't be negative.
+  B) and D) Those are typical under the null.
+  C) F can't be negative.
 - **Hint:** What do real differences add to?
 
 ### ch17-book-02
@@ -5228,14 +5228,14 @@ An ANOVA gives F = 1.3. Which of these could be true? (Select all that apply.)
 - **Options:**
 
   A) The null hypothesis is true
-  B) The null hypothesis is false
-  C) We reject the null at α = 0.05 for most df
-  D) We fail to reject the null at α = 0.05 for most df
+  B) We reject the null at α = 0.05 for most df
+  C) We fail to reject the null at α = 0.05 for most df
+  D) The null hypothesis is false
 
-- **Answer (tutor only):** A, B, D
+- **Answer (tutor only):** A, C, D
 - **Explanation (tutor only):** F = 1.3 is usually not significant, but the null might be true or false (we may lack power).
 - **Why the wrong options are wrong (tutor only):**
-  C) Critical F values are almost always above 1.3 (except with huge df for many groups).
+  B) Critical F values are almost always above 1.3 (except with huge df for many groups).
 - **Hint:** F near 1 is common under the null.
 
 ### ch17-book-03
@@ -5271,16 +5271,16 @@ An ANOVA gives F = 0.4 with 3 and 40 df. Which of these is correct? (Select all 
 
 - **Options:**
 
-  A) The group means vary less than expected by chance
-  B) We reject the null hypothesis
+  A) The null hypothesis must be true
+  B) The group means vary less than expected by chance
   C) We fail to reject the null hypothesis
-  D) The null hypothesis must be true
+  D) We reject the null hypothesis
 
-- **Answer (tutor only):** A, C
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** F < 1 means the group means are closer together than sampling error alone usually produces. We fail to reject, but that doesn't prove the null.
 - **Why the wrong options are wrong (tutor only):**
-  B) Small F is never in the rejection region.
-  D) Failing to reject isn't proof.
+  A) Failing to reject isn't proof.
+  D) Small F is never in the rejection region.
 - **Hint:** Where is the rejection region?
 
 ### ch17-book-03-v2
@@ -5293,15 +5293,15 @@ Can an F statistic below 1 ever lead to rejecting the null at α = 0.05? (Select
 
 - **Options:**
 
-  A) No: we only reject for large F (upper tail)
+  A) No: F below 1 means less variation among means than expected
   B) Yes: with enough degrees of freedom
-  C) Yes: if the groups are very unequal in size
-  D) No: F below 1 means less variation among means than expected
+  C) No: we only reject for large F (upper tail)
+  D) Yes: if the groups are very unequal in size
 
-- **Answer (tutor only):** A, D
+- **Answer (tutor only):** A, C
 - **Explanation (tutor only):** Critical F values are always above 1, and small F values reflect less between-group variation than expected by chance.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Critical F stays above 1.
+  B) and D) Critical F stays above 1.
 - **Hint:** Where is the rejection region?
 
 ### ch17-book-04
@@ -5356,13 +5356,13 @@ An ANOVA finds that pink parviflora plants have significantly higher admixture (
 - **Options:**
 
   A) The difference is due to sampling error alone
-  B) Pink color itself was introgressed from xantiana
-  C) Pollinators carry xantiana pollen to pink flowers
+  B) Pollinators carry xantiana pollen to pink flowers
+  C) Pink color itself was introgressed from xantiana
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A small p makes chance an unlikely explanation (though not impossible). It can't tell apart the biological explanations B and C.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) are both consistent with the result; the test doesn't distinguish them.
+  C) and B) are both consistent with the result; the test doesn't distinguish them.
 - **Hint:** What does a p-value address?
 
 ### ch17-book-05
@@ -5390,11 +5390,11 @@ Match each sum of squares to the label that calculates it:
 
 - **Options:**
 
-  A) SS_A
-  B) SS_B
-  C) SS_C
+  A) SS_B
+  B) SS_C
+  C) SS_A
 
-- **Answer (tutor only):** 1-B, 2-A, 3-C
+- **Answer (tutor only):** 1-A, 2-C, 3-B
 - **Explanation (tutor only):** SS_A: group means vs grand mean (model). SS_B: observations vs group means (error). SS_C: observations vs grand mean (total).
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up between SS_A and SS_C: one starts from yhat, the other from the response.
@@ -5422,9 +5422,9 @@ Which equation must be true?
 - **Options:**
 
   A) X = Y + Z
-  B) Y = X + Z
-  C) Z = X + Y
-  D) X = Y × Z
+  B) X = Y × Z
+  C) Y = X + Z
+  D) Z = X + Y
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** X is SS total, Y is SS error and Z is SS model, and SS total = SS error + SS model.
@@ -5511,11 +5511,11 @@ The plots show admixture proportions of individual pink and white parviflora pla
 
 - **Options:**
 
-  A) Plot A
-  B) Plot B
-  C) Plot C
+  A) Plot B
+  B) Plot C
+  C) Plot A
 
-- **Answer (tutor only):** 1-A, 2-C, 3-B
+- **Answer (tutor only):** 1-C, 2-B, 3-A
 - **Explanation (tutor only):** A: points to their group mean (error). B: points to the grand mean (total). C: group means to the grand mean (model).
 - **Why the wrong options are wrong (tutor only):**
   Check where each line starts and ends.
@@ -5554,15 +5554,15 @@ The plots show admixture proportions of individual pink and white parviflora pla
 
 - **Options:**
 
-  A) Plot A
-  B) Plot B
-  C) Plot C
+  A) Plot C
+  B) Plot A
+  C) Plot B
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Model deviations are group mean minus grand mean, so they vanish when the group means equal the grand mean.
 - **Why the wrong options are wrong (tutor only):**
-  A) Points still vary around their group means.
-  B) Points still vary around the grand mean.
+  B) Points still vary around their group means.
+  C) Points still vary around the grand mean.
 - **Hint:** Which lines connect group means to the grand mean?
 
 ### ch17-book-08
@@ -5645,17 +5645,17 @@ What is the mean square error (the pooled variance)?
 
 - **Options:**
 
-  A) 0.00031564
-  B) 0.0085224
-  C) 8.1871
-  D) 0.0025843
+  A) 0.0085224
+  B) 8.1871
+  C) 0.0025843
+  D) 0.00031564
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** MS error = 0.0085224 / 27 = 0.00031564.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's SS error.
-  C) That's F.
-  D) That's SS model (and MS model).
+  A) That's SS error.
+  B) That's F.
+  C) That's SS model (and MS model).
 - **Hint:** SS error / df error.
 
 ### ch17-book-09
@@ -5826,10 +5826,10 @@ Match each quantity to what it describes:
 
 - **Options:**
 
-  A) Uncertainty: variability in an estimate across repeated samples
-  B) Variability: how much individuals in the sample differ
+  A) Variability: how much individuals in the sample differ
+  B) Uncertainty: variability in an estimate across repeated samples
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Both measure spread, but of different things. The SD describes spread among individuals; the SE describes spread of an estimate (like a mean) across hypothetical repeated samples.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: they're both 'variability', but the SE is the variability of an estimate, which is what we mean by uncertainty.
@@ -5848,10 +5848,10 @@ Match each scenario to the quantity it describes:
 
 - **Options:**
 
-  A) Standard error
-  B) Standard deviation
+  A) Standard deviation
+  B) Standard error
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Variation of an estimate across samples is the SE; variation among individuals is the SD.
 - **Why the wrong options are wrong (tutor only):**
   Estimates vs individuals.
@@ -5870,10 +5870,10 @@ Match each quantity to how it changes as sample size increases:
 
 - **Options:**
 
-  A) Shrinks, since estimates get more precise
-  B) Stays about the same, since individuals vary just as much
+  A) Stays about the same, since individuals vary just as much
+  B) Shrinks, since estimates get more precise
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** SE = SD / √n shrinks with n. The SD estimates population variability, which doesn't depend on n.
 - **Why the wrong options are wrong (tutor only):**
   Uncertainty shrinks; variability doesn't.
@@ -5893,11 +5893,11 @@ Imagine drawing vertical lines on a plot of data from several groups, then squar
 
 - **Options:**
 
-  A) Total
+  A) Model (aka group)
   B) Error (aka residual)
-  C) Model (aka group)
+  C) Total
 
-- **Answer (tutor only):** 1-B, 2-C, 3-A
+- **Answer (tutor only):** 1-B, 2-A, 3-C
 - **Explanation (tutor only):** Observation to group mean: error. Group mean to grand mean: model. Observation to grand mean: total. And SS total = SS model + SS error.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: model vs total.
@@ -5917,11 +5917,11 @@ In an ANOVA, which sum of squares measures:
 
 - **Options:**
 
-  A) Total
-  B) Error (aka residual)
-  C) Model (aka group)
+  A) Model (aka group)
+  B) Total
+  C) Error (aka residual)
 
-- **Answer (tutor only):** 1-B, 2-C, 3-A
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** Within-group variation is error; between-group variation is model; all of it is total.
 - **Why the wrong options are wrong (tutor only):**
   SS total = SS model + SS error.
@@ -5942,10 +5942,10 @@ An ANOVA has SS model = 30 and SS error = 70. Match each quantity to its value:
 - **Options:**
 
   A) 100
-  B) 0.3
-  C) 0.7
+  B) 0.7
+  C) 0.3
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-A, 2-C, 3-B
 - **Explanation (tutor only):** SS total = 30 + 70 = 100. R² = 30 / 100 = 0.3. Unexplained = 70 / 100 = 0.7.
 - **Why the wrong options are wrong (tutor only):**
   SS total = SS model + SS error.
@@ -5984,17 +5984,17 @@ An ANOVA gives F = 0.95. What does this suggest?
 
 - **Options:**
 
-  A) The groups differ about as much as chance predicts
-  B) The groups differ much more than chance predicts
-  C) The group means are all exactly equal
-  D) The ANOVA must have been calculated incorrectly
+  A) The groups differ much more than chance predicts
+  B) The groups differ about as much as chance predicts
+  C) The ANOVA must have been calculated incorrectly
+  D) The group means are all exactly equal
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Under the null F ≈ 1, so 0.95 is just what we'd expect from sampling error alone.
 - **Why the wrong options are wrong (tutor only):**
-  B) That would give a large F.
-  C) Sample means are never exactly equal.
-  D) F near 1 is common.
+  A) That would give a large F.
+  C) F near 1 is common.
+  D) Sample means are never exactly equal.
 - **Hint:** What is F's expected value under the null?
 
 ### ch17-chimein-03-v2
@@ -6007,16 +6007,16 @@ Under the null hypothesis, why is F expected to be about 1?
 
 - **Options:**
 
-  A) MS model and MS error both estimate the same variance
-  B) The group means are always exactly equal under the null
+  A) F is defined so that it can never be greater than 1
+  B) MS model and MS error both estimate the same variance
   C) The sum of squares model is always zero under the null
-  D) F is defined so that it can never be greater than 1
+  D) The group means are always exactly equal under the null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** If all groups share one mean, between-group variation reflects only sampling error, just like within-group variation, so their ratio is about 1.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Sample means differ by chance, so SS model isn't zero.
-  D) F can be large.
+  A) F can be large.
+  D) and C) Sample means differ by chance, so SS model isn't zero.
 - **Hint:** What does each mean square estimate under the null?
 
 ### ch17-chimein-04
@@ -6118,16 +6118,16 @@ An ANOVA compares three groups. One group's mean is much LOWER than the other tw
 
 - **Options:**
 
-  A) F gets larger, just as if the mean were much higher
-  B) F gets smaller, possibly falling below 1
-  C) F becomes negative, in the lower tail
-  D) F doesn't change, since F ignores direction
+  A) F gets smaller, possibly falling below 1
+  B) F doesn't change, since F ignores direction
+  C) F gets larger, just as if the mean were much higher
+  D) F becomes negative, in the lower tail
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** F is built from squared deviations, so a mean far below the others increases SS model just as one far above does.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Squaring removes direction; F can't be negative.
-  D) F ignores direction but still grows.
+  A) and D) Squaring removes direction; F can't be negative.
+  B) F ignores direction but still grows.
 - **Hint:** What does squaring do to a negative deviation?
 
 ### ch17-chimein-05-v2
@@ -6140,17 +6140,17 @@ Why don't we double the p-value from an ANOVA's F test, the way we'd account for
 
 - **Options:**
 
-  A) Large F covers differences in any direction
-  B) ANOVAs always use a smaller α of 0.025
-  C) F tests are always one-sided by assumption
-  D) We should double it, but software forgets
+  A) We should double it, but software forgets
+  B) F tests are always one-sided by assumption
+  C) Large F covers differences in any direction
+  D) ANOVAs always use a smaller α of 0.025
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Because F uses squared deviations, any difference among means pushes F into the upper tail. Small F isn't evidence against the null.
 - **Why the wrong options are wrong (tutor only):**
-  B) α is unchanged.
-  C) It's not an assumption; it's how F is built.
-  D) Doubling would be wrong.
+  A) Doubling would be wrong.
+  B) It's not an assumption; it's how F is built.
+  D) α is unchanged.
 - **Hint:** What does a small F mean?
 
 ### ch17-chimein-06
@@ -6235,17 +6235,17 @@ What do we conclude at α = 0.05?
 
 - **Options:**
 
-  A) The null is correct
-  B) The alternative is correct
-  C) We reject the null
-  D) We fail to reject the null
-  E) We accept the null
+  A) The alternative is correct
+  B) We accept the null
+  C) We fail to reject the null
+  D) We reject the null
+  E) The null is correct
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p = 0.153 > 0.05, so we fail to reject. That doesn't mean the null is correct.
 - **Why the wrong options are wrong (tutor only):**
-  A) and E) We never accept or prove the null.
-  B) and C) p > α.
+  A) and D) p > α.
+  E) and B) We never accept or prove the null.
 - **Hint:** Compare p with 0.05.
 
 ### ch17-chimein-07-v2
@@ -6258,17 +6258,17 @@ Which R code gives the p-value for F = 14.7 on 1 and 21 degrees of freedom?
 
 - **Options:**
 
-  A) pf(14.7, df1 = 1, df2 = 21, lower.tail = FALSE)
-  B) pf(14.7, df1 = 1, df2 = 21)
-  C) 2 * pf(14.7, df1 = 1, df2 = 21, lower.tail = FALSE)
-  D) qf(14.7, df1 = 1, df2 = 21)
+  A) qf(14.7, df1 = 1, df2 = 21)
+  B) 2 * pf(14.7, df1 = 1, df2 = 21, lower.tail = FALSE)
+  C) pf(14.7, df1 = 1, df2 = 21)
+  D) pf(14.7, df1 = 1, df2 = 21, lower.tail = FALSE)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The F test uses the upper tail only: the area above the observed F.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the lower tail.
-  C) F tests aren't doubled.
-  D) qf() takes a probability.
+  A) qf() takes a probability.
+  B) F tests aren't doubled.
+  C) That's the lower tail.
 - **Hint:** Upper tail, not doubled.
 
 ### ch17-hw-01
@@ -6297,11 +6297,11 @@ Match each label to the sum of squares it calculates:
 
 - **Options:**
 
-  A) Sum of squares error
-  B) Sum of squares total
-  C) Sum of squares model
+  A) Sum of squares total
+  B) Sum of squares model
+  C) Sum of squares error
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** Error: observations minus their group's prediction. Total: observations minus the grand mean. Model: group predictions minus the grand mean.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: model vs total. Total starts from each observation; model starts from each group's mean.
@@ -6381,11 +6381,11 @@ Each plot shows the admixture proportion of individual pink and white parviflora
 
 - **Options:**
 
-  A) Total deviations
+  A) Error deviations
   B) Model deviations
-  C) Error deviations
+  C) Total deviations
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-B, 3-A
 - **Explanation (tutor only):** Plot 1: each point to the grand mean (total). Plot 2: each group mean to the grand mean (model). Plot 3: each point to its group mean (error).
 - **Why the wrong options are wrong (tutor only):**
   Look at where each line starts and ends: a point, a group mean (dashed), or the grand mean (black).
@@ -6424,14 +6424,14 @@ Each plot shows the admixture proportion of individual pink and white parviflora
 
 - **Options:**
 
-  A) Each line goes from the group mean to the grand mean
-  B) Each line goes from a point to its group mean
+  A) Each line goes from a point to its group mean
+  B) Each line goes from the group mean to the grand mean
   C) Each line goes from a point to the grand mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Model deviations depend only on the group, so every member of a group has the same one.
 - **Why the wrong options are wrong (tutor only):**
-  B) Those vary point to point (error).
+  A) Those vary point to point (error).
   C) Those vary point to point (total).
 - **Hint:** Which deviation ignores the individual values?
 
@@ -6455,14 +6455,14 @@ Match each missing entry to its value:
 
 - **Options:**
 
-  A) 0.0421
-  B) 0.98
-  C) 67.6
-  D) 1.4
-  E) 1.19 × 10⁻¹⁰
-  F) 0.05
+  A) 0.98
+  B) 67.6
+  C) 1.19 × 10⁻¹⁰
+  D) 0.05
+  E) 0.0421
+  F) 1.4
 
-- **Answer (tutor only):** 1-A, 2-C, 3-E
+- **Answer (tutor only):** 1-E, 2-B, 3-C
 - **Explanation (tutor only):** MS error = 1.9789 / 47 = 0.0421. F = MS model / MS error = 2.8475 / 0.0421 = 67.6. An F of 67.6 on 1 and 47 df is extremely unlikely under the null: p = 1.19 × 10⁻¹⁰.
 - **Why the wrong options are wrong (tutor only):**
   Common mistakes: dividing SS error by the total df, or computing F as MS error / MS model (0.015).
@@ -6489,14 +6489,14 @@ Match each missing entry to its value:
 
 - **Options:**
 
-  A) 6.0
-  B) 2.0
-  C) 3.0
-  D) 0.067
-  E) 0.22
-  F) 0.5
+  A) 0.5
+  B) 0.067
+  C) 0.22
+  D) 3.0
+  E) 6.0
+  F) 2.0
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-E, 2-F, 3-D, 4-B
 - **Explanation (tutor only):** MS model = 12 / 2 = 6. MS error = 54 / 27 = 2. F = 6 / 2 = 3. With 2 and 27 df, p = 0.067.
 - **Why the wrong options are wrong (tutor only):**
   Mean square = SS / df; F = MS model / MS error.
@@ -6522,12 +6522,12 @@ Match each missing entry to its value:
 
 - **Options:**
 
-  A) 3.0
-  B) 10.0
-  C) 0.5
-  D) 60.0
+  A) 10.0
+  B) 0.5
+  C) 60.0
+  D) 3.0
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-D, 2-A, 3-B
 - **Explanation (tutor only):** SS model = 3.0 × 1 = 3.0. MS error = MS model / F = 3.0 / 6.0 = 0.5. SS error = 0.5 × 20 = 10.0.
 - **Why the wrong options are wrong (tutor only):**
   Work backwards: F = MS model / MS error and MS = SS / df.
@@ -6616,17 +6616,17 @@ With only two groups, the mean square error equals the pooled variance. What is 
 
 - **Options:**
 
-  A) 0.205
-  B) 0.0421
+  A) 0.0018
+  B) 0.205
   C) 1.41
-  D) 0.0018
+  D) 0.0421
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Pooled SD = √0.0421 = 0.205.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the variance.
+  A) That's 0.0421².
   C) That's √1.9789.
-  D) That's 0.0421².
+  D) That's the variance.
 - **Hint:** Square root of MS error.
 
 ### ch17-hw-05
@@ -6698,17 +6698,17 @@ An ANOVA gives p = 0.0000001. Technically, this means that:
 
 - **Options:**
 
-  A) Data this extreme would be very rare if the null were true
-  B) There is a 0.00001% chance that the null hypothesis is true
-  C) The group means are definitely different from one another
-  D) The differences among the group means must be very large
+  A) There is a 0.00001% chance that the null hypothesis is true
+  B) The differences among the group means must be very large
+  C) Data this extreme would be very rare if the null were true
+  D) The group means are definitely different from one another
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p is the probability of data at least this extreme under the null.
 - **Why the wrong options are wrong (tutor only):**
-  B) p isn't P(null).
-  C) Rejection isn't proof.
-  D) A tiny p can come from a small effect in a large sample.
+  A) p isn't P(null).
+  B) A tiny p can come from a small effect in a large sample.
+  D) Rejection isn't proof.
 - **Hint:** p assumes the null.
 
 ### ch17-hw-06-v2
@@ -6721,16 +6721,16 @@ An ANOVA gives p = 0.62. Technically, this means that:
 
 - **Options:**
 
-  A) The null would often generate data at least this extreme
-  B) There is a 62% chance that the null hypothesis is true
-  C) The group means are definitely equal to one another
-  D) There is a 38% chance that the alternative is true
+  A) There is a 62% chance that the null hypothesis is true
+  B) There is a 38% chance that the alternative is true
+  C) The null would often generate data at least this extreme
+  D) The group means are definitely equal to one another
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 62% of datasets generated under the null would be at least this extreme, so ours isn't surprising.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) p isn't a probability about hypotheses.
-  C) Failing to reject isn't proof.
+  A) and B) p isn't a probability about hypotheses.
+  D) Failing to reject isn't proof.
 - **Hint:** p assumes the null.
 
 ### ch17-hw-07
@@ -6788,14 +6788,14 @@ With two groups, a two-sample t-test and an ANOVA give the same p-value. What do
 - **Options:**
 
   A) The direction of the difference, through t's sign
-  B) Whether the difference is statistically significant
+  B) The amount of variance explained by the model
   C) A separate p-value for each group being compared
-  D) The amount of variance explained by the model
+  D) Whether the difference is statistically significant
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** F = t² is always positive, so it loses the sign; t tells you which group is larger.
 - **Why the wrong options are wrong (tutor only):**
-  B) Both give the same p.
+  B) That's R², from the ANOVA table.
   C) Neither does.
-  D) That's R², from the ANOVA table.
+  D) Both give the same p.
 - **Hint:** What does squaring remove?

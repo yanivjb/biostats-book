@@ -31,6 +31,8 @@ for f in files:
         assert not bad, (r['id'], bad)
         if r['type'] in ('MC','select-all','matching','TF'): assert r.get('options'), r['id']
         rows.append(r)
+from shuffle_options import shuffle_row
+rows = [shuffle_row(r) for r in rows]
 ids = [r['id'] for r in rows]; assert len(ids) == len(set(ids)), 'duplicate ids'
 with open('question_bank_exam2.csv', 'w', newline='') as fh:
     w = csv.DictWriter(fh, COLS); w.writeheader(); [w.writerow(r) for r in rows]

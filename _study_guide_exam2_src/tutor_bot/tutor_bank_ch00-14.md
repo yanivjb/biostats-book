@@ -60,16 +60,16 @@ The difference between the true mean and my estimates is most likely explained b
 
 - **Options:**
 
-  A) Too few repetitions
-  B) Sampling error
-  C) Sampling bias
+  A) Sampling error
+  B) Sampling bias
+  C) Too few repetitions
   D) Non-independence
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Nearly all 1000 estimates are above 2.56: a systematic shift. Families with more children have more students to be asked, so big families are oversampled (size-biased sampling). Sampling error would scatter estimates on both sides of the truth.
 - **Why the wrong options are wrong (tutor only):**
-  A) More repetitions would show the same shift.
-  B) Chance would put estimates on both sides of the line.
+  A) Chance would put estimates on both sides of the line.
+  C) More repetitions would show the same shift.
   D) Non-independence would widen the spread, not shift it.
 - **Hint:** Are the estimates scattered around the truth, or all off in one direction?
 
@@ -87,16 +87,16 @@ The individual estimates range from about 27 to 34.5 cm. This spread is best exp
 - **Options:**
 
   A) Sampling bias
-  B) Measurement error
+  B) Sampling error
   C) Non-independence
-  D) Sampling error
+  D) Measurement error
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The estimates are scattered evenly on both sides of the true mean, as expected from chance differences among random samples. There's no systematic shift, so no bias.
 - **Why the wrong options are wrong (tutor only):**
   A) Bias would shift the whole histogram away from the red line.
-  B) Even perfect measurements would give this spread, because each net catches different fish.
   C) Nothing suggests related fish.
+  D) Even perfect measurements would give this spread, because each net catches different fish.
 - **Hint:** Is the histogram centered on the red line?
 
 ### rev-ch08-book-06
@@ -136,17 +136,17 @@ What explains the difference between the panels, and which n has the smallest st
 
 - **Options:**
 
-  A) Less sampling error in larger samples; n = 160 has the smallest SE
+  A) Less non-independence in larger samples; n = 10 has the smallest SE
   B) Less sampling error in larger samples; they all have about the same SE
-  C) Less non-independence in larger samples; n = 10 has the smallest SE
-  D) Less sampling bias in larger samples; n = 160 has the smallest SE
+  C) Less sampling bias in larger samples; n = 160 has the smallest SE
+  D) Less sampling error in larger samples; n = 160 has the smallest SE
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** All three are centered on 0.30 (no bias) and get narrower as n increases. SE = √(0.3 × 0.7 / n): about 0.145, 0.072 and 0.036.
 - **Why the wrong options are wrong (tutor only):**
+  A) Sample size doesn't change independence; n = 10 has the largest SE.
   B) The widths clearly differ.
-  C) Sample size doesn't change independence; n = 10 has the largest SE.
-  D) None is biased.
+  C) None is biased.
 - **Hint:** Center = bias; width = sampling error / SE.
 
 ### rev-ch08-book-06-v2
@@ -162,17 +162,17 @@ Going from n = 16 to n = 64 (four times as many trees), what happens to the stan
 
 - **Options:**
 
-  A) It doubles
+  A) It stays the same
   B) It halves (about 1 m → 0.5 m)
   C) It shrinks to a quarter, since there are four times as many trees
-  D) It stays the same
+  D) It doubles
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** SE = SD/√n. Quadrupling n doubles √n, so the SE halves: 4/√16 = 1 m, 4/√64 = 0.5 m. You can see the n = 64 panel is about half as wide as n = 16.
 - **Why the wrong options are wrong (tutor only):**
-  A) Larger samples reduce the SE.
+  A) The SE depends on n.
   C) That would need 16 times the sample.
-  D) The SE depends on n.
+  D) Larger samples reduce the SE.
 - **Hint:** SE = SD / √n. What happens to √n when n quadruples?
 
 ### rev-ch08-gquiz-02
@@ -210,17 +210,17 @@ For a class survey of sleep hours, a teacher asks only one person per household 
 
 - **Options:**
 
-  A) To reduce the number of responses
-  B) To minimize sampling error
-  C) To minimize sampling bias
-  D) To minimize non-independence
+  A) To minimize sampling error
+  B) To reduce the number of responses
+  C) To minimize non-independence
+  D) To minimize sampling bias
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** People in the same household share routines (and noise!), so their sleep is more alike. Counting several per household would treat related observations as independent.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's a side effect, not the reason.
-  B) Fewer responses would increase, not reduce, sampling error.
-  C) It doesn't systematically shift the estimate.
+  A) Fewer responses would increase, not reduce, sampling error.
+  B) That's a side effect, not the reason.
+  D) It doesn't systematically shift the estimate.
 - **Hint:** Would two people from the same household be more alike than two random students?
 
 ### rev-ch08-gquiz-02-v2
@@ -233,15 +233,15 @@ In a class activity, each table drew one sample of 10 crayons, but everyone at t
 
 - **Options:**
 
-  A) The entries aren't independent: there are really only 6 samples
-  B) There's no problem; more entries is always better
+  A) There's no problem; more entries is always better
+  B) The entries aren't independent: there are really only 6 samples
   C) The sample size for each draw (10 crayons) was too small
   D) The estimates will be biased toward red, since tables share the same bin
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Duplicate entries of one draw aren't new information. Treating them as 30 independent samples overstates how much data we have, making results look more precise than they are.
 - **Why the wrong options are wrong (tutor only):**
-  B) More entries only help if they're independent.
+  A) More entries only help if they're independent.
   C) That's a separate issue.
   D) Duplicating samples doesn't shift the center.
 - **Hint:** How many independent draws were there?
@@ -258,12 +258,12 @@ When we do science, our data summaries represent (1) ____ found by considering a
 
 - **Options:**
 
-  A) estimates
+  A) sample
   B) parameters
-  C) sample
-  D) population
+  C) population
+  D) estimates
 
-- **Answer (tutor only):** 1-A, 2-C, 3-B, 4-D
+- **Answer (tutor only):** 1-D, 2-A, 3-B, 4-C
 - **Explanation (tutor only):** We compute estimates (e.g., a sample mean) from the sample we actually measured. They're our best guess at parameters, the true values for the whole population, which we almost never get to see.
 - **Why the wrong options are wrong (tutor only):**
   Parameters describe populations and estimates describe samples. Swapping them is the classic mix-up.
@@ -281,12 +281,12 @@ Fill in the blanks: 9.6 cm is our (1) ____, calculated from our (2) ____. We use
 
 - **Options:**
 
-  A) estimate
-  B) parameter
-  C) sample
-  D) population
+  A) sample
+  B) population
+  C) parameter
+  D) estimate
 
-- **Answer (tutor only):** 1-A, 2-C, 3-B, 4-D
+- **Answer (tutor only):** 1-D, 2-A, 3-C, 4-B
 - **Explanation (tutor only):** We calculate estimates (like this mean of 9.6 cm) from the sample we measured. They're our best guess at parameters, the true values for the whole population.
 - **Why the wrong options are wrong (tutor only):**
   Parameters describe populations, estimates describe samples. 9.6 cm came from 120 butterflies, so it's an estimate.
@@ -307,12 +307,12 @@ Classify each:
 
 - **Options:**
 
-  A) estimate
-  B) parameter
-  C) sample
-  D) population
+  A) population
+  B) sample
+  C) estimate
+  D) parameter
 
-- **Answer (tutor only):** 1-B, 2-A, 3-C, 4-D
+- **Answer (tutor only):** 1-D, 2-C, 3-B, 4-A
 - **Explanation (tutor only):** The true proportion over all ballots is a parameter of the population (every voter). The poll's proportion is an estimate calculated from the sample of 1,000.
 - **Why the wrong options are wrong (tutor only):**
   Swapping estimate and parameter is the classic mix-up: if it's calculated from a subset, it's an estimate.
@@ -331,10 +331,10 @@ Fill in the blanks:
 
 - **Options:**
 
-  A) standard deviation
-  B) standard error
+  A) standard error
+  B) standard deviation
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** The SD describes spread among individuals. The SE is the SD of the sampling distribution, i.e., spread among estimates. The SE shrinks as n grows; the SD doesn't.
 - **Why the wrong options are wrong (tutor only):**
   Swapping them is the most common confusion in the chapter.
@@ -353,10 +353,10 @@ Bill length in a population of finches has an SD of 1.2 mm. You take samples of 
 
 - **Options:**
 
-  A) standard deviation
-  B) standard error
+  A) standard error
+  B) standard deviation
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** The SD (1.2 mm) is the spread of individuals. The SE is the spread of estimates: here about 1.2/√36 = 0.2 mm.
 - **Why the wrong options are wrong (tutor only):**
   Swapping them is the most common confusion in the chapter.
@@ -372,17 +372,17 @@ A paper reports: "mean body mass = 24.1 g (± 0.3 g, SE), n = 100 mice." What do
 
 - **Options:**
 
-  A) How far a typical mouse is from the mean
-  B) The measurement error of the scale
-  C) The difference between the heaviest and the lightest mouse in the sample
-  D) How far a typical sample mean (n = 100) is from the true mean
+  A) How far a typical sample mean (n = 100) is from the true mean
+  B) How far a typical mouse is from the mean
+  C) The measurement error of the scale
+  D) The difference between the heaviest and the lightest mouse in the sample
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** A standard error describes the variability of an estimate (the mean of 100 mice). Individual mice vary much more: the SD here would be about 0.3 × √100 = 3 g.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's the SD.
-  B) Measurement error is a different thing; the SE comes from sampling.
-  C) That's the range.
+  B) That's the SD.
+  C) Measurement error is a different thing; the SE comes from sampling.
+  D) That's the range.
 - **Hint:** SE = spread of what?
 
 ### rev-ch08-hw-05
@@ -418,17 +418,17 @@ A lab estimates the mean seed mass of a weed from 15 randomly chosen plants. The
 
 - **Options:**
 
-  A) Weigh the seeds on a more precise scale, so each measurement has less error
-  B) Choose the 15 healthiest-looking plants, so the seeds are more uniform
+  A) Measure 150 randomly chosen plants
+  B) Weigh the seeds on a more precise scale, so each measurement has less error
   C) Nothing; sampling error can't be reduced
-  D) Measure 150 randomly chosen plants
+  D) Choose the 15 healthiest-looking plants, so the seeds are more uniform
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Sampling error comes from which individuals happen to be in the sample. Larger random samples average over more individuals, so the SE shrinks (with √n).
 - **Why the wrong options are wrong (tutor only):**
-  A) Reduces measurement error, a different source of error.
-  B) Non-random selection adds bias.
+  B) Reduces measurement error, a different source of error.
   C) It can't be eliminated, but it can be reduced.
+  D) Non-random selection adds bias.
 - **Hint:** What makes a sampling distribution narrower?
 
 ### rev-ch08-hw-05-v2
@@ -442,15 +442,15 @@ A researcher doubles her sample size but keeps sampling only from plants near th
 - **Options:**
 
   A) Sampling error decreases; the roadside bias remains
-  B) Bias decreases, but sampling error stays the same
+  B) Nothing changes
   C) Both sampling error and bias decrease, since more data fixes both
-  D) Nothing changes
+  D) Bias decreases, but sampling error stays the same
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** A larger sample makes the estimate more precise (less sampling error), but if roadside plants differ from the rest, the estimate is still systematically off. A bigger biased sample is precisely wrong.
 - **Why the wrong options are wrong (tutor only):**
-  C) and B) Sample size doesn't fix bias.
-  D) Precision does improve.
+  B) Precision does improve.
+  C) and D) Sample size doesn't fix bias.
 - **Hint:** Does sampling more from the same place fix who's being sampled?
 
 ### rev-ch09-book-04
@@ -486,17 +486,17 @@ A 95% CI for the proportion of infected ticks is 0.21 to 0.34. Which statement i
 
 - **Options:**
 
-  A) It either does or doesn't contain the true proportion
+  A) 95% of ticks have infection proportions between 0.21 and 0.34
   B) The true proportion is 0.275
   C) There's a 95% chance the true proportion is between 0.21 and 0.34
-  D) 95% of ticks have infection proportions between 0.21 and 0.34
+  D) It either does or doesn't contain the true proportion
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** After calculation, the interval and the parameter are fixed. The 95% refers to the method.
 - **Why the wrong options are wrong (tutor only):**
+  A) Individual ticks are infected or not; the CI is about the population proportion.
   B) 0.275 is the midpoint, an estimate, not the truth.
   C) Attaches the method's rate to this one interval.
-  D) Individual ticks are infected or not; the CI is about the population proportion.
 - **Hint:** Is anything random left once the interval is computed?
 
 ### rev-ch09-book-04-v2
@@ -509,16 +509,16 @@ Which change would make a newly calculated 95% CI narrower? (Select all that app
 
 - **Options:**
 
-  A) A larger sample
-  B) Less variable data
-  C) Choosing 99% instead of 95% confidence
-  D) Calculating it more carefully
+  A) Calculating it more carefully
+  B) A larger sample
+  C) Less variable data
+  D) Choosing 99% instead of 95% confidence
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** Width depends on the SE (SD/√n): more data or less variability narrows it. Higher confidence widens it.
 - **Why the wrong options are wrong (tutor only):**
-  C) A 99% interval must be wider to catch the truth more often.
-  D) A correct calculation doesn't change the width.
+  A) A correct calculation doesn't change the width.
+  D) A 99% interval must be wider to catch the truth more often.
 - **Hint:** Width tracks the SE and the confidence level.
 
 ### rev-ch09-chime-04
@@ -552,15 +552,15 @@ A lab increases sample size from 25 to 100. Which will tend to stay about the sa
 
 - **Options:**
 
-  A) The standard deviation
+  A) The standard error
   B) The mean
-  C) The standard error
-  D) The width of a 95% CI
+  C) The width of a 95% CI
+  D) The standard deviation
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, D
 - **Explanation (tutor only):** The SD and mean describe the population and don't trend with n. The SE (≈ SD/√n) halves when n quadruples, and the CI narrows with it.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) These shrink: four times the data gives half the SE.
+  A) and C) These shrink: four times the data gives half the SE.
 - **Hint:** Which quantities describe the population, and which describe your precision?
 
 ### rev-ch09-chime-04-v2
@@ -573,17 +573,17 @@ If the SD stays the same, by how much does the standard error of the mean change
 
 - **Options:**
 
-  A) It doubles
-  B) It is cut to a quarter
-  C) It stays the same
-  D) It is cut in half
+  A) It is cut in half
+  B) It stays the same
+  C) It doubles
+  D) It is cut to a quarter
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** SE = SD/√n. √25 = 5 and √100 = 10, so the SE is halved.
 - **Why the wrong options are wrong (tutor only):**
-  A) More data reduces, not increases, the SE.
-  B) The SE scales with 1/√n, not 1/n.
-  C) More data reduces the SE.
+  B) More data reduces the SE.
+  C) More data reduces, not increases, the SE.
+  D) The SE scales with 1/√n, not 1/n.
 - **Hint:** Compare √25 and √100.
 
 ### rev-ch09-chime-05
@@ -642,16 +642,16 @@ Why do we bootstrap in real studies instead of building the true sampling distri
 - **Options:**
 
   A) The true one needs many samples; we have one
-  B) The bootstrap is more accurate than the sampling distribution
-  C) The sampling distribution only works for normal data
-  D) The bootstrap removes sampling bias
+  B) The bootstrap removes sampling bias
+  C) The bootstrap is more accurate than the sampling distribution
+  D) The sampling distribution only works for normal data
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The bootstrap uses our one sample as a stand-in for the population, approximating the sampling distribution we can't actually observe.
 - **Why the wrong options are wrong (tutor only):**
-  B) It approximates the sampling distribution; it isn't better than the real thing.
-  C) Sampling distributions exist for any data.
-  D) The bootstrap inherits whatever bias the sample has.
+  B) The bootstrap inherits whatever bias the sample has.
+  C) It approximates the sampling distribution; it isn't better than the real thing.
+  D) Sampling distributions exist for any data.
 - **Hint:** What data do we actually have?
 
 ### rev-ch09-chime-07
@@ -686,16 +686,16 @@ A sample of 64 trees has a trunk-diameter SD of 16 cm. Roughly what would the bo
 - **Options:**
 
   A) About 2 cm
-  B) About 16 cm
+  B) About 128 cm
   C) About 0.25 cm
-  D) About 128 cm
+  D) About 16 cm
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** SE ≈ SD/√n = 16/8 = 2 cm, and a bootstrap SE should come out close to that.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the SD of individual trees.
+  B) Means vary less than individuals, not more.
   C) That's 16/64: divide by √n, not n.
-  D) Means vary less than individuals, not more.
+  D) That's the SD of individual trees.
 - **Hint:** SE ≈ SD/√n.
 
 ### rev-ch09-chime-07-v2
@@ -708,16 +708,16 @@ For a sample of size n = 1, how would the standard error of the mean compare to 
 
 - **Options:**
 
-  A) The SE would be zero, since there's nothing to vary
+  A) The SE would be larger
   B) The same (SD/√1 = SD)
-  C) The SE would be larger
+  C) The SE would be zero, since there's nothing to vary
   D) The SE would be smaller
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** With one observation, its mean varies exactly as much as individuals do. Averaging only reduces spread when n > 1. (In practice you can't estimate an SD from one value, but the idea holds.)
 - **Why the wrong options are wrong (tutor only):**
-  A) Different samples of one would give different values.
-  C) The SE is never larger than the SD.
+  A) The SE is never larger than the SD.
+  C) Different samples of one would give different values.
   D) Only with n > 1.
 - **Hint:** Plug n = 1 into SD/√n.
 
@@ -754,17 +754,17 @@ If we could draw 10,000 samples of 25 penguins and compute each sample's mean bo
 
 - **Options:**
 
-  A) The population distribution of body mass
-  B) The sample distribution; its spread is the standard deviation
-  C) A bootstrap distribution of body mass
+  A) The sample distribution; its spread is the standard deviation
+  B) A bootstrap distribution of body mass
+  C) The population distribution of body mass
   D) The sampling distribution of the mean
 
 - **Answer (tutor only):** D
 - **Explanation (tutor only):** A distribution of estimates from many independent samples of the same size is the sampling distribution. Its SD is the standard error.
 - **Why the wrong options are wrong (tutor only):**
-  A) The population distribution describes individual penguins.
-  B) A sample distribution is the values in one sample.
-  C) A bootstrap resamples one sample; here we drew new samples from the population.
+  A) A sample distribution is the values in one sample.
+  B) A bootstrap resamples one sample; here we drew new samples from the population.
+  C) The population distribution describes individual penguins.
 - **Hint:** Is each value in the histogram an individual or an estimate?
 
 ### rev-ch09-gquiz-01-v2
@@ -777,17 +777,17 @@ Two sampling distributions of a mean are centered on the true value. One is narr
 
 - **Options:**
 
-  A) The population is more variable than the sample
-  B) The estimate is wrong
-  C) Single estimates will tend to land farther from the truth
-  D) That design is biased, since its estimates are spread out
+  A) The estimate is wrong
+  B) The population is more variable than the sample
+  C) That design is biased, since its estimates are spread out
+  D) Single estimates will tend to land farther from the truth
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A wider sampling distribution means estimates scatter more from sample to sample, so one estimate is less precise. Both are centered on the truth, so neither is biased.
 - **Why the wrong options are wrong (tutor only):**
-  A) Spread here is spread of estimates, not individuals.
-  B) It's imprecise, not wrong.
-  D) Both are centered on the truth, so neither is biased.
+  A) It's imprecise, not wrong.
+  B) Spread here is spread of estimates, not individuals.
+  C) Both are centered on the truth, so neither is biased.
 - **Hint:** Spread of a sampling distribution = ?
 
 ### rev-ch09-gquiz-02
@@ -823,17 +823,17 @@ Your sample has 30 seed masses. Which describes ONE bootstrap replicate?
 
 - **Options:**
 
-  A) Draw 30 values from your 30 without replacement, then compute the mean
-  B) Draw 30 values from your 30 with replacement, then compute the mean
-  C) Collect 30 new seeds from the field, then compute the mean
-  D) Draw 10 values with replacement, then compute the mean
+  A) Draw 30 values from your 30 with replacement, then compute the mean
+  B) Collect 30 new seeds from the field, then compute the mean
+  C) Draw 10 values with replacement, then compute the mean
+  D) Draw 30 values from your 30 without replacement, then compute the mean
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Same size (30), with replacement: some seeds appear twice, some not at all. Computing the estimate on that resample gives one bootstrap replicate.
 - **Why the wrong options are wrong (tutor only):**
-  A) Without replacement you just reshuffle the same 30, so every mean is identical.
-  C) That's a new sample from the population, not a bootstrap.
-  D) Smaller resamples overstate uncertainty.
+  B) That's a new sample from the population, not a bootstrap.
+  C) Smaller resamples overstate uncertainty.
+  D) Without replacement you just reshuffle the same 30, so every mean is identical.
 - **Hint:** Same n, and with or without replacement?
 
 ### rev-ch09-gquiz-02-v2
@@ -846,17 +846,17 @@ A student bootstraps by sampling WITHOUT replacement (same size as the data). Wh
 
 - **Options:**
 
-  A) The bootstrap SE is slightly too large, as with any small sample
-  B) It works the same as sampling with replacement
+  A) It works the same as sampling with replacement
+  B) The bootstrap distribution becomes bimodal
   C) Every resample is just the data, so the SE looks like 0
-  D) The bootstrap distribution becomes bimodal
+  D) The bootstrap SE is slightly too large, as with any small sample
 
 - **Answer (tutor only):** C
 - **Explanation (tutor only):** Drawing all n values without replacement just reorders the data, and the mean doesn't depend on order, so there's no variation.
 - **Why the wrong options are wrong (tutor only):**
-  A) There is no variation at all, not a little extra.
-  B) Replacement is what creates variation among resamples.
-  D) There's no spread at all.
+  A) Replacement is what creates variation among resamples.
+  B) There's no spread at all.
+  D) There is no variation at all, not a little extra.
 - **Hint:** What's in a 'resample' if no value can be drawn twice?
 
 ### rev-ch09-gquiz-03
@@ -892,17 +892,17 @@ A researcher has only 4 measurements: 2.1, 2.3, 2.4, 9.8. Why should they be cau
 
 - **Options:**
 
-  A) The bootstrap needs at least 100 values to run
-  B) The bootstrap requires normally distributed data
+  A) With only 4 values, sampling with replacement is impossible
+  B) The bootstrap needs at least 100 values to run
   C) It can only reshuffle 4 values, so the CI is often too narrow
-  D) With only 4 values, sampling with replacement is impossible
+  D) The bootstrap requires normally distributed data
 
 - **Answer (tutor only):** C
 - **Explanation (tutor only):** With tiny samples the bootstrap's stand-in population is crude: few distinct resamples, and one odd value (9.8) dominates. Bootstrap intervals tend to understate uncertainty.
 - **Why the wrong options are wrong (tutor only):**
-  A) It runs; it just approximates poorly.
-  B) The bootstrap doesn't assume normality.
-  D) You can resample with replacement from any sample.
+  A) You can resample with replacement from any sample.
+  B) It runs; it just approximates poorly.
+  D) The bootstrap doesn't assume normality.
 - **Hint:** The bootstrap treats your sample as the population. How good is a 4-value population?
 
 ### rev-ch09-gquiz-03-v2
@@ -959,17 +959,17 @@ A coin is flipped and hidden under a cup. A friend says 'there's a 50% chance it
 
 - **Options:**
 
-  A) The analogy shows CIs are useless
-  B) Like the coin, the outcome is settled; 95% describes the procedure
-  C) The parameter moves like a flipping coin
-  D) The CI has a 95% chance of containing the parameter, just as the coin is 50% heads
+  A) Like the coin, the outcome is settled; 95% describes the procedure
+  B) The analogy shows CIs are useless
+  C) The CI has a 95% chance of containing the parameter, just as the coin is 50% heads
+  D) The parameter moves like a flipping coin
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Before flipping, P(heads) = 0.5. After, it's heads or tails. Likewise, before sampling the method has a 95% chance to succeed; after, the interval is right or wrong. (Many people still talk loosely here.)
 - **Why the wrong options are wrong (tutor only):**
-  A) CIs are useful; the analogy is about interpretation.
-  C) The parameter is fixed.
-  D) That's the loose reading statisticians object to.
+  B) CIs are useful; the analogy is about interpretation.
+  C) That's the loose reading statisticians object to.
+  D) The parameter is fixed.
 - **Hint:** Before vs after the randomness happens.
 
 ### rev-ch09-gquiz-07-v2
@@ -983,17 +983,17 @@ In the ring toss analogy for confidence intervals, what are the post and the rin
 
 - **Options:**
 
-  A) Both move each time
-  B) Post = the sample mean; ring = the population it came from
-  C) Post = the interval; ring = the parameter
-  D) Post = true parameter (fixed); ring = interval
+  A) Post = the sample mean; ring = the population it came from
+  B) Both move each time
+  C) Post = true parameter (fixed); ring = interval
+  D) Post = the interval; ring = the parameter
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The truth stays put; each sample produces a new interval that may or may not land around it. 95% CIs are a ring-toss method that rings the post 95% of the time.
 - **Why the wrong options are wrong (tutor only):**
-  A) The parameter is fixed.
-  B) The sample mean changes; the post doesn't.
-  C) The interval is what varies across samples.
+  A) The sample mean changes; the post doesn't.
+  B) The parameter is fixed.
+  D) The interval is what varies across samples.
 - **Hint:** Which thing changes from sample to sample?
 
 ### rev-ch09-hw-01
@@ -1010,15 +1010,15 @@ Match each description to a concept (each concept used at most once):
 
 - **Options:**
 
-  A) standard error
-  B) standard deviation
-  C) sampling distribution
-  D) bootstrapping
+  A) bootstrapping
+  B) sampling distribution
+  C) standard deviation
+  D) standard error
 
-- **Answer (tutor only):** 1-C, 2-A, 3-D
+- **Answer (tutor only):** 1-B, 2-D, 3-A
 - **Explanation (tutor only):** Sampling distribution: the idea (distribution of estimates). Standard error: its spread, i.e., how far estimates typically land from the truth. Bootstrapping: the tool for approximating it from one sample. The SD (spread of individuals) is the leftover.
 - **Why the wrong options are wrong (tutor only):**
-  B) The SD describes individuals, not estimates.
+  C) The SD describes individuals, not estimates.
 - **Hint:** Idea, measure, tool.
 
 ### rev-ch09-hw-01-v1
@@ -1035,12 +1035,12 @@ Match each description to a concept (each concept used at most once):
 
 - **Options:**
 
-  A) standard error
+  A) bootstrap distribution
   B) standard deviation
   C) sampling distribution
-  D) bootstrap distribution
+  D) standard error
 
-- **Answer (tutor only):** 1-B, 2-A, 3-D
+- **Answer (tutor only):** 1-B, 2-D, 3-A
 - **Explanation (tutor only):** The SD describes spread among individuals. The SE is the spread of estimates across samples (the SD of the sampling distribution). Resampling our own data with replacement gives a bootstrap distribution. The sampling distribution itself (the leftover) needs many samples from the population.
 - **Why the wrong options are wrong (tutor only):**
   C) The sampling distribution is built from new samples of the population, not from resampling one sample.
@@ -1060,15 +1060,15 @@ Match each description to a concept (each concept used at most once):
 
 - **Options:**
 
-  A) sampling error
-  B) standard error
-  C) sampling distribution
-  D) sampling bias
+  A) sampling bias
+  B) sampling distribution
+  C) sampling error
+  D) standard error
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-D, 3-B
 - **Explanation (tutor only):** Sampling error is the chance gap for any one sample. The standard error summarizes its typical size. The sampling distribution is the full collection of estimates that error produces.
 - **Why the wrong options are wrong (tutor only):**
-  D) Bias is a systematic shift, not chance; it wouldn't shrink with more data.
+  A) Bias is a systematic shift, not chance; it wouldn't shrink with more data.
 - **Hint:** Which one is a single gap, which a typical size, which a whole distribution?
 
 ### rev-ch09-hw-04
@@ -1191,15 +1191,15 @@ Which statement is most appropriate as a NULL hypothesis for a study of whether 
 - **Options:**
 
   A) Bees prefer blue flowers
-  B) Flower color affects how often bees visit
-  C) Visit rate isn't associated with flower color
-  D) Bees visit flowers
+  B) Visit rate isn't associated with flower color
+  C) Bees visit flowers
+  D) Flower color affects how often bees visit
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Null: no association.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) are alternatives.
-  D) Not a testable statement about the association.
+  A) and D) are alternatives.
+  C) Not a testable statement about the association.
 - **Hint:** No association = ?
 
 ### rev-ch10-book-02
@@ -1261,11 +1261,11 @@ Two studies have the same n and α. In Study 1 the true effect is large; in Stud
 
 - **Options:**
 
-  A) Study 1
-  B) Study 2
-  C) Neither: the same
+  A) Study 2
+  B) Neither: the same
+  C) Study 1
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-C, 2-B
 - **Explanation (tutor only):** Larger effects are easier to detect. When the null is true, the false-positive rate is α for both.
 - **Why the wrong options are wrong (tutor only):**
   Effect size affects power, not the false-positive rate.
@@ -1376,17 +1376,17 @@ With 9 of 10 correct, the two-sided P-value is about 0.02. What do we do with th
 
 - **Options:**
 
-  A) Reject it, though this could be a type I error
-  B) Reject it; we've proven dogs can smell cancer
-  C) Reject it; there's a 2% chance dogs are guessing
-  D) Fail to reject it
+  A) Reject it; we've proven dogs can smell cancer
+  B) Fail to reject it
+  C) Reject it, though this could be a type I error
+  D) Reject it; there's a 2% chance dogs are guessing
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p < 0.05, so reject. Rejecting isn't proof, and the p-value isn't the probability that the null is true.
 - **Why the wrong options are wrong (tutor only):**
-  B) Rejecting isn't proof.
-  C) That's the prosecutor's fallacy.
-  D) p < α.
+  A) Rejecting isn't proof.
+  B) p < α.
+  D) That's the prosecutor's fallacy.
 - **Hint:** Compare p to α; then remember what a p-value isn't.
 
 ### rev-ch10-book-05-v2
@@ -1405,17 +1405,17 @@ With 9 of 10 correct (p ≈ 0.02), a reporter writes: 'Dogs are 98% accurate at 
 
 - **Options:**
 
-  A) Nothing; that's a correct reading of p
-  B) It confuses 1 − p with accuracy (really 9/10)
-  C) The p-value should have been reported as 0.10
-  D) Dogs were 2% accurate
+  A) Dogs were 2% accurate
+  B) Nothing; that's a correct reading of p
+  C) It confuses 1 − p with accuracy (really 9/10)
+  D) The p-value should have been reported as 0.10
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The p-value is about how surprising 9/10 would be under guessing. The accuracy estimate is 9/10 = 0.9, with a wide CI because n is small.
 - **Why the wrong options are wrong (tutor only):**
-  A) 1 − p is not an accuracy or a probability of anything useful here.
-  C) The p-value was computed correctly.
-  D) Misreads p again.
+  A) Misreads p again.
+  B) 1 − p is not an accuracy or a probability of anything useful here.
+  D) The p-value was computed correctly.
 - **Hint:** Where does the accuracy estimate actually come from?
 
 ### rev-ch10-chime-01
@@ -1506,15 +1506,15 @@ Which of these increase statistical power (the chance of rejecting a false null)
 
 - **Options:**
 
-  A) A larger sample size
-  B) A larger true effect
-  C) Less variable data
-  D) A smaller α (e.g., 0.01 instead of 0.05)
+  A) A larger true effect
+  B) Less variable data
+  C) A smaller α (e.g., 0.01 instead of 0.05)
+  D) A larger sample size
 
-- **Answer (tutor only):** A, B, C
+- **Answer (tutor only):** A, B, D
 - **Explanation (tutor only):** Power rises with sample size, effect size and precision. A stricter α makes rejection harder, so power drops.
 - **Why the wrong options are wrong (tutor only):**
-  D) Lowering α trades fewer false positives for less power.
+  C) Lowering α trades fewer false positives for less power.
 - **Hint:** What makes a real effect easier to detect?
 
 ### rev-ch10-chime-02-v2
@@ -1528,15 +1528,15 @@ A type II error is:
 - **Options:**
 
   A) Getting p exactly 0.05
-  B) Failing to reject a false null
-  C) Using the wrong test for the data
-  D) Rejecting a null hypothesis that is true
+  B) Using the wrong test for the data
+  C) Rejecting a null hypothesis that is true
+  D) Failing to reject a false null
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Type II: missing a real effect. Its probability is 1 − power.
 - **Why the wrong options are wrong (tutor only):**
-  C) and A) Not error types.
-  D) That's a type I error.
+  B) and A) Not error types.
+  C) That's a type I error.
 - **Hint:** Missed a real effect, or false alarm?
 
 ### rev-ch10-chime-03
@@ -1571,16 +1571,16 @@ We use α = 0.10. Assuming the null is TRUE, what's the probability we reject it
 
 - **Options:**
 
-  A) 0.90
-  B) 0.10
-  C) Depends on sample size
-  D) Depends on effect size
+  A) Depends on effect size
+  B) 0.90
+  C) 0.10
+  D) Depends on sample size
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** When the null is true, we falsely reject with probability α = 0.10.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's the probability of (correctly) failing to reject.
-  C) and D) α alone sets the false-positive rate.
+  B) That's the probability of (correctly) failing to reject.
+  D) and A) α alone sets the false-positive rate.
 - **Hint:** When H0 is true, P(reject) = α.
 
 ### rev-ch10-chime-03-v2
@@ -1593,16 +1593,16 @@ A type I error is:
 
 - **Options:**
 
-  A) Rejecting a true null
-  B) Having a small sample
-  C) Making a calculation error in the test
-  D) Failing to reject a false null hypothesis
+  A) Making a calculation error in the test
+  B) Failing to reject a false null hypothesis
+  C) Having a small sample
+  D) Rejecting a true null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Type I: a false positive. Its probability (when H0 is true) is α.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Not error types.
-  D) That's type II.
+  B) That's type II.
+  C) and A) Not error types.
 - **Hint:** False alarm or missed effect?
 
 ### rev-ch10-chime-05
@@ -1637,14 +1637,14 @@ Spot the flaw: a survey finds that children who eat breakfast get better grades.
 - **Options:**
 
   A) It ignores sampling error
-  B) It misreads a p-value as the probability the null is true
-  C) A causal story that ignores confounds
-  D) It uses a p-value as a measure of effect size
+  B) It uses a p-value as a measure of effect size
+  C) It misreads a p-value as the probability the null is true
+  D) A causal story that ignores confounds
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Observational association doesn't show causation. Families that serve breakfast may differ in many ways that also affect grades.
 - **Why the wrong options are wrong (tutor only):**
-  B)–D) No p-value is misused; the problem is the causal leap.
+  C)–B) No p-value is misused; the problem is the causal leap.
 - **Hint:** Was breakfast randomly assigned?
 
 ### rev-ch10-chime-05-v2
@@ -1657,15 +1657,15 @@ Spot the flaw: 'Cities with more police officers have more crime, so police caus
 
 - **Options:**
 
-  A) Effect size was ignored
-  B) Sampling error
-  C) Reverse causation or confounding
-  D) The p-value was misread as an effect size
+  A) Sampling error
+  B) Effect size was ignored
+  C) The p-value was misread as an effect size
+  D) Reverse causation or confounding
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The association could run the other way (crime → more police) or be driven by city size.
 - **Why the wrong options are wrong (tutor only):**
-  D)–A) The problem is the causal interpretation.
+  C)–B) The problem is the causal interpretation.
 - **Hint:** Which way could the arrow point?
 
 ### rev-ch10-gquiz-07
@@ -1705,17 +1705,17 @@ A tiny study (n = 12) of a memory supplement reports a huge, significant effect 
 
 - **Options:**
 
-  A) Little or no effect; the small study's estimate was likely inflated
-  B) The later studies were all done wrong, since they disagree with the first
-  C) The supplement has a huge effect, as the first study showed
-  D) The supplement has a moderate effect
+  A) The later studies were all done wrong, since they disagree with the first
+  B) The supplement has a moderate effect
+  C) Little or no effect; the small study's estimate was likely inflated
+  D) The supplement has a huge effect, as the first study showed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Small studies that reach significance tend to overestimate effects (the winner's curse). The large, precise studies carry more weight.
 - **Why the wrong options are wrong (tutor only):**
-  B) No reason to think so.
-  C) One noisy study vs three precise ones.
-  D) None of the precise studies supports that.
+  A) No reason to think so.
+  B) None of the precise studies supports that.
+  D) One noisy study vs three precise ones.
 - **Hint:** Which studies are more precise?
 
 ### rev-ch10-gquiz-07-v2
@@ -1730,15 +1730,15 @@ Why do significant results from small studies tend to overestimate the true effe
 
   A) Small studies have smaller standard errors, so they detect effects more readily
   B) Only the unusually large noisy estimates reach significance
-  C) Small studies tend to measure the wrong thing
-  D) They don't; small-study estimates are unbiased, significant or not
+  C) They don't; small-study estimates are unbiased, significant or not
+  D) Small studies tend to measure the wrong thing
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** To reach p < 0.05 with a large SE, the estimate must be big. If the true effect is modest, only lucky overestimates make the cut. This is the winner's curse.
 - **Why the wrong options are wrong (tutor only):**
   A) Small studies have larger SEs.
-  C) Small isn't wrong.
-  D) Each estimate is unbiased, but the significant subset is biased upward.
+  C) Each estimate is unbiased, but the significant subset is biased upward.
+  D) Small isn't wrong.
 - **Hint:** What has to happen for a small study to reach p < 0.05?
 
 ### rev-ch10-hw-01
@@ -1772,15 +1772,15 @@ Which statement is most appropriate as an ALTERNATIVE hypothesis?
 
 - **Options:**
 
-  A) Mean seed size differs between plants in shaded and sunny plots
-  B) Shaded plants produce seeds exactly 1.2 mg heavier than sunny plants
-  C) Mean seed size is the same in shaded and sunny plots
+  A) Mean seed size is the same in shaded and sunny plots
+  B) Mean seed size differs between plants in shaded and sunny plots
+  C) Shaded plants produce seeds exactly 1.2 mg heavier than sunny plants
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** An alternative hypothesis claims a difference or association.
 - **Why the wrong options are wrong (tutor only):**
-  B) Alternatives don't usually claim an exact value.
-  C) 'The same' is the null.
+  A) 'The same' is the null.
+  C) Alternatives don't usually claim an exact value.
 - **Hint:** Which statement claims something is going on?
 
 ### rev-ch10-hw-01-v2
@@ -1794,15 +1794,15 @@ A researcher asks whether salamander abundance is associated with stream tempera
 - **Options:**
 
   A) No association between abundance and temperature
-  B) Salamanders are more abundant in cooler streams
-  C) Salamanders are rare
-  D) Stream temperature affects how many salamanders there are
+  B) Stream temperature affects how many salamanders there are
+  C) Salamanders are more abundant in cooler streams
+  D) Salamanders are rare
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The null is 'no association'.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) These claim an association (alternatives).
-  C) That isn't a hypothesis about the relationship.
+  C) and B) These claim an association (alternatives).
+  D) That isn't a hypothesis about the relationship.
 - **Hint:** The null says nothing is going on.
 
 ### rev-ch10-hw-02
@@ -1853,17 +1853,17 @@ Why does the book generally recommend two-tailed tests?
 
 - **Options:**
 
-  A) Two-tailed tests don't need a null hypothesis
-  B) Two-tailed tests always give smaller p-values, so they find effects more easily
+  A) Effects in the 'wrong' direction matter, and one-tailed tests invite cherry-picking
+  B) Two-tailed tests don't need a null hypothesis
   C) One-tailed tests are mathematically invalid
-  D) Effects in the 'wrong' direction matter, and one-tailed tests invite cherry-picking
+  D) Two-tailed tests always give smaller p-values, so they find effects more easily
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** A one-tailed test ignores effects in the other direction and halves the p-value for the chosen one, which is tempting to pick after the fact.
 - **Why the wrong options are wrong (tutor only):**
-  A) Every test needs a null.
-  B) For the same data, two-tailed p-values are larger.
+  B) Every test needs a null.
   C) They're valid when justified in advance.
+  D) For the same data, two-tailed p-values are larger.
 - **Hint:** What does a one-tailed test ignore?
 
 ### rev-ch10-hw-03
@@ -1897,17 +1897,17 @@ A study of 2 million smartphone users finds that a new app layout increases time
 
 - **Options:**
 
-  A) The study was biased because it was so large
-  B) The result is probably due to chance
-  C) Almost certainly real but practically negligible
-  D) The effect is large, because p is so small
+  A) The effect is large, because p is so small
+  B) The study was biased because it was so large
+  C) The result is probably due to chance
+  D) Almost certainly real but practically negligible
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Huge samples detect tiny effects. Significance tells you the effect is probably not zero; the estimate (0.4 s) tells you it doesn't matter much.
 - **Why the wrong options are wrong (tutor only):**
-  A) Size doesn't cause bias.
-  B) p < 0.0001 makes chance an unlikely explanation.
-  D) p-values don't measure effect size.
+  A) p-values don't measure effect size.
+  B) Size doesn't cause bias.
+  C) p < 0.0001 makes chance an unlikely explanation.
 - **Hint:** Separate 'is there an effect?' from 'how big is it?'
 
 ### rev-ch10-hw-03-v2
@@ -1920,17 +1920,17 @@ If the true effect is small but not zero, what happens to the p-value as sample 
 
 - **Options:**
 
-  A) It gets larger
-  B) It gets smaller, eventually below 0.05
-  C) It equals the effect size
-  D) It stays about the same, since the effect doesn't change
+  A) It equals the effect size
+  B) It stays about the same, since the effect doesn't change
+  C) It gets larger
+  D) It gets smaller, eventually below 0.05
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A larger n shrinks the SE, so even a small real effect becomes more and more detectable.
 - **Why the wrong options are wrong (tutor only):**
-  A) More data gives more evidence, not less.
-  C) p-values aren't effect sizes.
-  D) The p-value depends on n.
+  A) p-values aren't effect sizes.
+  B) The p-value depends on n.
+  C) More data gives more evidence, not less.
 - **Hint:** What does a bigger n do to the SE?
 
 ### rev-ch10-hw-07
@@ -1987,17 +1987,17 @@ Which statement commits the prosecutor's fallacy?
 
 - **Options:**
 
-  A) 'p = 0.02 is below α = 0.05, so we reject the null'
+  A) 'p = 0.02, so there's a 2% chance the null hypothesis is true'
   B) 'p = 0.02 doesn't tell us the effect size'
-  C) 'If the null were true, data this extreme would occur 2% of the time'
-  D) 'p = 0.02, so there's a 2% chance the null hypothesis is true'
+  C) 'p = 0.02 is below α = 0.05, so we reject the null'
+  D) 'If the null were true, data this extreme would occur 2% of the time'
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** It flips P(data | H0) into P(H0 | data).
 - **Why the wrong options are wrong (tutor only):**
-  A) A correct decision rule.
   B) True and not a fallacy.
-  C) That's the correct definition.
+  C) A correct decision rule.
+  D) That's the correct definition.
 - **Hint:** Find the one that makes the p-value a probability about the hypothesis.
 
 ### rev-ch11-book-01
@@ -2014,12 +2014,12 @@ Which method (bootstrap, permutation, both, or neither):
 
 - **Options:**
 
-  A) Bootstrap
-  B) Permutation
-  C) Both
-  D) Neither
+  A) Both
+  B) Neither
+  C) Bootstrap
+  D) Permutation
 
-- **Answer (tutor only):** 1-B, 2-A, 3-B
+- **Answer (tutor only):** 1-D, 2-C, 3-D
 - **Explanation (tutor only):** Permutation only shuffles labels, so the overall mean never changes, and it simulates the null to produce p-values. The bootstrap resamples with replacement, so values (and the overall mean) change, and it is used to estimate uncertainty (CIs).
 - **Why the wrong options are wrong (tutor only):**
   The bootstrap changes which values appear; permutation never does.
@@ -2039,12 +2039,12 @@ Which method (bootstrap, permutation, both, or neither):
 
 - **Options:**
 
-  A) Bootstrap
-  B) Permutation
+  A) Neither
+  B) Bootstrap
   C) Both
-  D) Neither
+  D) Permutation
 
-- **Answer (tutor only):** 1-B, 2-A, 3-D
+- **Answer (tutor only):** 1-D, 2-B, 3-A
 - **Explanation (tutor only):** Permutation reshuffles the same values; the bootstrap samples with replacement. Neither collects new data; that's their whole appeal.
 - **Why the wrong options are wrong (tutor only):**
   3: Both methods work from the one sample we have.
@@ -2064,12 +2064,12 @@ Which method (bootstrap, permutation, both, or neither):
 
 - **Options:**
 
-  A) Bootstrap
-  B) Permutation
-  C) Both
-  D) Neither
+  A) Permutation
+  B) Neither
+  C) Bootstrap
+  D) Both
 
-- **Answer (tutor only):** 1-C, 2-D, 3-A
+- **Answer (tutor only):** 1-D, 2-B, 3-C
 - **Explanation (tutor only):** Both are computational methods using only our data, and neither assumes normality. Only the bootstrap keeps each individual's x and y together.
 - **Why the wrong options are wrong (tutor only):**
   3: Permutation deliberately breaks the association.
@@ -2093,12 +2093,12 @@ For each statement, which method makes it true?
 
 - **Options:**
 
-  A) Bootstrap
-  B) Permutation
-  C) Both
+  A) Both
+  B) Bootstrap
+  C) Permutation
   D) Neither
 
-- **Answer (tutor only):** 1-B, 2-D, 3-A, 4-B
+- **Answer (tutor only):** 1-C, 2-D, 3-B, 4-C
 - **Explanation (tutor only):** Permutation: same numbers reshuffled, so the overall mean is fixed, the male mean changes, and the distribution is centered at 0. Bootstrap: values resampled, so all the means vary, and the distribution is centered near the observed 639 g.
 - **Why the wrong options are wrong (tutor only):**
   2: Neither method keeps the male mean fixed. Shuffling changes which values are labeled male, and resampling changes the values themselves.
@@ -2122,12 +2122,12 @@ For each statement, which method makes it true?
 
 - **Options:**
 
-  A) Bootstrap
-  B) Permutation
-  C) Both
+  A) Permutation
+  B) Both
+  C) Bootstrap
   D) Neither
 
-- **Answer (tutor only):** 1-B, 2-D, 3-B, 4-A
+- **Answer (tutor only):** 1-A, 2-D, 3-A, 4-C
 - **Explanation (tutor only):** Permutation reuses the same 68 values (fixed overall mean) and centers the difference at 0. The bootstrap centers near the observed 8.2 mm. Neither keeps the female mean fixed.
 - **Why the wrong options are wrong (tutor only):**
   2: Shuffling changes which values are labeled female; resampling changes the values.
@@ -2146,17 +2146,17 @@ Why is the permutation distribution centered at 0 while the bootstrap distributi
 
 - **Options:**
 
-  A) Shuffling removes the sex difference; bootstrapping keeps it
-  B) The bootstrap removes sampling error, so it centers on the truth
-  C) Permutation uses fewer replicates than the bootstrap
-  D) It's a coincidence
+  A) Permutation uses fewer replicates than the bootstrap
+  B) It's a coincidence
+  C) Shuffling removes the sex difference; bootstrapping keeps it
+  D) The bootstrap removes sampling error, so it centers on the truth
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Permutation simulates the null (no difference); the bootstrap simulates sampling variation around our estimate.
 - **Why the wrong options are wrong (tutor only):**
-  B) The bootstrap shows sampling error.
-  C) Both use 5000.
-  D) It's by design.
+  A) Both use 5000.
+  B) It's by design.
+  D) The bootstrap shows sampling error.
 - **Hint:** Which method keeps the association?
 
 ### rev-ch11-book-03
@@ -2216,17 +2216,17 @@ What does the position of the blue line in Distribution 2 tell you?
 
 - **Options:**
 
-  A) The observed difference is typical under the null
+  A) Shuffling never produced a difference that big, so p is tiny
   B) The bootstrap failed
-  C) The CI includes 0, so the difference isn't significant
-  D) Shuffling never produced a difference that big, so p is tiny
+  C) The observed difference is typical under the null
+  D) The CI includes 0, so the difference isn't significant
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** The blue line (8.2 mm) lies well past the largest permuted difference (about 6.5 mm in absolute value).
 - **Why the wrong options are wrong (tutor only):**
-  A) It's way out in the tail.
   B) Distribution 2 is the permutation.
-  C) Distribution 2 isn't used for a CI.
+  C) It's way out in the tail.
+  D) Distribution 2 isn't used for a CI.
 - **Hint:** Is 8.2 mm unusual for the null distribution?
 
 ### rev-ch11-chime-01
@@ -2261,15 +2261,15 @@ Which of these is a permutation test robust to, or not dependent on? (Select all
 
 - **Options:**
 
-  A) Non-normal data
-  B) Biased sampling
-  C) Non-independent observations analyzed as independent
+  A) Non-independent observations analyzed as independent
+  B) Non-normal data
+  C) Biased sampling
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Permutation makes no normality assumption. But like any test it needs unbiased, independent data (or a shuffling scheme that respects the dependence).
 - **Why the wrong options are wrong (tutor only):**
-  B) Bias gives a misleading answer whatever the test.
-  C) Must be handled, e.g., by shuffling within groups.
+  A) Must be handled, e.g., by shuffling within groups.
+  C) Bias gives a misleading answer whatever the test.
 - **Hint:** What does shuffling assume about the data?
 
 ### rev-ch11-chime-01-v2
@@ -2326,17 +2326,17 @@ What does each permuted replicate represent?
 
 - **Options:**
 
-  A) A resample of our data, drawn with replacement
+  A) A dataset with the outliers removed
   B) Data like ours with any real association removed
-  C) A new sample from the population
-  D) A dataset with the outliers removed
+  C) A resample of our data, drawn with replacement
+  D) A new sample from the population
 
 - **Answer (tutor only):** B
 - **Explanation (tutor only):** Shuffling breaks the link between variables, so each replicate is one possible 'null world' version of our data.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's the bootstrap.
-  C) No new data are collected.
-  D) All values are kept.
+  A) All values are kept.
+  C) That's the bootstrap.
+  D) No new data are collected.
 - **Hint:** What does shuffling destroy?
 
 ### rev-ch11-chime-02-v2
@@ -2350,16 +2350,16 @@ After building a permutation null distribution, how is the p-value found?
 - **Options:**
 
   A) The proportion as or more extreme than observed
-  B) The SD of the permuted statistics
-  C) The 2.5th and 97.5th percentiles of the permuted statistics
-  D) The mean of the permuted statistics
+  B) The 2.5th and 97.5th percentiles of the permuted statistics
+  C) The mean of the permuted statistics
+  D) The SD of the permuted statistics
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** How often does the null world produce something as extreme as what we saw?
 - **Why the wrong options are wrong (tutor only):**
-  B) That's a spread, not a p-value.
-  C) Those percentiles would give an interval, not a p-value (and bootstrap percentiles give the CI).
-  D) That's near 0 by design.
+  B) Those percentiles would give an interval, not a p-value (and bootstrap percentiles give the CI).
+  C) That's near 0 by design.
+  D) That's a spread, not a p-value.
 - **Hint:** How often does the null produce data like ours?
 
 ### rev-ch11-new-01
@@ -2401,17 +2401,17 @@ What do the 19 shuffled panels represent?
 
 - **Options:**
 
-  A) What data would look like if island had no effect on mass
-  B) What data would look like if Biscoe penguins were heavier
-  C) Repeated real samples taken from the two penguin islands
-  D) Bootstrap resamples used to build a confidence interval
+  A) What data would look like if Biscoe penguins were heavier
+  B) What data would look like if island had no effect on mass
+  C) Bootstrap resamples used to build a confidence interval
+  D) Repeated real samples taken from the two penguin islands
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Shuffling labels breaks any link between island and mass, simulating the null.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's an alternative.
-  C) They're not new samples.
-  D) Bootstrapping resamples with replacement within groups; this shuffles labels.
+  A) That's an alternative.
+  C) Bootstrapping resamples with replacement within groups; this shuffles labels.
+  D) They're not new samples.
 - **Hint:** What does shuffling remove?
 
 ### rev-ch11-new-01-v2
@@ -2427,17 +2427,17 @@ If the real panel clearly stood out from all 19 shuffled panels, what would that
 
 - **Options:**
 
-  A) The real difference is unusual under the null (p ≤ 1/20)
-  B) Shuffling was done incorrectly, so the test is invalid
-  C) The islands certainly have identical mean body masses
-  D) Nothing; line-ups can't tell us anything about the data
+  A) The islands certainly have identical mean body masses
+  B) Nothing; line-ups can't tell us anything about the data
+  C) The real difference is unusual under the null (p ≤ 1/20)
+  D) Shuffling was done incorrectly, so the test is invalid
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** If the real data stand out from 19 null panels, a pattern that strong would rarely arise by chance (like p ≤ 0.05).
 - **Why the wrong options are wrong (tutor only):**
-  B) Standing out is the point.
-  C) The opposite.
-  D) Line-ups are a visual permutation test.
+  A) The opposite.
+  B) Line-ups are a visual permutation test.
+  D) Standing out is the point.
 - **Hint:** 1 real vs 19 null.
 
 ### rev-ch12-book-05
@@ -2533,16 +2533,16 @@ In an observational study, people who sleep more report less anxiety. Which expl
 - **Options:**
 
   A) More sleep reduces anxiety
-  B) The association is a chance result
-  C) A third factor (e.g., stress at work) affects both
-  D) Less anxious people find it easier to sleep
+  B) A third factor (e.g., stress at work) affects both
+  C) Less anxious people find it easier to sleep
+  D) The association is a chance result
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Reverse causation: the response is actually causing the explanatory variable.
 - **Why the wrong options are wrong (tutor only):**
   A) That's the forward causal story.
-  B) That's sampling error.
-  C) That's confounding.
+  B) That's confounding.
+  D) That's sampling error.
 - **Hint:** Flip the arrow.
 
 ### rev-ch12-hw-02-v2
@@ -2555,16 +2555,16 @@ Ice cream sales and sunburns are positively correlated across days. What's the m
 
 - **Options:**
 
-  A) Sunburns make people buy ice cream to cool down
-  B) It must be sampling error
-  C) Ice cream causes sunburn
-  D) Hot, sunny weather increases both
+  A) Hot, sunny weather increases both
+  B) Ice cream causes sunburn
+  C) It must be sampling error
+  D) Sunburns make people buy ice cream to cool down
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Sunny days drive both. This is the classic common-cause pattern.
 - **Why the wrong options are wrong (tutor only):**
-  B) Possible, but a confounder is far more likely with an obvious common cause.
-  C) and A) No plausible mechanism.
+  B) and D) No plausible mechanism.
+  C) Possible, but a confounder is far more likely with an obvious common cause.
 - **Hint:** What makes both go up?
 
 ### rev-exam1-q04
@@ -2602,15 +2602,15 @@ You conduct the same study twice, once with 20 individuals and once with 500. Wh
 
 - **Options:**
 
-  A) The standard error
+  A) The standard deviation
   B) The width of the 95% confidence interval
-  C) The standard deviation
-  D) The mean
+  C) The mean
+  D) The standard error
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, D
 - **Explanation (tutor only):** Uncertainty (SE, CI width) shrinks with n; the SD and mean estimate population values that don't depend on n.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) don't systematically change with n.
+  A) and C) don't systematically change with n.
 - **Hint:** Uncertainty vs population values.
 
 ### rev-exam1-q04-v2
@@ -2623,15 +2623,15 @@ As sample size increases, which estimates are expected to stay about the same (b
 
 - **Options:**
 
-  A) The mean
-  B) The standard deviation
-  C) The standard error
-  D) The width of the 95% CI
+  A) The standard error
+  B) The mean
+  C) The width of the 95% CI
+  D) The standard deviation
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, D
 - **Explanation (tutor only):** The mean and SD estimate fixed population values. The SE and CI width shrink with n.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) shrink.
+  A) and C) shrink.
 - **Hint:** Which ones estimate population parameters?
 
 ### rev-exam1-q06
@@ -2669,16 +2669,16 @@ A student says, "The standard error tells me how much the individuals in my samp
 
 - **Options:**
 
-  A) The SE describes how much estimates vary among samples, not individuals
-  B) The SE is only defined for categorical data, not for measurements
-  C) The SE is calculated before any data are collected in a study
-  D) They aren't wrong; that is what the standard error describes
+  A) The SE is only defined for categorical data, not for measurements
+  B) The SE describes how much estimates vary among samples, not individuals
+  C) They aren't wrong; that is what the standard error describes
+  D) The SE is calculated before any data are collected in a study
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Variation among individuals is the SD. The SE describes uncertainty in an estimate across repeated samples.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Not true.
-  D) That's the SD.
+  A) and D) Not true.
+  C) That's the SD.
 - **Hint:** Individuals vs estimates.
 
 ### rev-exam1-q06-v2
@@ -2691,17 +2691,17 @@ Which describes the sampling distribution of a mean?
 
 - **Options:**
 
-  A) The distribution of means from many samples of the same size
-  B) The distribution of individual values within one sample
-  C) The distribution of individual values in the population
-  D) The distribution of p-values from many repeated studies
+  A) The distribution of individual values in the population
+  B) The distribution of means from many samples of the same size
+  C) The distribution of p-values from many repeated studies
+  D) The distribution of individual values within one sample
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A sampling distribution is the distribution of an estimate across repeated samples.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the sample distribution.
-  C) That's the population distribution.
-  D) Not what it means.
+  A) That's the population distribution.
+  C) Not what it means.
+  D) That's the sample distribution.
 - **Hint:** Distribution of estimates.
 
 ### rev-exam1-q08
@@ -2737,15 +2737,15 @@ To estimate the average size of fish in a lake, you measure fish caught with a n
 
 - **Options:**
 
-  A) Sampling bias, because small fish are less likely to be measured
-  B) Sampling error, because estimates differ among samples by chance
+  A) Sampling error, because estimates differ among samples by chance
+  B) Sampling bias, because small fish are less likely to be measured
   C) Non-independence, because fish from one school are related
   D) Measurement error, because rulers are imprecise for fish
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The net systematically misses small fish, so the estimate will be too large: bias.
 - **Why the wrong options are wrong (tutor only):**
-  B) Sampling error is random, not systematic.
+  A) Sampling error is random, not systematic.
   C) and D) Not the main issue.
 - **Hint:** Is the error systematic?
 
@@ -2759,17 +2759,17 @@ To estimate how much time people spend outdoors, a researcher surveys visitors a
 
 - **Options:**
 
-  A) Sampling bias: park visitors likely spend more time outdoors
-  B) Sampling error: a larger sample would remove the problem
+  A) No problem: anyone could visit the park on any day
+  B) Sampling bias: park visitors likely spend more time outdoors
   C) Non-independence: visitors were all asked the same questions
-  D) No problem: anyone could visit the park on any day
+  D) Sampling error: a larger sample would remove the problem
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Park visitors aren't representative of everyone; more data won't fix a biased sampling frame.
 - **Why the wrong options are wrong (tutor only):**
-  B) Larger samples don't fix bias.
+  A) The sample isn't representative.
   C) Same questions don't cause non-independence.
-  D) The sample isn't representative.
+  D) Larger samples don't fix bias.
 - **Hint:** Who gets sampled?
 
 ### rev-exam1-q09
@@ -2808,16 +2808,16 @@ A p-value of 0.30 means: (select all correct)
 
 - **Options:**
 
-  A) We fail to reject the null hypothesis (at α = 0.05)
+  A) The null is true
   B) 30% of samples from the null would be as or more extreme than ours
   C) There is a 30% chance that the null is true
-  D) The null is true
+  D) We fail to reject the null hypothesis (at α = 0.05)
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, D
 - **Explanation (tutor only):** p > 0.05, so we fail to reject. B is the definition of a p-value.
 - **Why the wrong options are wrong (tutor only):**
+  A) Failing to reject isn't proof.
   C) p isn't P(null).
-  D) Failing to reject isn't proof.
 - **Hint:** Definition of p.
 
 ### rev-exam1-q09-v2
@@ -2830,15 +2830,15 @@ Which statements about a p-value are correct? (select all correct)
 
 - **Options:**
 
-  A) It is calculated assuming the null hypothesis is true
+  A) It is the probability that the null hypothesis is true
   B) It's the probability of a result at least this extreme if the null were true
-  C) It is the probability that the null hypothesis is true
+  C) It is calculated assuming the null hypothesis is true
   D) It measures how large the effect is
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** p assumes the null and gives the probability of data at least this extreme.
 - **Why the wrong options are wrong (tutor only):**
-  C) Reversed conditional.
+  A) Reversed conditional.
   D) p mixes effect size and sample size.
 - **Hint:** P(data | null).
 
@@ -2878,14 +2878,14 @@ What would happen if the field changed the custom from α = 0.05 to α = 0.10? (
 - **Options:**
 
   A) We would reject more true nulls (more type I errors)
-  B) We would reject fewer false nulls (less power)
-  C) We would reject more false nulls (more power)
+  B) We would reject more false nulls (more power)
+  C) We would reject fewer false nulls (less power)
   D) We would use 90% confidence intervals, which are narrower
 
-- **Answer (tutor only):** A, C, D
+- **Answer (tutor only):** A, B, D
 - **Explanation (tutor only):** A larger α makes rejecting easier: more false positives, more power, and narrower (90%) intervals.
 - **Why the wrong options are wrong (tutor only):**
-  B) Power goes up.
+  C) Power goes up.
 - **Hint:** Easier to reject.
 
 ### rev-exam1-q11-v2
@@ -2969,15 +2969,15 @@ A researcher compares two diets by giving each diet to one cage of 20 mice. How 
 - **Options:**
 
   A) 1
-  B) 20
+  B) 10
   C) 40
-  D) 10
+  D) 20
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Diet was applied to whole cages, so each cage is one replicate; mice in a cage are not independent.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Count mice, not cages.
-  D) No basis.
+  B) No basis.
+  D) and C) Count mice, not cages.
 - **Hint:** What received the treatment?
 
 ### rev-exam1-q23
@@ -3015,17 +3015,17 @@ A study reports a mean beak depth of 9.4 mm with a standard error of 0.1 mm. In 
 
 - **Options:**
 
-  A) How far the sample mean typically is from the true mean
+  A) The amount of bias introduced by the sampling method
   B) How far a typical bird's beak is from the mean beak depth
-  C) The probability that the sample mean is wrong
-  D) The amount of bias introduced by the sampling method
+  C) How far the sample mean typically is from the true mean
+  D) The probability that the sample mean is wrong
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The SE describes uncertainty in the estimate due to sampling error.
 - **Why the wrong options are wrong (tutor only):**
+  A) The SE doesn't measure bias.
   B) That's the SD.
-  C) Not a probability.
-  D) The SE doesn't measure bias.
+  D) Not a probability.
 - **Hint:** Uncertainty in the estimate.
 
 ### rev-exam1-q23-v2
@@ -3038,17 +3038,17 @@ Two studies measure the same trait with the same SD, but one has n = 25 and the 
 
 - **Options:**
 
-  A) The n = 100 study's SE is half as large
+  A) The n = 100 study's SE is twice as large
   B) The n = 100 study's SE is a quarter as large
-  C) Both studies have exactly the same SE
-  D) The n = 100 study's SE is twice as large
+  C) The n = 100 study's SE is half as large
+  D) Both studies have exactly the same SE
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** SE = SD / √n; √100 / √25 = 2, so the SE halves.
 - **Why the wrong options are wrong (tutor only):**
+  A) Larger n means smaller SE.
   B) SE scales with √n.
-  C) n differs.
-  D) Larger n means smaller SE.
+  D) n differs.
 - **Hint:** SD / √n.
 
 ### rev-exam1-q24
@@ -3084,15 +3084,15 @@ Which study is an experiment?
 
 - **Options:**
 
-  A) Randomly assigning plants to shade or full sun, then measuring growth
+  A) Surveying gardeners about where their plants grow best
   B) Comparing growth of plants that happen to grow in shade or sun
-  C) Measuring growth of plants along a natural light gradient
-  D) Surveying gardeners about where their plants grow best
+  C) Randomly assigning plants to shade or full sun, then measuring growth
+  D) Measuring growth of plants along a natural light gradient
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** In an experiment the researcher assigns the explanatory variable (ideally at random).
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) observe existing conditions.
+  B), D) and A) observe existing conditions.
 - **Hint:** Who sets the explanatory variable?
 
 ### rev-exam1-q24-v2
@@ -3105,17 +3105,17 @@ Why does random assignment allow causal conclusions?
 
 - **Options:**
 
-  A) It balances confounders, measured or not, on average
+  A) It removes all sampling error from the results
   B) It guarantees a large sample size for the study
-  C) It removes all sampling error from the results
-  D) It ensures every individual responds the same way
+  C) It ensures every individual responds the same way
+  D) It balances confounders, measured or not, on average
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Randomization breaks links between the treatment and other variables, so differences can be attributed to the treatment.
 - **Why the wrong options are wrong (tutor only):**
+  A) Sampling error remains.
   B) Unrelated.
-  C) Sampling error remains.
-  D) Individuals still vary.
+  C) Individuals still vary.
 - **Hint:** What happens to confounders?
 
 ## Chapter 13: Linear Models
@@ -3155,12 +3155,12 @@ A researcher says, "Warmer water speeds up fish metabolism, so fish in warm lake
 
 - **Options:**
 
-  A) The metabolism idea is scientific; the lm() is statistical
+  A) Both are scientific models of the same process
   B) The lm() is scientific; the metabolism idea is statistical
   C) Both are statistical models of the same pattern
-  D) Both are scientific models of the same process
+  D) The metabolism idea is scientific; the lm() is statistical
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The metabolism idea proposes a process. The regression describes a pattern in the data.
 - **Why the wrong options are wrong (tutor only):**
   Scientific models explain how; statistical models describe what the data look like.
@@ -3176,16 +3176,16 @@ Which statement about scientific and statistical models is true?
 
 - **Options:**
 
-  A) Statistical models describe patterns; scientific models propose processes
-  B) Scientific models are always correct; statistical models can be wrong
-  C) Only statistical models can be used to make predictions about data
+  A) Scientific models are always correct; statistical models can be wrong
+  B) Only statistical models can be used to make predictions about data
+  C) Statistical models describe patterns; scientific models propose processes
   D) Only scientific models make assumptions about the world
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Statistical models summarize patterns in data; scientific models are built on ideas about the processes that generate them. Both can be wrong, make predictions and rest on assumptions.
 - **Why the wrong options are wrong (tutor only):**
-  B) Both can be wrong.
-  C) Scientific models make predictions too.
+  A) Both can be wrong.
+  B) Scientific models make predictions too.
   D) Statistical models have assumptions too.
 - **Hint:** Pattern vs process.
 
@@ -3240,17 +3240,17 @@ The (Intercept) describes:
 
 - **Options:**
 
-  A) The mean flipper length of the penguins in this dataset
-  B) The mean flipper length of all penguins in the world
-  C) The mean flipper length of the reference-level species
-  D) The expected flipper length when body mass is zero
+  A) The expected flipper length when body mass is zero
+  B) The mean flipper length of the reference-level species
+  C) The mean flipper length of all penguins in the world
+  D) The mean flipper length of the penguins in this dataset
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** An intercept-only model predicts the sample mean of the response.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's an estimate from a sample, not the population value.
-  C) No species term is in the model.
-  D) No body mass term is in the model.
+  A) No body mass term is in the model.
+  B) No species term is in the model.
+  C) It's an estimate from a sample, not the population value.
 - **Hint:** What does ~ 1 estimate?
 
 ### ch13-book-02-v2
@@ -3315,9 +3315,9 @@ Without running it, which species will be the reference level in lm(bill_length_
 - **Options:**
 
   A) Adelie
-  B) Chinstrap
+  B) Whichever species has the most penguins
   C) Gentoo
-  D) Whichever species has the most penguins
+  D) Chinstrap
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** By default R uses the first level alphabetically. Adelie comes first.
@@ -3337,12 +3337,12 @@ Penguins were sampled on three islands: Biscoe, Dream and Torgersen. Without run
 
 - **Options:**
 
-  A) Biscoe
+  A) Torgersen
   B) Dream
-  C) Torgersen
-  D) Whichever island has the lightest penguins
+  C) Whichever island has the lightest penguins
+  D) Biscoe
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** R uses the first level alphabetically as the reference: Biscoe.
 - **Why the wrong options are wrong (tutor only):**
   Means don't set the default reference level.
@@ -3518,17 +3518,17 @@ The dataset has 151 Adelie, 68 Chinstrap and 123 Gentoo penguins. Why isn't the 
 
 - **Options:**
 
-  A) The species have different sample sizes, so their means need weighting
-  B) The intercept is already the mean bill length of all the penguins
-  C) Species means can't be combined because they come from a model
-  D) It is; the overall mean always equals the average of group means
+  A) The intercept is already the mean bill length of all the penguins
+  B) The species have different sample sizes, so their means need weighting
+  C) It is; the overall mean always equals the average of group means
+  D) Species means can't be combined because they come from a model
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The overall mean weights each species by its number of penguins. Adelie (151) counts more than Chinstrap (68).
 - **Why the wrong options are wrong (tutor only):**
-  B) The intercept is the Adelie mean.
-  C) Model-based group means are just the sample means here.
-  D) Only true when groups are the same size.
+  A) The intercept is the Adelie mean.
+  C) Only true when groups are the same size.
+  D) Model-based group means are just the sample means here.
 - **Hint:** Each penguin counts once.
 
 ### ch13-book-06-v2
@@ -3548,16 +3548,16 @@ Which of these can you calculate using ONLY this output?
 
 - **Options:**
 
-  A) The mean bill length of Gentoo penguins
-  B) The mean bill length of all penguins
-  C) The number of Chinstrap penguins sampled
-  D) The standard deviation of Adelie bills
+  A) The standard deviation of Adelie bills
+  B) The mean bill length of Gentoo penguins
+  C) The mean bill length of all penguins
+  D) The number of Chinstrap penguins sampled
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Gentoo mean = 38.791 + 8.713. The overall mean needs sample sizes; counts and SDs aren't in the coefficients.
 - **Why the wrong options are wrong (tutor only):**
-  B) Needs the sample size of each species.
-  C) and D) Coefficients don't report counts or spread.
+  C) Needs the sample size of each species.
+  D) and A) Coefficients don't report counts or spread.
 - **Hint:** Coefficients give group means, nothing more.
 
 ### ch13-book-07
@@ -3789,16 +3789,16 @@ The regression of bill depth on bill length (intercept 14.6, slope 0.0641) was f
 
 - **Options:**
 
-  A) The prediction for a bill 50 mm long
-  B) The prediction for a bill 5 mm long
-  C) The prediction for a bill 100 mm long
-  D) They are all equally trustworthy
+  A) The prediction for a bill 5 mm long
+  B) The prediction for a bill 100 mm long
+  C) They are all equally trustworthy
+  D) The prediction for a bill 50 mm long
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 50 mm lies within the data (40.9 to 58 mm). The others are extrapolations.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) are far outside the data.
-  D) Predictions outside the data range are not trustworthy.
+  A) and B) are far outside the data.
+  C) Predictions outside the data range are not trustworthy.
 - **Hint:** Which one is inside the range of the data?
 
 ### ch13-book-11-v2
@@ -3815,15 +3815,15 @@ The regression of bill depth on bill length (intercept 14.6, slope 0.0641) was f
 
   A) A bill length of 0 mm is far outside the data, so it's an extrapolation
   B) The intercept is the mean bill depth, not a prediction for any penguin
-  C) The intercept is only meaningful when the slope is negative
-  D) We should; 14.6 mm is the expected depth of a bill 0 mm long
+  C) We should; 14.6 mm is the expected depth of a bill 0 mm long
+  D) The intercept is only meaningful when the slope is negative
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The intercept is the prediction at x = 0, which is far outside the observed bill lengths, so it has no biological meaning here.
 - **Why the wrong options are wrong (tutor only):**
   B) The mean depth is 17.59, not 14.6.
-  C) The slope's sign doesn't matter.
-  D) The math gives a number, but it's an extrapolation.
+  C) The math gives a number, but it's an extrapolation.
+  D) The slope's sign doesn't matter.
 - **Hint:** Is 0 mm within the range of the data?
 
 ### ch13-book-12
@@ -3917,15 +3917,15 @@ The figure shows Gentoo bill depth vs bill length, with solid lines from lm(bill
 
 - **Options:**
 
-  A) Mean bill lengths
+  A) Slopes
   B) Mean bill depths
-  C) Slopes
+  C) Mean bill lengths
   D) Intercepts
 
-- **Answer (tutor only):** A, B, D
+- **Answer (tutor only):** B, C, D
 - **Explanation (tutor only):** Males have longer and deeper bills (different means) and their line sits higher (different intercept), but the slopes are nearly the same (parallel dashed lines).
 - **Why the wrong options are wrong (tutor only):**
-  C) The dashed lines are nearly parallel.
+  A) The dashed lines are nearly parallel.
 - **Hint:** Look at where the clouds sit, and whether the dashed lines are parallel.
 
 ### ch13-book-13-v2
@@ -3942,15 +3942,15 @@ The figure shows Gentoo bill depth vs bill length, with solid lines from lm(bill
 - **Options:**
 
   A) The additive model gives both sexes one shared slope
-  B) Males and females have exactly the same mean bill length
-  C) The dashed separate fits are also exactly parallel
+  B) The dashed separate fits are also exactly parallel
+  C) Males and females have exactly the same mean bill length
   D) Bill depth was measured more precisely for one sex
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Without an interaction, the model estimates one bill length slope for both sexes; sex only shifts the line up or down.
 - **Why the wrong options are wrong (tutor only):**
-  B) The means differ.
-  C) The dashed lines are close but not exactly parallel.
+  B) The dashed lines are close but not exactly parallel.
+  C) The means differ.
   D) Measurement precision doesn't set the slope.
 - **Hint:** How many slopes does bill_length_mm + sex estimate?
 
@@ -4236,13 +4236,13 @@ Messerli (2012) found that countries with higher chocolate consumption tend to h
 - **Options:**
 
   A) Chocolate makes people happier, and happier scientists do more creative work
-  B) A scatterplot with a best-fit line through the country-level data points
-  C) Richer countries spend more on both research and luxury foods like chocolate
+  B) Richer countries spend more on both research and luxury foods like chocolate
+  C) A scatterplot with a best-fit line through the country-level data points
 
-- **Answer (tutor only):** A, C
+- **Answer (tutor only):** A, B
 - **Explanation (tutor only):** A and C propose processes (happiness; wealth). A best-fit line describes a pattern, so it's a statistical model.
 - **Why the wrong options are wrong (tutor only):**
-  B) A fitted line describes a pattern; it says nothing about why.
+  C) A fitted line describes a pattern; it says nothing about why.
 - **Hint:** Which ones explain why?
 
 ### ch13-hw-02
@@ -4296,16 +4296,16 @@ What does the (Intercept) of 4.63 represent?
 - **Options:**
 
   A) The expected chocolate consumption in a country with no Nobel laureates
-  B) The average chocolate consumption (kg/person/year) across countries
-  C) The average number of Nobel laureates per 10 million people
-  D) The increase in chocolate consumption per extra Nobel laureate
+  B) The average number of Nobel laureates per 10 million people
+  C) The increase in chocolate consumption per extra Nobel laureate
+  D) The average chocolate consumption (kg/person/year) across countries
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A model with only an intercept predicts the mean of the response for everyone. Here the response is chocolate consumption.
 - **Why the wrong options are wrong (tutor only):**
   A) There's no predictor here, so nothing is set to zero.
-  C) Nobel prizes aren't in this model.
-  D) There's no slope in an intercept-only model.
+  B) Nobel prizes aren't in this model.
+  C) There's no slope in an intercept-only model.
 - **Hint:** What does ~ 1 predict for every country?
 
 ### ch13-hw-02-v2
@@ -4318,17 +4318,17 @@ Messerli (2012) found that countries with higher chocolate consumption tend to h
 
 - **Options:**
 
-  A) lm(nobel_prizes ~ 1, data = chocolate_data)
-  B) lm(nobel_prizes ~ chocolate_consumption, data = chocolate_data)
+  A) lm(nobel_prizes ~ chocolate_consumption, data = chocolate_data)
+  B) lm(1 ~ nobel_prizes, data = chocolate_data)
   C) lm(chocolate_consumption ~ 1, data = chocolate_data)
-  D) lm(1 ~ nobel_prizes, data = chocolate_data)
+  D) lm(nobel_prizes ~ 1, data = chocolate_data)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** ~ 1 fits an intercept only, and the intercept-only model's estimate is the mean of the response.
 - **Why the wrong options are wrong (tutor only):**
-  B) That also fits a slope.
+  A) That also fits a slope.
+  B) The response must be on the left.
   C) That gives mean chocolate consumption.
-  D) The response must be on the left.
 - **Hint:** Response on the left; ~ 1 means 'intercept only'.
 
 ### ch13-hw-03
@@ -4382,16 +4382,16 @@ Why is the intercept (-3.396) negative, even though a country can't have negativ
 - **Options:**
 
   A) It's the prediction at 0 kg of chocolate, far outside the data
-  B) Countries with no chocolate truly lose Nobel laureates on average
-  C) The model must have been fit to the data incorrectly
-  D) Intercepts are always negative when the slope is positive
+  B) Intercepts are always negative when the slope is positive
+  C) Countries with no chocolate truly lose Nobel laureates on average
+  D) The model must have been fit to the data incorrectly
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The intercept is where the line crosses chocolate = 0. No country in the data eats 0 kg, so this is an extrapolation and needn't make biological sense.
 - **Why the wrong options are wrong (tutor only):**
-  B) Laureate counts can't be negative.
-  C) The fit can be correct; it's just extrapolated.
-  D) Sign of the intercept doesn't depend on the slope's sign.
+  B) Sign of the intercept doesn't depend on the slope's sign.
+  C) Laureate counts can't be negative.
+  D) The fit can be correct; it's just extrapolated.
 - **Hint:** What value of chocolate consumption does the intercept correspond to?
 
 ### ch13-hw-03-v2
@@ -4411,17 +4411,17 @@ What does the model predict for a country with 0 kg of chocolate consumption per
 
 - **Options:**
 
-  A) 2.527 laureates per 10 million people
-  B) -3.396 laureates per 10 million people
-  C) The mean number of laureates across countries
-  D) 0 laureates per 10 million people
+  A) -3.396 laureates per 10 million people
+  B) 2.527 laureates per 10 million people
+  C) 0 laureates per 10 million people
+  D) The mean number of laureates across countries
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** At chocolate = 0, the prediction is just the intercept: -3.396. Impossible in reality, showing the danger of predicting outside the data.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's the slope.
-  C) That's what an intercept-only model would give.
-  D) The line doesn't pass through the origin.
+  B) That's the slope.
+  C) The line doesn't pass through the origin.
+  D) That's what an intercept-only model would give.
 - **Hint:** Set chocolate_consumption to 0.
 
 ### ch13-hw-04
@@ -4471,17 +4471,17 @@ According to the model, how do two countries that differ by 2 kg of chocolate pe
 
 - **Options:**
 
-  A) By about 2.53 laureates per 10 million people
-  B) By about 5.05 laureates per 10 million people
-  C) By about 1.65 laureates per 10 million people
-  D) By about 6.79 laureates per 10 million people
+  A) By about 1.65 laureates per 10 million people
+  B) By about 6.79 laureates per 10 million people
+  C) By about 2.53 laureates per 10 million people
+  D) By about 5.05 laureates per 10 million people
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The slope is 2.527 laureates per kg, so 2 kg → 2 × 2.527 = 5.05.
 - **Why the wrong options are wrong (tutor only):**
-  A) That's the difference for 1 kg.
-  C) That adds the intercept to the slope.
-  D) That's 2 × 3.396, the intercept, not the slope.
+  A) That adds the intercept to the slope.
+  B) That's 2 × 3.396, the intercept, not the slope.
+  C) That's the difference for 1 kg.
 - **Hint:** Slope × difference in x.
 
 ### ch13-hw-04-v2
@@ -4705,17 +4705,17 @@ model_A has a residual standard deviation of 10.2 and model_B of 6.1. What does 
 
 - **Options:**
 
-  A) Data points fall closer, on average, to model B's predictions
-  B) Data points fall closer, on average, to model A's predictions
-  C) Chocolate consumption causes differences in Nobel prizes
-  D) Model A is statistically significant, while model B is not
+  A) Data points fall closer, on average, to model A's predictions
+  B) Data points fall closer, on average, to model B's predictions
+  C) Model A is statistically significant, while model B is not
+  D) Chocolate consumption causes differences in Nobel prizes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Smaller residual SD = observations closer to the predictions.
 - **Why the wrong options are wrong (tutor only):**
-  B) Larger residual SD means farther.
-  C) Fit doesn't show causation.
-  D) Residual SD isn't a significance test.
+  A) Larger residual SD means farther.
+  C) Residual SD isn't a significance test.
+  D) Fit doesn't show causation.
 - **Hint:** What does the residual SD measure?
 
 ### ch13-hw-08-v2
@@ -4728,17 +4728,17 @@ Messerli (2012) found that countries with higher chocolate consumption tend to h
 
 - **Options:**
 
-  A) A country's laureate count is typically about 6 away from the model's prediction
-  B) Each extra kg of chocolate predicts about 6.1 more laureates per 10 million
-  C) The model explains about 61% of the variation in Nobel laureates
-  D) The standard deviation of chocolate consumption across countries is 6.1
+  A) Each extra kg of chocolate predicts about 6.1 more laureates per 10 million
+  B) The standard deviation of chocolate consumption across countries is 6.1
+  C) A country's laureate count is typically about 6 away from the model's prediction
+  D) The model explains about 61% of the variation in Nobel laureates
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The residual SD is roughly the typical distance between observations and the model's predictions, in units of the response.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's a slope.
-  C) That's R², not the residual SD.
-  D) The residual SD is about the response, not the explanatory variable.
+  A) That's a slope.
+  B) The residual SD is about the response, not the explanatory variable.
+  D) That's R², not the residual SD.
 - **Hint:** Residuals are observed minus predicted.
 
 ### ch13-quiz-01
@@ -4784,16 +4784,16 @@ If dose had instead been entered as a number (0.5, 1, 2), what would the model a
 
 - **Options:**
 
-  A) That tooth length changes by the same amount for every extra mg of vitamin C
-  B) That orange juice and water have the same effect at every dose of vitamin C
-  C) That every hamster in a dose group has exactly the same tooth length
+  A) That orange juice and water have the same effect at every dose of vitamin C
+  B) That every hamster in a dose group has exactly the same tooth length
+  C) That tooth length changes by the same amount for every extra mg of vitamin C
   D) That the dose effects must be estimated separately for OJ and for water
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** A numeric dose gets one slope: the same change in tooth length per mg everywhere. As a category, each dose gets its own mean, so the dose-response can have any shape.
 - **Why the wrong options are wrong (tutor only):**
-  B) Both versions are additive, so both assume the supplement effect is the same at every dose.
-  C) Neither version assumes no variation within groups.
+  A) Both versions are additive, so both assume the supplement effect is the same at every dose.
+  B) Neither version assumes no variation within groups.
   D) Neither version has a dose × supplement interaction.
 - **Hint:** What does a single slope imply about going from 0.5 to 1 mg versus 1 to 2 mg?
 
@@ -4807,15 +4807,15 @@ A plant biologist grows seedlings at three fertilizer levels (low, medium, high)
 
 - **Options:**
 
-  A) Each fertilizer level gets its own mean, so height need not change by equal steps
-  B) The model estimates a single slope for the change in height per fertilizer level
+  A) The model estimates a single slope for the change in height per fertilizer level
+  B) Each fertilizer level gets its own mean, so height need not change by equal steps
   C) The model no longer needs a reference level or an intercept to make predictions
   D) The predictions are guaranteed to be identical to those from the numeric version
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A categorical predictor gives each level its own coefficient (relative to the reference), so the model doesn't assume a straight-line, equal-step response.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's what the numeric version does.
+  A) That's what the numeric version does.
   C) Categorical predictors still use a reference level and intercept.
   D) Predictions match only if the true means happen to fall on a straight line.
 - **Hint:** One slope, or one mean per level?
@@ -5020,15 +5020,15 @@ Researchers ask whether fishing changes the year-to-year coefficient of variatio
 
 - **Options:**
 
-  A) lm(cv ~ exploited + size)
+  A) lm(exploited ~ cv + size)
   B) lm(size ~ cv + exploited)
-  C) lm(exploited ~ cv + size)
+  C) lm(cv ~ exploited + size)
   D) lm(cv ~ size)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** cv is the response, so it goes on the left. Exploitation status (the question of interest) and size (the variable we adjust for) both go on the right.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) put the wrong variable as the response.
+  B) and A) put the wrong variable as the response.
   D) leaves out exploitation, the variable we care about.
 - **Hint:** Which variable is being explained?
 
@@ -5042,17 +5042,17 @@ A study asks whether exploited fish species have more variable larval population
 
 - **Options:**
 
-  A) It leaves out age, so it does not adjust for age at maturation
-  B) It puts cv as the response when exploited should be the response
-  C) It should include age instead of exploited as the only predictor
-  D) Nothing; the adjustment happens automatically in lm()
+  A) It should include age instead of exploited as the only predictor
+  B) Nothing; the adjustment happens automatically in lm()
+  C) It puts cv as the response when exploited should be the response
+  D) It leaves out age, so it does not adjust for age at maturation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** To adjust for age at maturation, age must be in the model: lm(cv ~ exploited + age).
 - **Why the wrong options are wrong (tutor only):**
-  B) cv is the response in this design.
-  C) Dropping exploited removes the variable of interest.
-  D) lm() only adjusts for variables you include.
+  A) Dropping exploited removes the variable of interest.
+  B) lm() only adjusts for variables you include.
+  C) cv is the response in this design.
 - **Hint:** Which variable from the design is missing?
 
 ### ch13-quiz-06
@@ -5070,10 +5070,10 @@ To ask whether fishing makes fish populations more variable, a model compared th
 - **Options:**
 
   A) Square root of the mean square residual
-  B) Sum of the squared residuals
-  C) Residual sum of squares divided by its degrees of freedom
+  B) Residual sum of squares divided by its degrees of freedom
+  C) Sum of the squared residuals
 
-- **Answer (tutor only):** 1-B, 2-C, 3-A
+- **Answer (tutor only):** 1-C, 2-B, 3-A
 - **Explanation (tutor only):** Square each residual and add them up to get the residual sum of squares (2.45). Divide by the residual degrees of freedom to get the mean square, an estimate of the residual variance (0.098). Its square root (0.313) is the residual standard deviation: roughly how far a typical point falls from its prediction, in the units of cv.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: the mean square and the standard deviation. The mean square is a variance (squared units); the SD is its square root.
@@ -5093,11 +5093,11 @@ To ask whether fishing makes fish populations more variable, a model compared th
 
 - **Options:**
 
-  A) residual standard deviation
-  B) residual sum of squares
+  A) residual sum of squares
+  B) residual standard deviation
   C) mean square residual
 
-- **Answer (tutor only):** 1-B, 2-C, 3-A
+- **Answer (tutor only):** 1-A, 2-C, 3-B
 - **Explanation (tutor only):** Sum of squares → divide by df → mean square (the residual variance) → square root → residual standard deviation.
 - **Why the wrong options are wrong (tutor only):**
   Follow the order: square and sum, then average, then take the root.
@@ -5118,10 +5118,10 @@ To ask whether fishing makes fish populations more variable, a model compared th
 - **Options:**
 
   A) The residual standard deviation (√0.098)
-  B) The residual sum of squares
-  C) The mean square residual (2.45 / 25)
+  B) The mean square residual (2.45 / 25)
+  C) The residual sum of squares
 
-- **Answer (tutor only):** 1-B, 2-C, 3-A
+- **Answer (tutor only):** 1-C, 2-B, 3-A
 - **Explanation (tutor only):** 2.45 is the sum of squared residuals; 2.45 / 25 = 0.098 is the mean square; √0.098 = 0.313 is the residual SD.
 - **Why the wrong options are wrong (tutor only):**
   Each value is calculated from the one before it.
@@ -5202,12 +5202,12 @@ The plot shows the coefficient of variation (cv) in larval abundance for exploit
 
 - **Options:**
 
-  A) exploitedyes positive; age negative
-  B) exploitedyes negative; age negative
-  C) exploitedyes positive; age positive
-  D) exploitedyes negative; age positive
+  A) exploitedyes positive; age positive
+  B) exploitedyes negative; age positive
+  C) exploitedyes negative; age negative
+  D) exploitedyes positive; age negative
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** At any given age, exploited species sit higher (positive exploitedyes). Within each group cv falls as age at maturation increases (negative age slope).
 - **Why the wrong options are wrong (tutor only):**
   Compare the groups at the same age, then look at the trend within a group.
@@ -5225,16 +5225,16 @@ The plot shows the coefficient of variation (cv) in larval abundance for exploit
 - **Options:**
 
   A) The model is additive: one age slope is shared by both groups
-  B) The exploited coefficient is positive, so the lines never cross
-  C) Age at maturation was measured the same way in both groups
-  D) The residual standard deviation is the same for both groups
+  B) The residual standard deviation is the same for both groups
+  C) The exploited coefficient is positive, so the lines never cross
+  D) Age at maturation was measured the same way in both groups
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** With no interaction, both groups share one age slope; exploited only shifts the line up or down.
 - **Why the wrong options are wrong (tutor only):**
-  B) A positive shift alone doesn't make lines parallel; a shared slope does.
-  C) Measurement method doesn't determine the slope.
-  D) Equal residual spread doesn't make lines parallel.
+  B) Equal residual spread doesn't make lines parallel.
+  C) A positive shift alone doesn't make lines parallel; a shared slope does.
+  D) Measurement method doesn't determine the slope.
 - **Hint:** How many age slopes does lm(cv ~ exploited + age) estimate?
 
 ### ch13-quiz-09
@@ -5427,17 +5427,17 @@ Birth weight is a key predictor of infant health. Birth weight of U.S. singleton
 
 - **Options:**
 
-  A) dnorm(2.5, mean = 3.339, sd = 0.573)
-  B) pnorm(2.5, mean = 3.339, sd = 0.573)
-  C) pnorm(2.5, mean = 3.339, sd = 0.573, lower.tail = FALSE)
-  D) qnorm(2.5, mean = 3.339, sd = 0.573)
+  A) pnorm(2.5, mean = 3.339, sd = 0.573)
+  B) dnorm(2.5, mean = 3.339, sd = 0.573)
+  C) qnorm(2.5, mean = 3.339, sd = 0.573)
+  D) pnorm(2.5, mean = 3.339, sd = 0.573, lower.tail = FALSE)
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** pnorm() gives the area below 2.5 (about 0.07).
 - **Why the wrong options are wrong (tutor only):**
-  A) dnorm() gives a height.
-  C) That's the area above 2.5.
-  D) qnorm() takes a probability.
+  B) dnorm() gives a height.
+  C) qnorm() takes a probability.
+  D) That's the area above 2.5.
 - **Hint:** Area below a value.
 
 ### ch14-book-03-v2
@@ -5451,15 +5451,15 @@ Birth weight is a key predictor of infant health. Birth weight of U.S. singleton
 - **Options:**
 
   A) qnorm(0.99, mean = 3.339, sd = 0.573)
-  B) pnorm(0.99, mean = 3.339, sd = 0.573)
-  C) dnorm(0.99, mean = 3.339, sd = 0.573)
-  D) qnorm(0.01, mean = 3.339, sd = 0.573)
+  B) qnorm(0.01, mean = 3.339, sd = 0.573)
+  C) pnorm(0.99, mean = 3.339, sd = 0.573)
+  D) dnorm(0.99, mean = 3.339, sd = 0.573)
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 99% of babies fall below the 0.99 quantile, so only 1% exceed it (about 4.67 kg).
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) take a weight, not a probability.
-  D) That's the weight 1% fall BELOW.
+  B) That's the weight 1% fall BELOW.
+  C) and D) take a weight, not a probability.
 - **Hint:** Which quantile has 1% above it?
 
 ### ch14-book-04
@@ -5624,10 +5624,10 @@ Match each statement with its name:
 
 - **Options:**
 
-  A) The law of large numbers
-  B) The central limit theorem
+  A) The central limit theorem
+  B) The law of large numbers
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** The law of large numbers is about where an estimate ends up (close to the truth). The central limit theorem is about the shape of the sampling distribution (normal).
 - **Why the wrong options are wrong (tutor only):**
   These two are easy to mix up. 'Large numbers' gets you close to the truth; 'central limit' gives you a normal shape.
@@ -5646,10 +5646,10 @@ Match each example to the idea it illustrates:
 
 - **Options:**
 
-  A) The law of large numbers
-  B) The central limit theorem
+  A) The central limit theorem
+  B) The law of large numbers
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Approaching the truth is the law of large numbers; the bell shape of the sampling distribution is the central limit theorem.
 - **Why the wrong options are wrong (tutor only):**
   One is about where the estimate ends up; the other is about the shape.
@@ -5740,12 +5740,12 @@ The figure shows a normal distribution, a value x, the height of the curve at x,
 
 - **Options:**
 
-  A) Returns the probability density: the height of the curve (y) at x
-  B) Returns the probability of a value greater than x: the shaded area from x to infinity
+  A) Draws random values from the distribution
+  B) Returns the probability density: the height of the curve (y) at x
   C) Returns the value of x for which the area to its left equals a given probability (e.g. the 0.025 quantile)
-  D) Draws random values from the distribution
+  D) Returns the probability of a value greater than x: the shaded area from x to infinity
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-B, 2-D, 3-C, 4-A
 - **Explanation (tutor only):** d = density (height), p = probability (area), q = quantile (the x value for a given area), r = random draws.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: pnorm() and qnorm() are inverses. pnorm() goes from x to an area; qnorm() goes from an area to x.
@@ -5769,10 +5769,10 @@ The figure shows a normal distribution, a value x, the height of the curve at x,
 
   A) dnorm()
   B) pnorm(lower.tail = FALSE)
-  C) qnorm()
-  D) rnorm()
+  C) rnorm()
+  D) qnorm()
 
-- **Answer (tutor only):** 1-D, 2-A, 3-C, 4-B
+- **Answer (tutor only):** 1-C, 2-A, 3-D, 4-B
 - **Explanation (tutor only):** r = random draws; d = density (height); q = quantile; p = probability (area).
 - **Why the wrong options are wrong (tutor only):**
   Match the first letter: d, p, q, r.
@@ -5793,11 +5793,11 @@ The figure shows a normal distribution, a value x, the height of the curve at x,
 
 - **Options:**
 
-  A) A value of x
-  B) A probability (an area)
-  C) The number of random values to draw
+  A) The number of random values to draw
+  B) A value of x
+  C) A probability (an area)
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-B, 2-C, 3-A
 - **Explanation (tutor only):** pnorm(x) returns an area; qnorm(p) returns a value; rnorm(n) returns n random draws.
 - **Why the wrong options are wrong (tutor only):**
   pnorm and qnorm are inverses.
@@ -5874,17 +5874,17 @@ A biologist rescales tail lengths by subtracting the population mean and dividin
 
 - **Options:**
 
-  A) The Z-transform; mean 0
-  B) The Z-transform; mean 1
-  C) The log-transform; mean 0
-  D) The central limit theorem; mean 1
+  A) The central limit theorem; mean 1
+  B) The log-transform; mean 0
+  C) The Z-transform; mean 1
+  D) The Z-transform; mean 0
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** (Y - μ) / σ is the Z-transform. The rescaled values have mean 0 and SD 1.
 - **Why the wrong options are wrong (tutor only):**
-  B) The SD is 1; the mean is 0.
-  C) No logs are taken.
-  D) The CLT is about sampling distributions.
+  A) The CLT is about sampling distributions.
+  B) No logs are taken.
+  C) The SD is 1; the mean is 0.
 - **Hint:** What happens to the mean after subtracting it?
 
 ### ch14-hw-02-v2
@@ -5897,17 +5897,17 @@ After a Z-transform, (Y - μ) / σ, a value of Z = -1 means the original value w
 
 - **Options:**
 
-  A) One standard deviation below the mean
-  B) One unit below the mean, in the original units
-  C) One standard error below the mean
-  D) Smaller than every other value in the data
+  A) Smaller than every other value in the data
+  B) One standard error below the mean
+  C) One standard deviation below the mean
+  D) One unit below the mean, in the original units
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Z counts standard deviations from the mean; negative means below.
 - **Why the wrong options are wrong (tutor only):**
-  B) Z is in SD units, not original units.
-  C) Z uses σ, not the SE.
-  D) It's one SD below the mean, not the minimum.
+  A) It's one SD below the mean, not the minimum.
+  B) Z uses σ, not the SE.
+  D) Z is in SD units, not original units.
 - **Hint:** What units is Z in?
 
 ### ch14-hw-03
@@ -5943,17 +5943,17 @@ Wing length helps determine flight performance in birds. Wing length of adult ho
 
 - **Options:**
 
-  A) dnorm(74, mean = 76, sd = 2)
-  B) pnorm(74, mean = 76, sd = 2)
-  C) qnorm(74, mean = 76, sd = 2)
-  D) rnorm(74, mean = 76, sd = 2)
+  A) pnorm(74, mean = 76, sd = 2)
+  B) qnorm(74, mean = 76, sd = 2)
+  C) rnorm(74, mean = 76, sd = 2)
+  D) dnorm(74, mean = 76, sd = 2)
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** pnorm() gives the area below a value (here 0.159).
 - **Why the wrong options are wrong (tutor only):**
-  A) dnorm() gives the curve's height.
-  C) qnorm() takes a probability and returns a value.
-  D) rnorm() draws random values.
+  B) qnorm() takes a probability and returns a value.
+  C) rnorm() draws random values.
+  D) dnorm() gives the curve's height.
 - **Hint:** p for probability (area).
 
 ### ch14-hw-03-v2
@@ -5966,17 +5966,17 @@ Wing length helps determine flight performance in birds. Wing length of adult ho
 
 - **Options:**
 
-  A) dnorm(0.025, mean = 76, sd = 2)
-  B) pnorm(0.025, mean = 76, sd = 2)
-  C) qnorm(0.025, mean = 76, sd = 2)
-  D) rnorm(0.025, mean = 76, sd = 2)
+  A) pnorm(0.025, mean = 76, sd = 2)
+  B) qnorm(0.025, mean = 76, sd = 2)
+  C) rnorm(0.025, mean = 76, sd = 2)
+  D) dnorm(0.025, mean = 76, sd = 2)
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** qnorm() takes a probability and returns the value (quantile) with that area to its left: about 72.1 mm.
 - **Why the wrong options are wrong (tutor only):**
-  A) dnorm() gives a height.
-  B) pnorm() takes a value and returns an area.
-  D) rnorm() draws random values.
+  A) pnorm() takes a value and returns an area.
+  C) rnorm() draws random values.
+  D) dnorm() gives a height.
 - **Hint:** q for quantile.
 
 ### ch14-hw-04
@@ -6281,17 +6281,17 @@ The histogram shows the mass of 3,720 blue tit chicks 14 days after hatching. We
 
 - **Options:**
 
-  A) It becomes more normal and narrower
-  B) It becomes more skewed and wider
+  A) It stays the shape of the data
+  B) It becomes more normal and narrower
   C) It becomes more normal, but no narrower
-  D) It stays the shape of the data
+  D) It becomes more skewed and wider
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** By the CLT, the sampling distribution becomes more normal, and its spread (the SE) shrinks with √n.
 - **Why the wrong options are wrong (tutor only):**
-  B) Larger samples make it less skewed and narrower.
+  A) Means of large samples become normal.
   C) The SE shrinks as n grows.
-  D) Means of large samples become normal.
+  D) Larger samples make it less skewed and narrower.
 - **Hint:** Think about both the CLT and σ / √n.
 
 ### ch14-hw-09-v2
@@ -6305,16 +6305,16 @@ The histogram shows the mass of 3,720 blue tit chicks 14 days after hatching. Im
 
 - **Options:**
 
-  A) Somewhat left-skewed, like the data
+  A) Right-skewed, the opposite of the data
   B) Perfectly normal, by the CLT
-  C) Right-skewed, the opposite of the data
+  C) Somewhat left-skewed, like the data
   D) Uniform, with all means equally likely
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With n = 2, means still carry much of the data's skew. The CLT only kicks in with larger samples.
 - **Why the wrong options are wrong (tutor only):**
+  A) Averaging doesn't flip the skew.
   B) The CLT needs large samples, especially for skewed data.
-  C) Averaging doesn't flip the skew.
   D) There's no reason for a uniform shape.
 - **Hint:** Is n = 2 large?
 
@@ -6351,17 +6351,17 @@ Seed mass in a wildflower is strongly right-skewed. A botanist repeatedly takes 
 
 - **Options:**
 
-  A) The central limit theorem
-  B) The law of large numbers
+  A) The law of large numbers
+  B) The seeds themselves are normally distributed
   C) Bayes' theorem
-  D) The seeds themselves are normally distributed
+  D) The central limit theorem
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The central limit theorem says means of large samples are approximately normal, whatever the shape of the data.
 - **Why the wrong options are wrong (tutor only):**
-  B) The law of large numbers says the estimate approaches the truth, not that it becomes normal.
+  A) The law of large numbers says the estimate approaches the truth, not that it becomes normal.
+  B) The seed masses are skewed.
   C) Bayes' theorem is about conditional probability.
-  D) The seed masses are skewed.
 - **Hint:** Which rule is about the shape of the sampling distribution?
 
 ### ch14-quiz-01-v2
@@ -6374,16 +6374,16 @@ Which statement describes the central limit theorem?
 
 - **Options:**
 
-  A) Sample means become approximately normal as sample size gets large
-  B) Sample estimates get closer to the true value as sample size gets large
-  C) Every biological variable is normal if we measure enough individuals
-  D) The data in a large sample always become approximately normal
+  A) Every biological variable is normal if we measure enough individuals
+  B) The data in a large sample always become approximately normal
+  C) Sample estimates get closer to the true value as sample size gets large
+  D) Sample means become approximately normal as sample size gets large
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The CLT is about the sampling distribution of means (or sums): it becomes approximately normal with large samples, even when the data aren't.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the law of large numbers.
-  C) and D) The data keep their own shape; only the sampling distribution of the mean becomes normal.
+  A) and B) The data keep their own shape; only the sampling distribution of the mean becomes normal.
+  C) That's the law of large numbers.
 - **Hint:** Is it about the data or about the means?
 
 ### ch14-quiz-02
@@ -6403,12 +6403,12 @@ Any normal value can be converted to the standard normal (mean 0, SD 1) with Z =
 
 - **Options:**
 
-  A) Z = -2
-  B) Z = -1
-  C) Z = 1
-  D) Z = 3
+  A) Z = 1
+  B) Z = 3
+  C) Z = -2
+  D) Z = -1
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-C, 2-D, 3-A, 4-B
 - **Explanation (tutor only):** Subtract the mean (8) and divide by the SD (4): (0 - 8)/4 = -2, (4 - 8)/4 = -1, (12 - 8)/4 = 1, (20 - 8)/4 = 3.
 - **Why the wrong options are wrong (tutor only):**
   Common mistake: dividing by the variance (16) instead of the SD (4).
@@ -6431,12 +6431,12 @@ Any normal value can be converted to the standard normal (mean 0, SD 1) with Z =
 
 - **Options:**
 
-  A) Z = -2
-  B) Z = -0.5
-  C) Z = 1
+  A) Z = 1
+  B) Z = -2
+  C) Z = -0.5
   D) Z = 2.5
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-B, 2-C, 3-A, 4-D
 - **Explanation (tutor only):** (30 - 50)/10 = -2; (45 - 50)/10 = -0.5; (60 - 50)/10 = 1; (75 - 50)/10 = 2.5.
 - **Why the wrong options are wrong (tutor only):**
   Subtract the mean, then divide by the SD.
@@ -6459,12 +6459,12 @@ Any normal value can be converted to the standard normal (mean 0, SD 1) with Z =
 
 - **Options:**
 
-  A) Y = 2
-  B) Y = 8
-  C) Y = 10
-  D) Y = 16
+  A) Y = 16
+  B) Y = 2
+  C) Y = 8
+  D) Y = 10
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-B, 2-C, 3-D, 4-A
 - **Explanation (tutor only):** Y = μ + Z × σ: 8 - 1.5 × 4 = 2; 8 + 0 = 8; 8 + 0.5 × 4 = 10; 8 + 2 × 4 = 16.
 - **Why the wrong options are wrong (tutor only):**
   Work backwards: Y = 8 + 4Z.
@@ -6640,16 +6640,16 @@ You take many samples of size 10 from this population and record the mean of eac
 - **Options:**
 
   A) The sampling distribution of the mean
-  B) The population distribution
-  C) The standard normal distribution
-  D) The null distribution
+  B) The null distribution
+  C) The population distribution
+  D) The standard normal distribution
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The distribution of an estimate across repeated samples is its sampling distribution.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the distribution of individual values.
-  C) That's the normal with mean 0 and SD 1.
-  D) A null distribution is a sampling distribution assuming the null is true.
+  B) A null distribution is a sampling distribution assuming the null is true.
+  C) That's the distribution of individual values.
+  D) That's the normal with mean 0 and SD 1.
 - **Hint:** Distribution of estimates from many samples.
 
 ### ch14-quiz-06-v2
@@ -6665,15 +6665,15 @@ Which of these describes the distribution of individual values in the population
 - **Options:**
 
   A) The population distribution: mean 8 and SD 4
-  B) The sampling distribution: mean 8 and SD 4 / √n
+  B) The standard normal: mean 8 and SD 1
   C) The null distribution: mean 0 and SD 1
-  D) The standard normal: mean 8 and SD 1
+  D) The sampling distribution: mean 8 and SD 4 / √n
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Individual values follow the population distribution (SD = σ = 4). Sample means follow the sampling distribution, whose SD (the SE) is σ / √n.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's for sample means.
-  C) and D) These aren't this population's distribution of individuals.
+  C) and B) These aren't this population's distribution of individuals.
+  D) That's for sample means.
 - **Hint:** Individuals vs means.
 
 ### ch14-quiz-07
@@ -6753,16 +6753,16 @@ A researcher repeatedly samples 20 mice, calculates the mean body mass of each s
 
 - **Options:**
 
-  A) The standard error of the mean
-  B) The residual standard deviation
-  C) The population variance
+  A) The residual standard deviation
+  B) The population variance
+  C) The standard error of the mean
   D) The Z score
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The SD of a sampling distribution is the standard error.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's about residuals from a model.
-  C) That's the spread of individuals, squared.
+  A) That's about residuals from a model.
+  B) That's the spread of individuals, squared.
   D) A Z score is a single standardized value.
 - **Hint:** SD of the sampling distribution.
 
@@ -6776,17 +6776,17 @@ What does the standard error of a mean describe?
 
 - **Options:**
 
-  A) How much the sample mean varies from sample to sample
+  A) How far the sample is from a normal distribution
   B) How much individual values vary around the mean
-  C) The probability that the null hypothesis is true
-  D) How far the sample is from a normal distribution
+  C) How much the sample mean varies from sample to sample
+  D) The probability that the null hypothesis is true
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The standard error is the SD of the sampling distribution: how much estimates vary among samples.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's about the shape, not the SE.
   B) That's the standard deviation.
-  C) Neither SE nor p-values give that.
-  D) That's about the shape, not the SE.
+  D) Neither SE nor p-values give that.
 - **Hint:** Variation among estimates, not individuals.
 
 ### ch14-quiz-09
@@ -6870,15 +6870,15 @@ You take one sample of size four and estimate a mean of 10. The two-tailed p-val
 - **Options:**
 
   A) Reject the null; the null is false
-  B) Reject the null; we don't know whether the null is true
-  C) Fail to reject the null; the null is true
+  B) Fail to reject the null; the null is true
+  C) Reject the null; we don't know whether the null is true
   D) Fail to reject the null; we don't know whether the null is true
 
 - **Answer (tutor only):** D
 - **Explanation (tutor only):** 0.32 > 0.05, so we fail to reject. But failing to reject doesn't show the null is true: we may simply lack power.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) p > α, so we don't reject.
-  C) Failing to reject isn't evidence the null is true.
+  A) and C) p > α, so we don't reject.
+  B) Failing to reject isn't evidence the null is true.
 - **Hint:** Compare p to α, then remember what p can't tell you.
 
 ### ch14-quiz-10-v2
@@ -6891,16 +6891,16 @@ A study tests whether a fertilizer changes plant height and gets p = 0.01. Using
 
 - **Options:**
 
-  A) We reject the null, and we know the fertilizer changes height
-  B) We reject the null, but we don't know for sure that the null is false
-  C) We fail to reject the null, so the fertilizer has no effect
-  D) We fail to reject the null, but we don't know if it is true
+  A) We fail to reject the null, so the fertilizer has no effect
+  B) We reject the null, and we know the fertilizer changes height
+  C) We fail to reject the null, but we don't know if it is true
+  D) We reject the null, but we don't know for sure that the null is false
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p < α, so we reject. But rejecting doesn't prove the null false: a true null still gives p < 0.05 in 5% of studies (a type I error).
 - **Why the wrong options are wrong (tutor only):**
-  A) Rejection isn't proof.
-  C) and D) p < α, so we reject.
+  A) and C) p < α, so we reject.
+  B) Rejection isn't proof.
 - **Hint:** Can a true null give p = 0.01?
 
 ### ch14-quiz-11
@@ -6936,17 +6936,17 @@ Body masses of shrews are right-skewed, and a researcher considers transforming 
 
 - **Options:**
 
-  A) Every shrew's mass must be transformed in the same way
-  B) If mass is transformed, the explanatory variable must be too
-  C) Try many transformations and keep the one with the smallest p
-  D) Transforming the data is never appropriate in statistics
+  A) Try many transformations and keep the one with the smallest p
+  B) Transforming the data is never appropriate in statistics
+  C) Every shrew's mass must be transformed in the same way
+  D) If mass is transformed, the explanatory variable must be too
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** All values of a variable get the same transformation. Different variables can be transformed differently, and the choice is made before testing.
 - **Why the wrong options are wrong (tutor only):**
-  B) Each variable is transformed (or not) on its own merits.
-  C) Choosing by p-value is p-hacking.
-  D) Transformations are often appropriate.
+  A) Choosing by p-value is p-hacking.
+  B) Transformations are often appropriate.
+  D) Each variable is transformed (or not) on its own merits.
 - **Hint:** What must be consistent within one variable?
 
 ### ch14-quiz-11-v2
@@ -6959,15 +6959,15 @@ Which of these is a legitimate way to choose a transformation for skewed data?
 
 - **Options:**
 
-  A) Compare a few transformations' normality before running the test
-  B) Run the test on several transformations; keep the significant one
+  A) Run the test on several transformations; keep the significant one
+  B) Compare a few transformations' normality before running the test
   C) Transform the large values only, leaving the small values alone
   D) Transform the response only in the group that looks most skewed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** It's fine to compare transformations by how well they normalize the data, as long as you decide before seeing test results and apply it to all values.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's p-hacking.
+  A) That's p-hacking.
   C) and D) All values of a variable must get the same transformation.
 - **Hint:** When should the choice be made?
 
@@ -7003,16 +7003,16 @@ A dataset of parasite counts includes many zeros. Why can't we simply log-transf
 - **Options:**
 
   A) The log of zero is undefined
-  B) The log changes the order of the values
-  C) Logs only work on normally distributed data
-  D) Logs turn different counts into the same value
+  B) Logs turn different counts into the same value
+  C) The log changes the order of the values
+  D) Logs only work on normally distributed data
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** log(0) is undefined (negative infinity). A common fix is log(x + 1).
 - **Why the wrong options are wrong (tutor only):**
-  B) The log keeps the order.
-  C) Logs are often used to make skewed data more normal.
-  D) The log is one-to-one.
+  B) The log is one-to-one.
+  C) The log keeps the order.
+  D) Logs are often used to make skewed data more normal.
 - **Hint:** What is log(0)?
 
 ### ch14-quiz-12-v2
@@ -7026,14 +7026,14 @@ A variable has values ranging from -5 to 20. Which transformation could NOT be a
 - **Options:**
 
   A) The square root
-  B) Adding a constant of 10
-  C) Multiplying by 2
-  D) Squaring
+  B) Multiplying by 2
+  C) Squaring
+  D) Adding a constant of 10
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The square root of a negative number is undefined (and so is the log).
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) are defined for every number.
+  D), B) and C) are defined for every number.
 - **Hint:** Which one fails for negative numbers?
 
 ### ch14-quiz-13
@@ -7066,15 +7066,15 @@ Data on temperature change include negative and positive values (e.g. -3 and 3).
 
 - **Options:**
 
-  A) -3 and 3 both become 9, so different values become the same
-  B) The order of values is no longer preserved
-  C) The transformation is undefined for negative values
-  D) The transformation is undefined when the value is zero
+  A) The transformation is undefined for negative values
+  B) The transformation is undefined when the value is zero
+  C) The order of values is no longer preserved
+  D) -3 and 3 both become 9, so different values become the same
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** C, D
 - **Explanation (tutor only):** Squaring maps -3 and 3 to 9 (not one-to-one), and it scrambles order (-3 < 2, but 9 > 4). Squaring is defined for every number.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) Every number, including negatives and zero, can be squared.
+  A) and B) Every number, including negatives and zero, can be squared.
 - **Hint:** Try squaring -3, 2 and 3.
 
 ### ch14-quiz-13-v2
@@ -7087,13 +7087,13 @@ Which transformations keep the order of values (a larger value stays larger) whe
 
 - **Options:**
 
-  A) The log
-  B) The square root
-  C) Squaring
-  D) Taking 1 / x
+  A) Taking 1 / x
+  B) Squaring
+  C) The log
+  D) The square root
 
-- **Answer (tutor only):** A, B, C
+- **Answer (tutor only):** B, C, D
 - **Explanation (tutor only):** For positive numbers, log, square root and squaring are all increasing. 1/x reverses the order (2 < 4, but 1/2 > 1/4).
 - **Why the wrong options are wrong (tutor only):**
-  D) 1/x reverses the order.
+  A) 1/x reverses the order.
 - **Hint:** Try each on the values 2 and 4.

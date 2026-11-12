@@ -143,15 +143,15 @@ Looking at the plot (individual crabs, with means and 95% CIs), which comparison
 
 - **Options:**
 
-  A) intact male vs male minor removed
-  B) female vs male minor removed
-  C) female vs intact male
-  D) female vs male major removed
+  A) female vs intact male
+  B) intact male vs male minor removed
+  C) female vs male major removed
+  D) female vs male minor removed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Intact males and males with the minor claw removed have similar means and overlapping CIs (Tukey p = 0.78).
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) all involve females, whose mean is well above the males'.
+  D), A) and C) all involve females, whose mean is well above the males'.
 - **Hint:** Which two means are closest?
 
 ### ch18-book-03-v2
@@ -225,12 +225,12 @@ Which two groups have the most different variances?
 
 - **Options:**
 
-  A) intact male and male minor removed
+  A) female and male major removed
   B) female and intact male
-  C) female and male major removed
-  D) male major removed and male minor removed
+  C) male major removed and male minor removed
+  D) intact male and male minor removed
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Largest: intact male (0.0521); smallest: male minor removed (0.0392).
 - **Why the wrong options are wrong (tutor only):**
   Find the largest and smallest.
@@ -254,16 +254,16 @@ How many crabs were in the study?
 
 - **Options:**
 
-  A) 76
-  B) 72
-  C) 4
+  A) 72
+  B) 4
+  C) 76
   D) 19
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 19 + 19 + 18 + 20 = 76.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the residual df.
-  C) That's the number of groups.
+  A) That's the residual df.
+  B) That's the number of groups.
   D) That's one group.
 - **Hint:** Add the n column.
 
@@ -284,11 +284,11 @@ Each panel shows individual crabs, the group means (colored lines) and the grand
 
 - **Options:**
 
-  A) Panel a
-  B) Panel b
-  C) Panel c
+  A) Panel c
+  B) Panel a
+  C) Panel b
 
-- **Answer (tutor only):** 1-B, 2-C, 3-A
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** a: crabs to their group mean (error). b: crabs to the grand mean (total). c: group means to the grand mean (model).
 - **Why the wrong options are wrong (tutor only):**
   Check where each vertical line starts and ends.
@@ -308,14 +308,14 @@ Each panel shows individual crabs, the group means (colored lines) and the grand
 - **Options:**
 
   A) Panel a
-  B) Panel b
-  C) Panel c
+  B) Panel c
+  C) Panel b
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Panel c shows model deviations: each group mean minus the grand mean, the same for every crab in a group.
 - **Why the wrong options are wrong (tutor only):**
   A) Error deviations vary crab to crab.
-  B) Total deviations vary crab to crab.
+  C) Total deviations vary crab to crab.
 - **Hint:** Which deviation ignores individual values?
 
 ### ch18-book-05-v2
@@ -331,11 +331,11 @@ Each panel shows individual crabs, the group means (colored lines) and the grand
 
 - **Options:**
 
-  A) Panels c and a add to panel b
-  B) Panels a and b add to panel c
-  C) Panels b and c add to panel a
+  A) Panels a and b add to panel c
+  B) Panels b and c add to panel a
+  C) Panels c and a add to panel b
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** c is model, a is error, b is total.
 - **Why the wrong options are wrong (tutor only):**
   Identify which panel is total first.
@@ -391,17 +391,17 @@ What is the best name for this_partition?
 
 - **Options:**
 
-  A) SS_total
-  B) SS_model
-  C) SS_error
-  D) MS_error
+  A) SS_model
+  B) SS_error
+  C) MS_error
+  D) SS_total
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Each crab minus its group mean, squared and summed: SS error. Not divided by df.
 - **Why the wrong options are wrong (tutor only):**
-  A) Uses the grand mean.
-  B) Uses group means minus the grand mean.
-  D) Would divide by df.
+  A) Uses group means minus the grand mean.
+  C) Would divide by df.
+  D) Uses the grand mean.
 - **Hint:** What is subtracted?
 
 ### ch18-book-06-v2
@@ -416,17 +416,17 @@ The model sum of squares is 1.9964 with 3 df. What is the model mean square?
 
 - **Options:**
 
-  A) 0.66546
-  B) 1.9964
-  C) 5.9892
-  D) 0.04541
+  A) 1.9964
+  B) 0.66546
+  C) 0.04541
+  D) 5.9892
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** MS = SS / df = 1.9964 / 3 = 0.665.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's SS.
-  C) Multiplies by df.
-  D) That's MS residual.
+  A) That's SS.
+  C) That's MS residual.
+  D) Multiplies by df.
 - **Hint:** SS / df.
 
 ### ch18-book-07
@@ -479,16 +479,16 @@ What's wrong?
 
 - **Options:**
 
-  A) It plots fitted values instead of residuals
-  B) geom_qq() needs aes(x = ...) instead of sample
-  C) augment() can't be used with lm() output
+  A) augment() can't be used with lm() output
+  B) It plots fitted values instead of residuals
+  C) geom_qq() needs aes(x = ...) instead of sample
   D) Nothing; this plots the residuals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Use aes(sample = .resid). Fitted values are just the group means.
 - **Why the wrong options are wrong (tutor only):**
-  B) sample is correct.
-  C) augment() works with lm().
+  A) augment() works with lm().
+  C) sample is correct.
   D) .fitted isn't the residuals.
 - **Hint:** Which column holds the residuals?
 
@@ -502,16 +502,16 @@ Which line correctly sets up a QQ plot of residuals from augment() output?
 
 - **Options:**
 
-  A) ggplot(aes(sample = .resid))
-  B) ggplot(aes(x = .resid))
-  C) ggplot(aes(sample = .fitted))
+  A) ggplot(aes(x = .resid))
+  B) ggplot(aes(sample = .fitted))
+  C) ggplot(aes(sample = .resid))
   D) ggplot(aes(y = .resid))
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** geom_qq() needs the sample aesthetic, and the residuals are in .resid.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Wrong aesthetic.
-  C) Wrong column.
+  A) and D) Wrong aesthetic.
+  B) Wrong column.
 - **Hint:** geom_qq() expects sample.
 
 ### ch18-book-08
@@ -554,16 +554,16 @@ Why is a QQ plot of raw bodyTemperature with all four crab groups pooled a poor 
 - **Options:**
 
   A) Pooling groups with different means distorts the shape
-  B) Raw data can never be used to check normality at all
-  C) QQ plots only work for data with a single group
-  D) Pooled data always look perfectly normal
+  B) Pooled data always look perfectly normal
+  C) Raw data can never be used to check normality at all
+  D) QQ plots only work for data with a single group
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The assumption is about residuals within groups. Mixing groups with different means can make normal residuals look non-normal.
 - **Why the wrong options are wrong (tutor only):**
-  B) Raw values within a group work.
-  C) You can facet.
-  D) Pooling can look odd.
+  B) Pooling can look odd.
+  C) Raw values within a group work.
+  D) You can facet.
 - **Hint:** What does the assumption concern?
 
 ### ch18-book-08-v2
@@ -576,17 +576,17 @@ Why is a QQ plot of fitted values (.fitted), faceted by crabType, useless for ch
 
 - **Options:**
 
-  A) Every fitted value within a group is the same number
-  B) Fitted values are always perfectly normally distributed
-  C) Fitted values exist only for the reference group
-  D) Faceting by group removes all of the information
+  A) Faceting by group removes all of the information
+  B) Every fitted value within a group is the same number
+  C) Fitted values are always perfectly normally distributed
+  D) Fitted values exist only for the reference group
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** In a one-way ANOVA the fitted value is the group mean, so each panel is a single repeated value.
 - **Why the wrong options are wrong (tutor only):**
-  B) They're constant within a group.
-  C) Every crab has a fitted value.
-  D) Faceting is fine for residuals.
+  A) Faceting is fine for residuals.
+  C) They're constant within a group.
+  D) Every crab has a fitted value.
 - **Hint:** What's the fitted value in an ANOVA?
 
 ### ch18-book-09
@@ -604,12 +604,12 @@ In the context of an ANOVA, which R code gives you each of the following?
 
 - **Options:**
 
-  A) lm(y ~ x) |> anova()  OR  aov(y ~ x) |> summary()
-  B) aov(y ~ x) |> TukeyHSD()
-  C) lm(y ~ x) |> summary()
+  A) aov(y ~ x) |> TukeyHSD()
+  B) lm(y ~ x) |> summary()
+  C) lm(y ~ x) |> anova()  OR  aov(y ~ x) |> summary()
   D) lm(y ~ x)
 
-- **Answer (tutor only):** 1-D, 2-A, 3-B, 4-C
+- **Answer (tutor only):** 1-D, 2-C, 3-A, 4-B
 - **Explanation (tutor only):** lm() alone prints coefficients. anova() (or summary() of aov()) gives the ANOVA table. TukeyHSD() runs a post-hoc test. summary() of an lm gives coefficient t-tests, which mostly test comparisons with the reference group and aren't the tests we want.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: summary() of an lm vs summary() of an aov. They give different output.
@@ -626,16 +626,16 @@ You want to know which pairs of crab groups differ after a significant ANOVA. Wh
 - **Options:**
 
   A) aov(y ~ x) |> TukeyHSD()
-  B) lm(y ~ x) |> summary()
+  B) lm(y ~ x)
   C) lm(y ~ x) |> anova()
-  D) lm(y ~ x)
+  D) lm(y ~ x) |> summary()
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** TukeyHSD() runs the post-hoc comparisons.
 - **Why the wrong options are wrong (tutor only):**
-  B) Compares each group only with the reference.
+  B) Prints coefficients.
   C) Gives the overall F test.
-  D) Prints coefficients.
+  D) Compares each group only with the reference.
 - **Hint:** Post-hoc test.
 
 ### ch18-book-09-v2
@@ -651,12 +651,12 @@ Match each code to what it reports:
 
 - **Options:**
 
-  A) An ANOVA table with SS, MS, F and p
-  B) Model coefficients only
-  C) Pairwise post-hoc comparisons
-  D) Coefficients with t- and p-values
+  A) Model coefficients only
+  B) Coefficients with t- and p-values
+  C) An ANOVA table with SS, MS, F and p
+  D) Pairwise post-hoc comparisons
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** anova() gives the ANOVA table; lm() alone prints coefficients.
 - **Why the wrong options are wrong (tutor only):**
   TukeyHSD() and summary() do the others.
@@ -739,17 +739,17 @@ If the null hypothesis were true, about what value would we expect F to be?
 
 - **Options:**
 
-  A) About 1
-  B) About 0
+  A) About 72
+  B) About 1
   C) About 14.7
-  D) About 72
+  D) About 0
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Under the null, both mean squares estimate the same variance, so F ≈ 1.
 - **Why the wrong options are wrong (tutor only):**
-  B) F near 0 is unusual.
+  A) That's a df.
   C) That's the observed F.
-  D) That's a df.
+  D) F near 0 is unusual.
 - **Hint:** Ratio of two estimates of the same variance.
 
 ### ch18-book-11
@@ -810,15 +810,15 @@ Which comparisons are NOT significant at α = 0.05?
 
 - **Options:**
 
-  A) major removed - intact male and minor removed - intact male
-  B) intact male - female and minor removed - female
-  C) major removed - female and minor removed - major removed
+  A) major removed - female and minor removed - major removed
+  B) major removed - intact male and minor removed - intact male
+  C) intact male - female and minor removed - female
   D) All six comparisons are significant at α = 0.05
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** p = 0.208 and 0.778; all others are below 0.05.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) are significant. D) Two are not.
+  C) and A) are significant. D) Two are not.
 - **Hint:** Find p adj > 0.05.
 
 ### ch18-book-11-v2
@@ -844,16 +844,16 @@ If female is in significance group 'a', which group(s) is 'male major removed' i
 - **Options:**
 
   A) b only
-  B) c only
+  B) b, c
   C) a, b
-  D) b, c
+  D) c only
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Major removed differs from female (a) and from minor removed (c), but not from intact male (b, c), so it's 'b'.
 - **Why the wrong options are wrong (tutor only):**
-  B) It differs from minor removed, which is c.
+  B) It differs from minor removed (c).
   C) It differs from female.
-  D) It differs from minor removed (c).
+  D) It differs from minor removed, which is c.
 - **Hint:** Start from the female/minor-removed letters.
 
 ### ch18-chimein-01
@@ -869,15 +869,15 @@ Match each question to its answer:
 
 - **Options:**
 
-  A) Because the false positive rate is no longer what we advertise (α)
-  B) By testing one hypothesis, not many
-  C) Because it's more work
-  D) By lowering α for each test
+  A) By lowering α for each test
+  B) Because it's more work
+  C) By testing one hypothesis, not many
+  D) Because the false positive rate is no longer what we advertise (α)
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-C
 - **Explanation (tutor only):** Many tests each with α = 0.05 give a much higher chance of at least one false positive. ANOVA tests a single null (all means equal).
 - **Why the wrong options are wrong (tutor only):**
-  C) Effort isn't the issue. D) ANOVA doesn't adjust α; post-hoc corrections do something like that.
+  B) Effort isn't the issue. A) ANOVA doesn't adjust α; post-hoc corrections do something like that.
 - **Hint:** What happens to the chance of a false positive as you run more tests?
 
 ### ch18-chimein-01-v1
@@ -893,12 +893,12 @@ Match each scenario to its consequence:
 
 - **Options:**
 
-  A) About a 64% chance of at least one false positive
+  A) A 0% chance of a false positive
   B) A 5% chance of a false positive
-  C) A 0% chance of a false positive
-  D) A 100% chance of a false positive
+  C) A 100% chance of a false positive
+  D) About a 64% chance of at least one false positive
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** 1 - 0.95²⁰ = 0.64. One ANOVA keeps the false positive rate at α.
 - **Why the wrong options are wrong (tutor only):**
   Multiple tests multiply chances.
@@ -917,12 +917,12 @@ Match each approach to what it does about multiple testing:
 
 - **Options:**
 
-  A) Tests a single null hypothesis that all means are equal
-  B) Compares pairs while controlling the overall false positive rate
-  C) Runs each pairwise t-test at α = 0.05 with no adjustment
-  D) Ignores the problem entirely
+  A) Ignores the problem entirely
+  B) Runs each pairwise t-test at α = 0.05 with no adjustment
+  C) Compares pairs while controlling the overall false positive rate
+  D) Tests a single null hypothesis that all means are equal
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-C
 - **Explanation (tutor only):** ANOVA avoids many tests; Tukey adjusts for them.
 - **Why the wrong options are wrong (tutor only):**
   Neither ignores the problem.
@@ -959,16 +959,16 @@ A researcher bootstraps the mean egg length of cuckoos 1,000 times and plots a h
 
 - **Options:**
 
-  A) The sampling distribution of the mean
+  A) The null distribution of the egg-length difference
   B) The distribution of egg lengths in the population
-  C) The distribution of egg lengths in the sample
-  D) The null distribution of the egg-length difference
+  C) The sampling distribution of the mean
+  D) The distribution of egg lengths in the sample
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Bootstrapping approximates the distribution of an estimate across many samples.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Those are about individual eggs.
-  D) Null distributions come from permutation or theory under the null.
+  A) Null distributions come from permutation or theory under the null.
+  B) and D) Those are about individual eggs.
 - **Hint:** Distribution of estimates.
 
 ### ch18-chimein-02-v2
@@ -981,16 +981,16 @@ The spread (standard deviation) of a sampling distribution is called:
 
 - **Options:**
 
-  A) The standard error
+  A) The sum of squares
   B) The standard deviation of the data
-  C) The residual variance
-  D) The sum of squares
+  C) The standard error
+  D) The residual variance
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The SE is the SD of a sampling distribution.
 - **Why the wrong options are wrong (tutor only):**
   B) That's spread among individuals.
-  C) and D) Those are ANOVA quantities.
+  D) and A) Those are ANOVA quantities.
 - **Hint:** SD of estimates.
 
 ### ch18-chimein-03
@@ -1024,17 +1024,17 @@ A sample of 100 crabs has an SD of 0.2 for heat gain. What is the standard error
 
 - **Options:**
 
-  A) 0.02; uncertainty in the mean
+  A) 2.0; variability among crabs
   B) 0.02; variability among crabs
-  C) 0.2; uncertainty in the mean
-  D) 2.0; variability among crabs
+  C) 0.02; uncertainty in the mean
+  D) 0.2; uncertainty in the mean
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** SE = 0.2 / √100 = 0.02, describing uncertainty in the estimated mean.
 - **Why the wrong options are wrong (tutor only):**
+  A) Multiplies instead of divides.
   B) The SD (0.2) describes variability.
-  C) That's the SD.
-  D) Multiplies instead of divides.
+  D) That's the SD.
 - **Hint:** SD / √n.
 
 ### ch18-chimein-03-v2
@@ -1047,16 +1047,16 @@ Which quantity would you report to describe how much individual cuckoo eggs vary
 
 - **Options:**
 
-  A) The standard deviation
-  B) The standard error
-  C) The 95% confidence interval
-  D) The p-value
+  A) The standard error
+  B) The 95% confidence interval
+  C) The p-value
+  D) The standard deviation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The SD describes variability among individuals; SE and CI describe uncertainty in an estimate.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) describe uncertainty in the mean.
-  D) p is about a hypothesis test.
+  A) and B) describe uncertainty in the mean.
+  C) p is about a hypothesis test.
 - **Hint:** Variability vs uncertainty.
 
 ### ch18-hw-01
@@ -1156,11 +1156,11 @@ Each plot shows cuckoo egg lengths by host (colored points), the group means (co
 
 - **Options:**
 
-  A) Plot A
+  A) Plot C
   B) Plot B
-  C) Plot C
+  C) Plot A
 
-- **Answer (tutor only):** 1-B, 2-A, 3-C
+- **Answer (tutor only):** 1-B, 2-C, 3-A
 - **Explanation (tutor only):** A: group means to the grand mean (model). B: each egg to its group mean (error). C: each egg to the grand mean (total).
 - **Why the wrong options are wrong (tutor only):**
   Check where each vertical line starts and ends.
@@ -1180,14 +1180,14 @@ Each plot shows cuckoo egg lengths by host (colored points), the group means (co
 - **Options:**
 
   A) Plot A
-  B) Plot B
-  C) Plot C
+  B) Plot C
+  C) Plot B
 
-- **Answer (tutor only):** B
-- **Explanation (tutor only):** F = MS model / MS error. MS error comes from error deviations: each egg to its group mean (Plot B).
+- **Answer (tutor only):** C
+- **Explanation (tutor only):** F = MS model / MS error. MS error comes from error deviations: each egg to its group mean (Plot C).
 - **Why the wrong options are wrong (tutor only):**
   A) Model (numerator).
-  C) Total.
+  B) Total.
 - **Hint:** Denominator = error.
 
 ### ch18-hw-03-v2
@@ -1203,15 +1203,15 @@ Each plot shows cuckoo egg lengths by host (colored points), the group means (co
 
 - **Options:**
 
-  A) Plot A
-  B) Plot B
-  C) Plot C
+  A) Plot B
+  B) Plot C
+  C) Plot A
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Model deviations (group means to the grand mean) are large when groups differ a lot.
 - **Why the wrong options are wrong (tutor only):**
-  B) Error deviations reflect within-group spread.
-  C) Total deviations include both.
+  A) Error deviations reflect within-group spread.
+  B) Total deviations include both.
 - **Hint:** Between-group differences.
 
 ### ch18-hw-04
@@ -1266,12 +1266,12 @@ Which two host species have the most different variances?
 
 - **Options:**
 
-  A) Hedge Sparrow and Robin
+  A) Hedge Sparrow and Pied Wagtail
   B) Meadow Pipit and Wren
-  C) Pied Wagtail and Tree Pipit
-  D) Hedge Sparrow and Pied Wagtail
+  C) Hedge Sparrow and Robin
+  D) Pied Wagtail and Tree Pipit
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Largest variance: Hedge Sparrow (1.142); smallest: Robin (0.469).
 - **Why the wrong options are wrong (tutor only):**
   Find the largest and smallest variances.
@@ -1287,15 +1287,15 @@ Five groups of snails have variances in shell length of 2.1, 2.8, 3.0, 4.2 and 2
 
 - **Options:**
 
-  A) Less than two-fold; not a concern
+  A) Over ten-fold; a big concern
   B) Two- to five-fold; probably fine
   C) Five- to ten-fold; somewhat worrisome
-  D) Over ten-fold; a big concern
+  D) Less than two-fold; not a concern
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** 25.0 / 2.1 = 11.9-fold: transform or use Welch's ANOVA.
 - **Why the wrong options are wrong (tutor only):**
-  A), B) and C) The ratio is about 12.
+  D), B) and C) The ratio is about 12.
 - **Hint:** Largest / smallest.
 
 ### ch18-hw-05
@@ -1345,17 +1345,17 @@ How many cuckoo eggs were measured?
 
 - **Options:**
 
-  A) 120
-  B) 114
-  C) 119
-  D) 6
+  A) 6
+  B) 120
+  C) 114
+  D) 119
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** df residual = n - groups, so n = 114 + 6 = 120.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the residual df.
-  C) That's df total (n - 1).
-  D) That's the number of hosts.
+  A) That's the number of hosts.
+  C) That's the residual df.
+  D) That's df total (n - 1).
 - **Hint:** Residual df = n - number of groups.
 
 ### ch18-hw-05-v2
@@ -1376,17 +1376,17 @@ How was the F value of 10.388 calculated?
 
 - **Options:**
 
-  A) 8.5879 / 0.8267
-  B) 42.940 / 94.248
-  C) 42.940 / 5
-  D) 5 / 114
+  A) 42.940 / 94.248
+  B) 8.5879 / 0.8267
+  C) 5 / 114
+  D) 42.940 / 5
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** F = MS model / MS residual = 8.5879 / 0.8267.
 - **Why the wrong options are wrong (tutor only):**
-  B) Ratio of SS, not MS.
-  C) That's MS model.
-  D) Ratio of df.
+  A) Ratio of SS, not MS.
+  C) Ratio of df.
+  D) That's MS model.
 - **Hint:** Ratio of mean squares.
 
 ### ch18-hw-06
@@ -1481,12 +1481,12 @@ How many hosts does Meadow Pipit differ from significantly?
 
 - **Options:**
 
-  A) 3
+  A) 0
   B) 1
-  C) 5
-  D) 0
+  C) 3
+  D) 5
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Meadow Pipit differs from Hedge Sparrow, Tree Pipit and Wren.
 - **Why the wrong options are wrong (tutor only):**
   Count the pairs that include Meadow Pipit.
@@ -1528,16 +1528,16 @@ To ask whether brood-parasitic cuckoos adjust their eggs to match their hosts, r
 - **Options:**
 
   A) Whether Wren eggs differ from Hedge Sparrow eggs
-  B) Whether Wren eggs differ from all other hosts' eggs
-  C) Whether the mean Wren egg length is zero
-  D) Whether host species affects egg length overall
+  B) Whether the mean Wren egg length is zero
+  C) Whether host species affects egg length overall
+  D) Whether Wren eggs differ from all other hosts' eggs
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Hedge Sparrow is the reference level, so each coefficient is a difference from it.
 - **Why the wrong options are wrong (tutor only):**
-  B) Only versus the reference.
-  C) That's what the intercept tests (for Hedge Sparrow).
-  D) That's the ANOVA F test.
+  B) That's what the intercept tests (for Hedge Sparrow).
+  C) That's the ANOVA F test.
+  D) Only versus the reference.
 - **Hint:** Which host is the reference level?
 
 ### ch18-hw-07-v2
@@ -1551,16 +1551,16 @@ To ask whether brood-parasitic cuckoos adjust their eggs to match their hosts, r
 - **Options:**
 
   A) It tests one null (all hosts equal), avoiding multiple tests
-  B) It always gives smaller p-values than the coefficient tests
-  C) The coefficients' p-values can't be calculated for factors
-  D) summary() ignores the host species variable entirely
+  B) summary() ignores the host species variable entirely
+  C) It always gives smaller p-values than the coefficient tests
+  D) The coefficients' p-values can't be calculated for factors
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The coefficient tests compare each host only with the reference, and there are many of them. The F test asks one question about all groups.
 - **Why the wrong options are wrong (tutor only):**
-  B) Not always.
-  C) They are calculated.
-  D) summary() includes it.
+  B) summary() includes it.
+  C) Not always.
+  D) They are calculated.
 - **Hint:** One test vs many.
 
 ### ch18-quiz-01
@@ -1585,13 +1585,13 @@ Match each missing entry to its value:
 
 - **Options:**
 
-  A) 3
-  B) 26
-  C) 1.67
-  D) 2
-  E) 0.83
+  A) 1.67
+  B) 2
+  C) 0.83
+  D) 3
+  E) 26
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D, 5-E
+- **Answer (tutor only):** 1-D, 2-E, 3-A, 4-B, 5-C
 - **Explanation (tutor only):** df model = groups - 1 = 3. df residual = n - groups = 30 - 4 = 26. MS model = 5 / 3 = 1.67. MS residual = 52 / 26 = 2. F = 1.67 / 2 = 0.83.
 - **Why the wrong options are wrong (tutor only):**
   Common mistakes: residual df = n - 1 (29), or F = SS model / SS residual (0.096).
@@ -1619,13 +1619,13 @@ Match each missing entry to its value:
 
 - **Options:**
 
-  A) 4
-  B) 20
-  C) 5
-  D) 2
-  E) 2.5
+  A) 20
+  B) 2
+  C) 4
+  D) 2.5
+  E) 5
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D, 5-E
+- **Answer (tutor only):** 1-C, 2-A, 3-E, 4-B, 5-D
 - **Explanation (tutor only):** df model = 5 - 1 = 4. df residual = 25 - 5 = 20. MS model = 20 / 4 = 5. MS residual = 40 / 20 = 2. F = 5 / 2 = 2.5.
 - **Why the wrong options are wrong (tutor only):**
   Mean square = SS / df.
@@ -1655,11 +1655,11 @@ Match each quantity to how it was calculated:
 - **Options:**
 
   A) Number of groups - 1
-  B) Number of crabs - number of groups
-  C) Sum Sq / Df for crabType
-  D) Mean Sq crabType / Mean Sq Residuals
+  B) Sum Sq / Df for crabType
+  C) Mean Sq crabType / Mean Sq Residuals
+  D) Number of crabs - number of groups
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-A, 2-D, 3-B, 4-C
 - **Explanation (tutor only):** df model = 4 - 1 = 3; df residual = 76 - 4 = 72; MS = 1.9964 / 3; F = 0.66546 / 0.04541.
 - **Why the wrong options are wrong (tutor only):**
   Follow the ANOVA table's logic left to right.
@@ -1701,16 +1701,16 @@ What do you do to the null hypothesis at α = 0.05?
 
 - **Options:**
 
-  A) Reject it
-  B) Fail to reject it
-  C) Accept it
-  D) Fail to accept it
+  A) Fail to accept it
+  B) Reject it
+  C) Fail to reject it
+  D) Accept it
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** p = 0.075 > 0.05, so we fail to reject. (We never 'accept' the null.)
 - **Why the wrong options are wrong (tutor only):**
-  A) p > α.
-  C) and D) We never accept the null.
+  B) p > α.
+  D) and A) We never accept the null.
 - **Hint:** Compare p with 0.05.
 
 ### ch18-quiz-02-v2
@@ -1885,14 +1885,14 @@ Which of the following are NOT assumptions of an ANOVA? (Select all that apply.)
 - **Options:**
 
   A) Each group has the same number of samples
-  B) The response variable itself is normally distributed overall
+  B) Groups have roughly equal variances
   C) Residuals are normally distributed within groups
-  D) Groups have roughly equal variances
+  D) The response variable itself is normally distributed overall
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** A, D
 - **Explanation (tutor only):** ANOVA doesn't need equal sample sizes (though they help), and it's the residuals, not the overall response, that should be normal.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) are assumptions.
+  C) and B) are assumptions.
 - **Hint:** Residuals vs raw data.
 
 ### ch18-quiz-05-v2
@@ -1905,16 +1905,16 @@ A researcher measures 10 leaves from each of 3 trees per treatment, and runs an 
 
 - **Options:**
 
-  A) Independence of observations
+  A) Equal sample sizes
   B) Equal variance among groups
-  C) Normality of residuals
-  D) Equal sample sizes
+  C) Independence of observations
+  D) Normality of residuals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Leaves from the same tree are not independent; the real replicates are trees.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Nothing suggests these are violated.
-  D) Not an ANOVA assumption.
+  A) Not an ANOVA assumption.
+  B) and D) Nothing suggests these are violated.
 - **Hint:** Are leaves on the same tree independent?
 
 ### ch18-quiz-06
@@ -1971,17 +1971,17 @@ What does a post-hoc test (like Tukey's) do after an ANOVA?
 
 - **Options:**
 
-  A) Compares pairs of groups while controlling overall false positives
-  B) Tests whether the ANOVA's assumptions are met by the data
-  C) Recalculates the ANOVA's F using only the largest groups
-  D) Tells us whether all group means differ from one another
+  A) Recalculates the ANOVA's F using only the largest groups
+  B) Compares pairs of groups while controlling overall false positives
+  C) Tells us whether all group means differ from one another
+  D) Tests whether the ANOVA's assumptions are met by the data
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Post-hoc tests identify which pairs differ, adjusting for the number of comparisons.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's diagnostics.
-  C) Not what it does.
-  D) It identifies which pairs differ.
+  A) Not what it does.
+  C) It identifies which pairs differ.
+  D) That's diagnostics.
 - **Hint:** Which groups differ?
 
 ### ch18-quiz-08
@@ -2040,15 +2040,15 @@ Which line has a mistake?
 
 - **Options:**
 
-  A) df_group = n_group - 1
-  B) df_error = n_total - 1
-  C) ms_group = ss_group / df_group
-  D) f_val = ms_group / ms_error
+  A) ms_group = ss_group / df_group
+  B) f_val = ms_group / ms_error
+  C) df_group = n_group - 1
+  D) df_error = n_total - 1
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Error df = n_total - n_group (one df lost per group mean), not n_total - 1.
 - **Why the wrong options are wrong (tutor only):**
-  A), C) and D) are correct.
+  C), A) and B) are correct.
 - **Hint:** How many means are estimated?
 
 ### ch18-quiz-08-v2
@@ -2065,17 +2065,17 @@ What's wrong?
 
 - **Options:**
 
-  A) It returns the lower tail; it needs lower.tail = FALSE
-  B) df1 and df2 are swapped; df1 should be df_error
+  A) Nothing; this gives the correct p-value
+  B) It returns the lower tail; it needs lower.tail = FALSE
   C) pf() should be pt(), since this is a t-test
-  D) Nothing; this gives the correct p-value
+  D) df1 and df2 are swapped; df1 should be df_error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** By default pf() returns the area below F. The p-value is the area above.
 - **Why the wrong options are wrong (tutor only):**
-  B) df1 = model df is right.
+  A) It gives 1 - p.
   C) It's an F test.
-  D) It gives 1 - p.
+  D) df1 = model df is right.
 - **Hint:** Which tail is the p-value?
 
 ### ch18-quiz-09
@@ -2132,17 +2132,17 @@ If infected aphids are in significance group 'a', which group letters do origina
 
 - **Options:**
 
-  A) Both are 'b'
+  A) Original is 'a'; uninfected is 'b'
   B) Original is 'b'; uninfected is 'c'
-  C) Both are 'a'
-  D) Original is 'a'; uninfected is 'b'
+  C) Both are 'b'
+  D) Both are 'a'
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Both differ from infected, but not from each other, so they share a letter.
 - **Why the wrong options are wrong (tutor only):**
+  A) Original differs from infected.
   B) They don't differ from each other.
-  C) They differ from infected.
-  D) Original differs from infected.
+  D) They differ from infected.
 - **Hint:** Same letter = not significantly different.
 
 ### ch18-quiz-09-v2
@@ -2214,17 +2214,17 @@ The grey band is a 95% confidence interval. If we instead drew a 95% prediction 
 
 - **Options:**
 
-  A) Wider: it adds individual scatter
-  B) Narrower: it ignores uncertainty
-  C) The same: they're two names for one band
-  D) It would only cover the mean x value
+  A) It would only cover the mean x value
+  B) The same: they're two names for one band
+  C) Narrower: it ignores uncertainty
+  D) Wider: it adds individual scatter
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Prediction intervals include both uncertainty in the line and scatter of individuals.
 - **Why the wrong options are wrong (tutor only):**
-  B) It's wider.
-  C) They're different.
-  D) It spans all x.
+  A) It spans all x.
+  B) They're different.
+  C) It's wider.
 - **Hint:** Individuals vary more than means.
 
 ### ch19-book-01-v2
@@ -2240,16 +2240,16 @@ The grey band is a 95% confidence interval. Which statement is correct?
 
 - **Options:**
 
-  A) 95% of bands made this way contain the true line
-  B) 95% of the 49 RILs fall inside the grey band
-  C) 95% of future RILs will fall in the grey band
-  D) The band shows where the residuals fall
+  A) 95% of future RILs will fall in the grey band
+  B) 95% of bands made this way contain the true line
+  C) The band shows where the residuals fall
+  D) 95% of the 49 RILs fall inside the grey band
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Like any CI, the 95% describes the procedure: intervals built this way usually capture the true mean response.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) That's about individuals.
-  D) Residuals aren't plotted.
+  C) Residuals aren't plotted.
+  D) and A) That's about individuals.
 - **Hint:** CIs are about the mean.
 
 ### ch19-book-02
@@ -2291,16 +2291,16 @@ Based on the blue line, roughly what proportion of hybrid seed is predicted for 
 
 - **Options:**
 
-  A) About 0.47
-  B) About 0.21
-  C) About 0.73
+  A) About 0.21
+  B) About 0.73
+  C) About 0.47
   D) About 0.26
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 0.208 + 0.262 × 1 = 0.47.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the intercept (0 visits).
-  C) That's at 2 visits.
+  A) That's the intercept (0 visits).
+  B) That's at 2 visits.
   D) That's the slope.
 - **Hint:** Intercept + slope × 1.
 
@@ -2317,15 +2317,15 @@ Is the slope of the blue line positive or negative, and what does that mean?
 
 - **Options:**
 
-  A) Positive: RILs with more visits set more hybrid seed
+  A) Zero: visits are unrelated to hybrid seed
   B) Negative: RILs with more visits set less hybrid seed
-  C) Zero: visits are unrelated to hybrid seed
+  C) Positive: RILs with more visits set more hybrid seed
   D) Positive: more hybrid seed causes more visits
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The line rises with visits.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) The line rises.
+  B) and A) The line rises.
   D) Reverses cause and effect; regression shows association.
 - **Hint:** Does the line go up or down?
 
@@ -2350,15 +2350,15 @@ Match each quantity to its value:
 
 - **Options:**
 
-  A) 0.26
+  A) 0.04
   B) 0.36
-  C) 0.04
-  D) 0.78
+  C) 0.78
+  D) 0.26
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** Slope = cov / var(visits) = 0.039 / 0.149 = 0.26. Correlation = cov / (sd_x × sd_y) = 0.039 / (0.386 × 0.280) = 0.36.
 - **Why the wrong options are wrong (tutor only):**
-  C) is the covariance. D) is unrelated here.
+  A) is the covariance. C) is unrelated here.
 - **Hint:** Slope divides by the variance of x; correlation divides by both SDs.
 
 ### ch19-book-03-v1
@@ -2379,15 +2379,15 @@ Using the slope (0.26), what is the intercept of the regression of proportion hy
 
 - **Options:**
 
-  A) About 0.21
-  B) About 0.26
+  A) About 0.26
+  B) About 0.21
   C) About 0.05
   D) About 0.36
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** a = mean(y) - b × mean(x) = 0.260 - 0.26 × 0.197 = 0.209.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's mean y.
+  A) That's mean y.
   C) That's b × mean x.
   D) That's the correlation.
 - **Hint:** The line passes through the means.
@@ -2460,17 +2460,17 @@ The slope is 0.262 (SE 0.098, p = 0.011). What null hypothesis does the slope's 
 
 - **Options:**
 
-  A) That proportion hybrid doesn't change with visits
-  B) That RILs with zero visits set no hybrid seed
+  A) That RILs with zero visits set no hybrid seed
+  B) That visits explain all the variation
   C) That the mean proportion hybrid is zero
-  D) That visits explain all the variation
+  D) That proportion hybrid doesn't change with visits
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The slope's p-value tests whether the true slope is zero: the biologically interesting question.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the intercept's test.
+  A) That's the intercept's test.
+  B) Not a null hypothesis we test.
   C) Not this test.
-  D) Not a null hypothesis we test.
 - **Hint:** Slope = 0.
 
 ### ch19-book-04-v2
@@ -2578,14 +2578,14 @@ Visits ranged from 0 to 2 per session. Which prediction is NOT an extrapolation?
 - **Options:**
 
   A) For a RIL with 1.2 visits
-  B) For a RIL with 2.5 visits
-  C) For a RIL with 4 visits
-  D) For a RIL with -1 visits
+  B) For a RIL with -1 visits
+  C) For a RIL with 2.5 visits
+  D) For a RIL with 4 visits
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 1.2 is within the observed range (0 to 2).
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) are outside it.
+  C), D) and B) are outside it.
 - **Hint:** Inside 0 to 2?
 
 ### ch19-book-06-v2
@@ -2600,17 +2600,17 @@ The model predicts 1.26 for a RIL with 4 visits per session. What does this show
 
 - **Options:**
 
-  A) A straight line can't hold far beyond the data
-  B) RILs with 4 visits set more seed than they make
-  C) The slope must have been estimated incorrectly
-  D) Nothing; the prediction is perfectly reasonable
+  A) RILs with 4 visits set more seed than they make
+  B) A straight line can't hold far beyond the data
+  C) Nothing; the prediction is perfectly reasonable
+  D) The slope must have been estimated incorrectly
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A proportion can't exceed 1. Extrapolating beyond 2 visits breaks the model.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's impossible.
-  C) The slope is fine within the data.
-  D) It's impossible.
+  A) That's impossible.
+  C) It's impossible.
+  D) The slope is fine within the data.
 - **Hint:** Can a proportion exceed 1?
 
 ### ch19-book-07
@@ -2652,17 +2652,17 @@ The diagnostic plots for lm(prop_hybrid ~ visits) are shown. Why are non-normal 
 
 - **Options:**
 
-  A) Proportions are bounded (0 to 1) and often pile up at zero
+  A) Pollinator visits can't be measured at all precisely
   B) Proportions are always perfectly normally distributed
-  C) Pollinator visits can't be measured at all precisely
-  D) Small sample sizes always produce perfect diagnostics
+  C) Small sample sizes always produce perfect diagnostics
+  D) Proportions are bounded (0 to 1) and often pile up at zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Bounded responses with many zeros produce skewed residuals and variance that changes with the mean.
 - **Why the wrong options are wrong (tutor only):**
+  A) Measurement precision isn't the main issue.
   B) They often aren't.
-  C) Measurement precision isn't the main issue.
-  D) Not true.
+  C) Not true.
 - **Hint:** What values can a proportion take?
 
 ### ch19-book-07-v2
@@ -2678,17 +2678,17 @@ The diagnostic plots for lm(prop_hybrid ~ visits) are shown. Which plot is most 
 
 - **Options:**
 
-  A) The scale-location plot
-  B) The QQ plot of residuals
-  C) A histogram of visits
-  D) Residuals vs leverage
+  A) Residuals vs leverage
+  B) A histogram of visits
+  C) The scale-location plot
+  D) The QQ plot of residuals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Unequal variance shows up as spread that changes with fitted values, in the scale-location (or residuals vs fitted) plot.
 - **Why the wrong options are wrong (tutor only):**
-  B) QQ plots address normality.
-  C) Not a diagnostic of residuals.
-  D) That's for influence.
+  A) That's for influence.
+  B) Not a diagnostic of residuals.
+  D) QQ plots address normality.
 - **Hint:** Spread vs fitted values.
 
 ### ch19-book-08
@@ -2707,12 +2707,12 @@ Using the labeled points in the diagnostic plots, match each description to a da
 
 - **Options:**
 
-  A) 34
-  B) 13
-  C) 9
-  D) 44
+  A) 9
+  B) 44
+  C) 13
+  D) 34
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-C
 - **Explanation (tutor only):** Point 34 has the largest residual (top of the residuals and QQ plots). Point 13 has by far the highest leverage, with a sizable residual, so it pulls the line most (in the residuals vs leverage plot).
 - **Why the wrong options are wrong (tutor only):**
   9 is a big residual but not the biggest; 44 has moderate leverage.
@@ -2731,16 +2731,16 @@ Using the labeled points in the diagnostic plots, which point has by far the hig
 
 - **Options:**
 
-  A) 13
-  B) 34
-  C) 9
-  D) 44
+  A) 44
+  B) 9
+  C) 13
+  D) 34
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Point 13 stands far to the right in the residuals vs leverage plot.
 - **Why the wrong options are wrong (tutor only):**
-  B) 34 has the largest residual, not leverage.
-  C) and D) Lower leverage.
+  B) and A) Lower leverage.
+  D) 34 has the largest residual, not leverage.
 - **Hint:** Look at the x-axis of residuals vs leverage.
 
 ### ch19-book-08-v2
@@ -2756,17 +2756,17 @@ Using the labeled points in the diagnostic plots, what makes a point influential
 
 - **Options:**
 
-  A) A combination of high leverage and a large residual
-  B) A large residual alone, wherever its x value is
-  C) A small residual combined with low leverage
-  D) Being the first point in the dataset
+  A) Being the first point in the dataset
+  B) A combination of high leverage and a large residual
+  C) A large residual alone, wherever its x value is
+  D) A small residual combined with low leverage
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Influence (e.g. Cook's distance) depends on both leverage (unusual x) and the residual.
 - **Why the wrong options are wrong (tutor only):**
-  B) A large residual near mean x has little pull.
-  C) That's a typical point.
-  D) Order doesn't matter.
+  A) Order doesn't matter.
+  C) A large residual near mean x has little pull.
+  D) That's a typical point.
 - **Hint:** Leverage × residual.
 
 ### ch19-book-09
@@ -2824,16 +2824,16 @@ Which is a legitimate reason to remove a data point from an analysis?
 
 - **Options:**
 
-  A) It was a documented recording or measurement error
-  B) It makes the p-value larger than you would like
+  A) It falls outside the confidence band of the line
+  B) It was a documented recording or measurement error
   C) It has the largest residual in the regression
-  D) It falls outside the confidence band of the line
+  D) It makes the p-value larger than you would like
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Points can be removed for documented errors, not because they're inconvenient.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's p-hacking.
-  C) and D) Large residuals are part of the data.
+  C) and A) Large residuals are part of the data.
+  D) That's p-hacking.
 - **Hint:** Errors vs inconvenience.
 
 ### ch19-book-10
@@ -2854,10 +2854,10 @@ Each panel shows the RILs, the regression line (blue) and the mean proportion hy
 - **Options:**
 
   A) Panel A
-  B) Panel B
-  C) Panel C
+  B) Panel C
+  C) Panel B
 
-- **Answer (tutor only):** 1-C, 2-A, 3-B
+- **Answer (tutor only):** 1-B, 2-A, 3-C
 - **Explanation (tutor only):** A: points to the mean (total). B: points to the line (residual). C: line to the mean (model).
 - **Why the wrong options are wrong (tutor only):**
   Check where each line starts and ends.
@@ -2876,14 +2876,14 @@ Each panel shows the RILs, the regression line (blue) and the mean proportion hy
 
 - **Options:**
 
-  A) Panel A
-  B) Panel B
+  A) Panel B
+  B) Panel A
   C) Panel C
 
-- **Answer (tutor only):** B
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Panel B shows each point to the line (residuals).
 - **Why the wrong options are wrong (tutor only):**
-  A) Total.
+  B) Total.
   C) Model.
 - **Hint:** Point to line.
 
@@ -2900,17 +2900,17 @@ Each panel shows the RILs, the regression line (blue) and the mean proportion hy
 
 - **Options:**
 
-  A) Panel C, since the line is farthest from the mean there
-  B) Panel B, since residuals always grow with x
+  A) Panel B, since residuals always grow with x
+  B) Panel A, since total deviations never vary
   C) None; model deviations are the same for every RIL
-  D) Panel A, since total deviations never vary
+  D) Panel C, since the line is farthest from the mean there
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Model deviations (line minus mean) grow the farther x is from its mean.
 - **Why the wrong options are wrong (tutor only):**
-  B) Residuals needn't grow with x.
+  A) Residuals needn't grow with x.
+  B) Total deviations vary point to point.
   C) In regression they vary with x.
-  D) Total deviations vary point to point.
 - **Hint:** Where is the line farthest from the mean?
 
 ### ch19-book-11
@@ -2957,17 +2957,17 @@ SS model = 0.493 and SS total = 3.76. What is SS error, and what is R²?
 
 - **Options:**
 
-  A) 3.26 and 0.13
-  B) 4.25 and 0.13
-  C) 3.26 and 0.87
-  D) 0.493 and 0.15
+  A) 0.493 and 0.15
+  B) 3.26 and 0.13
+  C) 4.25 and 0.13
+  D) 3.26 and 0.87
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** SS error = 3.76 - 0.493 = 3.27 ≈ 3.26. R² = 0.493 / 3.76 = 0.13.
 - **Why the wrong options are wrong (tutor only):**
-  B) Adds instead of subtracts.
-  C) 0.87 is 1 - R².
-  D) Wrong on both.
+  A) Wrong on both.
+  C) Adds instead of subtracts.
+  D) 0.87 is 1 - R².
 - **Hint:** Total = model + error.
 
 ### ch19-book-11-v2
@@ -2990,15 +2990,15 @@ Which of these is the share of variation NOT explained by visits?
 - **Options:**
 
   A) ssa / ssc = 0.87
-  B) ssb / ssc = 0.13
+  B) ssc / ssa = 1.15
   C) ssb / ssa = 0.15
-  D) ssc / ssa = 1.15
+  D) ssb / ssc = 0.13
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** SS error / SS total = 3.26 / 3.76 = 0.87 = 1 - R².
 - **Why the wrong options are wrong (tutor only):**
-  B) That's R².
-  C) and D) Not meaningful shares.
+  C) and B) Not meaningful shares.
+  D) That's R².
 - **Hint:** Error / total.
 
 ### ch19-book-12
@@ -3038,16 +3038,16 @@ What is the alternative hypothesis (two-tailed) for testing this regression?
 
 - **Options:**
 
-  A) The true slope is not zero
+  A) The true intercept is not zero
   B) The true slope is positive
-  C) The true intercept is not zero
+  C) The true slope is not zero
   D) The observed slope is not zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Two-tailed: the response changes with visits in either direction.
 - **Why the wrong options are wrong (tutor only):**
+  A) Wrong parameter.
   B) One-tailed.
-  C) Wrong parameter.
   D) Hypotheses are about true values.
 - **Hint:** Two-tailed, about the slope.
 
@@ -3063,17 +3063,17 @@ If the null hypothesis (slope = 0) were true, what would the regression line loo
 
 - **Options:**
 
-  A) Flat, at the mean proportion hybrid
-  B) Passing through the origin (0, 0)
+  A) Passing through the origin (0, 0)
+  B) Vertical, at mean visits
   C) Rising steeply with visits
-  D) Vertical, at mean visits
+  D) Flat, at the mean proportion hybrid
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Slope = 0 means predictions don't change with visits: a flat line at the mean.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's intercept = 0.
+  A) That's intercept = 0.
+  B) Not a regression line.
   C) That's a positive slope.
-  D) Not a regression line.
 - **Hint:** What does slope = 0 mean?
 
 ### ch19-book-13
@@ -3156,15 +3156,15 @@ F = 7.1 on 1 and 47 df gives p = 0.011, and R² = 0.13. Which statement is corre
 - **Options:**
 
   A) The association is significant but explains little variation
-  B) Visits explain most of the variation in hybrid seed
-  C) Visits definitely cause hybrid seed production
+  B) Visits definitely cause hybrid seed production
+  C) Visits explain most of the variation in hybrid seed
   D) There's no association between visits and hybrid seed
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** p < 0.05 indicates an association; R² = 0.13 means visits explain about 13% of the variation.
 - **Why the wrong options are wrong (tutor only):**
-  B) R² is only 0.13.
-  C) Association isn't causation.
+  B) Association isn't causation.
+  C) R² is only 0.13.
   D) p < 0.05.
 - **Hint:** Significance vs R².
 
@@ -3180,17 +3180,17 @@ F = 7.1 on 1 and 47 df gives p = 0.011. Why can't we conclude that pollinator vi
 
 - **Options:**
 
-  A) These are observational data; other traits may drive both
-  B) Because the p-value isn't below 0.001
+  A) We can; a significant slope demonstrates causation
+  B) These are observational data; other traits may drive both
   C) Because R² is greater than zero
-  D) We can; a significant slope demonstrates causation
+  D) Because the p-value isn't below 0.001
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** RILs that attract more visits may differ in other traits (e.g. flower size, timing) that also affect hybridization.
 - **Why the wrong options are wrong (tutor only):**
-  B) Smaller p wouldn't prove causation.
+  A) Significance doesn't show causation.
   C) Irrelevant.
-  D) Significance doesn't show causation.
+  D) Smaller p wouldn't prove causation.
 - **Hint:** Observational vs experimental.
 
 ### ch19-chimein-01
@@ -3209,12 +3209,12 @@ Match each description to the term it describes:
 - **Options:**
 
   A) Covariance
-  B) Correlation
-  C) Residual
-  D) Slope
-  E) Intercept
+  B) Residual
+  C) Correlation
+  D) Intercept
+  E) Slope
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-A, 2-C, 3-B, 4-E
 - **Explanation (tutor only):** Covariance measures joint deviation (in units of x times y). Correlation standardizes it to measure how tightly points follow a line. The slope gives the change in y per unit x. A residual is observed minus predicted.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: correlation (how predictable) vs slope (how much).
@@ -3234,11 +3234,11 @@ Match each quantity to its units, for a regression of territory size (m²) on bi
 
 - **Options:**
 
-  A) m² per N
-  B) No units
-  C) m² × N
+  A) m² × N
+  B) m² per N
+  C) No units
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-B, 2-C, 3-A
 - **Explanation (tutor only):** Slope: change in y per unit x. Correlation is unitless. Covariance has units of x times y.
 - **Why the wrong options are wrong (tutor only):**
   Correlation is standardized.
@@ -3258,12 +3258,12 @@ Match each description to the term it describes:
 
 - **Options:**
 
-  A) Intercept
-  B) Residual
-  C) Correlation
+  A) Residual
+  B) Correlation
+  C) Intercept
   D) Slope
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** Intercept: prediction at x = 0. Residual: observed - predicted. Correlation: between -1 and 1.
 - **Why the wrong options are wrong (tutor only):**
   The slope isn't described.
@@ -3283,11 +3283,11 @@ Match each quantity to what it measures:
 
 - **Options:**
 
-  A) Deviation from the null
-  B) Surprise (how unusual the data would be under the null)
-  C) Strength of association
+  A) Surprise (how unusual the data would be under the null)
+  B) Strength of association
+  C) Deviation from the null
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** F and t measure how far the estimate is from the null in standardized units. p converts that into how surprising the data would be if the null were true. R² measures the proportion of variance explained.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: p and the test statistic. The p-value is the probability; t and F are distances.
@@ -3325,15 +3325,15 @@ Which quantity tells you how SURPRISING the data would be if there were no relat
 
 - **Options:**
 
-  A) p
-  B) R²
-  C) The slope
-  D) The correlation
+  A) The correlation
+  B) The slope
+  C) R²
+  D) p
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p measures surprise under the null.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) describe the relationship, not surprise.
+  C), B) and A) describe the relationship, not surprise.
 - **Hint:** Probability under the null.
 
 ### ch19-chimein-03
@@ -3350,11 +3350,11 @@ In linear models, each observation Yᵢ equals its prediction Ŷᵢ plus its res
 
 - **Options:**
 
-  A) SS model
-  B) SS error
-  C) SS total
+  A) SS error
+  B) SS total
+  C) SS model
 
-- **Answer (tutor only):** 1-B, 2-A, 3-C
+- **Answer (tutor only):** 1-A, 2-C, 3-B
 - **Explanation (tutor only):** Observations minus predictions: error. Predictions minus the mean: model. Observations minus the mean: total.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: model vs total.
@@ -3370,12 +3370,12 @@ In linear models, Yᵢ = Ŷᵢ + eᵢ. Which equation is always true?
 
 - **Options:**
 
-  A) Σ(Yᵢ - Ȳ)² = Σ(Ŷᵢ - Ȳ)² + Σ(Yᵢ - Ŷᵢ)²
-  B) Σ(Yᵢ - Ŷᵢ)² = Σ(Ŷᵢ - Ȳ)² + Σ(Yᵢ - Ȳ)²
-  C) Σ(Ŷᵢ - Ȳ)² = Σ(Yᵢ - Ȳ)² + Σ(Yᵢ - Ŷᵢ)²
-  D) Σ(Yᵢ - Ȳ)² = Σ(Ŷᵢ - Ȳ)² × Σ(Yᵢ - Ŷᵢ)²
+  A) Σ(Yᵢ - Ŷᵢ)² = Σ(Ŷᵢ - Ȳ)² + Σ(Yᵢ - Ȳ)²
+  B) Σ(Yᵢ - Ȳ)² = Σ(Ŷᵢ - Ȳ)² + Σ(Yᵢ - Ŷᵢ)²
+  C) Σ(Yᵢ - Ȳ)² = Σ(Ŷᵢ - Ȳ)² × Σ(Yᵢ - Ŷᵢ)²
+  D) Σ(Ŷᵢ - Ȳ)² = Σ(Yᵢ - Ȳ)² + Σ(Yᵢ - Ŷᵢ)²
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** SS total = SS model + SS error.
 - **Why the wrong options are wrong (tutor only):**
   Identify SS total first.
@@ -3436,16 +3436,16 @@ Two labs measure the same relationship. Lab A measures x precisely; Lab B measur
 
 - **Options:**
 
-  A) Closer to zero
-  B) Farther from zero
-  C) Exactly the same on average
-  D) Associated with a weaker correlation
+  A) Associated with a weaker correlation
+  B) Exactly the same on average
+  C) Farther from zero
+  D) Closer to zero
 
 - **Answer (tutor only):** A, D
 - **Explanation (tutor only):** Error in x biases both the slope and the correlation toward zero.
 - **Why the wrong options are wrong (tutor only):**
-  B) Bias is toward zero.
-  C) Error in x causes bias.
+  B) Error in x causes bias.
+  C) Bias is toward zero.
 - **Hint:** Regression dilution.
 
 ### ch19-chimein-04-v2
@@ -3458,16 +3458,16 @@ What is 'regression dilution'?
 
 - **Options:**
 
-  A) Error in x biases the estimated slope toward zero
-  B) Error in y biases the estimated slope toward zero
-  C) Adding predictors reduces each one's slope
-  D) Large samples shrink the slope toward zero
+  A) Error in y biases the estimated slope toward zero
+  B) Adding predictors reduces each one's slope
+  C) Large samples shrink the slope toward zero
+  D) Error in x biases the estimated slope toward zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Random error in the explanatory variable flattens the estimated slope.
 - **Why the wrong options are wrong (tutor only):**
-  B) Error in y doesn't bias the slope.
-  C) and D) Not what it means.
+  A) Error in y doesn't bias the slope.
+  B) and C) Not what it means.
 - **Hint:** Which variable has the error?
 
 ### ch19-chimein-05
@@ -3502,15 +3502,15 @@ Two labs measure the same relationship. Lab A measures y precisely; Lab B measur
 
 - **Options:**
 
-  A) A slope that is biased toward zero
-  B) A weaker correlation
+  A) A weaker correlation
+  B) A slope that is biased toward zero
   C) A larger standard error for the slope
   D) A slope that is biased away from zero
 
-- **Answer (tutor only):** B, C
+- **Answer (tutor only):** A, C
 - **Explanation (tutor only):** Error in y adds scatter: the slope stays unbiased but less precise, and the correlation drops.
 - **Why the wrong options are wrong (tutor only):**
-  A) and D) Error in y doesn't bias the slope.
+  B) and D) Error in y doesn't bias the slope.
 - **Hint:** Scatter vs bias.
 
 ### ch19-chimein-05-v2
@@ -3523,15 +3523,15 @@ Random measurement error in Y does NOT: (Select all that apply.)
 
 - **Options:**
 
-  A) Bias the estimated slope
-  B) Reduce the estimated correlation
+  A) Increase the residual variance
+  B) Bias the estimated slope
   C) Increase the slope's standard error
-  D) Increase the residual variance
+  D) Reduce the estimated correlation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Error in y leaves the slope unbiased but lowers the correlation and raises the SE and residual variance.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) all happen.
+  D), C) and A) all happen.
 - **Hint:** Which one stays unbiased?
 
 ### ch19-hw-01
@@ -3547,12 +3547,12 @@ The grey band in the plot is a (1) ____ interval. If we wanted the band to show 
 
 - **Options:**
 
-  A) confidence
-  B) prediction
-  C) wider
-  D) narrower
+  A) wider
+  B) narrower
+  C) prediction
+  D) confidence
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-D, 2-C, 3-A
 - **Explanation (tutor only):** A confidence band shows uncertainty in the mean response at each x. A prediction interval also includes the scatter of individual points around that mean, so it's much wider.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: thinking the grey band should contain most points. It describes the mean, not individuals.
@@ -3574,12 +3574,12 @@ Match each interval to what it describes:
 
 - **Options:**
 
-  A) Where the true mean response at each x plausibly lies
+  A) Where 95% of the current data points fall
   B) Where new individual observations are expected to fall
-  C) Where 95% of the current data points fall
+  C) Where the true mean response at each x plausibly lies
   D) The range of x values in the data
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-B
 - **Explanation (tutor only):** A confidence band is for the mean response; a prediction interval adds individual scatter.
 - **Why the wrong options are wrong (tutor only):**
   Mean vs individuals.
@@ -3598,12 +3598,12 @@ The grey confidence band is narrowest near the middle of the petal areas and wid
 
 - **Options:**
 
-  A) mean
-  B) maximum
-  C) slope uncertainty
-  D) intercept
+  A) intercept
+  B) slope uncertainty
+  C) maximum
+  D) mean
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** The line pivots around (mean x, mean y), so uncertainty in the slope matters more far from the mean.
 - **Why the wrong options are wrong (tutor only):**
   The line always passes through the means.
@@ -3648,17 +3648,17 @@ Why do most individual points fall OUTSIDE the grey 95% confidence band?
 
 - **Options:**
 
-  A) The band describes the mean, not individual RILs
-  B) The model is wrong and should be discarded
-  C) The band should contain 95% of the points
-  D) Most points are outliers in this dataset
+  A) Most points are outliers in this dataset
+  B) The band should contain 95% of the points
+  C) The model is wrong and should be discarded
+  D) The band describes the mean, not individual RILs
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The confidence band is about the true mean response, not where individuals fall.
 - **Why the wrong options are wrong (tutor only):**
-  B) Points outside a confidence band are expected.
-  C) That's a prediction interval.
-  D) They're ordinary scatter.
+  A) They're ordinary scatter.
+  B) That's a prediction interval.
+  C) Points outside a confidence band are expected.
 - **Hint:** Mean vs individuals.
 
 ### ch19-hw-02-v2
@@ -3675,15 +3675,15 @@ With more RILs (and similar data), what would happen to the grey 95% confidence 
 - **Options:**
 
   A) It would get narrower
-  B) It would get wider
-  C) It would stay the same
+  B) It would stay the same
+  C) It would get wider
   D) It would disappear
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** More data shrink the standard errors of the intercept and slope, narrowing the band.
 - **Why the wrong options are wrong (tutor only):**
-  B) More data reduce uncertainty.
-  C) Uncertainty depends on n.
+  B) Uncertainty depends on n.
+  C) More data reduce uncertainty.
   D) Some uncertainty always remains.
 - **Hint:** What does n do to SEs?
 
@@ -3724,15 +3724,15 @@ Which assumptions CAN'T be evaluated from diagnostic plots? (Select all that app
 
 - **Options:**
 
-  A) Independence
-  B) Unbiased data collection
-  C) Normality of residuals
+  A) Unbiased data collection
+  B) Normality of residuals
+  C) Independence
   D) Homoscedasticity (equal variance)
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** A, C
 - **Explanation (tutor only):** Independence and bias depend on the study design; QQ and residual plots address normality and equal variance.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) are what the plots show.
+  B) and D) are what the plots show.
 - **Hint:** What do the plots actually display?
 
 ### ch19-hw-03-v2
@@ -3749,15 +3749,15 @@ What does the QQ plot of residuals suggest?
 - **Options:**
 
   A) The residuals are skewed, not normally distributed
-  B) The residuals are perfectly normally distributed
-  C) The residuals are not independent of each other
-  D) The residuals have equal variance across x
+  B) The residuals are not independent of each other
+  C) The residuals have equal variance across x
+  D) The residuals are perfectly normally distributed
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The points curve away from the line, as expected for proportions with many zeros.
 - **Why the wrong options are wrong (tutor only):**
-  B) They deviate.
-  C) and D) A QQ plot doesn't show these.
+  B) and C) A QQ plot doesn't show these.
+  D) They deviate.
 - **Hint:** Do the points follow the line?
 
 ### ch19-hw-04
@@ -3795,17 +3795,17 @@ The residuals are non-normal and their variance isn't constant. Which is a reaso
 
 - **Options:**
 
-  A) Compare with a permutation test or bootstrap
+  A) Switch to a smaller α and keep the same model
   B) Delete points until the residuals look normal
   C) Report the result without mentioning the problems
-  D) Switch to a smaller α and keep the same model
+  D) Compare with a permutation test or bootstrap
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Resampling methods don't rely on normal, equal-variance residuals.
 - **Why the wrong options are wrong (tutor only):**
+  A) α doesn't fix assumption violations.
   B) Deleting data to fit assumptions is wrong.
   C) Be honest about violations.
-  D) α doesn't fix assumption violations.
 - **Hint:** Which methods don't need these assumptions?
 
 ### ch19-hw-04-v2
@@ -3820,17 +3820,17 @@ The residuals are somewhat non-normal. Why is this less of a worry with 113 RILs
 
 - **Options:**
 
-  A) The CLT makes the slope's sampling distribution near normal
-  B) Large samples make the residuals themselves normal
-  C) Large samples make the model's assumptions unnecessary
-  D) It is not less of a worry with more data
+  A) Large samples make the residuals themselves normal
+  B) It is not less of a worry with more data
+  C) The CLT makes the slope's sampling distribution near normal
+  D) Large samples make the model's assumptions unnecessary
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With large samples, estimates like the slope have roughly normal sampling distributions even when residuals aren't normal.
 - **Why the wrong options are wrong (tutor only):**
-  B) Residuals keep their shape.
-  C) Assumptions still matter (e.g. independence).
-  D) Large n helps.
+  A) Residuals keep their shape.
+  B) Large n helps.
+  D) Assumptions still matter (e.g. independence).
 - **Hint:** Central limit theorem.
 
 ### ch19-hw-05
@@ -3918,17 +3918,17 @@ The intercept is -0.078 and the slope is 0.0040. What does the model predict for
 
 - **Options:**
 
-  A) About 0.16
-  B) About -0.08
+  A) About 0.004
+  B) About 0.16
   C) About 0.24
-  D) About 0.004
+  D) About -0.08
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** -0.078 + 0.0040 × 60 = -0.078 + 0.24 = 0.162.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the intercept.
+  A) That's the slope.
   C) Forgets the intercept.
-  D) That's the slope.
+  D) That's the intercept.
 - **Hint:** Intercept + slope × 60.
 
 ### ch19-hw-06-v2
@@ -3944,16 +3944,16 @@ Petal areas range from about 35 to 110 mm². Over what range of petal areas does
 - **Options:**
 
   A) Below about 20 mm², outside our data
-  B) Below about 60 mm², within our data
-  C) Above about 110 mm², outside our data
-  D) It never predicts a negative proportion
+  B) Above about 110 mm², outside our data
+  C) It never predicts a negative proportion
+  D) Below about 60 mm², within our data
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The line crosses zero at 0.078 / 0.0040 ≈ 19.5 mm², below the smallest petals observed.
 - **Why the wrong options are wrong (tutor only):**
-  B) At 60 mm² the prediction is 0.16.
-  C) Predictions increase with area.
-  D) The intercept is negative.
+  B) Predictions increase with area.
+  C) The intercept is negative.
+  D) At 60 mm² the prediction is 0.16.
 - **Hint:** Solve -0.078 + 0.004 × x = 0.
 
 ### ch19-hw-07
@@ -3973,11 +3973,11 @@ Each plot shows 30 randomly chosen RILs, the regression line (blue) and the mean
 
 - **Options:**
 
-  A) Error
-  B) Total
+  A) Total
+  B) Error
   C) Model
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-B, 2-A, 3-C
 - **Explanation (tutor only):** A: points to the regression line (error). B: points to the mean (total). C: the line to the mean (model).
 - **Why the wrong options are wrong (tutor only):**
   Check where each pink line starts and ends.
@@ -3996,15 +3996,15 @@ Each plot shows 30 randomly chosen RILs, the regression line (blue) and the mean
 
 - **Options:**
 
-  A) Plot A
+  A) Plot C
   B) Plot B
-  C) Plot C
+  C) Plot A
 
-- **Answer (tutor only):** C
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** Model deviations (line to mean) vanish when the line is the mean.
 - **Why the wrong options are wrong (tutor only):**
-  A) Points still scatter around the line.
   B) Points still scatter around the mean.
+  C) Points still scatter around the line.
 - **Hint:** Which lines connect the regression line to the mean?
 
 ### ch19-hw-07-v2
@@ -4020,14 +4020,14 @@ Each plot shows 30 randomly chosen RILs, the regression line (blue) and the mean
 
 - **Options:**
 
-  A) Plot A
-  B) Plot B
+  A) Plot B
+  B) Plot A
   C) Plot C
 
-- **Answer (tutor only):** A
-- **Explanation (tutor only):** Residuals are the vertical distances from each point to the regression line (Plot A).
+- **Answer (tutor only):** B
+- **Explanation (tutor only):** Residuals are the vertical distances from each point to the regression line (Plot B).
 - **Why the wrong options are wrong (tutor only):**
-  B) Total deviations.
+  A) Total deviations.
   C) Model deviations.
 - **Hint:** Point to line.
 
@@ -4054,11 +4054,11 @@ Match each to its sum of squares:
 
 - **Options:**
 
-  A) Model
-  B) Error
-  C) Total
+  A) Error
+  B) Total
+  C) Model
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** ssa compares predictions to the mean (model), ssb compares observations to predictions (error), and ssc compares observations to the mean (total). Check: 0.413 + 6.88 = 7.29.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: model vs total.
@@ -4076,16 +4076,16 @@ SS model = 0.413, SS error = 6.88. What is SS total?
 
 - **Options:**
 
-  A) 7.29
+  A) 0.06
   B) 6.47
-  C) 0.06
+  C) 7.29
   D) 16.7
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** SS total = 0.413 + 6.88 = 7.29.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's R².
   B) Subtracts.
-  C) That's R².
   D) That's 6.88 / 0.413.
 - **Hint:** SS total = SS model + SS error.
 
@@ -4103,11 +4103,11 @@ Match each formula to its sum of squares in a regression:
 
 - **Options:**
 
-  A) Model
+  A) Total
   B) Error
-  C) Total
+  C) Model
 
-- **Answer (tutor only):** 1-B, 2-A, 3-C
+- **Answer (tutor only):** 1-B, 2-C, 3-A
 - **Explanation (tutor only):** Observation - prediction: error. Prediction - mean: model. Observation - mean: total.
 - **Why the wrong options are wrong (tutor only):**
   Which two quantities are compared?
@@ -4170,12 +4170,12 @@ A simple regression on 113 data points. Match each degree of freedom to its valu
 
 - **Options:**
 
-  A) 1
+  A) 111
   B) 2
-  C) 111
+  C) 1
   D) 112
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** The model estimates one slope beyond the mean (df = 1). Error df = n - 2 = 111 (we estimated an intercept and a slope).
 - **Why the wrong options are wrong (tutor only):**
   Common mistake: n - 1 = 112 for the error df.
@@ -4194,12 +4194,12 @@ A simple regression on 30 data points. Match each degree of freedom to its value
 
 - **Options:**
 
-  A) 1
-  B) 2
-  C) 28
+  A) 2
+  B) 28
+  C) 1
   D) 29
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-C, 2-B
 - **Explanation (tutor only):** Model df = 1 (one slope). Error df = 30 - 2 = 28.
 - **Why the wrong options are wrong (tutor only):**
   Two parameters are estimated.
@@ -4217,16 +4217,16 @@ Why is the error df 111 (not 112) in this regression on 113 RILs?
 
 - **Options:**
 
-  A) Two parameters, intercept and slope, are estimated
+  A) The model df is always subtracted twice
   B) One data point was removed as an outlier
-  C) The model df is always subtracted twice
+  C) Two parameters, intercept and slope, are estimated
   D) R uses n - 2 for every type of model
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Error df = n minus the number of estimated parameters (2).
 - **Why the wrong options are wrong (tutor only):**
+  A) Not how df work.
   B) No points were removed.
-  C) Not how df work.
   D) It depends on the number of parameters.
 - **Hint:** Count the estimated parameters.
 
@@ -4267,15 +4267,15 @@ F = 6.66 on 1 and 111 df gives p = 0.011. Which statement is correct?
 
   A) Petal area is associated with hybrid seed, but explains little variation
   B) Petal area explains most of the variation in hybrid seed
-  C) Larger petals definitely cause more hybrid seed
-  D) There is a 1.1% chance there's no relationship
+  C) There is a 1.1% chance there's no relationship
+  D) Larger petals definitely cause more hybrid seed
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** p < 0.05 shows an association; R² = 0.057 shows it explains little of the variation.
 - **Why the wrong options are wrong (tutor only):**
   B) R² is only 0.057.
-  C) Association isn't causation.
-  D) p isn't P(null).
+  C) p isn't P(null).
+  D) Association isn't causation.
 - **Hint:** Significance vs R².
 
 ### ch19-hw-11-v2
@@ -4290,17 +4290,17 @@ Why is the regression's F (6.66) equal to the square of the slope's t?
 
 - **Options:**
 
-  A) With one predictor, F = t² and both test the same null
-  B) Coincidence; F and t are unrelated in regression
-  C) F always equals t² regardless of the model
-  D) Because R² is the square of the correlation
+  A) F always equals t² regardless of the model
+  B) Because R² is the square of the correlation
+  C) Coincidence; F and t are unrelated in regression
+  D) With one predictor, F = t² and both test the same null
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** With one predictor, the F test of the model and the t test of the slope test the same null (slope = 0), and F = t².
 - **Why the wrong options are wrong (tutor only):**
-  B) It's not a coincidence.
-  C) Only with one numerator df.
-  D) True, but not the reason.
+  A) Only with one numerator df.
+  B) True, but not the reason.
+  C) It's not a coincidence.
 - **Hint:** How many predictors?
 
 ### ch19-hw-12
@@ -4402,15 +4402,15 @@ In the equation territoryᵢ = a + b × biteᵢ + eᵢ, what is eᵢ?
 
 - **Options:**
 
-  A) The residual: lizard i's territory minus its prediction
-  B) The standard error of the slope for lizard i
+  A) The standard error of the slope for lizard i
+  B) The residual: lizard i's territory minus its prediction
   C) The predicted territory size for lizard i
   D) The bite force of lizard i, minus the mean bite force
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** eᵢ is lizard i's residual: what's left after the line's prediction.
 - **Why the wrong options are wrong (tutor only):**
-  B) Standard errors describe estimates, not individual lizards.
+  A) Standard errors describe estimates, not individual lizards.
   C) That's a + b × biteᵢ.
   D) That's a deviation in x.
 - **Hint:** Observed = predicted + ?
@@ -4438,15 +4438,15 @@ Which equation gives the model's PREDICTED territory size for lizard i?
 
   A) territorŷᵢ = -31.54 + 11.68 × biteᵢ
   B) territorŷᵢ = -31.54 + 11.68 × biteᵢ + eᵢ
-  C) territorŷᵢ = 11.68 - 31.54 × biteᵢ
-  D) territorŷᵢ = -31.54 + 4.85 × biteᵢ
+  C) territorŷᵢ = -31.54 + 4.85 × biteᵢ
+  D) territorŷᵢ = 11.68 - 31.54 × biteᵢ
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Predictions come from the line alone; the residual is the gap between the observation and the prediction.
 - **Why the wrong options are wrong (tutor only):**
   B) Adding eᵢ gives the observed value.
-  C) Swaps intercept and slope.
-  D) Uses the slope's SE instead of the slope.
+  C) Uses the slope's SE instead of the slope.
+  D) Swaps intercept and slope.
 - **Hint:** Predictions have no residual term.
 
 ### ch19-quiz-02
@@ -4502,17 +4502,17 @@ What is the 95% confidence interval for the intercept, and does it include zero?
 
 - **Options:**
 
-  A) (-84.7, 21.7); yes, it includes zero
+  A) (-84.7, 21.7); no, it excludes zero
   B) (0.71, 22.6); no, it excludes zero
-  C) (-84.7, 21.7); no, it excludes zero
-  D) (23.5, 4.85); yes, it includes zero
+  C) (23.5, 4.85); yes, it includes zero
+  D) (-84.7, 21.7); yes, it includes zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The intercept's CI is -84.73 to 21.65, which includes zero.
 - **Why the wrong options are wrong (tutor only):**
+  A) The interval spans zero.
   B) That's the slope's CI.
-  C) The interval spans zero.
-  D) Those are standard errors.
+  C) Those are standard errors.
 - **Hint:** Look at the (Intercept) row.
 
 ### ch19-quiz-02-v2
@@ -4535,17 +4535,17 @@ Why is the slope's 95% CI (0.71 to 22.6) so wide?
 
 - **Options:**
 
-  A) With only 11 lizards, the slope's SE is large
-  B) Because the slope is statistically significant
-  C) Because bite force causes larger territories
-  D) Because R² is greater than 0.3
+  A) Because the slope is statistically significant
+  B) Because bite force causes larger territories
+  C) Because R² is greater than 0.3
+  D) With only 11 lizards, the slope's SE is large
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Small samples give large SEs (4.85 here), so the CI (estimate ± about 2.26 × SE) is wide.
 - **Why the wrong options are wrong (tutor only):**
-  B) Significance doesn't widen a CI.
-  C) Causation isn't shown and doesn't affect width.
-  D) R² doesn't set the CI width directly.
+  A) Significance doesn't widen a CI.
+  B) Causation isn't shown and doesn't affect width.
+  C) R² doesn't set the CI width directly.
 - **Hint:** CI = estimate ± critical t × SE.
 
 ### ch19-quiz-03
@@ -4630,14 +4630,14 @@ The fitted model is territory = -31.54 + 11.68 × bite. Which prediction is most
 - **Options:**
 
   A) For a lizard with a bite force of 4.8 N
-  B) For a lizard with a bite force of 2.0 N
-  C) For a lizard with a bite force of 8.0 N
+  B) For a lizard with a bite force of 8.0 N
+  C) For a lizard with a bite force of 2.0 N
   D) All are equally trustworthy
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 4.8 N lies within the observed range (4.3 to 5.4 N); the others are extrapolations.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Far outside the data.
+  C) and B) Far outside the data.
   D) Extrapolations are less trustworthy.
 - **Hint:** Which is inside the data?
 
@@ -4653,17 +4653,17 @@ The fitted model is territory = -31.54 + 11.68 × bite. For a lizard with a 10 N
 
 - **Options:**
 
-  A) 10 N is far above the bite forces we observed
-  B) The prediction is a positive number of square meters
-  C) The slope's confidence interval doesn't include zero
-  D) We shouldn't; the model gives a sensible prediction
+  A) We shouldn't; the model gives a sensible prediction
+  B) The slope's confidence interval doesn't include zero
+  C) 10 N is far above the bite forces we observed
+  D) The prediction is a positive number of square meters
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Our data cover 4.3 to 5.4 N; we don't know if the line holds far beyond that.
 - **Why the wrong options are wrong (tutor only):**
-  B) Positive is fine.
-  C) Irrelevant to extrapolation.
-  D) Plausible-looking extrapolations are still extrapolations.
+  A) Plausible-looking extrapolations are still extrapolations.
+  B) Irrelevant to extrapolation.
+  D) Positive is fine.
 - **Hint:** Range of the data.
 
 ### ch19-quiz-06
@@ -4772,9 +4772,9 @@ If we measured bite force (x) perfectly, instead of with random error, what woul
 
 - **Options:**
 
-  A) The estimated slope would tend to be farther from zero
+  A) The slope's uncertainty would be smaller
   B) The estimated slope would tend to be closer to zero
-  C) The slope's uncertainty would be smaller
+  C) The estimated slope would tend to be farther from zero
   D) Nothing would change
 
 - **Answer (tutor only):** A, C
@@ -4794,16 +4794,16 @@ A biologist measures body size (x) with a lot of random error and regresses meta
 
 - **Options:**
 
-  A) Closer to zero than the true slope
-  B) Farther from zero than the true slope
-  C) Less precise than with perfect measurements
-  D) Exactly unbiased, because error averages out
+  A) Exactly unbiased, because error averages out
+  B) Less precise than with perfect measurements
+  C) Closer to zero than the true slope
+  D) Farther from zero than the true slope
 
-- **Answer (tutor only):** A, C
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** Error in x dilutes the slope toward zero and adds noise.
 - **Why the wrong options are wrong (tutor only):**
-  B) Bias is toward zero.
-  D) Error in x does not average out in the slope.
+  A) Error in x does not average out in the slope.
+  D) Bias is toward zero.
 - **Hint:** Regression dilution.
 
 ### ch19-quiz-08
@@ -4844,16 +4844,16 @@ If we measured territory size (y) perfectly, instead of with random error, what 
 
 - **Options:**
 
-  A) The estimated slope would tend to be farther from zero
-  B) The estimated slope would be no more or less biased
+  A) The slope's uncertainty would be larger
+  B) The estimated slope would tend to be farther from zero
   C) The slope's uncertainty would be smaller
-  D) The slope's uncertainty would be larger
+  D) The estimated slope would be no more or less biased
 
-- **Answer (tutor only):** B, C
+- **Answer (tutor only):** C, D
 - **Explanation (tutor only):** Error in y doesn't bias the slope, so removing it doesn't change bias, but it reduces residual scatter and the SE.
 - **Why the wrong options are wrong (tutor only):**
-  A) Error in y doesn't bias the slope.
-  D) Less error means less uncertainty.
+  A) Less error means less uncertainty.
+  B) Error in y doesn't bias the slope.
 - **Hint:** Error in y vs error in x.
 
 ### ch19-quiz-08-v2
@@ -4866,15 +4866,15 @@ A biologist measures metabolic rate (y) with a lot of random error and regresses
 
 - **Options:**
 
-  A) Unbiased, but with a larger standard error
-  B) Biased toward zero, with a smaller standard error
-  C) Biased away from zero, with a larger standard error
-  D) Biased toward zero, with the same standard error
+  A) Biased toward zero, with the same standard error
+  B) Biased away from zero, with a larger standard error
+  C) Biased toward zero, with a smaller standard error
+  D) Unbiased, but with a larger standard error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Random error in y just adds residual scatter: no bias, more uncertainty.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) Error in y doesn't bias the slope.
+  C), B) and A) Error in y doesn't bias the slope.
 - **Hint:** Which variable has the error?
 
 ### ch19-quiz-09
@@ -4921,15 +4921,15 @@ Suppose a second study of 11 lizards found p = 0.21 for the slope. At α = 0.05,
 
 - **Options:**
 
-  A) Reject; bite force predicts territory size
-  B) Reject; we can't say for sure whether the null is true
+  A) Fail to reject; we can't say for sure
+  B) Reject; bite force predicts territory size
   C) Fail to reject; bite force has no effect
-  D) Fail to reject; we can't say for sure
+  D) Reject; we can't say for sure whether the null is true
 
-- **Answer (tutor only):** D
+- **Answer (tutor only):** A
 - **Explanation (tutor only):** p > 0.05, so we fail to reject. With only 11 lizards we may lack power; this isn't evidence of no effect.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) p > α.
+  B) and D) p > α.
   C) Failing to reject isn't proof.
 - **Hint:** Compare p with 0.05.
 
@@ -4953,15 +4953,15 @@ The slope's p-value is 0.039 and its 95% CI is 0.71 to 22.64. How are these cons
 
 - **Options:**
 
-  A) p < 0.05, and the CI excludes zero
+  A) p > 0.05, and the CI excludes zero
   B) p < 0.05, and the CI includes zero
-  C) p > 0.05, and the CI excludes zero
-  D) They aren't consistent with each other
+  C) They aren't consistent with each other
+  D) p < 0.05, and the CI excludes zero
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A two-tailed test at α = 0.05 rejects exactly when the 95% CI excludes the null value (0).
 - **Why the wrong options are wrong (tutor only):**
+  A) p < 0.05.
   B) The CI excludes zero.
-  C) p < 0.05.
-  D) They agree.
+  C) They agree.
 - **Hint:** Is 0 in the CI?

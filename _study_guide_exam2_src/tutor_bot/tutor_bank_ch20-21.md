@@ -67,9 +67,9 @@ How many coefficients does this model estimate, including the intercept?
 - **Options:**
 
   A) Four
-  B) Three
-  C) Two
-  D) Five
+  B) Five
+  C) Three
+  D) Two
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Intercept, Sepal.Length, Speciesversicolor and Speciesvirginica.
@@ -94,16 +94,16 @@ Why does species get two coefficients?
 
 - **Options:**
 
-  A) It has three levels: one is the reference
-  B) It is the most important predictor
-  C) Each species has two flowers sampled
+  A) It is the most important predictor
+  B) Each species has two flowers sampled
+  C) It has three levels: one is the reference
   D) Species interacts with sepal length
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** A categorical variable with k levels gets k - 1 coefficients.
 - **Why the wrong options are wrong (tutor only):**
-  B) Importance doesn't set the count.
-  C) Irrelevant.
+  A) Importance doesn't set the count.
+  B) Irrelevant.
   D) There's no interaction term.
 - **Hint:** k - 1.
 
@@ -156,17 +156,17 @@ Using the model, what is the predicted petal length of a setosa flower with a se
 
 - **Options:**
 
-  A) About 1.46 cm
-  B) About 3.67 cm
-  C) About 4.55 cm
-  D) About 0.63 cm
+  A) About 0.63 cm
+  B) About 4.55 cm
+  C) About 1.46 cm
+  D) About 3.67 cm
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** -1.7023 + 0.6321 × 5 = 1.458 cm (setosa is the reference).
 - **Why the wrong options are wrong (tutor only):**
-  B) Adds the versicolor coefficient.
-  C) Adds the virginica coefficient.
-  D) That's the slope.
+  A) That's the slope.
+  B) Adds the virginica coefficient.
+  D) Adds the versicolor coefficient.
 - **Hint:** Setosa is the reference level.
 
 ### ch20-book-02-v2
@@ -186,17 +186,17 @@ Two virginica flowers differ in sepal length by 2 cm. How much does their predic
 
 - **Options:**
 
-  A) About 1.26 cm
+  A) About 3.09 cm
   B) About 0.63 cm
-  C) About 3.09 cm
-  D) About 6.18 cm
+  C) About 6.18 cm
+  D) About 1.26 cm
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 0.6321 × 2 = 1.26 cm.
 - **Why the wrong options are wrong (tutor only):**
+  A) The virginica coefficient.
   B) For 1 cm.
-  C) The virginica coefficient.
-  D) 2 × 3.09.
+  C) 2 × 3.09.
 - **Hint:** Slope × difference.
 
 ### ch20-book-03
@@ -246,17 +246,17 @@ At the same sepal length, how much longer are virginica petals than versicolor p
 
 - **Options:**
 
-  A) About 0.88 cm
-  B) About 3.09 cm
+  A) About 3.09 cm
+  B) About 5.30 cm
   C) About 2.21 cm
-  D) About 5.30 cm
+  D) About 0.88 cm
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 3.0900 - 2.2101 = 0.88 cm.
 - **Why the wrong options are wrong (tutor only):**
-  B) Virginica vs setosa.
+  A) Virginica vs setosa.
+  B) Adds them.
   C) Versicolor vs setosa.
-  D) Adds them.
 - **Hint:** Subtract the two species coefficients.
 
 ### ch20-book-03-v2
@@ -276,17 +276,17 @@ The Speciesvirginica coefficient (3.09) compares virginica petal length to:
 
 - **Options:**
 
-  A) Setosa petal length, at the same sepal length
-  B) Setosa petal length, ignoring sepal length
-  C) Versicolor petal length, at the same sepal length
-  D) The average petal length of all three species
+  A) The average petal length of all three species
+  B) Setosa petal length, at the same sepal length
+  C) Setosa petal length, ignoring sepal length
+  D) Versicolor petal length, at the same sepal length
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Setosa is the reference, and the comparison adjusts for sepal length.
 - **Why the wrong options are wrong (tutor only):**
-  B) Sepal length is in the model.
-  C) Versicolor isn't the reference.
-  D) Not an average.
+  A) Not an average.
+  C) Sepal length is in the model.
+  D) Versicolor isn't the reference.
 - **Hint:** Reference level + adjustment.
 
 ### ch20-book-04
@@ -334,15 +334,15 @@ Which phrase best describes what this model does with sepal length when comparin
 
 - **Options:**
 
-  A) Adjusts for it statistically
-  B) Holds it constant by design
-  C) Randomly assigns it to flowers
+  A) Holds it constant by design
+  B) Randomly assigns it to flowers
+  C) Adjusts for it statistically
   D) Removes it from the data
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Regression adjusts statistically; nothing was fixed by design.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) That's experimental.
+  A) and B) That's experimental.
   D) It's in the model.
 - **Hint:** Statistical vs experimental.
 
@@ -423,16 +423,16 @@ The figure shows two ways to plot these data. What model does plot A (separate s
 
 - **Options:**
 
-  A) An interaction model: Sepal.Length * Species
-  B) This additive model: Sepal.Length + Species
-  C) A model with Species only, no sepal length
-  D) A model with Sepal.Length only, no species
+  A) This additive model: Sepal.Length + Species
+  B) An interaction model: Sepal.Length * Species
+  C) A model with Sepal.Length only, no species
+  D) A model with Species only, no sepal length
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Separate slopes per species correspond to an interaction model.
 - **Why the wrong options are wrong (tutor only):**
-  B) Additive → parallel lines (B).
-  C) and D) Would give flat lines or one line.
+  A) Additive → parallel lines (A).
+  D) and C) Would give flat lines or one line.
 - **Hint:** Different slopes.
 
 ### ch20-book-05-v2
@@ -453,17 +453,17 @@ The figure shows two ways to plot these data. In plot B, what is the vertical ga
 
 - **Options:**
 
-  A) 3.09 cm, the Speciesvirginica coefficient
-  B) 0.63 cm, the Sepal.Length coefficient
-  C) 2.21 cm, the Speciesversicolor coefficient
-  D) It changes along the sepal length axis
+  A) 0.63 cm, the Sepal.Length coefficient
+  B) 2.21 cm, the Speciesversicolor coefficient
+  C) It changes along the sepal length axis
+  D) 3.09 cm, the Speciesvirginica coefficient
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Parallel lines are separated by the species coefficient at every sepal length.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the slope.
-  C) That's versicolor vs setosa.
-  D) Parallel lines keep a constant gap.
+  A) That's the slope.
+  B) That's versicolor vs setosa.
+  C) Parallel lines keep a constant gap.
 - **Hint:** Parallel lines, constant gap.
 
 ### ch20-book-06
@@ -513,16 +513,16 @@ Which test tells us whether species as a whole is associated with petal length, 
 
 - **Options:**
 
-  A) The Type II F test for Species from car::Anova()
-  B) The p-value for Speciesversicolor in summary()
-  C) The p-value for the intercept in summary()
+  A) The p-value for the intercept in summary()
+  B) The Type II F test for Species from car::Anova()
+  C) The p-value for Speciesversicolor in summary()
   D) The p-value for Sepal.Length in summary()
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The Type II F test asks about the species term as a whole.
 - **Why the wrong options are wrong (tutor only):**
-  B) Tests only versicolor vs setosa.
-  C) Tests whether the intercept is zero.
+  A) Tests whether the intercept is zero.
+  C) Tests only versicolor vs setosa.
   D) Tests sepal length.
 - **Hint:** One test for the whole term.
 
@@ -543,16 +543,16 @@ What does the p-value for Speciesvirginica in summary() test?
 
 - **Options:**
 
-  A) Whether virginica differs from setosa at the same sepal length
-  B) Whether species matters at all, after adjusting for sepal length
-  C) Whether virginica differs from versicolor in petal length
+  A) Whether virginica differs from versicolor in petal length
+  B) Whether virginica differs from setosa at the same sepal length
+  C) Whether species matters at all, after adjusting for sepal length
   D) Whether virginica petals are longer than 0 cm
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Each coefficient's test compares that level to the reference, adjusting for other terms.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the F test.
-  C) Versicolor isn't the reference.
+  A) Versicolor isn't the reference.
+  C) That's the F test.
   D) That's not the coefficient's meaning.
 - **Hint:** Compared to the reference.
 
@@ -569,15 +569,15 @@ Match each R function to what it does for a multiple regression:
 
 - **Options:**
 
-  A) Tests each term after accounting for the other terms in the additive model
-  B) Uses sequential (Type I) sums of squares, so results depend on the order of terms
-  C) Tests only the intercept
-  D) Tests whether residuals are normal
+  A) Tests whether residuals are normal
+  B) Tests only the intercept
+  C) Uses sequential (Type I) sums of squares, so results depend on the order of terms
+  D) Tests each term after accounting for the other terms in the additive model
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-C
 - **Explanation (tutor only):** Type II asks about each term given the others. Base R's anova() adds terms one at a time, so earlier terms aren't adjusted for later ones.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) Neither function does that.
+  B) and A) Neither function does that.
 - **Hint:** Lowercase anova() is sequential.
 
 ### ch20-book-07-v1
@@ -593,12 +593,12 @@ Match each situation to the function you'd use:
 
 - **Options:**
 
-  A) car::Anova()
+  A) anova()
   B) emmeans()
-  C) anova()
+  C) car::Anova()
   D) vif()
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-B
 - **Explanation (tutor only):** car::Anova() gives Type II tests; emmeans() gives adjusted means and contrasts.
 - **Why the wrong options are wrong (tutor only):**
   anova() is sequential; vif() checks multicollinearity.
@@ -617,12 +617,12 @@ Match each R function to what it reports:
 
 - **Options:**
 
-  A) How much each coefficient's variance is inflated by correlated predictors
-  B) Sequential (Type I) sums of squares for each term
+  A) Sequential (Type I) sums of squares for each term
+  B) How much each coefficient's variance is inflated by correlated predictors
   C) Model-adjusted means for each group
   D) Tests of whether residuals are normal
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** vif() measures multicollinearity; anova() gives sequential SS.
 - **Why the wrong options are wrong (tutor only):**
   emmeans() gives adjusted means.
@@ -691,17 +691,17 @@ Why is setosa's emmean (1.99) different from the intercept (-1.70)?
 
 - **Options:**
 
-  A) emmean is at the average sepal length; the intercept is at 0 cm
-  B) emmean uses a different reference species than the intercept
-  C) The intercept is the raw mean of setosa petal lengths
-  D) emmean ignores the sepal length term in the model
+  A) emmean ignores the sepal length term in the model
+  B) The intercept is the raw mean of setosa petal lengths
+  C) emmean uses a different reference species than the intercept
+  D) emmean is at the average sepal length; the intercept is at 0 cm
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** emmeans predicts at the mean sepal length (5.84 cm): -1.70 + 0.632 × 5.84 = 1.99.
 - **Why the wrong options are wrong (tutor only):**
-  B) Same reference.
-  C) The intercept is at sepal length 0.
-  D) It uses sepal length at its mean.
+  A) It uses sepal length at its mean.
+  B) The intercept is at sepal length 0.
+  C) Same reference.
 - **Hint:** Where is each evaluated?
 
 ### ch20-book-08-v2
@@ -726,17 +726,17 @@ Why use a Tukey adjustment here?
 
 - **Options:**
 
-  A) To control false positives across all pairs
-  B) To make each comparison's p-value smaller
-  C) Because the species have unequal variances
-  D) To adjust the comparisons for sepal length
+  A) To adjust the comparisons for sepal length
+  B) Because the species have unequal variances
+  C) To make each comparison's p-value smaller
+  D) To control false positives across all pairs
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Tukey adjusts for multiple comparisons. (Adjusting for sepal length comes from the model itself.)
 - **Why the wrong options are wrong (tutor only):**
-  B) Adjustment makes p larger.
-  C) Not what Tukey addresses.
-  D) The model already does that.
+  A) The model already does that.
+  B) Not what Tukey addresses.
+  C) Adjustment makes p larger.
 - **Hint:** Multiple comparisons.
 
 ### ch20-book-09
@@ -759,15 +759,15 @@ Match each question to its answer:
 
 - **Options:**
 
-  A) They describe different kinds of comparisons (per cm vs one species vs another)
+  A) Which variable causes the response
   B) How much variation in the response is associated with a term after accounting for the others
-  C) Which variable causes the response
+  C) They describe different kinds of comparisons (per cm vs one species vs another)
   D) Coefficients are always unitless
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-B
 - **Explanation (tutor only):** One coefficient is a slope per cm, the other a difference between groups, so their sizes aren't comparable. Partial R² puts terms on a common scale: the share of remaining variation each explains.
 - **Why the wrong options are wrong (tutor only):**
-  C) Partial R² doesn't show causation. D) Coefficients have units.
+  A) Partial R² doesn't show causation. D) Coefficients have units.
 - **Hint:** What units does each coefficient have?
 
 ### ch20-book-09-v1
@@ -790,12 +790,12 @@ Match each question to its answer:
 
 - **Options:**
 
-  A) Partial R²
-  B) They describe different kinds of comparisons
-  C) The intercept, -1.70
-  D) They have the same units
+  A) They describe different kinds of comparisons
+  B) The intercept, -1.70
+  C) They have the same units
+  D) Partial R²
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-A
 - **Explanation (tutor only):** Partial R² compares terms on the same scale; raw coefficients describe a slope vs a group difference.
 - **Why the wrong options are wrong (tutor only):**
   Raw coefficients aren't on a common scale.
@@ -821,12 +821,12 @@ Match each quantity to what it describes:
 
 - **Options:**
 
-  A) The expected change in petal length per cm of sepal length
-  B) The share of variation explained by sepal length after accounting for species
+  A) The share of variation explained by sepal length after accounting for species
+  B) The probability that sepal length matters
   C) The correlation between sepal length and species
-  D) The probability that sepal length matters
+  D) The expected change in petal length per cm of sepal length
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-A
 - **Explanation (tutor only):** A coefficient is a slope; partial R² is a share of variation.
 - **Why the wrong options are wrong (tutor only):**
   Neither is a correlation or probability.
@@ -848,11 +848,11 @@ Match each role to its variable:
 
 - **Options:**
 
-  A) Energy expenditure (lnEnergy)
-  B) Body mass (lnMass)
-  C) Caste
+  A) Caste
+  B) Energy expenditure (lnEnergy)
+  C) Body mass (lnMass)
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-B, 2-C, 3-A
 - **Explanation (tutor only):** The question is whether castes differ in energy use (response) after accounting for body mass (covariate).
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: treating body mass as the main question. It's there because bigger animals use more energy.
@@ -872,11 +872,11 @@ To ask whether urban birds sing at higher pitch than rural birds, accounting for
 
 - **Options:**
 
-  A) Song pitch
+  A) Habitat (urban vs rural)
   B) Body size
-  C) Habitat (urban vs rural)
+  C) Song pitch
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-B, 3-A
 - **Explanation (tutor only):** The question is about habitat (key explanatory) and pitch (response), accounting for body size (covariate).
 - **Why the wrong options are wrong (tutor only):**
   What's the research question about?
@@ -894,16 +894,16 @@ Why include lnMass in the model?
 
 - **Options:**
 
-  A) Bigger rats use more energy; castes may differ in size
+  A) Including more predictors always improves a model
   B) lnMass is the main research question of the study
-  C) Including more predictors always improves a model
+  C) Bigger rats use more energy; castes may differ in size
   D) The castes were defined by their body mass alone
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** If castes differ in mass, an energy difference might just reflect size. Adjusting for mass isolates the caste effect.
 - **Why the wrong options are wrong (tutor only):**
+  A) Not always.
   B) Caste is the question.
-  C) Not always.
   D) Castes are defined by behavior.
 - **Hint:** What could confound the caste comparison?
 
@@ -931,12 +931,12 @@ Match each mole rat to its predicted lnEnergy:
 
 - **Options:**
 
-  A) 4.19
-  B) 4.58
-  C) 4.29
+  A) 4.58
+  B) 4.29
+  C) 4.19
   D) 0.39
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** Lazy (reference): -0.097 + 0.893 × 4.8 = 4.19. Worker: 4.19 + 0.393 = 4.58.
 - **Why the wrong options are wrong (tutor only):**
   D) is just the caste difference.
@@ -964,15 +964,15 @@ What is the predicted lnEnergy for a worker with lnMass = 4.0?
 - **Options:**
 
   A) 3.87
-  B) 3.48
-  C) 4.97
+  B) 4.97
+  C) 3.48
   D) 0.39
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** -0.097 + 0.393 + 0.893 × 4.0 = 3.868.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's a lazy rat (no caste term).
-  C) Uses 5.0 for lnMass.
+  B) Uses 5.0 for lnMass.
+  C) That's a lazy rat (no caste term).
   D) That's the casteworker coefficient.
 - **Hint:** Intercept + casteworker + lnMass slope × 4.0.
 
@@ -1048,17 +1048,17 @@ This plot was made with geom_smooth(method = 'lm'), giving each caste its own li
 
 - **Options:**
 
-  A) lm(lnEnergy ~ caste * lnMass), with an interaction
-  B) lm(lnEnergy ~ caste + lnMass), without an interaction
-  C) lm(lnEnergy ~ caste), without any body mass term
-  D) lm(lnEnergy ~ lnMass), without any caste term
+  A) lm(lnEnergy ~ lnMass), without any caste term
+  B) lm(lnEnergy ~ caste * lnMass), with an interaction
+  C) lm(lnEnergy ~ caste + lnMass), without an interaction
+  D) lm(lnEnergy ~ caste), without any body mass term
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Separate slopes per caste correspond to an interaction model.
 - **Why the wrong options are wrong (tutor only):**
-  B) Additive → parallel lines.
-  C) Would be flat lines.
-  D) One line for all.
+  A) One line for all.
+  C) Additive → parallel lines.
+  D) Would be flat lines.
 - **Hint:** Separate slopes.
 
 ### ch20-chimein-05-v2
@@ -1074,17 +1074,17 @@ If we plotted the fitted values from lm(lnEnergy ~ caste + lnMass), what would t
 
 - **Options:**
 
-  A) Parallel lines, with the worker line higher
-  B) Lines with different slopes for each caste
-  C) A single line shared by both of the castes
-  D) Two flat lines at each caste's mean energy
+  A) Two flat lines at each caste's mean energy
+  B) Parallel lines, with the worker line higher
+  C) Lines with different slopes for each caste
+  D) A single line shared by both of the castes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Additive model: shared slope, different intercepts (workers 0.393 higher).
 - **Why the wrong options are wrong (tutor only):**
-  B) That's an interaction.
-  C) Ignores caste.
-  D) Ignores mass.
+  A) Ignores mass.
+  C) That's an interaction.
+  D) Ignores caste.
 - **Hint:** One slope, two intercepts.
 
 ### ch20-chimein-06
@@ -1124,15 +1124,15 @@ Consider these diagnostic plots for lm(lnEnergy ~ caste + lnMass). Which assumpt
 
 - **Options:**
 
-  A) Independence and unbiased sampling
-  B) Normality of residuals and linearity
-  C) Equal variance and normality of residuals
+  A) Normality of residuals and linearity
+  B) Equal variance and normality of residuals
+  C) Independence and unbiased sampling
   D) Linearity and equal variance of residuals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Independence and bias depend on how the data were collected.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) are what diagnostic plots address.
+  A), B) and D) are what diagnostic plots address.
 - **Hint:** Design vs data.
 
 ### ch20-chimein-06-v2
@@ -1148,17 +1148,17 @@ What would a clear curve in the residuals vs fitted plot suggest?
 
 - **Options:**
 
-  A) A violation of linearity
-  B) A violation of independence
-  C) Normally distributed residuals
-  D) That the sample size is too large
+  A) That the sample size is too large
+  B) Normally distributed residuals
+  C) A violation of independence
+  D) A violation of linearity
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A curve means the straight-line model misses a nonlinear pattern.
 - **Why the wrong options are wrong (tutor only):**
-  B) Can't be seen here.
-  C) Unrelated.
-  D) Unrelated.
+  A) Unrelated.
+  B) Unrelated.
+  C) Can't be seen here.
 - **Hint:** Straight line vs curve.
 
 ### ch20-chimein-07
@@ -1216,17 +1216,17 @@ What does the lnMass test (F = 21.39, p < 0.001) tell us?
 
 - **Options:**
 
-  A) Heavier rats use more energy, after adjusting for caste
+  A) Body mass causes differences in caste membership
   B) Workers use more energy than lazy rats of the same mass
   C) Caste has no association with energy expenditure
-  D) Body mass causes differences in caste membership
+  D) Heavier rats use more energy, after adjusting for caste
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** lnMass is significantly associated with lnEnergy after accounting for caste (and its slope is positive).
 - **Why the wrong options are wrong (tutor only):**
+  A) Not what's tested.
   B) That's the caste test.
   C) The caste test is significant.
-  D) Not what's tested.
 - **Hint:** Which row?
 
 ### ch20-chimein-07-v2
@@ -1250,17 +1250,17 @@ How many mole rats were in this study?
 
 - **Options:**
 
-  A) 35
+  A) 3
   B) 32
-  C) 34
-  D) 3
+  C) 35
+  D) 34
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Residual df = n - number of estimated parameters (3): n = 32 + 3 = 35.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's the number of parameters.
   B) That's the residual df.
-  C) Adds only 2.
-  D) That's the number of parameters.
+  D) Adds only 2.
 - **Hint:** Residual df = n - parameters.
 
 ### ch20-hw-01
@@ -1279,12 +1279,12 @@ You're analyzing how diet and exercise affect weight loss. Match each blank:
 
   A) Type II
   B) Type I
-  C) Anova()
-  D) anova()
-  E) car
-  F) stats (base R)
+  C) car
+  D) stats (base R)
+  E) Anova()
+  F) anova()
 
-- **Answer (tutor only):** 1-A, 2-C, 3-E
+- **Answer (tutor only):** 1-A, 2-E, 3-C
 - **Explanation (tutor only):** Type II tests each term after adjusting for the others; car::Anova() calculates it. Base R's anova() uses sequential Type I sums of squares.
 - **Why the wrong options are wrong (tutor only):**
   Common mix-up: anova() (lowercase, Type I) vs Anova() (car, Type II).
@@ -1303,12 +1303,12 @@ Match each R code to the type of sums of squares it uses for an additive model:
 
 - **Options:**
 
-  A) Type I (sequential)
-  B) Type II
-  C) Type III
-  D) Partial R²
+  A) Type II
+  B) Type III
+  C) Partial R²
+  D) Type I (sequential)
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-A
 - **Explanation (tutor only):** Base R anova() is sequential (Type I); car::Anova() defaults to Type II.
 - **Why the wrong options are wrong (tutor only):**
   Base R vs car.
@@ -1327,12 +1327,12 @@ You're analyzing how temperature and humidity affect insect activity. Match each
 
 - **Options:**
 
-  A) Type I
+  A) anova()
   B) Type II
-  C) anova()
-  D) Anova()
+  C) Anova()
+  D) Type I
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-D, 2-A
 - **Explanation (tutor only):** Type I is sequential, so order matters; base R's anova() uses it.
 - **Why the wrong options are wrong (tutor only):**
   car::Anova() gives Type II.
@@ -1392,16 +1392,16 @@ When will anova(lm(y ~ a + b)) and anova(lm(y ~ b + a)) give the same results fo
 
 - **Options:**
 
-  A) When a and b are uncorrelated (e.g. a balanced design)
-  B) Always; the order of terms never matters in anova()
-  C) Only when both a and b are significant predictors
-  D) Only when y is normally distributed in each group
+  A) Always; the order of terms never matters in anova()
+  B) Only when both a and b are significant predictors
+  C) Only when y is normally distributed in each group
+  D) When a and b are uncorrelated (e.g. a balanced design)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** If predictors don't overlap, adjusting for one doesn't change the other's SS, so order doesn't matter.
 - **Why the wrong options are wrong (tutor only):**
-  B) Order matters when predictors are correlated.
-  C) and D) Irrelevant.
+  A) Order matters when predictors are correlated.
+  B) and C) Irrelevant.
 - **Hint:** When does adjusting change nothing?
 
 ### ch20-hw-03
@@ -1436,15 +1436,15 @@ In a model predicting seed output from leaf size and plant height (highly correl
 
 - **Options:**
 
-  A) The model's predictions and overall R²
-  B) The standard errors of the two coefficients
-  C) The stability of each coefficient across samples
-  D) Our ability to separate each predictor's effect
+  A) Our ability to separate each predictor's effect
+  B) The stability of each coefficient across samples
+  C) The standard errors of the two coefficients
+  D) The model's predictions and overall R²
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Multicollinearity mainly destabilizes individual coefficients; the model's overall fit and predictions are fine.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) are what multicollinearity harms.
+  C), B) and A) are what multicollinearity harms.
 - **Hint:** Individual coefficients vs overall fit.
 
 ### ch20-hw-03-v2
@@ -1457,16 +1457,16 @@ Which is a reasonable response to severe multicollinearity between two predictor
 
 - **Options:**
 
-  A) Drop one, or combine them into one variable
+  A) Ignore it; it only affects the intercept
   B) Add more highly correlated predictors
-  C) Ignore it; it only affects the intercept
+  C) Drop one, or combine them into one variable
   D) Report the p-values with more decimal places
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Removing or combining redundant predictors reduces the overlap.
 - **Why the wrong options are wrong (tutor only):**
+  A) It affects slopes.
   B) Makes it worse.
-  C) It affects slopes.
   D) Irrelevant.
 - **Hint:** Reduce the overlap.
 
@@ -1501,16 +1501,16 @@ A study of bird song adds habitat type to a regression and says it 'held habitat
 
 - **Options:**
 
-  A) 'Adjusted for habitat statistically'
-  B) 'Experimentally manipulated habitat'
-  C) 'Proved habitat doesn't matter'
-  D) 'Randomized birds to habitats'
+  A) 'Proved habitat doesn't matter'
+  B) 'Randomized birds to habitats'
+  C) 'Experimentally manipulated habitat'
+  D) 'Adjusted for habitat statistically'
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Regression adjusts statistically; nothing was held constant by design.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Nothing was manipulated.
-  C) Adjusting doesn't prove that.
+  A) Adjusting doesn't prove that.
+  C) and B) Nothing was manipulated.
 - **Hint:** Statistical vs experimental.
 
 ### ch20-hw-04-v2
@@ -1523,16 +1523,16 @@ Why does 'adjusting for' body mass in a regression not fully remove its influenc
 
 - **Options:**
 
-  A) It removes only the part the model's form (e.g. linear) captures
-  B) Regression ignores every variable that is put into the model
-  C) Body mass can never be measured accurately in animals
+  A) Body mass can never be measured accurately in animals
+  B) It removes only the part the model's form (e.g. linear) captures
+  C) Regression ignores every variable that is put into the model
   D) It does fully remove it, whatever the model looks like
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** If the true relationship is curved, or mass is measured with error, a linear adjustment leaves some influence behind.
 - **Why the wrong options are wrong (tutor only):**
-  B) Regression uses them.
-  C) Not the main point.
+  A) Not the main point.
+  C) Regression uses them.
   D) Adjustment is imperfect.
 - **Hint:** What if the relationship isn't linear?
 
@@ -1573,17 +1573,17 @@ Two models: Model 1 uses mean_visits as the response; Model 2 uses log1p(mean_vi
 
 - **Options:**
 
-  A) Right-skewed residuals
-  B) Perfectly normal residuals
-  C) Non-independent residuals
-  D) Too few data points
+  A) Perfectly normal residuals
+  B) Too few data points
+  C) Right-skewed residuals
+  D) Non-independent residuals
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The points curve upward at the right: a long right tail.
 - **Why the wrong options are wrong (tutor only):**
-  B) They deviate.
-  C) QQ plots don't show independence.
-  D) There are 113 RILs.
+  A) They deviate.
+  B) There are 113 RILs.
+  D) QQ plots don't show independence.
 - **Hint:** Which way do the points bend?
 
 ### ch20-hw-05-v2
@@ -1599,17 +1599,17 @@ Why use log1p(mean_visits) = log(mean_visits + 1) rather than log(mean_visits)?
 
 - **Options:**
 
-  A) Some RILs had zero visits, and log(0) is undefined
-  B) log1p() always gives a larger effect size than log()
+  A) log1p() always gives a larger effect size than log()
+  B) log1p() makes the data perfectly normal
   C) log() is only defined for whole numbers of visits
-  D) log1p() makes the data perfectly normal
+  D) Some RILs had zero visits, and log(0) is undefined
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Adding 1 lets zeros be transformed (log(1) = 0).
 - **Why the wrong options are wrong (tutor only):**
-  B) Not about effect size.
+  A) Not about effect size.
+  B) No transformation guarantees normality.
   C) log() works on non-integers.
-  D) No transformation guarantees normality.
 - **Hint:** What is log(0)?
 
 ### ch20-hw-06
@@ -1656,16 +1656,16 @@ What does a VIF of 1.07 tell us?
 
 - **Options:**
 
-  A) Uncertainty in each coefficient is barely inflated by the overlap
-  B) The two predictors are perfectly correlated with each other
-  C) The model explains 1.07% of the variation in visits
+  A) The model explains 1.07% of the variation in visits
+  B) Uncertainty in each coefficient is barely inflated by the overlap
+  C) The two predictors are perfectly correlated with each other
   D) Each coefficient's p-value should be multiplied by 1.07
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** VIF is the inflation of each coefficient's variance due to correlation with other predictors; 1.07 is tiny.
 - **Why the wrong options are wrong (tutor only):**
-  B) That would give infinite VIF.
-  C) Not R².
+  A) Not R².
+  C) That would give infinite VIF.
   D) Not how VIF is used.
 - **Hint:** Variance inflation.
 
@@ -1818,17 +1818,17 @@ The petal_area_mm coefficient in lm(mean_visits ~ petal_area_mm + asd_mm) is 0.0
 
 - **Options:**
 
-  A) after adjusting for ASD
-  B) without accounting for ASD
-  C) only for plants with an ASD of 0
-  D) because larger petals cause visits
+  A) only for plants with an ASD of 0
+  B) because larger petals cause visits
+  C) without accounting for ASD
+  D) after adjusting for ASD
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Each coefficient in a multiple regression is adjusted for the other predictors.
 - **Why the wrong options are wrong (tutor only):**
-  B) ASD is in the model.
-  C) Not an interaction model.
-  D) Association, not causation.
+  A) Not an interaction model.
+  B) Association, not causation.
+  C) ASD is in the model.
 - **Hint:** What else is in the model?
 
 ### ch20-hw-08-v2
@@ -1843,17 +1843,17 @@ A simple regression of mean_visits on asd_mm alone gives a slope of 1.1, but in 
 
 - **Options:**
 
-  A) ASD correlates with petal area, which takes over part of its effect
-  B) Adding a predictor always cuts every other slope in half
-  C) The simple regression must have been calculated incorrectly
-  D) ASD was measured in different units in the two models
+  A) The simple regression must have been calculated incorrectly
+  B) ASD was measured in different units in the two models
+  C) ASD correlates with petal area, which takes over part of its effect
+  D) Adding a predictor always cuts every other slope in half
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** In the simple regression, ASD gets credit for some of petal area's association. Adjusting for petal area removes that.
 - **Why the wrong options are wrong (tutor only):**
-  B) Not a rule.
-  C) Both can be right; they answer different questions.
-  D) Same units.
+  A) Both can be right; they answer different questions.
+  B) Same units.
+  D) Not a rule.
 - **Hint:** Overlap between predictors.
 
 ### ch20-hw-09
@@ -1920,17 +1920,17 @@ Why did ASD look significant when entered FIRST in anova(), but not in car::Anov
 
 - **Options:**
 
-  A) Entered first, ASD takes credit for variation shared with petal area
+  A) The base anova() function contains a bug for numeric data
   B) car::Anova() uses a smaller sample than the base anova() does
   C) anova() always gives smaller p-values than car::Anova()
-  D) The base anova() function contains a bug for numeric data
+  D) Entered first, ASD takes credit for variation shared with petal area
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Sequential SS give the first term all the variation it shares with later terms.
 - **Why the wrong options are wrong (tutor only):**
+  A) No bug; different question.
   B) Same data.
   C) Not always.
-  D) No bug; different question.
 - **Hint:** Shared variation.
 
 ### ch20-hw-10
@@ -1962,10 +1962,10 @@ At α = 0.05, what do you do to each null?
 
 - **Options:**
 
-  A) Reject it
-  B) Fail to reject it
+  A) Fail to reject it
+  B) Reject it
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Petal area: p = 0.0004, reject. ASD: p = 0.13, fail to reject.
 - **Why the wrong options are wrong (tutor only):**
   Common mistake: using p-values from anova() or summary() instead of the Type II table.
@@ -2000,10 +2000,10 @@ At α = 0.01, what do you do to each null?
 
 - **Options:**
 
-  A) Reject it
-  B) Fail to reject it
+  A) Fail to reject it
+  B) Reject it
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Petal area: p = 0.0004 < 0.01, reject. ASD: p = 0.13, fail to reject.
 - **Why the wrong options are wrong (tutor only):**
   Compare each p with 0.01.
@@ -2038,12 +2038,12 @@ Match each term to its F value's calculation:
 
 - **Options:**
 
-  A) (22.22 / 1) / (182.13 / 110)
-  B) (3.88 / 1) / (182.13 / 110)
+  A) (3.88 / 1) / (182.13 / 110)
+  B) 182.13 / 110
   C) 22.22 / 3.88
-  D) 182.13 / 110
+  D) (22.22 / 1) / (182.13 / 110)
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-A
 - **Explanation (tutor only):** F = (SS term / df term) / MS residual, with MS residual = 182.13 / 110 = 1.656.
 - **Why the wrong options are wrong (tutor only):**
   Each F divides its own MS by MS residual.
@@ -2086,16 +2086,16 @@ Petal area is significantly associated with visitation after adjusting for ASD. 
 
 - **Options:**
 
-  A) Experimentally trim petals on random plants and count visits
-  B) Measure more RILs and refit the same regression model
-  C) Add more floral traits to the model as covariates
-  D) Use a smaller α so the result is more convincing
+  A) Add more floral traits to the model as covariates
+  B) Experimentally trim petals on random plants and count visits
+  C) Use a smaller α so the result is more convincing
+  D) Measure more RILs and refit the same regression model
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Manipulating petal size at random breaks links with other traits, allowing causal inference.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Still observational.
-  D) α doesn't establish causation.
+  C) α doesn't establish causation.
+  D) and A) Still observational.
 - **Hint:** Manipulation.
 
 ### ch20-hw-11-v2
@@ -2110,17 +2110,17 @@ Why doesn't adjusting for ASD rule out all alternative explanations for the peta
 
 - **Options:**
 
-  A) Other unmeasured traits may correlate with petal area
-  B) ASD was measured with too much precision to be useful
-  C) Adjusting for one variable removes every confounder
-  D) Petal area and ASD are uncorrelated in these RILs
+  A) ASD was measured with too much precision to be useful
+  B) Other unmeasured traits may correlate with petal area
+  C) Petal area and ASD are uncorrelated in these RILs
+  D) Adjusting for one variable removes every confounder
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Only measured variables in the model are adjusted for; unmeasured confounders remain.
 - **Why the wrong options are wrong (tutor only):**
-  B) Irrelevant.
-  C) That's the misconception.
-  D) They are correlated (r = 0.33), and it doesn't matter here.
+  A) Irrelevant.
+  C) They are correlated (r = 0.33), and it doesn't matter here.
+  D) That's the misconception.
 - **Hint:** What about traits not in the model?
 
 ### ch20-hw-12
@@ -2187,17 +2187,17 @@ Why can't we compare the raw coefficients (0.0302 for petal area, 0.498 for ASD)
 
 - **Options:**
 
-  A) They are in different units (per mm² vs per mm)
-  B) The intercept is negative, so the slopes are unreliable
-  C) Raw coefficients are always unitless numbers
-  D) Only one of them is statistically significant
+  A) Only one of them is statistically significant
+  B) They are in different units (per mm² vs per mm)
+  C) The intercept is negative, so the slopes are unreliable
+  D) Raw coefficients are always unitless numbers
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** A slope's size depends on its predictor's units and spread. Partial R² is on a common scale.
 - **Why the wrong options are wrong (tutor only):**
-  B) Irrelevant.
-  C) They have units.
-  D) Significance doesn't fix units.
+  A) Significance doesn't fix units.
+  C) Irrelevant.
+  D) They have units.
 - **Hint:** Units.
 
 ### ch20-hw-12-v2
@@ -2226,17 +2226,17 @@ How many times more of the remaining variation does petal area explain than ASD?
 
 - **Options:**
 
-  A) About 5 times
-  B) About 16 times
-  C) About 0.06 times
-  D) The same amount
+  A) About 16 times
+  B) About 0.06 times
+  C) The same amount
+  D) About 5 times
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 0.109 / 0.021 ≈ 5.2.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's 0.498 / 0.0302 (raw coefficients).
-  C) Upside down, roughly.
-  D) They differ.
+  A) That's 0.498 / 0.0302 (raw coefficients).
+  B) Upside down, roughly.
+  C) They differ.
 - **Hint:** Compare partial R².
 
 ### ch20-quiz-01
@@ -2289,16 +2289,16 @@ What does the intercept (23.31) in Model 3 represent?
 - **Options:**
 
   A) The predicted bill length for a bill depth of 0 and mass of 0
-  B) The average bill length of the penguins in this dataset
-  C) The average bill length of Adelie penguins in this dataset
-  D) The change in bill length per mm of bill depth, all else equal
+  B) The change in bill length per mm of bill depth, all else equal
+  C) The average bill length of the penguins in this dataset
+  D) The average bill length of Adelie penguins in this dataset
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** With two numeric predictors, the intercept is the prediction when both equal zero: far outside the data, so just an anchor.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's an intercept-only model.
-  C) Species isn't in Model 3.
-  D) That's the bill_dep slope.
+  B) That's the bill_dep slope.
+  C) That's an intercept-only model.
+  D) Species isn't in Model 3.
 - **Hint:** Set every predictor to zero.
 
 ### ch20-quiz-01-v2
@@ -2318,17 +2318,17 @@ In Model 1, which species' mean bill length is NOT shown directly by any single 
 
 - **Options:**
 
-  A) Chinstrap and Gentoo
-  B) Adelie only
-  C) Gentoo only
-  D) None; every mean is one coefficient
+  A) Adelie only
+  B) Gentoo only
+  C) None; every mean is one coefficient
+  D) Chinstrap and Gentoo
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Adelie's mean is the intercept (38.8). Chinstrap = 38.8 + 10.0 and Gentoo = 38.8 + 8.7.
 - **Why the wrong options are wrong (tutor only):**
-  B) Adelie is the intercept.
-  C) Chinstrap also needs adding.
-  D) Only the reference mean is a single coefficient.
+  A) Adelie is the intercept.
+  B) Chinstrap also needs adding.
+  C) Only the reference mean is a single coefficient.
 - **Hint:** Which species is the reference?
 
 ### ch20-quiz-02
@@ -2407,14 +2407,14 @@ In Model 2, what does sexmale = 3.7 mean?
 - **Options:**
 
   A) Males' bills are 3.7 mm longer than females' of the same species
-  B) Males' bills are 3.7 mm long on average, across all of the species
-  C) Male Adelie penguins have bills that are 3.7 mm long, on average
+  B) Male Adelie penguins have bills that are 3.7 mm long, on average
+  C) Males' bills are 3.7 mm long on average, across all of the species
   D) Females' bills are 3.7 mm longer than males' of the same species
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** sexmale is the male - female difference, adjusting for species.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Coefficients are differences.
+  C) and B) Coefficients are differences.
   D) Wrong direction.
 - **Hint:** Female is the reference level.
 
@@ -2526,15 +2526,15 @@ In Model 2, what is the predicted bill length of a male Adelie penguin?
 
   A) 40.7 mm
   B) 37.0 mm
-  C) 38.8 mm
-  D) 47.0 mm
+  C) 47.0 mm
+  D) 38.8 mm
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** 37.0 + 3.7 = 40.7 mm (Adelie is the reference species).
 - **Why the wrong options are wrong (tutor only):**
   B) That's a female Adelie.
-  C) That's the Model 1 intercept.
-  D) Adds the Chinstrap coefficient.
+  C) Adds the Chinstrap coefficient.
+  D) That's the Model 1 intercept.
 - **Hint:** Intercept + sexmale.
 
 ### ch20-quiz-04-v2
@@ -2554,17 +2554,17 @@ Why does the intercept change from 38.8 (Model 1) to 37.0 (Model 2)?
 
 - **Options:**
 
-  A) In Model 2 it describes female Adelies, not all Adelies
-  B) Adding sex changed which species is the reference level
-  C) The data used to fit Model 2 were completely different
-  D) Intercepts always shrink when terms are added to a model
+  A) The data used to fit Model 2 were completely different
+  B) Intercepts always shrink when terms are added to a model
+  C) Adding sex changed which species is the reference level
+  D) In Model 2 it describes female Adelies, not all Adelies
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Model 2's intercept is the prediction for the reference levels of both species and sex (female Adelie), which is below the all-Adelie mean.
 - **Why the wrong options are wrong (tutor only):**
-  B) Adelie is still the reference.
-  C) Same data.
-  D) Not a rule.
+  A) Same data.
+  B) Not a rule.
+  C) Adelie is still the reference.
 - **Hint:** What are the reference levels in Model 2?
 
 ### ch20-quiz-05
@@ -2731,17 +2731,17 @@ If body mass in Model 3 were measured in kg instead of g, what would happen to i
 
 - **Options:**
 
-  A) It would be 1,000 times larger (4.24 per kg)
-  B) It would be 1,000 times smaller
-  C) It would stay the same
-  D) It would become equal to the bill depth coefficient
+  A) It would be 1,000 times smaller
+  B) It would become equal to the bill depth coefficient
+  C) It would be 1,000 times larger (4.24 per kg)
+  D) It would stay the same
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** A 1-kg change is 1,000 g, so the change per kg is 1,000 × 0.00424 = 4.24 mm. The relationship itself is unchanged.
 - **Why the wrong options are wrong (tutor only):**
-  B) Wrong direction.
-  C) Coefficients depend on units.
-  D) No reason for that.
+  A) Wrong direction.
+  B) No reason for that.
+  D) Coefficients depend on units.
 - **Hint:** Per gram vs per kilogram.
 
 ### ch20-quiz-07-v2
@@ -2762,15 +2762,15 @@ Which would let you fairly compare the importance of bill depth and body mass in
 - **Options:**
 
   A) Partial R² or standardized coefficients
-  B) The raw coefficients, 0.163 vs 0.00424
-  C) The intercept of the model, 23.31
+  B) The intercept of the model, 23.31
+  C) The raw coefficients, 0.163 vs 0.00424
   D) The number of penguins in the dataset
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Raw coefficients depend on units. Partial R² and standardized coefficients put terms on a common scale.
 - **Why the wrong options are wrong (tutor only):**
-  B) Units differ.
-  C) and D) Don't compare predictors.
+  B) and D) Don't compare predictors.
+  C) Units differ.
 - **Hint:** Common scale.
 
 ### ch20-quiz-08
@@ -2920,16 +2920,16 @@ At α = 0.05, what do we do with the null hypothesis that bill depth is not asso
 
 - **Options:**
 
-  A) Fail to reject it (p = 0.234)
-  B) Reject it (p = 0.234)
-  C) Reject it (p < 2e-16)
-  D) Fail to reject it (p < 2e-16)
+  A) Fail to reject it (p < 2e-16)
+  B) Reject it (p < 2e-16)
+  C) Fail to reject it (p = 0.234)
+  D) Reject it (p = 0.234)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Bill depth's Type II p-value is 0.234 > 0.05.
 - **Why the wrong options are wrong (tutor only):**
-  B) p > α.
-  C) and D) That's body mass's p-value.
+  B) and A) That's body mass's p-value.
+  D) p > α.
 - **Hint:** Find bill_dep's row.
 
 ### ch20-quiz-10-v2
@@ -2961,16 +2961,16 @@ What does 'Type II' mean for the F test of body mass in this table?
 
 - **Options:**
 
-  A) It's tested after accounting for bill depth
-  B) It's tested before accounting for bill depth
-  C) It's tested only within the second species
-  D) It tests whether it's a type II error
+  A) It tests whether it's a type II error
+  B) It's tested only within the second species
+  C) It's tested before accounting for bill depth
+  D) It's tested after accounting for bill depth
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Type II tests each term after adjusting for the other terms in the additive model.
 - **Why the wrong options are wrong (tutor only):**
-  B) That would be Type I if mass came first.
-  C) and D) Not what Type II means.
+  B) and A) Not what Type II means.
+  C) That would be Type I if mass came first.
 - **Hint:** After the others.
 
 ### ch20-quiz-11
@@ -3043,17 +3043,17 @@ What does a partial R² of 0.319 for body mass mean?
 
 - **Options:**
 
-  A) After accounting for bill depth, mass explains ~32% of the remaining variation
+  A) There's a 31.9% chance that body mass is not associated with bill length
   B) Body mass explains 31.9% of all variation in bill length, ignoring bill depth
   C) Body mass and bill depth have a correlation of 0.319 in these penguins
-  D) There's a 31.9% chance that body mass is not associated with bill length
+  D) After accounting for bill depth, mass explains ~32% of the remaining variation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Partial R² is the share of the variation left after other terms that this term explains.
 - **Why the wrong options are wrong (tutor only):**
+  A) Not a probability.
   B) That would be a simple R².
   C) Not a correlation.
-  D) Not a probability.
 - **Hint:** After accounting for the other term.
 
 ### ch20-quiz-11-v2
@@ -3085,17 +3085,17 @@ How is the partial R² of body mass calculated from the ANOVA table?
 
 - **Options:**
 
-  A) 3065.6 / (3065.6 + 6537.1)
-  B) 3065.6 / (27.4 + 3065.6 + 6537.1)
+  A) 3065.6 / (27.4 + 3065.6 + 6537.1)
+  B) 6537.1 / (3065.6 + 6537.1)
   C) 27.4 / (27.4 + 6537.1)
-  D) 6537.1 / (3065.6 + 6537.1)
+  D) 3065.6 / (3065.6 + 6537.1)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Partial R² = SS term / (SS term + SS residual) = 3065.6 / 9602.7 = 0.319.
 - **Why the wrong options are wrong (tutor only):**
-  B) Includes bill depth's SS in the denominator.
+  A) Includes bill depth's SS in the denominator.
+  B) That's residual / (term + residual).
   C) That's bill depth's.
-  D) That's residual / (term + residual).
 - **Hint:** SS term / (SS term + SS residual).
 
 ### ch20-quiz-12
@@ -3170,15 +3170,15 @@ At what VIF would you start to worry about multicollinearity?
 - **Options:**
 
   A) Around 5 to 10
-  B) Anything above 1
-  C) Around 1.1
-  D) Only above 100
+  B) Only above 100
+  C) Anything above 1
+  D) Around 1.1
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Common rules of thumb flag VIFs around 5 to 10.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Some correlation is normal.
-  D) Far too lenient.
+  B) Far too lenient.
+  C) and D) Some correlation is normal.
 - **Hint:** Rule of thumb.
 
 ### ch20-quiz-12-v2
@@ -3210,17 +3210,17 @@ Why do both predictors have exactly the same VIF (1.29)?
 
 - **Options:**
 
-  A) With two predictors, both VIFs come from the same r²
-  B) Bill depth and body mass are measured in the same units
-  C) The VIF is always the same for every predictor in a model
-  D) Because body mass is significant and bill depth is not
+  A) Because body mass is significant and bill depth is not
+  B) With two predictors, both VIFs come from the same r²
+  C) Bill depth and body mass are measured in the same units
+  D) The VIF is always the same for every predictor in a model
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Each predictor's VIF is 1 / (1 - R²) from regressing it on the others; with only two predictors, both use the same r².
 - **Why the wrong options are wrong (tutor only):**
-  B) Units differ.
-  C) Not with three or more predictors.
-  D) Significance doesn't set VIF.
+  A) Significance doesn't set VIF.
+  C) Units differ.
+  D) Not with three or more predictors.
 - **Hint:** Regress each predictor on the other.
 
 ### ch20-quiz-13
@@ -3272,17 +3272,17 @@ What does the bill_dep coefficient of 0.71 in Model 4 describe?
 
 - **Options:**
 
-  A) Change in bill length per mm of depth, adjusting for species and mass
+  A) The difference in bill depth between Gentoo and Adelie penguins
   B) Change in bill length per mm of depth, ignoring the differences among species
-  C) The difference in bill depth between Gentoo and Adelie penguins
-  D) The proportion of variation in bill length explained by depth
+  C) The proportion of variation in bill length explained by depth
+  D) Change in bill length per mm of depth, adjusting for species and mass
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Each coefficient is adjusted for the other terms in the model: here species and body mass.
 - **Why the wrong options are wrong (tutor only):**
+  A) Not a species difference.
   B) Species is in the model.
-  C) Not a species difference.
-  D) That's a partial R².
+  C) That's a partial R².
 - **Hint:** What else is in Model 4?
 
 ### ch20-quiz-13-v2
@@ -3303,17 +3303,17 @@ Why did R² jump from 0.36 to 0.82?
 
 - **Options:**
 
-  A) Species explains a lot of bill length variation
+  A) Bill depth became significant in Model 4
   B) Adding any variable always doubles R²
-  C) Bill depth became significant in Model 4
-  D) Species causes the change in bill depth
+  C) Species causes the change in bill depth
+  D) Species explains a lot of bill length variation
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Species differ a lot in bill length, so including species explains much more variation.
 - **Why the wrong options are wrong (tutor only):**
+  A) A consequence, not the reason R² rose.
   B) Not a rule.
-  C) A consequence, not the reason R² rose.
-  D) Causation isn't shown.
+  C) Causation isn't shown.
 - **Hint:** What was added?
 
 ## Chapter 21: Interactions
@@ -3422,15 +3422,15 @@ Using the additive model, match each penguin to its predicted body mass:
 
 - **Options:**
 
-  A) 4750 g
-  B) 5418 g
-  C) 4680 g
+  A) 5418 g
+  B) 4680 g
+  C) 4750 g
   D) 5485 g
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** Female Gentoo: 3372 + 1378 = 4750. Male Gentoo: 4750 + 668 = 5418.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) come from the interaction model.
+  B) and D) come from the interaction model.
 - **Hint:** Female is the reference sex.
 
 ### ch21-book-02-v1
@@ -3454,15 +3454,15 @@ Using the additive model, match each penguin to its predicted body mass:
 
 - **Options:**
 
-  A) 3399 g
-  B) 4067 g
-  C) 3527 g
-  D) 3939 g
+  A) 4067 g
+  B) 3939 g
+  C) 3399 g
+  D) 3527 g
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** Female Chinstrap: 3372 + 27 = 3399. Male Chinstrap: 3399 + 668 = 4067.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) come from the interaction model.
+  D) and B) come from the interaction model.
 - **Hint:** Add the coefficients that apply.
 
 ### ch21-book-02-v2
@@ -3486,15 +3486,15 @@ Using the additive model, match each penguin to its predicted body mass:
 
 - **Options:**
 
-  A) 3372 g
-  B) 4040 g
-  C) 3369 g
+  A) 4040 g
+  B) 3369 g
+  C) 3372 g
   D) 4044 g
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-C, 2-A
 - **Explanation (tutor only):** Female Adelie is the reference: 3372. Male Adelie: 3372 + 668 = 4040.
 - **Why the wrong options are wrong (tutor only):**
-  C) and D) come from the interaction model.
+  B) and D) come from the interaction model.
 - **Hint:** Adelie and female are the reference levels.
 
 ### ch21-book-03
@@ -3519,15 +3519,15 @@ Using the interaction model, match each penguin to its predicted body mass:
 
 - **Options:**
 
-  A) 4750 g
-  B) 5418 g
-  C) 4680 g
-  D) 5485 g
+  A) 5485 g
+  B) 4680 g
+  C) 4750 g
+  D) 5418 g
 
-- **Answer (tutor only):** 1-C, 2-D
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Female Gentoo: 3369 + 1311 = 4680. Male Gentoo: 3369 + 675 + 1311 + 130 = 5485. These equal the observed group means.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) come from the additive model. Common mistake: forgetting the sexmale:speciesGentoo term for males.
+  C) and D) come from the additive model. Common mistake: forgetting the sexmale:speciesGentoo term for males.
 - **Hint:** For a male Gentoo, add every coefficient whose indicator is 1.
 
 ### ch21-book-03-v1
@@ -3553,14 +3553,14 @@ Using the interaction model, match each penguin to its predicted body mass:
 - **Options:**
 
   A) 3399 g
-  B) 4067 g
-  C) 3527 g
-  D) 3939 g
+  B) 3939 g
+  C) 4067 g
+  D) 3527 g
 
-- **Answer (tutor only):** 1-C, 2-D
+- **Answer (tutor only):** 1-D, 2-B
 - **Explanation (tutor only):** Female Chinstrap: 3369 + 158 = 3527. Male Chinstrap: 3369 + 675 + 158 - 263 = 3939.
 - **Why the wrong options are wrong (tutor only):**
-  A) and B) come from the additive model.
+  A) and C) come from the additive model.
 - **Hint:** Include the interaction for males.
 
 ### ch21-book-03-v2
@@ -3582,17 +3582,17 @@ According to the interaction model, how much heavier are male Chinstraps than fe
 
 - **Options:**
 
-  A) 412 g
-  B) 675 g
+  A) 675 g
+  B) 263 g
   C) 938 g
-  D) 263 g
+  D) 412 g
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** 675 - 263 = 412 g: the Adelie sex difference plus the Chinstrap interaction.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's the Adelie sex difference.
+  A) That's the Adelie sex difference.
+  B) That's the interaction alone.
   C) Adds instead of subtracting.
-  D) That's the interaction alone.
 - **Hint:** sexmale + sexmale:speciesChinstrap.
 
 ### ch21-book-04
@@ -3639,17 +3639,17 @@ The plot shows body mass by sex and species; large points are group means. Which
 
 - **Options:**
 
-  A) Males are heavier than females in every species
-  B) The lines for each species aren't parallel
-  C) Gentoos are heavier than the other species
-  D) Body mass varies a lot within each group
+  A) Body mass varies a lot within each group
+  B) Gentoos are heavier than the other species
+  C) The lines for each species aren't parallel
+  D) Males are heavier than females in every species
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** A consistent male-female difference is the sex main effect.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's an interaction.
-  C) That's a species effect.
-  D) That's within-group variation.
+  A) That's within-group variation.
+  B) That's a species effect.
+  C) That's an interaction.
 - **Hint:** Female vs male.
 
 ### ch21-book-04-v2
@@ -3736,17 +3736,17 @@ What do we conclude about the sex:species interaction at α = 0.05?
 
 - **Options:**
 
-  A) Reject the null: the sex difference varies by species
-  B) Fail to reject: the sex difference is the same in each
-  C) Reject the null: males are heavier in every species
-  D) Fail to reject: species don't differ in their mass
+  A) Reject the null: males are heavier in every species
+  B) Fail to reject: species don't differ in their mass
+  C) Fail to reject: the sex difference is the same in each
+  D) Reject the null: the sex difference varies by species
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** p = 0.0002 < 0.05, so the male-female difference differs among species.
 - **Why the wrong options are wrong (tutor only):**
-  B) p < α.
-  C) That's not what the interaction tests.
-  D) Wrong term.
+  A) That's not what the interaction tests.
+  B) Wrong term.
+  C) p < α.
 - **Hint:** What does the interaction test?
 
 ### ch21-book-05-v2
@@ -3771,17 +3771,17 @@ Why does the sex:species term have 2 degrees of freedom?
 
 - **Options:**
 
-  A) (2 - 1) sexes × (3 - 1) species = 2
-  B) There are 2 sexes in the dataset
-  C) Interactions always have exactly 2 df
-  D) It is 327 - 325, from the residuals
+  A) It is 327 - 325, from the residuals
+  B) Interactions always have exactly 2 df
+  C) (2 - 1) sexes × (3 - 1) species = 2
+  D) There are 2 sexes in the dataset
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Interaction df = (levels of sex - 1) × (levels of species - 1) = 1 × 2.
 - **Why the wrong options are wrong (tutor only):**
-  B) Coincidence here.
-  C) Depends on the levels.
-  D) Not how df work.
+  A) Not how df work.
+  B) Depends on the levels.
+  D) Coincidence here.
 - **Hint:** Multiply the main effects' df.
 
 ### ch21-book-06
@@ -3817,15 +3817,15 @@ Two students fit lm(y ~ a + b + a:b) and lm(y ~ b + a + a:b) and run base R's an
 
 - **Options:**
 
-  A) anova() is sequential, so the first term isn't adjusted for later ones
-  B) The two models make different predictions for each observation
+  A) The two models make different predictions for each observation
+  B) anova() is sequential, so the first term isn't adjusted for later ones
   C) Base R picks a random reference level for each model it fits
   D) They can't disagree; the models are identical
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Type I SS depend on order when predictors are correlated. car::Anova() avoids this.
 - **Why the wrong options are wrong (tutor only):**
-  B) Same model, same predictions.
+  A) Same model, same predictions.
   C) Not random.
   D) The tables can differ even though the model is the same.
 - **Hint:** Sequential sums of squares.
@@ -3879,12 +3879,12 @@ Consider the (Intercept) p-value.
 
 - **Options:**
 
-  A) the mean body mass of female Adelie penguins is zero
-  B) we already know penguins don't have an average body mass of zero grams
+  A) we already know penguins don't have an average body mass of zero grams
+  B) the mean body mass of female Adelie penguins is zero
   C) the mean body mass of all penguins is zero
   D) intercepts can't be estimated in models with interactions
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** The intercept is the prediction for the reference levels (female, Adelie). Its p-value tests whether that mean is zero, which is obviously false.
 - **Why the wrong options are wrong (tutor only):**
   C) The intercept is for the reference group, not all penguins. D) They can.
@@ -3916,15 +3916,15 @@ What does the sexmale coefficient (674.66) describe in this interaction model?
 
   A) The male - female difference in Adelies only
   B) The male - female difference averaged over species
-  C) The male - female difference in every one of the species
-  D) The difference in average mass between Adelie and Gentoo
+  C) The difference in average mass between Adelie and Gentoo
+  D) The male - female difference in every one of the species
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** With an interaction, sexmale is the sex difference at the reference species (Adelie).
 - **Why the wrong options are wrong (tutor only):**
   B) That's from emmeans.
-  C) The interaction says it varies.
-  D) That's a species coefficient.
+  C) That's a species coefficient.
+  D) The interaction says it varies.
 - **Hint:** Reference species.
 
 ### ch21-book-07-v2
@@ -3954,12 +3954,12 @@ Match each coefficient to the group comparison it describes:
 
 - **Options:**
 
-  A) Female Gentoo minus female Adelie
-  B) How much larger the sex gap is in Gentoos than Adelies
-  C) Male Gentoo minus male Adelie
-  D) Gentoo minus Adelie, averaged over sexes
+  A) How much larger the sex gap is in Gentoos than Adelies
+  B) Male Gentoo minus male Adelie
+  C) Gentoo minus Adelie, averaged over sexes
+  D) Female Gentoo minus female Adelie
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-D, 2-A
 - **Explanation (tutor only):** Main effects are at the reference sex (female); the interaction is the extra sex difference in Gentoos.
 - **Why the wrong options are wrong (tutor only):**
   Reference levels matter.
@@ -4024,14 +4024,14 @@ What does the sexmale:speciesGentoo p-value (0.089) test? (Select all that apply
 
 - **Options:**
 
-  A) Whether the sex difference differs between Gentoo and Adelie
-  B) Whether Gentoo males are heavier than Gentoo females
+  A) Whether Gentoo males are heavier than Gentoo females
+  B) Whether the sex difference differs between Gentoo and Adelie
   C) Whether Gentoos are heavier than Adelies overall
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** It tests whether the Gentoo sex gap differs from the Adelie sex gap.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's a different comparison.
+  A) That's a different comparison.
   C) That's a species comparison.
 - **Hint:** Interaction = difference of differences.
 
@@ -4059,15 +4059,15 @@ Which is the best way to test whether species matters overall in this model? (Se
 
 - **Options:**
 
-  A) The Type II F test for species from car::Anova()
-  B) The p-value for speciesChinstrap in summary()
-  C) The p-value for the (Intercept) in summary()
+  A) The p-value for the (Intercept) in summary()
+  B) The Type II F test for species from car::Anova()
+  C) The p-value for speciesChinstrap in summary()
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** The F test asks about the species term as a whole.
 - **Why the wrong options are wrong (tutor only):**
-  B) One reference comparison, for females only.
-  C) Tests whether female Adelie mass is zero.
+  A) Tests whether female Adelie mass is zero.
+  C) One reference comparison, for females only.
 - **Hint:** One test for the whole term.
 
 ### ch21-book-09
@@ -4141,17 +4141,17 @@ Why does emmeans warn that the sex contrast 'may be misleading'?
 
 - **Options:**
 
-  A) It averages a sex gap that differs among species
-  B) The emmeans sex contrast contains a calculation error
-  C) Males and females have identical average body mass
-  D) The species comparison is not statistically significant
+  A) Males and females have identical average body mass
+  B) It averages a sex gap that differs among species
+  C) The species comparison is not statistically significant
+  D) The emmeans sex contrast contains a calculation error
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** With an interaction, a single average sex difference hides variation among species.
 - **Why the wrong options are wrong (tutor only):**
-  B) No error.
-  C) They differ by 631 g on average.
-  D) Irrelevant.
+  A) They differ by 631 g on average.
+  C) Irrelevant.
+  D) No error.
 - **Hint:** Averaged over what?
 
 ### ch21-book-09-v2
@@ -4183,16 +4183,16 @@ Which statement about the female - male contrast (-631 g) is correct?
 
 - **Options:**
 
-  A) It averages the sex difference across the three species
-  B) It is the sex difference in Adelie penguins only
-  C) It is the sex difference in Gentoo penguins only
+  A) It is the sex difference in Adelie penguins only
+  B) It is the sex difference in Gentoo penguins only
+  C) It averages the sex difference across the three species
   D) It is the size of the interaction between sex and species
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** 'Results are averaged over the levels of: species.'
 - **Why the wrong options are wrong (tutor only):**
-  B) That's sexmale from summary().
-  C) Gentoo's gap is larger.
+  A) That's sexmale from summary().
+  B) Gentoo's gap is larger.
   D) Not an interaction.
 - **Hint:** Read the note under the contrast.
 
@@ -4284,8 +4284,8 @@ The emmeans Adelie - Gentoo contrast is -1376 g, but speciesGentoo in summary() 
 
 - **Options:**
 
-  A) emmeans averages over both sexes
-  B) speciesGentoo compares females only
+  A) speciesGentoo compares females only
+  B) emmeans averages over both sexes
   C) The Gentoo sex gap is larger than Adelie's
 
 - **Answer (tutor only):** A, B, C
@@ -4332,15 +4332,15 @@ Which test asks whether Adelie and Chinstrap penguins differ in mass, averaged o
 
 - **Options:**
 
-  A) The emmeans Adelie - Chinstrap contrast
-  B) The speciesChinstrap p-value in summary()
-  C) The sexmale:speciesChinstrap p-value
+  A) The sexmale:speciesChinstrap p-value
+  B) The emmeans Adelie - Chinstrap contrast
+  C) The speciesChinstrap p-value in summary()
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** emmeans averages over sex; speciesChinstrap is females only; the interaction compares sex gaps.
 - **Why the wrong options are wrong (tutor only):**
-  B) Females only.
-  C) A difference in sex gaps.
+  A) A difference in sex gaps.
+  C) Females only.
 - **Hint:** Averaged over sexes.
 
 ### ch21-book-11
@@ -4406,17 +4406,17 @@ Why is lm(growth ~ temperature + I(temperature^2)) still a linear model, even th
 
 - **Options:**
 
-  A) The prediction is still a sum of coefficients times predictors
-  B) The curve is approximately straight over the range of data
-  C) Polynomial terms are dropped automatically by R
-  D) It isn't a linear model; it's a nonlinear model
+  A) Polynomial terms are dropped automatically by R
+  B) It isn't a linear model; it's a nonlinear model
+  C) The curve is approximately straight over the range of data
+  D) The prediction is still a sum of coefficients times predictors
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Linear refers to the coefficients: temperature² is just another predictor.
 - **Why the wrong options are wrong (tutor only):**
-  B) It can be very curved.
-  C) They aren't dropped.
-  D) It is linear in its coefficients.
+  A) They aren't dropped.
+  B) It is linear in its coefficients.
+  C) It can be very curved.
 - **Hint:** Linear in what?
 
 ### ch21-chimein-01
@@ -4451,17 +4451,17 @@ Palmer penguins: bill length of three Antarctic penguin species by sex. If you c
 
 - **Options:**
 
-  A) Roughly parallel lines, sloping up from female to male
-  B) Lines that cross, with the sex effect reversing
-  C) Flat lines, since sex has no effect on bill length
-  D) Lines with strongly different slopes for each species
+  A) Lines that cross, with the sex effect reversing
+  B) Lines with strongly different slopes for each species
+  C) Roughly parallel lines, sloping up from female to male
+  D) Flat lines, since sex has no effect on bill length
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Males are longer-billed in every species by similar amounts: roughly parallel lines (no significant interaction).
 - **Why the wrong options are wrong (tutor only):**
-  B) The sex effect doesn't reverse.
-  C) There's a clear sex effect.
-  D) The gaps are similar.
+  A) The sex effect doesn't reverse.
+  B) The gaps are similar.
+  D) There's a clear sex effect.
 - **Hint:** Is the male-female gap similar across species?
 
 ### ch21-chimein-01-v2
@@ -4475,15 +4475,15 @@ Palmer penguins: bill length of three Antarctic penguin species by sex. Which mo
 
 - **Options:**
 
-  A) lm(bill_len ~ sex + species)
-  B) lm(bill_len ~ sex)
-  C) lm(bill_len ~ species)
+  A) lm(bill_len ~ species)
+  B) lm(bill_len ~ sex + species)
+  C) lm(bill_len ~ sex)
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Both sex and species matter, and their effects look roughly additive.
 - **Why the wrong options are wrong (tutor only):**
-  B) Ignores big species differences.
-  C) Ignores the consistent sex difference.
+  A) Ignores the consistent sex difference.
+  C) Ignores big species differences.
 - **Hint:** Which effects are visible?
 
 ### ch21-chimein-02
@@ -4540,14 +4540,14 @@ Iris petal length vs petal width for three iris species, with a separate regress
 
 - **Options:**
 
-  A) The species barely overlap in petal width
+  A) The slopes are all exactly equal
   B) Each slope covers a different range of widths
-  C) The slopes are all exactly equal
+  C) The species barely overlap in petal width
 
-- **Answer (tutor only):** A, B
+- **Answer (tutor only):** B, C
 - **Explanation (tutor only):** Each species' line covers a different range, so differences in slope partly reflect different parts of the width axis.
 - **Why the wrong options are wrong (tutor only):**
-  C) They differ.
+  A) They differ.
 - **Hint:** Look at where each species falls on the x-axis.
 
 ### ch21-chimein-03
@@ -4583,14 +4583,14 @@ Iris sepal length vs sepal width for three iris species, with a separate regress
 - **Options:**
 
   A) lm(Sepal.Length ~ Sepal.Width + Species)
-  B) lm(Sepal.Length ~ Sepal.Width * Species)
-  C) lm(Sepal.Length ~ Species)
+  B) lm(Sepal.Length ~ Species)
+  C) lm(Sepal.Length ~ Sepal.Width * Species)
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Roughly parallel lines at different heights: an additive model (the interaction isn't significant, p = 0.67).
 - **Why the wrong options are wrong (tutor only):**
-  B) Not needed: lines are parallel.
-  C) Ignores the clear width effect.
+  B) Ignores the clear width effect.
+  C) Not needed: lines are parallel.
 - **Hint:** Parallel lines at different heights.
 
 ### ch21-chimein-03-v2
@@ -4604,17 +4604,17 @@ Iris sepal length vs sepal width for three iris species, with a separate regress
 
 - **Options:**
 
-  A) Large (not significant)
+  A) Impossible to guess
   B) Very small (p < 0.001)
-  C) Exactly 0.05
-  D) Impossible to guess
+  C) Large (not significant)
+  D) Exactly 0.05
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Roughly parallel lines suggest no interaction (p = 0.67).
 - **Why the wrong options are wrong (tutor only):**
+  A) The plot gives a strong hint.
   B) That would need clearly different slopes.
-  C) No reason.
-  D) The plot gives a strong hint.
+  D) No reason.
 - **Hint:** Are the lines parallel?
 
 ### ch21-chimein-04
@@ -4637,12 +4637,12 @@ Match each penguin (flipper length 200 mm) to its predicted body mass:
 
 - **Options:**
 
-  A) 4024 g
-  B) 3871 g
-  C) 4133 g
+  A) 3871 g
+  B) 4133 g
+  C) 4024 g
   D) 6560 g
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-A, 3-B
 - **Explanation (tutor only):** Adelie: -2536 + 32.8 × 200 = 4024. Chinstrap: -2536 - 501 + (32.8 + 1.74) × 200 = 3871. Gentoo: -2536 - 4251 + (32.8 + 21.8) × 200 = 4133.
 - **Why the wrong options are wrong (tutor only):**
   Common mistake: forgetting to add the interaction to the slope for Chinstrap or Gentoo.
@@ -4669,14 +4669,14 @@ Match each penguin (flipper length 210 mm) to its predicted body mass:
 - **Options:**
 
   A) 4352 g
-  B) 4216 g
-  C) 4679 g
-  D) 6888 g
+  B) 4679 g
+  C) 6888 g
+  D) 4216 g
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-A, 2-D, 3-B
 - **Explanation (tutor only):** Adelie: -2536 + 32.8 × 210. Chinstrap: -3037 + 34.54 × 210. Gentoo: -6787 + 54.6 × 210.
 - **Why the wrong options are wrong (tutor only):**
-  D) is 32.8 × 210 without the intercept.
+  C) is 32.8 × 210 without the intercept.
 - **Hint:** Each species has its own intercept and slope.
 
 ### ch21-chimein-04-v2
@@ -4699,12 +4699,12 @@ Match each species to its slope (g per mm of flipper length):
 
 - **Options:**
 
-  A) 32.80
+  A) 54.60
   B) 34.54
-  C) 54.60
+  C) 32.80
   D) 21.80
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C
+- **Answer (tutor only):** 1-C, 2-B, 3-A
 - **Explanation (tutor only):** Adelie: 32.80. Chinstrap: 32.80 + 1.74. Gentoo: 32.80 + 21.80.
 - **Why the wrong options are wrong (tutor only):**
   D) is the Gentoo interaction term alone.
@@ -4755,16 +4755,16 @@ Why is the Gentoo slope (54.6 g/mm) so different from Adelie's (32.8 g/mm)?
 
 - **Options:**
 
-  A) The flipper_len:speciesGentoo interaction adds 21.8 g/mm
-  B) speciesGentoo shifts the line down by 4251 g
-  C) Gentoos have more data, so their slope is larger
+  A) speciesGentoo shifts the line down by 4251 g
+  B) Gentoos have more data, so their slope is larger
+  C) The flipper_len:speciesGentoo interaction adds 21.8 g/mm
   D) It isn't; they share one slope in this model
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With an interaction, each species' slope is the reference slope plus its interaction term.
 - **Why the wrong options are wrong (tutor only):**
-  B) That changes the intercept, not the slope.
-  C) Sample size doesn't set the slope.
+  A) That changes the intercept, not the slope.
+  B) Sample size doesn't set the slope.
   D) The interaction gives separate slopes.
 - **Hint:** Which term changes slopes?
 
@@ -4784,16 +4784,16 @@ What does speciesChinstrap = -501 represent?
 
 - **Options:**
 
-  A) The Chinstrap - Adelie difference at a flipper length of 0 mm
+  A) The difference in slopes between Chinstraps and Adelies
   B) The average mass difference between Chinstraps and Adelies
-  C) How much lighter Chinstraps are at every flipper length
-  D) The difference in slopes between Chinstraps and Adelies
+  C) The Chinstrap - Adelie difference at a flipper length of 0 mm
+  D) How much lighter Chinstraps are at every flipper length
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With an interaction, a main effect is the difference where the other variable equals zero.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) The difference varies with flipper length.
-  D) That's the interaction (1.74).
+  A) That's the interaction (1.74).
+  B) and D) The difference varies with flipper length.
 - **Hint:** Main effect in an interaction model.
 
 ### ch21-hw-01
@@ -4830,16 +4830,16 @@ A researcher includes an interaction between temperature and every one of 8 othe
 
 - **Options:**
 
-  A) Many interactions cost power and invite overfitting
-  B) R can't fit models with more than one interaction
-  C) Interactions can only involve categorical variables
+  A) R can't fit models with more than one interaction
+  B) Interactions can only involve categorical variables
+  C) Many interactions cost power and invite overfitting
   D) There's no problem; more interactions are always better
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Include interactions that make biological sense; each one spends data.
 - **Why the wrong options are wrong (tutor only):**
-  B) R can.
-  C) Numeric variables can interact.
+  A) R can.
+  B) Numeric variables can interact.
   D) Not true.
 - **Hint:** Each term costs data.
 
@@ -4854,16 +4854,16 @@ Which is the best reason to include an interaction between fertilizer and soil m
 - **Options:**
 
   A) There's reason to expect fertilizer to work differently in wet vs dry soil
-  B) Both variables are significant on their own in an additive model
-  C) The dataset has more than 100 plants in it
-  D) Soil moisture is a numeric variable rather than a category
+  B) Soil moisture is a numeric variable rather than a category
+  C) Both variables are significant on their own in an additive model
+  D) The dataset has more than 100 plants in it
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Interactions should be motivated by the biology: does the effect of one depend on the other?
 - **Why the wrong options are wrong (tutor only):**
-  B) Main effects don't imply interactions.
-  C) Sample size alone isn't a reason.
-  D) Variable type isn't a reason.
+  B) Variable type isn't a reason.
+  C) Main effects don't imply interactions.
+  D) Sample size alone isn't a reason.
 - **Hint:** Start from the biology.
 
 ### ch21-hw-02
@@ -4898,16 +4898,16 @@ In a study of fertilizer and two plant varieties, there's a significant interact
 
 - **Options:**
 
-  A) No: the effect reverses, so an average is misleading
+  A) Yes: if its p-value is below α
   B) Yes: main effects are always meaningful
-  C) Yes: if its p-value is below α
-  D) No: interactions make all main effects zero
+  C) No: interactions make all main effects zero
+  D) No: the effect reverses, so an average is misleading
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** When the direction flips, an average effect describes neither variety.
 - **Why the wrong options are wrong (tutor only):**
-  B) and C) Not when effects reverse.
-  D) Main effects aren't zero; they're just hard to interpret.
+  B) and A) Not when effects reverse.
+  C) Main effects aren't zero; they're just hard to interpret.
 - **Hint:** Does the direction change?
 
 ### ch21-hw-02-v2
@@ -4920,16 +4920,16 @@ Males are heavier than females in all three penguin species, but by different am
 
 - **Options:**
 
-  A) Males are heavier in every species, but the gap varies by species
-  B) Sex doesn't matter, since there is a significant interaction
-  C) Males are heavier by exactly the same amount in every species
-  D) Nothing can be said about sex because of the interaction
+  A) Males are heavier by exactly the same amount in every species
+  B) Nothing can be said about sex because of the interaction
+  C) Sex doesn't matter, since there is a significant interaction
+  D) Males are heavier in every species, but the gap varies by species
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** When direction is consistent, a main effect is meaningful; add that its size varies.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) Too strong.
-  C) The interaction says the gap varies.
+  A) The interaction says the gap varies.
+  C) and B) Too strong.
 - **Hint:** Is the direction consistent?
 
 ### ch21-hw-03
@@ -4950,12 +4950,12 @@ Each panel shows the same data with lines from a different model. Match each pan
 
 - **Options:**
 
-  A) Petal area only
-  B) Petal area, petal color, and their interaction
+  A) Petal area, petal color, and their interaction
+  B) Petal color only
   C) Petal area and petal color (additive)
-  D) Petal color only
+  D) Petal area only
 
-- **Answer (tutor only):** 1-A, 2-B, 3-C, 4-D
+- **Answer (tutor only):** 1-D, 2-A, 3-C, 4-B
 - **Explanation (tutor only):** A: one line for everyone (petal area only). B: different slopes for each color (interaction). C: parallel lines (additive). D: flat lines at each color's mean (color only).
 - **Why the wrong options are wrong (tutor only):**
   Look for: one line vs two; parallel vs not; sloped vs flat.
@@ -4975,15 +4975,15 @@ Each panel shows the same data with lines from a different model. Which panel's 
 - **Options:**
 
   A) Panel B: petal area × petal color
-  B) Panel A: petal area only
+  B) Panel D: petal color only
   C) Panel C: petal area + petal color
-  D) Panel D: petal color only
+  D) Panel A: petal area only
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** The interaction model estimates an intercept, an area slope, a color difference and a slope difference: 4 parameters.
 - **Why the wrong options are wrong (tutor only):**
-  B) and D) 2 parameters.
   C) 3 parameters.
+  D) and B) 2 parameters.
 - **Hint:** Count intercepts and slopes.
 
 ### ch21-hw-03-v2
@@ -4999,15 +4999,15 @@ Each panel shows the same data with lines from a different model. In which panel
 
 - **Options:**
 
-  A) Panel D: petal color only
-  B) Panel A: petal area only
-  C) Panel B: area × color
+  A) Panel A: petal area only
+  B) Panel B: area × color
+  C) Panel D: petal color only
   D) Panel C: area + color
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** Without petal area in the model, predictions don't change with area: flat lines at each color's mean.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) include petal area, so their lines slope.
+  A), B) and D) include petal area, so their lines slope.
 - **Hint:** Which model ignores petal area?
 
 ### ch21-hw-04
@@ -5023,12 +5023,12 @@ Diagnostic plots for lm(prop_hybrid ~ petal_area_mm * petal_color) are shown. Fi
 
 - **Options:**
 
-  A) not normally distributed
-  B) normally distributed
+  A) normally distributed
+  B) homoscedastic
   C) heteroscedastic
-  D) homoscedastic
+  D) not normally distributed
 
-- **Answer (tutor only):** 1-A, 2-C
+- **Answer (tutor only):** 1-D, 2-C
 - **Explanation (tutor only):** The QQ plot curves away from the line (many zeros and a long right tail), and the spread of residuals grows with the fitted values.
 - **Why the wrong options are wrong (tutor only):**
   Proportions with many zeros rarely give normal, equal-variance residuals.
@@ -5076,12 +5076,12 @@ Diagnostic plots for lm(prop_hybrid ~ petal_area_mm * petal_color) are shown. Ma
 
 - **Options:**
 
-  A) Many RILs set no hybrid seed, with a long right tail
-  B) Proportions near zero can't vary much, but larger ones can
+  A) Proportions near zero can't vary much, but larger ones can
+  B) Many RILs set no hybrid seed, with a long right tail
   C) The RILs were not independent of one another
   D) Petal area was measured in the wrong units
 
-- **Answer (tutor only):** 1-A, 2-B
+- **Answer (tutor only):** 1-B, 2-A
 - **Explanation (tutor only):** Pile-ups at zero skew the residuals; bounded proportions have smaller variance near zero.
 - **Why the wrong options are wrong (tutor only):**
   C) and D) don't explain these patterns.
@@ -5150,15 +5150,15 @@ Why is the interaction's test the same with Type II and Type III?
 - **Options:**
 
   A) It's the highest-order term, adjusted for all others in both types
-  B) Interactions are never affected by any type of sums of squares
-  C) Petal color and petal area are uncorrelated in these RILs
+  B) Petal color and petal area are uncorrelated in these RILs
+  C) Interactions are never affected by any type of sums of squares
   D) Type II and Type III are always the same for every term
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** Both Type II and Type III test the highest-order term after all other terms.
 - **Why the wrong options are wrong (tutor only):**
-  B) Too general.
-  C) Not the reason.
+  B) Not the reason.
+  C) Too general.
   D) The main effects differ here.
 - **Hint:** What is the interaction adjusted for?
 
@@ -5188,17 +5188,17 @@ Why is petal color not significant with Type III (p = 0.17)?
 
 - **Options:**
 
-  A) Type III tests color at a petal area of 0, far outside the data
+  A) The interaction removes all of petal color's effect
   B) Petal color has no association with hybrid seed in these data
-  C) Type III always gives larger p-values than Type II does
-  D) The interaction removes all of petal color's effect
+  C) Type III tests color at a petal area of 0, far outside the data
+  D) Type III always gives larger p-values than Type II does
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** With an interaction (and default contrasts), Type III tests each main effect where the other variable is 0.
 - **Why the wrong options are wrong (tutor only):**
+  A) Color still matters at real petal areas.
   B) Type II finds a strong color effect.
-  C) Not always.
-  D) Color still matters at real petal areas.
+  D) Not always.
 - **Hint:** Where is the color effect evaluated?
 
 ### ch21-hw-06
@@ -5236,17 +5236,17 @@ To ask which floral traits predict hybridization, we modeled the proportion of h
 
 - **Options:**
 
-  A) Lines for pink and white with different slopes
+  A) Flat lines at each color's mean hybrid seed
   B) Parallel lines for pink and white flowers
   C) One single line for both colors of flower
-  D) Flat lines at each color's mean hybrid seed
+  D) Lines for pink and white with different slopes
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** An interaction means different slopes for each color.
 - **Why the wrong options are wrong (tutor only):**
+  A) That's color only.
   B) That's additive.
   C) That's area only.
-  D) That's color only.
 - **Hint:** Interaction = non-parallel.
 
 ### ch21-hw-06-v2
@@ -5261,13 +5261,13 @@ To ask which floral traits predict hybridization, we modeled the proportion of h
 
   A) Petal color and petal area are strongly correlated with each other
   B) The petal area slope differs between pink and white flowers
-  C) The effect of color depends on petal area
-  D) The model's lines for the two colors aren't parallel
+  C) The model's lines for the two colors aren't parallel
+  D) The effect of color depends on petal area
 
 - **Answer (tutor only):** A
 - **Explanation (tutor only):** An interaction is about effects depending on each other, not about predictors being correlated.
 - **Why the wrong options are wrong (tutor only):**
-  B), C) and D) are all what an interaction means.
+  B), D) and C) are all what an interaction means.
 - **Hint:** Interaction ≠ correlation.
 
 ### ch21-hw-07
@@ -5362,16 +5362,16 @@ In the plot, roughly how big is the gap between men's and women's winning times 
 
 - **Options:**
 
-  A) About 1 second
-  B) About 0.1 seconds
-  C) About 3 seconds
+  A) About 3 seconds
+  B) About 1 second
+  C) About 0.1 seconds
   D) There is no gap
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** Recent women's times are around 10.8 to 10.9 s and men's around 9.85 s: about 1 s apart.
 - **Why the wrong options are wrong (tutor only):**
-  B) Too small.
-  C) Too large.
+  A) Too large.
+  C) Too small.
   D) Men are clearly faster.
 - **Hint:** Compare the most recent points.
 
@@ -5388,17 +5388,17 @@ If straight lines were drawn through each group's points, would they be parallel
 
 - **Options:**
 
-  A) Probably not: women's times seem to fall more steeply
+  A) Probably not: men's times seem to fall more steeply
   B) Yes: both groups fall at exactly the same rate
-  C) Probably not: men's times seem to fall more steeply
-  D) Yes: neither group's times change over time
+  C) Yes: neither group's times change over time
+  D) Probably not: women's times seem to fall more steeply
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The women's points drop from about 12.2 to 10.9 s since 1928; the men's drop less over the same period. Non-parallel lines suggest an interaction.
 - **Why the wrong options are wrong (tutor only):**
+  A) The women's fall is steeper.
   B) The slopes look different.
-  C) The women's fall is steeper.
-  D) Both fall.
+  C) Both fall.
 - **Hint:** Compare how steeply each set of points falls.
 
 ### ch21-quiz-02
@@ -5678,16 +5678,16 @@ Women are the reference level. What does the Year:Gendermale coefficient (0.0058
 
 - **Options:**
 
-  A) How much less steeply men's times fall per year than women's
-  B) How much faster men are than women, averaged over every year
-  C) The change in women's winning times per year of the Olympics
+  A) The change in women's winning times per year of the Olympics
+  B) How much less steeply men's times fall per year than women's
+  C) How much faster men are than women, averaged over every year
   D) The probability that men and women improve at the same rate
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** B
 - **Explanation (tutor only):** It's the difference in slopes (men minus women). Positive means men's negative slope is less steep.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's not an interaction.
-  C) That's the Year coefficient.
+  A) That's the Year coefficient.
+  C) That's not an interaction.
   D) Coefficients aren't probabilities.
 - **Hint:** Difference in slopes.
 
@@ -5710,16 +5710,16 @@ What null hypothesis does the Year:Gendermale p-value (0.008) test?
 
 - **Options:**
 
-  A) Men's and women's times change at the same rate
-  B) Men's and women's times are the same on average
-  C) Winning times are not changing over the years
-  D) Women's times are not changing over the years
+  A) Winning times are not changing over the years
+  B) Women's times are not changing over the years
+  C) Men's and women's times change at the same rate
+  D) Men's and women's times are the same on average
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** C
 - **Explanation (tutor only):** The interaction tests whether the slopes differ.
 - **Why the wrong options are wrong (tutor only):**
-  B) That's about the gap, not slopes.
-  C) and D) Those are about slopes themselves, not their difference.
+  A) and B) Those are about slopes themselves, not their difference.
+  D) That's about the gap, not slopes.
 - **Hint:** Interaction = difference in slopes.
 
 ### ch21-quiz-07
@@ -5856,17 +5856,17 @@ Why is the Intercept (44.35 s) not a sensible winning time?
 
 - **Options:**
 
-  A) It's the women's prediction for year 0, far outside the data
-  B) It's the average winning time for men across all of the years
+  A) It's the average winning time for men across all of the years
+  B) It is sensible: early sprinters took about 44 s for 100 m
   C) It's the predicted winning time for the first modern Olympics
-  D) It is sensible: early sprinters took about 44 s for 100 m
+  D) It's the women's prediction for year 0, far outside the data
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** The intercept is the prediction at Year = 0 for the reference group: a huge extrapolation.
 - **Why the wrong options are wrong (tutor only):**
-  B) Not an average.
+  A) Not an average.
+  B) Nobody took 44 s.
   C) The first Olympics was 1896, not year 0.
-  D) Nobody took 44 s.
 - **Hint:** What year does the intercept refer to?
 
 ### ch21-quiz-09
@@ -5910,15 +5910,15 @@ We refit the interaction model using years_since_1928 = Year - 1928. Which of th
 
 - **Options:**
 
-  A) The slope for women
-  B) The interaction coefficient
-  C) The predicted times for 1960
-  D) The intercept
+  A) The interaction coefficient
+  B) The intercept
+  C) The slope for women
+  D) The predicted times for 1960
 
-- **Answer (tutor only):** A, B, C
+- **Answer (tutor only):** A, C, D
 - **Explanation (tutor only):** Centering moves 'zero', changing the intercept and the gender coefficient, but not slopes or predictions.
 - **Why the wrong options are wrong (tutor only):**
-  D) The intercept now describes women in 1928.
+  B) The intercept now describes women in 1928.
 - **Hint:** What does shifting x change?
 
 ### ch21-quiz-09-v2
@@ -5936,15 +5936,15 @@ After refitting with years_since_1928 = Year - 1928, the Gendermale coefficient 
 
 - **Options:**
 
-  A) The predicted men-women gap in 1928
-  B) The predicted men-women gap in year 0
-  C) The average men-women gap over all years
-  D) The difference in slopes between men and women
+  A) The difference in slopes between men and women
+  B) The average men-women gap over all years
+  C) The predicted men-women gap in year 0
+  D) The predicted men-women gap in 1928
 
-- **Answer (tutor only):** A
+- **Answer (tutor only):** D
 - **Explanation (tutor only):** Gendermale is the gap where years_since_1928 = 0, i.e. in 1928.
 - **Why the wrong options are wrong (tutor only):**
-  B) That was before centering.
-  C) Not an average.
-  D) That's the interaction.
+  A) That's the interaction.
+  B) Not an average.
+  C) That was before centering.
 - **Hint:** Where is the new zero?

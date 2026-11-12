@@ -135,9 +135,14 @@ table.data th { background: var(--surface-2); }
 .optlist li { margin: 4px 0; }
 .optlist b { color: var(--brand); }
 
-.matchrow { display: flex; gap: 10px; align-items: center; margin: 6px 0; flex-wrap: wrap; }
-.matchrow label { font-weight: 600; min-width: 4.5em; }
-.matchrow select { min-width: 0; flex: 1 1 260px; max-width: 100%; padding: 7px 8px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); }
+.matchrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: center; margin: 0; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.matchrow:last-child { border-bottom: 0; }
+.matchrow label { font-weight: 500; }
+.matchrow label b { color: var(--brand); margin-right: 4px; }
+.matchrow select { min-width: 0; width: 100%; padding: 8px 8px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); }
+.matchbox { margin: 0 0 14px; }
+.matchrow .mright { font-size: .88rem; color: var(--good); margin-top: 4px; }
+@media (max-width: 560px) { .matchrow { grid-template-columns: 1fr; gap: 6px; } }
 .matchrow.is-wrong select { border-color: var(--bad); background: var(--bad-soft); }
 .matchrow.is-right select { border-color: var(--good); background: var(--good-soft); }
 .numrow { display: flex; gap: 10px; align-items: center; margin: 6px 0; flex-wrap: wrap; }
@@ -198,6 +203,16 @@ details summary { cursor: pointer; color: var(--brand); font-weight: 600; }
 .tnote { margin: 6px 0 0; }
 .aistrip { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin: 10px 0 0; }
 [hidden] { display: none !important; }
+.calc-toggle { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; border-radius: 999px; padding: 10px 16px; box-shadow: var(--shadow); }
+.calc { position: fixed; right: 16px; bottom: calc(68px + env(safe-area-inset-bottom, 0px)); z-index: 40; width: min(320px, calc(100vw - 32px)); background: var(--surface); border: 1.5px solid var(--brand); border-radius: 12px; padding: 12px; box-shadow: 0 4px 18px rgba(0,0,0,.15); }
+.calc input { width: 100%; padding: 8px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.calc .chist { max-height: 160px; overflow-y: auto; margin: 0 0 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88rem; }
+.calc .chist div { padding: 2px 0; border-bottom: 1px dashed var(--border); cursor: pointer; }
+.calc .chist .res { color: var(--brand); font-weight: 600; }
+.calc .cerr { color: var(--bad); font-size: .85rem; min-height: 1.2em; }
+.calc .ckeys { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.calc .ckeys button { padding: 3px 8px; font-size: .85rem; border-radius: 6px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer; }
+
 .rate { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: .92rem; color: var(--muted); }
 .rate .thumb { font-size: 1.05rem; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface); cursor: pointer; }
 .rate .thumb[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-soft); }
@@ -378,6 +393,10 @@ function isCodeLine(l) {
   return /<-|\|>|%>%/.test(l) || /^\s{2,}\S/.test(l) || /^(library|ggplot|install\.packages|setwd)\(/.test(l.trim())
     || /^#/.test(l.trim()) || /^[\w.]+\(.*\)\s*(\+|\|>)?$/.test(l.trim());
 }
+// R console output: columns lined up with runs of spaces, "[1] ..." lines, or indented lines.
+function isOutputLine(l) {
+  return /\S {2,}\S/.test(l) || /^\s*\[\d+\]\s/.test(l) || /^\s{2,}\S/.test(l) || /^\s*-{3,}\s*$/.test(l) || /^NOTE: |^Results are averaged|^Signif\. codes|^Coefficients:\s*$|^Residuals:\s*$|^Type I+ |^Response: /.test(l);
+}
 function renderText(text) {
   const box = el("div", { class: "qtext" });
   const lines = text.split("\n");
@@ -405,8 +424,22 @@ function renderText(text) {
     if (isCodeLine(l)) {
       flush();
       const code = [];
-      while (i < lines.length && lines[i].trim() !== "" && (isCodeLine(lines[i]) || /^\s/.test(lines[i]) || /^[)\]}]/.test(lines[i].trim()))) { code.push(lines[i]); i++; }
+      while (i < lines.length && lines[i].trim() !== "" && (isCodeLine(lines[i]) || isOutputLine(lines[i]) || /^\s/.test(lines[i]) || /^[)\]}]/.test(lines[i].trim()))) { code.push(lines[i]); i++; }
+      // R output printed right after the code (possibly after one blank line) joins the same block.
+      let j = i; if (j < lines.length && lines[j].trim() === "" && j + 1 < lines.length && isOutputLine(lines[j + 1])) j++;
+      if (j < lines.length && isOutputLine(lines[j]) && !lines[j].includes(" | ")) {
+        if (j > i) code.push("");
+        i = j;
+        while (i < lines.length && lines[i].trim() !== "" && !lines[i].includes(" | ") && (isOutputLine(lines[i]) || /^[\w().:]+(\s+\S+)+$/.test(lines[i]) && isOutputLine(lines[i - 1]))) { code.push(lines[i]); i++; }
+      }
       box.append(el("pre", {}, el("code", { text: code.join("\n") })));
+      continue;
+    }
+    if (isOutputLine(l) && !l.includes(" | ") && (isOutputLine(lines[i + 1] || "") || /^\s*\[\d+\]/.test(l))) {
+      flush();
+      const out = [];
+      while (i < lines.length && lines[i].trim() !== "" && !lines[i].includes(" | ") && (isOutputLine(lines[i]) || /^[\w().:]+(\s+\S+)+$/.test(lines[i]))) { out.push(lines[i]); i++; }
+      box.append(el("pre", {}, el("code", { text: out.join("\n") })));
       continue;
     }
     if (l.trim() === "") { flush(); i++; continue; }
@@ -625,6 +658,7 @@ function header(item) {
   return [
     el("div", { class: "roundbar" },
       el("div", { class: "progressline" }, el("div", { style: "width:" + Math.round(100 * session.i / session.list.length) + "%" })),
+      el("button", { class: "btn ghost endbtn", onclick: prevQuestion, disabled: session.i > 0 ? null : true, title: "Go back to the previous question" }, "← Previous"),
       el("button", { class: "btn ghost endbtn", onclick: endRound, title: "Stop this round and see how you did" }, "End round")),
     el("div", { class: "qmeta" },
       el("span", { text: "Question " + (session.i + 1) + " of " + session.list.length }),
@@ -637,11 +671,19 @@ function header(item) {
   ];
 }
 
+const cardCache = new WeakMap();
+function stashCard() {
+  const item = session && session.list && session.list[session.i];
+  if (item && app.firstChild) cardCache.set(item, { nodes: Array.from(app.childNodes), refresh: aiRefresh });
+}
+function prevQuestion() { if (session.i > 0) { stashCard(); session.i -= 1; showQuestion(); } }
 function showQuestion() {
   setNav("setup"); app.innerHTML = "";
   if (session.i >= session.list.length) return showSummary();
   const item = session.list[session.i];
   window.scrollTo({ top: 0 });
+  const cached = cardCache.get(item);
+  if (cached) { cached.nodes.forEach(n => app.append(n)); aiRefresh = cached.refresh; return; }
   if (item.kind === "open") return showOpen(item);
   return showCheck(item);
 }
@@ -653,10 +695,27 @@ function record(id, outcome, extra) {
   store.results[id] = r; saveStore();
 }
 
+// For matching questions, pull lines like "1. ..." out of the question so each item can sit next to its dropdown.
+function splitMatch(q) {
+  if (q.type !== "match") return null;
+  const texts = {};
+  let stem = q.question;
+  for (const n of q.items) {
+    const re = new RegExp("^[ \\t]*" + n + "\\.[ \\t]+(.+)$", "m");
+    const m = stem.match(re);
+    if (!m) return null;
+    texts[n] = m[1].trim();
+    stem = stem.replace(re, "");
+  }
+  return { stem: stem.replace(/\n{3,}/g, "\n\n").trim(), texts };
+}
+function optText(q, key) { const o = (q.options || []).find(o => o.key === key); return o ? o.text : key; }
+
 function showCheck(item) {
   const q = item.q, s = q.plain || reveal(q.secret);
+  const split = splitMatch(q);
   const st = { attempts: 0, firstChoice: null, usedHint: false, done: false, revealed: false, struck: new Set(), locked: {}, t0: Date.now() };
-  const card = el("section", { class: "card" }, header(item), renderText(q.question), figures(q.images));
+  const card = el("section", { class: "card" }, header(item), renderText(split ? split.stem : q.question), figures(q.images));
   const answerBox = el("div");
   const fb = el("div");
   const actions = el("div", { class: "row" });
@@ -710,14 +769,16 @@ function showCheck(item) {
         return b;
       })));
     } else if (q.type === "match") {
-      answerBox.append(el("ul", { class: "optlist" }, q.options.map(o => el("li", {}, el("b", { text: o.key + ") " }), el("span", { html: inline(o.text) })))));
+      const box = el("div", { class: "matchbox" });
       q.items.forEach(n => {
-        const sel = el("select", { "aria-label": "Answer for " + n, disabled: st.done || st.locked[n] ? true : null },
-          el("option", { value: "", text: "Choose…" }), q.options.map(o => el("option", { value: o.key, text: o.key + ") " + o.text.slice(0, 80) })));
+        const sel = el("select", { "aria-label": "Answer for " + (split ? split.texts[n] : "blank " + n), disabled: st.done || st.locked[n] ? true : null },
+          el("option", { value: "", text: "Choose…" }), q.options.map(o => el("option", { value: o.key, text: o.text })));
         sel.value = matchSel[n] || "";
         sel.addEventListener("change", () => { matchSel[n] = sel.value; drawActions(); });
-        answerBox.append(el("div", { class: "matchrow", "data-item": n }, el("label", { text: "Item " + n }), sel));
+        const label = split ? el("label", {}, el("span", { html: inline(split.texts[n]) })) : el("label", {}, el("b", { text: "Blank (" + n + ")" }));
+        box.append(el("div", { class: "matchrow", "data-item": n }, label, el("div", {}, sel)));
       });
+      answerBox.append(box);
     } else if (q.type === "numeric") {
       numInputs = [];
       const parts = q.parts.length ? q.parts : [""];
@@ -728,6 +789,9 @@ function showCheck(item) {
         numInputs.push(inp);
         answerBox.append(el("div", { class: "numrow" }, p ? el("label", { text: p }) : null, inp));
       });
+      answerBox.append(el("p", { class: "muted small", style: "margin:2px 0 10px" },
+        el("button", { class: "btn ghost", type: "button", style: "padding:4px 10px;font-size:.88rem;margin-right:8px", onclick: () => window.openCalculator && window.openCalculator() }, "🧮 Calculator"),
+        "You can also type the calculation itself, e.g. 2.85/(2.85+1.98)."));
     } else if (q.type === "short") {
       shortBox = el("textarea", { class: "answer", placeholder: "Type your answer…", style: "min-height:90px" });
       shortBox.addEventListener("input", drawActions);
@@ -796,7 +860,7 @@ function showCheck(item) {
     const v = t.replace(/[−–]/g, "-").replace(/\s|,/g, "").replace(/^≈/, "");
     if (/^-?\d*\.?\d+\/-?\d*\.?\d+$/.test(v)) { const [a, b] = v.split("/").map(Number); return a / b; }
     if (/^-?\d*\.?\d+(e-?\d+)?%?$/.test(v)) return v.endsWith("%") ? parseFloat(v) / 100 : parseFloat(v);
-    return NaN;
+    try { const x = calcEval(t.replace(/^≈/, ""), null); return x === null ? NaN : x; } catch (e) { return NaN; }
   }
 
   function otherOptionsWhy() {
@@ -862,7 +926,7 @@ function showCheck(item) {
       if (!correct) {
         const bad = vals.some(isNaN);
         fb.append(el("div", { class: "feedback bad" },
-          el("h3", { text: bad ? "I couldn't read one of your numbers. Use digits, a decimal point, or a fraction like 1/12." : "Not quite." }),
+          el("h3", { text: bad ? "I couldn't read one of your answers. Type a number (0.25), a fraction (1/12), or a calculation like 2.85/(2.85+1.98)." : "Not quite." }),
           (s.general || []).length ? el("p", { html: "<strong>Common mistakes:</strong> " + inline(s.general.join(" ").replace(/^Common mistakes:\s*/i, "")) }) : null));
       }
     } else if (q.type === "short") {
@@ -913,7 +977,9 @@ function showCheck(item) {
 
   function answerLine() {
     if (q.type === "mc" || q.type === "tf" || q.type === "multi") return el("p", {}, el("strong", { text: "Answer: " }), s.answer.join(", "));
-    if (q.type === "match") return el("p", {}, el("strong", { text: "Answer: " }), q.items.map(n => n + " → " + s.answer[n]).join(", "));
+    if (q.type === "match") return el("div", {}, el("strong", { text: "Answer:" }),
+      el("ul", { style: "margin:4px 0 0;padding-left:1.2em" }, q.items.map(n => el("li", {},
+        el("span", { html: inline(split ? split.texts[n] : "(" + n + ")") }), " → ", el("strong", { html: inline(optText(q, s.answer[n])) })))));
     if (q.type === "numeric" || q.type === "short") return el("p", {}, el("strong", { text: "Answer: " }), el("span", { style: "white-space:pre-wrap", text: s.shown }));
     return null;
   }
@@ -957,7 +1023,54 @@ function showCheck(item) {
   drawAnswer(); drawActions();
 }
 
-function nextQuestion() { session.i += 1; showQuestion(); }
+
+// ---------- calculator ----------
+// A small calculator for arithmetic on the exam questions: + - * / ^ ( ), sqrt(), log() (natural), log10(), exp(), abs(), pi.
+function calcEval(expr, ans) {
+  let e = expr.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-").replace(/,/g, "").trim();
+  if (!e) return null;
+  const fns = { sqrt: "Math.sqrt", log10: "Math.log10", log: "Math.log", ln: "Math.log", exp: "Math.exp", abs: "Math.abs" };
+  const check = e.replace(/\b(sqrt|log10|log|ln|exp|abs|pi|ans)\b/g, "").replace(/\d*\.?\d+(e[+-]?\d+)?/gi, "");
+  if (/[^\s+\-*/^().%]/.test(check)) throw new Error("Use numbers, + − × ÷ ^ ( ), sqrt(), log(), exp(), abs(), pi");
+  e = e.replace(/\b(sqrt|log10|log|ln|exp|abs)\b/g, m => fns[m]).replace(/\bpi\b/g, "Math.PI").replace(/\bans\b/g, "(" + (ans ?? 0) + ")").replace(/\^/g, "**").replace(/(\d+(?:\.\d+)?)%/g, "($1/100)");
+  const v = Function('"use strict"; return (' + e + ');')();
+  if (typeof v !== "number" || !isFinite(v)) throw new Error("That doesn't give a number");
+  return v;
+}
+function fmtCalc(v) { return Math.abs(v) >= 1e-4 && Math.abs(v) < 1e9 ? String(+v.toPrecision(10)) : v.toPrecision(6); }
+(function setupCalculator() {
+  let ans = null;
+  const hist = el("div", { class: "chist", "aria-live": "polite" });
+  const err = el("div", { class: "cerr" });
+  const input = el("input", { type: "text", inputmode: "text", placeholder: "e.g. 5.25 / sqrt(13.716 / 5)", "aria-label": "Calculator input", autocomplete: "off" });
+  const run = () => {
+    err.textContent = "";
+    try {
+      const v = calcEval(input.value, ans);
+      if (v === null) return;
+      ans = v;
+      const row = el("div", { title: "Click to reuse this answer" }, el("span", { text: input.value + " = " }), el("span", { class: "res", text: fmtCalc(v) }));
+      row.addEventListener("click", () => { input.value += fmtCalc(v); input.focus(); });
+      hist.append(row); hist.scrollTop = hist.scrollHeight; input.value = "";
+    } catch (e) { err.textContent = e.message || "Can't calculate that"; }
+  };
+  input.addEventListener("keydown", e => { if (e.key === "Enter") run(); });
+  const key = t => el("button", { type: "button", onclick: () => { input.value += t; input.focus(); } }, t === "sqrt(" ? "√(" : t);
+  const panel = el("div", { class: "calc", hidden: true, role: "dialog", "aria-label": "Calculator" },
+    el("div", { class: "row", style: "margin-bottom:6px" }, el("strong", { text: "Calculator" }), el("span", { class: "spacer" }),
+      el("button", { class: "btn ghost tclose", type: "button", onclick: () => { panel.hidden = true; } }, "Close")),
+    hist, input, err,
+    el("div", { class: "ckeys" }, ["sqrt(", "^", "(", ")", "log(", "exp(", "pi", "ans"].map(key),
+      el("button", { type: "button", onclick: run, style: "font-weight:700" }, "="),
+      el("button", { type: "button", onclick: () => { hist.innerHTML = ""; ans = null; err.textContent = ""; } }, "Clear")),
+    el("p", { class: "muted small", style: "margin:6px 0 0", text: "Press Enter to calculate. ^ is a power, log() is the natural log, ans is your last answer." }));
+  const toggle = el("button", { class: "btn secondary calc-toggle", type: "button", "aria-expanded": "false", onclick: () => {
+    panel.hidden = !panel.hidden; toggle.setAttribute("aria-expanded", String(!panel.hidden)); if (!panel.hidden) input.focus(); } }, "🧮 Calculator");
+  document.body.append(panel, toggle);
+  window.openCalculator = () => { panel.hidden = false; toggle.setAttribute("aria-expanded", "true"); input.focus(); };
+})();
+
+function nextQuestion() { stashCard(); session.i += 1; showQuestion(); }
 
 function showOpen(item) {
   const q = item.q;
