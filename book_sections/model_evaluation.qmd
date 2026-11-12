@@ -1,4 +1,4 @@
-# X3. Model Evaluation {.unnumbered #model_evaluation}
+# X1. Model Evaluation {.unnumbered #model_evaluation}
 
 
 
@@ -285,7 +285,7 @@ autoplot(lm(Petal.Length ~ Sepal.Width+Species, data = iris), which = c(1,3))   
 
 #### QQ plots
 
-We have already seen QQ (Quantile-Quantile) plots. QQ plots compare the quantiles of the residuals, to the quantiles of a theoretical distribution (the normal distribution for linear models). Residuals follow their expected distribution if they fall largely on the 1:1 line. Deviations indicate departures from normality -- so curvature at the tails suggests heavy (big values are too big -- use a square root or log transformation) or light (too few big observations -- use a square or exponential transformation) tails, while an S-shape indicates skewness. We see for the model `lm(Petal.Length ~ Sepal.Width + Species, data = iris)`  that our large values are a bit too large. 
+We have already seen QQ (Quantile-Quantile) plots. QQ plots compare the quantiles of the residuals, to the quantiles of a theoretical distribution (the normal distribution for linear models). Residuals follow their expected distribution if they fall largely on the 1:1 line. Deviations indicate departures from normality -- a curve bending the same way at both ends suggests skew (which can often be fixed by transformation), while points pulling away from the line in opposite directions at the two ends suggest heavy or light tails (which transformations usually don't fix). We see for the model `lm(Petal.Length ~ Sepal.Width + Species, data = iris)`  that our large values are a bit too large. 
 
 ```{r} 
 #| label: fig-qq
@@ -362,7 +362,7 @@ Unlike  $R^2$ , the adjusted  $R^2$  can **decrease** as we add parameters, indi
 
 - **AIC penalizes the log-likelihood.** Specifically, AIC is calculated as:  
 $$2\times\left((k+1) - \ln(\widehat{L})\right)$$
-  where $k$  is the number of parameters in the model, and $ln(\widehat{L})$ is the log-likelihood of the model. A lower AIC indicates that the added parameter improves model fit. In general, a decrease in AIC of **at least 2** (approximately equivalent to a two-standard-error improvement) is considered evidence to prefer the model with more parameters. 
+  where $k$  is the number of parameters in the model (e.g. the slope and intercept), the `+1` accounts for the residual variance (which we also estimate), and $\ln(\widehat{L})$ is the log-likelihood of the model. A lower AIC indicates a model that better balnces fit and complexity. In general, a decrease in AIC of **at least 2** (approximately equivalent to a two-standard-error improvement when adding one parameter) is considered evidence to prefer the model with more parameters. 
   
 R is happy to calculate these values for us. The adjusted $R^2$ value is provided from the `summary()`function, and the `AIC()` function will return the AIC of your model. Even better, the `glance()` function in the `broom` package gives us these values and more.  
 

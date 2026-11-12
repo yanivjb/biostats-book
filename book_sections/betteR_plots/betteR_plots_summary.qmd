@@ -1,4 +1,4 @@
-## • X2. Better ggplots summary {.unnumbered #better_plots_summary}
+## • X4. Better ggplots summary {.unnumbered #better_plots_summary}
 
 
 

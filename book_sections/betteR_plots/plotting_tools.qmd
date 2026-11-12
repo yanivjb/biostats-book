@@ -1,4 +1,4 @@
-## • X2. Tools for BetteR plots {.unnumbered #plotting_tools} 
+## • X4. Tools for BetteR plots {.unnumbered #plotting_tools} 
 
 
 

@@ -1,0 +1,46 @@
+# Review for Exam 2 {.unnumbered}
+
+
+
+This [practice exam](https://docs.google.com/document/d/1vQdZ5z5ZC5hUeljr3cQgI0qD72XH7x0v/edit?usp=sharing&ouid=100526388399423353231&rtpof=true&sd=true) is adapted from my 2025 Applied Biostats exam.
+
+### Practice app
+
+Practice for Exam 2 (chapters 13–21, linear models through interactions). As before, my questions from the semester + AI generated versions of each. So you can chose - hyman written questions you've seen, AI written versions you have not, or a. mix.  I also included a review "chapter" of key ideas from Exam 1 that will show up on this exam. Like the exam, there's no code to write or run, but you may need to know about e.g. difference between `car::Anova` and  `anova`, how to interpret the `summary()` output etc...  I also will probaly assume you're familiriard with the headings from `broom::augment()` (e.g. `fitted` is $\hat{Y_i}$, `.resid` is $\hat{e_i}$...).
+
+---
+
+#### Non-AI version
+
+[Open the study guide full screen ↗](study_guide_exam2/index.html){target="_blank"} It's also down below.
+
+---
+
+#### AI version (Claude)
+
+[Open the Claude supported study guide ↗](https://claude.ai/artifact/6qyXueJZDfASwbZzcnCVFM){target="_blank"} Same questions, plus Claude: a tutor that talks you through questions you're stuck on, feedback on your written answers, new practice questions on demand, and a report on your strengths and weak spots. You need a (free) Claude account, and it uses your own Claude usage, only when you click.
+
+#### AI version (ChatGPT)
+
+I got a version of this going in [ChatGPT](https://chatgpt.com/g/g-691c034a72888191b509fc1f75c42b81-exam-2-prep). It doesn't allow for images, so it's missing some types of questions. But it does chat to you!
+
+---
+
+#### Use in-book
+
+```{=html}
+<iframe src="study_guide_exam2/index.html" title="Exam 2 study guide"
+        style="width:100%; height:85vh; border:1px solid #d5dccb; border-radius:10px;"></iframe>
+```
+
+## Relax
+
+Also, dont worry too much, it's just an exam.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(knitr)
+include_graphics("figs/fun_figs/relax.png")
+```

@@ -1,4 +1,4 @@
-# X2. Better Figures in R  {.unnumbered #betteR_plots}
+# X4. Better Figures in R  {.unnumbered #betteR_plots}
 
 
 ```{r setup, include=FALSE}

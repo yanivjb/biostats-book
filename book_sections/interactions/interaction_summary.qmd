@@ -497,7 +497,7 @@ Sometimes the impact of changing one variable depends on the value of another. S
 :::tutor
 
 
-Please interact with this custom chatbot ([**ChatGRPT link here**](https://chatgpt.com/g/g-690a6a2ef9c48191ab07696d60a694f4-interaction-tutor), [Gemini link here](https://gemini.google.com/gem/1lfaqYKjjJF0V9iTaf9lvpsC8JgBzLzAb?usp=sharin)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
+Please interact with this custom chatbot ([**ChatGRPT link here**](https://chatgpt.com/g/g-690a6a2ef9c48191ab07696d60a694f4-interaction-tutor), [Gemini link here](https://gemini.google.com/gem/1lfaqYKjjJF0V9iTaf9lvpsC8JgBzLzAb?usp=sharin)). I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
 

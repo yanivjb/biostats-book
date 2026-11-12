@@ -1,4 +1,4 @@
-## • X1. Transparent plots {.unnumbered #transparent_plots}
+## • X3. Transparent plots {.unnumbered #transparent_plots}
 
 
 

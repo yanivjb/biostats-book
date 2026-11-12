@@ -1,0 +1,1401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exam 2 Study Guide</title>
+<style>
+:root {
+  --bg: #f7f8f4;
+  --surface: #ffffff;
+  --surface-2: #eef2e6;
+  --text: #1f2a14;
+  --muted: #5b6650;
+  --border: #d5dccb;
+  --brand: #3a5f0b;
+  --brand-strong: #2c4808;
+  --brand-soft: #e3ecd2;
+  --on-brand: #ffffff;
+  --good: #1f7a3a;
+  --good-soft: #e1f3e6;
+  --bad: #b3261e;
+  --bad-soft: #fbe7e5;
+  --warn-soft: #fff4d6;
+  --focus: #8ab33a;
+  --code-bg: #f1f3ec;
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.05);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12160e; --surface: #1b2115; --surface-2: #232b1b; --text: #e7eddc; --muted: #a9b39b;
+    --border: #36402b; --brand: #8ab33a; --brand-strong: #a6cc55; --brand-soft: #2a3519; --on-brand: #12160e;
+    --good: #6fcf8a; --good-soft: #17301f; --bad: #f2948c; --bad-soft: #3a1c1a; --warn-soft: #3a3115;
+    --focus: #a6cc55; --code-bg: #232b1b; --shadow: none; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12160e; --surface: #1b2115; --surface-2: #232b1b; --text: #e7eddc; --muted: #a9b39b;
+  --border: #36402b; --brand: #8ab33a; --brand-strong: #a6cc55; --brand-soft: #2a3519; --on-brand: #12160e;
+  --good: #6fcf8a; --good-soft: #17301f; --bad: #f2948c; --bad-soft: #3a1c1a; --warn-soft: #3a3115;
+  --focus: #a6cc55; --code-bg: #232b1b; --shadow: none; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+a { color: var(--brand); }
+
+header.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--brand); color: var(--on-brand);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 16px;
+}
+header.bar h1 { font-size: 1.05rem; margin: 0; font-weight: 650; letter-spacing: .01em; flex: 1 1 auto; }
+header.bar nav { display: flex; gap: 4px; flex-wrap: wrap; }
+header.bar nav button {
+  background: transparent; border: 1px solid transparent; color: var(--on-brand);
+  padding: 6px 12px; border-radius: 999px; cursor: pointer; font-size: .95rem;
+}
+header.bar nav button[aria-current="page"] { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.35); }
+:root[data-theme="dark"] header.bar nav button[aria-current="page"] { background: rgba(0,0,0,.18); }
+main { max-width: 820px; margin: 0 auto; padding: 20px 16px 64px; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
+.step h2 { font-size: 1.05rem; margin: 0 0 4px; }
+.step p.sub { color: var(--muted); margin: 0 0 12px; font-size: .93rem; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1.5px solid var(--border); background: var(--surface); color: var(--text);
+  padding: 8px 14px; border-radius: 999px; cursor: pointer; line-height: 1.3; text-align: left;
+}
+.chip:hover { border-color: var(--brand); }
+.chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+.chip small { opacity: .8; }
+.chip.big { padding: 12px 18px; border-radius: 12px; }
+.chip.big strong { display: block; }
+.chip.big span { font-size: .88rem; opacity: .85; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.spacer { flex: 1; }
+
+.btn {
+  border: 1.5px solid var(--brand); background: var(--brand); color: var(--on-brand);
+  padding: 9px 18px; border-radius: 10px; cursor: pointer; font-weight: 600;
+}
+.btn:hover { background: var(--brand-strong); border-color: var(--brand-strong); }
+.btn.secondary { background: transparent; color: var(--brand); }
+.btn.secondary:hover { background: var(--brand-soft); }
+.btn.ghost { background: transparent; border-color: var(--border); color: var(--text); font-weight: 500; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.qmeta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--muted); font-size: .85rem; margin-bottom: 10px; }
+.tag { background: var(--surface-2); border-radius: 999px; padding: 2px 10px; }
+.roundbar { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; }
+.roundbar .progressline { flex: 1 1 auto; margin: 0; }
+.endbtn { padding: 5px 12px; font-size: .88rem; white-space: nowrap; }
+.progressline { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; margin: 0 0 14px; }
+.progressline > div { height: 100%; background: var(--brand); width: 0; transition: width .25s; }
+
+.qtext { margin: 0 0 14px; }
+.qtext p { margin: 0 0 10px; white-space: pre-wrap; }
+.qtext pre, .md pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; overflow-x: auto; margin: 0 0 10px; font-size: .9rem;
+}
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.md code, .qtext code { background: var(--code-bg); padding: 1px 4px; border-radius: 4px; font-size: .92em; }
+.md pre code, .qtext pre code { background: none; padding: 0; font-size: 1em; }
+.tablewrap { overflow-x: auto; margin: 0 0 12px; }
+table.data { border-collapse: collapse; font-size: .92rem; min-width: 50%; }
+table.data th, table.data td { border: 1px solid var(--border); padding: 4px 10px; text-align: left; }
+table.data th { background: var(--surface-2); }
+.figs { display: grid; gap: 10px; margin: 0 0 14px; }
+.figs img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: zoom-in; }
+
+.options { display: grid; gap: 8px; margin: 0 0 14px; }
+.opt {
+  display: flex; gap: 10px; align-items: flex-start; text-align: left;
+  border: 1.5px solid var(--border); background: var(--surface); border-radius: 10px;
+  padding: 10px 12px; cursor: pointer; width: 100%;
+}
+.opt:hover:not(:disabled) { border-color: var(--brand); }
+.opt .key { flex: 0 0 auto; font-weight: 700; color: var(--brand); min-width: 1.4em; }
+.opt[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-soft); }
+.opt.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.is-right { border-color: var(--good); background: var(--good-soft); }
+.opt.is-missed { border-color: var(--good); border-style: dashed; }
+.opt:disabled { cursor: default; }
+.opt.struck { opacity: .5; text-decoration: line-through; }
+.optlist { margin: 0 0 12px; padding-left: 0; list-style: none; }
+.optlist li { margin: 4px 0; }
+.optlist b { color: var(--brand); }
+
+.matchrow { display: flex; gap: 10px; align-items: center; margin: 6px 0; flex-wrap: wrap; }
+.matchrow label { font-weight: 600; min-width: 4.5em; }
+.matchrow select { min-width: 0; flex: 1 1 260px; max-width: 100%; padding: 7px 8px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); }
+.matchrow.is-wrong select { border-color: var(--bad); background: var(--bad-soft); }
+.matchrow.is-right select { border-color: var(--good); background: var(--good-soft); }
+.numrow { display: flex; gap: 10px; align-items: center; margin: 6px 0; flex-wrap: wrap; }
+.numrow input { width: 12em; padding: 7px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); }
+.numrow.is-wrong input { border-color: var(--bad); background: var(--bad-soft); }
+.numrow.is-right input { border-color: var(--good); background: var(--good-soft); }
+
+textarea.answer {
+  width: 100%; min-height: 150px; padding: 10px 12px; border-radius: 10px;
+  border: 1.5px solid var(--border); background: var(--surface); resize: vertical;
+}
+.counter { color: var(--muted); font-size: .88rem; }
+.counter.ok { color: var(--good); font-weight: 600; }
+
+.feedback { border-radius: 12px; padding: 14px 16px; margin: 14px 0; border: 1px solid var(--border); }
+.feedback.good { background: var(--good-soft); border-color: var(--good); }
+.feedback.bad { background: var(--bad-soft); border-color: var(--bad); }
+.feedback.info { background: var(--surface-2); }
+.feedback.hint { background: var(--warn-soft); }
+.feedback h3 { margin: 0 0 6px; font-size: 1rem; }
+.feedback p { margin: 0 0 8px; }
+.feedback p:last-child { margin-bottom: 0; }
+details { margin: 8px 0; }
+details summary { cursor: pointer; color: var(--brand); font-weight: 600; }
+.md p { margin: 0 0 8px; }
+.md ul, .md ol { margin: 0 0 8px; padding-left: 1.3em; }
+.md li { margin: 2px 0; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+.stat .n { font-size: 1.6rem; font-weight: 700; color: var(--brand); }
+.stat .l { color: var(--muted); font-size: .85rem; }
+.meter { display: grid; grid-template-columns: minmax(0, 1fr) 120px 3.5em; gap: 10px; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .93rem; }
+.meter:last-child { border-bottom: 0; }
+.meter .track { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.meter .fill { height: 100%; background: var(--brand); }
+.meter .pct { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: .88rem; }
+.toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 8px 16px; border-radius: 999px; font-size: .9rem; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+.zoom { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: flex; align-items: center; justify-content: center; z-index: 50; padding: 16px; cursor: zoom-out; }
+.zoom img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 6px; }
+.selfrate { margin-top: 10px; }
+.tutor { margin-top: 14px; border: 1.5px solid var(--brand); border-radius: 12px; padding: 12px 14px; background: var(--surface); }
+.thead { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.tclose { padding: 4px 10px; font-size: .85rem; }
+.tlog { display: grid; gap: 8px; max-height: 420px; overflow-y: auto; }
+.msg { padding: 8px 12px; border-radius: 10px; max-width: 92%; }
+.msg.me { justify-self: end; background: var(--brand-soft); white-space: pre-wrap; }
+.msg.ai { justify-self: start; background: var(--surface-2); }
+.msg.ai .md p:last-child, .msg.ai .md ul:last-child { margin-bottom: 0; }
+.msg.pending { color: var(--muted); font-style: italic; }
+.tchips { margin: 8px 0 0; }
+.tchips .chip { padding: 5px 12px; font-size: .88rem; }
+.trow { display: flex; gap: 8px; align-items: flex-end; margin-top: 8px; }
+.trow textarea { flex: 1 1 auto; min-width: 0; padding: 8px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); resize: vertical; }
+.tnote { margin: 6px 0 0; }
+.aistrip { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin: 10px 0 0; }
+[hidden] { display: none !important; }
+.rate { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: .92rem; color: var(--muted); }
+.rate .thumb { font-size: 1.05rem; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--surface); cursor: pointer; }
+.rate .thumb[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-soft); }
+.rate .more { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rate .chip { padding: 4px 10px; font-size: .85rem; }
+.rate .more input { flex: 1 1 220px; min-width: 0; padding: 6px 10px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text); }
+@media (max-width: 520px) {
+  header.bar h1 .long { display: none; }
+  main { padding: 14px 12px 56px; }
+  .card { padding: 16px; }
+  .meter { grid-template-columns: minmax(0, 1fr) 70px 3em; }
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <h1><span class="long">Applied Biostats · </span>Exam 2 study guide</h1>
+  <nav aria-label="Main">
+    <button data-nav="setup">Quiz me</button>
+    <button data-nav="progress">My progress</button>
+    <button data-nav="report" hidden>Study report</button>
+    <button data-nav="about">How to use this</button>
+  </nav>
+</header>
+<main id="app" aria-live="polite"></main>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="data.js"></script>
+<script>
+// Paste the Google Apps Script web app URL here to turn on "Submit for feedback"
+// for explain-it answers and to collect question ratings (thumbs up/down).
+// Leave it empty and nothing is ever sent anywhere.
+const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbygLFG8LzP3uq1yXq0G-1zAf12rbseMTkqJuOzBMRAxqS5ByVpEDYe92RlraqaB3Y5wtg/exec";
+
+// Paste the link to the course tutor bot (a ChatGPT GPT or Gemini Gem) here. "Ask the tutor"
+// buttons then copy the question and open the bot in a new tab. Leave it empty to just copy.
+const TUTOR_URL = "https://chatgpt.com/g/g-691c034a72888191b509fc1f75c42b81-exam-2-prep";
+
+const DATA = window.STUDY_DATA;
+const META = DATA.meta.chapters;
+const STORE_KEY = "biostats-study-guide-exam2-v1";
+const OPEN_MIN_SECONDS = 60;
+
+const store = loadStore();
+let setup = { scope: null, chapters: [], within: "random", concepts: [], style: null, source: "orig", length: 10 };
+let session = null;
+
+function loadStore() {
+  let s = {};
+  try { s = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch (e) { s = {}; }
+  s.results = s.results || {};
+  s.drafts = s.drafts || {};
+  s.ratings = s.ratings || {};
+  if (!s.code) s.code = Math.random().toString(36).slice(2, 8);
+  return s;
+}
+function saveStore() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) { /* storage unavailable */ }
+}
+
+function reveal(secret) {
+  const key = "clarkia";
+  const raw = atob(secret);
+  const bytes = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function askTutor(text) {
+  // Copy before opening the new tab: browsers refuse clipboard writes from a page that has lost focus.
+  const done = () => toast(TUTOR_URL ? "Copied. Paste it into the tutor (Ctrl/Cmd+V)." : "Copied. Paste it into the course tutor bot.");
+  const fail = () => toast("Couldn't copy automatically. Select the question text and copy it.");
+  try { (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(done, fail); } catch (e) { fail(); }
+  if (TUTOR_URL) window.open(TUTOR_URL, "_blank", "noopener");
+}
+
+function sendAnswer(row) {
+  if (!SUBMIT_URL) return Promise.resolve();
+  try {
+    return fetch(SUBMIT_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(Object.assign({ student_code: store.code }, row))
+    });
+  } catch (e) { return Promise.reject(e); }
+}
+
+// One anonymous row per finished question (which question, right or wrong, time), so the instructor can see
+// how the study guide is used. Sent only if SUBMIT_URL is set (the book version), never with a name.
+function logActivity(q, row) {
+  if (!SUBMIT_URL) return;
+  const base = { kind: "activity", question_id: q.id, original_id: q.variant_of || q.id,
+    version: q.generated ? "Claude-written" : q.variant_of ? "AI version" : "original",
+    chapter: "ch" + q.chapters.join(",ch"), concepts: (q.concepts || []).join("; ") };
+  sendAnswer(Object.assign(base, row)).catch(() => {});
+}
+function secondsSince(t0) { return Math.min(Math.round((Date.now() - t0) / 1000), 1800); }
+
+// Thumbs up/down on a question, with optional reasons. Sent to the sheet only if SUBMIT_URL is set.
+const RATE_REASONS = ["Confusing wording", "Answer key looks wrong", "Figure unclear", "Too easy", "Too hard"];
+function rateBox(q, outcome) {
+  const prior = store.ratings[q.id];
+  const base = { kind: "rating", question_id: q.id, original_id: q.variant_of || q.id, version: q.generated ? "Claude-written" : q.variant_of ? "AI version" : "original",
+    chapter: q.chapters.join(","), outcome: outcome || "" };
+  const box = el("div", { class: "rate" });
+  function save(r) { store.ratings[q.id] = r; saveStore(); }
+  function draw(choice) {
+    box.innerHTML = "";
+    box.append(el("span", { text: "Was this a good question?" }));
+    const up = el("button", { class: "thumb", "aria-pressed": choice === "up" ? "true" : "false", "aria-label": "Thumbs up", title: "Good question", text: "👍" });
+    const down = el("button", { class: "thumb", "aria-pressed": choice === "down" ? "true" : "false", "aria-label": "Thumbs down", title: "Something's off", text: "👎" });
+    up.onclick = () => { if (choice === "up") return; sendAnswer(Object.assign({ rating: "up" }, base)); save("up"); toast("Thanks!"); draw("up"); };
+    down.onclick = () => { if (choice === "down") return; sendAnswer(Object.assign({ rating: "down" }, base)); save("down"); draw("down", true); };
+    box.append(up, down);
+    if (choice === "down" && arguments[1]) {
+      const picked = new Set();
+      const note = el("input", { type: "text", placeholder: "What's off? (optional)", "aria-label": "What's off? (optional)", maxlength: "500" });
+      const send = el("button", { class: "btn ghost", onclick: () => {
+        if (!picked.size && !note.value.trim()) { draw("down"); return; }
+        sendAnswer(Object.assign({ rating: "comment", reason: [...picked].join("; "), comment: note.value.trim() }, base));
+        toast("Thanks, that helps!"); draw("down");
+      } }, "Send");
+      box.append(el("div", { class: "more" },
+        RATE_REASONS.map(r => { const b = el("button", { class: "chip", "aria-pressed": "false", text: r });
+          b.onclick = () => { picked.has(r) ? picked.delete(r) : picked.add(r); b.setAttribute("aria-pressed", picked.has(r) ? "true" : "false"); }; return b; }),
+        note, send));
+    } else if (choice) box.append(el("span", { class: "small", text: choice === "up" ? "Thanks!" : "Thanks for flagging it." }));
+  }
+  draw(prior || null);
+  return box;
+}
+
+const app = document.getElementById("app");
+function el(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === null || v === undefined || v === false) continue;
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k === "html") e.innerHTML = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()) if (kid !== null && kid !== undefined && kid !== false) e.append(kid instanceof Node ? kid : document.createTextNode(kid));
+  return e;
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function inline(s) {
+  return esc(s)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[\s(])\*([^*\s][^*]*)\*(?=[\s).,;:!?]|$)/g, "$1<em>$2</em>");
+}
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+}
+function shuffle(a) {
+  const b = a.slice();
+  for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+  return b;
+}
+function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+// Question text: tables ("a | b | c" lines), code-looking lines, and paragraphs.
+// A sentence that mentions code ("A script contains x <- 3:5 and ...") is prose, not a code block.
+function isProseLine(l) {
+  const t = l.trim();
+  if (!/^[A-Z]/.test(t)) return false;
+  const words = t.split(/\s+/);
+  if (words.length < 6) return false;
+  const plain = words.filter(w => /^[A-Za-z']+[,.:;?!]?$/.test(w)).length;
+  return /^[A-Z][a-z']*,?\s+[a-z(]/.test(t) || plain >= 0.6 * words.length;
+}
+function isCodeLine(l) {
+  if (isProseLine(l)) return false;
+  return /<-|\|>|%>%/.test(l) || /^\s{2,}\S/.test(l) || /^(library|ggplot|install\.packages|setwd)\(/.test(l.trim())
+    || /^#/.test(l.trim()) || /^[\w.]+\(.*\)\s*(\+|\|>)?$/.test(l.trim());
+}
+function renderText(text) {
+  const box = el("div", { class: "qtext" });
+  const lines = text.split("\n");
+  let i = 0, para = [];
+  const flush = () => { if (para.length) { box.append(el("p", { html: inline(para.join("\n")) })); para = []; } };
+  while (i < lines.length) {
+    const l = lines[i];
+    if ((l.match(/ \| /g) || []).length >= 1 && (lines[i + 1] || "").includes(" | ")) {
+      flush();
+      const rows = [];
+      while (i < lines.length && lines[i].includes(" | ")) { rows.push(lines[i].split(" | ").map(c => c.trim())); i++; }
+      const t = el("table", { class: "data" });
+      t.append(el("thead", {}, el("tr", {}, rows[0].map(c => el("th", { text: c })))));
+      t.append(el("tbody", {}, rows.slice(1).map(r => el("tr", {}, r.map(c => el("td", { text: c }))))));
+      box.append(el("div", { class: "tablewrap" }, t));
+      continue;
+    }
+    // Lettered lines ("a) x <- 4") stay one list: the code part goes inline.
+    const lettered = l.trim().match(/^(\(?[a-z]\))\s+(.+)$/);
+    if (lettered) {
+      const rest = lettered[2];
+      const looksCode = !isProseLine(rest) && (/<-|\|>|%>%|[\w.]\(/.test(rest)) && !rest.includes("`");
+      para.push(looksCode ? lettered[1] + " `" + rest + "`" : l.trim()); i++; continue;
+    }
+    if (isCodeLine(l)) {
+      flush();
+      const code = [];
+      while (i < lines.length && lines[i].trim() !== "" && (isCodeLine(lines[i]) || /^\s/.test(lines[i]) || /^[)\]}]/.test(lines[i].trim()))) { code.push(lines[i]); i++; }
+      box.append(el("pre", {}, el("code", { text: code.join("\n") })));
+      continue;
+    }
+    if (l.trim() === "") { flush(); i++; continue; }
+    para.push(l); i++;
+  }
+  flush();
+  return box;
+}
+
+// Small markdown renderer for the open-ended bank (bullets, numbers, code fences, bold, italics).
+function renderMd(md) {
+  const box = el("div", { class: "md" });
+  const indents = md.split("\n").filter(l => /^\s*([-*]|\d+\.)\s+/.test(l)).map(l => l.match(/^\s*/)[0].length);
+  const base = indents.length ? Math.min(...indents) : 0;
+  const lines = md.split("\n").map(l => l.slice(0, base).trim() === "" ? l.slice(base) : l.trimStart());
+  let html = "", stack = [], inCode = false, code = [], para = [], fence = 0, blank = false;
+  const closeLists = (depth) => { while (stack.length > depth) html += "</li></" + stack.pop().type + ">"; };
+  const flushPara = () => { if (para.length) { html += "<p>" + inline(para.join(" ")) + "</p>"; para = []; } };
+  for (const raw of lines) {
+    if (raw.trim().startsWith("```")) {
+      if (inCode) { html += "<pre><code>" + esc(code.join("\n")) + "</code></pre>"; code = []; inCode = false; }
+      else { flushPara(); inCode = true; fence = raw.match(/^\s*/)[0].length; }
+      continue;
+    }
+    if (inCode) { code.push(raw.slice(0, fence).trim() === "" ? raw.slice(fence) : raw.trimStart()); continue; }
+    const m = raw.match(/^(\s*)([-*]|\d+\.)\s+(.*)$/);
+    // A blank line followed by unindented text ends any open list.
+    if (!m && blank && raw.trim() !== "" && !/^\s/.test(raw)) closeLists(0);
+    blank = raw.trim() === "";
+    if (m) {
+      flushPara();
+      const depth = Math.floor(m[1].length / 2) + 1;
+      const type = /\d/.test(m[2]) ? "ol" : "ul";
+      if (stack.length < depth) {
+        while (stack.length < depth) { html += "<" + type + "><li>"; stack.push({ type }); }
+      } else {
+        closeLists(depth);
+        if (stack.length && stack[stack.length - 1].type !== type) { closeLists(depth - 1); html += "<" + type + "><li>"; stack.push({ type }); }
+        else html += "</li><li>";
+      }
+      html += inline(m[3]);
+      continue;
+    }
+    if (raw.trim() === "") { flushPara(); continue; }
+    if (stack.length) { html += " " + inline(raw.trim()); continue; }
+    para.push(raw.trim());
+  }
+  flushPara(); closeLists(0);
+  box.innerHTML = html;
+  return box;
+}
+
+function figures(images) {
+  if (!images || !images.length) return null;
+  return el("div", { class: "figs" }, images.map(src => el("img", {
+    src: imgSrc(src), alt: "Figure for this question", loading: "lazy",
+    onclick: () => { const z = el("div", { class: "zoom", onclick: () => z.remove() }, el("img", { src: imgSrc(src), alt: "" })); document.body.append(z); }
+  })));
+}
+
+function imgSrc(name) { return (window.STUDY_IMAGES && window.STUDY_IMAGES[name]) || "images/" + name; }
+function chapterName(n) { return META[String(n)].name; }
+
+// ---------- navigation ----------
+function setNav(view) {
+  document.querySelectorAll("[data-nav]").forEach(b => b.setAttribute("aria-current", b.dataset.nav === view ? "page" : "false"));
+}
+document.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click", () => {
+  if (b.dataset.nav === "setup") showSetup();
+  if (b.dataset.nav === "progress") showProgress();
+  if (b.dataset.nav === "report") showReport();
+  if (b.dataset.nav === "about") showAbout();
+}));
+
+// ---------- setup ----------
+function showSetup() {
+  setNav("setup"); session = null; app.innerHTML = "";
+  const step = (title, sub, ...body) => el("section", { class: "card step" }, el("h2", { text: title }), sub ? el("p", { class: "sub", text: sub }) : null, ...body);
+  const toggle = (pressed, label, onclick, cls) => el("button", { class: "chip" + (cls ? " " + cls : ""), "aria-pressed": pressed ? "true" : "false", onclick }, label);
+
+  app.append(step("1. What do you want to practice?", null,
+    el("div", { class: "choices" },
+      toggle(setup.scope === "all", el("span", {}, el("strong", { text: "Random from everything" }), el("span", { text: "Chapters 13–21 plus Exam 1 review, mixed" })), () => { setup.scope = "all"; showSetup(); }, "big"),
+      toggle(setup.scope === "chapters", el("span", {}, el("strong", { text: "Pick chapters" }), el("span", { text: "Focus on one or more chapters" })), () => { setup.scope = "chapters"; showSetup(); }, "big"),
+      EXAM.length ? toggle(setup.scope === "exam", el("span", {}, el("strong", { text: "Practice exam 1" }), el("span", { text: EXAM.length + " questions from the practice exam, in order" })), () => { setup.scope = "exam"; setup.style = "check"; setup.source = "orig"; setup.length = 0; showSetup(); }, "big") : null)));
+
+  if (setup.scope === "chapters") {
+    app.append(step("2. Which chapters?", "Pick as many as you like.",
+      el("div", { class: "choices" }, Object.keys(META).map(k => toggle(setup.chapters.includes(+k),
+        el("span", {}, el("small", { text: k + " · " }), META[k].name),
+        () => { const n = +k; setup.chapters = setup.chapters.includes(n) ? setup.chapters.filter(c => c !== n) : setup.chapters.concat(n); setup.concepts = setup.concepts.filter(c => setup.chapters.includes(c.ch)); showSetup(); })))));
+    if (setup.chapters.length) {
+      const conceptChips = setup.within === "concepts" ? el("div", { class: "choices", style: "margin-top:10px" },
+        setup.chapters.slice().sort((a, b) => a - b).flatMap(ch => META[ch].concepts.map(c => {
+          const on = setup.concepts.some(x => x.ch === ch && x.name === c);
+          return toggle(on, el("span", {}, setup.chapters.length > 1 ? el("small", { text: ch + " · " }) : null, c), () => {
+            setup.concepts = on ? setup.concepts.filter(x => !(x.ch === ch && x.name === c)) : setup.concepts.concat({ ch, name: c });
+            showSetup();
+          });
+        }))) : null;
+      app.append(step("3. Within those chapters", null,
+        el("div", { class: "choices" },
+          toggle(setup.within === "random", "Random", () => { setup.within = "random"; showSetup(); }),
+          toggle(setup.within === "concepts", "By concept", () => { setup.within = "concepts"; showSetup(); })),
+        conceptChips));
+    }
+  }
+
+  const ready = setup.scope === "all" || setup.scope === "exam" || (setup.scope === "chapters" && setup.chapters.length && (setup.within === "random" || setup.concepts.length));
+  if (ready && setup.scope !== "exam") {
+    const n = setup.scope === "all" ? 2 : 4;
+    app.append(step(n + ". Question style", null,
+      el("div", { class: "choices" },
+        toggle(setup.style === "check", el("span", {}, el("strong", { text: "Check my answer" }), el("span", { text: "Multiple choice, matching, numbers" })), () => { setup.style = "check"; showSetup(); }, "big"),
+        toggle(setup.style === "explain", el("span", {}, el("strong", { text: "Explain it" }), el("span", { text: "Write an answer, then compare to key ideas" })), () => { setup.style = "explain"; showSetup(); }, "big"),
+        toggle(setup.style === "mix", el("span", {}, el("strong", { text: "Mix" }), el("span", { text: "Mostly checked, with an explain-it every few" })), () => { setup.style = "mix"; showSetup(); }, "big"))));
+  }
+  if (ready && setup.style) {
+    let n = setup.scope === "exam" ? 2 : setup.scope === "all" ? 3 : 5;
+    if (setup.style !== "explain" && setup.scope !== "exam") {
+      app.append(step(n + ". Which versions?", "Every question has an original (from the course) and new AI-written versions that test the same idea.",
+        el("div", { class: "choices" },
+          toggle(setup.source === "orig", el("span", {}, el("strong", { text: "Course originals" }), el("span", { text: "Yaniv's homework, quiz and book questions" })), () => { setup.source = "orig"; showSetup(); }, "big"),
+          toggle(setup.source === "new", el("span", {}, el("strong", { text: "New versions" }), el("span", { text: "AI-written replacements for each question" })), () => { setup.source = "new"; showSetup(); }, "big"),
+          toggle(setup.source === "mix", el("span", {}, el("strong", { text: "Mix" }), el("span", { text: "About half originals, half new versions" })), () => { setup.source = "mix"; showSetup(); }, "big"))));
+      n += 1;
+    }
+    const pool = buildPool(false);
+    const total = pool.check.length + pool.open.length;
+    app.append(step(n + ". How many?", total + " questions match your choices.",
+      el("div", { class: "choices" }, [5, 10, 20, 0].map(k => toggle(setup.length === k, k ? String(k) : setup.scope === "exam" ? "All " + EXAM.length : "Until I stop", () => { setup.length = k; showSetup(); }))),
+      el("div", { class: "row", style: "margin-top:16px" },
+        el("button", { class: "btn", disabled: total ? null : true, onclick: () => startSession(buildPool(false)) }, "Start"),
+        missesCount() ? el("button", { class: "btn secondary", onclick: () => startSession(buildPool(true)) }, "Only questions I've missed (" + missesCount() + ")") : null)));
+  }
+}
+
+function inScope(item) {
+  if (setup.scope === "exam" || item.set) return setup.scope === "exam" && item.set === "exam1";
+  if (setup.scope === "all") return true;
+  const chs = item.chapters.filter(c => setup.chapters.includes(c));
+  if (!chs.length) return false;
+  if (setup.within === "random") return true;
+  return setup.concepts.some(x => item.chapters.includes(x.ch) && item.concepts.includes(x.name));
+}
+function isMiss(id) { const r = store.results[id]; return !!(r && r.last && !["first", "yes", "recovered"].includes(r.last)); }
+const BANK = DATA.bank.filter(q => !q.variant_of);
+const EXAM = BANK.filter(q => q.set === "exam1");
+function similarFor(q) {
+  const root = q.variant_of || q.id;
+  const pool = DATA.bank.filter(x => (x.variant_of === root || x.id === root) && x.id !== q.id && !session.used.has(x.id));
+  if (!pool.length) return null;
+  const fresh = pool.filter(x => !store.results[x.id]);
+  const from = fresh.length ? fresh : pool;
+  return from[Math.floor(Math.random() * from.length)];
+}
+function versionsOf(q) {
+  const root = q.variant_of || q.id;
+  return DATA.bank.filter(x => (x.variant_of === root || x.id === root) && x.id !== q.id);
+}
+function pickVersion(list) {
+  if (!list.length) return null;
+  const unused = list.filter(x => !session || !session.used || !session.used.has(x.id));
+  const pool = unused.length ? unused : list;
+  const fresh = pool.filter(x => !store.results[x.id]);
+  const from = fresh.length ? fresh : pool;
+  return from[Math.floor(Math.random() * from.length)];
+}
+function asItem(q) {
+  return q.variant_of ? { kind: "check", q, alt: true, root: q.variant_of } : { kind: "check", q };
+}
+function chooseSource(q) {
+  const useNew = setup.source === "new" || (setup.source === "mix" && Math.random() < 0.5);
+  if (!useNew) return q;
+  const vs = DATA.bank.filter(x => x.variant_of === q.id);
+  const fresh = vs.filter(x => !store.results[x.id]);
+  const from = fresh.length ? fresh : vs;
+  return from.length ? from[Math.floor(Math.random() * from.length)] : q;
+}
+function missesCount() { return BANK.concat(DATA.open).filter(q => isMiss(q.id)).length; }
+function buildPool(onlyMisses) {
+  const ok = q => inScope(q) && (!onlyMisses || isMiss(q.id));
+  return {
+    check: setup.style === "explain" ? [] : BANK.filter(ok),
+    open: setup.style === "check" ? [] : DATA.open.filter(ok)
+  };
+}
+
+function startSession(pool) {
+  let check = setup.scope === "exam" ? pool.check.slice().sort((a, b) => a.id < b.id ? -1 : 1) : shuffle(pool.check).map(chooseSource), open = shuffle(pool.open);
+  const want = setup.length || Infinity;
+  let list = [];
+  if (setup.style === "mix") {
+    while (list.length < want && (check.length || open.length)) {
+      if ((list.length + 1) % 4 === 0 && open.length) list.push({ kind: "open", q: open.shift() });
+      else if (check.length) list.push(asItem(check.shift()));
+      else list.push({ kind: "open", q: open.shift() });
+    }
+  } else {
+    list = check.map(asItem).concat(open.map(q => ({ kind: "open", q }))).slice(0, want === Infinity ? undefined : want);
+  }
+  // A question whose stem gives away another's answer goes after it (or alone).
+  const pos = id => list.findIndex(x => (x.q.variant_of || x.q.id) === id);
+  for (let i = 0; i < list.length; i++) {
+    const r = list[i].q.reveals;
+    if (r) { const j = pos(r); if (j > i) { const [it] = list.splice(i, 1); list.splice(j, 0, it); i--; } }
+  }
+  if (!list.length) { toast("No questions match. Try different choices."); return; }
+  session = { list, i: 0, used: new Set(list.map(x => x.q.id)), tally: { first: 0, retry: 0, revealed: 0, open: 0, recovered: 0 } };
+  showQuestion();
+}
+
+// ---------- question views ----------
+function header(item) {
+  const q = item.q;
+  return [
+    el("div", { class: "roundbar" },
+      el("div", { class: "progressline" }, el("div", { style: "width:" + Math.round(100 * session.i / session.list.length) + "%" })),
+      el("button", { class: "btn ghost endbtn", onclick: endRound, title: "Stop this round and see how you did" }, "End round")),
+    el("div", { class: "qmeta" },
+      el("span", { text: "Question " + (session.i + 1) + " of " + session.list.length }),
+      item.similar ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "Similar question" })
+        : item.alt ? el("span", { class: "tag", style: "background:var(--brand-soft);color:var(--brand-strong);font-weight:600", text: "New version" })
+        : q.generated ? el("span", { class: "tag", style: "background:var(--warn-soft);font-weight:600", title: "Not reviewed by the instructor. If something looks off, flag it with 👎.", text: "Written by Claude" }) : null,
+      q.set ? el("span", { class: "tag", style: "font-weight:600", text: "Practice exam · Q" + (+q.id.slice(-2)) }) : null,
+      el("span", { class: "tag", text: q.chapters.map(c => c + " · " + chapterName(c)).join(", ") }),
+      q.concepts.map(c => el("span", { class: "tag", text: c })))
+  ];
+}
+
+function showQuestion() {
+  setNav("setup"); app.innerHTML = "";
+  if (session.i >= session.list.length) return showSummary();
+  const item = session.list[session.i];
+  window.scrollTo({ top: 0 });
+  if (item.kind === "open") return showOpen(item);
+  return showCheck(item);
+}
+
+function record(id, outcome, extra) {
+  const r = store.results[id] || { seen: 0 };
+  r.seen += 1; r.last = outcome; r.when = Date.now();
+  Object.assign(r, extra || {});
+  store.results[id] = r; saveStore();
+}
+
+function showCheck(item) {
+  const q = item.q, s = q.plain || reveal(q.secret);
+  const st = { attempts: 0, firstChoice: null, usedHint: false, done: false, revealed: false, struck: new Set(), locked: {}, t0: Date.now() };
+  const card = el("section", { class: "card" }, header(item), renderText(q.question), figures(q.images));
+  const answerBox = el("div");
+  const fb = el("div");
+  const actions = el("div", { class: "row" });
+  const aiBox = el("div");
+  card.append(answerBox, fb, actions, aiBox);
+  app.append(card);
+  aiRefresh = () => drawActions();
+
+  let selected = new Set(), matchSel = {}, numInputs = [], shortBox = null;
+
+  function correctText() {
+    if (q.type === "numeric" || q.type === "short") return s.shown;
+    if (q.type === "match") return q.items.map(n => n + "-" + s.answer[n]).join(", ");
+    return s.answer.join(", ");
+  }
+  function aiContext() {
+    const opts = (q.options || []).map(o => o.key + ") " + o.text).join("\n");
+    const why = s.why ? Object.keys(s.why).map(k => k + ") " + s.why[k].join(" ")).join("\n") : "";
+    const key = "Correct answer: " + correctText() + "\nExplanation: " + s.explanation +
+      (why ? "\nWhy the wrong options are wrong:\n" + why : "") + ((s.general || []).length ? "\nCommon mistakes: " + s.general.join(" ") : "");
+    return AI_RULES + "\n\nTHE QUESTION the student is working on (" + q.chapters.map(c => "chapter " + c).join(", ") + "; concepts: " + q.concepts.join(", ") + "):\n" +
+      q.question.trim() + (opts ? "\nOptions:\n" + opts : "") + (q.type === "match" ? "\nItems to match: " + q.items.join(", ") : "") +
+      (q.images && q.images.length ? (figureBlobs(q).length ? "\n(The question's figure is attached as an image.)" : "\n(The question has a figure you can't see; ask the student to describe it if needed.)") : "") +
+      "\n\nThe student's first answer: " + (st.firstChoice || "(none yet)") + "; attempts so far: " + st.attempts + "." +
+      (st.done
+        ? "\nThe student has FINISHED this question and has seen the answer and explanation.\n" + key
+        : "\nThe student is STILL WORKING on it and has NOT seen the answer. Do not reveal the correct answer or say which option is right, unless they explicitly ask you to reveal it. Guide them with questions.\nTUTOR-ONLY KEY:\n" + key);
+  }
+  function openTutor(firstAsk) {
+    const right = st.done && st.outcome === "first";
+    tutorPanel(aiBox, { title: "Tutor", q, context: aiContext, tier: "quick", firstAsk,
+      chips: st.done
+        ? (right ? ["Check that I really understand this", "Give me a harder example"] : ["Why was my answer wrong?", "Explain the right answer simply", "Give me a similar example to try"])
+        : ["Give me a nudge (no answer)", "What is this question really asking?"] });
+  }
+
+  function drawAnswer() {
+    answerBox.innerHTML = "";
+    if (q.type === "mc" || q.type === "tf" || q.type === "multi") {
+      if (q.type === "multi") answerBox.append(el("p", { class: "muted small", text: "Select all that apply." }));
+      answerBox.append(el("div", { class: "options", role: q.type === "multi" ? "group" : "radiogroup" }, q.options.map(o => {
+        const b = el("button", { class: "opt", "aria-pressed": selected.has(o.key) ? "true" : "false", "data-key": o.key },
+          el("span", { class: "key", text: o.key }), el("span", { html: inline(o.text) }));
+        if (st.struck.has(o.key)) { b.classList.add("struck"); b.disabled = true; }
+        if (st.done) b.disabled = true;
+        b.addEventListener("click", () => {
+          if (q.type === "multi") { selected.has(o.key) ? selected.delete(o.key) : selected.add(o.key); }
+          else { selected = new Set([o.key]); }
+          drawAnswer(); drawActions();
+        });
+        return b;
+      })));
+    } else if (q.type === "match") {
+      answerBox.append(el("ul", { class: "optlist" }, q.options.map(o => el("li", {}, el("b", { text: o.key + ") " }), el("span", { html: inline(o.text) })))));
+      q.items.forEach(n => {
+        const sel = el("select", { "aria-label": "Answer for " + n, disabled: st.done || st.locked[n] ? true : null },
+          el("option", { value: "", text: "Choose…" }), q.options.map(o => el("option", { value: o.key, text: o.key + ") " + o.text.slice(0, 80) })));
+        sel.value = matchSel[n] || "";
+        sel.addEventListener("change", () => { matchSel[n] = sel.value; drawActions(); });
+        answerBox.append(el("div", { class: "matchrow", "data-item": n }, el("label", { text: "Item " + n }), sel));
+      });
+    } else if (q.type === "numeric") {
+      numInputs = [];
+      const parts = q.parts.length ? q.parts : [""];
+      parts.forEach((p, i) => {
+        const inp = el("input", { type: "text", inputmode: "decimal", placeholder: "e.g. 0.25 or 1/4", "aria-label": p || "Your answer" });
+        inp.addEventListener("input", drawActions);
+        inp.addEventListener("keydown", e => { if (e.key === "Enter") check(); });
+        numInputs.push(inp);
+        answerBox.append(el("div", { class: "numrow" }, p ? el("label", { text: p }) : null, inp));
+      });
+    } else if (q.type === "short") {
+      shortBox = el("textarea", { class: "answer", placeholder: "Type your answer…", style: "min-height:90px" });
+      shortBox.addEventListener("input", drawActions);
+      answerBox.append(shortBox);
+    }
+  }
+
+  function canCheck() {
+    if (st.done) return false;
+    if (q.type === "mc" || q.type === "tf" || q.type === "multi") return selected.size > 0;
+    if (q.type === "match") return q.items.every(n => matchSel[n]);
+    if (q.type === "numeric") return numInputs.every(i => i.value.trim() !== "");
+    if (q.type === "short") return shortBox && wordCount(shortBox.value) >= 2;
+    return false;
+  }
+
+  function drawActions() {
+    actions.innerHTML = "";
+    if (!st.done) {
+      actions.append(el("button", { class: "btn", disabled: canCheck() ? null : true, onclick: check }, q.type === "short" ? "Show the answer" : "Check"));
+      if (q.hint && !st.usedHint) actions.append(el("button", { class: "btn ghost", onclick: () => { st.usedHint = true; fb.prepend(el("div", { class: "feedback hint" }, el("p", {}, el("strong", { text: "Hint: " }), q.hint))); drawActions(); } }, "Hint"));
+      if (st.attempts > 0) actions.append(el("button", { class: "btn secondary", onclick: showAnswer }, "Show me the answer"));
+      const simNow = st.attempts > 0 ? similarFor(q) : null;
+      if (simNow) actions.append(el("button", { class: "btn secondary", onclick: () => {
+        finish("revealed", true);
+        session.list.splice(session.i + 1, 0, { kind: "check", q: simNow, similar: true, root: q.variant_of || q.id });
+        session.used.add(simNow.id); nextQuestion();
+      } }, "Try a similar question"));
+      actions.append(el("span", { class: "spacer" }));
+      const other = st.attempts === 0 && !st.usedHint ? pickVersion(versionsOf(q)) : null;
+      if (other) actions.append(el("button", { class: "btn ghost", title: "Swap in another version of this question that tests the same idea", onclick: () => {
+        const nxt = asItem(other);
+        if (item.similar) { nxt.similar = true; nxt.root = item.root; nxt.alt = false; }
+        session.list[session.i] = nxt; session.used.add(other.id); showQuestion();
+      } }, "Different version"));
+      if (SAMPLE && st.attempts > 0) actions.append(el("button", { class: "btn ghost", onclick: () => openTutor() }, "Ask the tutor"));
+      actions.append(el("button", { class: "btn ghost", onclick: () => finish("skipped") }, "Skip"));
+    } else {
+      const sim = st.outcome !== "first" && q.type !== "short" ? similarFor(q) : null;
+      if (SAMPLE && !q.set) {
+        const gen = el("button", { class: "btn ghost", title: "Claude writes a fresh question on the same idea", onclick: async () => {
+          gen.disabled = true; gen.textContent = "Writing a question…";
+          try {
+            const nq = await generateQuestion(q, s);
+            session.list.splice(session.i + 1, 0, { kind: "check", q: nq, generated: true });
+            nextQuestion();
+          } catch (e) {
+            gen.disabled = false; gen.textContent = "New question like this";
+            toast(e && e.code === "invalid_json" || e === "bad" ? "That one came out garbled. Try again." : (AI_ERRORS[e && e.code] || "Couldn't write a question right now."));
+          }
+        } }, "New question like this");
+        actions.append(gen);
+      }
+      if (sim) actions.append(el("button", { class: "btn secondary", onclick: () => {
+        session.list.splice(session.i + 1, 0, { kind: "check", q: sim, similar: true, root: q.variant_of || q.id });
+        session.used.add(sim.id); nextQuestion();
+      } }, "Try a similar question"));
+      if (SAMPLE) actions.append(el("button", { class: "btn ghost", onclick: () => openTutor() }, "Ask the tutor"));
+      else if (TUTOR_URL) actions.append(el("button", { class: "btn ghost", title: "Copy this question, your answer and the explanation for the course tutor bot", onclick: () => askTutor(tutorText()) }, "Ask the tutor ↗"));
+      actions.append(el("span", { class: "spacer" }));
+      actions.append(el("button", { class: sim ? "btn ghost" : "btn", onclick: nextQuestion }, session.i + 1 < session.list.length ? "Next question →" : "See my summary"));
+    }
+  }
+
+  function parseNum(t) {
+    const v = t.replace(/[−–]/g, "-").replace(/\s|,/g, "").replace(/^≈/, "");
+    if (/^-?\d*\.?\d+\/-?\d*\.?\d+$/.test(v)) { const [a, b] = v.split("/").map(Number); return a / b; }
+    if (/^-?\d*\.?\d+(e-?\d+)?%?$/.test(v)) return v.endsWith("%") ? parseFloat(v) / 100 : parseFloat(v);
+    return NaN;
+  }
+
+  function otherOptionsWhy() {
+    if (!q.options || q.type === "match") return null;
+    const items = q.options.filter(o => !s.answer.includes(o.key) && s.why && s.why[o.key]);
+    if (!items.length) return null;
+    return el("details", {}, el("summary", { text: "Why the other options are wrong" }),
+      el("ul", {}, items.map(o => el("li", {}, el("strong", { text: o.key + ") " }), el("span", { html: inline(s.why[o.key].join(" ")) })))));
+  }
+
+  function check() {
+    if (!canCheck()) return;
+    st.attempts += 1;
+    fb.innerHTML = "";
+    let correct = false;
+    if (q.type === "mc" || q.type === "tf") {
+      const pick = [...selected][0];
+      if (st.firstChoice === null) st.firstChoice = pick;
+      correct = s.answer.includes(pick);
+      if (!correct) {
+        if (q.type === "tf") { st.revealed = true; return done(false, "Not quite. This one has only two options, so here's the answer."); }
+        st.struck.add(pick); selected = new Set();
+        const why = (s.why[pick] || []).join(" ") || (s.general || []).join(" ") || "That's not it. Take another look.";
+        fb.append(el("div", { class: "feedback bad" }, el("h3", { text: "Not quite. Here's why " + pick + " doesn't work:" }), el("p", { html: inline(why) })));
+      }
+    } else if (q.type === "multi") {
+      const picks = [...selected];
+      if (st.firstChoice === null) st.firstChoice = picks.sort().join(",");
+      const wrong = picks.filter(k => !s.answer.includes(k));
+      const missed = s.answer.filter(k => !selected.has(k));
+      correct = !wrong.length && !missed.length;
+      if (!correct) {
+        const parts = [];
+        if (wrong.length) parts.push(wrong.length + (wrong.length > 1 ? " of your picks are" : " of your picks is") + " wrong");
+        if (missed.length) parts.push("you missed " + missed.length);
+        const box = el("div", { class: "feedback bad" }, el("h3", { text: "Not quite: " + parts.join(", and ") + "." }));
+        wrong.forEach(k => box.append(el("p", {}, el("strong", { text: k + ") " }), el("span", { html: inline((s.why[k] || ["This one isn't correct."]).join(" ")) }))));
+        fb.append(box);
+      }
+    } else if (q.type === "match") {
+      if (st.firstChoice === null) st.firstChoice = q.items.map(n => n + "-" + matchSel[n]).join(",");
+      let nWrong = 0;
+      q.items.forEach(n => {
+        const row = answerBox.querySelector('[data-item="' + n + '"]');
+        const ok = matchSel[n] === s.answer[n];
+        row.classList.toggle("is-right", ok); row.classList.toggle("is-wrong", !ok);
+        if (ok) st.locked[n] = true; else nWrong++;
+      });
+      correct = nWrong === 0;
+      if (!correct) {
+        fb.append(el("div", { class: "feedback bad" }, el("h3", { text: nWrong + " of " + q.items.length + " matches are wrong (in red). The right ones are locked in." }),
+          (s.general || []).length ? el("p", { html: inline(s.general.join(" ")) }) : null));
+        const keep = Object.assign({}, matchSel); drawAnswer();
+        q.items.forEach(n => { const row = answerBox.querySelector('[data-item="' + n + '"]'); const ok = keep[n] === s.answer[n]; row.classList.add(ok ? "is-right" : "is-wrong"); });
+      }
+    } else if (q.type === "numeric") {
+      const vals = numInputs.map(i => parseNum(i.value));
+      if (st.firstChoice === null) st.firstChoice = numInputs.map(i => i.value.trim()).join(" | ");
+      const oks = vals.map((v, k) => !isNaN(v) && v >= s.ranges[k][0] - 1e-12 && v <= s.ranges[k][1] + 1e-12);
+      numInputs.forEach((inp, k) => inp.parentElement.classList.toggle("is-right", oks[k]));
+      numInputs.forEach((inp, k) => inp.parentElement.classList.toggle("is-wrong", !oks[k]));
+      correct = oks.every(Boolean);
+      if (!correct) {
+        const bad = vals.some(isNaN);
+        fb.append(el("div", { class: "feedback bad" },
+          el("h3", { text: bad ? "I couldn't read one of your numbers. Use digits, a decimal point, or a fraction like 1/12." : "Not quite." }),
+          (s.general || []).length ? el("p", { html: "<strong>Common mistakes:</strong> " + inline(s.general.join(" ").replace(/^Common mistakes:\s*/i, "")) }) : null));
+      }
+    } else if (q.type === "short") {
+      if (st.firstChoice === null) st.firstChoice = shortBox.value.trim().slice(0, 200);
+      st.revealed = true;
+      return selfMark();
+    }
+    if (correct) return done(true);
+    drawAnswer(); drawActions();
+  }
+
+  function done(correct, note) {
+    st.done = true;
+    const outcome = st.revealed ? "revealed" : correct ? (st.attempts === 1 && !st.usedHint ? "first" : "retry") : "revealed";
+    st.outcome = outcome;
+    if (item.similar && outcome === "first") { record(item.root, "recovered"); session.tally.recovered++; }
+    markOptions();
+    const box = el("div", { class: "feedback " + (outcome === "revealed" ? "info" : "good") },
+      el("h3", { text: note || (outcome === "first" ? (item.similar ? "Correct! Looks like you've got it now." : "Correct!") : outcome === "retry" ? "Got it!" : "Here's the answer.") }),
+      answerLine(),
+      el("p", { html: inline(s.explanation) }),
+      otherOptionsWhy());
+    box.append(rateBox(q, outcome));
+    fb.innerHTML = ""; fb.append(box);
+    finish(outcome, true);
+    drawAnswer(); markOptions(); drawActions();
+  }
+
+  function figureNote() {
+    if (!q.images || !q.images.length) return "";
+    // On the published site the figures are public files, so the tutor can open the same image.
+    const links = window.STUDY_IMAGES ? [] : q.images.map(n => new URL("images/" + n, location.href).href);
+    return links.length ? "\nFigure: " + links.join(" , ") : "\n(This question has a figure; I can paste a screenshot.)";
+  }
+
+  function tutorText() {
+    const opts = (q.options || []).map(o => o.key + ") " + o.text).join("\n");
+    const items = q.type === "match" ? "\nItems to match: " + q.items.join(", ") : "";
+    const correct = q.type === "numeric" || q.type === "short" ? s.shown : q.type === "match" ? q.items.map(n => n + "-" + s.answer[n]).join(", ") : s.answer.join(", ");
+    const ask = st.outcome === "first" ? "I got this right, but can you check I really understand it? Ask me one follow-up question."
+      : "I didn't get this right at first. Help me understand why my answer was wrong, then give me a similar question to check I get it.";
+    return "I'm working on study guide question " + q.id + " (" + q.concepts.join(", ") + ").\n\nQuestion: " + q.question.trim() +
+      figureNote() +
+      (opts ? "\n\nOptions:\n" + opts : "") + items +
+      "\n\nMy first answer: " + (st.firstChoice || "(none)") + "\nCorrect answer: " + correct +
+      "\nExplanation from the study guide: " + s.explanation + "\n\n" + ask;
+  }
+
+  function answerLine() {
+    if (q.type === "mc" || q.type === "tf" || q.type === "multi") return el("p", {}, el("strong", { text: "Answer: " }), s.answer.join(", "));
+    if (q.type === "match") return el("p", {}, el("strong", { text: "Answer: " }), q.items.map(n => n + " → " + s.answer[n]).join(", "));
+    if (q.type === "numeric" || q.type === "short") return el("p", {}, el("strong", { text: "Answer: " }), el("span", { style: "white-space:pre-wrap", text: s.shown }));
+    return null;
+  }
+
+  function markOptions() {
+    if (!(q.type === "mc" || q.type === "tf" || q.type === "multi")) {
+      if (q.type === "match") { q.items.forEach(n => { matchSel[n] = s.answer[n]; }); }
+      return;
+    }
+    answerBox.querySelectorAll(".opt").forEach(b => {
+      const k = b.dataset.key;
+      b.disabled = true; b.classList.remove("struck");
+      if (s.answer.includes(k)) b.classList.add(selected.has(k) || q.type !== "multi" ? "is-right" : "is-missed");
+      else if (selected.has(k) || st.struck.has(k)) b.classList.add("is-wrong");
+    });
+  }
+
+  function showAnswer() { st.revealed = true; done(false); }
+
+  function selfMark() {
+    st.done = true;
+    fb.innerHTML = "";
+    const rate = el("div", { class: "row selfrate" }, el("span", { text: "How did you do?" }),
+      [["yes", "Got it"], ["partly", "Partly"], ["no", "Not yet"]].map(([v, l]) => el("button", { class: "btn ghost", onclick: () => { record(q.id, v === "yes" ? "yes" : v); logActivity(q, { item: "checked", outcome: "self-" + v, attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) }); toast("Saved"); rate.remove(); } }, l)));
+    fb.append(el("div", { class: "feedback info" }, el("h3", { text: "Compare with the model answer" }), answerLine(), el("p", { html: inline(s.explanation) }), rate, rateBox(q, "self")));
+    finish("self", true);
+    drawActions();
+  }
+
+  function finish(outcome, keepView) {
+    const extra = st.firstChoice ? { first: String(st.firstChoice).slice(0, 200) } : {};
+    if (outcome !== "self") record(q.id, outcome, extra);
+    if (outcome !== "self") logActivity(q, { item: "checked", outcome, attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) });
+    if (outcome !== "self" && item.alt && !item.similar) record(item.root, outcome, extra);
+    if (outcome === "first") session.tally.first++;
+    else if (outcome === "retry") session.tally.retry++;
+    else if (outcome === "revealed") session.tally.revealed++;
+    if (!keepView) nextQuestion();
+  }
+
+  drawAnswer(); drawActions();
+}
+
+function nextQuestion() { session.i += 1; showQuestion(); }
+
+function showOpen(item) {
+  const q = item.q;
+  const started = Date.now();
+  const st = { hintsShown: 0, revealed: false };
+  const card = el("section", { class: "card" }, header(item), el("h2", { style: "margin:0 0 8px;font-size:1.1rem", text: q.title }), renderMd(q.prompt), figures(q.images));
+  const ta = el("textarea", { class: "answer", placeholder: "Write your answer in your own words. Aim for at least " + q.min_words + " words before you look at the key ideas." });
+  ta.value = store.drafts[q.id] || "";
+  const counter = el("div", { class: "counter" });
+  const hintsBox = el("div");
+  const keyBox = el("div");
+  const actions = el("div", { class: "row", style: "margin-top:10px" });
+  const aiBox = el("div"), aiStrip = el("div");
+  card.append(ta, counter, aiStrip, hintsBox, actions, aiBox, keyBox);
+  app.append(card);
+  aiRefresh = () => update();
+
+  function aiContext() {
+    const s = reveal(q.secret);
+    return AI_RULES + "\n\nThe student is answering an open-ended prompt (" + q.chapters.map(c => "chapter " + c).join(", ") + "; concepts: " + q.concepts.join(", ") + ").\nPROMPT:\n" + q.prompt.trim() +
+      (q.images && q.images.length ? (figureBlobs(q).length ? "\n(The prompt's figure is attached as an image.)" : "\n(The prompt has a figure you can't see.)") : "") +
+      "\n\nTHE STUDENT'S CURRENT WRITTEN ANSWER:\n" + (ta.value.trim() || "(empty)") +
+      "\n\nTUTOR-ONLY notes" + (st.revealed ? " (the student has now seen the key ideas)" : " (the student has NOT seen these; never paste them)") + ":\nKey ideas:\n" + s.key + "\nGood enough when:\n" + s.good + "\nCommon mistakes:\n" + s.pitfalls +
+      "\n\nWhen asked for feedback on the answer: (1) one specific sentence on what's right; (2) the single most important gap or misconception, as a nudge or question, without giving the full answer; " +
+      "(3) if the answer meets the 'good enough' bar, say: \"Great job, this is good enough. I'm here if you want to refine it further.\" Under about 120 words. For later messages, keep tutoring the same way.";
+  }
+  function openFeedback() {
+    const api = tutorPanel(aiBox, { title: "Feedback on your answer", q, context: aiContext, tier: "default",
+      chips: ["I revised my answer: check it again", "I'm stuck: give me a hint"] });
+    if (api && !aiBox.querySelector(".msg")) api.ask("Please give me feedback on my answer.");
+  }
+
+  function secondsLeft() { return Math.max(0, OPEN_MIN_SECONDS - Math.floor((Date.now() - started) / 1000)); }
+  function update() {
+    const w = wordCount(ta.value), left = secondsLeft();
+    store.drafts[q.id] = ta.value; saveStore();
+    const okWords = w >= q.min_words;
+    counter.className = "counter" + (okWords && !left ? " ok" : "");
+    counter.textContent = w + " / " + q.min_words + " words" + (left && okWords ? " · key ideas unlock in " + left + "s" : "");
+    actions.innerHTML = "";
+    aiStrip.innerHTML = "";
+    if (SAMPLE && !st.revealed && !aiBox.firstChild) aiStrip.append(el("div", { class: "feedback info aistrip" },
+      el("div", {}, el("strong", { text: "AI tutor feedback" }),
+        el("div", { class: "small muted", text: okWords ? "Get Claude's comments on what you've written so far, before you look at the key ideas." : "Write at least " + q.min_words + " words, then get Claude's comments on your answer." })),
+      el("button", { class: "btn secondary", disabled: okWords ? null : true, onclick: () => { openFeedback(); update(); } }, "Get tutor feedback")));
+    if (!st.revealed) {
+      const nextHintAt = [5, 10][st.hintsShown];
+      if (st.hintsShown < q.hints.length) {
+        const ready = nextHintAt === undefined || w >= nextHintAt;
+        actions.append(el("button", { class: "btn ghost", disabled: ready ? null : true, onclick: () => {
+          hintsBox.append(el("div", { class: "feedback hint" }, el("p", {}, el("strong", { text: "Hint " + (st.hintsShown + 1) + ": " }), el("span", { html: inline(q.hints[st.hintsShown]) }))));
+          st.hintsShown++; update();
+        } }, ready ? "Hint " + (st.hintsShown + 1) : "Hint " + (st.hintsShown + 1) + " (after " + nextHintAt + " words)"));
+      }
+      actions.append(el("button", { class: "btn", disabled: okWords && !left ? null : true, onclick: showKey }, "Compare with the key ideas"));
+    }
+    if (!st.revealed) {
+      actions.append(el("span", { class: "spacer" }));
+      actions.append(el("button", { class: "btn ghost", onclick: () => { record(q.id, "skipped"); logActivity(q, { item: "checked", outcome: "skipped", attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) }); nextQuestion(); } }, "Skip"));
+    }
+  }
+  ta.addEventListener("input", update);
+  const timer = setInterval(() => { if (!document.body.contains(ta)) return clearInterval(timer); if (!st.revealed) update(); }, 1000);
+
+  function showKey() {
+    st.revealed = true; session.tally.open++;
+    const s = reveal(q.secret);
+    keyBox.innerHTML = "";
+    const checks = el("div", { class: "row selfrate" }, el("span", { text: "Did your answer cover it?" }),
+      [["yes", "Yes"], ["partly", "Partly"], ["no", "Not yet"]].map(([v, l]) => el("button", { class: "btn ghost", onclick: () => {
+        st.self = v; record(q.id, v === "yes" ? "yes" : v); toast("Saved");
+        logActivity(q, { item: "explain-it", outcome: "self-" + v, words: wordCount(ta.value), seconds: secondsSince(started) }); checks.querySelectorAll("button").forEach(b => b.disabled = true);
+      } }, l)));
+    let submitBox = null;
+    if (SUBMIT_URL) {
+      const nameIn = el("input", { type: "text", placeholder: "Your name (optional)", "aria-label": "Your name (optional)",
+        style: "padding:7px 10px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);flex:1 1 200px;min-width:0" });
+      nameIn.value = store.name || "";
+      const sendBtn = el("button", { class: "btn secondary", onclick: () => {
+        store.name = nameIn.value.trim(); saveStore();
+        sendBtn.disabled = true; sendBtn.textContent = "Sending…";
+        sendAnswer({ kind: "open", name: store.name, question_id: q.id, chapter: q.chapters.join(","), concept: q.concepts.join("; "),
+          word_count: wordCount(ta.value), self_check: st.self || "", answer: ta.value })
+          .then(() => { sendBtn.textContent = "Submitted ✓"; toast("Submitted. Thanks!"); },
+                () => { sendBtn.disabled = false; sendBtn.textContent = "Submit for feedback"; toast("Couldn't send. Check your connection and try again."); });
+      } }, "Submit for feedback");
+      submitBox = el("div", { class: "feedback info", style: "margin-top:12px" },
+        el("h3", { text: "Want feedback from Prof. Brandvain? (optional)" }),
+        el("p", { class: "small", text: "Submit this answer to the instructor. Add your name for individual feedback, or leave it blank to stay anonymous (your answer then helps with class-wide feedback)." }),
+        el("div", { class: "row" }, nameIn, sendBtn));
+    }
+    const tutorBtn = !TUTOR_URL ? null : el("button", { class: "btn ghost", onclick: () => {
+      const text = "I'm working on study guide prompt " + q.id + " (" + q.title + ").\n\nPrompt: " + q.prompt.replace(/\n+/g, " ") + "\n\nMy answer: " + ta.value.trim() + "\n\nCan you help me improve it?";
+      askTutor(text);
+    } }, "Discuss with the tutor ↗");
+    keyBox.append(...[
+      el("div", { class: "feedback info" }, el("h3", { text: "Key ideas" }), renderMd(s.key)),
+      el("div", { class: "feedback good" }, el("h3", { text: "The tutor's checklist: an answer is good enough when…" }), renderMd(s.good)),
+      el("details", {}, el("summary", { text: "Common mistakes the tutor watches for" }), renderMd(s.pitfalls)),
+      SAMPLE ? el("div", { class: "feedback info", style: "margin-top:12px" },
+        el("h3", { text: "Want the tutor's take on your answer?" }),
+        el("p", { class: "small", text: "Claude compares what you wrote with the key ideas, says what's right and nudges you on what's missing. Uses your own Claude usage." }),
+        el("button", { class: "btn secondary", onclick: openFeedback }, "Get tutor feedback")) : null,
+      checks,
+      rateBox(q, "open"),
+      submitBox,
+      el("div", { class: "row", style: "margin-top:10px" }, tutorBtn, el("span", { class: "spacer" }),
+        el("button", { class: "btn", onclick: nextQuestion }, session.i + 1 < session.list.length ? "Next question →" : "See my summary"))
+    ].filter(Boolean));
+    update();
+  }
+  update();
+}
+
+function endRound() {
+  if (!session) return showSetup();
+  session.ended = true;
+  setNav("setup"); app.innerHTML = "";
+  showSummary();
+}
+function showSummary() {
+  const t = session.tally;
+  const seen = session.list.slice(0, session.ended ? session.i + 1 : session.list.length);
+  const n = t.first + t.retry + t.revealed + t.open;
+  const missed = seen.filter(x => isMiss(x.q.id));
+  app.append(el("section", { class: "card" },
+    el("h2", { style: "margin-top:0", text: session.ended ? "Round ended" : "Round complete" }),
+    el("div", { class: "stats" },
+      stat(t.first, "right on the first try"), stat(t.retry, "right after a retry or hint"), stat(t.revealed, "answers shown"),
+      t.recovered ? stat(t.recovered, "similar questions nailed after a miss") : null, stat(t.open, "explain-it answers compared")),
+    el("p", { class: "muted", text: n === 1 ? "1 question answered this round." : n + " questions answered this round." }),
+    el("div", { class: "row" },
+      missed.length ? el("button", { class: "btn", onclick: () => startSession({ check: missed.filter(x => x.kind === "check").map(x => x.q), open: missed.filter(x => x.kind === "open").map(x => x.q) }) }, "Retry the " + missed.length + " I missed") : null,
+      el("button", { class: "btn secondary", onclick: () => startSession(buildPool(false)) }, "Another round, same settings"),
+      el("button", { class: "btn ghost", onclick: showSetup }, "Main menu"))));
+}
+function stat(n, l) { return el("div", { class: "stat" }, el("div", { class: "n", text: String(n) }), el("div", { class: "l", text: l })); }
+
+// ---------- progress ----------
+function showProgress() {
+  setNav("progress"); app.innerHTML = "";
+  const res = store.results;
+  const all = BANK.concat(DATA.open);
+  const tried = all.filter(q => res[q.id] && res[q.id].last !== "skipped");
+  const good = q => res[q.id] && ["first", "yes", "recovered"].includes(res[q.id].last);
+  app.append(el("section", { class: "card" },
+    el("h2", { style: "margin-top:0", text: "My progress" }),
+    el("p", { class: "muted small", text: "Saved only in this browser. Your most recent attempt at each question counts." }),
+    el("div", { class: "stats" },
+      stat(tried.length, "of " + all.length + " questions tried"),
+      stat(tried.filter(good).length, "right first time, explained, or recovered"),
+      stat(missesCount(), "to review")),
+    el("div", { class: "row" },
+      missesCount() ? el("button", { class: "btn", onclick: () => {
+        setup = { scope: "all", chapters: [], within: "random", concepts: [], style: "mix", length: 0 };
+        startSession({ check: BANK.filter(q => isMiss(q.id)), open: DATA.open.filter(q => isMiss(q.id)) });
+      } }, "Retry everything I've missed") : null,
+      el("button", { class: "btn ghost", onclick: (e) => {
+        const b = e.currentTarget;
+        if (b.dataset.armed) { store.results = {}; store.drafts = {}; saveStore(); showProgress(); toast("Progress cleared"); return; }
+        b.dataset.armed = "1"; b.textContent = "Click again to clear all progress and drafts";
+        setTimeout(() => { if (document.body.contains(b)) { delete b.dataset.armed; b.textContent = "Reset my progress"; } }, 4000);
+      } }, "Reset my progress"))));
+
+  for (const k of Object.keys(META)) {
+    const ch = +k;
+    const items = all.filter(q => q.chapters.includes(ch));
+    const rows = META[k].concepts.map(c => {
+      const qs = items.filter(q => q.concepts.includes(c));
+      const t = qs.filter(q => res[q.id] && res[q.id].last !== "skipped");
+      const pct = t.length ? Math.round(100 * t.filter(good).length / t.length) : null;
+      return el("div", { class: "meter" },
+        el("span", {}, c, el("span", { class: "muted small", text: "  · " + t.length + "/" + qs.length + " tried" })),
+        el("div", { class: "track" }, el("div", { class: "fill", style: "width:" + (pct || 0) + "%" })),
+        el("span", { class: "pct", text: pct === null ? "–" : pct + "%" }));
+    });
+    app.append(el("section", { class: "card" }, el("h2", { style: "margin:0 0 8px;font-size:1rem", text: k + " · " + META[k].name }), rows));
+  }
+}
+
+// ---------- about ----------
+function showAbout() {
+  setNav("about"); app.innerHTML = "";
+  app.append(el("section", { class: "card md" },
+    el("h2", { style: "margin-top:0", text: "How to use this study guide" }),
+    renderMd([
+      "- **Quiz me:** choose random questions from everything, or pick chapters (and concepts within them).",
+      "- **Check my answer:** multiple choice, matching and number questions. A wrong answer shows why *that* choice is wrong. Then try again, ask for a hint, or reveal the answer. After a miss, **Try a similar question** checks whether it's clicked.",
+      "- **Original or new versions:** every checked question has the course original plus AI-written versions that test the same idea. Choose originals, new versions or a mix when you set up a round, or click **Different version** on any question before you answer it.",
+      "- **Explain it:** write your answer in your own words first. The key ideas unlock after 15 words and a minute of thinking. Then compare and rate yourself honestly.",
+      "- **My progress** shows how you're doing by concept, and lets you retry everything you've missed.",
+      TUTOR_URL ? "- **Want to talk it through?** After any question, **Ask the tutor** copies the question, your answer and the explanation and opens the course AI tutor." : "",
+      SUBMIT_URL ? "- **Want instructor feedback?** On explain-it questions, click **Submit for feedback** to send your answer to the instructor." : "",
+      "",
+      "**No R needed.** Like the exam, these questions are about ideas, plots and reasoning, not running code."
+    ].filter((l, k) => l || k === 7).join("\n")),
+    SAMPLE ? el("h3", { text: "Claude features" }) : null,
+    SAMPLE ? renderMd([
+      "These are only in this Claude version of the study guide; the copy in the course book doesn't have them. They run on your own Claude account, only when you click. Claude can make mistakes; the answer key wins.",
+      "",
+      "- **Ask the tutor:** after you try a question, opens a short chat about it. It nudges you toward the idea instead of handing you the answer.",
+      "- **Get tutor feedback:** on explain-it questions, Claude comments on what you wrote: what's right, what's missing, and when it's good enough.",
+      "- **New question like this:** after any question, Claude writes a fresh one on the same idea. These are marked *Written by Claude* and haven't been checked by the instructor, so flag anything odd with 👎.",
+      "- **Study report** (top bar): once you've answered at least 5 questions, Claude reads your record in this browser and tells you what you know well, where you seem confused, and what to do next. Then you can practice your weak spots or talk them through with the tutor."
+    ].join("\n")) : null,
+    el("h3", { text: "Privacy" }),
+    renderMd("Your progress and drafts are saved only in this browser." +
+      (SAMPLE ? " When you use a Claude feature, the question, your answers and (for the study report) your practice record are sent to Claude on your own account." : "") +
+      (SUBMIT_URL ? " To help improve the study guide, it also records anonymous practice data (which questions you did, whether you got them right, and how long they took; no names). Clicking 👍 or 👎 sends that rating (anonymously) so bad questions get fixed, and **Submit for feedback** sends that answer, and your name if you add one, to the instructor."
+        : (SAMPLE ? "" : " Nothing is sent anywhere."))),
+    el("p", { class: "muted small", text: BANK.length + " checked questions (+ " + (DATA.bank.length - BANK.length) + " similar-question variants) · " + DATA.open.length + " explain-it prompts · chapters 13–21 plus an Exam 1 review" })));
+}
+
+// ---------- AI tutor (only inside a Claude artifact that allows it) ----------
+// Every call runs on the viewer's own Claude account and only when they click.
+let SAMPLE = null, AI_IMAGES = 0, aiRefresh = null;
+const AI_RULES = [
+  "You are a study tutor for an intro biostatistics course (Applied Biostatistics, Exam 2: chapters 13-21, linear models through interactions, plus key Exam 1 ideas). How to tutor:",
+  "- The student does the thinking. Ask the question that gets them to the next step; don't lecture.",
+  "- Short: usually 1-4 sentences and under about 100 words, unless they ask for a fuller explanation.",
+  "- End most replies with ONE question for the student. Never stack several questions.",
+  "- One idea per reply: fix the biggest misunderstanding first.",
+  "- Build on their words: say what's right in their thinking, then nudge.",
+  "- The exam has no R. Never ask them to run code (talking about what code does is fine).",
+  "- Correct misconceptions clearly and kindly (e.g. '95% chance the true value is in my CI', 'p is the probability the null is true').",
+  "- The answer key and explanations below are the course's own; trust them. If one looks wrong, say it may be an error and suggest the student flag it with the thumbs-down button.",
+  "- Plain language; light Markdown only (bold, short lists). No headings."
+].join("\n");
+const AI_ERRORS = {
+  rate_limited: "You've hit your Claude usage limit for now. Try again later (the quiz itself still works).",
+  session_expired: "Your Claude session expired. Sign in again, then retry.",
+  refused: "Claude couldn't answer that. Try rephrasing.",
+  empty_completion: "No reply came back. Try rephrasing or asking for less.",
+  image_rejected: "The figure couldn't be sent, so try again without it.",
+  prompt_too_large: "That conversation got too long. Close the tutor and start again.",
+  upstream_error: "The connection dropped. Try again."
+};
+const AI_GONE = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+
+(async () => {
+  try {
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    const s = await window.claude.use("sample");
+    if (!s) return;
+    SAMPLE = s;
+    const rb = document.querySelector('[data-nav="report"]'); if (rb) rb.hidden = false;
+    if (aiRefresh) aiRefresh();
+    try { const lim = await s.limits(); AI_IMAGES = lim.images ? lim.images.maxCount : 0; } catch (e) { AI_IMAGES = 0; }
+  } catch (e) { /* no tutor in this view */ }
+})();
+
+function figureBlobs(q) {
+  if (!AI_IMAGES || !q.images || !q.images.length || !window.STUDY_IMAGES) return [];
+  return q.images.slice(0, AI_IMAGES).map(n => {
+    const uri = window.STUDY_IMAGES[n];
+    if (!uri) return null;
+    const [head, b64] = uri.split(",");
+    const bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new Blob([bytes], { type: (head.match(/data:([^;]+)/) || [])[1] || "image/png" });
+  }).filter(Boolean);
+}
+
+// A small chat panel. context() returns the standing instructions + question details for every call.
+function tutorPanel(host, { title, context, q, chips, tier, firstAsk }) {
+  if (host.firstChild) { const i = host.querySelector("textarea"); if (i) i.focus(); return host.firstChild.api; }
+  const turns = [];
+  let ctl = null;
+  const log = el("div", { class: "tlog", "aria-live": "polite" });
+  const input = el("textarea", { class: "tinput", rows: "2", placeholder: "Ask the tutor, or explain your thinking…", "aria-label": "Message to the tutor" });
+  const send = el("button", { class: "btn", onclick: () => ask(input.value) }, "Send");
+  const stop = el("button", { class: "btn ghost", hidden: true, onclick: () => ctl && ctl.abort() }, "Stop");
+  const note = el("p", { class: "muted small tnote" });
+  const chipRow = el("div", { class: "choices tchips" }, (chips || []).map(c => el("button", { class: "chip", onclick: () => ask(c) }, c)));
+  input.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(input.value); } });
+  const panel = el("div", { class: "tutor" },
+    el("div", { class: "thead" }, el("strong", { text: title }), el("span", { class: "muted small", text: "Uses your own Claude usage, only when you send" }),
+      el("span", { class: "spacer" }), el("button", { class: "btn ghost tclose", "aria-label": "Close the tutor", onclick: () => { if (ctl) ctl.abort(); host.innerHTML = ""; } }, "Close")),
+    log, chipRow, el("div", { class: "trow" }, input, send, stop), note);
+  host.append(panel);
+
+  function bubble(role, text) {
+    const b = el("div", { class: "msg " + role });
+    if (role === "ai") b.append(renderMd(text)); else b.textContent = text;
+    log.append(b); b.scrollIntoView({ block: "nearest" });
+    return b;
+  }
+  async function ask(text) {
+    text = String(text || "").trim();
+    if (!text || ctl || !SAMPLE) return;
+    input.value = ""; note.textContent = "";
+    bubble("me", text);
+    turns.push({ role: "user", content: text });
+    const out = bubble("ai", "Thinking…");
+    out.classList.add("pending");
+    ctl = new AbortController(); send.disabled = true; stop.hidden = false;
+    const recent = turns.slice(-8);
+    if (recent[0].role !== "user") recent.shift();
+    try {
+      const imgs = figureBlobs(q);
+      const { text: reply, truncated } = await SAMPLE([{ role: "user", content: context() }, ...recent], {
+        cache: false, signal: ctl.signal, modelTier: tier || "quick", ...(imgs.length ? { images: imgs } : {}),
+        onText: ({ text: t }) => { out.classList.remove("pending"); out.innerHTML = ""; out.append(renderMd(t)); }
+      });
+      out.classList.remove("pending"); out.innerHTML = ""; out.append(renderMd(reply));
+      turns.push({ role: "assistant", content: reply });
+      if (truncated) note.textContent = "That reply was cut short. Ask for less at a time.";
+    } catch (e) {
+      const code = e && e.code;
+      out.classList.remove("pending");
+      if (e && e.text) { out.innerHTML = ""; out.append(renderMd(e.text)); turns.push({ role: "assistant", content: e.text }); } else out.remove();
+      if (code === "images_unavailable") AI_IMAGES = 0;
+      if (AI_GONE.includes(code)) {
+        note.textContent = "The tutor isn't available here (Claude access wasn't allowed). The rest of the study guide works as usual.";
+        SAMPLE = null; send.disabled = true; input.disabled = true;
+      } else if (code !== "cancelled") note.textContent = AI_ERRORS[code] || AI_ERRORS.upstream_error;
+    } finally {
+      ctl = null; stop.hidden = true; if (SAMPLE) send.disabled = false;
+    }
+  }
+  panel.api = { ask };
+  if (firstAsk) ask(firstAsk); else input.focus();
+  return panel.api;
+}
+
+
+// Claude writes a fresh multiple-choice question on the same idea as q (shown with its key so it can copy the trap).
+let genCount = 0;
+async function generateQuestion(q, s) {
+  const opts = (q.options || []).map(o => o.key + ") " + o.text).join("\n");
+  const key = q.type === "numeric" || q.type === "short" ? s.shown : q.type === "match" ? q.items.map(n => n + "-" + s.answer[n]).join(", ") : s.answer.join(", ");
+  const prompt = "Write ONE new multiple-choice practice question for an intro biostatistics course (Exam 2). It must test the same idea, and the same common mistake, as the original below, but with a different scenario and different numbers.\n\n" +
+    "ORIGINAL (" + q.concepts.join(", ") + "):\n" + q.question.trim() + (opts ? "\nOptions:\n" + opts : "") + "\nAnswer: " + key + "\nExplanation: " + s.explanation + "\n\n" +
+    "Rules:\n- Conceptual; no R needed to answer (reading or reasoning about short code is fine).\n- Self-contained: no figure. If the idea needs data, give it in the text (a short table is fine) without giving the answer away.\n" +
+    "- Exactly 4 options, A-D, exactly ONE correct. Wrong options should be tempting mistakes students really make.\n" +
+    "- If there are numbers, work the answer out yourself first and make sure every number is consistent and the key is right.\n- Plain language, at most about 90 words for the question.\n\n" +
+    'Reply with only JSON: {"question": "...", "options": {"A": "...", "B": "...", "C": "...", "D": "..."}, "answer": "B", ' +
+    '"explanation": "1-3 sentences on why the answer is right", "why_wrong": {"A": "why A is wrong", "C": "...", "D": "..."}, "hint": "a nudge that does not give the answer"}';
+  const j = await SAMPLE.json(prompt, { modelTier: "default", cache: false });
+  const keys = j && j.options && typeof j.options === "object" ? Object.keys(j.options).filter(k => /^[A-F]$/.test(k)).sort() : [];
+  const ans = String(j && j.answer || "").trim().toUpperCase().slice(0, 1);
+  if (keys.length < 3 || !keys.includes(ans) || !j.question) throw "bad";
+  const why = {};
+  keys.filter(k => k !== ans).forEach(k => { const w = j.why_wrong && j.why_wrong[k]; if (w) why[k] = [String(w)]; });
+  genCount += 1;
+  return {
+    id: "gen-" + Date.now() + "-" + genCount, type: "mc", generated: true,
+    question: String(j.question), options: keys.map(k => ({ key: k, text: String(j.options[k]) })),
+    chapters: q.chapters, concepts: q.concepts, images: [], hint: j.hint ? String(j.hint) : "",
+    plain: { answer: [ans], explanation: String(j.explanation || ""), why, general: [] }
+  };
+}
+
+// ---------- study report (Claude reads the student's own record) ----------
+let lastReport = null;
+function studyData() {
+  const res = store.results, all = BANK.concat(DATA.open);
+  const good = id => res[id] && ["first", "yes", "recovered"].includes(res[id].last);
+  const byConcept = {};
+  for (const q of all) {
+    const r = res[q.id];
+    if (!r || r.last === "skipped") continue;
+    for (const c of q.concepts) {
+      const k = "Ch " + q.chapters[0] + " · " + c;
+      byConcept[k] = byConcept[k] || { tried: 0, good: 0, missed: 0 };
+      byConcept[k].tried++; if (good(q.id)) byConcept[k].good++; else byConcept[k].missed++;
+    }
+  }
+  const missed = BANK.filter(q => isMiss(q.id)).slice(-15).map(q => {
+    const r = res[q.id], k = reveal(q.secret);
+    const choice = ["mc", "tf", "multi"].includes(q.type);
+    const pick = choice && r.first ? q.options.filter(o => String(r.first).split(",").includes(o.key)).map(o => o.key + ") " + o.text).join("; ") : String(r.first || "");
+    const right = choice && Array.isArray(k.answer) ? q.options.filter(o => k.answer.includes(o.key)).map(o => o.key + ") " + o.text).join("; ")
+      : q.type === "match" && k.answer ? q.items.map(n => n + "-" + k.answer[n]).join(", ") : String(k.shown || "");
+    return "- [" + q.concepts.join(", ") + "] " + q.question.replace(/\s+/g, " ").slice(0, 220) + (pick ? "\n  Picked: " + pick.slice(0, 160) : "") + (right ? "\n  Correct: " + right.slice(0, 160) : "");
+  });
+  const written = DATA.open.filter(q => res[q.id] && res[q.id].last !== "skipped" && store.drafts[q.id]).slice(-5).map(q =>
+    "- " + q.title + " (self-rating: " + res[q.id].last + "): " + store.drafts[q.id].replace(/\s+/g, " ").slice(0, 400));
+  const triedN = all.filter(q => res[q.id] && res[q.id].last !== "skipped").length;
+  const conceptLines = Object.entries(byConcept).sort((a, b) => b[1].missed - a[1].missed)
+    .map(([k, v]) => "- " + k + ": " + v.good + " of " + v.tried + " right first time / explained" + (v.missed ? ", " + v.missed + " missed" : ""));
+  return { triedN, byConcept, text: "BY CONCEPT:\n" + conceptLines.join("\n") + (missed.length ? "\n\nQUESTIONS THEY MISSED (most recent):\n" + missed.join("\n") : "") +
+    (written.length ? "\n\nSOME OF THEIR WRITTEN ANSWERS:\n" + written.join("\n") : "") };
+}
+function weakConcepts(by) {
+  return Object.entries(by).filter(([, v]) => v.missed > 0).sort((a, b) => (b[1].missed / b[1].tried) - (a[1].missed / a[1].tried) || b[1].missed - a[1].missed)
+    .slice(0, 4).map(([k]) => { const m = k.match(/^Ch (\d+) · (.*)$/); return { ch: +m[1], name: m[2] }; });
+}
+function showReport() {
+  try { drawReport(); } catch (e) {
+    app.innerHTML = "";
+    app.append(el("section", { class: "card" }, el("h2", { style: "margin-top:0", text: "Study report" }),
+      el("p", { text: "Something went wrong building your report. Please flag it to the instructor." }), el("p", { class: "muted small", text: String(e && e.message || e) })));
+  }
+}
+function drawReport() {
+  setNav("report"); app.innerHTML = ""; aiRefresh = () => showReport();
+  const card = el("section", { class: "card" }, el("h2", { style: "margin-top:0", text: "Study report" }));
+  app.append(card);
+  if (!SAMPLE) { card.append(el("p", { class: "muted", text: "The study report needs Claude, which isn't available in this view." })); return; }
+  const d = studyData();
+  card.append(el("p", { class: "muted small", text: "Claude reads your record in this browser (what you got right, which options you picked, your self-ratings and written answers) and tells you what you know and where you seem confused. It runs on your own Claude account, only when you click." }));
+  if (d.triedN < 5) { card.append(el("p", { text: "Answer at least 5 questions first (you've done " + d.triedN + "), then come back." })); return; }
+  const out = el("div", { class: "md" }), note = el("p", { class: "muted small" }), after = el("div");
+  const go = el("button", { class: "btn", onclick: async () => {
+    go.disabled = true; out.innerHTML = ""; out.append(el("p", { class: "muted", text: "Reading your record… (this can take up to a minute)" })); note.textContent = ""; after.innerHTML = "";
+    try {
+      const prompt = AI_RULES + "\n\nWrite a short study report for a student preparing for Exam 2, based ONLY on their practice record below. Don't invent results.\n" +
+        "Format (Markdown, under about 250 words):\n**What you know well** (2-3 bullets)\n**Where you seem confused** (2-4 bullets; for each, name the likely misconception, using the options they picked as evidence)\n**What to do next** (3 short, concrete steps)\n" +
+        "Be encouraging but honest. Address the student as 'you'.\n\nTHEIR RECORD (" + d.triedN + " questions tried):\n" + d.text;
+      const { text } = await SAMPLE(prompt, { modelTier: "default", cache: false, onText: ({ text: t }) => { out.innerHTML = ""; out.append(renderMd(t)); } });
+      lastReport = { text, data: d.text, weak: weakConcepts(d.byConcept) };
+      out.innerHTML = ""; out.append(renderMd(text)); renderAfter();
+    } catch (e) {
+      out.innerHTML = ""; if (e && e.text) out.append(renderMd(e.text));
+      note.textContent = AI_GONE.includes(e && e.code) ? "Claude access wasn't allowed, so the report isn't available." : (AI_ERRORS[e && e.code] || AI_ERRORS.upstream_error);
+    } finally { go.disabled = false; go.textContent = "Update my report"; }
+  } }, lastReport ? "Update my report" : "Write my study report");
+  const chat = el("div");
+  function renderAfter() {
+    after.innerHTML = "";
+    const weak = lastReport.weak;
+    after.append(el("div", { class: "row", style: "margin-top:12px" },
+      weak.length ? el("button", { class: "btn", onclick: () => {
+        setup = { scope: "chapters", chapters: [...new Set(weak.map(w => w.ch))], within: "concepts", concepts: weak, style: "check", source: "mix", length: 10 };
+        startSession(buildPool(false));
+      } }, "Practice my weak spots") : null,
+      el("button", { class: "btn secondary", onclick: () => tutorPanel(chat, { title: "Tutor", q: { images: [] }, tier: "quick",
+        context: () => AI_RULES + "\n\nYou're tutoring a student after giving them this study report:\n" + lastReport.text + "\n\nTheir record:\n" + lastReport.data +
+          "\n\nWork on ONE confusion at a time, starting with the one they pick (or the biggest one if they don't). Ask them a question that probes the misconception, then guide.",
+        chips: ["Start with my biggest confusion", "Quiz me on my weak spots"] }) }, "Talk it through with the tutor")),
+      weak.length ? el("p", { class: "muted small", text: "Weak spots: " + weak.map(w => w.name).join(", ") }) : null);
+  }
+  card.append(el("div", { class: "row" }, go), note, out, after, chat);
+  if (lastReport) { out.append(renderMd(lastReport.text)); renderAfter(); }
+}
+
+showSetup();
+</script>
+</body>
+</html>

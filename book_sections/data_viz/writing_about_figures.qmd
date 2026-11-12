@@ -1,4 +1,4 @@
-## • X1. Writing about plots {.unnumbered #writing_about_figures}
+## • X3. Writing about plots {.unnumbered #writing_about_figures}
 
 
 
