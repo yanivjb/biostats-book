@@ -68,7 +68,8 @@ gg_color_hue <- function(n) {
 
 :::
 
-# Goals of model building  
+
+---
 
 > - "*All models are wrong, but some are useful.*" George Box.    
 >     
@@ -80,6 +81,9 @@ gg_color_hue <- function(n) {
 >     
 >     
 
+---
+
+# Goals of model building  
 Biology is messy and complex. Rarely can we fully grasp the workings of any biological phenomenon. Our brains need help to navigate this complexity. A simplified mathematical or conceptual representation of a biological system, known as a "model", can simplify complex systems to allow us to understand them. Good models highlight key relationships, test hypotheses, or make predictions from a few key features of a system. By focusing on the most relevant factors and ignoring extraneous details, models allow us to simplify complex biological systems into things we can understand. 
 
 For example, statistical models (e.g. regression) can show how a trait (e.g. body size) is influenced by environmental factors (e.g. calories consumed per day), while a biological model like a Holliday junction helps us visualize the molecular mechanics of DNA recombination. Neither of these models  completely describes reality, but I cannot get my head inside a developing organism or the process of meiosis, so these models are a  good start.
@@ -148,27 +152,44 @@ Our eyes and brains are often quite good at spotting unusual patterns in plots. 
 As shown in @fig-modelsim, the patterns in the real data differ noticeably from the patterns in three simulated datasets generated from the model.
 
 ```{r}
+sim_data <- lm(Petal.Length ~ Sepal.Width, data = iris) |>
+  augment() |>
+  mutate(
+    `Simulation 1` = rnorm(n(), mean = .fitted, sd = sd(.resid)),
+    `Simulation 2` = rnorm(n(), mean = .fitted, sd = sd(.resid)),
+    `Simulation 3` = rnorm(n(), mean = .fitted, sd = sd(.resid)),
+    Observed = Petal.Length
+  )
+```
+
+```{r}
 #| label: fig-modelsim 
 #| fig-cap:  "Simulation helps us evaluate model fit. Real data are shown with large black points; data from three simulations are shown in reddish colors."
-#| fig-height: 4
+#| fig-height: 2
 #| fig-width: 4.5
 #| message: false
 #| warning: false
-#| 
-lm(Petal.Length ~ Sepal.Width, data = iris) %>% 
-  augment() %>%
-  mutate(
-    sim_petal_length_a = rnorm(n(), mean = .fitted, sd = sd(.resid)),
-    sim_petal_length_b = rnorm(n(), mean = .fitted, sd = sd(.resid)),
-    sim_petal_length_c = rnorm(n(), mean = .fitted, sd = sd(.resid))
-  ) %>%
-  ggplot(aes(x = Sepal.Width, y = Petal.Length)) +
-  geom_smooth(method = 'lm', se = FALSE) +
-  geom_point(size = 2, alpha = 0.8) +
-  geom_point(aes(y = sim_petal_length_a), color = "red", alpha = 0.3) +
-  geom_point(aes(y = sim_petal_length_b), color = "pink", alpha = 0.3) +
-  geom_point(aes(y = sim_petal_length_c), color = "firebrick", alpha = 0.3) +
-  theme(axis.title = element_text(size = 15),axis.text = element_text(size = 12))
+#| column: page-right
+#| code-fold: true
+
+sim_data |>pivot_longer(
+    cols = starts_with("Simulation"),
+    names_to = "simulation",
+    values_to = "sim_petal_length"
+  ) |>
+  ggplot(aes(x = Sepal.Width)) +
+  geom_point(aes(y = sim_petal_length, color = "Simulated"), alpha = 0.5) +
+  geom_point(aes(y = Petal.Length, color = "Observed"), alpha = 0.5) +
+    geom_line(aes(y = .fitted), color = "black") +
+  facet_wrap(~ simulation, ncol = 3) +
+  scale_color_manual(values = c("Observed" = "black", "Simulated" = "firebrick")) +
+  labs(x = "Sepal width", y = "Petal length",color = "Data")+
+  theme(#legend.position = "bottom", 
+        axis.text = element_text(size = 5),
+        axis.title = element_text(size = 7),
+        legend.text = element_text(size = 5),
+        legend.title = element_text(size = 7),
+        strip.text = element_text(size = 7))
 ```
 
 
@@ -177,8 +198,9 @@ By contrast, the data and simulations look more similar when we include species 
 ```{r} 
 #| label: fig-modelsim2
 #| fig-cap: "Simulation helps us evaluate model fit. Real data are shown with large black points; data from three simulations are shown in reddish colors."
-#| fig-height: 4
-#| fig-width: 11
+#| fig-height: 2
+#| fig-width: 4.5
+#| column: page-right
 #| message: false
 #| warning: false
 #| echo: false
@@ -196,12 +218,13 @@ lm(Petal.Length ~ Species + Sepal.Width, data = iris) %>%
   geom_point(aes(y = sim_petal_length_a), color = "red", alpha = 0.3) +
   geom_point(aes(y = sim_petal_length_b), color = "pink", alpha = 0.3) +
   geom_point(aes(y = sim_petal_length_c), color = "firebrick", alpha = 0.3) +
-  facet_wrap(~Species)+
-  theme(
-    axis.title = element_text(size = 15),
-    axis.text = element_text(size = 12),
-    strip.text = element_text(size = 15)
-  )
+  facet_wrap(~Species)+  
+  theme(#legend.position = "bottom", 
+        axis.text = element_text(size = 5),
+        axis.title = element_text(size = 7),
+        legend.text = element_text(size = 5),
+        legend.title = element_text(size = 7),
+        strip.text = element_text(size = 7))
 ```
 
 ### Multivariate visualizations     
@@ -237,16 +260,16 @@ a+b +plot_annotation(tag_levels = "A")
 # Model diagnostics 
 
 
-We have previously been concerned about the assumptions of a linear model because we wanted to ensure that metrics like p-values, confidence intervals, and standard errors were well-calibrated. While these are valid concerns, here we propose a different perspective: treating violations of model assumptions as prima facie evidence that the model does not fully capture the data's structure. **This shift in viewpoint changes how we approach assumption violations — instead of focusing on how to force the data to meet assumptions, we can see these violations as signals that the process generating the data is more complex and interesting than the model suggests.**
+People often worry about if data meet the assumptions of the model used because they worry about e.g. if p-values or confidence intervals are well-calibrated. Although we shouldn't fully write off such concerns, linear models are remarkably robust to minor violations of these assumptions. Here we consider something more important about these violation -- they suggest that our model poorly captures the underlying biological process that we profess to be interested in. In this view we treat violations of assumption not as a challenge to be overcome by transformation, or an issue to be sidestepped by "non-parametric" tests, but rather as a signal that a different model could tell us more about the biology. 
 
 
-Let's consider how violations of linear model assumptions can provide insights into underlying biology:
+Here are some examples of how violations of linear model assumptions can provide insights into underlying biology:
 
-- **Differences in variance:** The treatment may not only influence the group means but also alter the variability within groups. This is exciting, as it suggests additional biological processes at play!  
+- **Differences in variance:** The treatment may not only influence the group means but also alter the variability within groups. This is exciting, as it suggests additional more fun biology!  
 
-- **Non-independence:** Patterns or relationships among the subjects in our study could indicate interesting biological interactions or grouping effects. Exploring these could help us better understand the thing we hoped to study.
+- **Non-independence:** Patterns or relationships among the subjects in our study could indicate interesting biological interactions or grouping effects. 
 
-- **Residuals are not normally distributed:** The data generation process may be richer and more complex than our model captures, offering an opportunity to uncover deeper biological mechanisms.
+- **Non-normality of residuals** Non normal residuals can suggest an interesting process that generated the data.  For example, in [their study of how marine bacteria encounter food](https://www.pnas.org/doi/10.1073/pnas.2521542123), Thomas Day and Julia Schwartzman, realized that these discrete encounters are better described by a Poisson than a normal distribution. This model revealed a biological trade-off: larger bacterial groups encounter resources more consistently but receive fewer resources per cell. This could provide a benefit to joining a large group when the environment is likely to fluctuate.
 
 ### Interpreting diagnostic plots
 
@@ -285,7 +308,7 @@ autoplot(lm(Petal.Length ~ Sepal.Width+Species, data = iris), which = c(1,3))   
 
 #### QQ plots
 
-We have already seen QQ (Quantile-Quantile) plots. QQ plots compare the quantiles of the residuals, to the quantiles of a theoretical distribution (the normal distribution for linear models). Residuals follow their expected distribution if they fall largely on the 1:1 line. Deviations indicate departures from normality -- a curve bending the same way at both ends suggests skew (which can often be fixed by transformation), while points pulling away from the line in opposite directions at the two ends suggest heavy or light tails (which transformations usually don't fix). We see for the model `lm(Petal.Length ~ Sepal.Width + Species, data = iris)`  that our large values are a bit too large. 
+We have already seen QQ (Quantile-Quantile) plots. QQ plots compare the quantiles of the residuals, to the quantiles of a theoretical distribution (the normal distribution for linear models). Residuals follow their expected distribution if they fall largely on the 1:1 line. A QQ plot with a curve bending the same way at both ends suggests skew (which can often be fixed by transformation). Diagnostic plots for our model  `lm(Petal.Length ~ Sepal.Width + Species, data = iris)` show that our large values are a bit too large. 
 
 ```{r} 
 #| label: fig-qq
@@ -394,7 +417,7 @@ Just because metrics like AIC or adjusted $R^2$ favor one model does not mean it
 
 
 
-Rather than relying solely on simple measures of significant model improvement (e.g., AIC, BIC, adjusted  $R^2$ , etc.), we are often more practically interested in how well our model predicts new data. While this is challenging because we typically have access only to our existing data, we can approximate this task by building models using a portion of the data and then evaluating how well the model performs on the unseen portion. This approach, known as cross-validation, helps us assess predictive performance and identify when our models have *overfit* the data.
+Rather than relying solely on simple measures of significant model improvement (e.g., AIC, BIC, adjusted  $R^2$ , etc.), we are often more practically interested in how well our model predicts new data. This is challenging because we typically have access only to our existing data. But we can approximate this task by building models using a portion of the data and seeing how well we can predict the "hold-out" data that the model was not trained on. This "cross-validation" is especially usefull in evaluating if a  model has *overfit* the data.
 
 
 ### Leave one out cross validation
@@ -438,43 +461,88 @@ c <- ggplot(admixture, aes(x =  northing, y=  precip_spring_var))+
 a+b+c
 ```
 
-To evaluate the performance of these models, we conducted leave-one-out cross-validation (LOOCV). This involves building a model using all data points except one, then predicting the "held-out" data point using this model. The difference between the actual value of the held-out data point and its predicted value (from the model that excluded it) is recorded. This process is repeated for every data point in the dataset. To summarize the overall model performance, we compute a measure of prediction error—commonly the square root of the mean of the squared differences between the predicted and actual values of the held-out data points (root mean squared error, or RMSE). We then compared this measure across all models, including a model with only the intercept, to assess which model performed best.
+To evaluate the performance of these models, we conducted leave-one-out cross-validation (LOOCV). In LOOCV, we: 
+1. Build a model with all but one data point.
+2. Use this model to "predict" the value of the repsonse variable for this "held out" observation.  
+3. We find the difference between the actual value and the prediction and square it (aka the squared error). 
+4. Do this for all data points. 
+5. Finf the root-mean squared error as the square root of the average of the mean squared error over all held out data points
+
 
 Here's how you can do this with R's `caret` package:  
 
+::: {.panel-tabset}
+
+## Null model
+
 ```{r}
 library(caret)
-train_control <- trainControl(method = "LOOCV")
+library(caret)
 
 train(
-    admixture_prop ~ null,                 # Intercept-only model formula
-    data = admixture %>% mutate(null = 0),
-    method = "lm",
-    trControl = trainControl(method = "LOOCV")
-)
-
-
-train(
-    admixture_prop ~ precip_spring_var,       
-    data = admixture,
-    method = "lm",
-    trControl = trainControl(method = "LOOCV")
-)
-
-train(
-    admixture_prop ~ northing,      
-    data = admixture,
-    method = "lm",
-    trControl = trainControl(method = "LOOCV")
-)
-
-train(
-    admixture_prop ~ precip_spring_var+ northing,       
-    data = admixture,
-    method = "lm",
-    trControl = trainControl(method = "LOOCV")
+  admixture_prop ~ null,
+  data = admixture |> mutate(null = 0),
+  method = "lm",
+  trControl = trainControl(method = "LOOCV")
 )
 ```
+
+## Spring precipitation
+
+```{r}
+library(caret)
+train(
+  admixture_prop ~ precip_spring_var,
+  data = admixture,
+  method = "lm",
+  trControl = trainControl(method = "LOOCV")
+)
+```
+
+## Northing
+
+```{r}
+library(caret)
+train(
+  admixture_prop ~ northing,
+  data = admixture,
+  method = "lm",
+  trControl = trainControl(method = "LOOCV")
+)
+```
+
+## Both
+
+```{r}
+library(caret)
+train(
+  admixture_prop ~ precip_spring_var + northing,
+  data = admixture,
+  method = "lm",
+  trControl = trainControl(method = "LOOCV")
+)
+```
+
+:::
+
+---
+
+```{r}
+#| label: fig-loocv
+#| echo: false
+#| column: page-right
+#| fig-cap: "**Leave-one-out cross-validation for models of the admixture proportion in six *Clarkia xantiana* populations.** The animation loops accross all populations, leaving one out at a time.  (large red point). It fits the model to the remaining populations, and predicts the left-out population (red ✕). Admixture as a function of variance in spring precipitation, and  admixture as a function of northing are shown in the top and bottom panels, respectively. The **Middle panels** show squared prediction error for each focal population, and the **Right panels** track the running root mean squared error (RMSE) as we loop over hold-outs. The dashed line shows the RMSE for the intercept only model as a reference."
+#| fig-alt: "Animated figure with two rows of three panels, cycling through six frames, one for each Clarkia population left out (GC, GRW, SAW, S7, S22, SM). Top row: admixture proportion versus variance in spring precipitation. Bottom row: admixture proportion versus northing in km. In each left panel, the left-out population is a large red point, a black line is fit to the remaining five, and a red X marks that line's prediction, with a red vertical segment showing the error. Middle panels are bar charts of squared prediction errors, one bar added per frame. Right panels show the running RMSE as a line rising or falling as each population is added, with a dashed horizontal line at 0.150 for an intercept-only model. In the top row, errors stay small and the running RMSE ends at 0.049, well below the dashed line. In the bottom row, errors are large for GC and especially S22, and the running RMSE ends at 0.151, about the same as the intercept-only model."
+include_graphics("../figs/linear_models/model_evaluation/loocv_precip_vs_northing.gif")
+```
+
+---
+
+Our leave-one-out cross validation (illustrated in @fig-loocv) shows that a model using only `precip_spring_var` does a good job of predicting the "help-out" observation. By contrast, a model with only `northing` does no better at predicting the "hold-out" than that intercept-only model. This is sobering, as we did reject the null in in the "northing only" model. 
+
+[Bu-bu-bu-but wait it gets worse](https://www.youtube.com/watch?v=7ADgCeYJMN4), a model with both `northing` and `precip_spring_var` are predicts of held-out data **worse** than the  `precip_spring_var` only model (@fig-rmse). 
+
+
 
 ```{r} 
 #| label: fig-rmse
@@ -489,26 +557,180 @@ tibble(predictor = c("intercept","precip_spring_var","northing","precip_spring_v
 ```
 
 
-We observe that a model using only `precip_spring_var` predicts the missing data effectively, suggesting it captures meaningful variation in the response variable. In contrast, a model using only `northing` performs no better than an intercept-only model, indicating that `northing` provides little to no predictive value on its own. Surprisingly, when both `northing` and `precip_spring_var` are included in the model, the prediction of held-out data **worsens** compared to the model using only `precip_spring_var` (@fig-rmse). This  highlights an important conclusion -- a simpler model can make better  predictions than a more complex one.
-
-
-
 ### K fold cross validation 
 
 
-While leave-one-out cross-validation (LOOCV) is useful, it is best  for small datasets like the admixture analysis above. This is because LOOCV becomes computationally expensive for larger datasets, as it requires training the model $n$ times (where $n$ is the number of observations). Additionally, LOOCV can produce high-variance estimates of model performance because each training set is very similar, with only one observation excluded in each iteration. As a result, the models are highly correlated so you don't get much bang out of that extra computation.
+Leave-one-out cross-validation is useful, but it is best  for small datasets like the admixture analysis above. This is because it becomes computationally expensive for larger datasets (we need to run it as many times as there are observations). This computational expense is also not particularly well-spent -- because each training set is very similar (only one observation excluded in each iteration), models are highly correlated,  so you don't get much bang out of that extra computation. 
 
-$k$-fold cross-validation splits the dataset into $k$  groups (or "folds"). The model is trained on $(k-1)$ folds and tested on the remaining fold. This process is repeated $k$  times, each time leaving out a different fold as the test set. By averaging the results across all folds, $k$-fold CV provides a more robust estimate of model performance. Compared to LOOCV, $k$-fold CV reduces computational burden and produces lower-variance performance estimates since each test set contains more observations, and the training sets differ more substantially across folds.
+$k$-fold cross-validation splits the dataset into $k$  groups (or "folds"). We train the model on $(k-1)$ "folds" and tested on the remaining fold. We repeat this process $k$  times, each time leaving out a different fold as the test set. We then average results across all folds.  $k$-fold CV provides a more robust estimate of model performance. $k$-fold cross validation uses less compute. than leave one out cross validation, and the training sets differ more substantially across folds.
 
-The code for $k$-fold cross-validation using the `caret` package is nearly identical to that for LOOCV, with a slight adjustment to the `trainControl` argument. For $k$-fold CV, you specify `trainControl(method = "cv", number = K)`, where `K` is the number of folds. By convention, $K = 10$ is most common.
-
-As in leave one out cross validation you can compare  performance of more complex to simpler models with k fold cross validation, to see whether a more complex model makes better or worse predictions than a simpler model.
-
-
-:::warning
-Note that in all cross-validation approaches, we are still limited to the data at hand. This raises a valid concern: patterns of non-independence or specific characteristics of your study (e.g., conditions that apply to soil in Minnesota may not apply to soil in South Dakota) could limit how well the model generalizes to different contexts, such as another time, location, or population.
+:::aside
+**Leave-one-out cross validation** is a special class of "k-fold cross validation" where $k = n-1$.
 :::
 
 
 
 
+Because leave-one-out cross validation is a special case of k-forl cross validation (see aside above), the code for $k$-fold cross-validation in R's [`caret`](https://topepo.github.io/caret/) package is basically identical to that for LOOCV. The only difference is that with $k$-fold cross validation, you specify `trainControl(method = "cv", number = K)`, where `K` is the number of folds. By convention, $K = 10$ is most common.
+
+As in leave one out cross validation you can compare  performance of more complex to simpler models with k fold cross validation, to see whether a more complex model makes better or worse predictions than a simpler model.
+
+
+:::warning
+**NOTE** cross-validation approaches are limited to the data at hand. This raises a real concern -- specific characteristics of your study (e.g., conditions that apply to soil in Minnesota may not apply to soil in South Dakota) will limit how well the model generalizes to different situations. So, always be careful in considering / explaining where our model is "validated".
+:::
+
+
+
+
+
+
+
+```{r}
+#| eval: false
+#| echo: false
+library(tidyverse)
+library(gganimate)
+library(gifski)
+library(magick)
+
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+big_text <- theme(legend.position = "none",
+                  axis.text = element_text(size = 16),
+                  axis.title = element_text(size = 18),
+                  strip.text = element_text(size = 18, face = "bold"),
+                  plot.title = element_text(size = 26),
+                  plot.subtitle = element_text(size = 16))
+
+admixture <- read_csv("https://raw.githubusercontent.com/ybrandvain/datasets/refs/heads/master/admix_sites.csv") |>
+  mutate(northing_km = northing / 1000)
+n_sites <- nrow(admixture)
+
+# The two models to compare, one row each
+models <- tibble(model = c("admixture_prop ~ precip_spring_var", "admixture_prop ~ northing"),
+                 xvar  = c("precip_spring_var", "northing_km")) |>
+  mutate(model = factor(model, levels = model))
+
+# Leave each population out in turn: fit to the rest, predict the one left out
+loo <- pmap_dfr(models, function(model, xvar) {
+  map_dfr(seq_len(n_sites), function(i) {
+    fit <- lm(reformulate(xvar, "admixture_prop"), data = admixture[-i, ])
+    tibble(model     = model,
+           frame     = i,
+           site      = admixture$site[i],
+           x         = admixture[[xvar]][i],
+           observed  = admixture$admixture_prop[i],
+           predicted = predict(fit, newdata = admixture[i, ]),
+           null_pred = mean(admixture$admixture_prop[-i]),
+           intercept = coef(fit)[1],
+           slope     = coef(fit)[2])
+  })
+}) |>
+  group_by(model) |>
+  mutate(error        = observed - predicted,
+         sq_error     = error^2,
+         running_rmse = sqrt(cumsum(sq_error) / frame)) |>
+  ungroup()
+
+null_rmse <- loo |> filter(model == levels(model)[1]) |>
+  summarise(rmse = sqrt(mean((observed - null_pred)^2))) |> pull(rmse)   # about 0.150
+
+# ---- Column A: the left-out population and the line fit without it ----
+points_by_frame <- models |>
+  pmap_dfr(function(model, xvar) admixture |>
+             transmute(model = model, row = row_number(), x = .data[[xvar]], admixture_prop)) |>
+  mutate(model = factor(model, levels = levels(models$model))) |>
+  crossing(frame = seq_len(n_sites)) |>
+  mutate(held_out = row == frame)
+
+loo_plot_a <- ggplot(points_by_frame, aes(x = x, y = admixture_prop)) +
+  geom_abline(data = loo, aes(intercept = intercept, slope = slope), linewidth = 1.2) +
+  geom_segment(data = loo, aes(x = x, xend = x, y = predicted, yend = observed),
+               color = gg_color_hue(2)[1], linewidth = 1.5, inherit.aes = FALSE) +
+  geom_point(aes(color = held_out, size = held_out)) +
+  geom_point(data = loo, aes(x = x, y = predicted), shape = 4, size = 6, stroke = 2,
+             color = gg_color_hue(2)[1], inherit.aes = FALSE) +
+  geom_label(data = loo,
+             aes(x = -Inf, y = Inf,
+                 label = paste0("Left out: ", site, "\nObserved: ", round(observed, 3),
+                                "\nPredicted: ", round(predicted, 3), "\nError: ", round(error, 3))),
+             hjust = -0.05, vjust = 1.1, size = 5, inherit.aes = FALSE) +
+  scale_color_manual(values = c("FALSE" = "black", "TRUE" = gg_color_hue(2)[1])) +
+  scale_size_manual(values = c("FALSE" = 3, "TRUE" = 6)) +
+  facet_wrap(~ model, ncol = 1, scales = "free_x") +
+  coord_cartesian(ylim = c(-0.05, 0.6)) +
+  labs(title = "Leave one out",
+       subtitle = "Fit to the other five (line), predict the one left out (x)",
+       x = "spring precipitation variance (top) / northing in km (bottom)",
+       y = "admixture proportion") +
+  big_text +
+  transition_manual(frame)
+
+# ---- Column B: squared errors build up ----
+sq_by_frame <- loo |>
+  select(model, site, step = frame, sq_error) |>
+  mutate(site = factor(site, levels = admixture$site)) |>
+  crossing(display_frame = seq_len(n_sites)) |>
+  filter(step <= display_frame) |>
+  mutate(current = step == display_frame)
+
+sq_labels <- loo |>
+  group_by(model) |>
+  transmute(display_frame = frame,
+            label = paste0("Sum of squared errors\n(so far): ", round(cumsum(sq_error), 3))) |>
+  ungroup()
+
+loo_plot_b <- ggplot(sq_by_frame, aes(x = site, y = sq_error, alpha = current)) +
+  geom_col(fill = gg_color_hue(2)[1]) +
+  geom_label(data = sq_labels, aes(x = -Inf, y = Inf, label = label),
+             hjust = -0.05, vjust = 1.1, size = 5, inherit.aes = FALSE) +
+  scale_x_discrete(drop = FALSE) +
+  scale_alpha_manual(values = c("TRUE" = 1, "FALSE" = 0.35)) +
+  facet_wrap(~ model, ncol = 1) +
+  coord_cartesian(ylim = c(0, max(loo$sq_error) * 1.25)) +
+  labs(title = "Squared errors",
+       subtitle = "Previous values are transparent.",
+       x = "population left out",
+       y = "(observed - predicted)²") +
+  big_text +
+  transition_manual(display_frame)
+
+# ---- Column C: running LOOCV RMSE ----
+loo_plot_c <- ggplot(loo, aes(x = frame, y = running_rmse)) +
+  geom_hline(yintercept = null_rmse, linetype = "dashed", color = "grey40") +
+  annotate("text", x = 1, y = null_rmse, label = "intercept-only model",
+           hjust = 0, vjust = -0.5, size = 5, color = "grey40") +
+  geom_line(color = "darkgreen", linewidth = 1.2) +
+  geom_point(size = 3) +
+  scale_x_continuous(breaks = seq_len(n_sites), labels = admixture$site) +
+  facet_wrap(~ model, ncol = 1) +
+  coord_cartesian(ylim = c(0, max(null_rmse, max(loo$running_rmse)) * 1.2)) +
+  labs(title = "Running RMSE",
+       subtitle = "sqrt(mean squared error so far)",
+       x = "population left out",
+       y = "LOOCV RMSE") +
+  big_text +
+  transition_reveal(along = frame)
+
+# ---- Render each column with the same number of frames, then put them side by side ----
+dir.create("figs/linear_models/model_evaluation", recursive = TRUE, showWarnings = FALSE)
+anim_save("figs/linear_models/model_evaluation/loocv2_a.gif",
+          animate(loo_plot_a, nframes = n_sites, fps = .4, width = 450, height = 830, renderer = gifski_renderer()))
+anim_save("figs/linear_models/model_evaluation/loocv2_b.gif",
+          animate(loo_plot_b, nframes = n_sites, fps = .4, width = 450, height = 830, renderer = gifski_renderer()))
+anim_save("figs/linear_models/model_evaluation/loocv2_c.gif",
+          animate(loo_plot_c, nframes = n_sites, fps = .4, width = 350, height = 830, renderer = gifski_renderer()))
+
+gif1 <- image_read("figs/linear_models/model_evaluation/loocv2_a.gif")
+gif2 <- image_read("figs/linear_models/model_evaluation/loocv2_b.gif")
+gif3 <- image_read("figs/linear_models/model_evaluation/loocv2_c.gif")
+
+combined <- image_append(c(gif1[1], gif2[1], gif3[1]))
+for (i in 2:length(gif1)) {
+  combined <- c(combined, image_append(c(gif1[i], gif2[i], gif3[i])))
+}
+image_write(image_animate(combined, fps = 0.4), "figs/linear_models/model_evaluation/loocv_precip_vs_northing.gif")
+```
