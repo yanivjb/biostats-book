@@ -522,7 +522,7 @@ function showSetup() {
 
   app.append(step("1. What do you want to practice?", null,
     el("div", { class: "choices" },
-      toggle(setup.scope === "all", el("span", {}, el("strong", { text: "Random from everything" }), el("span", { text: "Chapters 13–21 plus Exam 1 review, mixed" })), () => { setup.scope = "all"; showSetup(); }, "big"),
+      toggle(setup.scope === "all", el("span", {}, el("strong", { text: "Random from everything" }), el("span", { text: "Chapters 13–22 plus Exam 1 review, mixed" })), () => { setup.scope = "all"; showSetup(); }, "big"),
       toggle(setup.scope === "chapters", el("span", {}, el("strong", { text: "Pick chapters" }), el("span", { text: "Focus on one or more chapters" })), () => { setup.scope = "chapters"; showSetup(); }, "big"),
       EXAM.length ? toggle(setup.scope === "exam", el("span", {}, el("strong", { text: "Practice exam 1" }), el("span", { text: EXAM.length + " questions from the practice exam, in order" })), () => { setup.scope = "exam"; setup.style = "check"; setup.source = "orig"; setup.length = 0; showSetup(); }, "big") : null)));
 
@@ -790,8 +790,7 @@ function showCheck(item) {
         answerBox.append(el("div", { class: "numrow" }, p ? el("label", { text: p }) : null, inp));
       });
       answerBox.append(el("p", { class: "muted small", style: "margin:2px 0 10px" },
-        el("button", { class: "btn ghost", type: "button", style: "padding:4px 10px;font-size:.88rem;margin-right:8px", onclick: () => window.openCalculator && window.openCalculator() }, "🧮 Calculator"),
-        "You can also type the calculation itself, e.g. 2.85/(2.85+1.98)."));
+        "Tip: you can type the calculation itself (e.g. 2.85/(2.85+1.98)), or use the 🧮 Calculator in the corner."));
     } else if (q.type === "short") {
       shortBox = el("textarea", { class: "answer", placeholder: "Type your answer…", style: "min-height:90px" });
       shortBox.addEventListener("input", drawActions);
@@ -1129,7 +1128,7 @@ function showOpen(item) {
     }
     if (!st.revealed) {
       actions.append(el("span", { class: "spacer" }));
-      actions.append(el("button", { class: "btn ghost", onclick: () => { record(q.id, "skipped"); logActivity(q, { item: "checked", outcome: "skipped", attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) }); nextQuestion(); } }, "Skip"));
+      actions.append(el("button", { class: "btn ghost", onclick: () => { record(q.id, "skipped"); logActivity(q, { item: "explain-it", outcome: "skipped", attempts: st.attempts, used_hint: st.usedHint ? "yes" : "no", seconds: secondsSince(st.t0) }); nextQuestion(); } }, "Skip"));
     }
   }
   ta.addEventListener("input", update);
@@ -1281,14 +1280,14 @@ function showAbout() {
       (SAMPLE ? " When you use a Claude feature, the question, your answers and (for the study report) your practice record are sent to Claude on your own account." : "") +
       (SUBMIT_URL ? " To help improve the study guide, it also records anonymous practice data (which questions you did, whether you got them right, and how long they took; no names). Clicking 👍 or 👎 sends that rating (anonymously) so bad questions get fixed, and **Submit for feedback** sends that answer, and your name if you add one, to the instructor."
         : (SAMPLE ? "" : " Nothing is sent anywhere."))),
-    el("p", { class: "muted small", text: BANK.length + " checked questions (+ " + (DATA.bank.length - BANK.length) + " similar-question variants) · " + DATA.open.length + " explain-it prompts · chapters 13–21 plus an Exam 1 review" })));
+    el("p", { class: "muted small", text: BANK.length + " checked questions (+ " + (DATA.bank.length - BANK.length) + " similar-question variants) · " + DATA.open.length + " explain-it prompts · chapters 13–22 plus an Exam 1 review" })));
 }
 
 // ---------- AI tutor (only inside a Claude artifact that allows it) ----------
 // Every call runs on the viewer's own Claude account and only when they click.
 let SAMPLE = null, AI_IMAGES = 0, aiRefresh = null;
 const AI_RULES = [
-  "You are a study tutor for an intro biostatistics course (Applied Biostatistics, Exam 2: chapters 13-21, linear models through interactions, plus key Exam 1 ideas). How to tutor:",
+  "You are a study tutor for an intro biostatistics course (Applied Biostatistics, Exam 2: chapters 13-22, linear models through model evaluation, plus key Exam 1 ideas). How to tutor:",
   "- The student does the thinking. Ask the question that gets them to the next step; don't lecture.",
   "- Short: usually 1-4 sentences and under about 100 words, unless they ask for a fuller explanation.",
   "- End most replies with ONE question for the student. Never stack several questions.",

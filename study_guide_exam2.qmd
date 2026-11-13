@@ -6,7 +6,7 @@ This [practice exam](https://docs.google.com/document/d/1vQdZ5z5ZC5hUeljr3cQgI0q
 
 ### Practice app
 
-Practice for Exam 2 (chapters 13–21, linear models through interactions). As before, my questions from the semester + AI generated versions of each. So you can chose - hyman written questions you've seen, AI written versions you have not, or a. mix.  I also included a review "chapter" of key ideas from Exam 1 that will show up on this exam. Like the exam, there's no code to write or run, but you may need to know about e.g. difference between `car::Anova` and  `anova`, how to interpret the `summary()` output etc...  I also will probaly assume you're familiriard with the headings from `broom::augment()` (e.g. `fitted` is $\hat{Y_i}$, `.resid` is $\hat{e_i}$...).
+Practice for Exam 2 (chapters 13–22, linear models through interactions). As before, my questions from the semester + AI generated versions of each. So you can chose - hyman written questions you've seen, AI written versions you have not, or a. mix.  I also included a review "chapter" of key ideas from Exam 1 that will show up on this exam. Like the exam, there's no code to write or run, but you may need to know about e.g. difference between `car::Anova` and  `anova`, how to interpret the `summary()` output etc...  I also will probably assume you're familiriard with the headings from `broom::augment()` (e.g. `fitted` is $\hat{Y_i}$, `.resid` is $\hat{e_i}$...).
 
 ---
 
