@@ -1,0 +1,224 @@
+# Knowledge Base: Model Evaluation Chapter
+
+## Chapter Context
+
+This chapter asks: you have built a model, can estimate parameters with uncertainty, and can test null hypotheses, but how can you tell if your model is any good? It is a single page with these sections:
+
+1. Goals of model building
+2. Model fit vs model adequacy (visualize your data and model; simulation to help the eye; multivariate visualizations)
+3. Model diagnostics (interpreting diagnostic plots)
+4. Evaluating model fit (R², log-likelihood; model comparison and penalizing additional parameters)
+5. Model evaluation: predictive performance (leave-one-out cross-validation; k-fold cross-validation)
+
+Learning goals (from the motivating scenario box at the top of the chapter):
+
+- Distinguish between "rejecting the null" and "having a good alternative"
+- Use plots and simulations to judge whether a model captures key patterns in data
+- Interpret residual, QQ, and leverage plots to spot nonlinearity, heteroscedasticity, or outliers
+- Compare models using adjusted R², AIC, and log-likelihood, and explain how they penalize complexity
+- Use cross-validation (LOOCV and k-fold) to assess predictive performance and avoid overfitting
+- Reflect on when a more complex model is worth it vs when a simpler one is preferable
+
+The chapter opens with quotes: "All models are wrong, but some are useful" (George Box); "A map is not the territory..." (Alfred Korzybski); "Truth is much too complicated to allow anything but approximations" (John von Neumann). The cross-validation section opens with "With four parameters I can fit an elephant, and with five I can make him wiggle his trunk" (von Neumann to Fermi, according to Freeman Dyson).
+
+Examples: the iris data (petal length, sepal width, species) and the admixture proportion of six Clarkia xantiana xantiana populations. The homework uses Anscombe's quartet. The tutor should know these examples but should not make every answer about them.
+
+## Big Ideas
+
+### Goals of model building
+
+Models simplify complex biology by focusing on the most relevant factors. What counts as "relevant" depends on the goal:
+
+- Prediction: prioritize how well the model performs on new observations, often favoring predictive accuracy over interpretability.
+- Understanding a system: prefer a simpler model with fewer variables that explains much of the system's behavior, rather than a more complex one that explains more at the cost of clarity.
+- Understanding the process that generates the data: incorporate plausible causal mechanisms, paying attention to the distributions underlying the data rather than relying on robustness to non-normality.
+
+Models are tools: the wrong model can mislead, like banging in a nail with a saw.
+
+### Model fit vs model adequacy
+
+Three ways to ask "Is my model any good?":
+
+- Does my model fit the data well?
+- Is my model an adequate description of the process?
+- Are my conclusions from NHST and/or my uncertainty estimates justified? (Not the focus here; evaluate by permutation and bootstrapping.)
+
+### Visualize your data and your model
+
+Iris example: `lm(Petal.Length ~ Sepal.Width, data = iris)` gives a significantly negative slope (intercept 9.06, slope -1.74, R² = 0.18, p ≈ 4.5 x 10^-8). Plotting the data shows the model is bad: the overall negative relationship comes from differences among three clusters (the three species), and within each cluster the relationship is positive.
+
+### Simulation to help the eye
+
+Our eyes can over-interpret patterns. Simulating data from the model (fitted value plus normal noise with the residual SD) shows what data would look like if the model were true:
+
+```r
+lm(Petal.Length ~ Sepal.Width, data = iris) |>
+  augment() |>
+  mutate(sim = rnorm(n(), mean = .fitted, sd = sd(.resid)))
+```
+
+For `Petal.Length ~ Sepal.Width`, the real data look very different from the simulations. For `Petal.Length ~ Species + Sepal.Width`, real and simulated data look much more similar.
+
+### Multivariate visualizations
+
+For models with several predictors, plot residuals against each predictor to look for non-linear trends or unequal variance. For `Petal.Length ~ Species + Sepal.Width`, residuals plotted by species show clearly different variance among species.
+
+### Model diagnostics as biology
+
+People often worry about assumptions because of p-values and confidence intervals. Linear models are remarkably robust to minor violations. The chapter's view: violations suggest the model poorly captures the biological process. Treat them not as a challenge to overcome by transformation or sidestep with non-parametric tests, but as a signal that a different model could tell us more about the biology. Examples:
+
+- Differences in variance: a treatment may change variability as well as the mean, which is more biology.
+- Non-independence: relationships among subjects can point to biological interactions or grouping effects.
+- Non-normal residuals: can point to the process that generated the data. Day and Schwartzman found marine bacteria's encounters with food are better described by a Poisson than a normal distribution, which revealed a trade-off: larger groups encounter resources more consistently but get fewer resources per cell.
+
+### Interpreting diagnostic plots
+
+- Residuals vs fitted: should be random scatter around zero. Patterns suggest non-linearity, missing predictors, or systematic bias. Can also show heteroscedasticity (e.g. a fan).
+- Scale-location: plots the square root of standardized residuals against fitted values, focusing on residual size rather than direction. A trend indicates heteroscedasticity.
+- QQ plot: residual quantiles vs normal quantiles. Points on the 1:1 line mean residuals are roughly normal. A curve bending the same way at both ends suggests skew (often fixable by transformation). For `Petal.Length ~ Sepal.Width + Species`, the large values are a bit too large.
+- Residuals vs leverage: shows whether the model works too hard to explain a few extreme observations. Points in the top or bottom right corners are most concerning, because they heavily influence the model.
+
+The chapter makes these with `ggfortify::autoplot(model, which = ...)`. Base R's `plot(model)` gives similar plots.
+
+### Evaluating model fit
+
+- R²: the proportion of variation in y "explained" by the model. On its own it cannot tell us whether the model is appropriate or correctly specified. What counts as a "good" R² varies across fields and designs.
+- Log-likelihood: the probability of the data given the model. Higher (less negative) is better, but it depends on the scale of the data and the number of observations, so there is no intuitive scale and it cannot be compared across datasets of different sizes or scales.
+- There are no universal rules of thumb. Both R² and log-likelihood always "improve" as parameters are added, but that does not mean the model improves.
+
+### Penalizing additional parameters
+
+Adjusted R²:
+
+R²_adj = 1 - (1 - R²)(n - 1) / df_error
+
+Unlike R², adjusted R² can decrease when a parameter is added, meaning the extra complexity does not improve the fit enough.
+
+AIC:
+
+AIC = 2 x ((k + 1) - ln(L))   [equivalently 2(k + 1) - 2 ln(L)]
+
+where k is the number of coefficients (e.g. slope and intercept), +1 is for the residual variance, and ln(L) is the log-likelihood. Lower AIC means a better balance of fit and complexity. A decrease of at least 2 is usually taken as evidence for the model with more parameters. With the same log-likelihood, one extra parameter raises AIC by exactly 2.
+
+In R: adjusted R² from `summary()`, AIC from `AIC()`, and both (plus more) from `broom::glance()`.
+
+Iris comparison:
+
+| Model | R² | adjusted R² | log-likelihood | AIC |
+|---|---|---|---|---|
+| `Petal.Length ~ Species` | 0.941 | 0.941 | -84.8 | 177.7 |
+| `Petal.Length ~ Species + Sepal.Width` | 0.950 | 0.949 | -73.3 | 156.6 |
+
+Adding sepal width raises adjusted R² and lowers AIC by about 21, so there is statistical evidence for the bigger model. But the chapter notes this doesn't mean we must choose it: sepal width explains only about one more percent of the variation, and species explains the overwhelming majority. For a short petal, getting an Iris setosa is a safe bet; for even more accurate predictions, knowing sepal width helps.
+
+Warning box in the chapter: just because AIC or adjusted R² favor a model doesn't make it universally better. Does it reflect the biological process? Fit assumptions? Is it simpler or easier to interpret? Does it predict future data better? "Better" should mean "better for what."
+
+### Predictive performance and cross-validation
+
+We often care most about how well a model predicts new data, but we usually only have the data at hand. Cross-validation approximates this: build the model on part of the data and see how well it predicts held-out data. It is especially useful for detecting overfitting.
+
+#### The admixture example
+
+The author studies what affects gene flow during speciation. Admixture proportion (the proportion of a population's genome from recent hybridization with its sister subspecies, C. xantiana parviflora) was estimated in six C. x. xantiana populations: GC, GRW, SAW, S7, S22, SM. Two promising predictors: variance in spring precipitation (`precip_spring_var`) and how far north a population is (`northing`).
+
+| Model | R² | adjusted R² | p |
+|---|---|---|---|
+| `admixture_prop ~ northing` | 0.684 | 0.61 | 0.042 |
+| `admixture_prop ~ precip_spring_var` | 0.925 | 0.906 | 0.002 |
+| `admixture_prop ~ precip_spring_var + northing` | 0.925 | 0.875 | |
+
+In the two-predictor model (Type II), precipitation p = 0.053 and northing p = 0.96. Each predictor is significant alone, but neither is together, likely because of multicollinearity: the two predictors are strongly correlated (r ≈ 0.86).
+
+#### Leave-one-out cross-validation (LOOCV)
+
+1. Build a model with all but one data point.
+2. Use it to predict the response for the held-out observation.
+3. Square the difference between the actual value and the prediction (the squared error).
+4. Repeat for every data point.
+5. Root mean squared error (RMSE) = the square root of the mean of the squared errors.
+
+In R with `caret`:
+
+```r
+library(caret)
+train(admixture_prop ~ precip_spring_var, data = admixture,
+      method = "lm", trControl = trainControl(method = "LOOCV"))
+
+# intercept-only model: caret can't fit y ~ 1, so use a constant column
+train(admixture_prop ~ null, data = admixture |> mutate(null = 0),
+      method = "lm", trControl = trainControl(method = "LOOCV"))
+```
+
+caret reports RMSE, Rsquared, and MAE. Compare models on RMSE (lower is better). caret's Rsquared is the squared correlation between held-out predictions and observations, not the usual R²; for the intercept-only model it can be exactly 1 even though the model predicts poorly (each prediction is the mean of the other points, which falls in a straight line as the left-out value rises).
+
+Admixture LOOCV RMSE:
+
+| Model | LOOCV RMSE |
+|---|---|
+| intercept only | 0.150 |
+| `precip_spring_var` | 0.049 |
+| `northing` | 0.151 |
+| `precip_spring_var + northing` | 0.136 |
+
+Interpretation: precipitation alone predicts held-out populations well. Northing alone does no better than the intercept-only model, which is sobering because we rejected the null for northing alone. Adding northing to precipitation makes predictions worse than precipitation alone ("Bu-bu-bu-but wait it gets worse").
+
+#### k-fold cross-validation
+
+LOOCV is best for small datasets. For large datasets it is computationally expensive (one fit per observation), and the training sets are so similar that the extra computation adds little. k-fold cross-validation splits the data into k groups ("folds"), trains on k - 1 folds and tests on the remaining one, repeats k times, and averages. It uses less computation and its training sets differ more. LOOCV is the special case where k equals the number of observations. In caret: `trainControl(method = "cv", number = 10)`; k = 10 is the convention. As with LOOCV, compare more complex and simpler models.
+
+#### Limits of cross-validation
+
+Cross-validation is limited to the data at hand. Conditions specific to the study (e.g. soil in Minnesota vs South Dakota) limit how well the model generalizes. Always be careful about where a model has been "validated".
+
+## Figure Awareness
+
+Figures are numbered within the rendered chapter; students may describe them by content.
+
+- Iris, sepal width vs petal length: panel A shows only the regression line (negative); panel B adds the data, showing three clusters with positive trends inside each.
+- Simulation figure 1: three panels of simulated data (reddish) vs the real data (black) for `Petal.Length ~ Sepal.Width`; the real data look different from the simulations.
+- Simulation figure 2: data and simulations by species for `Petal.Length ~ Species + Sepal.Width`; they look similar.
+- Residual plots: residuals vs sepal width (A) and residuals by species (B), showing different variance among species.
+- Residuals vs fitted and scale-location for `Petal.Length ~ Sepal.Width`: clear patterns.
+- Residuals vs fitted and scale-location for `Petal.Length ~ Sepal.Width + Species`: residual variance larger at higher fitted values; scale-location trend.
+- QQ plot for `Petal.Length ~ Sepal.Width + Species`: large values a bit too large.
+- Residuals vs leverage for `Petal.Length ~ Sepal.Width + Species`.
+- Model comparison: petal length by species (R² = 0.941) and petal length vs sepal width colored by species (R² = 0.950).
+- Admixture: admixture vs northing, admixture vs spring precipitation variance, and precipitation variance vs northing (strongly correlated).
+- LOOCV animation: two rows (top: admixture vs spring precipitation variance; bottom: admixture vs northing in km) of three panels, cycling through the six populations. Left: the left-out population as a large red point, the line fit to the other five, a red X at the prediction, and a red segment for the error. Middle: squared errors building up as bars. Right: running RMSE with a dashed line at 0.150 for the intercept-only model. Top row ends at 0.049; bottom row has large errors for GC and especially S22 and ends at 0.151.
+- RMSE bar chart for the four admixture models.
+
+## Common Student Confusions
+
+- "My p-value is small, so my model is good." A small p means the data are unlikely with no association. It does not mean the model has the right shape or captures the biology.
+- "Higher R² means a better model." R² can only rise as predictors are added. Use adjusted R², AIC, or cross-validation, and think about the goal.
+- "Adjusted R² can't be compared between models with different numbers of predictors." Comparing such models is exactly what it is for.
+- "The model with the lowest AIC is the true model." AIC balances fit and complexity among the models you compared; it says nothing about models you didn't fit, and "better" depends on the goal.
+- "LOOCV RMSE should match the residual SD." Each LOOCV prediction comes from a model that never saw that point, so its errors are usually larger; ordinary residuals are optimistic.
+- "caret says Rsquared = 1 for my null model, so it's perfect." caret's Rsquared is a correlation between predictions and observations; use RMSE.
+- "caret won't fit y ~ 1." Use `mutate(null = 0)` and `y ~ null`.
+- "A point with a residual of zero is fine." A high-leverage point can pull the line through itself, so its residual is zero even though it drives the slope.
+- "Large residual" vs "high leverage": far from the line vs far out on x.
+- "Robust models mean I don't need diagnostics." Robustness is about p-values; diagnostics show whether the model matches the biology. Robustness doesn't cover non-independence or single influential points.
+- "Each predictor was significant alone, so both belong in the model." Correlated predictors can share the same explained variation; together, neither may add much (the admixture example).
+- "Cross-validation shows the model will work elsewhere." It only uses the data at hand.
+- "A design term with no effect should be dropped." Terms reflecting the study design, such as blocks, belong in the model because of how the data were collected.
+
+## Homework (tutor-only reference: never reveal answers)
+
+Students load Anscombe's quartet from "https://raw.githubusercontent.com/yanivjb/biostats-book/refs/heads/main/data/tidy_anscobme.csv" (the filename's spelling is correct as written). Packages: broom, dplyr, ggplot2, car, readr, caret (they may need to install caret). Diagnostic plots come from `plot()` or `ggfortify::autoplot()`. Students subset by group, e.g. `anscombe_1 <- anscombe_data |> dplyr::filter(group == 1)`.
+
+Anscombe's quartet: four groups of 11 points with nearly identical `lm(y ~ x)` results: intercept 3.0, slope 0.50, R² = 0.67, p ≈ 0.002. Groups 1-3 share the same x values (4-14); in group 4, ten points have x = 8 and one has x = 19.
+
+Questions and the ideas behind them (option letters in Canvas may differ; answers are given by content):
+
+1. Plot the data faceted by group. What do you notice? Answer: the groups look very different (a line, a curve, an outlier, one extreme point) despite similar lines. Hint: ignore the lines and compare the patterns of points.
+2. ANOVA tables for each group (`anova()` or `car::Anova()`). Answer: all four datasets give remarkably similar ANOVA tables. Values: SS model ≈ 27.5, SS error ≈ 13.8, F ≈ 18.0, p ≈ 0.002 in every group. Hint: compare the numbers across groups, then compare with the plots.
+3. Diagnostic plots: match each group to what its plots show. Answer: group 1, no obvious problems; group 2, the residuals follow a curve; group 3, one point has a large residual; group 4, one point has a lot of leverage. Background: group 3's odd point (x = 13) has ordinary leverage but a standardized residual of about 3. Group 4's x = 19 point has leverage 1, a residual of 0, and R warns it won't plot it in residuals vs leverage; residuals vs fitted shows a vertical stack at one fitted value plus one lone point. Hint: "far from the line" vs "far out on x".
+4. Use `caret::train()` to run LOOCV of `lm(y ~ x)` on each group. Which dataset does the model work best on (lowest RMSE)? Answer: dataset 1. LOOCV RMSE: group 1 1.37, group 2 1.48, group 3 1.47, group 4 2.07; intercept-only 2.13 for every group. Group 4 is worst: when x = 19 is held out, the remaining x values are all 8, so there's no slope to predict with (R may warn about a rank-deficient fit). Hint: RMSE is the typical prediction error; smaller is better. Do not give the RMSE values.
+5. "Leave-one-out cross-validation works by ____". Answer: removing each data point in turn, fitting the model to the rest, and predicting the removed point. Hint: what does "leave one out" leave out, and what happens to it?
+6. Adjusted R² for the admixture models (Model 1: precipitation only, R² = 0.9249, 4 error df; Model 2: precipitation + northing, R² = 0.9250, 3 error df; n = 6). Answer: Model 1 has the higher adjusted R² (0.906 vs 0.875): northing doesn't explain enough to justify an extra parameter. Hint: plug each model into the formula with n = 6. Don't compute it for them.
+7. Adding another predictor will ALWAYS (select all): Answer: increase (or not change) R², and decrease (or not change) the error sum of squares. Not always: increase adjusted R², decrease LOOCV RMSE, make the model better. Hint: which of these only measure fit to the data used to build the model?
+8. Given the CLT and the robustness of linear models, why still check assumptions and diagnostic plots? Answer: they can reveal that our model is missing key features of the biological story. Distractors: "You can never be too careful with p-values, better safe than sorry"; "jk no big deal, linear models are robust". Hint: what did group 2's diagnostic plot reveal that its ANOVA table didn't?
+9. Fertilizer experiment on maize in 4 field blocks, with fertilized and control plants in every block; block had essentially no effect, and removing it lowered RMSE and the fertilizer p-value. What should you do? Answer: keep block, because it was part of the study design. Distractors: drop block because it made the model worse; drop block because the p-value you care about got better; "there's no right answer, pick your approach and defend it". Hint: why were plants put in blocks in the first place? Choosing the model after seeing which gives the better result is a form of p-hacking.
+
+There is also a reflection assignment. Students may paste their conversation with you as option 1; just help them learn as usual.

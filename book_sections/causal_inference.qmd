@@ -65,7 +65,7 @@ html_tag_audio <- function(file, type = c("mp3")) {
 
 4. Explain why statistically adjusting for a confound can recover a causal estimate, while adjusting for a collider can create a spurious one.
 
-5. Use a hypothesized causal structure to decide which variables belong inand out of a multiple regression model.
+5. Use a hypothesized causal structure to decide which variables belong in and out of a multiple regression model.
 
 6. Recognize that randomized controlled experiments remain our strongest tool for establishing cause, and understand what careful reasoning about observational data can and cannot offer in their absence.
 
@@ -153,7 +153,7 @@ By forcing us to carefully lay out our causal story, DAGs can show us where pote
 Let’s return to Fisher's arguments about smoking and lung cancer. We can reframe this debate as a few competing causal models which we can present as DAGs: 
 
 
-* **A) Smoking causes lung cancer.** The simplest model: smoking → cancer (@fig-cancerDAGs A). This represents a *front-door* causal path. This direct effect does not imply that smoking is the only cause of lung cancer, nor that all smokers will develop lung cancer or that all non-smokers won’t. Rather, it suggests that if we could create a "clone" for each person, with one clone smoking and the other not, we would expect more lung cancer cases among the smoking clones due to this direct effect.   
+* **A) Smoking causes lung cancer.** The simplest model: smoking → cancer (@fig-cancerDAGs A). This represents a direct causal path. This direct effect does not imply that smoking is the only cause of lung cancer, nor that all smokers will develop lung cancer or that all non-smokers won’t. Rather, it suggests that if we could create a "clone" for each person, with one clone smoking and the other not, we would expect more lung cancer cases among the smoking clones due to this direct effect.   
 
 * **B) Genetics confounds the relationship.**   Fisher argued that both smoking and cancer were influenced by a shared genetic predisposition: smoking ← genes → cancer (@fig-cancerDAGs B). This is a *back-door* path that creates a false correlation between smoking and cancer. 
 
@@ -161,7 +161,7 @@ These are not the only plausible causal models for an association between smokin
 
 * **C) Genetics influences smoking, which then causes cancer.**    A *pipe* (or "mediator") model (genes → smoking → cancer) — smoking still causes cancer, but genetics affects exposure (@fig-cancerDAGs C).
 
-* **D) Both genetics and smoking contribute to cancer.**  A *collider* model (smoking → cancer ← genes), where both arrows "collide" at cancer (@fig-cancerDAGs D).
+* **D) Both genetics and smoking contribute to cancer.**  A *collider* model  (smoking → cancer ← genes), where both arrows "collide" at cancer (@fig-cancerDAGs D). This doesn't explain away the association between smoking and cancer association, as smoking still causes cancer here. The collider matters only if we condition on cancer. In a study of only cancer patients, smoking and genetic risk would appear negatively related even if they're unrelated in the population (see collider bias below). 
 
 * **E) A more realistic model.**
     Includes multiple interacting causes (e.g., smoking, genetics, environment), showing that biological causation is usually complex (@fig-cancerDAGs E).
@@ -193,7 +193,7 @@ dag.3 <- dagitty("dag{genes -> smoke -> cancer}")
 dag.3 <- ggdag_canonical(dag.3, layout = "circle",node_size = 12,label_size = 22,text_size = 2.5)+theme_tufte()+
   theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank(), axis.line = element_line(color = "lightgrey"), axis.line.x.top = element_line(color = "lightgrey"), axis.line.y.right =  element_line(color = "lightgrey"))+ labs(title = "C) A pipe")
 
-dag.4 <- dagitty("dag{cancer <- smoke <- genes -> cancer}")
+dag.4 <- dagitty("dag{smoke -> cancer <- genes}")
 dag.4<-ggdag_canonical(dag.4, layout = "circle",node_size = 12,label_size = 22,text_size = 2.5)+theme_tufte()+
   theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank(), axis.line = element_line(color = "lightgrey"), axis.line.x.top = element_line(color = "lightgrey"), axis.line.y.right =  element_line(color = "lightgrey"))+ labs(title = "D) A collider")
 
@@ -228,7 +228,7 @@ Now, suppose we are studying a species of fish and want to determine if being la
 ### Causal Model 1: The Confound
 
 ```{r} 
-#| lable: fig-fishconfound
+#| label: fig-fishconfound
 #| echo: false 
 #| column: margin
 dag.fish <- dagitty("dag{eggs <- env. -> length}")
@@ -276,7 +276,7 @@ Wrong model 1: Omitting the confound
 #| echo: false
 #| column: margin
 #| label: fig-confound
-#| fig-cap: "Confounds are confounding."
+#| fig-cap: "Confounds are confounding: Length and eggs are associated only because environment affects both."  
 confound_plot <- ggplot(confounded_fish, aes(x = fish_length, y = fish_eggs)) +
   geom_smooth(method = "lm")+ 
   labs(title = "Confound", subtitle = "# eggs increases with length\nwithout a causal relationship.")
@@ -292,9 +292,7 @@ confound_plot +
 ```
 
 
-We can build a simple linear model predicting the number of fish eggs as a function of fish length. We can see that the prediction is good, and makes sense -- egg number reliably increases (`r lm(fish_eggs ~ fish_length, confounded_fish) %>%  glance()  %>% pull(r.squared) %>%round(digits =3)`) with fish length (slope = `r lm(fish_eggs ~ fish_length, confounded_fish) %>% tidy()%>%slice(2)%>% pull(estimate)%>% round(digits =3)`, df = (1,98), F = `r lm(fish_eggs ~ fish_length, confounded_fish) %>% anova()%>% tidy()%>% slice(1)%>%pull(statistic) %>% round(digits = 2)`, p-value = `r lm(fish_eggs ~ fish_length, confounded_fish) %>% anova()%>% tidy()%>% slice(1)%>%pull(p.value) %>% round(digits = 4)`). But we know this is not a causal relationship (because we didn't have this cause in our simulation).   
-
-
+We can build a simple linear model predicting the number of fish eggs as a function of fish length. We can see that the prediction is good, and makes sense -- egg number reliably increases ($R^2$ `r lm(fish_eggs ~ fish_length, confounded_fish) %>%  glance()  %>% pull(r.squared) %>%round(digits =3)`) with fish length (slope = `r lm(fish_eggs ~ fish_length, confounded_fish) %>% tidy()%>%slice(2)%>% pull(estimate)%>% round(digits =3)`, df = (1,98), F = `r lm(fish_eggs ~ fish_length, confounded_fish) %>% anova()%>% tidy()%>% slice(1)%>%pull(statistic) %>% round(digits = 2)`, p-value = `r lm(fish_eggs ~ fish_length, confounded_fish) %>% anova()%>% tidy()%>% slice(1)%>%pull(p.value) %>% round(digits = 4)`). The association is real, but it isn't causal. In our simulation, length has no effect on eggs. Length and eggs are associated only because good environments produce both.
 
 ```{r,echo=FALSE}
 lm(fish_eggs ~ fish_length, confounded_fish) %>% tidy()%>% mutate_at(-1,round, digits=3) %>%filter(term == "fish_length")%>%gt()%>% 
@@ -305,7 +303,10 @@ lm(fish_eggs ~ fish_length, confounded_fish) %>% tidy()%>% mutate_at(-1,round, d
 ```
 
 
-#### A Model Including the True Cause
+#### Adjusting for the confound.    
+
+To estimate the causal effect of length, we need to block the back-door path through environment. We do this by adding environmental quality to the model, so the length slope compares fish from equally good environments. 
+
 
 Let's say we didn't have a clear idea of which trait causally increased the number of eggs a fish laid. In this example, it’s plausible (although not necessarily true) to believe that both environmental quality and fish length influence the number of eggs laid. So, let's build a model that includes both variables, including the confounding variable, environmental quality. Then, we'll find our estimates and use the appropriate Type II sums of squares to evaluate significance. Finally, we'll use the `emtrends()` and `confint()` functions from the `emmeans` package to estimate uncertainty in our slope estimates.
 
@@ -338,13 +339,13 @@ bind_rows(
   )
 ```
 
-- **The Good News** is that now that we’ve added the true cause, we no longer find that fish_length is statistically associated with the number of eggs laid.    
+**This model answers our question right!** Kepping the environment constant, the slope for length is basically zero and its 95% CI includes 0, matching the truth. The environment slope is estimated less precisely than it would be on its own, because length and environment are so correlated (r = `r round(cor(confounded_fish$env_quality, confounded_fish$fish_length), 2)`). 
 
-- **The Bad News** is that, because we still have the wrong variable in our model, we lose the ability to correctly identify that environmental quality strongly predicts the number of eggs laid.
 
 :::note
-The results above are from a simulation. If you run this multiple times, you’ll see different outcomes. Sometimes, we will correctly reject the false null hypothesis in favor of the truth—that environmental quality increases the number of eggs laid. However, including the confounder in our model reduces our power to identify the true cause.
+These results come from one simulated dataset. Change the seed and the numbers will change, but across many simulations the length slope centers on 0, and its 95% CI includes 0 about 95% of the time.
 :::
+
 
 #### What to do?
 
@@ -370,7 +371,9 @@ the_confound <- ggplot(confounded_fish, aes(x = env_quality, y = fish_length)) +
 (confound_plot +   geom_point())+ causal_plot + the_confound + plot_annotation(tag_levels = "A")
 ```
 
-The right thing to do in is to model the confounder (e.g. with an ANCOVA or multiple regression).  
+*The right model depends on the question.* To estimate the effect of length, include the confounder  `fish_eggs ~ fish_length + env_quality` (above). To estimate the effect of environment, you don't need length. It isn't a confounder of environment → eggs (it doesn't cause eggs), so `fish_eggs ~ env_quality` is the cleaner and more precise model.
+
+
 
 ```{r,echo=FALSE}
 lm(fish_eggs ~ env_quality , confounded_fish)  %>% tidy()%>% mutate_at(-1,round, digits=3) %>%filter(term == "env_quality")%>%gt()%>% 
@@ -384,7 +387,7 @@ lm(fish_eggs ~ env_quality , confounded_fish)  %>% tidy()%>% mutate_at(-1,round,
 
 
 :::aside
-**Multicolinearity:**  This example also shows a statistical problem of *multicolinearity* -- that is our predictors are correlated. This makes building and interpreting a model challenging. 
+**Multicollinearity:**  This example also shows a statistical problem of *,ulticollinearity* -- that is our predictors are correlated. This makes building and interpreting a model challenging. 
 :::
 
 
@@ -396,7 +399,7 @@ lm(fish_eggs ~ env_quality , confounded_fish)  %>% tidy()%>% mutate_at(-1,round,
 
 
 ```{r}
-#| lable: fig-fishpipe1
+#| label: fig-fishpipe1
 #| echo: false 
 #| column: margin
 dag.fish.pipe <- dagitty("dag{env. -> length -> eggs}")
@@ -414,13 +417,22 @@ include_graphics("../figs/old/dag_pipe.png")
 ```
 
 
-So now let's look at a *pipe* in which the environment causes fish length and fish length causes fitness, but environment itself has  has no impact on fitness.   First let's simulate: 
 
 
-- One hundred fish (`n = 100`)
-- Environmental quality for each fish (normally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$)
-- Fish length based on environmental quality (predicted length = environmental quality with standard deviation 2)
-- Egg count based on fish length (predicted egg count = half the fish length, standard deviation 5, rounded to the nearest integer)
+So now let’s look at a pipe. In this example, the environment causes fish length, and fish length causes fitness. But the environment has no direct effect on egg number, it just indirectly influences it through its effect on length.   
+
+
+*First let’s simulate:*   
+
+- One hundred fish (`n = 100`).    
+- Environmental quality for each fish (normally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$).    
+- Fish length based on environmental quality (predicted length = environmental quality with standard deviation 2).   
+- Egg count based on fish length (predicted egg count = half the fish length, standard deviation 5, rounded to the nearest integer).  
+
+```{r}
+#| echo: false
+set.seed(18) 
+```
 
 ```{r}
 pipe_fish <- tibble(
@@ -436,11 +448,11 @@ pipe_fish <- tibble(
 #| echo: false
 #| column: margin
 #| label: fig-pipe_scatter
-#| fig-cap: "Pipes are fun."
-pipe_plot <- ggplot(pipe_fish, aes(x = fish_length, y = fish_eggs)) +
-  geom_smooth(method = "lm")+ 
-  labs(title = "Pipe (mediator)", subtitle = "# eggs increases with length\nwithout a causal relationship.")
-
+#| fig-cap: "In a pipe, environment is associated with egg number because it makes fish longer."
+pipe_plot <- ggplot(pipe_fish, aes(x = env_quality, y = fish_eggs)) +
+  geom_smooth(method = "lm") +
+  labs(title = "Pipe (mediator)",
+       subtitle = "Eggs increase with environment,\nbut only because of fish length.")
 
 pipe_plot +
     geom_point(size = 4)+
@@ -451,18 +463,15 @@ pipe_plot +
 
 ```
 
-In this scenario, we know that environmental quality does not directly cause fish to lay more eggs, as the model does not include a direct link from quality to egg count. However, both a plot and a statistical test reveal a strong association between environmental quality and egg count when fish length is not included in the model.
-
-
+In this scenario, we know that environmental quality does not directly cause fish to lay more eggs, as our simulation does not include a direct link from quality to egg count. However, both a plot and a statistical test reveal a strong association between environmental quality and egg count when fish length is not included in the model. This association is causal but indirect. That is, improving the environment really would produce more eggs, but only because it makes fish longer.
 
 :::note
-**Thinking about cause:**  In a real way you could say that environmental quality was a cause here. If we did an experiment and changed environmental quality we would get more eggs. Of course, we would get more eggs because fish length increased with environmental quality and this increase in length would be the cause of more eggs. If we could somehow increase fish length other means (e.g., selective breeding) without improving environmental quality, or if environmental quality improved but length remained constant, we would not -- according to this DAG -- see an increase in egg numbers. 
+**Thinking about cause:**  Environmental quality is a cause here, but it's an indirect one. If we did an experiment and changed environmental quality we would get more eggs. Of course, we would get more eggs because fish length increased with environmental quality and this increase in length would be the cause of more eggs. According to this DAG, if we increased fish length some other way (e.g., selective breeding) without increasing environment al quality, we would get more eggs. Conversely, this DAG implies that if we improved the environment but somehow held length constant, we would not.
 :::
 
-**Our Statistical Analysis Cannot Prove Causation**
+**The total effect of environment**
 
-We can fit a simple linear model predicting egg count based solely on environmental quality. This model will show a positive and reliable association (slope = `r (lm(fish_eggs ~ env_quality, pipe_fish) %>%  coef())[2]%>% as.numeric()%>% round(digits = 4)`; $r^2 =$  `r lm(fish_eggs ~ env_quality, pipe_fish) %>%  glance() %>%pull(r.squared) %>% round(digits =3)`) —- egg count appears to increase with environmental quality. Of course, this is not a causal relationship, as we did not model environmental quality as a direct cause of egg production. 
-
+We can fit a simple linear model predicting egg count based solely on environmental quality. This model will show a positive and reliable association (slope = `r (lm(fish_eggs ~ env_quality, pipe_fish) %>%  coef())[2]%>% as.numeric()%>% round(digits = 4)`; $r^2 =$  `r lm(fish_eggs ~ env_quality, pipe_fish) %>%  glance() %>%pull(r.squared) %>% round(digits =3)`) —- egg count increases with environmental quality. The slope estimates the total causal effect of environment on egg production, which is mediated by length. In this simulation, (because we know the actual generating model), we can see that the total effect is 0.5 eggs per unit of environmental quality (give or take sampling error) -- length increases with environmental quality (slope = 1), and egg production increases with length (slope = 0.5). 
 
 ```{r, echo=FALSE}
 lm(fish_eggs ~ env_quality, pipe_fish) %>% tidy()%>% mutate_at(-1,round, digits=3) %>%filter(term == "env_quality")%>%gt()%>% 
@@ -474,7 +483,11 @@ lm(fish_eggs ~ env_quality, pipe_fish) %>% tidy()%>% mutate_at(-1,round, digits=
 
 **Adding the immediate cause into our model**  
 
-So, let's build a model including both the immediate cause, fish length, as well as the indirect cause, environmental quality. We see pretty strange behavior here - when both variables are in the statistical model, neither is significantly associated with the number of eggs laid. 
+So, let's build a model including both the immediate cause, fish length, as well as the indirect cause, environmental quality. These results may surprise you because **Adding length into the model fundamentally changes what each slope means.** Now,   
+
+- The slope for environment estimates the direct effect of environment, holding length constant. From our simulation set-up, we know that this should be zero.    
+- The length slope estimates the effect of length, holding environment constant. From our simulation set up, this should be 0.5.  
+- But becsaue length and environment are correlated (r = `r round(cor(pipe_fish$env_quality, pipe_fish$fish_length), 2)`), there is little independent variation left in either. because of this, both estimates are imprecise, and adjusting for each in turn (as we do with type II sums of squares) can rob us of statistical power to detect the effect of either.
 
 
 ```{r, eval = FALSE}
@@ -509,6 +522,8 @@ bind_rows(
 ```
 
 
+In our simulated data, the estimated environment slope is `r round(coef(fish_lm_w_cause)["env_quality"], 2)` and the estimated slope for length slope is`r round(coef(fish_lm_w_cause)["fish_length"], 2)`, and both have wide 95% CIs
+
 **What to do?**
 
 First let's look at all the relationships in our data 
@@ -521,19 +536,23 @@ First let's look at all the relationships in our data
 #| message: false
 #| warning: false
 direct_causal_plot <- ggplot(pipe_fish, aes(x = fish_length, y = fish_eggs)) +
-  geom_point()+
-  geom_smooth(method = "lm")+ 
-  labs(title = "Truth", subtitle = "Big fish\nincrease fitness")
+  geom_point() + geom_smooth(method = "lm") +
+  labs(title = "Truth", subtitle = "Longer fish\nlay more eggs")
 
-indirect_path <- ggplot(pipe_fish, aes(x = fish_length, y = env_quality)) +
-  geom_point()+
-  geom_smooth(method = "lm")+ 
-  labs(title="Truth", subtitle = "The indirect causal path is driven\nby the effect of env quality on length")
+indirect_path <- ggplot(pipe_fish, aes(x = env_quality, y = fish_length)) +
+  geom_point() + geom_smooth(method = "lm") +
+  labs(title = "Truth", subtitle = "Better environments\nmake longer fish")
 
-(pipe_plot+geom_point()) + causal_plot + indirect_path + plot_annotation(tag_levels = "A")
+(pipe_plot + geom_point()) + direct_causal_plot + indirect_path + plot_annotation(tag_levels = "A")
+
 ```
 
-The right thing to do in this case is to just build a model with the fish length.  
+Which model is right depends on the question.   
+
+- If your question is "*Does the environment affect egg number?*" Build the model `fish_eggs ~ env_quality`, and make sure not to add length, because  adjusting for it blocks the very effect you're asking about.   
+- If your question is	"*Does length affect egg number?*" Build the model `fish_eggs ~ fish_length`. Leave out env_quality. You don’t need it (it affects eggs only through length), and  it will cost you precision and power.  
+- If your question is	"*Does the environment affect eggs other than through length? (the direct effect)?*" Fit `fish_eggs ~ env_quality + fish_length` model, and look at the environment slope. Here it should be about 0.
+
 
 
 ```{r,echo=FALSE}
@@ -548,13 +567,19 @@ lm(fish_eggs ~ fish_length , pipe_fish)  %>% tidy()%>% mutate_at(-1,round, digit
 
 ### Causal model 3: Collider
 
-A collider is something caused by two variables. Say in our example both fish length and environmental quality caused fish to lay more eggs. Here egg number is a colider. Lets simulate it!
+A collider is a variable whose value is caused by the value of two (or more) other variables. Suppose fish length and environmental quality each cause fish to lay more eggs, but are unrelated to each other. Egg number is then a collider if we consider this DAG: length → eggs ← environment. Colliders become a problem when we try to adjust for, condition, or select based on the value of the collider.  Doing so creates an association between the causes, even when none exists. 
 
 
-- One thousand fish 
-- Environmental quality for each fish (normally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$)
-- Fish length is independent of quality  (normally distributed with mean $\mu = 50$ and standard deviation $\sigma = 5$)
-- Egg count based on fish length and environmental quality (predicted egg count = (Fish length + Environmental quality) /4, standard deviation 8, rounded to the nearest integer)
+
+Such "collider bias", is tricky to understand, so, let's simulate it:   
+
+
+-	One thousand fish (`n_fish = 1000`).    
+-	Environmental quality for each fish (normal, $\mu = 50$, $\sigma = 8$).     
+-	Fish length, independent of environment (normal, $\mu = 50$, $\sigma = 8$).    
+-	Egg count from both: $\hat{Y}$ = (length + environmental quality) / 4, with $\sigma = 2$, rounded to the nearest integer that is zero or greater.    
+
+
 
 ```{r}
 n_fish <-1000
@@ -573,22 +598,23 @@ Let's check out our data:
 collider_plotA <- ggplot(collider_fish, aes(x = fish_length, y = fish_eggs)) +
   geom_point()+
   geom_smooth(method = "lm")+ 
-  labs(title = "Truth", subtitle = "Big fish\nincrease fitness")
+  labs(title = "Truth", subtitle = "Longer fish\nlay more eggs")
 
 collider_plotB <- ggplot(collider_fish, aes(x = env_quality, y = fish_eggs)) +
   geom_point()+
   geom_smooth(method = "lm")+ 
-  labs(title = "Truth", subtitle = "Good environment\nincrease fitness")
+  labs(title = "Truth", subtitle = "Better environments\nmean more eggs")
 
 collider_plotC <- ggplot(collider_fish, aes(x = env_quality, y = fish_length)) +
   geom_point()+
   geom_smooth(method = "lm")+ 
-  labs(title = "Truth", subtitle = "Environment not\nassociated with lengthincrease")
+  labs(title = "Truth", subtitle = "Environment and length\nare unrelated")
 
 collider_plotA  + collider_plotB  + collider_plotC  + plot_annotation(tag_levels = "A")
 ```
 
-We see everything that is expected, and our stats back this up. 
+
+Each cause is associated with egg number, and the two causes are unrelated, just as we simulated. A model with both causes recovers both effects (the true slope for each is 0.25).  
 
 ```{r, eval = FALSE}
 library(emmeans)
@@ -621,7 +647,7 @@ bind_rows(
 
 ```
 
-Here the correct model is to include both causes, excluding one will likely lead to unbiased estimates of the effect of the other, but it will reduce power and increase uncertainty. 
+Here the correct model is to include both causes. Excluding one will likely lead to unbiased estimates of the effect of the other, but it will reduce power and increase uncertainty. 
 
 
 #### Beware of Collider Bias
@@ -629,23 +655,27 @@ Here the correct model is to include both causes, excluding one will likely lead
 Suppose we're interested in fish that lay a large number of eggs, and we want to explore factors that might help them lay even more. If we focus only on fish that laid more than the average number of eggs (e.g., 30), we might observe an unexpected pattern:
 
 ```{r, message=FALSE, warning=FALSE}
-ggplot(collider_fish %>% filter(fish_eggs >= 30),
-       aes(x = env_quality, y = fish_length)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
+high_egg_fish <- filter(collider_fish, fish_eggs >= 30)
+ggplot(collider_fish, aes(x = env_quality, y = fish_length)) +
+  geom_point(color = "grey80") +
+  geom_point(data = high_egg_fish) +
+  geom_smooth(data = high_egg_fish, method = "lm", se = FALSE) +
+  labs(subtitle = "Grey: all fish (no association). Black: fish with 30+ eggs only.")
+
 ```
 
 
+Why? A fish can lay 30 or more eggs (the average is about 25, so this is roughly the top 7%). Among high-egg fish, those in poor environments must be long, and short ones must be in good environments. Selecting on the collider creates an association that doesn't exist in the population.
 
 :::warning
-**Collider bias:**  Colliders can have funny consequences when we condition  on an outcome. Assume, there is no association between smoking and a genetic propensity to get lung cancer for reasons unrelated to smoking.  If we only looked at lung cancer patients, it would appear that there is a negative correlation between smoking and a genetic risk for cancer unrelated to smoking because we do not see non-smokers with low genetic risk for lung cancer. This is known as "selection bias", "M bias", or "collider bias".   
+**Collider bias:**  Conditioning on a collider, by selecting on it or adjusting for it in a model, creates an association between its causes even when none exists. In the lung cancer example, suppose smoking and a genetic risk for lung cancer are unrelated in the population. Among lung cancer patients only, smokers are less likely to carry the genetic risk (their cancer is already "explained" by smoking), so smoking and genetic risk appear negatively related. This is also called selection bias.
 :::
 
 
 ```{r,echo=FALSE}
 lm(fish_length ~ env_quality , collider_fish %>% filter(fish_eggs>=30))  %>% tidy()%>% mutate_at(-1,round, digits=3) %>%filter(term == "env_quality")%>%gt()%>% 
   tab_header(
-    title = "Model with direct cause only",
+    title = "Collider bias: environment and length among high-egg fish only",
     subtitle = "lm(fish_length ~ env_quality, data = collider_fish %>% filter(fish_eggs>=30))"
   )
 ```
@@ -653,8 +683,9 @@ lm(fish_length ~ env_quality , collider_fish %>% filter(fish_eggs>=30))  %>% tid
 
 ## What to do?
 
+The examples above show why it is hard to identify causes without experiments. Causal diagrams cannot prove causation, but can suggest two ways forward. First, they tell us which variables to adjust for, and which to leave out, when we build a model. Second, they make testable predictions about which associations we should and shouldn’t see.
 
-The examples above show the complexity in deciphering causes without experiments. But they also show us the light about how we can infer causation, because causal diagrams can point to testable hypotheses. If we cannot do experiments, causal diagrams offer us a glimpse into how we can infer causation. Perhaps the best way to do this is by matching – if we can match subjects that are identical for all causal paths except the one we are testing, we can then test for a statistical association, and make a causal claim we can believe in.
+I note that adjusting for a confounder doesn’t have to mean adding it to a linear model. We can also "match" (i.e. comparing subjects that are alike on every measured confounder). If two groups of fish come from equally good environments, any difference in egg number between long and short fish can’t be due to environment. Like any adjustment, matching can only account for confounders we’ve measured. And as with regression, the DAG tells us what to match on (math on confounders not mediators or colliders). But if we’ve measured and matched on all the confounders, a remaining association is one we can interpret causally.
 
 The field of causal inference is developing rapidly. If you want to hear more, the popular book, The Book of Why (Pearl and Mackenzie 2018) is a good place to start. The field of causal inference offers many exciting techniques for deciphering cause. For now we will just say that a good biological intuition and careful thinking about your model and causation is a great starting place. 
 
@@ -669,11 +700,11 @@ The field of causal inference is developing rapidly. If you want to hear more, t
     - *Example DAG:*  Genetics → Smoking and Genetics → Cancer.   
     - *What to do?* Control for confounder.   
 
-- **Mediator (or “Pipe”):** A variable through which the causal effect flows. Removing it breaks the causal chain and estimates only the direct effect.   
+- **Mediator (or “Pipe”):** A variable through which the causal effect flows. Including it in the model blocks that path, so you estimate only the direct effect.   
     - *Example DAG:* Genes → Smoking → Cancer (Smoking is the mediator).   
     - *What to do?* Think!! If you include the mediator you estimate **direct effects**. If you omit the mediator you estimate **total effects**.  
 
 -  **Collider:** A variable that is caused by two or more others; conditioning on it creates a false association.  
     - *Example DAG:* Smoking → Cancer ← Genes. In this example there would be a negative relationship between smoking and genetic predisposition to lung cancer among lung cancer patients, but not in the broader population. 
-    - *What to do?* Do not condition on the "colliding variable" and do no include it in your model.
+    - *What to do?* What to do? When studying the relationship between two variables, don't adjust for or select on a variable they both cause. If the collider is your outcome, of course you model it; the problem is conditioning on it while studying its causes.
 :::
