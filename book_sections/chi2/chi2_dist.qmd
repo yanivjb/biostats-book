@@ -1,4 +1,4 @@
-## • X6. $\chi^2$ distribution {.unnumbered #chi2_dist}
+## • XZ. $\chi^2$ distribution {.unnumbered #chi2_dist}
 
 
 

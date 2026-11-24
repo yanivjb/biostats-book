@@ -1,4 +1,4 @@
-# X3. Better Figures  {.unnumbered #dataviz}
+# XX. Better Figures  {.unnumbered #dataviz}
 
 ```{r setup, include=FALSE}
 library(dplyr)

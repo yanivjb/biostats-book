@@ -1,4 +1,4 @@
-## • X3. Clear plots {.unnumbered #clear_plots}
+## • XX. Clear plots {.unnumbered #clear_plots}
 
 
 

@@ -1,4 +1,4 @@
-## • X6. $\chi^2$ summary {.unnumbered #chi2_summary}
+## • XZ. $\chi^2$ summary {.unnumbered #chi2_summary}
 
 
 ---

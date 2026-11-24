@@ -1,4 +1,4 @@
-## • X6. $\chi^2$ Two Cats {.unnumbered #associations_between_catvars}
+## • XZ. $\chi^2$ Two Cats {.unnumbered #associations_between_catvars}
 
 
 
