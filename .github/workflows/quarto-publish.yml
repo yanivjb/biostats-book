@@ -107,6 +107,7 @@ jobs:
             "ggExtra",
             "caret",
             "pwr",
+            "broom.mixed",
             "multcomp",
             "dagitty",
             "ggdag",
