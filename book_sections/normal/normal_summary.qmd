@@ -22,7 +22,7 @@ library(ggplot2)
 
 
 
-Links to: [Summary](#normal_summary_chapter-summary). [Chatbot tutor](#normal_summary_chatbot_tutor).  [Questions](#normal_summary_practice-questions). [Glossary](#normal_summary_glossary-of-terms).  [R functions](#normal_summary_key-r-functions). [More resources](#normal_summary_additional-resources).
+Links to: [Summary](#normal_summary_chapter-summary). [Chatbot tutor](#normal_summary_chatbot_tutor). [Games](#chapter-14-games).  [Questions](#normal_summary_practice-questions). [Glossary](#normal_summary_glossary-of-terms).  [R functions](#normal_summary_key-r-functions). [More resources](#normal_summary_additional-resources).
 
 
 
@@ -49,6 +49,13 @@ Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgp
 
 :::
 
+
+### Games {#chapter-14-games}
+
+[Play this chapter’s games](../../games/assets/biostats-games/index.html?chapter=14){target="_blank"}
+
+<script src="../../games/embed.js"></script>
+<iframe data-chapter-games src="../../games/assets/biostats-games/index.html?chapter=14&amp;cards=1" title="Chapter 14 game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 ## Practice Questions {#normal_summary_practice-questions}
 
@@ -222,6 +229,11 @@ The standard deviation of the sampling distribution is the standard error, calcu
 ## Additional resources   {#normal_summary_additional-resources}
 
 :::learnmore 
+
+
+**Interactive visualizations:**          
+
+- [A viusal explanations of the Central Limit Theorem](https://mfviz.com/central-limit/) from [Michael Freeman](https://mfviz.com/).   
 
 **Videos:**         
 

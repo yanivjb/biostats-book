@@ -9,7 +9,7 @@ webr:
 ---
 
 
-Links to: [Summary](#f_summary_chapter-summary). [Chatbot tutor](#f_summary_chatbot_tutor).  [Questions](#f_summary_practice-questions). [Glossary](#f_summary_glossary-of-terms). [R packages](#f_summaryR_packages-introduced). [R functions](#f_summary_key-r-functions). [More resources](#f_summary_additional-resources).
+Links to: [Summary](#f_summary_chapter-summary). [Chatbot tutor](#f_summary_chatbot_tutor). [Games](#chapter-17-games).  [Questions](#f_summary_practice-questions). [Glossary](#f_summary_glossary-of-terms). [R packages](#f_summaryR_packages-introduced). [R functions](#f_summary_key-r-functions). [More resources](#f_summary_additional-resources).
 
 
 ```{r}
@@ -58,6 +58,13 @@ Please interact with this custom chatbot ([**ChatGPT link here**](https://chatgp
 
 
 
+
+### Games {#chapter-17-games}
+
+[Play this chapter’s games](../../games/assets/biostats-games/index.html?chapter=17){target="_blank"}
+
+<script src="../../games/embed.js"></script>
+<iframe data-chapter-games src="../../games/assets/biostats-games/index.html?chapter=17&amp;cards=1" title="Chapter 17 game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 ## Practice Questions {#f_summary_practice-questions}
 

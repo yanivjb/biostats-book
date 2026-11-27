@@ -23,7 +23,7 @@ library(palmerpenguins)
 
 
 
-Links to: [Summary](#shuffling_summary_chapter-summary). [Chatbot tutor](#shuffling_summary_chatbot_tutor).  [Questions](#shuffling_summary_practice-questions). [Glossary](#shuffling_summary_glossary-of-terms). [R packages](#shuffling_summaryR_packages_introduced). [R functions](#shuffling_summary_key-r-functions). [More resources](#shuffling_summary_additional-resources).
+Links to: [Summary](#shuffling_summary_chapter-summary). [Chatbot tutor](#shuffling_summary_chatbot_tutor). [Games](#chapter-11-games).  [Questions](#shuffling_summary_practice-questions). [Glossary](#shuffling_summary_glossary-of-terms). [R packages](#shuffling_summaryR_packages_introduced). [R functions](#shuffling_summary_key-r-functions). [More resources](#shuffling_summary_additional-resources).
 ---
 
 ## Chapter summary {#shuffling_summary_chapter-summary}  
@@ -46,6 +46,13 @@ Please interact with this custom chatbot ([**link to ChatGPT chatbot here**](htt
 
 :::
 
+
+### Games {#chapter-11-games}
+
+[Play this chapter’s games](../../games/assets/biostats-games/index.html?chapter=11){target="_blank"}
+
+<script src="../../games/embed.js"></script>
+<iframe data-chapter-games src="../../games/assets/biostats-games/index.html?chapter=11&amp;cards=1" title="Chapter 11 game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 ## Practice Questions {#shuffling_summary_practice-questions}
 

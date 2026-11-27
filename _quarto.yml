@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: docs
+  resources:
+    - games/assets/biostats-games/**
+    - games/embed.js
   preview:
     browser: true
 
@@ -212,6 +215,8 @@ book:
     - book_sections/future_incomplete.qmd
     - book_sections/causal_inference.qmd
     - book_sections/probability_and_likelihood.qmd
+    - book_sections/glm.qmd
+    - book_sections/dasEFX.qmd
     - part: book_sections/data_viz.qmd
       chapters:         
         - book_sections/data_viz/audience&delivery.qmd
@@ -236,6 +241,7 @@ book:
         - book_sections/chi2/chi2_summary.qmd   
     - book_sections/filler.qmd
     - book_sections/additional_resources_index.qmd
+    - games/games.qmd
     - part: book_sections/supps.qmd
       chapters: 
         - book_sections/effect_size_ref.qmd

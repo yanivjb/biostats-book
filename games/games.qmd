@@ -1,0 +1,14 @@
+---
+number-sections: false
+page-layout: full
+# Quarto 1.9's theme switch expects this link even on pages without code blocks.
+include-in-header:
+  text: |
+    <link id="quarto-text-highlighting-styles" class="quarto-color-scheme-extra" rel="disabled-stylesheet">
+---
+
+# Games {.unnumbered}
+
+[Open full screen ↗](assets/biostats-games/index.html){target="_blank" style="font-size:0.85em"}
+
+<iframe src="assets/biostats-games/index.html?embed=1" title="Applied Biostatistics games" style="width:100%;height:85vh;height:85dvh;min-height:480px;max-height:900px;border:0;" allow="web-share"></iframe>

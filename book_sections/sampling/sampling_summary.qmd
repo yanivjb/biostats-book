@@ -26,7 +26,7 @@ include_graphics("https://imgs.xkcd.com/comics/survivorship_bias_2x.png")
 
 --- 
 
-Links to:   [Summary](#sampling_summary_chapter-summary). [Chatbot tutor](#sampling_summary_chatbot_tutor).  [Questions](#sampling_summary_practice-questions). [Glossary](#sampling_summary_glossary-of-terms). [R functions](#sampling_summary_key-r-functions). [More resources](#sampling_summary_additional-resources).
+Links to:   [Summary](#sampling_summary_chapter-summary). [Chatbot tutor](#sampling_summary_chatbot_tutor). [Games](#chapter-8-games).  [Questions](#sampling_summary_practice-questions). [Glossary](#sampling_summary_glossary-of-terms). [R functions](#sampling_summary_key-r-functions). [More resources](#sampling_summary_additional-resources).
 ---
 
 ## Chapter summary {#sampling_summary_chapter-summary}
@@ -52,6 +52,13 @@ We almost never know the truth (the population parameter), but we estimate it fr
 
 Please interact with this custom chatbot ([**ChatGPT version here**](https://chatgpt.com/g/g-687e94ec840c8191ae844f3030e9adb4-sampling). [**Gemini version**](https://gemini.google.com/gem/1r6UJEu2uEwSt66cSUZ2RKNI721nDczKG?usp=sharing)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 :::
+
+### Games {#chapter-8-games}
+
+[Play this chapter’s games](../../games/assets/biostats-games/index.html?chapter=8){target="_blank"}
+
+<script src="../../games/embed.js"></script>
+<iframe data-chapter-games src="../../games/assets/biostats-games/index.html?chapter=8&amp;cards=1" title="Chapter 8 game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 ## Practice Questions {#sampling_summary_practice-questions}
 

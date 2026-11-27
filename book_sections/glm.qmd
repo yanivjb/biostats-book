@@ -1,0 +1,773 @@
+## X3. GLM {.unnumbered #glm}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(ggfortify)
+library(broom)
+library(cowplot)
+library(ggthemes)
+library(emojifont)
+library(knitr)
+library(DT)
+```
+
+**Motivating scenario:** We want to model data that are not normally distributed. Here we use yes/no (or proportion) data and count data as examples.
+
+### Review
+
+#### Linear models and their assumptions
+
+A statistical model describes the predicted value of a response variable as a function of one or more explanatory variables.
+
+A linear model predicts the response variable by adding up all components of the model. So, in a linear model, we predict the value of a response variable, $\widehat{Y_i}$, knowing that the observed value, $Y_i$, will deviate from this prediction by some normally distributed "residual" value, $e_i$.
+
+$$Y_i = \widehat{Y_i} + e_i$$
+
+We predict Y as a deviation from some constant, a, as a function of a bunch of stuff.
+
+$$\widehat{Y_i} = a + b_1 \times x_{1,i} + b_2 \times x_{2,i}  + \dots$$
+
+##### Assumptions of Linear Models
+
+Linear models assume
+
+- Data points are independent.
+- Data are unbiased.
+- Error is independent of predictors.
+- The variance of residuals is independent of predictors.
+- Error is normally distributed.
+- Response can be modeled as a linear combination of predictors.
+
+##### When data do not meet assumptions
+
+If data do not meet assumptions, we can forge ahead (if the test will be robust), permute/bootstrap, transform, or find a better model.
+
+##### Common violations
+
+We know that a lot of real-world data can be modeled by a linear model, and we also know that the linear model is relatively robust to violations of its assumptions.
+
+Still, there are some violations of assumptions of linear models that are particularly common, especially in biological data.
+
+How biology breaks assumptions of the linear model (better approach in parentheses):
+
+- Heteroscedastic residuals (Use Generalized Least Squares).
+- Binomial data (Use logistic regression, a generalized linear model for binomially distributed data).
+- Count data (Use a generalized linear model with Poisson, quasi-Poisson, or negative binomial distributions).
+- Non-independence from nested designs (Use mixed effect models).
+
+#### Likelihood-Based Inference
+
+We have [previously seen the idea of likelihood-based inference](#probability_and_likelihood), which we can use to estimate parameters and uncertainty, and to test null hypotheses for any data that we can appropriately model. We [previously used likelihood for our familiar linear models](#probability_and_likelihood), which we knew how to use without a likelihood approach. That is, we didn't need to use likelihood to ask if species were moving uphill (our one-sample t-test example), as we already knew how to run a one-sample t-test.
+
+Here, we'll consider the true benefit of likelihood-based inference: its flexibility.
+
+### Generalized Linear Models
+
+Generalized Linear Models (GLMs) let us model responses that aren't normally distributed (e.g., yes/no outcomes or counts) by modeling the data with the distribution they actually come from. They do so by:
+
+- Specifying the distribution family they come from (the random component).
+- Finding a "linear predictor" (systematic component).
+- Using a link function to connect the expected value (mean) of the response to the linear predictor. (The inverse of the link function takes us from the linear predictor back to the predicted mean.)
+
+What does this mean? Let's look at the example below to clarify!
+
+Here we focus on logistic regression (used for yes/no data). However, we can use a generalized linear model to model data from any distribution. We also introduce Poisson regression (used for count data).
+
+#### Assumptions of generalized linear models
+
+GLMs are flexible and allow us to model just about anything. But our models must be appropriate for our data. Specifically, GLMs assume
+
+- The data are independently distributed, conditional on predictors (unless this is modeled).
+- The response, given the predictors, follows the chosen distribution.
+- A linear relationship between the explanatory variables and the link-transformed *expected* response. (Note: a GLM does not transform the data themselves.)
+- Samples aren't too small (our p-values from likelihood ratio tests rely on a large-sample approximation).
+
+### GLM Example: "logistic regression"
+
+A particularly common type of biological data is yes/no data. Common examples of yes/no data are
+
+- Alive / Dead
+- Healthy / Sick
+- Present / Absent
+- Mated / Unmated
+- etc.
+
+Such data are poorly described by a standard linear model, but we can generalize the linear model to non-normal data. Logistic regression is a type of generalized linear model (GLM) which models a yes/no outcome (e.g. win/lose, live/die, presence/absence) as a function of one or more predictors. The linear predictor is the familiar regression equation:
+
+$$\widehat{\eta_i} = a + b_1 \times x_{1,i} + b_2 \times x_{2,i}  + \dots$$
+
+$\widehat{\eta_i}$ is not our prediction for the probability of "yes", $\widehat{p_i}$.  In fact, that's why I'm using $\widehat{\eta_i}$ as notation for the linear predictor, rather than $\widehat{Y_i}$. We can convert our linear predictor to the actual scale we care about through the "link function".
+
+For yes/no data, the link function is the logit. If $p$ is the probability of "yes," the odds of "yes" are $p/(1-p)$. For example, $p = 0.75$ gives odds of $0.75/0.25 = 3$, or "3 to 1." The logit is the natural log of the odds:
+
+$$\text{logit}(p) = \ln\left(\frac{p}{1-p}\right)$$
+
+This is useful because, while probabilities are bounded between zero and one, log odds can be any number. So whatever value the linear predictor gives, it corresponds to a valid probability (unlike the linear models we'll see below, which can predict impossible values). The problem is that few of us think in log odds, so we usually want to convert from log odds (our prediction scale) to probabilities (a scale we can understand). We do this with the inverse of the logit link function (the "logistic" function):
+
+$$\widehat{p_i} = \frac{e^{\widehat{\eta_i}}}{1+e^{\widehat{\eta_i}}}$$
+
+So if the linear predictor gives log odds, $\widehat{\eta_i}$, of negative one, the probability of "yes" is $\frac{e^{-1}}{1+e^{-1}} = 0.269$. We can find this in R as:
+
+- `exp(-1)/ (1+exp(-1))` = `r round(exp(-1)/ (1+exp(-1)), digits = 3)`
+- Or, more simply, with the [`plogis()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Logistic.html) function. `plogis(-1)` = `r round(plogis(-1), digits = 3)`.
+
+#### Logistic Regression Example: Cold fish
+
+How does the length of exposure to cold water impact fish survival?
+
+Pitkow (1960) exposed guppies to 2, 8, 12, or 18 minutes in 5°C water. The data -- with a value of 1 for Alive meaning alive and a value of 0 meaning dead -- are presented below.
+
+```{r}
+cold.fish <- tibble(Time  = rep(c(2,8,12,18), times = 2),
+                    Alive = rep(c(0,1), each = 4),
+                    n     = c(11, 24, 29, 38, 29, 16, 11, 2)) %>%
+  uncount(weights = n)
+```
+
+What to do??
+
+##### (Imperfect) Option 1: Linear model with zero/one data
+
+We could build a linear model in which we predict survival as a function of time in cold water.
+
+```{r}
+#| label: fig-coldfish-lm
+#| fig-cap: "Guppy survival (1 = alive, 0 = dead) after 2 to 18 minutes in 5°C water, with a linear model fit. Points are jittered so overlapping fish are visible."
+#| fig-alt: "Scatterplot of survival (0 or 1) against minutes in cold water. Points cluster in horizontal bands at 0 and 1 above each of four exposure times. A straight regression line slopes downward from about 0.7 at 2 minutes to near 0 at 18 minutes."
+#| message: false
+ggplot(cold.fish, aes(x = Time, y = Alive)) +
+  geom_jitter(size = 2, alpha = .35, height = .05, width = .5)+
+  geom_smooth(method = "lm")+
+  scale_x_continuous(breaks = seq(2,18,6),limits = c(0,20))
+```
+
+```{r}
+lm_cold_fish1 <- lm(Alive ~ Time, data = cold.fish)
+summary(lm_cold_fish1)
+```
+
+We see, unsurprisingly, that fish survival strongly and significantly decreases the longer they are in cold water.
+
+```{r}
+#| label: fig-coldfish-lm-diag
+#| fig-cap: "Diagnostic plots for the linear model of 0/1 survival data."
+#| fig-alt: "Four diagnostic panels: residuals vs. fitted values, normal Q-Q plot, scale-location plot, and residuals vs. leverage. Residuals fall in two parallel diagonal bands because the response is only 0 or 1, and the Q-Q plot departs from the line at both ends."
+#| fig-width: 9
+autoplot(lm_cold_fish1 , ncol = 4)
+```
+
+While this isn't terrible, we do see the greatest residuals for intermediate predictions, and the QQ plot shows the extreme values are too big.
+
+So, this isn't the end of the world, but isn't ideal.
+
+##### (Imperfect) Option 2: Linear model with proportions
+
+Alternatively, we could convert data to proportions and run a linear model.
+
+```{r}
+#| message: false
+cold.fish.summary <- cold.fish %>%
+    group_by(Time, Alive) %>%
+    summarise(n = n())    %>%
+    mutate(n_tot = sum(n),
+           prop_survive = n /n_tot)  %>%
+    filter(Alive == 1) %>%
+    ungroup()
+```
+
+```{r}
+#| echo: false
+cold.fish.summary %>% kable(digits = 3)
+```
+
+```{r}
+lm_cold_fish2 <- lm(prop_survive ~ Time, cold.fish.summary)
+summary(lm_cold_fish2)
+```
+
+We see, unsurprisingly, that fish survival strongly and significantly decreases (although the p-value is considerably greater than above) the longer they are in cold water.
+
+```{r}
+#| label: fig-coldfish-prop-diag
+#| fig-cap: "Diagnostic plots for the linear model of the proportion surviving. With only four points, these are hard to interpret."
+#| fig-alt: "Four diagnostic panels (residuals vs. fitted, normal Q-Q, scale-location, residuals vs. leverage), each showing only four points."
+#| fig-width: 9
+autoplot(lm_cold_fish2, ncol = 4)
+```
+
+With only four points, we can't really evaluate whether these data meet assumptions. A bigger issue is that we gave up a ton of power -- we went from 160 to four data points. And both linear models share a more basic problem: they can predict impossible probabilities. For example, both predict a survival probability of about -0.05 after 20 minutes in cold water.
+
+##### (Better) Option 3: Logistic regression
+
+A better option is to model the data as they are -- 160 observations of Alive or Dead with forty fish at each of four exposure times.
+
+###### Fitting the model
+
+In R, we do this with the [`glm()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/glm.html) function, noting that the data are binomially distributed and that we want our link function to be the logit.
+
+There are two equivalent ways to do this.
+
+- For the initial data as zero/one we type
+
+```{r}
+cold.fish.glm1 <- glm(Alive ~ Time, data = cold.fish,
+                      family = binomial(link = "logit"))
+```
+
+- For proportion data we just tell R we want to weight the proportion by the total number of observations for a given X.
+
+```{r}
+cold.fish.glm2 <- glm(prop_survive ~ Time,
+                       weights = n_tot, data = cold.fish.summary,
+                       family = binomial(link = "logit"))
+```
+
+```{r}
+summary(cold.fish.glm2)
+```
+
+Either way, we get the same estimates and standard errors (otherwise, I'd be worried). As with a standard linear model, we focus on the coefficients estimated in the `summary()` output, but treat the p-values with suspicion. However, because these coefficients relate to the linear predictor $\widehat{\eta_i}$, it's often worth providing some predictions in the probability scale to better explain your model (see below).
+
+
+::: aside
+Some issues with the p-values from `summary()` in GLMs:
+ 
+- The p-values come from a Wald z-test which uses an approximate likelihood, not a likelihood ratio test.  
+- They don't compare likelihoods of models with and without the term. Rather, they just compare see how many SEs away from the null the estimate is. 
+- As in a linear model `Anova(test.statistic=c(\"LR\")` provides the appropriate p-values (you can use `anova(test = \"LRT\")` if you have only one explanatory variable).
+:::
+
+###### Interpreting and communicating the results
+
+Because most readers don't think naturally in log-odds scale, we usually present logistic regression results on a more intuitive scale. There are two common scales people use:
+
+**Odds ratios.** Exponentiating a slope turns it into an *odds ratio*. An odds ratio shows how much the odds of "yes" are multiplied for each one-unit increase in the predictor. The `tidy(exponentiate = TRUE)` function in the broom package does this for us. But we'll skip this for now, because most readers don't think in the odds ratio scale either. See [this article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2938757/) for more information.
+
+
+**Predicted probabilities across the range of the predictor.** I prefer this direct description of our model predictions on a scale readers understand. I get predictions by converting `.fitted` values from broom's [`augment()`](hhttps://cran.r-project.org/web/packages/broom/refman/broom.html#augment.glm) function to the probability scale with [`plogis()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Logistic.html) for a few values of interest (e.g. times 2, 6, 10, and 18 below). We can similarly find confidence intervals by adding and subtracting 1.96 × the standard error at this fitted value from $\widehat{\eta_i}$ and then converting to the probability scale (again with [`plogis()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Logistic.html)):
+
+```{r}
+broom::augment(cold.fish.glm2,
+               newdata      = tibble(Time = c(2, 6, 10, 18)),
+               type.predict = "link",
+               se_fit       = TRUE) |>
+  mutate(pred_survival = plogis(.fitted),
+         lower_95      = plogis(.fitted - 1.96 * .se.fit),
+         upper_95      = plogis(.fitted + 1.96 * .se.fit)) |>
+  select(Time, pred_survival, lower_95, upper_95)
+```
+
+So we can say that we estimate that a fish exposed for two minutes has about a 73% chance of surviving, compared with about 32% after ten minutes and about 7% after eighteen. Note that the effect of one extra minute on the *probability* of survival is not constant. That's why we share these values and/or plot the fitted curve with 95% CIs (as in @fig-coldfish-glm-raw, below).
+
+###### Making predictions from the (inverse) link function
+
+How can we take this output and predict the proportion of fish that will survive exposure to 5°C water for some time? Say 6 minutes?
+
+- We first use the linear predictor to predict the log odds:
+
+$$\widehat{\eta_i} = 1.44470 -0.22191  \times Time$$
+
+So we predict the log odds of a fish surviving following six minutes of exposure to 5°C water to equal $1.44470 - 6 \times 0.22191 = 0.11324$.
+
+This does not mean that a fish has a 0.11324 probability of surviving six minutes of exposure to 5°C water -- this is just the log-odds of surviving.
+We convert this to a survival probability with the inverse of the logit link function.
+
+$$p_\text{survive six min} = \frac{e^{0.11324}}{1+e^{0.11324}} = 0.528$$
+
+Or with `plogis()`, `plogis(.11324)` = `r plogis(.11324)`.
+
+This prediction -- that a fish at 5°C for six minutes has a 52.8% chance of surviving -- is in line with our plots, while incorrectly interpreting the output of the linear predictor as the predicted proportion is not.
+
+###### Testing the model
+
+We formally test the null hypothesis by conducting a likelihood ratio test -- that is, we take two times the difference in log-likelihoods and compare this value to its null sampling distribution (which, for large samples, is approximately a $\chi^2$ distribution with degrees of freedom equal to the difference in the number of parameters estimated for the null and the fitted model).
+
+We can do this with the anova function, telling R that we want our test to be the LRT (we get the same answer if we ask for a Chisq). Note that this is true for binomial and Poisson GLMs, but not for `lm()`: for a linear model, `anova(..., test = "Chisq")` does not give the likelihood ratio test.
+
+```{r}
+anova(cold.fish.glm2, test = "LRT")
+```
+
+###### Plotting the model
+
+We can add this fit to a plot!!!
+
+For either the raw data
+
+```{r}
+#| label: fig-coldfish-glm-raw
+#| fig-cap: "Logistic regression fit to guppy survival. Unlike the linear model, the predicted probability curves and stays between 0 and 1."
+#| fig-alt: "Jittered survival data (0 or 1) against minutes in cold water, with an S-shaped logistic curve declining from about 0.8 at 0 minutes to about 0.05 at 20 minutes, and a shaded confidence band."
+#| message: false
+ggplot(cold.fish, aes(x = Time, y = Alive)) +
+  geom_jitter(size = 2, alpha = .35, height = .05, width = .5)+
+  geom_smooth(method = "glm",method.args = list(family = binomial))+
+  scale_x_continuous(breaks = seq(2,18,6),limits = c(0,20))
+```
+
+Or the summary
+
+```{r}
+#| label: fig-coldfish-glm-prop
+#| fig-cap: "The same logistic regression fit to the proportion of fish surviving at each exposure time."
+#| fig-alt: "Four points showing the proportion surviving (0.73, 0.40, 0.28, 0.05) at 2, 8, 12 and 18 minutes, with a declining S-shaped logistic curve and shaded confidence band passing close to all four points."
+#| message: false
+ggplot(cold.fish.summary, aes(x = Time, y = prop_survive, weight = n_tot)) +
+  geom_point(aes(size = n_tot))+
+  geom_smooth(method = "glm",method.args = list(family = binomial))+
+  scale_x_continuous(breaks = seq(2,18,6),limits = c(0,20))
+```
+
+### GLM Example 2: "Poisson regression" and count data
+
+A particularly common type of biological data is count data. Common examples of count data are
+
+- Number of mating attempts.
+- Number of mutation (or recombination) events.
+- Number of individuals in a plot.
+- etc.
+
+Such data are poorly described by a standard linear model, but can be modeled. Below, I simulate leaves falling randomly on a landscape. We see that the number of leaves in each quadrat does not follow a normal distribution.
+
+```{r}
+#| label: fig-leaves-sim
+#| fig-cap: "Left: 110 leaves falling at random onto a 10 × 10 grid of quadrats. Right: the number of leaves per quadrat is not normally distributed."
+#| fig-alt: "Two panels. Left: leaf symbols scattered randomly over a square divided into 100 grid cells; some cells are empty and a few hold several leaves. Right: a histogram of leaves per quadrat, tallest at 0 and 1 leaves and tapering off to the right, a right-skewed shape."
+#| message: false
+#| fig-width: 9.5
+#| warning: false
+set.seed(38) # so the simulation gives the same result every time
+sim_rand_location <- tibble(x = runif(110), y = runif(110)) %>%
+  mutate(x_box = cut(x, breaks = seq(0,1,.1)),
+         y_box = cut(y, breaks = seq(0,1,.1)))
+
+plot_location <- ggplot(sim_rand_location , aes(x = x, y = y, label = emoji("fallen_leaf"))) +
+  geom_text(family="EmojiOne", color = "brown", hjust = 0.5, vjust = 0.5)+
+  theme_tufte() +  geom_vline(xintercept = seq(0,1,.1), color = "black", alpha = .3)+
+  geom_hline(yintercept = seq(0,1,.1), color = "black", alpha = .3)+
+  scale_x_continuous(expand = c(0,0)) +    scale_y_continuous(expand = c(0,0))
+
+location_histogram <- sim_rand_location %>%
+  group_by(x_box, y_box, .drop = FALSE) %>%
+  summarise(n = n())     %>%
+  ggplot(aes(x = n))+
+  geom_histogram(binwidth = 1, color = "white", linewidth = 2)+
+  scale_x_continuous(breaks = seq(0,8,1))+
+  theme_light()
+
+plot_grid(plot_location, location_histogram, ncol =2)
+```
+
+#### The Poisson distribution
+
+If these counts are randomly distributed over time or space, they will follow a Poisson distribution. For this reason, the Poisson is a common starting place for modeling count data.
+
+If there are, on average, $\lambda$ things per unit of time or space, the Poisson equation predicts the probability that we have X things in one unit of time or space equals
+
+$$P(X) = \frac{e^{-\lambda} \lambda^X}{X!}$$
+
+The mean of the Poisson is $\lambda$, as is the variance. Because the variance increases with the mean, Poisson distributed data often violate the homoscedasticity assumption of linear models.
+
+So, for the leaf example above, we have
+
+- 110 leaves land in the 100 quadrats of this 10 x 10 grid of equally sized squares.
+- So $\lambda = 110/100$. So we have 1.10 leaves per quadrat.
+- The probability that a given quadrat has three leaves equals $P(3) = \frac{e^{-1.1} 1.1^3}{3!} =  0.0738419$. We can find this in R as
+    - `exp(-1.1) * 1.1^3 / factorial(3)` = `r exp(-1.1) * 1.1^3 / factorial(3)`. Or, more simply, as
+    - `dpois(x = 3, lambda = 1.1)` = `r dpois(x = 3, lambda = 1.1)`.
+- So, we expect $100  \times 0.0738419 = 7.38$ of the 100 quadrats to have exactly three leaves.
+
+```{r}
+leaves_per_quadrant <- 1.1
+n_quadrants         <- 100
+
+expected_leaves <- tibble(n_leaves = 0:6,
+       prob_n_leaves = dpois(x = n_leaves, lambda = leaves_per_quadrant),
+       expected_number_quadrats = n_quadrants * prob_n_leaves)
+```
+
+```{r}
+#| echo: false
+expected_leaves %>% kable(digits = 7)
+```
+
+```{r}
+#| label: fig-leaves-poisson
+#| fig-cap: "Observed leaves per quadrat (bars) compared with the Poisson expectation for λ = 1.1 (red line)."
+#| fig-alt: "Histogram of leaves per quadrat with a red line showing Poisson expected counts: about 33 quadrats with 0 leaves, 37 with 1, 20 with 2, 7 with 3, and near zero by 5 leaves. The line closely tracks the bars."
+location_histogram +
+  geom_line(data = expected_leaves, aes(x = n_leaves , y = expected_number_quadrats), color = "red")+
+  annotate(x = 4, y = 30, geom = "text", label = "Poisson\nexpectations", color = "red", hjust = 0)
+```
+
+#### The Poisson regression
+
+The Poisson regression is a generalized linear model for Poisson distributed data. As in the logistic regression, the linear predictor is the familiar regression equation:
+
+$$\widehat{\eta_i} = a + b_1 \times x_{1,i} + b_2 \times x_{2,i}  + \dots$$
+
+$\widehat{\eta_i}$ is not our prediction for the count $\widehat{\lambda_i}$. Rather, in a GLM, we use this "linear predictor" through the "link function" to find our prediction.
+
+For a Poisson regression, the "linear predictor" describes the log of the predicted number, which we can convert to the predicted count by exponentiation. That is,
+
+$$\widehat{\lambda_i} = e^{\widehat{\eta_i}}$$
+
+So if the linear predictor gives a log expected count, $\widehat{\eta_i}$, of 3, we expect, on average, a count of $e^{3} \approx 20.1$. We can find this in R as
+
+- `exp(3)` = `r exp(3)`
+
+#### Poisson regression example: Elephants
+
+Do older elephant males have more mates?
+
+```{r}
+elephants <- tibble(mates = c(0,1,1,1,3,0,0,0,2,2,2,1,2,4,3,3, 3,2,1,1,2,3,5,6,1, 1,6,2,1,3,4,0,2,3,4,9,3,5,7,2,9),
+                    age = c(27,28,28,28,28,29,29,29,29,29,29,30,32,33,33,33, 33,33,34,34, 34,34,36,36,37,37,37,38,39,41,42,43, 43,43,43,43,44,45,47,48,52))
+```
+
+##### (Imperfect) Option 1: Linear model on raw data
+
+```{r}
+#| label: fig-elephant-lm
+#| fig-cap: "Number of mates against age for 41 male elephants, with a linear model fit."
+#| fig-alt: "Scatterplot of elephant symbols showing number of mates (0 to 9) against age (27 to 52 years). Mates increase with age and spread out more among older males. A straight regression line rises from about 1 mate at age 27 to about 6 at age 52."
+#| message: false
+ggplot(elephants, aes(x = age, y = mates, label = emoji("elephant"))) +
+  geom_text(family="EmojiOne", color = "black",
+            position = position_jitter(width = .1, height = .1))+
+  geom_smooth(method = "lm")
+```
+
+We could simply run a linear regression.
+
+```{r}
+elephant_lm1 <- lm(mates ~ age, data = elephants)
+confint(elephant_lm1)
+```
+
+Here we estimate that elephant males expect, on average, an additional 0.20 mates (95% CI 0.11, 0.29) for every year they live.
+
+But we can see a few issues in the diagnostic plots -- namely, the "scale-location" plot shows that the variance in the residuals increases with the predicted value.
+
+```{r}
+#| label: fig-elephant-lm-diag
+#| fig-cap: "Diagnostic plots for the linear model of elephant mates. The scale-location plot shows the residual variance increasing with the fitted value."
+#| fig-alt: "Four diagnostic panels: residuals vs. fitted, normal Q-Q, scale-location, and residuals vs. leverage. In the scale-location panel the points and trend line rise from left to right."
+#| fig-width: 9.5
+autoplot(elephant_lm1, ncol = 4)
+```
+
+##### (Imperfect) Option 2: Linear model on log-plus-one transformed data
+
+```{r}
+#| label: fig-elephant-log1p
+#| fig-cap: "Elephant mates against age with the y-axis on a log(x + 1) scale, and a linear model fit on that scale."
+#| fig-alt: "Scatterplot of elephant symbols, mates against age, with the y-axis compressed at higher values. The spread of points is more even across ages, and a straight line rises with age."
+#| message: false
+ggplot(elephants, aes(x = age, y = mates, label = emoji("elephant"))) +
+  geom_text(family="EmojiOne", color = "black",
+            position = position_jitter(width = .1, height = .1))+
+  geom_smooth(method = "lm")+
+  scale_y_continuous(trans = "log1p")
+```
+
+Alternatively, we could add one to the number of mates and then log transform to better meet assumptions of the linear model.
+
+```{r}
+elephant_lm2 <- lm(log1p(mates) ~ age, data = elephants)
+summary(elephant_lm2)
+```
+
+These model parameters take a minute to interpret -- we start with an intercept of -0.69893 and add 0.05093 for each year lived. To turn this into a prediction, we exponentiate and subtract one. So, for example, we predict that a 40-year-old elephant will have $e^{(-0.69893 + 40 \times 0.05093)}-1 = 2.81$ mates.
+
+```{r}
+#| label: fig-elephant-log1p-diag
+#| fig-cap: "Diagnostic plots for the linear model of log(mates + 1)."
+#| fig-alt: "Four diagnostic panels: residuals vs. fitted, normal Q-Q, scale-location, and residuals vs. leverage. Residual spread is roughly constant and Q-Q points fall near the line."
+#| fig-width: 9.5
+autoplot(elephant_lm2, ncol = 4)
+```
+
+This seems to meet model assumptions pretty well, and is a totally acceptable option -- but in a sense, we already dealt with the complexity of transforming our data for the model and then back-transforming to explain the results, so a Poisson regression might be more convenient. (Also note that back-transforming a mean on the log scale does not give the expected number of mates -- it gives something closer to a typical, median-like value.)
+
+##### (Better) Option 3: Poisson regression
+
+Rather than transforming the data to fit the test, we can actually model the data we have. We do this with the Poisson regression.
+
+We model data as being Poisson distributed -- that is, we ultimately predict the expected count, $\lambda_i$, for a given value of the predictor, assuming Poisson distributed errors. But remember that before that, we find our linear predictor, $\widehat{\eta_i}$, as we do for a standard linear model, and then exponentiate our prediction, $\widehat{\eta_i}$, to find $\lambda_i$.
+
+As with the logistic regression (above), we find the linear predictor with the [`glm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html) function. This time, we specify that we are modeling a Poisson random variable with a log link function:
+
+```{r}
+elephant.glm <- glm(mates ~ age, data = elephants, family = poisson(link = "log"))
+elephant.glm
+```
+
+###### Predictions from a Poisson regression
+
+So for our linear predictor, we begin with an intercept of -1.582 and add 0.06869 for every year an elephant has lived. So for a 40-year-old elephant, the linear predictor, $\widehat{\eta}_{age = 40} =  -1.582 + 40 \times 0.06869 = 1.1656$. Exponentiating this (to convert from log to linear scale), we predict that a 40-year-old elephant male will have, on average, $e^{1.1656} = 3.2$ mates (in R `exp(1.1656)`), with Poisson distributed error.
+
+Because the Poisson works on the log scale, the slope is easiest to interpret after exponentiating it: $e^{0.06869} = 1.07$. So for each additional year alive , we multiply the expected number of mates by $\approx 1.07$ (i.e. a 7% increase per year).
+
+###### Plotting results of a Poisson regression
+
+We can visualize the Poisson regression as follows:
+
+```{r}
+#| label: fig-elephant-glm
+#| fig-cap: "Poisson regression of elephant mates on age. The fitted curve is exponential, so expected mates rise faster at older ages."
+#| fig-alt: "Scatterplot of elephant symbols, mates against age, with a gently upward-curving fitted line rising from about 1.3 mates at age 27 to about 7 at age 52, and a shaded confidence band that widens at older ages."
+#| message: false
+ggplot(elephants, aes(x = age, y = mates, label = emoji("elephant"))) +
+  geom_text(family="EmojiOne", color = "black",
+            position = position_jitter(width = .1, height = .1))+
+  geom_smooth(method = "glm",method.args = list(family = poisson))
+```
+
+###### Hypothesis testing for a Poisson regression
+
+As with the logistic regression (above), we compare the likelihood of our MLE parameter estimate to a null model with a likelihood ratio test.
+
+We can do this ourselves:
+
+```{r}
+null.elephant.glm <- glm(mates ~1, data = elephants, family = poisson(link = "log"))
+D                 <- 2 * (logLik(elephant.glm) - logLik(null.elephant.glm))
+p.val             <- pchisq(q = D, df = 1, lower.tail = FALSE)
+c(D=D, p.val = p.val)
+```
+
+Or with the `anova()` function
+
+```{r}
+anova(elephant.glm, test = "LRT")
+```
+
+We see that the "deviance" that R calculates is our D, and that our p-values match R's.
+
+We reject the null!
+
+###### An aside on the deviance
+
+If we look at our GLM output, we see "Null Deviance" and "Residual Deviance", with our D equal to their difference (each deviance already includes the factor of two).
+
+```{r}
+elephant.glm
+```
+
+What does this mean?
+
+Well, we first find the log likelihood of the perfect, "saturated" model, for which every prediction is perfect.
+
+```{r}
+oversaturated_elephants <- elephants %>%
+  dplyr::select(mates) %>%
+  mutate(logLik = dpois(x = mates, lambda = mates, log = TRUE))
+```
+
+So the log likelihood of a perfect model is `summarise(oversaturated_elephants, logLik = sum(logLik))`
+= `r summarise(oversaturated_elephants, logLik = sum(logLik)) %>% pull()`.
+
+We find the log likelihood of our model is
+
+```{r}
+logLik_elephant_glm <- broom::augment(elephant.glm) %>%
+   dplyr::select(mates,   age, .fitted)%>%
+    mutate(lambda = exp(.fitted),
+           logLik = dpois(x = mates, lambda = lambda, log = TRUE))
+
+DT::datatable(logLik_elephant_glm %>%
+                mutate(.fitted = round(.fitted,digits = 3),
+                       lambda = round(lambda, digits = 3),
+                       logLik = round(logLik, digits =3)),
+              options = list(autoWidth = TRUE,pageLength = 5, lengthMenu = c(5, 25, 50)))
+```
+
+So the log likelihood of our model is `summarise(logLik_elephant_glm, logLik = sum(logLik))`
+= `r summarise(logLik_elephant_glm, logLik = sum(logLik)) %>% pull()`, which is what we could have found by `logLik(elephant.glm)` = `r as.numeric(logLik(elephant.glm))`.
+
+The "Residual Deviance" is two times the difference in the log likelihood of a perfect model, -50.72308 and our model, -76.2289 -- i.e. `2 * ((-50.72308 ) - (-76.2289 ))` = 51.01164.
+
+We can then get our "Deviance" of 75.37174 - 51.01164 = 24.3601, which we previously found by simply taking two times the difference in the log likelihood of the MLE and null models.
+
+Similarly, the "Null Deviance" is 2x the difference in log likelihood between the saturated model and the null:  $2 \times (-50.7 - (-88.409)) = 75.37174$.
+
+###### An aside on residuals
+
+If we look at the residuals of our model, we see something strange...
+
+```{r}
+broom::augment(elephant.glm)
+```
+
+
+It is not the difference between our observation, mates, and $\widehat{\eta_i}$, nor is it the difference between our observation and the predicted $\lambda_i$ (for example, we have zero mates and a prediction of $e^{0.273} = 1.3139$). These are "deviance residuals" (the default type of residual for a GLM). *NOTE:* `.fitted` ison the log (link) scale.  To get the expected count, exponentiate it: $\widehat{\lambda_i} = e^{.fitted}$
+ 
+
+See [this](https://www.datascienceblog.net/post/machine-learning/interpreting_generalized_linear_models/) for more background on interpreting residuals from Poisson regression.
+
+#### Assumptions of Poisson regression
+
+Remember that a GLM still makes assumptions and that these assumptions can differ from those of a linear model because we are building a different model.
+
+A Poisson regression assumes that
+
+- Poisson response -- that is, that the response variable is Poisson distributed (for each prediction).
+    - So, e.g. a continuous response value would not make sense.
+    - This also implies that the variance for a given value, $\sigma^2_i$, should equal the mean, $\lambda_i$.
+- Independence of responses (conditional on predictors).
+- That predictions can be made by adding up elements of the linear predictor and exponentiating.
+- That data are collected without bias.
+
+Viewing our standard diagnostic plots can help us evaluate some of these assumptions. As I said above, don't think too hard about these y-values -- think of them as a residual that would look as we hope if the model was a good fit.
+
+```{r}
+#| label: fig-elephant-glm-diag
+#| fig-cap: "Diagnostic plots for the Poisson regression, using deviance residuals."
+#| fig-alt: "Four diagnostic panels: residuals vs. fitted, normal Q-Q, scale-location, and residuals vs. leverage, with no strong pattern in the residuals."
+#| fig-width: 9.5
+autoplot(elephant.glm, ncol=4)
+```
+
+Another rough diagnostic is to look at the "Dispersion" -- a measure of how much more variance we see than we expect from a Poisson model. We can roughly approximate this by dividing the Residual deviance by the degrees of freedom (a more standard estimate divides the sum of squared Pearson residuals by the degrees of freedom).
+
+- A dispersion parameter of one means the variance is well predicted by the Poisson model.
+- As a rough rule of thumb, a dispersion way greater than one (like 2.5 or greater) suggests that a Poisson model is inappropriate.
+
+In our case this is 51.01/39 = 1.31, which is just fine.
+
+##### Model fit
+
+We can also evaluate if the model is a reasonable description of the data by comparing our likelihoods to the likelihood of data simulated directly from the model.
+
+Let's make this concrete by simulating once with the `rpois()` function:
+
+```{r}
+set.seed(38)
+sim1 <- broom::augment(elephant.glm) %>%
+  dplyr::select(mates,   age, .fitted) %>%
+  mutate(simulated = rpois(n=n(), lambda = exp(.fitted)),
+         logLikSim = dpois(x = simulated, lambda = exp(.fitted), log = TRUE))
+```
+
+So the log likelihood of this data set simulated from our model is `sim1 %>% summarise(sum(logLikSim))` = `r sim1 %>% summarise(sum(logLikSim)) %>% pull()`, which isn't far from the likelihood of the model for the actual data -- `logLik(elephant.glm)` = `r as.numeric(logLik(elephant.glm))`.
+
+If we did a bunch of these simulations and our log likelihood was way further from zero than nearly all simulated cases, we'd worry about model fit. The histogram below suggests that the log likelihood of our actual data falls well within the range of the simulated data, so the model fits reasonably well. (This is a rough check rather than a formal test, because we simulated from parameters estimated from these same data.)
+
+```{r}
+#| label: fig-elephant-simfit
+#| cache: true
+#| fig-cap: "Log likelihoods of 1000 data sets simulated from the fitted Poisson model (histogram), compared with the log likelihood of the real data (red line)."
+#| fig-alt: "Histogram of simulated log likelihoods, roughly bell-shaped, with the x-axis reversed. A red vertical line marking the observed log likelihood (about -76) falls near the middle of the histogram."
+# here we write a function to simulate data from a Poisson with predictions of a linear model
+# and return the log likelihood
+
+simPois <- function(pois.glm){
+  broom::augment(pois.glm) %>%
+    dplyr::select(.fitted) %>%
+    mutate(simulated = rpois(n=n(), lambda = exp(.fitted)),
+           logLikSim = dpois(x = simulated, lambda = exp(.fitted), log = TRUE)) %>%
+    summarise(loglik = sum(logLikSim)) %>%
+    pull()
+}
+
+tibble(simLogLiks = replicate(n = 1000, simPois(pois.glm = elephant.glm))) %>% # simulate 1000 times
+  ggplot(aes(x = simLogLiks)) +
+  geom_histogram(bins = 30)+
+  scale_x_reverse()+
+  geom_vline(xintercept = as.numeric(logLik(elephant.glm)), color = "red")+
+  labs(subtitle = "Comparing the log likelihood with real and simulated data")
+```
+
+#### Alternatives to the Poisson regression
+
+So, the Poisson is a good model if count data are random over space or time. But sometimes they are not. Common violations of Poisson assumptions include
+
+- Overdispersion (more variance than predicted by the Poisson)
+- Zero inflation (too many zeros)
+
+Quasi-Poisson & negative binomial models are usually good options for modeling overdispersed counts (for overdispersed binomial data, consider quasibinomial or beta-binomial models).
+
+"Hurdle" and "zero-inflated" models can be used to model data with too many zeros.
+
+### Quiz
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeNQcEJhrwvmKem1jc9WDh3Da4e_ge2APOB4QMwzWFzXhYfRA/viewform?showcase=0" width="100%" height="1000px" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+Quiz on generalized linear models [here](https://docs.google.com/forms/d/e/1FAIpQLSeNQcEJhrwvmKem1jc9WDh3Da4e_ge2APOB4QMwzWFzXhYfRA/viewform)
+
+### Advanced / under the hood
+
+#### How did we find the maximum likelihood?
+
+A straightforward but computationally intense way is a grid search.
+Here we look over a bunch of parameter combinations and then find the one with the largest log likelihood. R uses more efficient methods to basically do the same thing.
+
+Here's how we can do this:
+
+- Propose a bunch of plausible parameter values (aka models)
+
+```{r}
+models <- crossing(intercept = seq(-2, 2, 0.025),
+                   slope     = seq(-.5,.5, .01)) %>%
+  mutate(model = 1:n())
+```
+
+- Evaluate the log-likelihood of each model given the data.
+
+```{r}
+#| cache: true
+fishLogLik <- function(slope, intercept, dat){
+    model_log_lik <- dat %>%
+    mutate(p = plogis(intercept + slope * Time),
+           logLik = dbinom(x = Alive, size = 1, prob = p, log = TRUE)) %>%
+    summarise(sum(logLik)) %>%
+    pull()
+  return(model_log_lik)
+}
+
+models_logLiks <- models %>%
+  nest(params = c(intercept, slope)) %>%
+  mutate(log_lik = purrr::map_dbl(.x = params, ~ fishLogLik(slope = .x$slope,
+                                                   intercept = .x$intercept,
+                                                   dat = cold.fish)))%>%
+  unnest(cols = c(params))
+```
+
+- Find the MLE as the proposed parameters with the greatest log likelihood
+
+```{r}
+slice_max(models_logLiks, log_lik, n = 1) %>% kable()
+```
+
+Reassuringly, this matches R's answer (to within the resolution of our grid).
+
+- We can also use this output to plot a likelihood surface
+
+```{r}
+#| label: fig-likelihood-surface
+#| fig-cap: "Log likelihood of the cold-fish data for each combination of intercept and slope in our grid. The maximum likelihood estimate is marked."
+#| fig-alt: "Heat map with slope on the x-axis (-0.5 to 0.5) and intercept on the y-axis (-2 to 2), colored by log likelihood. A narrow diagonal ridge of high values runs through the plot, and a red '* MLE' label marks the peak near slope -0.22, intercept 1.44."
+ggplot(models_logLiks, aes(x = slope, y = intercept, fill = log_lik))+
+  geom_tile()+
+  scale_fill_gradientn(colours = terrain.colors(500))+
+  geom_text(data = . %>% slice_max(log_lik, n = 1), aes(label = "* MLE"),
+            hjust = 0, color = "red")+
+  theme_tufte()
+```
+
+- Finally, we can compare the log likelihood of this model (our best) which equals -82.35143 to the one where we just take the overall mean proportion
+
+```{r}
+cold.fish %>%
+    mutate(logLik = dbinom(x = Alive, size = 1,
+                           prob =  summarise(cold.fish, mean(Alive)) %>% pull(),
+                           log = TRUE)) %>%
+    summarise(sum(logLik)) %>%
+  pull()
+```
+
+So D = 2 × (-82.35143 - (-104.7749)) = 44.84694, and our p-value is `pchisq(q = 44.84694, df = 1, lower.tail = FALSE)` = $2.13 \times 10^{-11}$, which is basically our answer above, save minor rounding error!

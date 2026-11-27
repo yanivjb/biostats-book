@@ -1,0 +1,743 @@
+## X4. Random effects {.unnumbered #random}
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(broom)
+library(broom.mixed)
+library(lme4)
+library(lmerTest)
+library(car)
+library(performance)
+library(knitr)
+library(cowplot)
+library(ggrepel)
+library(ggeffects)
+library(DT)
+library(gt)
+```
+
+**Motivating scenario:** Often data are not independent. For example, numerous plants may come from the same field, fish from the same lakes, or students from the same class. If we were specifically interested in the impact of a given field, lake, or class, we could include this as a "fixed effect," as in an ANCOVA. However, this focuses on specific fields, lakes, or classes rather than the variability among them, which is often our primary interest.
+
+Practically, we may not have enough data within each level (e.g., each field or lake) to reliably estimate its effect as fixed. And when a variable of interest differs only between groups (e.g., each lake has a single water-selenium level), modeling group as a fixed effect makes it impossible to estimate that variable's effect at all.
+
+Random effects, by contrast, treat group-level differences as coming from a shared distribution rather than estimating them individually (that is, we model the variance among groups, rather than the means of each group). So, random effects models can provide a more appropriate way to model non-independence than "fixed effects" models.
+
+### Review
+
+#### Linear Models
+
+Linear models predict $Y$ as a deviation from some constant, $a$, as a function of a bunch of stuff:
+
+$$\widehat{Y_i} = a + b_1 \times x_{1,i} + b_2 \times x_{2,i} + \dots$$
+
+##### Biology Breaks Assumptions of Linear Models
+
+Linear models assume (1) data points are independent, (2) unbiased, (3) can be modeled as a linear combination of predictors, with (4) error having a mean and variance independent of predictors (5) and normally distributed.
+
+In the [previous chapter](#glm) we introduced the Generalized Linear Model as an approach to model non-normal data (e.g. binomial and count data using logistic and Poisson regression). In this chapter we focus on modeling data that break the assumption of independence. This is important, as both nature and experiments break the assumption of independence.
+
+#### Intro to Random Effects
+
+In biology, we are often more interested in variability than specific individuals. For example, understanding genetic variability is critical to predicting how a population responds to natural selection. Similarly, we might care about how repeatable a trait is—if we measure the same individual twice, how similar are those measurements compared to variability in the broader sample?
+
+Sometimes, we don't care about the variability itself but need to account for it because it makes our data non-independent. For example, plants in the same plot may respond similarly to fertilizer due to shared conditions. In all these cases, we aren't focused on specific individuals or locations but on understanding the variability across them. Random effects models let us capture this variability while accounting for non-independence.
+
+--- 
+
+##### Fixed vs random effects
+
+---
+
+| [**Fixed** effects]{style="color:#3d5a8a; font-size:1.2em"} | [**Random** effects]{style="color:#96332e; font-size:1.2em"} |
+|:---|:---|
+| [• The *levels* of the predictor are chosen by the researcher.]{style="color:#3d5a8a"} | [• The *levels* of the predictor are drawn from a distribution.]{style="color:#96332e"} |
+| [• Fixed effects are **estimated**.]{style="color:#3d5a8a"} | [• Random effects are **predicted**.]{style="color:#96332e"} |
+| [• Observations are (assumed to be) independent once we account for the fixed effects.]{style="color:#3d5a8a"} | [• Observations that share a level are not independent (we model this with a **covariance structure**).]{style="color:#96332e"} |
+| [• Inferences are made for the specific **levels** we studied.]{style="color:#3d5a8a"} | [• Inferences are made about the **distribution** the levels come from.]{style="color:#96332e"} |
+
+
+: {tbl-colwidths="[50,50]"}
+
+---
+
+Up to this point we have considered "fixed effects" e.g. fertilizer choice, experimental treatment etc… For these cases, we want to know the effects of these treatments, and we don't generalize to other treatments. For example, if I looked at how three fertilizers of interest impacted plant growth, I wouldn't go and look up the effect of a totally different fertilizer I hadn't seen before.
+
+However, in the examples above, we did not care about the specific individuals (or plots, etc.). Rather, we were interested in random effects: the variability we find across "random" individuals (or locations etc.) in our population. For these cases, our main goal isn't to model the individuals themselves (**Although we can "predict" their values, see fyi box below**), but rather we aim to describe the variability we expect across random individuals in our population. Thus, we hope to generalize to a larger population of sample units.
+
+::: fyi
+**"Estimation" vs. "Prediction"**
+
+- **We estimate fixed effects.** We think of fixed effects as parameters to estimate from data. For example, if field site is treated as a fixed effect, we want to learn the actual mean proportion of hybrid seeds at each field site.</br></br>
+
+- **We predict random effects.** In a random effects model, we think of groups as random draws from a distribution. So we *estimate* the overall mean and the among-group variance, and then use these estimates plus each group's own data to *predict* group means. For example, if RIL is treated as a random effect, we could predict the proportion of hybrid seeds for a given RIL using that RIL's data, the overall mean, and the estimated among-RIL variance. Because these predictions borrow from the shared distribution, they are pulled toward the overall mean ("shrinkage," @fig-shrinkage).</br></br>
+
+- **Mixed effects models.** Later in this chapter, we will see that we can combine fixed and random effects in a single "mixed effects" model. For example, we could then predict a given RIL's proportion of hybrid seeds at a particular field site using that RIL's data, the estimated among-RIL variance, *and* the estimated effects of field site, petal color, and any other fixed effects of interest.
+:::
+
+---
+
+##### How do we know if we have a fixed or random effect?
+
+---
+
+[You may ask yourself](https://www.youtube.com/watch?v=5IsSpAOD6K8) is this a random or fixed effect? 
+
+**Some of this is inherent to the experimental design:**  
+
+- Are levels of a predictor chosen intentionally (e.g. temperature treatments)? [Fixed]{style="color:#3d5a8a"}. 
+- Do we want to make inferences about the levels of a predictor (e.g. mean separation)? [Fixed]{style="color:#3d5a8a"}.  
+- Do observations that share a level (e.g., the same lizard or the same lake) resemble each other? [Random]{style="color:#96332e"}   
+
+
+**Some of this is inherent to the predictor:**
+
+- Are the levels of a predictor sampled from some distribution of possible levels? [Random]{style="color:#96332e"}
+- Can we borrow information across levels (i.e., would knowing about some levels tell us something about the others)? [Random]{style="color:#96332e"}
+- Are there enough levels to estimate a variance among them?
+   - Too few levels (fewer than ~5). [Fixed]{style="color:#3d5a8a"}
+   - Enough levels (~5 or more). [Random]{style="color:#96332e"}
+
+
+```{r}
+#| echo: false
+#| column: margin
+#| warning: false
+#| fig-alt: "A decorative image of a frolicking frog."
+include_graphics("https://media.giphy.com/media/Sux3kje9eOx1e/giphy.gif")
+```
+
+#### Analysis of Variance (ANOVA)
+
+When we work with "fixed effects," we can test for the significance of factors in a linear model using an ANOVA framework. We [previously saw](#f) that the total variance among groups includes two components: variance attributable to true differences between groups and variance attributable to random sampling error.
+
+In an ANOVA, both of these components contribute to the mean square for groups ($MS_{\text{groups}}$). However, we expect that the variance caused by random sampling alone will be roughly equal to the mean square for error ($MS_{\text{error}}$). This is why we use a one-tailed test of the null hypothesis that the true variance among groups is zero, in which case we expect the $F$-statistic (calculated as $F = \frac{MS_{\text{groups}}}{MS_{\text{error}}}$) to be about one. This corresponds to asking whether the variance among groups is greater than expected by chance, i.e., whether the true variance among groups is non-zero.
+
+#### Modeling Random Effects
+
+When modeling random effects, we take a slightly different approach than the one used in ANOVA. Instead of testing whether fixed factors explain variation, we focus on modeling the variance among the categories of our random effect. In other words, we aim to estimate how much of the total variance in the response is due to differences among groups (e.g., fields, lakes, or plots) rather than treating these groups as fixed levels of a factor.
+
+This approach allows us to partition variance into components attributable to group-level differences and residual error. By doing so, we can account for non-independence in our data and make inferences about the population of groups, rather than focusing on specific groups. Added benefits of random effects models are:
+
+1. Results from random effects models can be generalized beyond the groups in our study – so long as groups are actually "random".
+
+2. Results from random effects models can allow us to estimate the "fixed effect" of some variable of interest when we lack sufficient replication to model each group as a fixed effect.
+
+### Random effects 
+
+#### A Motivating Example:
+
+Huey and Dunham (1987) were interested in the variability of running speed of the lizard *Sceloporus merriami* in Big Bend National Park in Texas. So, they built a two-meter raceway, grabbed some lizards and measured their speed. But they were concerned that this would measure something about the lizards' motivation to run or the speed at that time etc… so they replicated this and ran each lizard twice.
+
+The data, presented below, can be accessed from [this link](https://whitlockschluter3e.zoology.ubc.ca/Data/chapter15/chap15q22LizardSprintSpeed.csv)
+
+```{r}
+#| echo: false
+#| message: false
+lizard_runs <- read_csv("https://whitlockschluter3e.zoology.ubc.ca/Data/chapter15/chap15q22LizardSprintSpeed.csv")
+DT::datatable(lizard_runs, options = list(pageLength = 5, lengthMenu = c(5, 25, 50)))
+```
+
+#### Estimating variance components
+
+##### An ANOVA perspective
+
+```{r}
+ggplot(lizard_runs, aes(x = factor(lizard), y = speed, group = lizard)) +
+  geom_point()+
+  geom_line()
+```
+
+With random effects, we are interested in two sources of variation – the variation between individuals (or locations or whatever) and the variation within them. This sounds a lot like a fixed effects ANOVA, so that will be our starting place. Let's look at this output. In a balanced one-way design like this one, the F-test also tests the random-effects null hypothesis that the variance among lizards is zero (we'll get a similar answer from a likelihood ratio test below).
+
+```{r}
+lizard_runs <- lizard_runs |>
+  mutate( lizard = as.factor(lizard)) # we don't want R thinking lizard 3 is two more than lizard one
+
+lizard_runs_lm <- lm(speed ~ lizard, data = lizard_runs)
+anova(lizard_runs_lm)
+```
+
+We see that the mean square for groups ($MS_{\text{group}}$)—the number of observations per group (here, two runs per lizard) times the variance among group means—is 0.34309. This value captures both the variability among lizards due to true differences in their average running speeds and variability due to chance sampling.
+
+How much of this variability is due to true differences among lizards? To estimate this, we first recognize that the mean square error ($MS_{\text{error}} = 0.04607$) represents the variability within groups due to chance sampling. In fact, because $MS_{\text{error}}$ is basically the average variance within groups, it is an estimate of the within-group variance, $s^2_{\text{within}}$.
+
+
+To isolate the variability among lizards, we subtract $s^2_{\text{within}}$ (estimated as $MS_{\text{error}}$) from $MS_{\text{group}}$. However, because $MS_{\text{group}}$ is the number of observations per group times the variance among group means, this difference estimates $n_{\text{per group}}$ times the variance among lizards. So we divide the difference by the number of observations per group ($n_{\text{per group}}$). This gives us the variance among lizards:
+
+$$s_A^2 = \frac{MS_{\text{group}} - MS_{\text{error}}}{n_{\text{per group}}}$$
+
+For this example:
+
+$$s_A^2 = \frac{0.34309 - 0.04607}{2} = 0.1485$$
+
+This means that if we could measure each lizard's running speed an infinite number of times, we estimate that the variance in their true average running speeds would be 0.1485. 
+
+:::fyi
+**What if $MS_{\text{group}} - MS_{\text{error}}$ is negative?**   
+
+We know $s^2_A$ cannot be negative (because it's squared). But we estimate $s^2_A$ as $(MS_{\text{group}} - MS_{\text{error}})/n_{\text{per group}}$, which can be negative. When this happens, R will be upset and  [`lmer()`](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) will set the among-group variance to zero, and grumble about a "singular fit".
+:::
+
+---
+
+#### A Random Effects Approach with the lme4 Package
+
+For simple models, such as the example here, we can use an ANOVA table to estimate $s_A^2$. However, as models become more complex and involve a mix of random and fixed effects, this approach becomes less feasible. To address this, we can use the [`lmer()`](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) function from the [lme4](https://github.com/lme4/lme4) package to fit random and mixed-effects models (covered in the next section).
+
+The syntax of [`lmer()`](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) is similar to [`lm()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html), but includes a language for specifying random effects. For instance, to estimate the variance (or standard deviations) in group means for a model where groups are random samples from a population, we use the following code:
+
+```{r}
+library(lme4) # Install lme4 first if necessary
+lizard_runs_rand <- lmer(speed ~ (1 | lizard), data = lizard_runs)
+lizard_runs_rand
+```
+
+```{r}
+logLik(lizard_runs_rand)
+```
+
+Here's what the output tells us:
+
+- "REML criterion at convergence": This is negative two times the (REML) log-likelihood of the model:
+  $-2 \cdot \text{logLik}(\text{lizard\_runs\_rand}) =$ `r -2 * as.numeric(logLik(lizard_runs_rand))`. Note: compared to standard maximum likelihood, REML accounts for the degrees of freedom used to estimate the fixed effects (in this case, the intercept), so its variance estimates are not biased low.
+
+- Std.Dev for lizard: This is the square root of our estimate for the variance among lizards ($s_A^2$):
+  $\sqrt{0.1485} = 0.385357$.
+
+- Std.Dev for Residual: This represents the expected variability within groups, which (in a balanced design like this one) equals the square root of the mean square error:
+  $\sqrt{0.04607} = 0.2146$.
+
+- Fixed Effect (Intercept): This is our estimate for the overall mean (in a balanced design like this one, it equals the mean of all observations):
+  `summarize(lizard_runs, mean(speed))` = `r summarize(lizard_runs, mean(speed)) %>% pull()`.
+
+#### Hypothesis Testing for Random Effects
+
+To test the null hypothesis that the among-group variance is zero, we can perform a likelihood ratio test. This involves:
+
+- Calculating two times the difference in log-likelihoods between the random-effects model and the null model.
+- Comparing this value to the $\chi^2$ distribution with one degree of freedom (since we estimate one parameter—the variance).
+- Note: REML log-likelihoods can only be compared between models with the same fixed effects. That is the case here (both models have only an intercept), so REML is fine for testing a random effect. To compare models that differ in their fixed effects, refit them with maximum likelihood (`REML = FALSE`).
+- Note: Because a variance cannot be negative, the null value (zero) sits at the edge of possible values. This makes the $\chi^2_1$ test conservative (p-values are too big). A common fix is to halve the p-value. Here, our conclusion is the same either way.
+
+```{r}
+log_lik_rand <- lmer(speed ~ (1 | lizard), data = lizard_runs) |>
+  logLik(REML = TRUE)
+
+log_lik_null <- lm(speed ~ 1, data = lizard_runs) |>
+  logLik(REML = TRUE)
+
+d <- 2 * (log_lik_rand - log_lik_null)
+p <- pchisq(q = d, df = 1, lower.tail = FALSE)
+```
+
+```{r}
+# Output results
+c(log_lik_rand = log_lik_rand, log_lik_null = log_lik_null, d = d, p = p)
+```
+
+Alternatively, we can use the [`ranova()`](https://www.rdocumentation.org/packages/lmerTest/versions/3.1-3/topics/ranova) function from the [lmerTest](https://github.com/runehaubo/lmerTestR) package to perform this test:
+
+```{r}
+library(lmerTest)
+ranova(lizard_runs_rand)
+```
+
+#### Repeatability
+
+In a random-effects model, we estimate the variance among groups, $s_A^2$. We may also want to assess what proportion of the total variance in the population is attributed to differences among groups. This measure, known as repeatability or the intraclass correlation coefficient (ICC), is calculated as:
+
+$$\text{Repeatability} = \frac{s_A^2}{s_A^2 + s^2_{\text{within}}}$$
+
+A repeatability of zero means that measuring the same sample twice is no more consistent than taking two random samples, while a repeatability of one implies no variation within individuals (perfect consistency).
+
+For our lizard running example:
+
+$$\text{Repeatability} = \frac{0.1485}{0.1485 + 0.0461} = 0.763$$
+
+This suggests that the measurements are highly repeatable.
+
+We can also get this directly from our model with the `icc()` function in the [performance](https://easystats.github.io/performance/) package:
+
+```{r}
+performance::icc(lizard_runs_rand)
+```
+
+#### Repeatability vs. $R^2$
+
+Repeatability quantifies how similar measurements from the same group (e.g., a random lizard) are expected to be. It is meaningful only for random effects and is useful because it represents a parameter interpretable beyond the context of the specific model.
+
+$R^2$, in contrast, measures the proportion of variance "explained by the model" ($SS_\text{groups}/SS_\text{total}$) and is specific to the fixed-effects structure of a given experiment. Unlike repeatability, $R^2$ is tied to the specific groups in our dataset, so it does not describe the broader population of groups.
+
+In our example:
+
+$$R^2 = \frac{11.3219}{11.3219 + 1.5664} = 0.8785$$
+
+Notice that $R^2$ (0.88) is larger than the repeatability (0.76). That's because $R^2$ counts the chance noise in each lizard's two-run average as "explained" by the model, while repeatability subtracts that noise out. 
+So, while both measures relate to variance, they measure different things:   
+
+
+- $R^2$ quantifies a model's explanatory power.  
+- Repeatability quantifies the consistency of measurements within groups.
+
+For mixed models (below), people often report two versions of $R^2$: a "marginal" $R^2$ (the variance explained by the fixed effects alone) and a "conditional" $R^2$ (the variance explained by the fixed and random effects together). The `r2()` function in the performance package calculates both.
+
+#### Shrinkage
+
+
+```{r}
+#| echo: false
+#| column: margin
+#| message: false
+#| label: fig-shrinkage
+#| fig-cap: "**Thinking about random effects.** Each group (green curves) draws its own true mean from a single population distribution (blue) with overall mean $\\mu$ and standard deviation $\\sigma$. A random-effects model estimates $\\mu$ and $\\sigma$ rather than each group's mean separately. Because extreme group means are unlikely under this distribution, the model pulls (\"shrinks\") each group's estimate toward $\\mu$."
+#| fig-alt: "Diagram of a random-effects model. On top, a wide blue bell curve labeled 'population mean μ', with a dashed vertical line at its center and a dashed horizontal line marked σ showing its spread. Below, six narrower green bell curves of different widths sit at different positions along a horizontal axis. Some overlap near the center and two are far out on either side. An arrow runs from each green curve up to the blue curve's axis, and the arrows tilt slightly toward the center."
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# --- Population distribution (top) ---------------------------------------
+mu    <- 0
+sigma <- 1
+top_y <- 1.6   # vertical offset of the top panel
+
+pop <- tibble(x = seq(-3.2, 3.2, length.out = 400),
+              y = top_y + dnorm(x, mu, sigma) * 2.2)
+
+# --- Group distributions (bottom), means drawn from the population --------
+groups <- tibble(group = 1:6,
+                 mean  = c(-1.7, -0.45, -0.15, 0.2, 0.6, 2.0),
+                 sd    = c(0.18, 0.45, 0.30, 0.25, 0.20, 0.35))
+
+group_curves <- groups |>
+  mutate(x = list(seq(-3.2, 3.2, length.out = 400))) |>
+  unnest(x) |>
+  mutate(y = dnorm(x, mean, sd) * 0.3)   # same area for every group
+
+ticks <- tibble(x = seq(-3, 3, by = 0.75))
+
+ggplot() +
+  # population curve
+  geom_ribbon(data = pop, aes(x, ymin = top_y, ymax = y),
+              fill = "#8ec5e8", colour = "#4a90c2", alpha = 0.9,
+              outline.type = "upper") +
+  # group curves
+  geom_ribbon(data = group_curves, aes(x, ymin = 0, ymax = y, group = group),
+              fill = "#4caf50", colour = "#2e7d32", alpha = 0.45,
+              outline.type = "upper") +
+  # baselines + tick marks
+  annotate("segment", x = -3.2, xend = 3.2, y = c(0, top_y), yend = c(0, top_y)) +
+  geom_segment(data = crossing(ticks, base = c(0, top_y)),linewidth = 2,
+               aes(x = x, xend = x, y = base - 0.04, yend = base + 0.04)) +
+  # mu: dashed line + label
+  annotate("segment", x = mu, xend = mu, y = top_y,linewidth = 2,
+           yend = top_y + dnorm(0) * 2.2, linetype = "dashed", colour = "#2b6a99") +
+  # sigma: dashed horizontal line at one SD + label
+  annotate("segment", x = mu, xend = mu + sigma,
+           y = top_y + dnorm(1) * 2.2, yend = top_y + dnorm(1) * 2.2,
+           linetype = "dashed", colour = "#2b6a99") +
+  annotate("point", x = c(mu, mu + 0.55), y = c(top_y + 1.12, top_y + 0.68),
+           shape = 21, size = 15, fill = c("#cfe6f5", "white"), colour = "#2b6a99") +
+  annotate("text", x = c(mu, mu + 0.55), y = c(top_y + 1.12, top_y + 0.68),
+           label = c("mu", "sigma"), parse = TRUE, size = 8.5) +
+  annotate("text", x = mu - 0.3, y = top_y + 1.12, label = "population mean",
+           hjust = 1, size = 8.5, family = "serif") +
+  # arrows: each group mean comes from the population distribution
+  geom_segment(data = groups,
+               aes(x = mean, xend = mean * 0.85, y = 0.95, yend = top_y - 0.1),
+               arrow = arrow(length = unit(0.12, "cm")), colour = "#2b6a99") +
+  coord_cartesian(clip = "off") +
+  theme_void()
+```
+
+From our understanding of "regression to the mean," we know that extreme values tend to reflect a mix of true effect and sampling error. While fixed-effect models treat the entire observed deviation as true effect, random effects account for both, by borrowing information from all groups to predict a given group's mean. The extent to which a group's mean is pulled toward the grand mean is known as "shrinkage." In our lizard example, each lizard's deviation from the overall mean is multiplied by $s_A^2 / (s_A^2 + s^2_{\text{within}}/n_{\text{per group}}) = 0.1485 / (0.1485 + 0.04607/2) = 0.87$.
+
+::: aside
+Recall that $s^2_{\text{within}} = MS_{\text{error}}$.  
+:::
+
+
+
+The extent of shrinkage depends on:
+
+- **How much the true group means vary.** The greater the among group variance ($s_A^2$), the more "trust" we place in each group's observations, so we shrink less. 
+- **The noise within groups.** The noisier (e.g. smaller samples more variation etc), the less "trust" we place in each group's observations, so we shrink more.
+
+Because this study measured each lizard twice, and because the model assumes equal within group (lizard) variance for all groups (lizards), it treats every  estimate as equally uncertain, so shrinkage is the same for each lizard. If sample sizes varied across lizards, those with fewer observations would be brought closer to the grand mean, while those with more observations would stay closer to their simple mean. 
+
+
+
+Let's explore this concept using our lizard running data:
+
+- First, we'll grab predictions from our fixed-effects model:  
+
+```{r}
+fixed_predicted_means <- augment(lizard_runs_lm) |>
+  dplyr::select(lizard, .fitted)                 |>
+  dplyr::distinct(lizard, .fitted)               |>
+  mutate(effect = "fixed")
+```
+
+- Next, we'll grab predictions from our random-effects model. Note here that we now require the [broom.mixed](https://github.com/bbolker/broom.mixed) package to tidy up output of mixed effects models with the augment function: 
+
+```{r}
+library(broom.mixed)
+rand_predicted_means <- lizard_runs_rand |>
+  broom.mixed::augment()                 |>
+  dplyr::select(lizard, .fitted)         |>
+  dplyr::distinct(lizard, .fitted)       |>
+  mutate(effect = "random")
+```
+
+- Finally, we'll combine these predictions and plot them  (@fig-lizardshrink). The dashed line shows the overall mean (2.139). We can see the shrinkage in that each predicted mean from the random effect model (blue) is closer to the grand mean than is the estimate from the fixed effect model (red).
+ 
+```{r}
+#| label: fig-lizardshrink
+bind_rows(fixed_predicted_means, rand_predicted_means)       |>
+  mutate(lizard = fct_reorder(lizard, .fitted, .fun = mean)) |>
+  ggplot(aes(x = lizard, y = .fitted, color = effect)) +
+  geom_point() +
+  geom_hline(yintercept = mean(lizard_runs$speed), linetype = "dashed") +
+  labs(x = "Lizard", y = "Predicted Mean",color = "Model Type")
+```
+
+:::warning
+**Random effects assume groups are sampled independently and at random**. 
+
+In our example:
+
+- If we preferentially caught slow lizards, we'd shrink every estimate toward the wrong (biased) grand mean. 
+
+- If lizards are related (e.g., siblings), we'd underestimate the true variance among lizards and shrink too much. 
+
+*NOTE:*  We can accommodate  non-independence among groups by modeling the covariance among them (e.g., [generalized least squares](https://statistics4ecologists-v3.netlify.app/05-generalizedleastsquares) for phylogenetic comparisons and the [animal model](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.1365-2656.2009.01639.x) for quantitative genetics).
+
+:::
+
+
+#### Assumptions of random effects models
+
+Random effects models make our standard linear model assumptions and also assume that groups (e.g. individuals, sites, etc.) are sampled at random and that the true group effects are normally distributed. In the next section we see that by modeling random effects, we can model non-independence of observations.
+
+### Mixed-Effects Models
+
+How do we test for some fixed effect, like if type of math instruction increases math scores, or if lizard sex is associated with sprint speed in the presence of this non-independence (like students in the same class learn from the same teacher, multiple measures of a lizard sprinting etc…)? In a mixed effect model, we model both fixed and random effects!!!! Mixed effect models address non-independence within groups (by modeling the dependence structure of the data as a random effect) while simultaneously capturing systematic effects of predictors (modeled as fixed effects).
+
+For example, consider lizard sprint speeds:
+
+- Measurements may be non-independent because multiple observations come from the same lizard (a random effect).
+- Observations may also differ systematically because male and female lizards sprint at different speeds (a fixed effect).
+
+In this case, we can model lizard as a random effect to account for variability among individuals and sex as a fixed effect to account for predictable differences between males and females.
+
+When the focus of the analysis is not on the specific groups themselves (e.g., individual lizards), the variance among groups is referred to as a nuisance parameter. This random effect accounts for variation that isn't of direct interest but must be considered to make accurate inferences.
+
+When the grouping variable (lizard, or class, or whatever "group" we're concerned with) is chosen at random, and (beyond the fixed effects modeled) there is no relationship between individuals from different groups, we can model it as a random effect. If the observations from different groups are non-independent in ways that are not of direct interest (e.g., they have familial, temporal or spatial dependence), we need another approach.
+
+#### Random Intercepts
+
+With a "random intercept" each group gets its own intercept, which is drawn from some distribution. This on its own is much like the lizard example, above. If we assume a random intercept only, we assume that each group draws an intercept from some distribution, but that groups have the same slope (save what is specified in the fixed effect).
+
+#### Random Slopes
+
+With a "random slope" each group gets its own slope, which is drawn from some distribution. Of course, we can only use random slopes if the predictor varies within each group, otherwise we can't fit a different slope for each group. For example, in the selenium example below, each lake has just one water-selenium value, so we can't fit a random slope of water selenium by lake. By contrast, each tree in the Loblolly example is measured at several ages, so we can fit a random slope for age.
+
+If we assume a random slope only, we assume that each group draws a slope from some distribution, but that groups have the same intercepts (save what is specified in the fixed effect).
+
+#### Random Slopes and Random Intercepts
+
+We can, in theory, model both random slopes and random intercepts. But sometimes these are hard to estimate together, so be careful.
+
+#### Visualizing Random Intercepts and Random Slopes
+
+I find it pretty hard to explain random slopes and intercepts in words, but pictures really help! The best explanation I've found is this interactive scrollable visualization by [Michael Freeman](https://mfviz.com/): **[Hierarchical models (opens in a new tab)](https://mfviz.com/hierarchical-models/){target="_blank"}**. Read and scroll through it.
+
+
+#### Mixed model: Random intercept example
+
+Selenium is a by-product of burning coal. Could selenium bioaccumulate in fish, such that fish from lakes with more selenium have more selenium in them?
+
+Let us look at data (download [here](https://raw.githubusercontent.com/yanivjb/biostats-book-data/refs/heads/main/Se-lake.csv)) from 83 fish from nine lakes, with 1 to 34 fish per lake.
+
+##### Ignoring nonindependence is inappropriate
+
+What if we just ignored lake and assumed each fish was independent???
+
+```{r}
+#| message: false
+selenium_data_link <- "https://raw.githubusercontent.com/yanivjb/biostats-book-data/refs/heads/main/Se-lake.csv"
+selenium     <- read_csv(selenium_data_link)
+selenium_lm1 <- lm(Log_fish_Se ~  Log_Water_Se, data = selenium)
+
+summary(selenium_lm1)
+```
+
+```{r}
+anova(selenium_lm1)
+```
+
+```{r}
+#| message: false
+ggplot(selenium, aes(x = Log_Water_Se, y = Log_fish_Se, label = Lake)) +
+  geom_point(aes(color = Lake), alpha = .5, size = 3) +
+  geom_smooth(method = "lm")
+```
+
+That would be a big mistake – as each fish is not independent. There could be something else about the lake associated with levels of selenium in fish that is not in our model. This seems likely: as we see below, residuals differ substantially by lake.
+
+```{r}
+#| message: false
+bind_cols( selenium , augment(selenium_lm1) |>  dplyr::select(.resid)) |>
+  ggplot(aes(x = Lake, y = .resid, color = Lake)) +
+  geom_jitter(width = .2, size = 3, alpha =.6, show.legend = FALSE)+
+  geom_hline(yintercept = 0, color = "red")+
+  stat_summary(data = . %>% group_by(Lake) %>% mutate(n = n()) %>% dplyr::filter(n>1), color = "black")
+```
+
+So why is this so bad? It's because we keep pretending each fish is independent when it is not. So, our certainty is WAY bigger than it deserves to be. This means that our p-value is WAY smaller than it deserves to be. Ignoring lake also changes our estimate of the slope itself (0.265 here, vs. 0.367 when we average within lakes, below), because lake b contributes 34 of our 83 fish and so dominates the fit.
+
+##### We can't model lake as a fixed effect
+
+Putting lake into our model as a fixed effect would essentially take the average of fish selenium content for each lake. Since each lake has only one selenium content value, water selenium is completely confounded with lake, so we then have nothing to model (as seen by the NA for our estimate of the effect of lake selenium content on fish selenium concentration).
+
+```{r}
+#| eval: false
+lm(Log_fish_Se ~  Lake + Log_Water_Se, data = selenium)
+```
+
+```{r}
+#| echo: false
+lm(Log_fish_Se ~  Lake + Log_Water_Se, data = selenium) |>
+  coef()                                                |>
+  enframe(name = "term", value = "estimate")            |>
+  gt()                                                  |>
+  fmt_number(columns = estimate, decimals = 3)
+```
+
+When a predictor does vary within lakes, or when we only care about these particular lakes, modeling lake as a fixed effect can be a legitimate choice. The costs are that we can't generalize to other lakes, and we use up a degree of freedom for every lake.
+
+##### Taking averages is a less wrong thing
+
+What if we just took the average selenium content over all fish for every lake, and then did our stats?
+
+```{r}
+#| message: false
+selenium_avg <- selenium                                     |>
+  group_by(Lake, Log_Water_Se)                               |>
+  summarise(mean_log_fish_Se = mean(Log_fish_Se), n = n())
+
+selenium_lm2 <- lm(mean_log_fish_Se ~  Log_Water_Se, data = selenium_avg)
+summary(selenium_lm2)
+```
+
+```{r}
+anova(selenium_lm2)
+```
+
+```{r}
+#| message: false
+#| warning: false
+ggplot(selenium_avg, aes(x = Log_Water_Se, y = mean_log_fish_Se, label = Lake)) +
+  geom_point(aes(size = n)) +
+  geom_text_repel(aes(color = Lake), show.legend = FALSE) +
+  geom_smooth(method = "lm",se = FALSE)
+```
+
+This approach isn't too bad, but there are some shortcomings –
+
+- It takes all means as equally informative, even though some come from small and others from large samples.
+- It surrenders so much of our hard-won data. This matters most when the  predictor varies within groups.  
+
+##### Accounting for Lake as a Random Effect is our best option
+
+Rather, we can model Lake as a random effect – this allows us to model the non-independence of observations within a Lake, while using all of the data.
+
+```{r}
+selenium_lme <- lmer(Log_fish_Se ~   (1|Lake) + Log_Water_Se , data = selenium)
+summary(selenium_lme)
+```
+
+As in previous chapters, we test our fixed effect with `car::Anova()`. In a mixed model, it's not obvious how many degrees of freedom to use, because our effective sample size lies somewhere between the number of groups (9 lakes) and the number of observations (83 fish). Here, we have about seven degrees of freedom, much closer to the number of lakes than the number of fish.
+
+::: {.callout-note collapse="true" title="How R finds these degrees of freedom"}
+The Satterthwaite approximation (used in the `summary()` output above, via lmerTest) and the Kenward-Roger approximation (used by `car::Anova()` with `test.statistic = "F"`; this requires the pbkrtest package) both estimate this. Here, Satterthwaite gives about seven degrees of freedom.
+:::
+
+```{r}
+car::Anova(selenium_lme, type = "II", test.statistic = "F")
+```
+
+Thus we fail to reject the null, and conclude that there is not sufficient evidence to support the idea that more selenium in lakes is associated with more selenium in fish.
+
+Notice that this is nearly the same answer we got by averaging fish within each lake (a slope of 0.366 vs 0.367, and a p-value of 0.082 in both cases). This makes sense here because we have only one measure of selenium per lake,  our real sample size is nine lakes, not 83 fish. So, the job of the mixed effect model in this case is  to prevent  us from pretending we have 83 independent observations. 
+
+We can also find the marginal and conditional $R^2$ (see above):
+
+```{r}
+performance::r2(selenium_lme)
+```
+
+###### Extracting estimates and uncertainty
+
+Although we do have model estimates, degrees of freedom, and standard deviations above, it can still be hard to consider and communicate uncertainty. The [`ggpredict()`](https://strengejacke.github.io/ggeffects/reference/ggpredict.html) function in the [ggeffects](https://strengejacke.github.io/ggeffects/) package can help!
+
+```{r}
+#| warning: false
+library(ggeffects)
+selenium_predictions <- ggpredict(selenium_lme, terms = "Log_Water_Se")
+selenium_predictions
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| code-fold: true
+#| code-summary: "Show plotting code"
+plot(selenium_predictions)+
+  geom_jitter(data = selenium, aes(x = Log_Water_Se , y= Log_fish_Se, color = Lake), alpha = .4, size = 3,height = 0, width  = .02)+
+  scale_color_manual(values = scales::hue_pal()(9))+
+  labs(color = "Lake")
+```
+
+###### Evaluating assumptions
+
+We can now see that by modeling Lake as a random effect, the residuals no longer cluster by lake. Note that this is partly by construction: these residuals are calculated after subtracting each lake's predicted intercept. So this plot shows that the model accounted for lake -- it does not on its own show that the model's assumptions are met.
+
+```{r}
+#| message: false
+#| code-fold: true
+#| code-summary: "Show plotting code"
+bind_cols( selenium , broom.mixed::augment(selenium_lme) |> dplyr::select(.resid)) |>
+  ggplot(aes(x = Lake, y = .resid, color = Lake)) +
+  geom_jitter(width = .2, size = 3, alpha =.6, show.legend = FALSE)+
+  geom_hline(yintercept = 0, color = "red")+
+  stat_summary(data = . %>% group_by(Lake) %>% mutate(n = n()) %>% dplyr::filter(n>1),color = "black")
+```
+
+Major assumptions of linear mixed effect models are
+
+- Data are collected without bias
+- Groups are random 
+- Data can be modeled as a linear function of predictors
+- Random effects (here, lake intercepts) are normally distributed
+- Random effects are unrelated to the predictors (here, a lake's intercept is not correlated with its water selenium). 
+- Residuals are independent within groups, once the random effect is included
+- Variance of the residuals is independent of predicted values.
+- Residuals are normally distributed.
+
+Let's look into the last few for these data. Because autoplot can't handle random effects output, we use the `check_model()` function from the performance package (you may also need the see package installed).
+
+```{r}
+#| fig-height: 9
+#| fig-width: 9
+performance::check_model(selenium_lme)
+```
+
+This looks ok at first pass. We would need to think harder if we were doing a legitimate analysis. If we thought things looked worrisome, we would look for outlying fish or lakes, consider a transformation, or model unequal variance (see Generalized Least Squares, below).
+
+#### Example II: Loblolly Pine Growth
+
+Let's try to model the growth rate of [`loblolly`](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/Loblolly.html) pines, a dataset built into R which describes trees grown from 14 different seed sources (Seed), with each tree's height (in feet) recorded for six ages (years). Because each tree is measured repeatedly, values are non-independent, so I'll treat  `Seed` as a random effect.
+
+First I looked at the data (a), and thought that taking the square root of age would make the relationship more linear (b), especially if I began my model after three years of growth (c).
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.5
+lob_a <- ggplot(Loblolly, aes(x = age, y = height, color = Seed)) +
+  geom_line() + theme(legend.position = "none")
+lob_b <- ggplot(Loblolly, aes(x = sqrt(age), y = height, color = Seed)) +
+  geom_line() + theme(legend.position = "none")
+lob_c <- ggplot(filter(Loblolly, age > 3), aes(x = sqrt(age), y = height, color = Seed)) +
+  geom_line() + theme(legend.position = "none")
+plot_grid(lob_a, lob_b, lob_c, ncol = 3, labels = c("a", "b", "c"))
+```
+
+##### Random Slopes
+
+Because we're interested in growth, a random slope is more appropriate than a random intercept. We do this in lmer with  `(0 + sqrt(age) | Seed)`, where the 0 removes the random intercept (i.e. every tree shares an intercept).
+
+```{r}
+loblolly_rand_slope <- lmer(height ~ sqrt(age)+ (0+sqrt(age)|Seed),
+                            data = filter(Loblolly, age>3))
+summary(loblolly_rand_slope)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show plotting code"
+loblolly_rand_slope                                         |>
+  broom.mixed::augment()                                    |>
+  mutate(Seed = as.character(Seed))                         |>
+  ggplot(aes(x = `sqrt(age)`, y = .fitted, color = Seed)) +
+  geom_line() + theme(legend.position = "none")
+```
+
+##### Random Intercepts
+
+As a comparison, here is the random intercept model, `(1 | Seed)`. Each tree gets its own intercept (overall height), but all trees share a growth rate.
+
+
+```{r}
+loblolly_rand_intercept <- lmer(height ~ sqrt(age) + (1|Seed),
+                                data = filter(Loblolly, age>3))
+summary(loblolly_rand_intercept)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show plotting code"
+loblolly_rand_intercept             |>
+  broom.mixed::augment()            |>
+  mutate(Seed = as.character(Seed)) |>
+  ggplot(aes(x = `sqrt(age)`, y = .fitted, color = Seed)) +
+  geom_line() + theme(legend.position = "none")
+```
+
+##### Comparing the models
+
+Compare the standard error of the slope in the two models: `r round(summary(loblolly_rand_slope)$coefficients["sqrt(age)", "Std. Error"], 3)` with random slopes vs `r round(summary(loblolly_rand_intercept)$coefficients["sqrt(age)", "Std. Error"], 3)` with random intercepts. If seeds really differ in how fast they grow, a model that forces them to share one slope (random intercepts only) will overstate our confidence in the average slope.
+
+Which model should we prefer? Because these models have the same fixed effects, we can compare them with AIC (and REML is fine here). In practice, most people would fit both random intercepts and random slopes, `(sqrt(age) | Seed)`, so let's include that model too:
+
+```{r}
+loblolly_rand_both <- lmer(height ~ sqrt(age) + (sqrt(age)|Seed),
+                           data = filter(Loblolly, age>3))
+AIC(loblolly_rand_slope, loblolly_rand_intercept, loblolly_rand_both)
+```
+
+The model with the lowest AIC is our best description of how seeds differ (if the model with both random intercepts and slopes gives a "singular fit" warning, it could not estimate both, and we should prefer a simpler model).
+
+##### Conclusion
+
+After accounting for the effect of seed by modeling it as a random effect, we find that trees reliably increase in height with age. We see a similar increase whether we model seed as a random slope or intercept. We know that trees grow (duh), so the key take-aways are about uncertainty and variability. How we model differences among seeds changes how confident we are about the average growth rate, so our random effects models both incorporates this variability in the estimate of the growth rate, and quantify the variability in slopes across trees (in the random slopes model).
+
+### Additional related topics
+
+Sadly our term is coming to an end, as we are just beginning to explore these more complex, flexible, and realistic models. In this brief section, I will show you a few fun directions for more complex models. If you are interested in these problems, I highly recommend John Fieberg's fantastic course – FW8051 Statistics for Ecologists. [Check out his book here](https://statistics4ecologists-v3.netlify.app/).
+
+#### Generalized Least Squares
+
+We can still run into issues of heteroscedasticity (unequal variances) and correlated residuals. For such cases, we can use generalized least squares, which lets us model unequal variances and correlations among residuals. In R, we can do this with the [`gls()`](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/gls.html) function in the [nlme package](https://cran.r-project.org/web/packages/nlme/index.html).
+
+#### More complex covariance structures
+
+We have considered a simple random effect where individuals are in one group or another. Sometimes the world is more complicated – for example, if we measure the same individuals repeatedly over time, measurements taken close together in time may be more similar than those taken far apart. We therefore want to specify more realistic covariances of residuals. In R, we can do this with the [`lme()`](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/lme.html) function in the [nlme package](https://cran.r-project.org/web/packages/nlme/index.html). (When individuals are related through a pedigree -- e.g., family members who are not all equally related -- we need an "animal model", available in packages like MCMCglmm or brms.)
+
+#### Generalized Linear Mixed Effect Models
+
+We [previously saw](#glm) that we could generalize a linear model to non-normal distributions. We can do the same for mixed effects models. We can do this with the [`glmer()`](https://search.r-project.org/CRAN/refmans/lme4/html/glmer.html) function in lme4. These can be a bit tricky, so proceed with caution.
+
+### Quiz
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdNN-_zGuOrRHmdaQt03rkIqPCRosqovZe171tTML72n6fksA/viewform?showcase=0" width="100%" height="1000px" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+Quiz on random and mixed effect models [here](https://docs.google.com/forms/d/e/1FAIpQLSdNN-_zGuOrRHmdaQt03rkIqPCRosqovZe171tTML72n6fksA/viewform)
+
+### References
+
+Huey, R. B., and A. E. Dunham. 1987. Repeatability of locomotor performance in natural populations of the lizard *Sceloporus merriami*. *Evolution* 41:1116–1120.

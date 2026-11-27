@@ -58,3 +58,7 @@ Untitled.R
 *.bak
 *.log
 **/*.quarto_ipynb
+
+# Games: local instructor material and package instructions
+/games/instructor/
+/games/START-HERE.md
