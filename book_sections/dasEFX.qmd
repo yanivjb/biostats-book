@@ -1,4 +1,4 @@
-## X4. Random effects {.unnumbered #random}
+## X5. Random effects {.unnumbered #random}
 
 
 ```{r}
@@ -19,6 +19,13 @@ library(ggeffects)
 library(DT)
 library(gt)
 ```
+
+### Try this chapter’s games {#extra-26-games}
+
+[Play this chapter’s games](../games/assets/biostats-games/index.html?chapter=26){target="_blank"}
+
+<script src="../games/embed.js"></script>
+<iframe data-chapter-games src="../games/assets/biostats-games/index.html?chapter=26&amp;cards=1" title="Random Effects game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 **Motivating scenario:** Often data are not independent. For example, numerous plants may come from the same field, fish from the same lakes, or students from the same class. If we were specifically interested in the impact of a given field, lake, or class, we could include this as a "fixed effect," as in an ANCOVA. However, this focuses on specific fields, lakes, or classes rather than the variability among them, which is often our primary interest.
 

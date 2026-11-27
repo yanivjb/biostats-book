@@ -50,6 +50,13 @@ gg_color_hue <- function(n) {
 
 
 
+### Try this chapter’s games {#extra-22-games}
+
+[Play this chapter’s games](../games/assets/biostats-games/index.html?chapter=22){target="_blank"}
+
+<script src="../games/embed.js"></script>
+<iframe data-chapter-games src="../games/assets/biostats-games/index.html?chapter=22&amp;cards=1" title="Model Evaluation game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
+
 ::: {.motivation style="background-color: #ffe6f7; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"}
 
 **Motivating Scenario:** You have built (or are in the process of building) a model. You can estimate parameters (with uncertainty) and test null hypotheses etc... But how can you tell if your model is any good?  

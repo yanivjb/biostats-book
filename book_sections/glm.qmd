@@ -1,4 +1,4 @@
-## X3. GLM {.unnumbered #glm}
+## X4. GLM {.unnumbered #glm}
 
 ```{r}
 #| echo: false
@@ -13,6 +13,13 @@ library(emojifont)
 library(knitr)
 library(DT)
 ```
+
+### Try this chapter’s games {#extra-25-games}
+
+[Play this chapter’s games](../games/assets/biostats-games/index.html?chapter=25){target="_blank"}
+
+<script src="../games/embed.js"></script>
+<iframe data-chapter-games src="../games/assets/biostats-games/index.html?chapter=25&amp;cards=1" title="Generalized Linear Models game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 **Motivating scenario:** We want to model data that are not normally distributed. Here we use yes/no (or proportion) data and count data as examples.
 

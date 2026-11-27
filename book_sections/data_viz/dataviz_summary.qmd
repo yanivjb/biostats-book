@@ -14,7 +14,7 @@ resources:
 
 
 
-Links to: [Summary](#datviz_summary_chapter-summary). [Chatbot tutor](#datviz_summary_chatbot_tutor). [Questions](#datviz_summary_practice-questions). [Glossary](#datviz_summary_glossary-of-terms). [R functions](#datviz_summary_key-r-functions). [R packages](#datviz_summary_r-packages-introduced). [More resources](#datviz_summary_additional-resources).
+Links to: [Summary](#datviz_summary_chapter-summary). [Chatbot tutor](#datviz_summary_chatbot_tutor). [Games](#extra-27-games). [Questions](#datviz_summary_practice-questions). [Glossary](#datviz_summary_glossary-of-terms). [R functions](#datviz_summary_key-r-functions). [R packages](#datviz_summary_r-packages-introduced). [More resources](#datviz_summary_additional-resources).
 
 ## Chapter Summary  {#datviz_summary_chapter-summary}   
 
@@ -41,6 +41,15 @@ An effective visualization allows you to rapidly communicate your key findings t
 
 Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-684745db4bb88191ab4e5e2e98226ce2-data-viz-tutro)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 :::
+
+
+
+### Games {#extra-27-games}
+
+[Play this chapter’s games](../../games/assets/biostats-games/index.html?chapter=27){target="_blank"}
+
+<script src="../../games/embed.js"></script>
+<iframe data-chapter-games src="../../games/assets/biostats-games/index.html?chapter=27&amp;cards=1" title="Better Figures game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 
 ## Practice Questions  {#datviz_summary_practice-questions}   

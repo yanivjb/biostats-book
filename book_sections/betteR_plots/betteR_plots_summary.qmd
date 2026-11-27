@@ -30,7 +30,7 @@ library(ggplot2)
 ```
 
 
-Links to: [Summary](#better_plots_summary_chapter-summary). [Chatbot tutor](#better_plots_summary_chatbot_tutor). [Questions](#better_plots_summary_practice-questions). [Glossary](#better_plots_summary_glossary-of-terms). [R functions](#better_plots_summary_key-r-functions). [R packages](#better_plots_summary_r-packages-introduced). [More resources](#better_plots_summary_additional-resources).
+Links to: [Summary](#better_plots_summary_chapter-summary). [Chatbot tutor](#better_plots_summary_chatbot_tutor). [Games](#extra-28-games). [Questions](#better_plots_summary_practice-questions). [Glossary](#better_plots_summary_glossary-of-terms). [R functions](#better_plots_summary_key-r-functions). [R packages](#better_plots_summary_r-packages-introduced). [More resources](#better_plots_summary_additional-resources).
 
 ## Chapter summary  {#better_plots_summary_chapter-summary}  
 
@@ -50,6 +50,15 @@ Throughout this process, we also make sure to consider the presentation format, 
 Please interact with this custom chatbot ([**link here**](https://chatgpt.com/g/g-685c1eb79a2c8191ba201bb9bf22d01e-better-ggplots)) I have made to help you with this chapter. I suggest interacting with at least ten back-and-forths to ramp up  and then stopping when you feel like you got what you needed from it. 
 
 :::
+
+
+
+### Games {#extra-28-games}
+
+[Play this chapter’s games](../../games/assets/biostats-games/index.html?chapter=28){target="_blank"}
+
+<script src="../../games/embed.js"></script>
+<iframe data-chapter-games src="../../games/assets/biostats-games/index.html?chapter=28&amp;cards=1" title="Better Figures in R game previews" style="display:block;width:100%;height:600px;border:0;" loading="lazy"></iframe>
 
 
 ---
