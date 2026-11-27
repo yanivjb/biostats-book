@@ -67,6 +67,7 @@ jobs:
             "rmarkdown",
             "blogdown",
             "gt",
+            "emojifont",
             "gtExtras",
             "patchwork",
             "cowplot",
